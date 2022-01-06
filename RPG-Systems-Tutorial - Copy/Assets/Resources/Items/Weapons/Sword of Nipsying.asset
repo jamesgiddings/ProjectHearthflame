@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
+  m_Name: Sword of Nipsying
+  m_EditorClassIdentifier: 
+  UID: 07c8c4cba19649f46b18ab68da7e9280
+  name: Sword of Nipsying
+  description: Item description will go here.
+  icon: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
+  rarity: {fileID: 11400000, guid: a1c30af3df3f89643bba121811563121, type: 2}
+  sellPrice: 111111111
+  maxStack: 1
+  equipmentType: 0
+  isUnique: 0
+  flavourText: Worth eleventy-million scrip.
+  weaponEffectBlueprints:
+  - {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
