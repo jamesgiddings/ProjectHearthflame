@@ -9,15 +9,20 @@ namespace GramophoneUtils.Stats
 	public class StatSystem
 	{
 		private readonly Dictionary<IStatType, Stat> stats = new Dictionary<IStatType, Stat>();
+		private readonly LevelSystem levelSystem;
+		private readonly CharacterClass characterClass;
 
-		public Dictionary<IStatType, Stat> Stats => stats;
-		public StatSystem() { }
-		public StatSystem(BaseStats baseStats)
+		public Dictionary<IStatType, Stat> Stats => stats; //getter
+		public LevelSystem LevelSystem => levelSystem; //getter
+		public StatSystem() { } //constructor 1
+		public StatSystem(BaseStats baseStats) //constructor 2
 		{
 			foreach (var stat in baseStats.Stats)
 			{
 				stats.Add(stat.StatType, new Stat(stat.Value));
 			}
+			characterClass = baseStats.CharacterClass;
+			levelSystem = new LevelSystem(characterClass);
 		}
 
 		public void AddModifier(StatModifier modifier)

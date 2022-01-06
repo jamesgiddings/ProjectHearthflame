@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 9}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 421}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 631
     width: 453
     height: 316
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -71,10 +71,10 @@ MonoBehaviour:
     y: 0
     width: 453
     height: 947
-  m_MinSize: {x: 232, y: 392}
-  m_MaxSize: {x: 10002, y: 14042}
+  m_MinSize: {x: 232, y: 371}
+  m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 27
+  controlID: 60
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -94,8 +94,8 @@ MonoBehaviour:
     y: 0
     width: 415
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -123,10 +123,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 911, y: 392}
-  m_MaxSize: {x: 22006, y: 14042}
+  m_MinSize: {x: 909, y: 371}
+  m_MaxSize: {x: 22004, y: 14021}
   vertical: 0
-  controlID: 26
+  controlID: 87
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,10 +170,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 304
+    width: 368
     height: 595
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -300,10 +300,10 @@ MonoBehaviour:
     y: 0
     width: 1052
     height: 947
-  m_MinSize: {x: 403, y: 342}
-  m_MaxSize: {x: 8003, y: 8042}
+  m_MinSize: {x: 402, y: 342}
+  m_MaxSize: {x: 8002, y: 8042}
   vertical: 1
-  controlID: 124
+  controlID: 35
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,10 +325,10 @@ MonoBehaviour:
     y: 0
     width: 1052
     height: 595
-  m_MinSize: {x: 403, y: 221}
-  m_MaxSize: {x: 8003, y: 4021}
+  m_MinSize: {x: 402, y: 221}
+  m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 125
+  controlID: 36
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -344,9 +344,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 304
+    x: 368
     y: 0
-    width: 748
+    width: 684
     height: 595
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -383,7 +383,7 @@ MonoBehaviour:
     height: 295
   m_ViewDataDictionary: {fileID: 0}
   m_Spl:
-    ID: 223
+    ID: 215
     splitterInitialOffset: 232
     currentActiveSplitter: -1
     realSizes:
@@ -533,7 +533,7 @@ MonoBehaviour:
       name: Inventory Tutorial
       fullName: Inventory Tutorial
       resultStatus: 1
-      duration: 0.0684426
+      duration: 0.0556805
       messages: 
       output: 
       stacktrace: 
@@ -544,12 +544,12 @@ MonoBehaviour:
       categories: []
       parentId: 
       parentUniqueId: 
-    - id: 1004
-      uniqueId: '[EditMode][F:/GitHub/RPG-Systems-Tutorial/Library/ScriptAssemblies/EditMode.dll][suite]'
+    - id: 1005
+      uniqueId: '[EditMode][F:/GitHub/ProjectHearthflame/Hearthflame/Library/ScriptAssemblies/EditMode.dll][suite]'
       name: EditMode.dll
-      fullName: F:/GitHub/RPG-Systems-Tutorial/Library/ScriptAssemblies/EditMode.dll
+      fullName: F:/GitHub/ProjectHearthflame/Hearthflame/Library/ScriptAssemblies/EditMode.dll
       resultStatus: 1
-      duration: 0.0350521
+      duration: 0.0232537
       messages: 
       output: 
       stacktrace: 
@@ -561,11 +561,11 @@ MonoBehaviour:
       parentId: 1000
       parentUniqueId: '[Inventory Tutorial][suite]'
     - id: 1001
-      uniqueId: EditMode.dll/[EditMode][StatsTests][suite]
-      name: StatsTests
-      fullName: StatsTests
+      uniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
+      name: EditModeTests
+      fullName: EditModeTests
       resultStatus: 1
-      duration: 0.0319149
+      duration: 0.0217448
       messages: 
       output: 
       stacktrace: 
@@ -574,12 +574,12 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1004
-      parentUniqueId: '[EditMode][F:/GitHub/RPG-Systems-Tutorial/Library/ScriptAssemblies/EditMode.dll][suite]'
+      parentId: 1006
+      parentUniqueId: '[EditMode][F:/GitHub/ProjectHearthflame/Hearthflame/Library/ScriptAssemblies/EditMode.dll][suite]'
     - id: 1003
-      uniqueId: EditMode.dll/StatsTests/[EditMode][StatsTests.ItemStatsTestsSimplePasses]
+      uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.ItemStatsTestsSimplePasses]
       name: ItemStatsTestsSimplePasses
-      fullName: StatsTests.ItemStatsTestsSimplePasses
+      fullName: EditModeTests.ItemStatsTestsSimplePasses
       resultStatus: 0
       duration: 0
       messages: 
@@ -592,15 +592,19 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentId: 1001
-      parentUniqueId: EditMode.dll/[EditMode][StatsTests][suite]
-    - id: 1006
-      uniqueId: EditMode.dll/StatsTests/[EditMode][StatsTests.ResourceIDTestSimplePasses]
-      name: ResourceIDTestSimplePasses
-      fullName: StatsTests.ResourceIDTestSimplePasses
+      parentUniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
+    - id: 1005
+      uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.LevelSystemTests]
+      name: LevelSystemTests
+      fullName: EditModeTests.LevelSystemTests
       resultStatus: 1
-      duration: 0.0168449
+      duration: 0.0088778
       messages: 
-      output: 'de301b3a5de18c7428d78e832f4900a2
+      output: '0
+
+        0
+
+        1
 
 '
       stacktrace: 
@@ -610,12 +614,12 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Uncategorized
-      parentId: 1003
-      parentUniqueId: EditMode.dll/[EditMode][StatsTests][suite]
-    - id: 1002
-      uniqueId: EditMode.dll/StatsTests/[EditMode][StatsTests.StatsTestsSimplePasses]
-      name: StatsTestsSimplePasses
-      fullName: StatsTests.StatsTestsSimplePasses
+      parentId: 1001
+      parentUniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
+    - id: 1004
+      uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.ResourceIDTestSimplePasses]
+      name: ResourceIDTestSimplePasses
+      fullName: EditModeTests.ResourceIDTestSimplePasses
       resultStatus: 0
       duration: 0
       messages: 
@@ -628,18 +632,39 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentId: 1001
-      parentUniqueId: EditMode.dll/[EditMode][StatsTests][suite]
-    m_ResultText: 'ResourceIDTestSimplePasses (0.017s)
+      parentUniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
+    - id: 1002
+      uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.StatsTestsSimplePasses]
+      name: StatsTestsSimplePasses
+      fullName: EditModeTests.StatsTestsSimplePasses
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
+    m_ResultText: 'LevelSystemTests (0.009s)
 
       ---
 
-      de301b3a5de18c7428d78e832f4900a2'
+      0
+
+      0
+
+      1'
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2e3f9ddb
-      m_LastClickedID: -610451666
-      m_ExpandedIDs: 7d7a5bbf4ff53015cae1d62affffff7f
+      m_SelectedIDs: 8278af5e
+      m_LastClickedID: 1588557954
+      m_ExpandedIDs: 372b5ca77d7a5bbfeec61fee4ff53015cae1d62affffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -718,7 +743,7 @@ MonoBehaviour:
     height: 610
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: function
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -730,22 +755,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Items/Equipment
+    - Assets/Scripts/Utilities
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: function
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Items/Equipment
+  - Assets/Scripts/Utilities
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: F:\GitHub\RPG-Systems-Tutorial
+  m_LastProjectPath: F:\GitHub\ProjectHearthflame\Hearthflame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 18.333313}
-    m_SelectedIDs: 04530000
-    m_LastClickedID: 21252
-    m_ExpandedIDs: 00000000c2520000c4520000c6520000c8520000ca520000cc520000ce520000d0520000d2520000d4520000d6520000f2520000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 24530000
+    m_LastClickedID: 21284
+    m_ExpandedIDs: 00000000c2520000ca520000ce520000d0520000d2520000f852000022530000aadd010080920200ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -800,7 +825,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000163e0000343c000072840000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -817,7 +842,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 4}
+      m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -828,7 +853,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 179
+  m_DirectoriesAreaWidth: 178
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -890,15 +915,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 303
+    width: 367
     height: 574
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 167}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 42fbffff
+      m_ExpandedIDs: 686fffff7878ffff8278ffff8878ffff2c7effffae7effffb87effffbe7efffff483ffff1084ffffb893ffff7e98ffff8098ffff8298ffffd49fffff5aa5ffff64a5ffff6aa5ffff72a5fffff4a5fffffea5ffff04a6ffff3aabffff58abffff42fbffff06f601000af6010010f60100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -943,9 +968,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 304
+    x: 368
     y: 73
-    width: 746
+    width: 682
     height: 574
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
@@ -959,9 +984,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 364.23093, y: 207.42474, z: -14.26947}
+    m_Target: {x: 107.64031, y: 392.98956, z: 41.13035}
     speed: 2
-    m_Value: {x: 364.23093, y: 207.42474, z: -14.26947}
+    m_Value: {x: 107.64031, y: 392.98956, z: 41.13035}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1010,11 +1035,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.14529398, y: 0.0005911418, z: -0.00008672541, w: -0.98938966}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: -0.14529379, y: 0.00059114106, z: -0.0000867253, w: -0.98938835}
   m_Size:
-    m_Target: 342.37662
+    m_Target: 252.31807
     speed: 2
-    m_Value: 342.37662
+    m_Value: 252.31807
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1060,10 +1085,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 304
+    x: 368
     y: 73
-    width: 746.6666
-    height: 573.6667
+    width: 682
+    height: 574
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
   m_SerializedViewValues: []
@@ -1071,7 +1096,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 746.6666, y: 552.6667}
+  m_TargetSize: {x: 682, y: 553}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1086,10 +1111,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -373.3333
-    m_HBaseRangeMax: 373.3333
-    m_VBaseRangeMin: -286.83334
-    m_VBaseRangeMax: 286.83334
+    m_HBaseRangeMin: -341
+    m_HBaseRangeMax: 341
+    m_VBaseRangeMin: -276.5
+    m_VBaseRangeMax: 276.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1106,24 +1131,24 @@ MonoBehaviour:
     m_DrawArea:
       serializedVersion: 2
       x: 0
-      y: 0
-      width: 746.6666
-      height: 573.6667
+      y: 21
+      width: 682
+      height: 553
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 373.3333, y: 286.83334}
+    m_Translation: {x: 341, y: 276.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -373.3333
-      y: -286.83334
-      width: 746.6666
-      height: 573.6667
+      x: -341
+      y: -276.5
+      width: 682
+      height: 553
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 746.6666, y: 573.6667}
+  m_LastWindowPixelSize: {x: 682, y: 574}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000

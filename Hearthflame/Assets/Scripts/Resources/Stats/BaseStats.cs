@@ -10,12 +10,14 @@ namespace GramophoneUtils.Stats
     {
         [SerializeField] private List<BaseStat> stats = new List<BaseStat>();
         [SerializeField] private new string name;
+        [SerializeField] private CharacterClass characterClass;
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth;
         [SerializeField] private int experience;
 
         public List<BaseStat> Stats => stats; //getter
-        public string Name => name;
+        public string Name => name; //getter
+        public CharacterClass CharacterClass => characterClass; //getter
         public int CurrentHealth => currentHealth; //getter
         public int MaxHealth => maxHealth; //getter
         public int Experience => experience; //getter
