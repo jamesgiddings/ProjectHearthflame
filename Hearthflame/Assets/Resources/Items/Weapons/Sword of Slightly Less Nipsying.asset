@@ -25,3 +25,5 @@ MonoBehaviour:
   weaponEffectBlueprints:
   - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
   - {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
+  classRestrictions:
+  - {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}

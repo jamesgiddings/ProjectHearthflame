@@ -15,7 +15,11 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private bool isUnique = false;
 		[SerializeField] private string flavourText = "Flavour text here.";
 		[SerializeField] private List<StatComponentBlueprint> weaponEffectBlueprints;
+		[SerializeField] private CharacterClass[] classRestrictions;
+
 		private List<StatModifier> weaponEffects = new List<StatModifier>();
+
+		public CharacterClass[] ClassRestrictions => classRestrictions;
 
 		public EquipmentType EquipmentType => equipmentType;
 		private void OnEnable()
@@ -38,7 +42,7 @@ namespace GramophoneUtils.Items.Containers
 		{
 			foreach (StatModifier weaponEffect in weaponEffects)
 			{
-				Debug.Log("Equip method is adding " + weaponEffect.Value + " value.");
+				//Debug.Log("Equip method is adding " + weaponEffect.StatType.Name + " " +  weaponEffect.Value + " value.");
 				statSystem.AddModifier(new StatModifier(weaponEffect.StatType, weaponEffect.ModifierType, weaponEffect.Value, weaponEffect.Duration, this)); // we make a new effect, which allows us to add the source as 'this' when we equip the item
 			}
 		}
@@ -47,6 +51,21 @@ namespace GramophoneUtils.Items.Containers
 			StringBuilder builder = new StringBuilder();
 
 			builder.Append(Rarity.Name).AppendLine();
+			if (classRestrictions.Length > 0)
+			{
+				for (int i = 0; i < classRestrictions.Length; i++)
+				{
+					if (i < classRestrictions.Length - 1)
+					{
+						builder.Append(classRestrictions[i].Name).Append(", ").AppendLine();
+					}
+					else
+					{
+						Debug.Log("<color=yellow>classRestrictions[i].Name: " + classRestrictions[i].Name + "</color>");
+						builder.Append("<color=yellow>" + classRestrictions[i].Name).Append(" only.</color>").AppendLine();
+					}
+				}
+			}
 			foreach (var effect in weaponEffects)
 			{
 				builder.Append("+").Append(effect.Value).Append(" ").Append(effect.StatType.Name).AppendLine();
@@ -61,7 +80,6 @@ namespace GramophoneUtils.Items.Containers
 
 		public void Unequip(StatSystem statSystem)
 		{
-			
 			foreach (KeyValuePair<IStatType, Stat> entry in statSystem.Stats)
 			{
 				entry.Value.RemoveAllModifiersFromSource(this);

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GramophoneUtils.Stats;
-using System;
 
 namespace GramophoneUtils.Items.Containers
 {
@@ -41,7 +38,6 @@ namespace GramophoneUtils.Items.Containers
 
 		private void RefreshEquipmentInSlots()
 		{
-			Debug.Log("Refresh is called");
 			foreach(ItemSlot itemSlot in ItemSlots)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;

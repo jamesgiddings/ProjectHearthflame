@@ -14,7 +14,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace CodeMonkey.Utils {
+namespace GramophoneUtils.Utils {
 
     /*
      * Calls function on every Update until it returns true

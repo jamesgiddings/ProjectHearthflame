@@ -14,6 +14,7 @@ namespace GramophoneUtils.Stats
 
 		public Dictionary<IStatType, Stat> Stats => stats; //getter
 		public LevelSystem LevelSystem => levelSystem; //getter
+		public CharacterClass CharacterClass => characterClass; //getter
 		public StatSystem() { } //constructor 1
 		public StatSystem(BaseStats baseStats) //constructor 2
 		{

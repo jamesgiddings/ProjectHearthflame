@@ -13,33 +13,52 @@ namespace GramophoneUtils.Stats
 
 		private int level;
 		private int experience;
-		private int experienceToNextLevel;
+		private LevelSystemAnimated levelSystemAnimated;
 		private CharacterClass characterClass;
+		private int[] experienceRequirements;
+		public int[] ExperienceRequirements => experienceRequirements;
+
+		public LevelSystemAnimated LevelSystemAnimated => levelSystemAnimated; //getter
 
 		public LevelSystem(CharacterClass characterClass)
 		{
 			level = 0;
 			experience = 0;
-			experienceToNextLevel = 100;
 			this.characterClass = characterClass;
+			levelSystemAnimated = new LevelSystemAnimated(this);
+			experienceRequirements = characterClass.ExperienceData.ExperienceRequirements;
 		}
+
+
 
 		public void AddExperience(int amount)
 		{
-			experience += amount;
-			while (experience >= experienceToNextLevel)
+			if (!IsMaxLevel())
 			{
-				// Enough experience to level up
-				level++;
-				experience -= experienceToNextLevel;
-				if (OnLevelChanged != null) OnLevelChanged(this, EventArgs.Empty);
+				experience += amount;
+				while (!IsMaxLevel() && experience >= GetExperienceToNextLevel(level))
+				{
+					// Enough experience to level up
+					
+					experience -= GetExperienceToNextLevel(level);
+					level++;
+
+					if (OnLevelChanged != null) OnLevelChanged(this, EventArgs.Empty);
+				}
+				if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
 			}
-			if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
 		}
 
 		public float GetExperienceNormalized()
 		{
-			return (float)experience / experienceToNextLevel;
+			if (IsMaxLevel())
+			{
+				return 1f;
+			}
+			else
+			{
+				return (float)experience / GetExperienceToNextLevel(level);
+			}
 		}
 
 		public int GetLevel()
@@ -52,9 +71,28 @@ namespace GramophoneUtils.Stats
 			return experience;
 		}
 
-		public int GetExperienceToNextLevel()
+		public int GetExperienceToNextLevel(int level)
 		{
-			return experienceToNextLevel;
+			if (level < experienceRequirements.Length)
+			{
+				return experienceRequirements[level];
+			} 
+			else
+			{
+				// Level Invalid
+				Debug.LogError("Level invalid: " + level + " (outside range of ExperienceData.ExperienceRequirements array).");
+				return 100;
+			}
+		}
+
+		public bool IsMaxLevel()
+		{
+			return IsMaxLevel(level);
+		}
+
+		public bool IsMaxLevel(int level)
+		{
+			return level == experienceRequirements.Length - 1;
 		}
 	}
 }

@@ -7,33 +7,36 @@ using GramophoneUtils.Stats;
 
 public class LevelDisplayUI : MonoBehaviour
 {
-	[SerializeField] TextMeshProUGUI levelText;
-	[SerializeField] Slider experienceSlider;
-	[SerializeField] StatSystemBehaviour statSystemBehaviour;
+	[SerializeField] private TextMeshProUGUI levelText;
+	[SerializeField] private Slider experienceSlider;
+	[SerializeField] private StatSystemBehaviour statSystemBehaviour;
+
 	private LevelSystem levelSystem;
+	private LevelSystemAnimated levelSystemAnimated;
 
 	private void Awake()
 	{
 		levelSystem = statSystemBehaviour.StatSystem.LevelSystem;
-		SetLevelNumber(levelSystem.GetLevel());
-		SetExperienceBarSize(levelSystem.GetExperienceNormalized());
-		levelSystem.OnExperienceChanged += LevelSystem_OnExperienceChanged;
-		levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
+		levelSystemAnimated = statSystemBehaviour.StatSystem.LevelSystem.LevelSystemAnimated;
+		SetLevelNumber(levelSystemAnimated.GetLevel());
+		SetExperienceBarSize(levelSystemAnimated.GetExperienceNormalized());
+		levelSystemAnimated.OnExperienceChanged += LevelSystemAnimated_OnExperienceChanged;
+		levelSystemAnimated.OnLevelChanged += LevelSystemAnimated_OnLevelChanged;
 	}
 
 	public void TestAdd500XP() //remove after testing
 	{
-		levelSystem.AddExperience(500);
+	levelSystem.AddExperience(13230000);
 	}
 
-	private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
+	private void LevelSystemAnimated_OnLevelChanged(object sender, System.EventArgs e)
 	{
-		SetLevelNumber(levelSystem.GetLevel());
+		SetLevelNumber(levelSystemAnimated.GetLevel());
 	}
 
-	private void LevelSystem_OnExperienceChanged(object sender, System.EventArgs e)
+	private void LevelSystemAnimated_OnExperienceChanged(object sender, System.EventArgs e)
 	{
-		SetExperienceBarSize(levelSystem.GetExperienceNormalized());
+		SetExperienceBarSize(levelSystemAnimated.GetExperienceNormalized());
 	}
 
 	private void SetExperienceBarSize(float experienceNormalized)
@@ -48,7 +51,7 @@ public class LevelDisplayUI : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		levelSystem.OnExperienceChanged -= LevelSystem_OnExperienceChanged;
-		levelSystem.OnLevelChanged -= LevelSystem_OnLevelChanged;
+		levelSystemAnimated.OnExperienceChanged -= LevelSystemAnimated_OnExperienceChanged;
+		levelSystemAnimated.OnLevelChanged -= LevelSystemAnimated_OnLevelChanged;
 	}
 }

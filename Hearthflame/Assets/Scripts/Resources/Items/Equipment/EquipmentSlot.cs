@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,22 +16,6 @@ namespace GramophoneUtils.Items.Containers
                 Debug.LogWarning("EquipmentSlot requires a reference to an EquipmentInventory, not just an inventory.");
 			}
 		}
-
-		public bool CanEquipToSlot(ItemSlotUI itemSlot)
-		{
-            if ((itemSlot as InventorySlot) != null)
-            {
-                if (itemSlot.SlotItem is EquipmentItem)
-                {
-                    EquipmentItem equipmentItem = (EquipmentItem)itemSlot.SlotItem;
-                    if (equipmentItem.EquipmentType == equipmentType)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
 
         public override void OnDrop(PointerEventData eventData)
         {
@@ -54,18 +39,60 @@ namespace GramophoneUtils.Items.Containers
                 Debug.LogError("inventory is null.");
             }
             if (itemDragHandler == null) { return; }
-            
-            if (CanEquipToSlot(itemDragHandler.ItemSlotUI)) 
+
+            EquipmentItem item = GetItemFromItemSlotUI(itemDragHandler.ItemSlotUI);
+            EquipmentInventory equipmentInventory = (EquipmentInventory)inventory;
+
+            if (CanEquipToSlot(item) && CanEquipToClass(item, equipmentInventory))
             {
                 inventory.Swap(itemContainerOne, itemDragHandler.ItemSlotUI.SlotIndex, inventory, SlotIndex);
-                if (inventory as EquipmentInventory != null)
+            }
+        }
+
+		private EquipmentItem GetItemFromItemSlotUI(ItemSlotUI itemSlot)
+		{
+            if (itemSlot as InventorySlot != null)
+            {
+                if (itemSlot.SlotItem is EquipmentItem)
                 {
-                    if((itemContainerOne.GetSlotByIndex(itemDragHandler.ItemSlotUI.SlotIndex).item != null) && 
-                        (inventory.GetSlotByIndex(SlotIndex).item != null))
-					{
-                        UnequipFromInventory(itemContainerOne, itemDragHandler.ItemSlotUI.SlotIndex);
-                    }
-                    EquipFromInventory();
+                    return (EquipmentItem)itemSlot.SlotItem;
+                }
+            }
+            return null;
+        }
+
+		public bool CanEquipToSlot(EquipmentItem equipmentItem)
+        {
+            if (equipmentItem != null)
+            {
+                if (equipmentItem.EquipmentType == equipmentType)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+            
+        private bool CanEquipToClass(EquipmentItem equipmentItem, EquipmentInventory equipmentInventory)
+        {
+            if (equipmentItem == null)
+            {
+                Debug.Log("Item null");
+                return true;
+            }
+            if (equipmentItem.ClassRestrictions.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                if (!Array.Exists(equipmentItem.ClassRestrictions, characterClass => characterClass.Name == equipmentInventory.StatSystemBehaviour.StatSystem.CharacterClass.Name))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
                 }
             }
         }
