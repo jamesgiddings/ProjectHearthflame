@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace GramophoneUtils.Items.Containers
 {
-    public class InventoryItemDragHandler : ItemDragHandler
+    public class InventoryItemDragHandler : ResourceDragHandler
     {
         [SerializeField] private ItemDestroyer itemDestroyer = null;
 
@@ -15,7 +15,7 @@ namespace GramophoneUtils.Items.Containers
 
                 if (eventData.hovered.Count == 0)
                 {
-                    InventorySlot thisSlot = ItemSlotUI as InventorySlot;
+                    InventorySlotUI thisSlot = ResourceSlotUI as InventorySlotUI;
                     itemDestroyer.Activate(thisSlot.ItemSlot, thisSlot.SlotIndex);
                 }
             }

@@ -1,34 +1,25 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
-	[Serializable]
-	public class StatSystem
-	{
-		private readonly Dictionary<IStatType, Stat> stats = new Dictionary<IStatType, Stat>();
-		private readonly LevelSystem levelSystem;
-		private readonly CharacterClass characterClass;
-
+    public class StatSystem
+    {
+        private readonly Dictionary<IStatType, Stat> stats = new Dictionary<IStatType, Stat>();
 		public Dictionary<IStatType, Stat> Stats => stats; //getter
-		public LevelSystem LevelSystem => levelSystem; //getter
-		public CharacterClass CharacterClass => characterClass; //getter
 		public StatSystem() { } //constructor 1
-		public StatSystem(BaseStats baseStats) //constructor 2
+		public StatSystem(CharacterTemplate template) //constructor 2
 		{
-			foreach (var stat in baseStats.Stats)
+			foreach (var stat in template.Stats)
 			{
 				stats.Add(stat.StatType, new Stat(stat.Value));
 			}
-			characterClass = baseStats.CharacterClass;
-			levelSystem = new LevelSystem(characterClass);
 		}
 
 		public void AddModifier(StatModifier modifier)
 		{
-			if(!stats.TryGetValue(modifier.StatType, out Stat stat))
+			if (!stats.TryGetValue(modifier.StatType, out Stat stat))
 			{
 				stat = new Stat(modifier.StatType);
 				stats.Add(modifier.StatType, stat);
@@ -39,7 +30,7 @@ namespace GramophoneUtils.Stats
 
 		public Stat GetStat(IStatType type)
 		{
-			if(!stats.TryGetValue(type, out Stat stat))
+			if (!stats.TryGetValue(type, out Stat stat))
 			{
 				stat = new Stat(type);
 				stats.Add(type, stat);
@@ -67,7 +58,5 @@ namespace GramophoneUtils.Stats
 			stat.RemoveModifier(modifier);
 			modifier.OnDurationElapsed -= RemoveModifier;
 		}
-
 	}
 }
-

@@ -51,7 +51,6 @@ namespace GramophoneUtils.SavingLoading
         {
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
             {
-                Debug.Log("Got one");
                 state[saveable.Id] = saveable.CaptureState();
             }
 

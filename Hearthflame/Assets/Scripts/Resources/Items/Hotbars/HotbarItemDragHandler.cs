@@ -2,7 +2,7 @@
 
 namespace GramophoneUtils.Items.Hotbars
 {
-    public class HotbarItemDragHandler : ItemDragHandler
+    public class HotbarItemDragHandler : ResourceDragHandler
     {
         public override void OnPointerUp(PointerEventData eventData)
         {
@@ -12,7 +12,7 @@ namespace GramophoneUtils.Items.Hotbars
 
                 if (eventData.hovered.Count == 0)
                 {
-                    (ItemSlotUI as HotbarSlot).SlotItem = null;
+                    (ResourceSlotUI as HotbarSlotUI).SlotResource = null;
                 }
             }
         }

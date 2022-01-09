@@ -9,15 +9,15 @@ public class LevelDisplayUI : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI levelText;
 	[SerializeField] private Slider experienceSlider;
-	[SerializeField] private StatSystemBehaviour statSystemBehaviour;
+	[SerializeField] private CharacterBehaviour statSystemBehaviour;
 
 	private LevelSystem levelSystem;
 	private LevelSystemAnimated levelSystemAnimated;
 
 	private void Awake()
 	{
-		levelSystem = statSystemBehaviour.StatSystem.LevelSystem;
-		levelSystemAnimated = statSystemBehaviour.StatSystem.LevelSystem.LevelSystemAnimated;
+		levelSystem = statSystemBehaviour.Character.LevelSystem;
+		levelSystemAnimated = statSystemBehaviour.Character.LevelSystem.LevelSystemAnimated;
 		SetLevelNumber(levelSystemAnimated.GetLevel());
 		SetExperienceBarSize(levelSystemAnimated.GetExperienceNormalized());
 		levelSystemAnimated.OnExperienceChanged += LevelSystemAnimated_OnExperienceChanged;

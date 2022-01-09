@@ -6,12 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Skill", menuName = "Character Classes/Skills")]
 public class Skill : Resource, IHotbarItem
 {
-	[SerializeField] private new string name;
 	[SerializeField] private CharacterClass[] classRestrictions;
-	public string Name => name; //getter
+	[SerializeField] private Skill[] prerequisites;
 	public CharacterClass[] ClassRestrictions => classRestrictions;
-
-	public Sprite Icon => throw new System.NotImplementedException();
+	public Skill[] Prerequisites => prerequisites;
 
 	public void Use()
 	{

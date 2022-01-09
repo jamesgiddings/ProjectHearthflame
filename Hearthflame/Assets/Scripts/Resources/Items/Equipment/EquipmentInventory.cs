@@ -3,10 +3,10 @@ using GramophoneUtils.Stats;
 
 namespace GramophoneUtils.Items.Containers
 {
-    public class EquipmentInventory : Inventory
+	public class EquipmentInventory : Inventory
     {
-        [SerializeField] private StatSystemBehaviour statSystemBehaviour;
-		public StatSystemBehaviour StatSystemBehaviour { get => statSystemBehaviour; }
+        [SerializeField] private CharacterBehaviour characterBehaviour;
+		public CharacterBehaviour CharacterBehaviour { get => characterBehaviour; }
 
 		private void Start()
 		{
@@ -23,7 +23,7 @@ namespace GramophoneUtils.Items.Containers
 			if (itemSlot.item as EquipmentItem != null)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Equip(statSystemBehaviour.StatSystem);
+				equippable.Equip(characterBehaviour.Character);
 			}
 		}
 
@@ -32,7 +32,7 @@ namespace GramophoneUtils.Items.Containers
 			if (itemSlot.item as EquipmentItem != null)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Unequip(statSystemBehaviour.StatSystem);
+				equippable.Unequip(characterBehaviour.Character);
 			}
 		}
 
@@ -43,8 +43,8 @@ namespace GramophoneUtils.Items.Containers
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
 				if (equippable != null)
 				{
-					equippable.Unequip(statSystemBehaviour.StatSystem);
-					equippable.Equip(statSystemBehaviour.StatSystem);
+					equippable.Unequip(characterBehaviour.Character);
+					equippable.Equip(characterBehaviour.Character);
 				}
 			}
 		}

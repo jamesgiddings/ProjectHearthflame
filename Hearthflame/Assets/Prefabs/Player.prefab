@@ -961,10 +961,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4038179365053744159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2e525acfbe057742afc5719e7623fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 092ddbdb25a8f0e48844964fa855eebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  template: {fileID: 0}
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &347782824
 MonoBehaviour:
   m_ObjectHideFlags: 0

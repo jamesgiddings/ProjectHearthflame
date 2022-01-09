@@ -10,16 +10,16 @@ namespace GramophoneUtils.Items.Containers
 		#region SavingLoading
 		public object CaptureState()
 		{
-			List<ItemSlotUI.ItemSlotSaveData> tempList = new List<ItemSlotUI.ItemSlotSaveData>();
+			List<ResourceSlotUI.ItemSlotSaveData> tempList = new List<ResourceSlotUI.ItemSlotSaveData>();
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{
 				if(ItemSlots[i].item != null)
 				{
-					tempList.Add(new ItemSlotUI.ItemSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
+					tempList.Add(new ResourceSlotUI.ItemSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
 				}
 				else
 				{
-					tempList.Add(new ItemSlotUI.ItemSlotSaveData("", 0));
+					tempList.Add(new ResourceSlotUI.ItemSlotSaveData("", 0));
 				}
 			}
 			
@@ -51,7 +51,7 @@ namespace GramophoneUtils.Items.Containers
 		private struct SaveData
 		{
 			public int money;
-			public List<ItemSlotUI.ItemSlotSaveData> itemSlotSaveData;
+			public List<ResourceSlotUI.ItemSlotSaveData> itemSlotSaveData;
 		}
 		#endregion
 	}

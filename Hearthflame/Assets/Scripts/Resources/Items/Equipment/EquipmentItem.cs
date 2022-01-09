@@ -38,12 +38,11 @@ namespace GramophoneUtils.Items.Containers
 			}
 		}
 
-		public void Equip(StatSystem statSystem)
+		public void Equip(Character character)
 		{
 			foreach (StatModifier weaponEffect in weaponEffects)
 			{
-				//Debug.Log("Equip method is adding " + weaponEffect.StatType.Name + " " +  weaponEffect.Value + " value.");
-				statSystem.AddModifier(new StatModifier(weaponEffect.StatType, weaponEffect.ModifierType, weaponEffect.Value, weaponEffect.Duration, this)); // we make a new effect, which allows us to add the source as 'this' when we equip the item
+				character.StatSystem.AddModifier(new StatModifier(weaponEffect.StatType, weaponEffect.ModifierType, weaponEffect.Value, weaponEffect.Duration, this)); // we make a new effect, which allows us to add the source as 'this' when we equip the item
 			}
 		}
 		public override string GetInfoDisplayText()
@@ -57,11 +56,10 @@ namespace GramophoneUtils.Items.Containers
 				{
 					if (i < classRestrictions.Length - 1)
 					{
-						builder.Append(classRestrictions[i].Name).Append(", ").AppendLine();
+						builder.Append("<color=yellow>" + classRestrictions[i].Name).Append(", </color>");
 					}
 					else
 					{
-						Debug.Log("<color=yellow>classRestrictions[i].Name: " + classRestrictions[i].Name + "</color>");
 						builder.Append("<color=yellow>" + classRestrictions[i].Name).Append(" only.</color>").AppendLine();
 					}
 				}
@@ -78,9 +76,9 @@ namespace GramophoneUtils.Items.Containers
 			return builder.ToString();
 		}
 
-		public void Unequip(StatSystem statSystem)
+		public void Unequip(Character character)
 		{
-			foreach (KeyValuePair<IStatType, Stat> entry in statSystem.Stats)
+			foreach (KeyValuePair<IStatType, Stat> entry in character.StatSystem.Stats)
 			{
 				entry.Value.RemoveAllModifiersFromSource(this);
 			}

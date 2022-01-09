@@ -4,13 +4,13 @@ namespace GramophoneUtils.Items.Hotbars
 {
     public class Hotbar : MonoBehaviour
     {
-        [SerializeField] private HotbarSlot[] hotbarSlots = new HotbarSlot[10];
+        [SerializeField] private HotbarSlotUI[] hotbarSlots = new HotbarSlotUI[10];
 
         public void Add(Item itemToAdd)
         {
-            foreach (HotbarSlot hotbarSlot in hotbarSlots)
+            foreach (HotbarSlotUI hotbarSlot in hotbarSlots)
             {
-                if (hotbarSlot.AddItem(itemToAdd)) { return; }
+                if (hotbarSlot.AddResource(itemToAdd)) { return; }
             }
         }
     }

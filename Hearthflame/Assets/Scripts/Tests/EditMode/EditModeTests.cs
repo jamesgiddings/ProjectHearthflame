@@ -16,13 +16,13 @@ public class EditModeTests
 		string relativePath = "Assets/GameData/Stats/Strength.asset";
 		StatType statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
 		StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
-		StatSystem statSystem = new StatSystem();
+		Character character = new Character();
 
-		Assert.AreEqual(0, statSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
+		Assert.AreEqual(0, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
 
-		statSystem.AddModifier(testModifier);
+		character.StatSystem.AddModifier(testModifier);
 
-		Assert.AreEqual(1, statSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have 1 modifier now.
+		Assert.AreEqual(1, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have 1 modifier now.
 
 		int iterations = 0;
 		while (iterations < 5)
@@ -30,27 +30,27 @@ public class EditModeTests
 			Turn.AdvanceTurn();
 			iterations++;
 		}
-		Assert.AreEqual(0, statSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
+		Assert.AreEqual(0, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
-		float currentStatValue = statSystem.GetStat(statType).Value;
+		float currentStatValue = character.StatSystem.GetStat(statType).Value;
 		StatModifier testModifier2 = new StatModifier(statType, StatModifierTypes.Flat, 15f, -1);
 		StatModifier testModifier3 = new StatModifier(statType, StatModifierTypes.Flat, 8f, -1);
-		statSystem.AddModifier(testModifier2);
-		statSystem.AddModifier(testModifier3);
+		character.StatSystem.AddModifier(testModifier2);
+		character.StatSystem.AddModifier(testModifier3);
 
-		Assert.AreEqual(currentStatValue + 15f + 8f, statSystem.GetStat(statType).Value); // the new strength stat in statSystem should have had its modifier removed after it timed out.
+		Assert.AreEqual(currentStatValue + 15f + 8f, character.StatSystem.GetStat(statType).Value); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
 		relativePath = "Assets/GameData/Stats/Magic.asset";
 		statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
 
-		currentStatValue = statSystem.GetStat(statType).Value;
+		currentStatValue = character.StatSystem.GetStat(statType).Value;
 		testModifier = new StatModifier(statType, StatModifierTypes.PercentAdditive, 0.50f, 5);
 		testModifier2 = new StatModifier(statType, StatModifierTypes.PercentAdditive, 0.50f, 5);
 
-		statSystem.AddModifier(testModifier);
-		statSystem.AddModifier(testModifier2);
+		character.StatSystem.AddModifier(testModifier);
+		character.StatSystem.AddModifier(testModifier2);
 
-		Assert.AreEqual(currentStatValue * 2, statSystem.GetStat(statType).Value); // check that two additive 50% percent mods behave as expected
+		Assert.AreEqual(currentStatValue * 2, character.StatSystem.GetStat(statType).Value); // check that two additive 50% percent mods behave as expected
 
 		iterations = 0;
 		while (iterations < 5)
@@ -59,16 +59,16 @@ public class EditModeTests
 			iterations++;
 		}
 
-		Assert.AreEqual(currentStatValue, statSystem.GetStat(statType).Value); // check the two additive buffs have ticked off.
+		Assert.AreEqual(currentStatValue, character.StatSystem.GetStat(statType).Value); // check the two additive buffs have ticked off.
 
 		testModifier = new StatModifier(statType, StatModifierTypes.Flat, 10f, 5);
 
 		testModifier3 = new StatModifier(statType, StatModifierTypes.PercentMultiplicative, 1f, 5);
-		statSystem.AddModifier(testModifier);
-		statSystem.AddModifier(testModifier2);
-		statSystem.AddModifier(testModifier3);
+		character.StatSystem.AddModifier(testModifier);
+		character.StatSystem.AddModifier(testModifier2);
+		character.StatSystem.AddModifier(testModifier3);
 
-		Assert.AreEqual(((currentStatValue + 10f) * 1.5f) * 2f, statSystem.GetStat(statType).Value); // check the value of modifiers when flat and additive and multiplicative are used is as expected 
+		Assert.AreEqual(((currentStatValue + 10f) * 1.5f) * 2f, character.StatSystem.GetStat(statType).Value); // check the value of modifiers when flat and additive and multiplicative are used is as expected 
 
 		iterations = 0;
 		while (iterations < 5)
@@ -77,7 +77,7 @@ public class EditModeTests
 			iterations++;
 		}
 
-		Assert.AreEqual(currentStatValue, statSystem.GetStat(statType).Value); // check all modifiers have been removed following 5 ticks
+		Assert.AreEqual(currentStatValue, character.StatSystem.GetStat(statType).Value); // check all modifiers have been removed following 5 ticks
 	}
 
 	[Test]
@@ -86,17 +86,17 @@ public class EditModeTests
 		string relativePath = "Assets/GameData/Stats/Strength.asset";
 		StatType statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
 		StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
-		StatSystem statSystem = new StatSystem();
+		Character statSystem = new Character();
 
-		float statBeforeEquip = statSystem.GetStatValue(statType);
+		float statBeforeEquip = statSystem.StatSystem.GetStatValue(statType);
 		
 		string relativePathWeapon = "Assets/Resources/Items/Weapons/Sword of Nipsying.asset";
 		EquipmentItem weaponItem = AssetDatabase.LoadAssetAtPath<EquipmentItem>(relativePathWeapon);
 		weaponItem.Equip(statSystem);
 
-		Assert.AreEqual(statBeforeEquip + 5f, statSystem.GetStat(statType).Value);
+		Assert.AreEqual(statBeforeEquip + 5f, statSystem.StatSystem.GetStat(statType).Value);
 		weaponItem.Unequip(statSystem);
-		Assert.AreEqual(statBeforeEquip, statSystem.GetStat(statType).Value);
+		Assert.AreEqual(statBeforeEquip, statSystem.StatSystem.GetStat(statType).Value);
 	}
 
 	[Test]
