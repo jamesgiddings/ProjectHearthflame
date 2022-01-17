@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
-  m_Name: Sword of Slightly Less Nipsying
+  m_Name: Lucky Coin
   m_EditorClassIdentifier: 
-  UID: 6705cc990f7d60f4788f0b2cc54ee7f1
-  name: Sword of Slightly Less Nipsying
-  description: A bit naff
-  icon: {fileID: 21300000, guid: 9c4c6cd6b5ab662498549111c27cb856, type: 3}
-  rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
+  UID: 1d216b02f3b35b94198d1901e8fc9b45
+  icon: {fileID: 21300000, guid: ae6f32453dcf4cb44991e7a010619491, type: 3}
+  name: Lucky Coin
+  description: New Item Description
+  rarity: {fileID: 11400000, guid: c02162df4aaf77147b42f0359f614592, type: 2}
   sellPrice: 1
   maxStack: 1
-  equipmentType: 0
+  equipmentType: 2
   isUnique: 0
   flavourText: Flavour text here.
   weaponEffectBlueprints:
-  - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
   - {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
-  classRestrictions:
-  - {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}
+  classRestrictions: []

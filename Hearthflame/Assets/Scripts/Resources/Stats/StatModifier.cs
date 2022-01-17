@@ -12,7 +12,7 @@ namespace GramophoneUtils.Stats
 		PercentMultiplicative = 2,
 	}
 
-	//[Serializable]
+	[Serializable]
 	public class StatModifier
 	{
 		[SerializeField] private IStatType statType;

@@ -137,7 +137,7 @@ namespace GramophoneUtils.Items.Containers
 
             if (firstSlot.Equals(secondSlot)) { return; }
 
-            if (secondSlot.item != null)
+            if (secondSlot.item != null && firstSlot.item != null)
             {
                 if (firstSlot.item == secondSlot.item)
                 {
@@ -159,6 +159,36 @@ namespace GramophoneUtils.Items.Containers
             itemContainerOne.ItemSlots[indexOne] = secondSlot;
             itemContainerTwo.ItemSlots[indexTwo] = firstSlot;
 
+            if (itemContainerOne as EquipmentInventory != null)
+            {
+                EquipmentInventory equipmentInventory = itemContainerOne as EquipmentInventory;
+                EquipmentItem equipmentItemOne = equipmentInventory.GetSlotByIndex(indexOne).item as EquipmentItem;
+                if (equipmentItemOne != null)
+                {
+                    equipmentItemOne.Equip(equipmentInventory.CharacterBehaviour.Character);
+                }
+                EquipmentItem equipmentItemTwo = itemContainerTwo.GetSlotByIndex(indexTwo).item as EquipmentItem;
+                if (equipmentItemTwo != null)
+                {
+                    equipmentItemTwo.Unequip(equipmentInventory.CharacterBehaviour.Character);
+                }
+
+            }
+            else if (itemContainerTwo as EquipmentInventory != null)
+            {
+                EquipmentInventory equipmentInventory = itemContainerTwo as EquipmentInventory;
+                EquipmentItem equipmentItemOne = equipmentInventory.GetSlotByIndex(indexTwo).item as EquipmentItem;
+                if (equipmentItemOne != null)
+                {
+                    equipmentItemOne.Equip(equipmentInventory.CharacterBehaviour.Character);
+                }
+                EquipmentItem equipmentItemTwo = itemContainerOne.GetSlotByIndex(indexOne).item as EquipmentItem;
+                if (equipmentItemTwo != null)
+                {
+                    equipmentItemTwo.Unequip(equipmentInventory.CharacterBehaviour.Character);
+                }
+
+            }
             onInventoryItemsUpdated.Invoke();
         }
 

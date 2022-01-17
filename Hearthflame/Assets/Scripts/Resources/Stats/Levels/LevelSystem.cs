@@ -11,6 +11,13 @@ namespace GramophoneUtils.Stats
 		public event EventHandler OnExperienceChanged;
 		public event EventHandler OnLevelChanged;
 
+		public class LevelChangedEventArgs : EventArgs
+		{
+			public int Level { get; set; }
+			public Character Character { get; set; }
+		}
+
+		private readonly Character character;
 		private int level;
 		private int experience;
 		private LevelSystemAnimated levelSystemAnimated;
@@ -20,16 +27,15 @@ namespace GramophoneUtils.Stats
 
 		public LevelSystemAnimated LevelSystemAnimated => levelSystemAnimated; //getter
 
-		public LevelSystem(CharacterClass characterClass)
+		public LevelSystem(CharacterClass characterClass, Character character)
 		{
 			level = 0;
 			experience = 0;
 			this.characterClass = characterClass;
+			this.character = character;
 			levelSystemAnimated = new LevelSystemAnimated(this);
 			experienceRequirements = characterClass.ExperienceData.ExperienceRequirements;
 		}
-
-
 
 		public void AddExperience(int amount)
 		{
@@ -43,7 +49,11 @@ namespace GramophoneUtils.Stats
 					experience -= GetExperienceToNextLevel(level);
 					level++;
 
-					if (OnLevelChanged != null) OnLevelChanged(this, EventArgs.Empty);
+					LevelChangedEventArgs args = new LevelChangedEventArgs();
+					args.Level = level;
+					args.Character = character;
+
+					OnLevelChanged?.Invoke(this, args);
 				}
 				if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
 			}

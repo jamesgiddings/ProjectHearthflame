@@ -1,4 +1,5 @@
 ﻿using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Stats;
 using System.Text;
 using UnityEngine;
 
@@ -21,5 +22,10 @@ namespace GramophoneUtils.Items
 
             return builder.ToString();
         }
-    }
+
+		public override void Use(CharacterBehaviour characterBehaviour, InventorySlotUI inventorySlotUI)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
 }

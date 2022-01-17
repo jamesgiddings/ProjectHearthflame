@@ -6,7 +6,6 @@ namespace GramophoneUtils.Items.Hotbars
     {
         string Name { get; }
         Sprite Icon { get; }
-        void Use();
     }
 }
 

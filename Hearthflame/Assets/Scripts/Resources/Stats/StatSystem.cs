@@ -28,6 +28,15 @@ namespace GramophoneUtils.Stats
 			modifier.OnDurationElapsed += RemoveModifier;
 		}
 
+		public void UpdateStatBaseValue(StatComponentBlueprint statComponentBlueprint)
+		{
+			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
+			{
+				stat = new Stat(statComponentBlueprint.StatType);
+				stats.Add(statComponentBlueprint.StatType, stat);
+			}
+		}
+
 		public Stat GetStat(IStatType type)
 		{
 			if (!stats.TryGetValue(type, out Stat stat))

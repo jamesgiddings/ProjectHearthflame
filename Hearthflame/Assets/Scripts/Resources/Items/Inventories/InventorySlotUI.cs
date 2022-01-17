@@ -11,14 +11,17 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] protected Inventory inventory;
         [SerializeField] private TextMeshProUGUI itemQuantityText;
+        [SerializeField] protected CharacterBehaviour thisTabCharacter;
+
         public override Resource SlotResource
         {
             get { return ItemSlot.item; }
             set { }
         }
 
-        public ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
+        public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
         public Inventory Inventory => inventory;
+        public CharacterBehaviour CharacterBehaviour => thisTabCharacter;
 
         public override void OnDrop(PointerEventData eventData)
         {
@@ -60,14 +63,13 @@ namespace GramophoneUtils.Items.Containers
             item.Unequip(equipmentInventory.CharacterBehaviour.Character);
         }
 
-		public override void UpdateSlotUI()
+        public override void UpdateSlotUI()
         {
             if (ItemSlot.item == null)
             {
                 EnableSlotUI(false);
                 return;
             }
-
             EnableSlotUI(true);
             resourceIconImage.sprite = ItemSlot.item.Icon;
             itemQuantityText.text = ItemSlot.quantity > 1 ? ItemSlot.quantity.ToString() : "";

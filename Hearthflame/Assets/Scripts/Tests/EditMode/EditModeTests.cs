@@ -114,8 +114,8 @@ public class EditModeTests
 	{
 		string relativePath = "Assets/GameData/Classes/HearthPriest.asset";
 		CharacterClass characterClass = AssetDatabase.LoadAssetAtPath<CharacterClass>(relativePath);
-
-		LevelSystem levelSystem = new LevelSystem(characterClass);
+		Character character = new Character();
+		LevelSystem levelSystem = new LevelSystem(characterClass, character);
 		Debug.Log(levelSystem.GetLevel());
 		levelSystem.AddExperience(50);
 		Debug.Log(levelSystem.GetLevel());

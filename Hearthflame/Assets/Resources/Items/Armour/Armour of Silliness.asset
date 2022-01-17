@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Armour of Silliness
   m_EditorClassIdentifier: 
-  UID: 0a0770fbd36658748939fa494cdb6be9
+  UID: 8f1f522bf4176aa4ca9cc60ab8fa62dc
+  icon: {fileID: 21300000, guid: 5372afdb7d982a248a89012aa0c42002, type: 3}
   name: Armour of Silliness
   description: Sillies.
-  icon: {fileID: 21300000, guid: 5372afdb7d982a248a89012aa0c42002, type: 3}
   rarity: {fileID: 11400000, guid: 0b671ad502b4b754184dc8291f37253b, type: 2}
   sellPrice: 2000
   maxStack: 1
@@ -24,3 +24,4 @@ MonoBehaviour:
   flavourText: In its silliness is its sensibleness.
   weaponEffectBlueprints:
   - {fileID: 11400000, guid: 1b487034c575635499e46d9bbbe28b79, type: 2}
+  classRestrictions: []

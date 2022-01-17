@@ -8,15 +8,13 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] private EquipmentType equipmentType;
 
-		//public void OnValidate()
-		//{
-		//	if (inventory as EquipmentInventory == null)
-		//	{
-  //              Debug.LogWarning("EquipmentSlot requires a reference to an EquipmentInventory, not just an inventory.");
-		//	}
-		//}
+        private void Start()
+        {
+            base.Start();
+            inventory = thisTabCharacter.GetComponent<EquipmentInventory>();
+        }
 
-        public override void OnDrop(PointerEventData eventData)
+		public override void OnDrop(PointerEventData eventData)
         {
             IItemContainer itemContainerOne;
             ResourceDragHandler resourceDragHandler = eventData.pointerDrag.GetComponent<ResourceDragHandler>();
@@ -42,7 +40,7 @@ namespace GramophoneUtils.Items.Containers
             EquipmentItem item = GetItemFromItemSlotUI(resourceDragHandler.ResourceSlotUI);
             EquipmentInventory equipmentInventory = (EquipmentInventory)inventory;
 
-            if (CanEquipToSlot(item) && CanEquipToClass(item, equipmentInventory))
+            if (equipmentInventory.CanEquipToSlot(item, equipmentType) && equipmentInventory.CanEquipToClass(item, equipmentInventory))
             {
                 inventory.Swap(itemContainerOne, resourceDragHandler.ResourceSlotUI.SlotIndex, inventory, SlotIndex);
             }
@@ -58,42 +56,6 @@ namespace GramophoneUtils.Items.Containers
                 }
             }
             return null;
-        }
-
-		public bool CanEquipToSlot(EquipmentItem equipmentItem)
-        {
-            if (equipmentItem != null)
-            {
-                if (equipmentItem.EquipmentType == equipmentType)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-            
-        private bool CanEquipToClass(EquipmentItem equipmentItem, EquipmentInventory equipmentInventory)
-        {
-            if (equipmentItem == null)
-            {
-                Debug.Log("Item null");
-                return true;
-            }
-            if (equipmentItem.ClassRestrictions.Length == 0)
-            {
-                return true;
-            }
-            else
-            {
-                if (!Array.Exists(equipmentItem.ClassRestrictions, characterClass => characterClass.Name == equipmentInventory.CharacterBehaviour.Character.CharacterClass.Name))
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
         }
 
         private void EquipFromInventory()

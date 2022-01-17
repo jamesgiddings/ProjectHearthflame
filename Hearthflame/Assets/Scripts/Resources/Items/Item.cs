@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Stats;
+using UnityEngine;
 
 namespace GramophoneUtils.Items
 {
@@ -10,5 +12,7 @@ namespace GramophoneUtils.Items
         public abstract string ColouredName { get; }
 
         public abstract string GetInfoDisplayText();
+
+        public abstract void Use(CharacterBehaviour characterBehaviour, InventorySlotUI inventorySlotUI);
     }
 }

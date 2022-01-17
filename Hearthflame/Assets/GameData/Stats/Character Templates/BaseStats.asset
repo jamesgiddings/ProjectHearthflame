@@ -25,8 +25,7 @@ MonoBehaviour:
     value: 10
   - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
     value: 10
-  name: 
+  name: Snee
   characterClass: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
-  currentHealth: 0
-  maxHealth: 0
-  experience: 0
+  currentHealth: 100
+  maxHealth: 100

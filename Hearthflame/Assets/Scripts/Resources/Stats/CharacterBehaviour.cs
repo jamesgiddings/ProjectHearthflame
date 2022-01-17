@@ -2,14 +2,17 @@ using System;
 using UnityEngine;
 using GramophoneUtils.SavingLoading;
 using UnityEngine.Events;
+using GramophoneUtils.Items.Containers;
 
 namespace GramophoneUtils.Stats
 {
     public class CharacterBehaviour : MonoBehaviour, ISaveable
     {
 		[SerializeField] private CharacterTemplate template;
+		[SerializeField] private EquipmentInventory equipmentInventory;
 
 		public UnityEvent onStatsChanged;
+		public EquipmentInventory EquipmentInventory => equipmentInventory;
 
 		private Character character;
         public Character Character

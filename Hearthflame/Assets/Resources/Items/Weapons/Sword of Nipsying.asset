@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Sword of Nipsying
   m_EditorClassIdentifier: 
-  UID: 07c8c4cba19649f46b18ab68da7e9280
+  UID: b167c95f89da848439c3c9a6564f5f90
+  icon: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
   name: Sword of Nipsying
   description: Item description will go here.
-  icon: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
   rarity: {fileID: 11400000, guid: a1c30af3df3f89643bba121811563121, type: 2}
-  sellPrice: 111111111
+  sellPrice: 11111111
   maxStack: 1
   equipmentType: 0
   isUnique: 0
-  flavourText: Worth eleventy-million scrip.
+  flavourText: Worth eleventy million scrip.
   weaponEffectBlueprints:
   - {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
   classRestrictions:

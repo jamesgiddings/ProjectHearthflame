@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 8827289118933545294}
   - component: {fileID: 5787808573264795321}
   - component: {fileID: 347782824}
+  - component: {fileID: 1865139631112472463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1037,6 +1038,24 @@ MonoBehaviour:
     quantity: 0
   - item: {fileID: 0}
     quantity: 0
+--- !u!114 &1865139631112472463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038179365053744159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89de0c1de9eb214ba9707a2c5d25a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 100
+  onInventoryItemsUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  itemSlots: []
+  characterBehaviour: {fileID: 0}
 --- !u!1 &4049800920690487418
 GameObject:
   m_ObjectHideFlags: 0

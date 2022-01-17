@@ -1,4 +1,5 @@
-﻿using GramophoneUtils.Items.Hotbars;
+﻿using GramophoneUtils.Events.CustomEvents;
+using GramophoneUtils.Items.Hotbars;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,8 @@ namespace GramophoneUtils.Items.Containers
     public abstract class ResourceSlotUI : MonoBehaviour, IDropHandler
     {
         [SerializeField] protected Image resourceIconImage = null;
+        [SerializeField] protected ResourceEvent onMouseRightClickResource = null;
+
         public int SlotIndex { get; private set; }
 
         public virtual Resource SlotResource { get; set; }
@@ -27,9 +30,9 @@ namespace GramophoneUtils.Items.Containers
 
         protected virtual void EnableSlotUI(bool enable) => resourceIconImage.enabled = enable;
 
-        #region SavingLoading
-        
-        [Serializable]
+		#region SavingLoading
+
+		[Serializable]
         public struct ItemSlotSaveData
         {
             public string itemUID;

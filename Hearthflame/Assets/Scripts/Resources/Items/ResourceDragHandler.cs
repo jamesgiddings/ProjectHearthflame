@@ -11,14 +11,20 @@ namespace GramophoneUtils.Items
         [SerializeField] protected ResourceSlotUI resourceSlotUI = null;
         [SerializeField] protected ResourceEvent onMouseStartHoverResource = null;
         [SerializeField] protected VoidEvent onMouseEndHoverResource = null;
+        [SerializeField] protected ResourceEvent onMouseRightClickResource = null;
 
         protected CanvasGroup canvasGroup = null;
+        protected GameObject dragDropCanvas;
         protected Transform originalParent = null;
         protected bool isHovering = false;
 
         public ResourceSlotUI ResourceSlotUI => resourceSlotUI;
 
-        private void Start() => canvasGroup = GetComponent<CanvasGroup>();
+        private void Start()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            dragDropCanvas = GameObject.FindGameObjectsWithTag("DragDropCanvas")[0];
+        }
 
         private void OnDisable()
         {
@@ -37,9 +43,25 @@ namespace GramophoneUtils.Items
 
                 originalParent = transform.parent;
 
-                transform.SetParent(transform.parent.parent);
+                if (dragDropCanvas == null)
+                {
+                    transform.SetParent(transform.parent.parent.parent.parent);
+                }
+                else
+                {
+                    transform.SetParent(dragDropCanvas.transform);
+                }
 
                 canvasGroup.blocksRaycasts = false;
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+			{
+                if (resourceSlotUI.SlotResource as Item != null && resourceSlotUI as InventorySlotUI != null && resourceSlotUI as EquipmentSlotUI == null)
+				{
+                    Item item = resourceSlotUI.SlotResource as Item;
+                    InventorySlotUI inventorySlotUI = resourceSlotUI as InventorySlotUI;
+                    item.Use(inventorySlotUI.CharacterBehaviour, inventorySlotUI);
+                }
             }
         }
 

@@ -9,19 +9,24 @@ namespace GramophoneUtils.Stats
 	[CreateAssetMenu(fileName = "New Stat Component Blueprint", menuName = "StatSystem/Stat Component Blueprint")]
 	public class StatComponentBlueprint : ScriptableObject, IBlueprint
 	{
-		[SerializeField] StatType StatType;
-		[SerializeField] StatModifierTypes ModifierType;
-		[SerializeField] float Value;
-		[SerializeField] int Duration;
+		[SerializeField] private StatType statType;
+		[SerializeField] private StatModifierTypes modifierType;
+		[SerializeField] private float value;
+		[SerializeField] private int duration;
+
+		public StatModifierTypes ModifierType => modifierType; //getter
+		public StatType StatType => statType; //getter
+		public float Value => value; //getter
+		public int Duration => duration; //getter
 
 		public T CreateBlueprintInstance<T>(object source = null)
 		{
-			StatModifier blueprintInstance = new StatModifier(StatType, ModifierType, Value, Duration, source);
+			StatModifier blueprintInstance = new StatModifier(statType, modifierType, value, duration, source);
 			return (T) Convert.ChangeType(blueprintInstance, typeof(T));
 		}
 
 
-		//StatComponentObject 
+		// StatComponentObject 
 
 		// the design of this class is to be a blueprint for the creation of StatModifiers at runtime.
 

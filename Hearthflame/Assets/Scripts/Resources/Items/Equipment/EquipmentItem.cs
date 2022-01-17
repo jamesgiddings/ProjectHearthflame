@@ -17,13 +17,14 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private List<StatComponentBlueprint> weaponEffectBlueprints;
 		[SerializeField] private CharacterClass[] classRestrictions;
 
-		private List<StatModifier> weaponEffects = new List<StatModifier>();
+		private List<StatModifier> weaponEffects;
 
 		public CharacterClass[] ClassRestrictions => classRestrictions;
 
 		public EquipmentType EquipmentType => equipmentType;
 		private void OnEnable()
 		{
+			weaponEffects = new List<StatModifier>();
 			InstanceWeaponEffectBlueprints();
 		}
 
@@ -82,6 +83,12 @@ namespace GramophoneUtils.Items.Containers
 			{
 				entry.Value.RemoveAllModifiersFromSource(this);
 			}
+		}
+
+		public override void Use(CharacterBehaviour characterBehaviour, InventorySlotUI inventorySlotUI)
+		{
+			//Debug.Log("Using equipment item " + Name + " on " + characterBehaviour.Character.Name);
+			characterBehaviour.gameObject.GetComponent<EquipmentInventory>().TryToEquip(this, inventorySlotUI);
 		}
 	}
 }

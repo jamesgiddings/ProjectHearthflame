@@ -6,3 +6,4 @@ namespace GramophoneUtils.Items.Containers
 {
     public enum EquipmentType { Weapon, Armor, Trinket };
 }
+ 

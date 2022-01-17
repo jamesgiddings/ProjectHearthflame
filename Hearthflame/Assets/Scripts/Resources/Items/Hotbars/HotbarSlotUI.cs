@@ -15,7 +15,7 @@ namespace GramophoneUtils.Items.Hotbars
         public override Resource SlotResource
         {
             get { return slotResource; }
-            set { slotResource = value; UpdateSlotUI(); }
+            set { slotResource = value; UpdateSlotUI(); Debug.Log("Setting"); }
         }
 
         public bool AddResource(Resource resourceToAdd)
@@ -41,20 +41,25 @@ namespace GramophoneUtils.Items.Hotbars
             if (resourceDragHandler == null) { return; }
             if (!(resourceDragHandler == null))
 			{
+                EquipmentSlotUI equipmentSlot = resourceDragHandler.ResourceSlotUI as EquipmentSlotUI;
+                if (equipmentSlot != null)
+				{
+                    SlotResource = equipmentSlot.SlotResource;
+                    UpdateSlotUI();
+                    return;
+                }
+
                 InventorySlotUI inventorySlot = resourceDragHandler.ResourceSlotUI as InventorySlotUI;
                 if (inventorySlot != null)
                 {
-                    Debug.Log(inventorySlot.ItemSlot.item.Name);
-                    SlotResource = inventorySlot.ItemSlot.item;
+                    SlotResource = inventorySlot.SlotResource;
                     UpdateSlotUI();
-                    Debug.Log(SlotResource.Name);
                     return;
                 }
 
                 HotbarSlotUI hotbarSlot = resourceDragHandler.ResourceSlotUI as HotbarSlotUI;
                 if (hotbarSlot != null)
                 {
-                    Debug.Log(resourceDragHandler.ResourceSlotUI.SlotResource);
                     Resource oldResource = SlotResource;
                     SlotResource = hotbarSlot.SlotResource;
                     hotbarSlot.SlotResource = oldResource;
@@ -65,13 +70,10 @@ namespace GramophoneUtils.Items.Hotbars
                 SkillSlotUI skillSlot = skillDragHandler.ResourceSlotUI as SkillSlotUI;
                 if (skillSlot != null)
                 {
-                    Debug.Log(skillSlot.SlotResource.Name);
                     SlotResource = skillSlot.SlotResource;
                     UpdateSlotUI();
-                    Debug.Log(SlotResource.Name);
                     return;
                 }
-
             }
         }
 
@@ -82,7 +84,6 @@ namespace GramophoneUtils.Items.Hotbars
 				EnableSlotUI(false);
                 return;
             }
-            Debug.Log("UPDATING UI");
 			resourceIconImage.sprite = SlotResource.Icon;
 
             EnableSlotUI(true);

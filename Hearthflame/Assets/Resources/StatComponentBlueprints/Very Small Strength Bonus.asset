@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf80f3668b0b58145b6d8357600f6d18, type: 3}
   m_Name: Very Small Strength Bonus
   m_EditorClassIdentifier: 
-  StatType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
-  ModifierType: 0
-  Value: 1
-  Duration: -1
+  statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
+  modifierType: 0
+  value: 1
+  duration: -1

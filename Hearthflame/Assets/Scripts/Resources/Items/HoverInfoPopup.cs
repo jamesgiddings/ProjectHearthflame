@@ -48,18 +48,23 @@ namespace Hel.Items
             popupObject.transform.position = newPos;
         }
 
-        public void DisplayInfo(Item infoItem)
+        public void DisplayInfo(Resource infoResource)
         {
-            StringBuilder builder = new StringBuilder();
+            Item infoItem = infoResource as Item;
+            
+            if (infoItem != null)
+			{
+                StringBuilder builder = new StringBuilder();
 
-            builder.Append("<size=35>").Append(infoItem.ColouredName).Append("</size>\n");
-            builder.Append(infoItem.GetInfoDisplayText());
+                builder.Append("<size=35>").Append(infoItem.ColouredName).Append("</size>\n");
+                builder.Append(infoItem.GetInfoDisplayText());
 
-            infoText.text = builder.ToString();
+                infoText.text = builder.ToString();
 
-            popupCanvasObject.SetActive(true);
+                popupCanvasObject.SetActive(true);
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
+            }
         }
     }
 }

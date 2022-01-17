@@ -2,6 +2,7 @@
 using GramophoneUtils.Items.Containers;
 using System.Text;
 using UnityEngine;
+using GramophoneUtils.Stats;
 
 namespace GramophoneUtils.Items
 {
@@ -23,9 +24,10 @@ namespace GramophoneUtils.Items
             return builder.ToString();
         }
 
-        public void Use()
-        {
+		public override void Use(CharacterBehaviour characterBehaviour, InventorySlotUI inventorySlotUI)
+		{
             Debug.Log($"Drinking {Name}");
+            // Do use code here
         }
-    }
+	}
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
+  m_Name: Wits Trinket
+  m_EditorClassIdentifier: 
+  UID: 8455039229e877541b251fc70899281f
+  icon: {fileID: 21300000, guid: 4029a9cfeb86f134c9c5af05993eaac8, type: 3}
+  name: Wits Trinket
+  description: New Item Description
+  rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
+  sellPrice: 1
+  maxStack: 1
+  equipmentType: 2
+  isUnique: 0
+  flavourText: Flavour text here.
+  weaponEffectBlueprints:
+  - {fileID: 11400000, guid: 8fba04f34f9ad344388c76dba3b5d9dc, type: 2}
+  classRestrictions: []

@@ -8,7 +8,6 @@ public class Resource : ScriptableObject
     [SerializeField] protected Sprite icon;
     [SerializeField] protected new string name;
 
-    
     public Sprite Icon => icon; //getter
     public string Name => name;
 
