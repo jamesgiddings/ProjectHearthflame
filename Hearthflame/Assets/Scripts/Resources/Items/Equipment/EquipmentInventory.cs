@@ -8,18 +8,24 @@ namespace GramophoneUtils.Items.Containers
 	[Serializable]
 	public class EquipmentInventory : Inventory
     {
-        [SerializeField] private CharacterBehaviour characterBehaviour;
-		public CharacterBehaviour CharacterBehaviour { get => characterBehaviour; }
-		public Dictionary<EquipmentType, int> equipmentTypeToSlotIndex;
+		private Character character;
+		public Character Character => character;
 
-		private void Start()
+		public Action Refresh;
+
+		public Dictionary<EquipmentType, int> equipmentTypeToSlotIndex;
+		public EquipmentInventory(Character character, PlayerBehaviour playerBehaviour, int size = 4, int money = 0)
 		{
+			this.character = character;
+			itemSlots = new ItemSlot[size];
+			this.money = money;
 			equipmentTypeToSlotIndex = new Dictionary<EquipmentType, int>()
 			{
 				{ EquipmentType.Armor, 0 },
 				{ EquipmentType.Weapon, 1 },
 				{ EquipmentType.Trinket, 2 },
 			};
+			onInventoryItemsUpdated = playerBehaviour.onInventoryItemsUpdated;
 			onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
 		}
 
@@ -33,7 +39,7 @@ namespace GramophoneUtils.Items.Containers
 			if (itemSlot.item as EquipmentItem != null)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Equip(characterBehaviour.Character);
+				equippable.Equip(character);
 			}
 		}
 
@@ -42,20 +48,19 @@ namespace GramophoneUtils.Items.Containers
 			if (itemSlot.item as EquipmentItem != null)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Unequip(characterBehaviour.Character);
+				equippable.Unequip(character);
 			}
 		}
 
-		private void RefreshEquipmentInSlots()
+		public void RefreshEquipmentInSlots()
 		{
-			Debug.Log("we're doing refreshing");
 			foreach(ItemSlot itemSlot in ItemSlots)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
 				if (equippable != null)
 				{
-					equippable.Unequip(characterBehaviour.Character);
-					equippable.Equip(characterBehaviour.Character);
+					equippable.Unequip(character);
+					equippable.Equip(character);
 				}
 			}
 		}
@@ -73,7 +78,7 @@ namespace GramophoneUtils.Items.Containers
 			}
 			else
 			{
-				if (!Array.Exists(equipmentItem.ClassRestrictions, characterClass => characterClass.Name == equipmentInventory.CharacterBehaviour.Character.CharacterClass.Name))
+				if (!Array.Exists(equipmentItem.ClassRestrictions, characterClass => characterClass.Name == equipmentInventory.Character.CharacterClass.Name))
 				{
 					return false;
 				}
@@ -104,14 +109,16 @@ namespace GramophoneUtils.Items.Containers
 				{
 					if (GetSlotByIndex(3).item == null)
 					{
-						Swap(CharacterBehaviour.gameObject.GetComponent<Inventory>(), originalSlot.SlotIndex, this, 3);
-
+						Swap(Character.PartyInventory, originalSlot.SlotIndex, this, 3);
+					}
+					else
+					{
+						Swap(Character.PartyInventory, originalSlot.SlotIndex, this, 2);
 					}
 				}
 				else
 				{
-					Swap(CharacterBehaviour.gameObject.GetComponent<Inventory>(), originalSlot.SlotIndex, this, equipmentTypeToSlotIndex[equipmentItem.EquipmentType]);
-
+					Swap(Character.PartyInventory, originalSlot.SlotIndex, this, equipmentTypeToSlotIndex[equipmentItem.EquipmentType]);
 				}
 				RefreshEquipmentInSlots();
 			}

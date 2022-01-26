@@ -1,14 +1,18 @@
-﻿using GramophoneUtils.Items.Containers;
+﻿using GramophoneUtils.Events.CustomEvents;
+using GramophoneUtils.Items.Containers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace GramophoneUtils.Npcs.Occupations.Vendors
 {
-    public class VendorItemButton : MonoBehaviour
+    public class VendorItemButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private TextMeshProUGUI itemNameText = null;
         [SerializeField] private Image itemIconImage = null;
+        [SerializeField] private ResourceEvent resourceEvent;
+        [SerializeField] private VoidEvent voidEvent;
 
         private VendorSystem vendorSystem = null;
         private InventoryItem item = null;
@@ -22,9 +26,18 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
             itemIconImage.sprite = item.Icon;
         }
 
-        public void SelectItem()
+		public void SelectItem()
         {
             vendorSystem.SetItem(item);
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            resourceEvent?.Raise(item);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            voidEvent?.Raise();
         }
     }
 }

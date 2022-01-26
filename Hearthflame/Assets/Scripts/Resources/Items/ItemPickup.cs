@@ -1,4 +1,5 @@
 using GramophoneUtils.Interactables;
+using GramophoneUtils.Stats;
 using UnityEngine;
 
 namespace GramophoneUtils.Items
@@ -9,9 +10,9 @@ namespace GramophoneUtils.Items
 
         public void Interact(GameObject other)
         {
-			foreach (ItemSlot itemSlot in itemSlots)
+            foreach (ItemSlot itemSlot in itemSlots)
 			{
-                var itemContainer = other.GetComponent<IItemContainer>();
+                var itemContainer = other.GetComponent<PlayerBehaviour>().PartyInventory;
 
                 if (itemContainer == null) { return; }
 

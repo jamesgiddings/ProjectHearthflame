@@ -40,6 +40,11 @@ namespace GramophoneUtils.Stats
 		public Stat(float initialValue) => baseValue = initialValue;
 		public Stat(IStatType statType) => baseValue = statType.DefaultValue;
 
+		public float GetBaseValue()
+		{
+			return baseValue;
+		}
+
 		public void UpdateBaseValue(float newBase)
 		{
 			isDirty = true;

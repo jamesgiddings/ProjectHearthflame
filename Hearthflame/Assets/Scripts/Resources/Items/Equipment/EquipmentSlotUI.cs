@@ -1,3 +1,4 @@
+using GramophoneUtils.Stats;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,10 +9,15 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] private EquipmentType equipmentType;
 
-        private void Start()
-        {
-            base.Start();
-            inventory = thisTabCharacter.GetComponent<EquipmentInventory>();
+		public override void Initialise(PlayerBehaviour playerBehaviour, Character character, ItemDestroyer itemDestroyer)
+		{
+            this.playerBehaviour = playerBehaviour;
+            inventory = character.EquipmentInventory;
+            InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();
+            if (dragHandler != null)
+			{
+                dragHandler.ItemDestroyer = itemDestroyer;
+			}
         }
 
 		public override void OnDrop(PointerEventData eventData)
@@ -62,13 +68,13 @@ namespace GramophoneUtils.Items.Containers
         {
             EquipmentInventory equipmentInventory = (EquipmentInventory)inventory;
             EquipmentItem item = (EquipmentItem)inventory.GetSlotByIndex(SlotIndex).item;
-            item.Equip(equipmentInventory.CharacterBehaviour.Character);
+            item.Equip(equipmentInventory.Character);
         }
         private void UnequipFromInventory(IItemContainer itemContainer, int index)
         {
             EquipmentInventory equipmentInventory = (EquipmentInventory)inventory;
             IEquippable item = (EquipmentItem)itemContainer.GetSlotByIndex(index).item;
-            item.Unequip(equipmentInventory.CharacterBehaviour.Character);
+            item.Unequip(equipmentInventory.Character);
         }
     }
 }

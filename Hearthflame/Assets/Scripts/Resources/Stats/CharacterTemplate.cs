@@ -5,7 +5,7 @@ using System;
 
 namespace GramophoneUtils.Stats
 {
-   [CreateAssetMenu(fileName = "New Base Stats", menuName = "StatSystem/Base Stats")]
+   [CreateAssetMenu(fileName = "New Base Stats", menuName = "Characters/Character Template")]
     public class CharacterTemplate : ScriptableObject
     {
         [SerializeField] private List<BaseStat> stats = new List<BaseStat>();
@@ -20,8 +20,18 @@ namespace GramophoneUtils.Stats
         public int CurrentHealth => currentHealth; //getter
         public int MaxHealth => maxHealth; //getter
 
+        public Dictionary<string, IStatType> StatTypeStringRefDictionary;
 
-        [Serializable]
+		private void OnEnable()
+		{
+            StatTypeStringRefDictionary = new Dictionary<string, IStatType>();
+            foreach (BaseStat stat in stats)
+			{
+                StatTypeStringRefDictionary.Add(stat.StatType.Name, stat.StatType);
+			}
+		}
+
+		[Serializable]
         public class BaseStat
 		{
             [SerializeField] private StatType statType = null;

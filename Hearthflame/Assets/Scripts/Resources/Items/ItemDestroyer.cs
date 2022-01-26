@@ -16,7 +16,6 @@ namespace GramophoneUtils.Items
         public void Activate(ItemSlot itemSlot, int slotIndex)
         {
             this.slotIndex = slotIndex;
-
             areYouSureText.text = $"Are you sure you wish to destroy {itemSlot.quantity}x {itemSlot.item.ColouredName}?";
 
             gameObject.SetActive(true);

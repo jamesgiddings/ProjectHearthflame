@@ -85,10 +85,9 @@ namespace GramophoneUtils.Items.Containers
 			}
 		}
 
-		public override void Use(CharacterBehaviour characterBehaviour, InventorySlotUI inventorySlotUI)
+		public override void Use(Character character, InventorySlotUI inventorySlotUI)
 		{
-			//Debug.Log("Using equipment item " + Name + " on " + characterBehaviour.Character.Name);
-			characterBehaviour.gameObject.GetComponent<EquipmentInventory>().TryToEquip(this, inventorySlotUI);
+			character.EquipmentInventory.TryToEquip(this, inventorySlotUI);
 		}
 	}
 }

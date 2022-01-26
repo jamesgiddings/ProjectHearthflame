@@ -27,7 +27,6 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
         public void StartScenario(VendorData scenarioData)
         {
             this.scenarioData = scenarioData;
-            Debug.Log(scenarioData.BuyingItemContainer.GetAllUniqueItems().Count);
             SetCurrentItemContainer(true);
 
             SetItem(scenarioData.SellingItemContainer.GetSlotByIndex(0).item);
@@ -85,6 +84,8 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
 
         public void ConfirmButton()
         {
+            Debug.Log("Confirming to sell: " + currentItem);
+
             int price = currentItem.SellPrice * (int)quantitySlider.value;
 
             if (scenarioData.BuyingItemContainer.Money < price) { return; }
@@ -104,6 +105,9 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
             SetCurrentItemContainer(scenarioData.IsFirstContainerBuying);
 
             if (!soldAll) { SetItem(currentItem); }
+
+            Debug.Log("selling item container: " + scenarioData.SellingItemContainer.GetAllUniqueItems());
+            Debug.Log("buying item container: " + scenarioData.BuyingItemContainer.GetAllUniqueItems());
         }
 
         private void ClearItemButtons()

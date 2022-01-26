@@ -35,6 +35,17 @@ namespace GramophoneUtils.Stats
 				stat = new Stat(statComponentBlueprint.StatType);
 				stats.Add(statComponentBlueprint.StatType, stat);
 			}
+			stat.UpdateBaseValue(statComponentBlueprint.Value);
+		}		
+		
+		public void IncrementStatBaseValue(StatComponentBlueprint statComponentBlueprint)
+		{
+			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
+			{
+				stat = new Stat(statComponentBlueprint.StatType);
+				stats.Add(statComponentBlueprint.StatType, stat);
+			}
+			stat.IncrementBaseValue(statComponentBlueprint.Value);
 		}
 
 		public Stat GetStat(IStatType type)
@@ -56,6 +67,17 @@ namespace GramophoneUtils.Stats
 			}
 
 			return stat.Value;
+		}
+
+		public float GetBaseStatValue(IStatType type)
+		{
+			if (!stats.TryGetValue(type, out Stat stat))
+			{
+				stat = new Stat(type);
+				stats.Add(type, stat);
+			}
+
+			return stat.GetBaseValue();
 		}
 
 		public void RemoveModifier(StatModifier modifier)

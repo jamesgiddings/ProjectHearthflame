@@ -23,7 +23,6 @@ namespace GramophoneUtils.Npcs
             
             for (int i = 0; i < npc.Occupations.Length; i++)
             {
-                Debug.Log("Doing a thing");
                 GameObject buttonInstance = Instantiate(occupationButtonPrefab, occupationButtonHolder);
                 buttonInstance.GetComponent<OccupationButton>().Initialise(npc.Occupations[i], npc.OtherInteractor);
             }

@@ -13,8 +13,8 @@ namespace GramophoneUtils.Interactables
 
         private void CheckForInteraction()
         {
-            if (currentInteractable == null) { return; }
 
+            if (currentInteractable == null) { return; }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 currentInteractable.Interact(transform.root.gameObject);
@@ -22,7 +22,7 @@ namespace GramophoneUtils.Interactables
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             var interactable = other.GetComponent<IInteractable>();
 
@@ -31,7 +31,7 @@ namespace GramophoneUtils.Interactables
             currentInteractable = interactable;
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             var interactable = other.GetComponent<IInteractable>();
 

@@ -22,8 +22,8 @@ namespace GramophoneUtils.Items
 
         private void Start()
         {
+            dragDropCanvas = GameObject.FindGameObjectWithTag("DragDropCanvas");
             canvasGroup = GetComponent<CanvasGroup>();
-            dragDropCanvas = GameObject.FindGameObjectsWithTag("DragDropCanvas")[0];
         }
 
         private void OnDisable()
@@ -60,7 +60,7 @@ namespace GramophoneUtils.Items
 				{
                     Item item = resourceSlotUI.SlotResource as Item;
                     InventorySlotUI inventorySlotUI = resourceSlotUI as InventorySlotUI;
-                    item.Use(inventorySlotUI.CharacterBehaviour, inventorySlotUI);
+                    item.Use(inventorySlotUI.Character, inventorySlotUI);
                 }
             }
         }

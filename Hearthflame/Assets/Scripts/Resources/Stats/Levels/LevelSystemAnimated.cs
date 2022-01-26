@@ -1,6 +1,7 @@
 using System;
+using CodeMonkey.Utils;
 using GramophoneUtils.Stats;
-using GramophoneUtils.Utils;
+using GramophoneUtils;
 using UnityEngine;
 
 public class LevelSystemAnimated 
@@ -120,4 +121,13 @@ public class LevelSystemAnimated
 		}
 		
 	}
+
+	public void UpdateLevelSystemAnimated() // call this after loading, to update display without animating
+	{
+		level = levelSystem.GetLevel();
+		experience = levelSystem.GetExperience();
+		if (OnLevelChanged != null) OnLevelChanged(this, EventArgs.Empty);
+		if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
+}
+
 }

@@ -27,10 +27,10 @@ namespace GramophoneUtils.Stats
 
 		public LevelSystemAnimated LevelSystemAnimated => levelSystemAnimated; //getter
 
-		public LevelSystem(CharacterClass characterClass, Character character)
+		public LevelSystem(CharacterClass characterClass, Character character, int level = 0, int experience = 0)
 		{
-			level = 0;
-			experience = 0;
+			this.level = level;
+			this.experience = experience;
 			this.characterClass = characterClass;
 			this.character = character;
 			levelSystemAnimated = new LevelSystemAnimated(this);
@@ -69,6 +69,16 @@ namespace GramophoneUtils.Stats
 			{
 				return (float)experience / GetExperienceToNextLevel(level);
 			}
+		}
+
+		public void SetLevel(int level)
+		{
+			this.level = level;
+		}
+		
+		public void SetExperience(int experience)
+		{
+			this.experience = experience;
 		}
 
 		public int GetLevel()

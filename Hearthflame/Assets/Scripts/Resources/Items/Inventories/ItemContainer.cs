@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace GramophoneUtils.Items.Containers
-{    public class ItemContainer : MonoBehaviour, IItemContainer
+{    public class ItemContainer : IItemContainer
     {
         [SerializeField] protected int money = 100;
-        [SerializeField] protected UnityEvent onInventoryItemsUpdated = null;
         [SerializeField] protected ItemSlot[] itemSlots = new ItemSlot[0];
+
+        public UnityEvent onInventoryItemsUpdated;
 
         public ItemSlot[] ItemSlots { get => itemSlots; }
         public int Money { get { return money; } set { money = value; } }
@@ -165,12 +166,12 @@ namespace GramophoneUtils.Items.Containers
                 EquipmentItem equipmentItemOne = equipmentInventory.GetSlotByIndex(indexOne).item as EquipmentItem;
                 if (equipmentItemOne != null)
                 {
-                    equipmentItemOne.Equip(equipmentInventory.CharacterBehaviour.Character);
+                    equipmentItemOne.Equip(equipmentInventory.Character);
                 }
                 EquipmentItem equipmentItemTwo = itemContainerTwo.GetSlotByIndex(indexTwo).item as EquipmentItem;
                 if (equipmentItemTwo != null)
                 {
-                    equipmentItemTwo.Unequip(equipmentInventory.CharacterBehaviour.Character);
+                    equipmentItemTwo.Unequip(equipmentInventory.Character);
                 }
 
             }
@@ -180,12 +181,12 @@ namespace GramophoneUtils.Items.Containers
                 EquipmentItem equipmentItemOne = equipmentInventory.GetSlotByIndex(indexTwo).item as EquipmentItem;
                 if (equipmentItemOne != null)
                 {
-                    equipmentItemOne.Equip(equipmentInventory.CharacterBehaviour.Character);
+                    equipmentItemOne.Equip(equipmentInventory.Character);
                 }
                 EquipmentItem equipmentItemTwo = itemContainerOne.GetSlotByIndex(indexOne).item as EquipmentItem;
                 if (equipmentItemTwo != null)
                 {
-                    equipmentItemTwo.Unequip(equipmentInventory.CharacterBehaviour.Character);
+                    equipmentItemTwo.Unequip(equipmentInventory.Character);
                 }
 
             }

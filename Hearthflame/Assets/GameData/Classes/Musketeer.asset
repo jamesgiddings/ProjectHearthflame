@@ -14,5 +14,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: f50f2d1a5f4efb5439fe9aaf377ca70d
   name: Musketeer
-  maxLevel: 0
-  experienceData: {fileID: 0}
+  icon: {fileID: 0}
+  maxLevel: 20
+  experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
+  skillsAvailable: []
+  levelStatEffects:
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []

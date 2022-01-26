@@ -10,23 +10,41 @@ public class CharacterClass : Resource
 	[SerializeField] private int maxLevel;
 	[SerializeField] private ExperienceData experienceData;
 	[SerializeField] private List<Skill> skillsAvailable;
-	[SerializeField] private List<LevelStatEffects> levelStatEffects;
+	[SerializeField] private List<LevelStatEffect> levelStatEffects;
 
 	[Serializable]
-	public class LevelStatEffects
+	public class LevelStatEffect
 	{
+
+		[SerializeField] private int baseHealthIncrement;
 		[SerializeField] private List<StatComponentBlueprint> statComponentBlueprints;
-		public List<StatComponentBlueprint> StatComponentBlueprint => statComponentBlueprints;
+		
+		public List<StatComponentBlueprint> StatComponentBlueprints => statComponentBlueprints;
+		public int BaseHealthIncrement => baseHealthIncrement;
 	}
 
 	public ExperienceData ExperienceData => experienceData; //getter
 	public List<Skill> SkillsAvailable => skillsAvailable; //getter
-	 //getter
-
+	
 	public void LevelUp(System.Object sender, EventArgs args)
 	{
 		// do levelling up here
 		LevelChangedEventArgs castArgs = args as LevelChangedEventArgs;
-		Debug.Log("Levelling up to level " + castArgs.Level);
+		IncrementStatBaseValues(castArgs);
+		IncrementHealthBaseValues(castArgs);
+	}
+
+	private void IncrementHealthBaseValues(LevelChangedEventArgs castArgs)
+	{
+		castArgs.Character.HealthSystem.IncrementMaxHealth(levelStatEffects[castArgs.Level].BaseHealthIncrement);
+		castArgs.Character.HealthSystem.IncrementCurrentHealth(levelStatEffects[castArgs.Level].BaseHealthIncrement);
+	}
+
+	private void IncrementStatBaseValues(LevelChangedEventArgs castArgs)
+	{
+		foreach (StatComponentBlueprint statComponentBlueprint in levelStatEffects[castArgs.Level].StatComponentBlueprints)
+		{
+			castArgs.Character.StatSystem.IncrementStatBaseValue(statComponentBlueprint);
+		}
 	}
 }

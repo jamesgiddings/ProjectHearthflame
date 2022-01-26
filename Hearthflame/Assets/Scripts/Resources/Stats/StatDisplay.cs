@@ -9,16 +9,21 @@ public class StatDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI statLabel;
     [SerializeField] TextMeshProUGUI statValue;
     [SerializeField] StatType statType;
-    [SerializeField] CharacterBehaviour characterBehaviour;
+    [SerializeField] Character character;
 
 	private void OnEnable()
 	{
 		UpdateStatDisplay();
 	}
 
+	public void Initialise(Character character)
+	{
+		this.character = character;
+	}
+
 	public void UpdateStatDisplay()
 	{
 		statLabel.text = statType.Name;
-		statValue.text = characterBehaviour.Character.StatSystem.GetStatValue(statType).ToString();
+		statValue.text = character.StatSystem.GetStatValue(statType).ToString();
 	}
 }

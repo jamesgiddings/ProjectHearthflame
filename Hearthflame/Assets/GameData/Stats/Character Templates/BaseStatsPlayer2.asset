@@ -26,6 +26,6 @@ MonoBehaviour:
   - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
     value: 11
   name: Snoo
-  characterClass: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
+  characterClass: {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}
   currentHealth: 100
   maxHealth: 100

@@ -15,30 +15,55 @@ MonoBehaviour:
   UID: 8966c4f7debd5804491e39950abb0684
   icon: {fileID: 0}
   name: Hearth Priest
-  maxLevel: 0
+  maxLevel: 20
   experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
   skillsAvailable:
   - {fileID: 11400000, guid: 5ebcd8f392e6b4b439149b7c053d74ba, type: 2}
   - {fileID: 11400000, guid: 3be275241d1b65e4098b8b499b239a7e, type: 2}
   levelStatEffects:
-  - statComponentBlueprints: []
-  - statComponentBlueprints:
+  - baseHealthIncrement: 20
+    statComponentBlueprints: []
+  - baseHealthIncrement: 20
+    statComponentBlueprints:
     - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
-  - statComponentBlueprints: []
+  - baseHealthIncrement: 20
+    statComponentBlueprints:
+    - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
+    - {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
+  - baseHealthIncrement: 20
+    statComponentBlueprints:
+    - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
+  - baseHealthIncrement: 0
+    statComponentBlueprints:
+    - {fileID: 11400000, guid: 4a076a4728c833440bbbcb458e0aab7b, type: 2}
+    - {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []

@@ -9,15 +9,15 @@ public class LevelDisplayUI : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI levelText;
 	[SerializeField] private Slider experienceSlider;
-	[SerializeField] private CharacterBehaviour statSystemBehaviour;
+	[SerializeField] private Character character;
 
 	private LevelSystem levelSystem;
 	private LevelSystemAnimated levelSystemAnimated;
 
 	private void Awake()
 	{
-		levelSystem = statSystemBehaviour.Character.LevelSystem;
-		levelSystemAnimated = statSystemBehaviour.Character.LevelSystem.LevelSystemAnimated;
+		levelSystem = character.LevelSystem;
+		levelSystemAnimated = character.LevelSystem.LevelSystemAnimated;
 		SetLevelNumber(levelSystemAnimated.GetLevel());
 		SetExperienceBarSize(levelSystemAnimated.GetExperienceNormalized());
 		levelSystemAnimated.OnExperienceChanged += LevelSystemAnimated_OnExperienceChanged;
@@ -26,7 +26,7 @@ public class LevelDisplayUI : MonoBehaviour
 
 	public void TestAdd500XP() //remove after testing
 	{
-	levelSystem.AddExperience(13230000);
+	levelSystem.AddExperience(50000);
 	}
 
 	private void LevelSystemAnimated_OnLevelChanged(object sender, System.EventArgs e)
@@ -46,7 +46,7 @@ public class LevelDisplayUI : MonoBehaviour
 
 	private void SetLevelNumber(int levelNumber)
 	{
-		levelText.text = (levelNumber + 1).ToString(); // the base level in the logic is 0, so the readable level is that +1
+		levelText.text = (levelNumber + 1).ToString() + " " + character.CharacterClass.Name; // the base level in the logic is 0, so the readable level is that +1
 	}
 
 	private void OnDestroy()
@@ -54,4 +54,10 @@ public class LevelDisplayUI : MonoBehaviour
 		levelSystemAnimated.OnExperienceChanged -= LevelSystemAnimated_OnExperienceChanged;
 		levelSystemAnimated.OnLevelChanged -= LevelSystemAnimated_OnLevelChanged;
 	}
+
+	public void SetCharacter(Character character)
+	{
+		this.character = character;
+	}
+
 }

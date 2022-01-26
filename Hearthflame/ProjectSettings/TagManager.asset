@@ -16,8 +16,8 @@ TagManager:
   - 
   - Interactable
   - Projectile
-  - 
-  - 
+  - Foreground
+  - Player
   - 
   - 
   - 
@@ -41,4 +41,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 456533209
+    locked: 0
+  - name: Player
+    uniqueID: 2393378671
+    locked: 0
+  - name: Foreground
+    uniqueID: 798331267
     locked: 0

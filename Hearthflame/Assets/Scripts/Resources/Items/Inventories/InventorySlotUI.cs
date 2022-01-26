@@ -11,7 +11,9 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] protected Inventory inventory;
         [SerializeField] private TextMeshProUGUI itemQuantityText;
-        [SerializeField] protected CharacterBehaviour thisTabCharacter;
+        [SerializeField] protected PlayerBehaviour playerBehaviour;
+
+        private Character character;
 
         public override Resource SlotResource
         {
@@ -19,9 +21,22 @@ namespace GramophoneUtils.Items.Containers
             set { }
         }
 
-        public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
+		public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
         public Inventory Inventory => inventory;
-        public CharacterBehaviour CharacterBehaviour => thisTabCharacter;
+        public PlayerBehaviour CharacterBehaviour => playerBehaviour;
+        public Character Character => character;
+
+        public virtual void Initialise(PlayerBehaviour playerBehaviour, Character character, ItemDestroyer itemDestroyer)
+		{
+            this.playerBehaviour = playerBehaviour;
+            this.inventory = playerBehaviour.PartyInventory;
+            this.character = character;
+            InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();
+            if (dragHandler != null)
+            {
+                dragHandler.ItemDestroyer = itemDestroyer;
+            }
+        }
 
         public override void OnDrop(PointerEventData eventData)
         {
@@ -60,7 +75,7 @@ namespace GramophoneUtils.Items.Containers
         private void UnequipFromInventory(EquipmentInventory equipmentInventory, int index)
 		{
             IEquippable item = (EquipmentItem)inventory.GetSlotByIndex(index).item;
-            item.Unequip(equipmentInventory.CharacterBehaviour.Character);
+            item.Unequip(equipmentInventory.Character);
         }
 
         public override void UpdateSlotUI()
