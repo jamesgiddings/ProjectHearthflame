@@ -15,7 +15,7 @@ namespace GramophoneUtils.Items.Hotbars
         public override Resource SlotResource
         {
             get { return slotResource; }
-            set { slotResource = value; UpdateSlotUI(); Debug.Log("Setting"); }
+            set { slotResource = value; UpdateSlotUI(); }
         }
 
         public bool AddResource(Resource resourceToAdd)

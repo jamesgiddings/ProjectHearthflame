@@ -33,15 +33,15 @@ namespace GramophoneUtils.Items.Containers
 		#region SavingLoading
 
 		[Serializable]
-        public struct ItemSlotSaveData
+        public struct ResourceSlotSaveData
         {
-            public string itemUID;
-            public int itemQuantity;
+            public string resourceUID;
+            public int resourceQuantity;
 
-            public ItemSlotSaveData(string itemUID, int itemQuantity)
+            public ResourceSlotSaveData(string resourceUID, int resourceQuantity)
             {
-                this.itemUID = itemUID;
-                this.itemQuantity = itemQuantity;
+                this.resourceUID = resourceUID;
+                this.resourceQuantity = resourceQuantity;
             }
         }
 

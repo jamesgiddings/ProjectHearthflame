@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: New Battle
   m_EditorClassIdentifier: 
   UID: 3beb57b860820844fac6f61c5d7adb4c
-  name: ff
-  enemyBattlers:
-  - {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
-  - {fileID: 11400000, guid: c677bdf64cb5ee3439f1ef6743bfac18, type: 2}
-  - {fileID: 11400000, guid: c677bdf64cb5ee3439f1ef6743bfac18, type: 2}
-  - {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  name: Enemy Party
+  enemyParty: {fileID: 11400000, guid: 66c9a56502b16734a835b496dc3312ef, type: 2}
   battleRewards: {fileID: 11400000, guid: 1d731f94270fb254780abbc39970f2cd, type: 2}

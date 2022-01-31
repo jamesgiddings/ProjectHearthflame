@@ -25,7 +25,9 @@ MonoBehaviour:
     value: 10
   - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
     value: 10
+  icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
   name: Snee
   characterClass: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   currentHealth: 100
   maxHealth: 100
+  isPlayer: 1

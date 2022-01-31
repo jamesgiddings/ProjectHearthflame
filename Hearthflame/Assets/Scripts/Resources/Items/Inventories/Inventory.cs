@@ -23,16 +23,16 @@ namespace GramophoneUtils.Items.Containers
 		
 		public object CaptureState()
 		{
-			List<ResourceSlotUI.ItemSlotSaveData> tempList = new List<ResourceSlotUI.ItemSlotSaveData>();
+			List<ResourceSlotUI.ResourceSlotSaveData> tempList = new List<ResourceSlotUI.ResourceSlotSaveData>();
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{
 				if(ItemSlots[i].item != null)
 				{
-					tempList.Add(new ResourceSlotUI.ItemSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
+					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
 				}
 				else
 				{
-					tempList.Add(new ResourceSlotUI.ItemSlotSaveData("", 0));
+					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData("", 0));
 				}
 			}
 			
@@ -50,11 +50,11 @@ namespace GramophoneUtils.Items.Containers
 			money = saveData.money;
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{
-				if (saveData.itemSlotSaveData[i].itemUID != null)
+				if (saveData.itemSlotSaveData[i].resourceUID != null)
 				{
-					Resource resource = ResourceDatabase.GetResourceByUID(saveData.itemSlotSaveData[i].itemUID);
+					Resource resource = ResourceDatabase.GetResourceByUID(saveData.itemSlotSaveData[i].resourceUID);
 					ItemSlots[i].item = (InventoryItem)resource;
-					ItemSlots[i].quantity = saveData.itemSlotSaveData[i].itemQuantity;
+					ItemSlots[i].quantity = saveData.itemSlotSaveData[i].resourceQuantity;
 				}
 			}
 			onInventoryItemsUpdated?.Invoke();
@@ -64,7 +64,7 @@ namespace GramophoneUtils.Items.Containers
 		public struct InventorySaveData
 		{
 			public int money;
-			public List<ResourceSlotUI.ItemSlotSaveData> itemSlotSaveData;
+			public List<ResourceSlotUI.ResourceSlotSaveData> itemSlotSaveData;
 		}
 		#endregion
 	}

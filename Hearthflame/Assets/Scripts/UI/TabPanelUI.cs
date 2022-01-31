@@ -20,12 +20,12 @@ public class TabPanelUI : MonoBehaviour
 	private void OnEnable()
 	{
 		tabContentParent.gameObject.SetActive(false);
-		foreach (PartyCharacter partyCharacter in playerBehaviour.PartyCharacters)
+		foreach (PartyCharacter partyCharacter in playerBehaviour.Party.PartyCharacters)
 		{
 			if (partyCharacter.IsUnlocked)
 			{
 				GameObject tabContentUI = Instantiate(tabContentPrefab, tabContentParent);
-				tabContentUI.GetComponent<TabContentUI>().Initialise(playerBehaviour, partyCharacter.Character, itemDestroyer);
+				tabContentUI.GetComponent<TabContentUI>().Initialise(playerBehaviour.Party, partyCharacter.Character, itemDestroyer);
 				SetupTab(tabContentUI, partyCharacter.Character);
 			}
 		}

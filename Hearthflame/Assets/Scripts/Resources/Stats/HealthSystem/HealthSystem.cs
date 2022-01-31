@@ -13,9 +13,11 @@ namespace GramophoneUtils.Stats
 		
 		private int currentHealth;
 		private int maxHealth;
-		
+				
 		public int CurrentHealth => currentHealth; // getter
 		public int MaxHealth => maxHealth;
+
+		public bool IsDead => CheckIsDeadAndNotify();
 
 		public HealthSystem(CharacterTemplate template)
 		{
@@ -64,7 +66,7 @@ namespace GramophoneUtils.Stats
 			OnHealthChanged?.Invoke();
 		}
 
-		private void CheckIsDeadAndNotify()
+		private bool CheckIsDeadAndNotify()
 		{
 			if (currentHealth <= 0 || maxHealth <= 0)
 			{
@@ -74,7 +76,9 @@ namespace GramophoneUtils.Stats
 					maxHealth = 0;
 				}
 				OnCharacterDeath?.Invoke();
+				return true;
 			}
+			return false;
 		}
 	}
 }

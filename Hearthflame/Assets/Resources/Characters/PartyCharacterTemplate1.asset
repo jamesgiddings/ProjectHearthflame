@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034346101c5df0a4782cfc925756cea2, type: 3}
+  m_Name: PartyCharacterTemplate1
+  m_EditorClassIdentifier: 
+  UID: a10d6b95ad0da76488ec185cf985fcfe
+  name: Snee
+  icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
+  template: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  isUnlocked: 1

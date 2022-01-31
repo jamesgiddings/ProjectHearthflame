@@ -11,7 +11,7 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] protected Inventory inventory;
         [SerializeField] private TextMeshProUGUI itemQuantityText;
-        [SerializeField] protected PlayerBehaviour playerBehaviour;
+        protected Party party;
 
         private Character character;
 
@@ -23,13 +23,13 @@ namespace GramophoneUtils.Items.Containers
 
 		public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
         public Inventory Inventory => inventory;
-        public PlayerBehaviour CharacterBehaviour => playerBehaviour;
+        public Party Party => party;
         public Character Character => character;
 
-        public virtual void Initialise(PlayerBehaviour playerBehaviour, Character character, ItemDestroyer itemDestroyer)
+        public virtual void Initialise(Party party, Character character, ItemDestroyer itemDestroyer)
 		{
-            this.playerBehaviour = playerBehaviour;
-            this.inventory = playerBehaviour.PartyInventory;
+            this.party = party;
+            this.inventory = party.PartyInventory;
             this.character = character;
             InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();
             if (dragHandler != null)

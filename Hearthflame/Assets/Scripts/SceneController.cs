@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public static class SceneController
 {
-	public static void AdditiveLoadScene(Battle battle = null, PlayerBehaviour player = null)
+	public static void AdditiveLoadScene(Battle battle = null, Party party = null)
 	{
-		if (battle != null && player != null)
+		if (battle != null && party != null)
 		{
-			BattleManager battleManager = new BattleManager(battle, player);
+			BattleManager battleManager = new BattleManager(battle, party);
 		}
 		SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
 	}

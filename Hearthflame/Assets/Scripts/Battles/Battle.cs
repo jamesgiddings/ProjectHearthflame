@@ -5,9 +5,9 @@ using UnityEngine;
 public class Battle : Data
 {
 	internal static object battleReward;
-	[SerializeField] private CharacterTemplate[] enemyBattlers;
+	[SerializeField] private Party enemyParty;
 	[SerializeField] private BattleReward battleRewards;
 
-	public CharacterTemplate[] EnemyBattlers => enemyBattlers;
+	public Party EnemyParty => enemyParty;
 	public BattleReward BattleReward => battleRewards;
 }

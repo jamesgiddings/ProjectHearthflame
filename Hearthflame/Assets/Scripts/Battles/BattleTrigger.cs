@@ -40,7 +40,7 @@ public class BattleTrigger : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
-			SceneController.AdditiveLoadScene(battle, player);
+			SceneController.AdditiveLoadScene(battle, player.Party);
 		}
 	}
 }

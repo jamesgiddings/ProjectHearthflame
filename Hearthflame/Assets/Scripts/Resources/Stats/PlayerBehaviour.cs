@@ -8,37 +8,23 @@ namespace GramophoneUtils.Stats
 {
 	public class PlayerBehaviour : MonoBehaviour, ISaveable
 	{
-		[SerializeField] private CharacterTemplate playerTemplate;
-		private Inventory partyInventory = new Inventory(20, 10000);
+		[SerializeField] private Party party;
 
-		[SerializeField] private PartyCharactersTemplateObject partyCharactersTemplateObject;
-
-		public UnityEvent onStatsChanged;
-		public UnityEvent onInventoryItemsUpdated;
-		public Inventory PartyInventory => partyInventory; //getter
-
-		private PartyCharacter[] partyCharacters;
-
-		public PartyCharacter[] PartyCharacters
-		{
-			get
-			{
-				if (partyCharacters != null) { return partyCharacters; }
-				partyCharacters = new PartyCharacter[partyCharactersTemplateObject.PartyCharacterTemplates.Length];
-				for (int i = 0; i < partyCharactersTemplateObject.PartyCharacterTemplates.Length; i++)
-				{
-					PartyCharacterTemplate partyCharacterTemplate = partyCharactersTemplateObject.PartyCharacterTemplates[i];
-					partyCharacters[i] = new PartyCharacter(partyCharacterTemplate, this);
-
-					RegisterCharacterOnStatsChangedEvent(partyCharacters[i].Character);
-				}
-				return partyCharacters;
-			}
-		}
+		public Party Party => party;
 
 		private void Start()
 		{
-			partyInventory.onInventoryItemsUpdated = onInventoryItemsUpdated;
+			party.PartyInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
+
+			RegisterCharactersOnStatsChangedEvent();
+		}
+
+		private void RegisterCharactersOnStatsChangedEvent()
+		{
+			for (int i = 0; i < party.PartyCharacters.Length; i++)
+			{
+				RegisterCharacterOnStatsChangedEvent(party.PartyCharacters[i].Character);
+			}
 		}
 
 		private void RegisterCharacterOnStatsChangedEvent(Character character)
@@ -59,12 +45,12 @@ namespace GramophoneUtils.Stats
 
 		private void OnStatsChanged()
 		{
-			onStatsChanged.Invoke();
+			party.onStatsChanged.Invoke();
 		}
 
 		private void OnDestroy() // just deregister from the unity event
 		{
-			foreach (PartyCharacter partyCharacter in partyCharacters)
+			foreach (PartyCharacter partyCharacter in Party.PartyCharacters)
 			{
 				UnregisterCharacterOnStatsChangedEvent(partyCharacter.Character);
 			}
@@ -73,37 +59,42 @@ namespace GramophoneUtils.Stats
 		#region SavingLoading
 		public object CaptureState()
 		{
-			PartyCharacterSaveData[] partyCharactersSaveDatasCache = new PartyCharacterSaveData[this.partyCharacters.Length];
-			for (int i = 0; i < partyCharacters.Length; i++)
+			PartyCharacterSaveData[] partyCharactersSaveDatasCache = new PartyCharacterSaveData[Party.PartyCharacters.Length];
+			for (int i = 0; i < Party.PartyCharacters.Length; i++)
 			{
+
 				partyCharactersSaveDatasCache[i] = new PartyCharacterSaveData
 				{
 					// IsUnlocked
 
-					IsUnlocked = partyCharacters[i].IsUnlocked,
+					IsUnlocked = Party.PartyCharacters[i].IsUnlocked,
+
+					// IsRear
+
+					IsRear = Party.PartyCharacters[i].IsRear,
 
 					// LevelSystem
 
-					Level = partyCharacters[i].Character.LevelSystem.GetLevel(),
-					Experience = partyCharacters[i].Character.LevelSystem.GetExperience(),
+					Level = Party.PartyCharacters[i].Character.LevelSystem.GetLevel(),
+					Experience = Party.PartyCharacters[i].Character.LevelSystem.GetExperience(),
 
 					// StatSystem
 
-					Dexterity = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Dexterity"]),
-					Magic = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Magic"]),
-					Resilience = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Resilience"]),
-					Speed = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Speed"]),
-					Strength = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Strength"]),
-					Wits = partyCharacters[i].Character.StatSystem.GetBaseStatValue(playerTemplate.StatTypeStringRefDictionary["Wits"]),
+					Dexterity = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.CharacterTemplate.StatTypeStringRefDictionary["Dexterity"]),
+					Magic = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Magic"]),
+					Resilience = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Resilience"]),
+					Speed = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Speed"]),
+					Strength = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Strength"]),
+					Wits = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Wits"]),
 
 					// HealthSystem
 
-					CurrentHealth = partyCharacters[i].Character.HealthSystem.CurrentHealth,
-					MaxHealth = partyCharacters[i].Character.HealthSystem.MaxHealth,
+					CurrentHealth = Party.PartyCharacters[i].Character.HealthSystem.CurrentHealth,
+					MaxHealth = Party.PartyCharacters[i].Character.HealthSystem.MaxHealth,
 
 					// EquipmentInventory
 
-					EquipmentInventorySaveData = partyCharacters[i].Character.EquipmentInventory.CaptureState()
+					EquipmentInventorySaveData = Party.PartyCharacters[i].Character.EquipmentInventory.CaptureState()
 				};
 			}
 			return new SaveData
@@ -119,7 +110,7 @@ namespace GramophoneUtils.Stats
 
 				// PartyInventory
 
-				PartyInventorySaveData = partyInventory.CaptureState()
+				PartyInventorySaveData = Party.PartyInventory.CaptureState()
 			};
 		}
 		
@@ -135,8 +126,15 @@ namespace GramophoneUtils.Stats
 
 			for (int i = 0; i < saveData.partyCharactersSaveData.Length; i++)
 			{
-				partyCharacters[i].IsUnlocked = saveData.partyCharactersSaveData[i].IsUnlocked;
-				Character character = partyCharacters[i].Character;
+				// IsUnlocked
+				
+				Party.PartyCharacters[i].IsUnlocked = saveData.partyCharactersSaveData[i].IsUnlocked;
+
+				// IsRear
+
+				Party.PartyCharacters[i].IsRear = saveData.partyCharactersSaveData[i].IsRear;
+
+				Character character = Party.PartyCharacters[i].Character;
 
 				// LevelSystem
 
@@ -147,12 +145,12 @@ namespace GramophoneUtils.Stats
 				  
 				// StatSystem
 
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Dexterity"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Dexterity);
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Magic"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Magic);
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Resilience"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Resilience);
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Speed"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Speed);
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Strength"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Strength);
-				character.StatSystem.GetStat(playerTemplate.StatTypeStringRefDictionary["Wits"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Wits);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Dexterity"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Dexterity);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Magic"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Magic);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Resilience"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Resilience);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Speed"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Speed);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Strength"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Strength);
+				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Wits"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Wits);
 
 				// HealthSystem
 
@@ -166,13 +164,18 @@ namespace GramophoneUtils.Stats
 
 			// PartyInventory
 
-			partyInventory.RestoreState(saveData.PartyInventorySaveData);
+			Party.PartyInventory.RestoreState(saveData.PartyInventorySaveData);
 		}
+
 		[Serializable]
 		public struct PartyCharacterSaveData
 		{
 			// IsUnlocked
 			public bool IsUnlocked;
+
+			// IsRear
+
+			public bool IsRear;
 			
 			// LevelSystem
 			public int Level;

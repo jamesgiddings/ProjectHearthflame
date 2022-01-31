@@ -1048,8 +1048,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 167692851004141726}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 167692849305436067}
-  playerBehaviour: {fileID: 0}
   equipmentType: 2
 --- !u!114 &167692849762860174
 MonoBehaviour:
@@ -2051,6 +2056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelText: {fileID: 167692849622710137}
   experienceSlider: {fileID: 167692849209158446}
+  character: {fileID: 0}
 --- !u!1 &167692850095525628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,6 +2111,7 @@ MonoBehaviour:
   statLabel: {fileID: 167692849958522784}
   statValue: {fileID: 167692850320864515}
   statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850095525627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2262,6 +2269,7 @@ MonoBehaviour:
   statLabel: {fileID: 167692850088072903}
   statValue: {fileID: 167692850699293681}
   statType: {fileID: 11400000, guid: 2c01afbc47a489f4eb2f58c4cf99cc82, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850204054090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,8 +3454,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 167692849597212017}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 167692850732766569}
-  playerBehaviour: {fileID: 0}
   equipmentType: 0
 --- !u!114 &167692850470357374
 MonoBehaviour:
@@ -3598,6 +3611,7 @@ MonoBehaviour:
   statLabel: {fileID: 167692850267452933}
   statValue: {fileID: 167692850309135133}
   statType: {fileID: 11400000, guid: 0b63d8f9d65768443853a38be3cbf8d5, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850513469474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4081,6 +4095,7 @@ MonoBehaviour:
   statLabel: {fileID: 167692850220973276}
   statValue: {fileID: 167692851154303778}
   statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850723633834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4431,6 +4446,7 @@ MonoBehaviour:
   statLabel: {fileID: 1744697416495315274}
   statValue: {fileID: 167692849811519649}
   statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850871263191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4553,8 +4569,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 167692849860085903}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 167692850091255134}
-  playerBehaviour: {fileID: 0}
   equipmentType: 2
 --- !u!114 &167692850882204006
 MonoBehaviour:
@@ -4639,6 +4660,7 @@ MonoBehaviour:
   statLabel: {fileID: 167692850425784924}
   statValue: {fileID: 167692850405777337}
   statType: {fileID: 11400000, guid: 2f064fa505d4f124f8ab2be9db238c41, type: 2}
+  character: {fileID: 0}
 --- !u!114 &167692850901153264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5627,8 +5649,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 2415617647855017003}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 5505296294050591756}
-  playerBehaviour: {fileID: 0}
   equipmentType: 1
 --- !u!114 &2415617647341558056
 MonoBehaviour:
@@ -7182,8 +7209,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115397277004}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448720905051499}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964113843597391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7305,8 +7337,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115464097211}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448720972965276}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964113909926072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7428,8 +7465,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115592998979}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448720978155620}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964113934333248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7551,8 +7593,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115666030032}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721173816823}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114111695059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7674,8 +7721,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114836575524}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721332190467}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114288873511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7797,8 +7849,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114959803352}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721485777919}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114433107675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7920,8 +7977,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115097016110}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721608359689}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114545644077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8043,8 +8105,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115078928835}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721626968548}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114564783296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8166,8 +8233,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115129241846}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721710872785}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114648684021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8289,8 +8361,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964115259603939}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721722725316}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114670124768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8412,8 +8489,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114278039612}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448721898711067}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964114829903167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8666,8 +8748,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114547931166}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722165436473}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115095600413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8789,8 +8876,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964113865957355}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722579240908}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115525114600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8912,8 +9004,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964113940504684}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722630772811}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115569780079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9035,8 +9132,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964113928053355}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722651875916}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115582494568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9158,8 +9260,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964113989259799}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722716244528}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115656283924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9281,8 +9388,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114120515386}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722727991069}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115674192441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9404,8 +9516,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114130033323}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722843382412}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115797581736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9527,8 +9644,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 8084964114136051889}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 2148448722846275734}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &8084964115794720178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12199,6 +12321,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyValue: {fileID: 1711889811825678092}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &6803306830373404918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13577,6 +13705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statLabel: {fileID: 7991909492472880714}
   statValue: {fileID: 7991909493760826530}
+  character: {fileID: 0}
 --- !u!1 &8084964113865957353
 GameObject:
   m_ObjectHideFlags: 0
@@ -14850,8 +14979,13 @@ MonoBehaviour:
   resourceIconImage: {fileID: 4622908874611556850}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  inventory:
+    money: 0
+    itemSlots: []
+    onInventoryItemsUpdated:
+      m_PersistentCalls:
+        m_Calls: []
   itemQuantityText: {fileID: 3297934123561249237}
-  playerBehaviour: {fileID: 0}
 --- !u!114 &4622908874127328497
 MonoBehaviour:
   m_ObjectHideFlags: 0

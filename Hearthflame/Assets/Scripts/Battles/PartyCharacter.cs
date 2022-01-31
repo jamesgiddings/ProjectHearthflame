@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PartyCharacter
 {
-	private bool isUnlocked;
+	[SerializeField] private bool isUnlocked;
+	[SerializeField] private bool isRear;
+
 	private readonly Character character;
 
 	public bool IsUnlocked
@@ -18,13 +20,25 @@ public class PartyCharacter
 		{
 			isUnlocked = value;
 		}
+	}	
+	
+	public bool IsRear
+	{
+		get
+		{
+			return isRear;
+		}
+		set
+		{
+			isRear = value;
+		}
 	}
 
 	public Character Character => character; // getter
 
-	public PartyCharacter(PartyCharacterTemplate partyCharacterTemplate, PlayerBehaviour playerBehaviour)
+	public PartyCharacter(PartyCharacterTemplate partyCharacterTemplate, Party party)
 		{
-		this.character = new Character(partyCharacterTemplate.Template, playerBehaviour);
+		this.character = new Character(partyCharacterTemplate, party);
 		this.isUnlocked = partyCharacterTemplate.IsUnlocked;
 		}
 }

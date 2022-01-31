@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05a5a28f1889e5b4ea37886495794e16, type: 3}
-  m_Name: PartyCharactersTemplateObject
+  m_Name: PlayerPartyCharactersTemplateObject
   m_EditorClassIdentifier: 
   partyCharacterTemplates:
-  - template: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
-    isUnlocked: 1
-  - template: {fileID: 11400000, guid: c677bdf64cb5ee3439f1ef6743bfac18, type: 2}
-    isUnlocked: 1
+  - {fileID: 11400000, guid: a9ec5c90e69cfb44aa1dece83615a9a7, type: 2}
+  - {fileID: 11400000, guid: c7927cb4ab6d5b242b978c2ba1a47b45, type: 2}

@@ -11,17 +11,17 @@ public class BattleReward: Data
 	[SerializeField] int experience;
 	[SerializeField] ItemSlot[] itemSlots;
 
-	public void AddBattleReward(PlayerBehaviour player)
+	public void AddBattleReward(Party party)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
 		{
-			var partyInventory = player.PartyInventory;
+			var partyInventory = party.PartyInventory;
 
 			if (partyInventory == null) { return; }
 			partyInventory.AddItem(itemSlot);
 		}
 
-		foreach (PartyCharacter partyCharacter in player.PartyCharacters)
+		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
 		{
 			partyCharacter.Character.LevelSystem.AddExperience(experience);
 		}

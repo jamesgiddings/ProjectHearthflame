@@ -9,9 +9,9 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] private EquipmentType equipmentType;
 
-		public override void Initialise(PlayerBehaviour playerBehaviour, Character character, ItemDestroyer itemDestroyer)
+		public override void Initialise(Party party, Character character, ItemDestroyer itemDestroyer)
 		{
-            this.playerBehaviour = playerBehaviour;
+            this.party = party;
             inventory = character.EquipmentInventory;
             InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();
             if (dragHandler != null)

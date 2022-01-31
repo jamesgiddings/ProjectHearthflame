@@ -14,7 +14,7 @@ namespace GramophoneUtils.Items.Containers
 		public Action Refresh;
 
 		public Dictionary<EquipmentType, int> equipmentTypeToSlotIndex;
-		public EquipmentInventory(Character character, PlayerBehaviour playerBehaviour, int size = 4, int money = 0)
+		public EquipmentInventory(Character character, Party party, int size = 4, int money = 0)
 		{
 			this.character = character;
 			itemSlots = new ItemSlot[size];
@@ -25,7 +25,7 @@ namespace GramophoneUtils.Items.Containers
 				{ EquipmentType.Weapon, 1 },
 				{ EquipmentType.Trinket, 2 },
 			};
-			onInventoryItemsUpdated = playerBehaviour.onInventoryItemsUpdated;
+			onInventoryItemsUpdated = party.onInventoryItemsUpdated;
 			onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
 		}
 

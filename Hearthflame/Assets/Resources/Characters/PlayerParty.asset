@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d3f447dd9250048adda04eac1fd8b5, type: 3}
+  m_Name: PlayerParty
+  m_EditorClassIdentifier: 
+  UID: 59a5f1b84847c134ba37917575818daa
+  name: Player Party
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 7de1a7089d98b894482f0ce6b9bf55aa, type: 2}
+        m_TargetAssemblyTypeName: GramophoneUtils.Events.CustomEvents.VoidEvent,
+          Scripts
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInventoryItemsUpdated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb5a201f7a491d84fba9a5d5731c602d, type: 2}
+        m_TargetAssemblyTypeName: GramophoneUtils.Events.CustomEvents.VoidEvent,
+          Scripts
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  partyCharactersTemplateObject: {fileID: 11400000, guid: 0a21726606512bb469f053330b747e40,
+    type: 2}
