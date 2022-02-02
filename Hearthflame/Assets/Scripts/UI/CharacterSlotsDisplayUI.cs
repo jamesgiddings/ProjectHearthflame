@@ -122,7 +122,6 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				Debug.Log("WERE DOING THE THING");
 				PartyCharacterTemplate partyCharacterTemplate = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as PartyCharacterTemplate;
 				partyCharacterTemplate.PartyCharacter.IsRear = false;
 			}

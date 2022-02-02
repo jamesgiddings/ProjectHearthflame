@@ -302,6 +302,7 @@ public BattleManager(Battle battle, Party party)
 		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
 		{
 			enemyBattlersList.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			
 		}
 	}
 
@@ -354,9 +355,7 @@ public BattleManager(Battle battle, Party party)
 	{
 		if (battleBehaviour != null)
 		{
-			//turnOrderPrefab = battleBehaviour.TurnOrderPrefab;
-			//TurnOrderUI turnOrderUI = UnityEngine.Object.Instantiate(turnOrderPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TurnOrderUI>();
-			//turnOrderUI.Initialise(this);
+			battleBehaviour.BattlerDisplayUI.Initialise(this);
 		}
 	}
 
