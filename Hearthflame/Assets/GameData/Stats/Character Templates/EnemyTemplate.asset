@@ -20,7 +20,7 @@ MonoBehaviour:
   - statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
     value: 5
   - statType: {fileID: 11400000, guid: 2f064fa505d4f124f8ab2be9db238c41, type: 2}
-    value: 5
+    value: 50
   - statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
     value: 5
   - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}

@@ -12,7 +12,7 @@ namespace GramophoneUtils.Items.Containers
         [SerializeField] protected Image resourceIconImage = null;
         [SerializeField] protected ResourceEvent onMouseRightClickResource = null;
 
-        public int SlotIndex { get; private set; }
+        public int SlotIndex { get; protected set; }
 
         public virtual Resource SlotResource { get; set; }
 

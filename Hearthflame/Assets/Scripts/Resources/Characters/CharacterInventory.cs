@@ -23,9 +23,9 @@ public class CharacterInventory : CharacterContainer, ISaveable
 		List<CharacterSlotUI.ResourceSlotSaveData> tempList = new List<CharacterSlotUI.ResourceSlotSaveData>();
 		for (int i = 0; i < CharacterSlots.Length; i++)
 		{
-			if (CharacterSlots[i].character != null)
+			if (CharacterSlots[i].PartyCharacterTemplate != null)
 			{
-				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].character.UID, GetSlotByIndex(i).quantity));
+				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].PartyCharacterTemplate.UID, GetSlotByIndex(i).Quantity));
 			}
 			else
 			{
@@ -48,8 +48,8 @@ public class CharacterInventory : CharacterContainer, ISaveable
 			if (saveData.characterSlotSaveData[i].resourceUID != null)
 			{
 				Resource resource = ResourceDatabase.GetResourceByUID(saveData.characterSlotSaveData[i].resourceUID);
-				CharacterSlots[i].character = (PartyCharacterTemplate)resource;
-				CharacterSlots[i].quantity = saveData.characterSlotSaveData[i].resourceQuantity;
+				CharacterSlots[i].PartyCharacterTemplate = (PartyCharacterTemplate)resource;
+				CharacterSlots[i].Quantity = saveData.characterSlotSaveData[i].resourceQuantity;
 			}
 		}
 		onCharactersUpdated?.Raise();

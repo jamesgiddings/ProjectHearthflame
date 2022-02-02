@@ -2,8 +2,6 @@ using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,14 +10,15 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
 
     [SerializeField] private bool isRear;
 
-    private Resource slotResource = null;
+    protected Resource slotResource = null;
 
     public Action onCharacterSlotChanged;
+
 
     public override Resource SlotResource
     {
         get { return slotResource; }
-        set { slotResource = value; UpdateSlotUI();}
+        set {slotResource = value; UpdateSlotUI();}
     }
 
     public override void OnDrop(PointerEventData eventData)
@@ -50,13 +49,13 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
         }
         if (SlotResource.Icon != null)
         {
-            Debug.Log(SlotResource.Icon.name);
             resourceIconImage.sprite = SlotResource.Icon;
             if (isRear)
 			{
                 PartyCharacterTemplate character = SlotResource as PartyCharacterTemplate;
 			}
         }
+
         EnableSlotUI(true);
         onCharacterSlotChanged?.Invoke();
     }

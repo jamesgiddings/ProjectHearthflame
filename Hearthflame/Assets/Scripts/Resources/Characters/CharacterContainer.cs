@@ -19,17 +19,17 @@ public class CharacterContainer : ICharacterContainer
     {
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].character != null)
+            if (characterSlots[i].PartyCharacterTemplate != null)
             {
-                if (characterSlots[i].character == characterSlot.character)
+                if (characterSlots[i].PartyCharacterTemplate == characterSlot.PartyCharacterTemplate)
                 {
-                    int slotRemainingSpace = characterSlots[i].character.MaxStack - characterSlots[i].quantity;
+                    int slotRemainingSpace = characterSlots[i].PartyCharacterTemplate.MaxStack - characterSlots[i].Quantity;
 
-                    if (characterSlot.quantity <= slotRemainingSpace)
+                    if (characterSlot.Quantity <= slotRemainingSpace)
                     {
-                        characterSlots[i].quantity += characterSlot.quantity;
+                        characterSlots[i].Quantity += characterSlot.Quantity;
 
-                        characterSlot.quantity = 0;
+                        characterSlot.Quantity = 0;
 
                         onCharactersUpdated.Raise();
 
@@ -37,9 +37,9 @@ public class CharacterContainer : ICharacterContainer
                     }
                     else if (slotRemainingSpace > 0)
                     {
-                        characterSlots[i].quantity += slotRemainingSpace;
+                        characterSlots[i].Quantity += slotRemainingSpace;
 
-                        characterSlot.quantity -= slotRemainingSpace;
+                        characterSlot.Quantity -= slotRemainingSpace;
                     }
                 }
             }
@@ -47,13 +47,13 @@ public class CharacterContainer : ICharacterContainer
 
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].character == null)
+            if (characterSlots[i].PartyCharacterTemplate == null)
             {
-                if (characterSlot.quantity <= characterSlot.character.MaxStack)
+                if (characterSlot.Quantity <= characterSlot.PartyCharacterTemplate.MaxStack)
                 {
                     characterSlots[i] = characterSlot;
 
-                    characterSlot.quantity = 0;
+                    characterSlot.Quantity = 0;
 
                     onCharactersUpdated?.Raise();
 
@@ -61,9 +61,9 @@ public class CharacterContainer : ICharacterContainer
                 }
                 else
                 {
-                    characterSlots[i] = new CharacterSlot(characterSlot.character, characterSlot.character.MaxStack);
+                    characterSlots[i] = new CharacterSlot(characterSlot.Character, characterSlot.PartyCharacterTemplate.MaxStack);
 
-                    characterSlot.quantity -= characterSlot.character.MaxStack;
+                    characterSlot.Quantity -= characterSlot.PartyCharacterTemplate.MaxStack;
                 }
             }
         }
@@ -75,13 +75,13 @@ public class CharacterContainer : ICharacterContainer
     {
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].character != null)
+            if (characterSlots[i].PartyCharacterTemplate != null)
             {
-                if (characterSlots[i].character == characterSlot.character)
+                if (characterSlots[i].PartyCharacterTemplate == characterSlot.PartyCharacterTemplate)
                 {
-                    if (characterSlots[i].quantity < characterSlot.quantity)
+                    if (characterSlots[i].Quantity < characterSlot.Quantity)
                     {
-                        characterSlot.quantity -= characterSlots[i].quantity;
+                        characterSlot.Quantity -= characterSlots[i].Quantity;
 
                         characterSlots[i] = new CharacterSlot();
 
@@ -89,9 +89,9 @@ public class CharacterContainer : ICharacterContainer
                     }
                     else
                     {
-                        characterSlots[i].quantity -= characterSlot.quantity;
+                        characterSlots[i].Quantity -= characterSlot.Quantity;
 
-                        if (characterSlots[i].quantity == 0)
+                        if (characterSlots[i].Quantity == 0)
                         {
                             characterSlots[i] = new CharacterSlot();
 
@@ -111,11 +111,11 @@ public class CharacterContainer : ICharacterContainer
 
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].character == null) { continue; }
+            if (characterSlots[i].PartyCharacterTemplate == null) { continue; }
 
-            if (characters.Contains(characterSlots[i].character)) { continue; }
+            if (characters.Contains(characterSlots[i].PartyCharacterTemplate)) { continue; }
 
-            characters.Add(characterSlots[i].character);
+            characters.Add(characterSlots[i].PartyCharacterTemplate);
         }
 
         return characters;
@@ -137,15 +137,15 @@ public class CharacterContainer : ICharacterContainer
 
         if (firstSlot.Equals(secondSlot)) { return; }
 
-        if (secondSlot.character != null && firstSlot.character != null)
+        if (secondSlot.PartyCharacterTemplate != null && firstSlot.PartyCharacterTemplate != null)
         {
-            if (firstSlot.character == secondSlot.character)
+            if (firstSlot.PartyCharacterTemplate == secondSlot.PartyCharacterTemplate)
             {
-                int secondSlotRemainingSpace = secondSlot.character.MaxStack - secondSlot.quantity;
+                int secondSlotRemainingSpace = secondSlot.PartyCharacterTemplate.MaxStack - secondSlot.Quantity;
 
-                if (firstSlot.quantity <= secondSlotRemainingSpace)
+                if (firstSlot.Quantity <= secondSlotRemainingSpace)
                 {
-                    itemContainerTwo.CharacterSlots[indexTwo].quantity += firstSlot.quantity;
+                    itemContainerTwo.CharacterSlots[indexTwo].Quantity += firstSlot.Quantity;
 
                     itemContainerOne.CharacterSlots[indexOne] = new CharacterSlot();
 
@@ -166,8 +166,8 @@ public class CharacterContainer : ICharacterContainer
     {
         foreach (CharacterSlot characterSlot in characterSlots)
         {
-            if (characterSlot.character == null) { continue; }
-            if (characterSlot.character != character) { continue; }
+            if (characterSlot.PartyCharacterTemplate == null) { continue; }
+            if (characterSlot.PartyCharacterTemplate != character) { continue; }
 
             return true;
         }
@@ -181,10 +181,10 @@ public class CharacterContainer : ICharacterContainer
 
         foreach (CharacterSlot characterSlot in characterSlots)
         {
-            if (characterSlot.character == null) { continue; }
-            if (characterSlot.character != character) { continue; }
+            if (characterSlot.PartyCharacterTemplate == null) { continue; }
+            if (characterSlot.PartyCharacterTemplate != character) { continue; }
 
-            totalCount += characterSlot.quantity;
+            totalCount += characterSlot.Quantity;
         }
 
         return totalCount;

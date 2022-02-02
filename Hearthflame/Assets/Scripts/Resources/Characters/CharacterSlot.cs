@@ -7,12 +7,14 @@ using GramophoneUtils.Stats;
 [Serializable]
 public struct CharacterSlot
 {
-    public PartyCharacterTemplate character;
-    public int quantity;
+    public PartyCharacterTemplate PartyCharacterTemplate;
+    public Character Character;
+    public int Quantity;
 
-    public CharacterSlot(PartyCharacterTemplate characterTemplate, int quantity = 1)
+    public CharacterSlot(Character character, int quantity = 1)
     {
-        this.character = characterTemplate;
-        this.quantity = quantity;
+        this.PartyCharacterTemplate = character.PartyCharacterTemplate;
+        this.Character = character;
+        this.Quantity = quantity;
     }
 }

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSlotsHolder: {fileID: 6418423818356349904}
-  characterSlotPrefab: {fileID: 554002927712265894, guid: 4acbdaf14c5b59b4f80db6b3d7a9d029,
+  characterTurnSlotPrefab: {fileID: 5928823288828269859, guid: c418d6f5747c17b4c98c13b460a58f1f,
     type: 3}
 --- !u!1 &6418423818124695478
 GameObject:

@@ -17,6 +17,7 @@ namespace GramophoneUtils.Stats
 		private readonly EquipmentInventory equipmentInventory;
 		
 		private bool isPlayer;
+		private bool isCurrentActor = false;
 
 		private readonly Party party;
 		private readonly Inventory partyInventory;
@@ -32,6 +33,7 @@ namespace GramophoneUtils.Stats
 		public CharacterClass CharacterClass => characterClass; //getter
 		public EquipmentInventory EquipmentInventory => equipmentInventory; //getter
 		public bool IsPlayer { get { return isPlayer; } set { isPlayer = value; } }
+		public bool IsCurrentActor { get { return isCurrentActor; } }
 		public Party Party => party; //getter
 		public Inventory PartyInventory => partyInventory; //getter
 		public CharacterTemplate CharacterTemplate => characterTemplate; //getter
@@ -54,6 +56,11 @@ namespace GramophoneUtils.Stats
 			isPlayer = partyCharacterTemplate.Template.IsPlayer;
 			this.party = party;
 			partyInventory = party.PartyInventory;
+		}
+
+		public void SetIsCurrentActor(bool value)
+		{
+			isCurrentActor = value; 
 		}
 	}
 }

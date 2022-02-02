@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 public class BattleManager
 {
 
+	private bool testBool = false;
+
 	[SerializeField] private Battle battle;
 	[SerializeField] private Party party;
 
@@ -24,14 +26,16 @@ public class BattleManager
 	private BattleBehaviour battleBehaviour;
 	private GameObject turnOrderPrefab;
 
-	private PlayerTurn playerTurn = new PlayerTurn();
-	private EnemyTurn enemyTurn = new EnemyTurn();
-	private BattleStart battleStart = new BattleStart();
-	private BattleWon battleWon = new BattleWon();
-	private BattleLost battleLost = new BattleLost();
+	private PlayerTurn playerTurn;
+	private EnemyTurn enemyTurn;
+	private BattleStart battleStart;
+	private BattleWon battleWon;
+	private BattleLost battleLost;
 
 	private List<Character> battlersList;
 	private List<Character> orderedBattlersList;
+	private Queue<Character> unresolvedQueue;
+	private Queue<Character> resolvedQueue;
 
 	private CharacterInventory battlersListNew;
 	private CharacterInventory orderedBattlersListNew;
@@ -40,19 +44,38 @@ public class BattleManager
 
 	private Character currentActor;
 
-	public static BattleManager Instance => _instance;
+	public Action OnCurrentActorChanged;
 
 	public CharacterInventory BattlersListNew => battlersListNew;
+	public CharacterInventory OrderedBattlersListNew => orderedBattlersListNew;
+	public CharacterInventory EnemyBattlersList => enemyBattlersList;
+	public CharacterInventory PlayerBattlersList => playerBattlersList;
 
-	public BattleManager(Battle battle, Party party)
+	public Character CurrentActor
+	{
+		get { return currentActor; } set { currentActor = value; }
+	}
+
+public BattleManager(Battle battle, Party party)
 	{
 		this.battle = battle;
 		this.party = party;
 		FunctionUpdater.Create(() => Update());
-		_instance = this;
 		isLoaded = false;
 		GameManager.Instance.BattleSceneLoaded += SetIsBattleFullyLoaded;
+
+		InitialiseBattleStates();
+
 		ChangeState(battleStart);
+	}
+
+	private void InitialiseBattleStates()
+	{
+		playerTurn = new PlayerTurn(this);
+		enemyTurn = new EnemyTurn(this);
+		battleStart = new BattleStart(this);
+		battleWon = new BattleWon(this);
+		battleLost = new BattleLost(this);
 	}
 
 	private void SetIsBattleFullyLoaded(Scene scene)
@@ -63,7 +86,7 @@ public class BattleManager
 		}
 	}
 
-	private void InitialiseUIElements()
+	private void InitialiseTurnOrderUI()
 	{
 		if (battleBehaviour != null)
 		{
@@ -76,7 +99,6 @@ public class BattleManager
 	private void InitialiseBattleBehaviour()
 	{
 		battleBehaviours = GameObject.FindObjectsOfType<BattleBehaviour>();
-		Debug.Log(battleBehaviour);
 		if (battleBehaviours.Length > 0)
 		{
 			battleBehaviour = battleBehaviours[0];
@@ -90,8 +112,19 @@ public class BattleManager
 
 	private void PlayerAction()
 	{
-		Debug.Log("Player Attack");
+		Debug.Log("Player Attack"); /////// Just a test
+		if (testBool == false)
+		{
+			Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
+			StatModifier statModifier = new StatModifier(CurrentActor.StatTypeStringRefDictionary["Speed"], StatModifierTypes.Flat, 2000, 6);
+			CurrentActor.StatSystem.AddModifier(statModifier);
+			Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
+			testBool = true;
+		}
+		if (CurrentActor.Name == "Snoo" && testBool == true)
+			Debug.Log(CurrentActor.Name + " Speed should be 17 again, is it?: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
 		NextTurn();
+		OnCurrentActorChanged?.Invoke();
 	}
 
 	private IEnumerator EnemyAction()
@@ -99,25 +132,12 @@ public class BattleManager
 		yield return new WaitForSeconds(2f);
 		Debug.Log("Enemy Attack");
 		NextTurn();
+		OnCurrentActorChanged?.Invoke();
 	}
 
-	private void NextTurn()
-	{
-		turn++;
-		if (turn >= battlersList.Count)
-		{
-			NextRound();
-		}
-		//Debug.Log("turn: " + turn);
-		//Debug.Log("ordered battlers length: " + orderedBattlersList.Count);
-		currentActor = CalculateNextActor();
-		Debug.Log("updated turn: " + turn);
-		Debug.Log(currentActor);
-		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
-		UpdateState(currentActor);
-	}
 
-	private void UpdateState(Character currentActor)
+
+	private void UpdateState()
 	{
 		if (HasPlayerTeamLost())
 		{
@@ -127,11 +147,11 @@ public class BattleManager
 		{
 			ChangeState(battleWon);
 		}
-		if (currentActor.IsPlayer)
+		if (CurrentActor.IsPlayer)
 		{
 			ChangeState(playerTurn);
 		}
-		else if (!currentActor.IsPlayer)
+		else if (!CurrentActor.IsPlayer)
 		{
 			ChangeState(enemyTurn);
 		}
@@ -149,37 +169,94 @@ public class BattleManager
 		return false;
 	}
 
+	private void NextTurn()
+	{
+		turn++;
+		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
+
+		unresolvedQueue = OrderQueue();
+
+		if (turn >= battlersList.Count)
+		{
+			NextRound();
+		}
+
+		CurrentActor = unresolvedQueue.Dequeue();
+		resolvedQueue.Enqueue(CurrentActor);
+
+		Debug.Log("Current Turn: " + turn);
+		Debug.Log("CurrentActor: " + CurrentActor.Name);
+
+		 
+		OnCurrentActorChanged?.Invoke();
+		UpdateState();
+	}
+
 	private void NextRound()
 	{
 		round++;
+		CreateNewRoundQueues();
+		unresolvedQueue = OrderQueue();
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
 		turn = 0;
 	}
 
 	private List<Character> CalculateOrderedBattlersList()
 	{
-		IEnumerable<Character> query = battlersList.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
 		orderedBattlersList = new List<Character>();
-		foreach (Character battler in query)
+		foreach (Character battler in resolvedQueue)
+		{
+			orderedBattlersList.Add(battler);
+		}
+		foreach (Character battler in unresolvedQueue)
 		{
 			orderedBattlersList.Add(battler);
 		}
 		return orderedBattlersList;
 	}
 
-	private Character CalculateNextActor()
-	{
-		return orderedBattlersList[turn];
-	}
-
 	private void InitialiseBattle()
 	{
 		InitialiseBattlersList();
-		CalculateOrderedBattlersList();
-
+		
 		turn = 0;
 		round = 0;
-		currentActor = CalculateNextActor();
-		UpdateState(currentActor);
+		CreateNewRoundQueues();
+		unresolvedQueue = OrderQueue();
+
+		InitialiseBattlersInventory();
+		InitialisePlayerBattlersInventory();
+		InitialiseEnemyBattlersInventory();
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
+
+		CurrentActor = unresolvedQueue.Dequeue();
+		CurrentActor.SetIsCurrentActor(true);
+		resolvedQueue.Enqueue(CurrentActor);
+	}
+
+	private Queue<Character> OrderQueue()
+	{
+		IEnumerable<Character> query = unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
+		Queue<Character> orderedRoundQueue = new Queue<Character>();
+		foreach (Character battler in query)
+		{
+			orderedRoundQueue.Enqueue(battler);
+		}
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
+		return orderedRoundQueue;
+	}
+
+	private void CreateNewRoundQueues()
+	{
+		unresolvedQueue = new Queue<Character>();
+		foreach (Character character in battlersList)
+		{
+			unresolvedQueue.Enqueue(character);
+		}
+		resolvedQueue = new Queue<Character>();
 	}
 
 	private void InitialiseBattlersList()
@@ -198,41 +275,89 @@ public class BattleManager
 		{
 			battlersList.Add(partyCharacter.Character);
 		}
-		Debug.Log("battlersList.Count: " + battlersList.Count);
+	}
 
-		// NEW
+	private CharacterInventory CalculateAndInitializeOrderedBattlersInventory()
+	{
+		InitializeOrderedBattlersInventory();
+		foreach (Character battler in orderedBattlersList)
+		{
+			orderedBattlersListNew.AddCharacter(new CharacterSlot(battler));
+		}
+		return orderedBattlersListNew;
+	}
+
+	private CharacterInventory InitializeOrderedBattlersInventory()
+	{
 		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
-		Debug.Log("battleBehaviour == null: " + (battleBehaviour == null));
+		orderedBattlersListNew = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
+		return orderedBattlersListNew;
+	}
+
+	private void InitialiseEnemyBattlersInventory()
+	{
+		int totalNumberOfEnemyBattlers = battle.EnemyParty.PartyCharacters.Length;
+		enemyBattlersList = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfEnemyBattlers);
+
+		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
+		{
+			enemyBattlersList.AddCharacter(new CharacterSlot(partyCharacter.Character));
+		}
+	}
+
+	private void InitialisePlayerBattlersInventory()
+	{
+		int totalNumberOfPlayerBattlers = party.PartyCharacters.Length;
+		playerBattlersList = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfPlayerBattlers);
+
+		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
+		{
+			if (partyCharacter.IsUnlocked) // && IsFront
+			{
+				playerBattlersList.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			}
+		}
+	}
+
+	private void InitialiseBattlersInventory()
+	{
+		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
 		battlersListNew = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
 
 		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
 		{
 			if (partyCharacter.IsUnlocked) // && IsFront
 			{
-				battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character.PartyCharacterTemplate));
-				Debug.Log(partyCharacter.Character.Name);
+				battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character));
 			}
 		}
 
 		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
 		{
-			battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character.PartyCharacterTemplate));
-			Debug.Log(partyCharacter.Character.Name);
-
-			//if (partyCharacter.IsUnlocked) // && IsFront
-			//{
-			//	battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character.PartyCharacterTemplate));
-			//	Debug.Log(partyCharacter.Character.Name);
-			//}
+			battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character));
 		}
 	}
 
-	IEnumerator WaitUntilBattleSceneFullyLoaded()
+	IEnumerator WaitUntilBattleSceneFullyLoadedThenInitialiseBattle()
 	{
 		yield return new WaitUntil(() => isLoaded = true);
 		InitialiseBattleBehaviour();
-		BattleManager.Instance.InitialiseBattle();
-		InitialiseUIElements();
+		InitialiseBattle();
+		InitialiseBattlerDisplay();
+		InitialiseTurnOrderUI();
+		OnCurrentActorChanged?.Invoke();
+		// Start:
+		UpdateState();
+	}
+
+	private void InitialiseBattlerDisplay()
+	{
+		if (battleBehaviour != null)
+		{
+			//turnOrderPrefab = battleBehaviour.TurnOrderPrefab;
+			//TurnOrderUI turnOrderUI = UnityEngine.Object.Instantiate(turnOrderPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TurnOrderUI>();
+			//turnOrderUI.Initialise(this);
+		}
 	}
 
 	#region BattleStates
@@ -248,30 +373,39 @@ public class BattleManager
 
 	public abstract class BattleState
 	{
-		public abstract void HandleInput();
+		protected BattleManager _outer;
 
-		public abstract void ExitState();
+		public abstract void HandleInput();
 
 		public virtual void EnterState()
 		{
-			BattleManager.Instance.battleState = this;
+			_outer.battleState = this;
+			//_outer.OnCurrentActorChanged?.Invoke();
 		}
+		public virtual void ExitState()
+		{
+			//_outer.OnCurrentActorChanged?.Invoke();
+		}
+
 	}
 
 	public class BattleStart : BattleState
 	{
+		public BattleStart(BattleManager outer)
+		{
+			_outer = outer;
+		}
 		public override void EnterState()
 		{
 			base.EnterState();
 
-			GameManager.Instance.StartCoroutine(BattleManager.Instance.WaitUntilBattleSceneFullyLoaded());
-			Debug.Log("PRPRPRPRPRPRPPR!");
+			GameManager.Instance.StartCoroutine(_outer.WaitUntilBattleSceneFullyLoadedThenInitialiseBattle());
 			
 		}
 
 		public override void ExitState()
 		{
-			//throw new NotImplementedException();
+			base.ExitState();
 		}
 
 		public override void HandleInput()
@@ -282,60 +416,99 @@ public class BattleManager
 
 	public class PlayerTurn : BattleState
 	{
+		private Character StateActor;
+
+		public PlayerTurn(BattleManager outer)
+		{
+			_outer = outer;
+		}
+
 		public override void EnterState()
 		{
 			base.EnterState();
-			Debug.Log("We're in the player state");
+			StateActor = _outer.CurrentActor;
+			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
+			Debug.Log("StateActor.IsCurrentActor. Should be false: " + StateActor.IsCurrentActor);
+			StateActor.SetIsCurrentActor(true);
+			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
+			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 		}
 
 		public override void ExitState()
 		{
-			//throw new NotImplementedException();
+			base.ExitState();
+			Debug.Log("We're leaving the player state, and the old actor is: " + StateActor.Name);
+			Debug.Log("The old Actor state should still be true. Is it? :- " + StateActor.IsCurrentActor);
+			StateActor.SetIsCurrentActor(false);			
+			Debug.Log("The old Actor state should now be false. Is it? :- " + StateActor.IsCurrentActor);
 		}
 
 		public override void HandleInput()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				BattleManager.Instance.PlayerAction();
+				_outer.PlayerAction();
 			}
 		}
 	}
 
 	public class EnemyTurn : BattleState
 	{
+		private Character StateActor;
+
+		public EnemyTurn(BattleManager outer)
+		{
+			_outer = outer;
+		}
+
 		public override void EnterState()
 		{
 			base.EnterState();
-			Debug.Log("We're in the enemy state");
-			GameManager.Instance.StartCoroutine(BattleManager.Instance.EnemyAction());
+			StateActor = _outer.CurrentActor;
+			Debug.Log("We're in the enemy state, and the current actor is: " + StateActor.Name);
+			Debug.Log("StateActor.IsCurrentActor. Should be false: " + StateActor.IsCurrentActor);
+			StateActor.SetIsCurrentActor(true);
+			Debug.Log("We're in the enemy state, and the current actor is: " + StateActor.Name);
+			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
+			GameManager.Instance.StartCoroutine(_outer.EnemyAction());
+
 		}
 
 		public override void ExitState()
 		{
-			//throw new NotImplementedException();
+			base.ExitState();
+			Debug.Log("We're leaving the enemy state, and the old actor is: " + StateActor.Name);
+			Debug.Log("The old Actor state should still be true. Is it? :- " + StateActor.IsCurrentActor);
+			StateActor.SetIsCurrentActor(false);
+			Debug.Log("The old Actor state should now be false. Is it? :- " + StateActor.IsCurrentActor);
 		}
 
 		public override void HandleInput()
 		{
-			return;
+			
 		}
 	}
 
 	public class BattleWon : BattleState
 	{
+		public BattleWon(BattleManager outer)
+		{
+			_outer = outer;
+		}
+
 		public override void EnterState()
 		{
 			base.EnterState();
 			// get the BattleReward class to show its popup 
-			BattleManager.Instance.battle.BattleReward.AddBattleReward(BattleManager.Instance.party);
+			_outer.battle.BattleReward.AddBattleReward(_outer.party);
 		}
 
 		public override void ExitState()
 		{
+			base.ExitState();
 			//throw new NotImplementedException();
 			// close the battle and change the scene back to map
-			GameManager.Instance.BattleSceneLoaded -= BattleManager.Instance.SetIsBattleFullyLoaded;
+			GameManager.Instance.BattleSceneLoaded -= _outer.SetIsBattleFullyLoaded;
 		}
 
 		public override void HandleInput()
@@ -347,6 +520,11 @@ public class BattleManager
 
 	public class BattleLost : BattleState
 	{
+		public BattleLost(BattleManager outer)
+		{
+			_outer = outer;
+		}
+
 		public override void EnterState()
 		{
 			base.EnterState();
@@ -355,7 +533,8 @@ public class BattleManager
 
 		public override void ExitState()
 		{
-			GameManager.Instance.BattleSceneLoaded -= BattleManager.Instance.SetIsBattleFullyLoaded;
+			base.ExitState();
+			GameManager.Instance.BattleSceneLoaded -= _outer.SetIsBattleFullyLoaded;
 		}
 
 		public override void HandleInput()
