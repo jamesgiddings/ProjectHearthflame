@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: e496856e570c9f843a41095df1eb3592
   name: Pyroblast
+  icon: {fileID: 21300000, guid: 8ec5b52b09d90074a83d61c1334190f9, type: 3}
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   prerequisites:
   - {fileID: 11400000, guid: 5ebcd8f392e6b4b439149b7c053d74ba, type: 2}
-  icon: {fileID: 21300000, guid: 8ec5b52b09d90074a83d61c1334190f9, type: 3}
+  targetFlag: 97

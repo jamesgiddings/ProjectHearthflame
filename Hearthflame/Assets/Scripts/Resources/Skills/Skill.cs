@@ -7,10 +7,26 @@ public class Skill : Resource, IHotbarItem
 {
 	[SerializeField] private CharacterClass[] classRestrictions;
 	[SerializeField] private Skill[] prerequisites;
+	[SerializeField] private TargetFlags targetFlag;
+
+	private int targetFlagSum;
 
 	public Action OnSkillUsed;
 	public CharacterClass[] ClassRestrictions => classRestrictions;
 	public Skill[] Prerequisites => prerequisites;
+
+	protected override void OnValidate()
+	{
+		base.OnValidate();
+		Debug.Log((int)targetFlag);
+		SetTargetFlagSum();
+		Debug.Log(targetFlagSum);
+	}
+
+	private void SetTargetFlagSum()
+	{
+		targetFlagSum = (int)targetFlag;
+	}
 
 	public void Use()
 	{
