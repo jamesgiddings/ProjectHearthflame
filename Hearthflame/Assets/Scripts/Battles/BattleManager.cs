@@ -9,13 +9,10 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager
 {
-
 	private bool testBool = false;
 
 	[SerializeField] private Battle battle;
 	[SerializeField] private Party party;
-
-	private static BattleManager _instance;
 
 	private bool isLoaded;
 	private int turn;
@@ -351,6 +348,14 @@ public BattleManager(Battle battle, Party party)
 		UpdateState();
 	}
 
+	private void InitialiseRadialMenu()
+	{
+		if (battleBehaviour != null)
+		{
+			battleBehaviour.RadialMenu.InitialiseRadialMenu(this);
+		}
+	}
+
 	private void InitialiseBattlerDisplay()
 	{
 		if (battleBehaviour != null)
@@ -431,6 +436,7 @@ public BattleManager(Battle battle, Party party)
 			StateActor.SetIsCurrentActor(true);
 			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
 			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
+			_outer.InitialiseRadialMenu();
 		}
 
 		public override void ExitState()

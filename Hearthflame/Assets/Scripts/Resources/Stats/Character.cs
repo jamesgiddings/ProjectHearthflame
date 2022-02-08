@@ -14,6 +14,7 @@ namespace GramophoneUtils.Stats
 		private readonly HealthSystem healthSystem;
 		private readonly LevelSystem levelSystem;
 		private readonly CharacterClass characterClass;
+		private readonly SkillSystem skillSystem;
 		private readonly EquipmentInventory equipmentInventory;
 		
 		private bool isPlayer;
@@ -31,6 +32,7 @@ namespace GramophoneUtils.Stats
 		public HealthSystem HealthSystem => healthSystem; //getter
 		public LevelSystem LevelSystem => levelSystem; //getter
 		public CharacterClass CharacterClass => characterClass; //getter
+		public SkillSystem SkillSystem => skillSystem; //getter
 		public EquipmentInventory EquipmentInventory => equipmentInventory; //getter
 		public bool IsPlayer { get { return isPlayer; } set { isPlayer = value; } }
 		public bool IsCurrentActor { get { return isCurrentActor; } }
@@ -40,7 +42,7 @@ namespace GramophoneUtils.Stats
 		public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter
 		public Character() { } //constructor 1
 		public Character(PartyCharacterTemplate partyCharacterTemplate, Party party) //constructor 2
-		{
+		{	
 			this.partyCharacterTemplate = partyCharacterTemplate;
 			this.characterTemplate = partyCharacterTemplate.Template;
 			name = partyCharacterTemplate.Template.Name;
@@ -49,13 +51,16 @@ namespace GramophoneUtils.Stats
 			healthSystem = new HealthSystem(partyCharacterTemplate.Template); 
 			// subscribe to OnDeathEvent here? also, inject a reference to Ch aracter if needed
 			characterClass = partyCharacterTemplate.Template.CharacterClass;
-			levelSystem = new LevelSystem(characterClass, this);
+			this.skillSystem = new SkillSystem(partyCharacterTemplate, this);
+			this.levelSystem = new LevelSystem(characterClass, this);
 			levelSystem.OnLevelChanged += characterClass.LevelUp;
 			equipmentInventory = new EquipmentInventory(this, party);
 			equipmentInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
 			isPlayer = partyCharacterTemplate.Template.IsPlayer;
 			this.party = party;
 			partyInventory = party.PartyInventory;
+
+			skillSystem.Initialise();
 		}
 
 		public void SetIsCurrentActor(bool value)

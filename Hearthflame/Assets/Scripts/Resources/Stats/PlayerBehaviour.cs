@@ -8,9 +8,18 @@ namespace GramophoneUtils.Stats
 {
 	public class PlayerBehaviour : MonoBehaviour, ISaveable
 	{
-		[SerializeField] private Party party;
+		[SerializeField] private PartyTemplate partyTemplate;
+		private Party party;
 
-		public Party Party => party;
+		public Party Party
+		{
+			get
+			{
+				if (party != null) { return party; }
+				party = partyTemplate.CreateBlueprintInstance<Party>();
+				return party;
+			}
+		}
 
 		private void Start()
 		{
@@ -59,6 +68,7 @@ namespace GramophoneUtils.Stats
 		#region SavingLoading
 		public object CaptureState()
 		{
+			Debug.Log("Player CaptureState()");
 			PartyCharacterSaveData[] partyCharactersSaveDatasCache = new PartyCharacterSaveData[Party.PartyCharacters.Length];
 			for (int i = 0; i < Party.PartyCharacters.Length; i++)
 			{
@@ -119,7 +129,7 @@ namespace GramophoneUtils.Stats
 			var saveData = (SaveData)state;
 
 			// Position
-
+			Debug.Log("We are resetting the player's position.");
 			gameObject.transform.position = new Vector3(saveData.positionX, saveData.positionY);
 
 			// PartyCharacters

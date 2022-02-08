@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f19042cd93e90a41b6ca45b8a1db1f3, type: 3}
+  m_Name: EnemyParty 1
+  m_EditorClassIdentifier: 
+  UID: f46cfb3cb05589848a5daf31f4dd8b39
+  name: EnemyParty
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onInventoryItemsUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  partyInventorySize: 20
+  partyInventoryStartingScrip: 0
+  partyCharactersTemplateObject: {fileID: 11400000, guid: feabb7039665aeb42a620b2f7b25a6a4,
+    type: 2}

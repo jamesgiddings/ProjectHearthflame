@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace GramophoneUtils.Items
 {
+
     public abstract class Item : Resource
     {
         [Header("Basic Info")]

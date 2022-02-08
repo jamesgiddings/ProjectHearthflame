@@ -1,0 +1,1020 @@
+fileFormatVersion: 2
+guid: 5d12d0cd3f5ba6a4481968c20bc77bf5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5857930158837236225
+    second: black panels_0
+  - first:
+      213: 6425230780191103388
+    second: black panels_1
+  - first:
+      213: 647959173940871573
+    second: black panels_2
+  - first:
+      213: -3617949902544317485
+    second: black panels_3
+  - first:
+      213: 3582199820329675522
+    second: black panels_4
+  - first:
+      213: 4501448607356701819
+    second: black panels_5
+  - first:
+      213: 5655336874070043788
+    second: black panels_6
+  - first:
+      213: 3997623208475013222
+    second: black panels_7
+  - first:
+      213: 352315131564611828
+    second: black panels_8
+  - first:
+      213: -8213754112271494859
+    second: black panels_9
+  - first:
+      213: -7127137322869366680
+    second: black panels_10
+  - first:
+      213: -4411045869449414776
+    second: black panels_11
+  - first:
+      213: -2056707910008673731
+    second: black panels_12
+  - first:
+      213: 8137363370961288709
+    second: black panels_13
+  - first:
+      213: -501000365380630603
+    second: black panels_14
+  - first:
+      213: 5197466890935270006
+    second: black panels_15
+  - first:
+      213: 8975442536118817269
+    second: black panels_16
+  - first:
+      213: -3568551403237440237
+    second: black panels_17
+  - first:
+      213: -3947674239571082488
+    second: black panels_18
+  - first:
+      213: -2647397122512179019
+    second: black panels_19
+  - first:
+      213: -8000906921163209790
+    second: black panels_20
+  - first:
+      213: -8444262242894192777
+    second: black panels_21
+  - first:
+      213: -213313866550107656
+    second: black panels_22
+  - first:
+      213: 8018032934189422392
+    second: black panels_23
+  - first:
+      213: -310764599868188267
+    second: black panels_24
+  - first:
+      213: 1477244707514380213
+    second: black panels_25
+  - first:
+      213: 2376745318871793214
+    second: black panels_26
+  - first:
+      213: 7559803123500873779
+    second: black panels_27
+  - first:
+      213: 1796579537174092138
+    second: black panels_28
+  - first:
+      213: 596831362397840459
+    second: black panels_29
+  - first:
+      213: 384563557583470803
+    second: black panels_30
+  - first:
+      213: 3868619025974783559
+    second: black panels_31
+  - first:
+      213: -2764746868370740070
+    second: black panels_32
+  - first:
+      213: -6496926852024874552
+    second: black panels_33
+  - first:
+      213: 4072797641985655946
+    second: black panels_34
+  - first:
+      213: -8989830518507170397
+    second: black panels_35
+  - first:
+      213: -6593042657019372870
+    second: black panels_36
+  - first:
+      213: -8294113505230647620
+    second: black panels_37
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: black panels_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 531
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1028a8c517c8b4150800000000000000
+      internalID: 5857930158837236225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 395
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99523d2a510b2950800000000000000
+      internalID: 6425230780191103388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 483
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59183b78f630ef800800000000000000
+      internalID: 647959173940871573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_3
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 499
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d3dfab7bb57acdc0800000000000000
+      internalID: -3617949902544317485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_4
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 507
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20be73dd1c786b130800000000000000
+      internalID: 3582199820329675522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_5
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 507
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c4c20a8ab587e30800000000000000
+      internalID: 4501448607356701819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_6
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 507
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8cec187ceacb7e40800000000000000
+      internalID: 5655336874070043788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_7
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 507
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 660b207b0296a7730800000000000000
+      internalID: 3997623208475013222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_8
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 491
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f857e9debca3e400800000000000000
+      internalID: 352315131564611828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_9
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 491
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53157a93722e20e80800000000000000
+      internalID: -8213754112271494859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_10
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 491
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86061f4bd52571d90800000000000000
+      internalID: -7127137322869366680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_11
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 491
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88773870721d8c2c0800000000000000
+      internalID: -4411045869449414776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_12
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 499
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3a62318d0b1573e0800000000000000
+      internalID: -2056707910008673731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_13
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 499
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e3c6e4fd8bde070800000000000000
+      internalID: 8137363370961288709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_14
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 3
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7852572d61c09f0800000000000000
+      internalID: -501000365380630603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_15
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 491
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67afc06999c112840800000000000000
+      internalID: 5197466890935270006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_16
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 471
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f11b43ce6d2f8c70800000000000000
+      internalID: 8975442536118817269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 431
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3158f4fd765f97ec0800000000000000
+      internalID: -3568551403237440237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_18
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 435
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803c76dd13b0739c0800000000000000
+      internalID: -3947674239571082488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_19
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 435
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b03545f75e824bd0800000000000000
+      internalID: -2647397122512179019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_20
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 387
+        width: 22
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c34a1bbb8117f090800000000000000
+      internalID: -8000906921163209790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_21
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 444
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f5c0eca34ffca80800000000000000
+      internalID: -8444262242894192777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_22
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 444
+        width: 12
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f1ad962b282a0df0800000000000000
+      internalID: -213313866550107656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_23
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 443
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8375eb7e876c54f60800000000000000
+      internalID: 8018032934189422392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_24
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 443
+        width: 5
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59917103e31ffabf0800000000000000
+      internalID: -310764599868188267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_25
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 443
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bf68b51c3a308410800000000000000
+      internalID: 1477244707514380213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_26
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 443
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3efce46645ebf020800000000000000
+      internalID: 2376745318871793214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_27
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 452
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 338782423e0d9e860800000000000000
+      internalID: 7559803123500873779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_28
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 445
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a695ff3029bbee810800000000000000
+      internalID: 1796579537174092138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_29
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 444
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b44298246fe584800800000000000000
+      internalID: 596831362397840459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_30
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 387
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d0c253a48e365500800000000000000
+      internalID: 384563557583470803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_31
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 374
+        width: 120
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74e6b8ed18810b530800000000000000
+      internalID: 3868619025974783559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_32
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 375
+        width: 120
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9c63e81f55a1a9d0800000000000000
+      internalID: -2764746868370740070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_33
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 363
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c94c55437746d5a0800000000000000
+      internalID: -6496926852024874552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_34
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 91
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a848a9470eb758830800000000000000
+      internalID: 4072797641985655946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_35
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 339
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a51a6906c4bd3380800000000000000
+      internalID: -8989830518507170397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_36
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 334
+        width: 96
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abadc5782aec084a0800000000000000
+      internalID: -6593042657019372870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: black panels_37
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 339
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe05f906b365ec80800000000000000
+      internalID: -8294113505230647620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

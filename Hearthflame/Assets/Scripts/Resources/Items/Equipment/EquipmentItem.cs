@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 
 namespace GramophoneUtils.Items.Containers
@@ -17,26 +18,23 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private List<StatComponentBlueprint> weaponEffectBlueprints;
 		[SerializeField] private CharacterClass[] classRestrictions;
 
-		private List<StatModifier> weaponEffects;
+		private List<StatModifier> weaponEffects { get { return InstanceWeaponEffectBlueprints(); } }
 
 		public CharacterClass[] ClassRestrictions => classRestrictions;
 
 		public EquipmentType EquipmentType => equipmentType;
-		private void OnEnable()
-		{
-			weaponEffects = new List<StatModifier>();
-			InstanceWeaponEffectBlueprints();
-		}
 
-		private void InstanceWeaponEffectBlueprints()
+		private List<StatModifier> InstanceWeaponEffectBlueprints()
 		{
+			List<StatModifier> effects = new List<StatModifier>();
 			if (weaponEffectBlueprints.Count > 0)
 			{
 				foreach (var blueprint in weaponEffectBlueprints)
 				{
-					weaponEffects.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
+					effects.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
 				}
 			}
+			return effects;
 		}
 
 		public void Equip(Character character)
@@ -48,8 +46,9 @@ namespace GramophoneUtils.Items.Containers
 		}
 		public override string GetInfoDisplayText()
 		{
+			Debug.Log("Inside Get Info Display text 1");
 			StringBuilder builder = new StringBuilder();
-
+			Debug.Log("Inside Get Info Display text 2");
 			builder.Append(Rarity.Name).AppendLine();
 			if (classRestrictions.Length > 0)
 			{
@@ -65,15 +64,19 @@ namespace GramophoneUtils.Items.Containers
 					}
 				}
 			}
+			Debug.Log("Inside Get Info Display text3");
 			foreach (var effect in weaponEffects)
 			{
 				builder.Append("+").Append(effect.Value).Append(" ").Append(effect.StatType.Name).AppendLine();
 			}
+
+			Debug.Log("Inside Get Info Display text4");
 			//builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
 			builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
 			builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold").AppendLine();
 			builder.Append('"').Append(flavourText).Append('"');
 
+			Debug.Log("Inside Get Info Display text5");
 			return builder.ToString();
 		}
 

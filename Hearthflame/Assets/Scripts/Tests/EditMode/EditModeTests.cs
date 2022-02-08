@@ -104,7 +104,7 @@ public class EditModeTests
 	{
 
 		string relativePath = "Assets/Scripts/Tests/EditMode/de301b3a5de18c7428d78e832f4900a2.asset";
-		Test resource = AssetDatabase.LoadAssetAtPath<Test>(relativePath);
+		Resource resource = AssetDatabase.LoadAssetAtPath<Resource>(relativePath);
 		Debug.Log(resource.UID);
 		Assert.AreEqual(resource.UID, "de301b3a5de18c7428d78e832f4900a2");
 	}

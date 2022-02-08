@@ -47,7 +47,7 @@ public class CharacterInventory : CharacterContainer, ISaveable
 		{
 			if (saveData.characterSlotSaveData[i].resourceUID != null)
 			{
-				Resource resource = ResourceDatabase.GetResourceByUID(saveData.characterSlotSaveData[i].resourceUID);
+				Resource resource = GameManager.Instance.ResourceDatabase.GetResourceByUID(saveData.characterSlotSaveData[i].resourceUID);
 				CharacterSlots[i].PartyCharacterTemplate = (PartyCharacterTemplate)resource;
 				CharacterSlots[i].Quantity = saveData.characterSlotSaveData[i].resourceQuantity;
 			}

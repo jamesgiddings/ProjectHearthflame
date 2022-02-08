@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Console
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 442}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -120,10 +120,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 909, y: 371}
-  m_MaxSize: {x: 22004, y: 14021}
+  m_MinSize: {x: 911, y: 392}
+  m_MaxSize: {x: 22006, y: 14042}
   vertical: 0
-  controlID: 205
+  controlID: 129
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,12 +143,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1199
+    width: 1238
     height: 947
-  m_MinSize: {x: 402, y: 342}
-  m_MaxSize: {x: 8002, y: 8042}
+  m_MinSize: {x: 403, y: 342}
+  m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 42
+  controlID: 188
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,12 +168,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1199
+    width: 1238
     height: 573
-  m_MinSize: {x: 402, y: 221}
-  m_MaxSize: {x: 8002, y: 4021}
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 43
+  controlID: 189
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,10 +191,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 297
+    width: 302
     height: 573
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -215,9 +215,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 297
+    x: 302
     y: 0
-    width: 902
+    width: 936
     height: 573
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -245,7 +245,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 573
-    width: 1199
+    width: 1238
     height: 374
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -272,14 +272,14 @@ MonoBehaviour:
   - {fileID: 13}
   m_Position:
     serializedVersion: 2
-    x: 1199
+    x: 1238
     y: 0
-    width: 445
+    width: 406
     height: 947
-  m_MinSize: {x: 232, y: 371}
-  m_MaxSize: {x: 10002, y: 14021}
+  m_MinSize: {x: 232, y: 392}
+  m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 68
+  controlID: 52
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,7 +297,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 445
+    width: 406
     height: 631
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
@@ -323,10 +323,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 631
-    width: 445
+    width: 406
     height: 316
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -351,8 +351,8 @@ MonoBehaviour:
     y: 0
     width: 276
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 23}
@@ -379,9 +379,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 297
+    x: 302
     y: 73
-    width: 900
+    width: 934
     height: 552
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_ShowGizmos: 1
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 900, y: 531}
+  m_TargetSize: {x: 934, y: 531}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -405,8 +405,8 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -450
-    m_HBaseRangeMax: 450
+    m_HBaseRangeMin: -467
+    m_HBaseRangeMax: 467
     m_VBaseRangeMin: -265.5
     m_VBaseRangeMax: 265.5
     m_HAllowExceedBaseRangeMin: 1
@@ -426,23 +426,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 900
+      width: 934
       height: 531
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 450, y: 265.5}
+    m_Translation: {x: 467, y: 265.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -450
+      x: -467
       y: -265.5
-      width: 900
+      width: 934
       height: 531
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 900, y: 552}
+  m_LastWindowPixelSize: {x: 934, y: 552}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -471,15 +471,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 296
+    width: 301
     height: 552
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 545a0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 38fbffff
+      m_ExpandedIDs: f28bfeff668cfeffa49efeffcc9efeffe89efefffe9ffeff72a0feff88b4feffbeb4feffdab4feffe8c4feff5cc5feff76d9feffb0d9feffd0d9feff1cddfeff90ddfeffa6f1feffdcf1fefff8f1feff36f3feff5cf3feffa610ffff1a11ffff5c23ffff8823ffffa823ffff6a25ffffde25fffff439ffff2a3affff463affffa03bfffff03effff663fffff7c53ffffb253ffffce53ffff3e56ffffb456ffffce6affff086bffff286bffff606effffd66effffec82ffff2283ffff3e83ffffba85ffff3086ffff469affff7c9affff989affff2e9dffffa49dffffbab1fffff0b1ffff0cb2ffff94b4ffff0ab5ffff20c9ffff56c9ffff72c9ffffe2cbffff58ccffff6ee0ffffa4e0ffffc0e0fffffae3ffff70e4ffff86f8ffffbcf8ffffdaf8ffffdefaffff40a1000068a4000080a40000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -524,9 +524,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 297
+    x: 302
     y: 73
-    width: 900
+    width: 934
     height: 552
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
@@ -535,14 +535,14 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 1
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 455.28116, y: 305.01068, z: -6965.7197}
+    m_Target: {x: 0, y: 0, z: 0}
     speed: 2
-    m_Value: {x: 455.28116, y: 305.01068, z: -6965.7197}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -571,17 +571,17 @@ MonoBehaviour:
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -589,17 +589,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: -0.028805226, y: -0.0054005436, z: 0.00015563928, w: -0.99956983}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: -0.028805245, y: -0.0054005473, z: 0.00015563938, w: -0.9995705}
   m_Size:
-    m_Target: 522.61536
+    m_Target: 10
     speed: 2
-    m_Value: 522.61536
+    m_Value: 10
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -669,7 +669,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 646
-    width: 1198
+    width: 1237
     height: 353
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &20
@@ -700,7 +700,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 103962
+  m_LastSelectedObjectID: 42120
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -722,13 +722,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1199
+    x: 1238
     y: 73
-    width: 443
+    width: 404
     height: 610
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: pyro
+    m_NameFilter: resource
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -740,22 +740,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Resources/Skills
+    - Assets/Resources/Resource Database/Items/Consumables
     m_Globs: []
-    m_OriginalText: pyro
+    m_OriginalText: resource
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Resources/Skills
+  - Assets/Resources/Resource Database/Items/Consumables
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\GitHub\ProjectHearthflame\Hearthflame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 382}
-    m_SelectedIDs: ea630000
-    m_LastClickedID: 25578
-    m_ExpandedIDs: 000000003c6300003e63000040630000426300004463000046630000486300004a6300004c6300004e63000050630000526300005463000056630000586300005a6300005c6300005e63000060630000626300006463000066630000686300006a6300006c6300006e63000070630000726300007463000076630000786300007a6300007c6300007e630000
+    scrollPos: {x: 0, y: 18}
+    m_SelectedIDs: 0e680000
+    m_LastClickedID: 26638
+    m_ExpandedIDs: 000000008a6700008c6700008e67000090670000926700009467000096670000986700009a6700009c6700009e670000a0670000a2670000a4670000a6670000a8670000aa670000ac670000ae670000b0670000b2670000b4670000b6670000b8670000ba670000bc670000be670000c0670000c2670000c4670000c6670000c8670000ca670000cc670000ce670000d0670000d2670000d4670000d6670000d8670000da6700002468000028680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -783,7 +783,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003c6300003e63000040630000426300004463000046630000486300004a6300004c6300004e63000050630000526300005463000056630000586300005a6300005c6300005e63000060630000626300006463000066630000686300006a6300006c6300006e63000070630000726300007463000076630000786300007a6300007c6300007e630000
+    m_ExpandedIDs: 000000008a6700008c6700008e67000090670000926700009467000096670000986700009a6700009c6700009e670000a0670000a2670000a4670000a6670000a8670000aa670000ac670000ae670000b0670000b2670000b4670000b6670000b8670000ba670000bc670000be670000c0670000c2670000c4670000c6670000c8670000ca670000cc670000ce670000d0670000d2670000d4670000d6670000d8670000da670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -811,7 +811,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000163e0000343c000072840000c0580000367a00004a7d0000867f0000083f0000d4f0ffff724f0000046e0000d26a000000000000
+    m_ExpandedInstanceIDs: c6230000163e0000343c000072840000c0580000367a00004a7d0000867f0000083f0000d4f0ffff724f0000046e0000d26a000000000000949200008c950000b4b2000078af0000529f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -835,10 +835,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 240}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 206
+  m_DirectoriesAreaWidth: 205
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -859,9 +859,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1199
+    x: 1238
     y: 704
-    width: 443
+    width: 404
     height: 295
   m_ViewDataDictionary: {fileID: 0}
   m_Spl:
@@ -1014,9 +1014,9 @@ MonoBehaviour:
       uniqueId: '[Inventory Tutorial][suite]'
       name: Inventory Tutorial
       fullName: Inventory Tutorial
-      resultStatus: 2
-      duration: 0.0685976
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0729571
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1030,9 +1030,9 @@ MonoBehaviour:
       uniqueId: '[EditMode][F:/GitHub/ProjectHearthflame/Hearthflame/Library/ScriptAssemblies/EditMode.dll][suite]'
       name: EditMode.dll
       fullName: F:/GitHub/ProjectHearthflame/Hearthflame/Library/ScriptAssemblies/EditMode.dll
-      resultStatus: 2
-      duration: 0.0419011
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0279939
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1046,9 +1046,9 @@ MonoBehaviour:
       uniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
       name: EditModeTests
       fullName: EditModeTests
-      resultStatus: 2
-      duration: 0.041267
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 0.0264764
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1062,7 +1062,7 @@ MonoBehaviour:
       uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.ItemStatsTestsSimplePasses]
       name: ItemStatsTestsSimplePasses
       fullName: EditModeTests.ItemStatsTestsSimplePasses
-      resultStatus: 2
+      resultStatus: 0
       duration: 0.0378165
       messages: 'System.NullReferenceException : Object reference not set to an instance
         of an object'
@@ -1109,7 +1109,7 @@ MonoBehaviour:
       name: ResourceIDTestSimplePasses
       fullName: EditModeTests.ResourceIDTestSimplePasses
       resultStatus: 1
-      duration: 0.0451237
+      duration: 0.0144829
       messages: 
       output: 'de301b3a5de18c7428d78e832f4900a2
 
@@ -1127,7 +1127,7 @@ MonoBehaviour:
       uniqueId: EditMode.dll/EditModeTests/[EditMode][EditModeTests.StatsTestsSimplePasses]
       name: StatsTestsSimplePasses
       fullName: EditModeTests.StatsTestsSimplePasses
-      resultStatus: 2
+      resultStatus: 0
       duration: 0.1234496
       messages: 'System.NullReferenceException : Object reference not set to an instance
         of an object'
@@ -1145,23 +1145,16 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1001
       parentUniqueId: EditMode.dll/[EditMode][EditModeTests][suite]
-    m_ResultText: "ItemStatsTestsSimplePasses (0.038s)\n---\nSystem.NullReferenceException
-      : Object reference not set to an instance of an object\n---\nat EditModeTests.ItemStatsTestsSimplePasses
-      () [0x00023] in F:\\GitHub\\ProjectHearthflame\\Hearthflame\\Assets\\Scripts\\Tests\\EditMode\\EditModeTests.cs:91
-      \r\n  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)\r\n 
-      at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags
-      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
-      culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0"
-    m_ResultStacktrace: "  at EditModeTests.ItemStatsTestsSimplePasses () [0x00023]
-      in F:\\GitHub\\ProjectHearthflame\\Hearthflame\\Assets\\Scripts\\Tests\\EditMode\\EditModeTests.cs:91
-      \r\n  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)\r\n 
-      at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags
-      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
-      culture) [0x00032] in <695d1cc93cca45069c528c15c9fdd749>:0 "
+    m_ResultText: 'ResourceIDTestSimplePasses (0.014s)
+
+      ---
+
+      de301b3a5de18c7428d78e832f4900a2'
+    m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c2fd4cfa
-      m_LastClickedID: -95617598
+      m_SelectedIDs: 6c923ee9
+      m_LastClickedID: -381775252
       m_ExpandedIDs: 372b5ca77d7a5bbfeec61fee4ff53015cae1d62affffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0

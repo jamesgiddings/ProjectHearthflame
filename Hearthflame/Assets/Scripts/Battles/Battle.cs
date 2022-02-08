@@ -5,9 +5,19 @@ using UnityEngine;
 public class Battle : Data
 {
 	internal static object battleReward;
-	[SerializeField] private Party enemyParty;
+	[SerializeField] private PartyTemplate enemyPartyTemplate;
 	[SerializeField] private BattleReward battleRewards;
 
-	public Party EnemyParty => enemyParty;
+	private Party enemyParty;
+
+	public Party EnemyParty
+	{
+		get
+		{
+			if (enemyParty != null) { return enemyParty; }
+			enemyParty = enemyPartyTemplate.CreateBlueprintInstance<Party>();
+			return enemyParty;
+		}
+	}
 	public BattleReward BattleReward => battleRewards;
 }

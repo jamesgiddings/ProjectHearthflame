@@ -16,6 +16,13 @@ MonoBehaviour:
   name: 
   inventory:
     money: 0
+    itemSlots:
+    - item: {fileID: 11400000, guid: ef225be4f145c5e4f853d9fdfa9058ff, type: 2}
+      quantity: 1
+    - item: {fileID: 11400000, guid: 6d0a85e2e2f038644a6c4650258e35b0, type: 2}
+      quantity: 4
+    - item: {fileID: 0}
+      quantity: 0
     onInventoryItemsUpdated:
       m_PersistentCalls:
         m_Calls:
@@ -31,8 +38,3 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    itemSlots:
-    - item: {fileID: 11400000, guid: ef225be4f145c5e4f853d9fdfa9058ff, type: 2}
-      quantity: 1
-    - item: {fileID: 11400000, guid: 6d0a85e2e2f038644a6c4650258e35b0, type: 2}
-      quantity: 4

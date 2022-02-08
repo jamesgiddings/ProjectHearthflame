@@ -38,7 +38,7 @@ public class PartyCharacter
 
 	public PartyCharacter(PartyCharacterTemplate partyCharacterTemplate, Party party)
 		{
-		this.character = new Character(partyCharacterTemplate, party);
-		this.isUnlocked = partyCharacterTemplate.IsUnlocked;
+			this.character = new Character(partyCharacterTemplate, party);
+			this.isUnlocked = partyCharacterTemplate.IsUnlocked;
 		}
 }

@@ -5,20 +5,10 @@ using UnityEngine;
 
 public class Data : ScriptableObject
 {
-    [ReadOnly] public string UID;
+    [ScriptableObjectId]
+    public string UID;
 
     [SerializeField] protected new string name;
 
     public string Name => name;
-        protected virtual void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (UID == "")
-        {
-            UID = GUID.Generate().ToString();
-
-            UnityEditor.EditorUtility.SetDirty(this);
-        }
-#endif
-    }
 }

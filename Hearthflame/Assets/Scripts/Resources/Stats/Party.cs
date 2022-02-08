@@ -4,8 +4,7 @@ using UnityEngine.Events;
 
 namespace GramophoneUtils.Stats
 {
-	[CreateAssetMenu(fileName = "New Party", menuName = "Characters/Party")]
-	public class Party : Data
+	public class Party
 	{
 		[SerializeField] public UnityEvent onStatsChanged;
 		[SerializeField] public UnityEvent onInventoryItemsUpdated;
@@ -31,6 +30,20 @@ namespace GramophoneUtils.Stats
 				}
 				return partyCharacters;
 			}
+		}
+
+		public Party(
+			PartyCharactersTemplateObject partyCharactersTemplateObject,
+			UnityEvent onStatsChanged,
+			UnityEvent onInventoryItemsUpdated,
+			int partyInventorySize,
+			int startingScrip
+			) //constructor 
+		{
+			this.partyCharactersTemplateObject = partyCharactersTemplateObject;
+			this.onStatsChanged = onStatsChanged;
+			this.onInventoryItemsUpdated = onInventoryItemsUpdated;
+			partyInventory = new Inventory(partyInventorySize, startingScrip);
 		}
 	}
 }

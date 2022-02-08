@@ -18,7 +18,7 @@ public class BattlerDisplayUI : MonoBehaviour
 	private CharacterInventory enemyBattlersList;
 	private CharacterInventory playerBattlersList;
 
-	private Transform[] battlerGameObjects;
+	private BattlerSprite[] battlerGameObjects;
 
 	public CharacterInventory PlayerBattlersList { get { return playerBattlersList; } set { playerBattlersList = value; } }
 	public CharacterInventory EnemyBattlersList { get { return enemyBattlersList; } set { enemyBattlersList = value; } }
@@ -29,15 +29,19 @@ public class BattlerDisplayUI : MonoBehaviour
 	#region Initialising
 	public void Initialise(BattleManager battleManager)
 	{
+		this.battleManager = battleManager;
+		
 		this.battlersListNew = battleManager.BattlersListNew;
 		this.orderedBattlersListNew = battleManager.OrderedBattlersListNew;
 		this.enemyBattlersList = battleManager.EnemyBattlersList;
 		this.playerBattlersList = battleManager.PlayerBattlersList;
 
-		battlerGameObjects = new Transform[battlersListNew.CharacterSlots.Length];
+		battlerGameObjects = new BattlerSprite[battlersListNew.CharacterSlots.Length];
 
 		InitialiseBattlers(playerBattlersList, true);
 		InitialiseBattlers(enemyBattlersList, false);
+
+		battleManager.OnCurrentActorChanged += UpdateDisplay;
 	}
 
 	private void InitialiseBattlers(CharacterInventory characterInventory, bool isPlayer)
@@ -62,17 +66,22 @@ public class BattlerDisplayUI : MonoBehaviour
 		}
 	}
 
-	private Transform InitialiseBattler(CharacterSlot characterSlot, bool isPlayer)
+	private BattlerSprite InitialiseBattler(CharacterSlot characterSlot, bool isPlayer)
 	{
 		Transform parent;
 		parent = (isPlayer)? playerTransform : enemyTransform;
 
-		Transform battler = UnityEngine.Object.Instantiate(battlerPrefab, parent);
-		
-		battler.GetComponent<Image>().sprite = characterSlot.Character.PartyCharacterTemplate.Icon; //character
+		BattlerSprite battler = UnityEngine.Object.Instantiate(battlerPrefab, parent).GetComponent<BattlerSprite>();
+
+		battler.Initialise(battleManager, characterSlot.Character);
 
 		return battler;
 	}
 
 	#endregion
+
+	public void UpdateDisplay()
+	{
+
+	}
 }
