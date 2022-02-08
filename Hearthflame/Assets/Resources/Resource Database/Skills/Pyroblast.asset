@@ -20,4 +20,5 @@ MonoBehaviour:
   prerequisites:
   - {fileID: 11400000, guid: 5ebcd8f392e6b4b439149b7c053d74ba, type: 2}
   usesToUnlock: 20
-  targetFlag: 97
+  targetAreaFlag: 12
+  targetNumberFlag: 1

@@ -87,7 +87,10 @@ public class RadialMenu : MonoBehaviour
 			skills.Add(skill);
 			RMF_RadialMenuElement rMF_RadialMenuElement = UnityEngine.Object.Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
 			rMF_RadialMenuElement.text.text = skill.Name;
-			subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);  
+			subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
+
+			rMF_RadialMenuElement.button.onClick.AddListener(delegate { battleManager.GetTargets(); });
+
 		}
 
 		return subMenu;

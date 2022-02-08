@@ -31,10 +31,10 @@ public class BattlerDisplayUI : MonoBehaviour
 	{
 		this.battleManager = battleManager;
 		
-		this.battlersListNew = battleManager.BattlersListNew;
-		this.orderedBattlersListNew = battleManager.OrderedBattlersListNew;
-		this.enemyBattlersList = battleManager.EnemyBattlersList;
-		this.playerBattlersList = battleManager.PlayerBattlersList;
+		this.battlersListNew = battleManager.BattlersCharacterInventory;
+		this.orderedBattlersListNew = battleManager.OrderedBattlersCharacterInventory;
+		this.enemyBattlersList = battleManager.EnemyBattlersCharacterInventory;
+		this.playerBattlersList = battleManager.PlayerBattlersCharacterInventory;
 
 		battlerGameObjects = new BattlerSprite[battlersListNew.CharacterSlots.Length];
 

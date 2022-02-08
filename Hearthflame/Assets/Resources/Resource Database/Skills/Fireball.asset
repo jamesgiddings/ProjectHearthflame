@@ -18,4 +18,6 @@ MonoBehaviour:
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   prerequisites: []
-  targetFlag: 97
+  usesToUnlock: 0
+  targetAreaFlag: 4
+  targetNumberFlag: 1

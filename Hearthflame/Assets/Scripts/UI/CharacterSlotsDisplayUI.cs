@@ -124,6 +124,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 			{
 				PartyCharacterTemplate partyCharacterTemplate = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as PartyCharacterTemplate;
 				partyCharacterTemplate.PartyCharacter.IsRear = false;
+				partyCharacterTemplate.PartyCharacter.Character.IsRear = false;
 			}
 		}
 
@@ -133,6 +134,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 			{
 				PartyCharacterTemplate partyCharacterTemplate = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as PartyCharacterTemplate;
 				partyCharacterTemplate.PartyCharacter.IsRear = true;
+				partyCharacterTemplate.PartyCharacter.Character.IsRear = true;
 			}
 		}
 	}

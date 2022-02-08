@@ -51,24 +51,13 @@ namespace Hel.Items
         public void DisplayInfo(Resource infoResource)
         {
             Item infoItem = infoResource as Item;
-            Debug.Log("We're trying to DisplayInfo()");
-            Debug.Log("infoItem.GetInfoDisplayText()");
-            Debug.Log(infoItem.GetInfoDisplayText());
             if (infoItem != null)
 			{
-                Debug.Log("Just inside infoItem != null");
                 StringBuilder builder = new StringBuilder();
-                Debug.Log(" StringBuilder builder = new StringBuilder();");
                 builder.Append("<size=35>").Append(infoItem.ColouredName).Append("</size>\n");
-                Debug.Log("builder.Append( < size = 35 > ).Append(infoItem.ColouredName).Append( </ size >\n);");
                 builder.Append(infoItem.GetInfoDisplayText());
-                Debug.Log(" builder.Append(infoItem.GetInfoDisplayText());");
                 infoText.text = builder.ToString();
-                Debug.Log("infoText.text = builder.ToString();");
-
-                Debug.Log("infoText.text: " + infoText.text);
                 popupCanvasObject.SetActive(true);
-
                 LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
             }
         }

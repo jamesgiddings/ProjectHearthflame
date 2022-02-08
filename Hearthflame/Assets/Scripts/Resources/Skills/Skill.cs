@@ -10,24 +10,17 @@ public class Skill : Resource, IHotbarItem
 	[SerializeField] private CharacterClass[] classRestrictions;
 	[SerializeField] private Skill[] prerequisites;
 	[SerializeField] private int usesToUnlock;
-	[SerializeField] private TargetFlags targetFlag;
+	[SerializeField] private TargetAreaFlag targetAreaFlag;
+	[SerializeField] private TargetNumberFlag targetNumberFlag;
 
-	private int targetFlagSum;
 
 	public Action OnSkillUsed;
 	public CharacterClass[] ClassRestrictions => classRestrictions; // getter
 	public Skill[] Prerequisites => prerequisites; // getter
 	public int UsesToUnlock => usesToUnlock; // getter
 
-	private void OnValidate()
-	{
-		SetTargetFlagSum();
-	}
-
-	private void SetTargetFlagSum()
-	{
-		targetFlagSum = (int)targetFlag;
-	}
+	public TargetAreaFlag TargetAreaFlag => targetAreaFlag;
+	public TargetNumberFlag TargetNumberFlag => targetNumberFlag;
 
 	public void Use()
 	{

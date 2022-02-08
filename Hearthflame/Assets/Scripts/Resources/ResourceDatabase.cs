@@ -17,6 +17,14 @@ public class ResourceDatabase : ScriptableObject
 		}
 	}
 
+	protected virtual void OnValidate()
+	{
+		foreach (Resource resource in resources)
+		{
+			AddResource(resource);
+		}
+	}
+
 	private Dictionary<string, Resource> database = new Dictionary<string, Resource>();
 
 	public void AddResource(Resource resource)

@@ -15,7 +15,7 @@ public class TurnOrderUI : MonoBehaviour
 	public void Initialise(BattleManager battleManager) 
 	{
 		this.battleManager = battleManager;
-		this.characterInventory = battleManager.OrderedBattlersListNew;
+		this.characterInventory = battleManager.OrderedBattlersCharacterInventory;
 		battleManager.OnCurrentActorChanged += UpdateTurnOrderUI;
 
 		characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
@@ -33,7 +33,7 @@ public class TurnOrderUI : MonoBehaviour
 
 	public void UpdateTurnOrderUI()
 	{
-		this.characterInventory = battleManager.OrderedBattlersListNew;
+		this.characterInventory = battleManager.OrderedBattlersCharacterInventory;
 		for (int i = 0; i < characterTurnSlotUIs.Count; i++)
 		{
 			characterTurnSlotUIs[i].SlotResource = characterInventory.GetSlotByIndex(i).PartyCharacterTemplate;

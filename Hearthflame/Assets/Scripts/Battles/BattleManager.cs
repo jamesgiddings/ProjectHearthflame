@@ -23,6 +23,8 @@ public class BattleManager
 	private BattleBehaviour battleBehaviour;
 	private GameObject turnOrderPrefab;
 
+	private TargetManager targetManager;
+
 	private PlayerTurn playerTurn;
 	private EnemyTurn enemyTurn;
 	private BattleStart battleStart;
@@ -34,19 +36,22 @@ public class BattleManager
 	private Queue<Character> unresolvedQueue;
 	private Queue<Character> resolvedQueue;
 
-	private CharacterInventory battlersListNew;
-	private CharacterInventory orderedBattlersListNew;
-	private CharacterInventory enemyBattlersList;
-	private CharacterInventory playerBattlersList;
+	private CharacterInventory battlersCharacterInventory;
+	private CharacterInventory orderedBattlersCharacterInventory;
+	private CharacterInventory enemyBattlersCharacterInventory;
+	private CharacterInventory playerBattlersCharacterInventory;
 
 	private Character currentActor;
 
 	public Action OnCurrentActorChanged;
 
-	public CharacterInventory BattlersListNew => battlersListNew;
-	public CharacterInventory OrderedBattlersListNew => orderedBattlersListNew;
-	public CharacterInventory EnemyBattlersList => enemyBattlersList;
-	public CharacterInventory PlayerBattlersList => playerBattlersList;
+	public CharacterInventory BattlersCharacterInventory => battlersCharacterInventory;
+	public CharacterInventory OrderedBattlersCharacterInventory => orderedBattlersCharacterInventory;
+	public CharacterInventory EnemyBattlersCharacterInventory => enemyBattlersCharacterInventory;
+	public CharacterInventory PlayerBattlersCharacterInventory => playerBattlersCharacterInventory;
+
+	public List<Character> BattlerList => battlersList;
+	public List<Character> OrderedBattlersList => orderedBattlersList;
 
 	public Character CurrentActor
 	{
@@ -60,6 +65,8 @@ public BattleManager(Battle battle, Party party)
 		FunctionUpdater.Create(() => Update());
 		isLoaded = false;
 		GameManager.Instance.BattleSceneLoaded += SetIsBattleFullyLoaded;
+
+		targetManager = new TargetManager(this);
 
 		InitialiseBattleStates();
 
@@ -110,6 +117,9 @@ public BattleManager(Battle battle, Party party)
 	private void PlayerAction()
 	{
 		Debug.Log("Player Attack"); /////// Just a test
+		
+		
+		
 		if (testBool == false)
 		{
 			Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
@@ -132,7 +142,10 @@ public BattleManager(Battle battle, Party party)
 		OnCurrentActorChanged?.Invoke();
 	}
 
-
+	public void GetTargets()
+	{
+		targetManager.GetAllPossibleTargets(currentActor.SkillSystem.UnlockedSkills[0], currentActor);
+	}
 
 	private void UpdateState()
 	{
@@ -279,26 +292,26 @@ public BattleManager(Battle battle, Party party)
 		InitializeOrderedBattlersInventory();
 		foreach (Character battler in orderedBattlersList)
 		{
-			orderedBattlersListNew.AddCharacter(new CharacterSlot(battler));
+			orderedBattlersCharacterInventory.AddCharacter(new CharacterSlot(battler));
 		}
-		return orderedBattlersListNew;
+		return orderedBattlersCharacterInventory;
 	}
 
 	private CharacterInventory InitializeOrderedBattlersInventory()
 	{
 		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
-		orderedBattlersListNew = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
-		return orderedBattlersListNew;
+		orderedBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
+		return orderedBattlersCharacterInventory;
 	}
 
 	private void InitialiseEnemyBattlersInventory()
 	{
 		int totalNumberOfEnemyBattlers = battle.EnemyParty.PartyCharacters.Length;
-		enemyBattlersList = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfEnemyBattlers);
+		enemyBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfEnemyBattlers);
 
 		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
 		{
-			enemyBattlersList.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			enemyBattlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
 			
 		}
 	}
@@ -306,13 +319,13 @@ public BattleManager(Battle battle, Party party)
 	private void InitialisePlayerBattlersInventory()
 	{
 		int totalNumberOfPlayerBattlers = party.PartyCharacters.Length;
-		playerBattlersList = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfPlayerBattlers);
+		playerBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfPlayerBattlers);
 
 		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
 		{
 			if (partyCharacter.IsUnlocked) // && IsFront
 			{
-				playerBattlersList.AddCharacter(new CharacterSlot(partyCharacter.Character));
+				playerBattlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
 			}
 		}
 	}
@@ -320,19 +333,19 @@ public BattleManager(Battle battle, Party party)
 	private void InitialiseBattlersInventory()
 	{
 		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
-		battlersListNew = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
+		battlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
 
 		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
 		{
 			if (partyCharacter.IsUnlocked) // && IsFront
 			{
-				battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character));
+				battlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
 			}
 		}
 
 		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
 		{
-			battlersListNew.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			battlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
 		}
 	}
 

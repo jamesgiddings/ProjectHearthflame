@@ -16,7 +16,8 @@ namespace GramophoneUtils.Stats
 		private readonly CharacterClass characterClass;
 		private readonly SkillSystem skillSystem;
 		private readonly EquipmentInventory equipmentInventory;
-		
+
+		private bool isRear = false;
 		private bool isPlayer;
 		private bool isCurrentActor = false;
 
@@ -35,6 +36,7 @@ namespace GramophoneUtils.Stats
 		public SkillSystem SkillSystem => skillSystem; //getter
 		public EquipmentInventory EquipmentInventory => equipmentInventory; //getter
 		public bool IsPlayer { get { return isPlayer; } set { isPlayer = value; } }
+		public bool IsRear { get { return isRear; } set { isRear = value; } }
 		public bool IsCurrentActor { get { return isCurrentActor; } }
 		public Party Party => party; //getter
 		public Inventory PartyInventory => partyInventory; //getter
@@ -66,6 +68,29 @@ namespace GramophoneUtils.Stats
 		public void SetIsCurrentActor(bool value)
 		{
 			isCurrentActor = value; 
+		}
+
+		public TargetAreaFlag GetTargetAreaFlag()
+		{
+			TargetAreaFlag characaterTargetAreaFlag = 0;
+
+			if (isPlayer && !isRear)
+			{
+				characaterTargetAreaFlag += (int)TargetAreaFlag.AllyFront;
+			}
+			else if (isPlayer && isRear)
+			{
+				characaterTargetAreaFlag += (int)TargetAreaFlag.AllyRear;
+			}
+			else if (!isPlayer && !isRear)
+			{
+				characaterTargetAreaFlag += (int)TargetAreaFlag.EnemyFront;
+			}
+			else if (!isPlayer && isRear)
+			{
+				characaterTargetAreaFlag += (int)TargetAreaFlag.EnemyRear;
+			}
+			return characaterTargetAreaFlag;
 		}
 	}
 }
