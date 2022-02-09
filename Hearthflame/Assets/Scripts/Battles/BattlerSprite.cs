@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,18 +22,32 @@ public class BattlerSprite : MonoBehaviour
 	{
         this.character = character;
         this.battleManager = battleManager;
-        Debug.Log("battleManager == null: " + (battleManager == null));
         this.spriteImage.sprite = character.PartyCharacterTemplate.Icon;
-        battleManager.OnCurrentActorChanged += UpdateDisplay;
+        battleManager.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
+        battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
 	}
 
-    public void UpdateDisplay()
+	private void UpdateTargetCursor(List<Character> targets)
+	{
+        if (targets.Contains(character))
+        {
+            targetCursor.gameObject.SetActive(true);
+		}
+		else
+		{
+            targetCursor.gameObject.SetActive(false);
+        }
+
+    }
+
+	public void UpdateCurrentActorHighlightState()
 	{
         currentActorHighlight.gameObject.SetActive(character.IsCurrentActor);
     }
 
 	private void OnDestroy()
 	{
-        battleManager.OnCurrentActorChanged -= UpdateDisplay;
+        battleManager.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+        battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
     }
 }

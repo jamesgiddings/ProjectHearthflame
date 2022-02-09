@@ -1,6 +1,7 @@
 using GramophoneUtils.Items.Hotbars;
 using GramophoneUtils.Stats;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -22,9 +23,9 @@ public class Skill : Resource, IHotbarItem
 	public TargetAreaFlag TargetAreaFlag => targetAreaFlag;
 	public TargetNumberFlag TargetNumberFlag => targetNumberFlag;
 
-	public void Use()
+	public void Use(List<Character> characters)
 	{
-		throw new System.NotImplementedException();
+		Debug.Log("Using " + this.name + " on " + characters.Count + " characters.");
 	}
 
 	public bool CanStartUnlocking(Skill skill, Character character)

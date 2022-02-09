@@ -45,13 +45,17 @@ public class BattleManager
 
 	public Action OnCurrentActorChanged;
 
+	public Action<Character> OnSkillUsed;
+
 	public CharacterInventory BattlersCharacterInventory => battlersCharacterInventory;
 	public CharacterInventory OrderedBattlersCharacterInventory => orderedBattlersCharacterInventory;
 	public CharacterInventory EnemyBattlersCharacterInventory => enemyBattlersCharacterInventory;
 	public CharacterInventory PlayerBattlersCharacterInventory => playerBattlersCharacterInventory;
 
-	public List<Character> BattlerList => battlersList;
+	public List<Character> BattlersList => battlersList;
 	public List<Character> OrderedBattlersList => orderedBattlersList;
+
+	public TargetManager TargetManager => targetManager; // getter
 
 	public Character CurrentActor
 	{
@@ -142,9 +146,14 @@ public BattleManager(Battle battle, Party party)
 		OnCurrentActorChanged?.Invoke();
 	}
 
-	public void GetTargets()
+	public void GetTargets(Skill skill)
 	{
-		targetManager.GetAllPossibleTargets(currentActor.SkillSystem.UnlockedSkills[0], currentActor);
+		targetManager.GetCurrentlyTargeted(skill, currentActor);
+	}
+
+	private void ChangeTargets()
+	{
+		targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 	}
 
 	private void UpdateState()
@@ -450,6 +459,8 @@ public BattleManager(Battle battle, Party party)
 			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
 			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 			_outer.InitialiseRadialMenu();
+
+
 		}
 
 		public override void ExitState()
@@ -467,8 +478,22 @@ public BattleManager(Battle battle, Party party)
 			{
 				_outer.PlayerAction();
 			}
+
+			if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+			{
+				if (Math.Abs(Input.GetAxis("Vertical")) > 0 || (Math.Abs(Input.GetAxis("Horizontal")) > 0))
+				{
+					_outer.ChangeTargets();
+				}
+			}
+
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				_outer.OnSkillUsed?.Invoke(StateActor);
+			}
 		}
 	}
+
 
 	public class EnemyTurn : BattleState
 	{

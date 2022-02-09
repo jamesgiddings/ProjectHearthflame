@@ -7,11 +7,5 @@ public enum TargetNumberFlag // create an editor tool which populates this throu
 	Single = 1,
 	All = 2,
 	AllExceptUser = 4,
-
-	AllyFront = 8,
-	AllyRear = 16,
-	
-	EnemyFront = 32,
-	EnemyRear = 64,
 }
 

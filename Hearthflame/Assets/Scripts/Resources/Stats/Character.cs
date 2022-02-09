@@ -17,7 +17,7 @@ namespace GramophoneUtils.Stats
 		private readonly SkillSystem skillSystem;
 		private readonly EquipmentInventory equipmentInventory;
 
-		private bool isRear = false;
+		private bool isRear;
 		private bool isPlayer;
 		private bool isCurrentActor = false;
 
@@ -59,6 +59,7 @@ namespace GramophoneUtils.Stats
 			equipmentInventory = new EquipmentInventory(this, party);
 			equipmentInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
 			isPlayer = partyCharacterTemplate.Template.IsPlayer;
+			isRear = partyCharacterTemplate.IsRear;
 			this.party = party;
 			partyInventory = party.PartyInventory;
 

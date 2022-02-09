@@ -89,7 +89,7 @@ public class RadialMenu : MonoBehaviour
 			rMF_RadialMenuElement.text.text = skill.Name;
 			subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
 
-			rMF_RadialMenuElement.button.onClick.AddListener(delegate { battleManager.GetTargets(); });
+			rMF_RadialMenuElement.button.onClick.AddListener(delegate { battleManager.GetTargets(skill); });
 
 		}
 
