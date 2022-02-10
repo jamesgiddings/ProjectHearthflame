@@ -22,3 +22,8 @@ MonoBehaviour:
   usesToUnlock: 0
   targetAreaFlag: -1
   targetNumberFlag: 4
+  targetTypeFlag: 1
+  statModifierBlueprints: []
+  damageBlueprints:
+  - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
+  healingBlueprints: []

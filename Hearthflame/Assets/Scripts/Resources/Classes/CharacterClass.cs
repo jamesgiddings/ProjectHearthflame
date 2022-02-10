@@ -17,9 +17,9 @@ public class CharacterClass : Resource
 	{
 
 		[SerializeField] private int baseHealthIncrement;
-		[SerializeField] private List<StatComponentBlueprint> statComponentBlueprints;
+		[SerializeField] private List<StatModifierBlueprint> statComponentBlueprints;
 		
-		public List<StatComponentBlueprint> StatComponentBlueprints => statComponentBlueprints;
+		public List<StatModifierBlueprint> StatComponentBlueprints => statComponentBlueprints;
 		public int BaseHealthIncrement => baseHealthIncrement;
 	}
 
@@ -42,7 +42,7 @@ public class CharacterClass : Resource
 
 	private void IncrementStatBaseValues(LevelChangedEventArgs castArgs)
 	{
-		foreach (StatComponentBlueprint statComponentBlueprint in levelStatEffects[castArgs.Level].StatComponentBlueprints)
+		foreach (StatModifierBlueprint statComponentBlueprint in levelStatEffects[castArgs.Level].StatComponentBlueprints)
 		{
 			castArgs.Character.StatSystem.IncrementStatBaseValue(statComponentBlueprint);
 		}

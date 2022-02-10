@@ -49,7 +49,6 @@ namespace GramophoneUtils.Stats
 			{
 				ElapseDuration();
 			}
-			
 		}
 
 		public void ElapseDuration()

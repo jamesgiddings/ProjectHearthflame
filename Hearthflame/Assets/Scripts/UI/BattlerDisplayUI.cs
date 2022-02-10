@@ -84,4 +84,12 @@ public class BattlerDisplayUI : MonoBehaviour
 	{
 
 	}
+
+	#region EndOfLife
+
+	private void OnDestroy()
+	{
+		battleManager.OnCurrentActorChanged -= UpdateDisplay;
+	}
+	#endregion
 }

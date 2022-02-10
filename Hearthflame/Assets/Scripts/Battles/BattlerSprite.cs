@@ -10,6 +10,7 @@ public class BattlerSprite : MonoBehaviour
     [SerializeField] private Image spriteImage;
     [SerializeField] private Image targetCursor;
     [SerializeField] private Image currentActorHighlight;
+    [SerializeField] private Slider healthSlider;
     
     private Character character;
     private BattleManager battleManager;
@@ -25,6 +26,8 @@ public class BattlerSprite : MonoBehaviour
         this.spriteImage.sprite = character.PartyCharacterTemplate.Icon;
         battleManager.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
+        character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
+        character.HealthSystem.OnCharacterDeath += KillCharacter;
 	}
 
 	private void UpdateTargetCursor(List<Character> targets)
@@ -37,7 +40,6 @@ public class BattlerSprite : MonoBehaviour
 		{
             targetCursor.gameObject.SetActive(false);
         }
-
     }
 
 	public void UpdateCurrentActorHighlightState()
@@ -45,9 +47,31 @@ public class BattlerSprite : MonoBehaviour
         currentActorHighlight.gameObject.SetActive(character.IsCurrentActor);
     }
 
+    public void UpdateHealthSlider()
+	{
+        if (character.HealthSystem.MaxHealth == 0)
+		{
+            healthSlider.value = 0;
+		}
+        else
+        {
+            Debug.Log("Current Health: " + character.HealthSystem.CurrentHealth);
+            Debug.Log("Max Health: " + character.HealthSystem.MaxHealth);
+            healthSlider.value = (float)character.HealthSystem.CurrentHealth / (float)character.HealthSystem.MaxHealth;
+        }
+	}
+
+    private void KillCharacter()
+	{
+        spriteImage.GetComponent<Image>().color = new Color32(255, 255, 225, 100); // greys out the characters image
+        healthSlider.gameObject.SetActive(false);
+    }
+
 	private void OnDestroy()
 	{
         battleManager.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
+        character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
+        character.HealthSystem.OnCharacterDeath -= KillCharacter;
     }
 }

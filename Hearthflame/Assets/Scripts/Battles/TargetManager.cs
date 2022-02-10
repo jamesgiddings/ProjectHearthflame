@@ -14,13 +14,15 @@ public class TargetManager
 
 	private Skill currentSkill;
 
-	private int targetIndex;
+	private int targetIndex = 0;
 
 	private List<Character> allPossibleTargetsCache = new List<Character>();
 
 	private List<Character> currentTargetsCache = new List<Character>();
 
 	public Action<List<Character>> OnCurrentTargetsChanged;
+
+	public bool IsTargeting => isTargeting; // getter
 
 	public TargetManager(BattleManager battleManager)
 	{
@@ -34,15 +36,15 @@ public class TargetManager
 	}
 	public List<Character> GetAllPossibleTargets(Skill skill, Character originator)
 	{
+		isTargeting = true;
 		currentSkill = skill;
-		targetIndex = 0;
 		List<Character> AllBattlers = battleManager.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
 		Debug.Log(AllBattlers.Count);
 		IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();
 		if (originator.IsPlayer)
 		{
-			query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
+			query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag()) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
 			Debug.Log("Getting all possible targets");
 
 			foreach (Character character in query)
@@ -73,6 +75,16 @@ public class TargetManager
 	public void UseSkill(Character originator)
 	{
 		currentSkill.Use(GetCurrentlyTargeted(currentSkill, originator));
+		ClearTargets();
+	}
+
+	public void ClearTargets()
+	{		
+		currentTargetsCache.Clear();
+		OnCurrentTargetsChanged?.Invoke(currentTargetsCache);
+		currentSkill = null;
+		targetIndex = 0;
+		isTargeting = false;
 	}
 
 	public List<Character> GetCurrentlyTargeted(Skill skill, Character originator)
@@ -82,7 +94,10 @@ public class TargetManager
 		switch (skill.TargetNumberFlag)
 		{
 			case TargetNumberFlag.Single:
-				currentlyTargeted.Add(currentTargetsCache.FirstOrDefault());
+				int index = currentTargetsCache.Count > targetIndex ? targetIndex : 0;
+				currentlyTargeted.Add(currentTargetsCache[index]);
+				Debug.Log("targetIndex: " + targetIndex);
+				Debug.Log("currentTargetsCache.Count: " + currentTargetsCache.Count);
 				break;
 			case TargetNumberFlag.All:
 				currentlyTargeted.AddRange(currentTargetsCache);

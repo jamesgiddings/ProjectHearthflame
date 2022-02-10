@@ -13,7 +13,11 @@ public class Skill : Resource, IHotbarItem
 	[SerializeField] private int usesToUnlock;
 	[SerializeField] private TargetAreaFlag targetAreaFlag;
 	[SerializeField] private TargetNumberFlag targetNumberFlag;
+	[SerializeField] private TargetTypeFlag targetTypeFlag = TargetTypeFlag.Alive;
 
+	[SerializeField] private List<StatModifierBlueprint> statModifierBlueprints;
+	[SerializeField] private List<DamageBlueprint> damageBlueprints;
+	[SerializeField] private List<HealingBlueprint> healingBlueprints;
 
 	public Action OnSkillUsed;
 	public CharacterClass[] ClassRestrictions => classRestrictions; // getter
@@ -22,11 +26,84 @@ public class Skill : Resource, IHotbarItem
 
 	public TargetAreaFlag TargetAreaFlag => targetAreaFlag;
 	public TargetNumberFlag TargetNumberFlag => targetNumberFlag;
+	public TargetTypeFlag TargetTypeFlag => targetTypeFlag;
+
+	private List<StatModifier> skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
+	private List<Damage> skillDamages { get { return InstanceSkillDamageBlueprints(); } }
+	private List<Healing> skillHealings { get { return InstanceSkillHealingBlueprints(); } }
+
+	private List<StatModifier> InstanceSkillStatModifierBlueprints()
+	{
+		List<StatModifier> statModifiers = new List<StatModifier>();
+		if (statModifierBlueprints.Count > 0)
+		{
+			foreach (var blueprint in statModifierBlueprints)
+			{
+				statModifiers.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
+			}
+		}
+		return statModifiers;
+	}
+	private List<Damage> InstanceSkillDamageBlueprints()
+	{
+		List<Damage> damages = new List<Damage>();
+		if (damageBlueprints.Count > 0)
+		{
+			foreach (var blueprint in damageBlueprints)
+			{
+				damages.Add(blueprint.CreateBlueprintInstance<Damage>(this));
+			}
+		}
+		return damages;
+	}	
+	
+	private List<Healing> InstanceSkillHealingBlueprints()
+	{
+		List<Healing> healings = new List<Healing>();
+		if (healingBlueprints.Count > 0)
+		{
+			foreach (var blueprint in healingBlueprints)
+			{
+				healings.Add(blueprint.CreateBlueprintInstance<Healing>(this));
+			}
+		}
+		return healings;
+	}
 
 	public void Use(List<Character> characters)
 	{
-		Debug.Log("Using " + this.name + " on " + characters.Count + " characters.");
+		foreach (Character character in characters)
+		{
+			ApplyStatModifiers(character);
+			ApplyDamageObjects(character);
+			ApplyHealingObjects(character);
+		}
 	}
+
+	private void ApplyStatModifiers(Character character)
+	{
+		foreach (StatModifier statModifier in skillStatModifiers)
+		{
+			character.StatSystem.AddModifier(statModifier);
+		}
+	}
+
+	private void ApplyDamageObjects(Character character)
+	{
+		foreach (Damage damage in skillDamages)
+		{
+			character.HealthSystem.AddDamage(damage);
+		}
+	}
+
+	private void ApplyHealingObjects(Character character)
+	{
+		foreach (Healing healing in skillHealings)
+		{
+			character.HealthSystem.AddHealing(healing);
+		}
+	}
+
 
 	public bool CanStartUnlocking(Skill skill, Character character)
 	{

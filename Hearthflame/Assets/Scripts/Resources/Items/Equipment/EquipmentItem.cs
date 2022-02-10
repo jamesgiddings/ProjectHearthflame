@@ -15,16 +15,16 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private EquipmentType equipmentType;
 		[SerializeField] private bool isUnique = false;
 		[SerializeField] private string flavourText = "Flavour text here.";
-		[SerializeField] private List<StatComponentBlueprint> weaponEffectBlueprints;
+		[SerializeField] private List<StatModifierBlueprint> weaponEffectBlueprints;
 		[SerializeField] private CharacterClass[] classRestrictions;
 
-		private List<StatModifier> weaponEffects { get { return InstanceWeaponEffectBlueprints(); } }
+		private List<StatModifier> equipmentEffects { get { return InstanceEquipmentEffectBlueprints(); } }
 
 		public CharacterClass[] ClassRestrictions => classRestrictions;
 
 		public EquipmentType EquipmentType => equipmentType;
 
-		private List<StatModifier> InstanceWeaponEffectBlueprints()
+		private List<StatModifier> InstanceEquipmentEffectBlueprints()
 		{
 			List<StatModifier> effects = new List<StatModifier>();
 			if (weaponEffectBlueprints.Count > 0)
@@ -39,7 +39,7 @@ namespace GramophoneUtils.Items.Containers
 
 		public void Equip(Character character)
 		{
-			foreach (StatModifier weaponEffect in weaponEffects)
+			foreach (StatModifier weaponEffect in equipmentEffects)
 			{
 				character.StatSystem.AddModifier(new StatModifier(weaponEffect.StatType, weaponEffect.ModifierType, weaponEffect.Value, weaponEffect.Duration, this)); // we make a new effect, which allows us to add the source as 'this' when we equip the item
 			}
@@ -64,13 +64,12 @@ namespace GramophoneUtils.Items.Containers
 					}
 				}
 			}
-			Debug.Log("Inside Get Info Display text3");
-			foreach (var effect in weaponEffects)
+			foreach (var effect in equipmentEffects)
 			{
+				
 				builder.Append("+").Append(effect.Value).Append(" ").Append(effect.StatType.Name).AppendLine();
 			}
-
-			Debug.Log("Inside Get Info Display text4");
+						
 			//builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
 			builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
 			builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold").AppendLine();

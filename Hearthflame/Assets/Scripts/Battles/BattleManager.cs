@@ -124,16 +124,16 @@ public BattleManager(Battle battle, Party party)
 		
 		
 		
-		if (testBool == false)
-		{
-			Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
-			StatModifier statModifier = new StatModifier(CurrentActor.StatTypeStringRefDictionary["Speed"], StatModifierTypes.Flat, 2000, 6);
-			CurrentActor.StatSystem.AddModifier(statModifier);
-			Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
-			testBool = true;
-		}
-		if (CurrentActor.Name == "Snoo" && testBool == true)
-			Debug.Log(CurrentActor.Name + " Speed should be 17 again, is it?: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
+		//if (testBool == false)
+		//{
+		//	Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
+		//	StatModifier statModifier = new StatModifier(CurrentActor.StatTypeStringRefDictionary["Speed"], StatModifierTypes.Flat, 2000, 6);
+		//	CurrentActor.StatSystem.AddModifier(statModifier);
+		//	Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
+		//	testBool = true;
+		//}
+		//if (CurrentActor.Name == "Snoo" && testBool == true)
+		//	Debug.Log(CurrentActor.Name + " Speed should be 17 again, is it?: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
 		NextTurn();
 		OnCurrentActorChanged?.Invoke();
 	}
@@ -190,12 +190,21 @@ public BattleManager(Battle battle, Party party)
 
 	private void NextTurn()
 	{
+		if (IsPlayerVictory())
+		{
+			ChangeState(battleWon);
+		}
+		else if (IsEnemyVictory())
+		{
+			ChangeState(battleLost);
+		}
+		
 		turn++;
 		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
 
 		unresolvedQueue = OrderQueue();
 
-		if (turn >= battlersList.Count)
+		if (turn >= orderedBattlersList.Count)
 		{
 			NextRound();
 		}
@@ -203,12 +212,42 @@ public BattleManager(Battle battle, Party party)
 		CurrentActor = unresolvedQueue.Dequeue();
 		resolvedQueue.Enqueue(CurrentActor);
 
+		
+
 		Debug.Log("Current Turn: " + turn);
 		Debug.Log("CurrentActor: " + CurrentActor.Name);
 
-		 
 		OnCurrentActorChanged?.Invoke();
 		UpdateState();
+		if (CurrentActor.HealthSystem.IsDead)
+		{
+			NextTurn();
+		}
+	}
+
+	private bool IsPlayerVictory()
+	{
+		bool allDead = true;
+		foreach (CharacterSlot characterSlot in enemyBattlersCharacterInventory.CharacterSlots)
+		{
+			if (!characterSlot.Character.HealthSystem.IsDead)
+			{
+				allDead = false;
+			}
+		}
+		return allDead;
+	}	
+	private bool IsEnemyVictory()
+	{
+		bool allDead = true;
+		foreach (CharacterSlot characterSlot in playerBattlersCharacterInventory.CharacterSlots)
+		{
+			if (!characterSlot.Character.HealthSystem.IsDead)
+			{
+				allDead = false;
+			}
+		}
+		return allDead;
 	}
 
 	private void NextRound()
@@ -216,6 +255,7 @@ public BattleManager(Battle battle, Party party)
 		round++;
 		CreateNewRoundQueues();
 		unresolvedQueue = OrderQueue();
+
 		CalculateOrderedBattlersList();
 		CalculateAndInitializeOrderedBattlersInventory();
 		turn = 0;
@@ -459,8 +499,6 @@ public BattleManager(Battle battle, Party party)
 			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
 			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 			_outer.InitialiseRadialMenu();
-
-
 		}
 
 		public override void ExitState()
@@ -487,9 +525,13 @@ public BattleManager(Battle battle, Party party)
 				}
 			}
 
-			if (Input.GetKeyDown(KeyCode.Return))
+			if (Input.GetKeyUp(KeyCode.Return))
 			{
-				_outer.OnSkillUsed?.Invoke(StateActor);
+				if (_outer.TargetManager.IsTargeting)
+				{
+					_outer.OnSkillUsed?.Invoke(StateActor);
+					_outer.PlayerAction();
+				}
 			}
 		}
 	}
@@ -544,6 +586,7 @@ public BattleManager(Battle battle, Party party)
 			base.EnterState();
 			// get the BattleReward class to show its popup 
 			_outer.battle.BattleReward.AddBattleReward(_outer.party);
+			Debug.Log("THE BATTLE HAS BEEN WON.");
 		}
 
 		public override void ExitState()

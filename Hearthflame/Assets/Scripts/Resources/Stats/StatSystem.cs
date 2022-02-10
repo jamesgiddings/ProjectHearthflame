@@ -28,7 +28,7 @@ namespace GramophoneUtils.Stats
 			modifier.OnDurationElapsed += RemoveModifier;
 		}
 
-		public void UpdateStatBaseValue(StatComponentBlueprint statComponentBlueprint)
+		public void UpdateStatBaseValue(StatModifierBlueprint statComponentBlueprint)
 		{
 			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
 			{
@@ -38,7 +38,7 @@ namespace GramophoneUtils.Stats
 			stat.UpdateBaseValue(statComponentBlueprint.Value);
 		}		
 		
-		public void IncrementStatBaseValue(StatComponentBlueprint statComponentBlueprint)
+		public void IncrementStatBaseValue(StatModifierBlueprint statComponentBlueprint)
 		{
 			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
 			{

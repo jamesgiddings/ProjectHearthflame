@@ -8,4 +8,3 @@ public enum TargetNumberFlag // create an editor tool which populates this throu
 	All = 2,
 	AllExceptUser = 4,
 }
-

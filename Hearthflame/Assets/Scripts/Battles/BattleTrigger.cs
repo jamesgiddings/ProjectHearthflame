@@ -11,6 +11,8 @@ public class BattleTrigger : MonoBehaviour
 
 	[SerializeField] private float sizeX = 5;
 	[SerializeField] private float sizeY = 5;
+
+	[SerializeField] bool destroyOnTrigger;
 	
 	private Rigidbody2D rb;
 	private BoxCollider2D boxCollider;
@@ -41,6 +43,10 @@ public class BattleTrigger : MonoBehaviour
 		{
 			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
 			SceneController.AdditiveLoadScene(battle, player.Party);
+		}
+		if (destroyOnTrigger)
+		{
+			Destroy(this.gameObject);
 		}
 	}
 }

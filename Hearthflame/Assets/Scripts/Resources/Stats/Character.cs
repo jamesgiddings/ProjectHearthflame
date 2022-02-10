@@ -93,6 +93,18 @@ namespace GramophoneUtils.Stats
 			}
 			return characaterTargetAreaFlag;
 		}
+
+		public TargetTypeFlag GetTargetTypeFlag()
+		{
+			if (healthSystem.IsDead)
+			{
+				return TargetTypeFlag.Dead;
+			}
+			else
+			{
+				return TargetTypeFlag.Alive;
+			}
+		}
 	}
 }
 

@@ -79,7 +79,7 @@ public class RadialMenu : MonoBehaviour
 
 		Debug.Log("button == null: " + (button == null));
 
-		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); });
+		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { battleManager.TargetManager.ClearTargets(); } });
 
 		foreach (Skill skill in character.SkillSystem.UnlockedSkills) // add the unlocked skills from the SkillSystem
 		{
