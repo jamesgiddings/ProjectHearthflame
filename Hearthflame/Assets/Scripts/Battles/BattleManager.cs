@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager
 {
-	private bool testBool = false;
-
 	[SerializeField] private Battle battle;
 	[SerializeField] private Party party;
 
@@ -77,6 +75,188 @@ public BattleManager(Battle battle, Party party)
 		ChangeState(battleStart);
 	}
 
+	private void Update()
+	{
+		battleState.HandleInput();
+	}
+
+	private void PlayerAction()
+	{
+		NextTurn();
+		OnCurrentActorChanged?.Invoke();
+	}
+
+	private IEnumerator EnemyAction()
+	{
+		yield return new WaitForSeconds(1f);
+
+		Skill enemySkill = CurrentActor.Brain.ChooseSkill();
+
+		if (enemySkill != null)
+		{
+			TargetManager.GetCurrentlyTargeted(enemySkill, CurrentActor);
+			OnSkillUsed?.Invoke(CurrentActor);
+		}
+		
+		
+
+		// choose skill
+		// get target
+		// use skill
+
+		NextTurn();
+		OnCurrentActorChanged?.Invoke();
+	}
+
+	public void GetTargets(Skill skill)
+	{
+		targetManager.GetCurrentlyTargeted(skill, currentActor);
+	}
+
+	private void ChangeTargets()
+	{
+		targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+	}
+
+	private void UpdateState()
+	{
+		if (CurrentActor.IsPlayer)
+		{
+			ChangeState(playerTurn);
+		}
+		else if (!CurrentActor.IsPlayer)
+		{
+			ChangeState(enemyTurn);
+		}
+	}
+
+	private void NextTurn()
+	{
+		if (IsPlayerVictory())
+		{
+			ChangeState(battleWon);
+		}
+		else if (IsEnemyVictory())
+		{
+			ChangeState(battleLost);
+		}
+		
+		turn++;
+		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
+
+		unresolvedQueue = OrderQueue();
+
+		if (turn >= orderedBattlersList.Count)
+		{
+			NextRound();
+		}
+
+		CurrentActor = unresolvedQueue.Dequeue();
+		resolvedQueue.Enqueue(CurrentActor);
+
+		Debug.Log("Current Turn: " + turn);
+		Debug.Log("CurrentActor: " + CurrentActor.Name);
+
+		OnCurrentActorChanged?.Invoke();
+		UpdateState();
+	}
+
+	private bool IsPlayerVictory()
+	{
+		bool allDead = true;
+		foreach (CharacterSlot characterSlot in enemyBattlersCharacterInventory.CharacterSlots)
+		{
+			if (!characterSlot.Character.HealthSystem.IsDead)
+			{
+				allDead = false;
+			}
+		}
+		return allDead;
+	}
+
+	private bool IsEnemyVictory()
+	{
+		bool allDead = true;
+		foreach (CharacterSlot characterSlot in playerBattlersCharacterInventory.CharacterSlots)
+		{
+			if (!characterSlot.Character.HealthSystem.IsDead)
+			{
+				allDead = false;
+			}
+		}
+		return allDead;
+	}
+
+	private void NextRound()
+	{
+		round++;
+		CreateNewRoundQueues();
+		unresolvedQueue = OrderQueue();
+
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
+		turn = 0;
+	}
+
+	private Queue<Character> OrderQueue()
+	{
+		IEnumerable<Character> query = unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
+		Queue<Character> orderedRoundQueue = new Queue<Character>();
+		foreach (Character battler in query)
+		{
+			orderedRoundQueue.Enqueue(battler);
+		}
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
+		return orderedRoundQueue;
+	}
+
+	private void CreateNewRoundQueues()
+	{
+		unresolvedQueue = new Queue<Character>();
+		foreach (Character character in battlersList)
+		{
+			unresolvedQueue.Enqueue(character);
+		}
+		resolvedQueue = new Queue<Character>();
+	}
+
+	private List<Character> CalculateOrderedBattlersList()
+	{
+		orderedBattlersList = new List<Character>();
+		foreach (Character battler in resolvedQueue)
+		{
+			orderedBattlersList.Add(battler);
+		}
+		foreach (Character battler in unresolvedQueue)
+		{
+			orderedBattlersList.Add(battler);
+		}
+		return orderedBattlersList;
+	}
+
+	#region Initialisation
+	private void InitialiseBattle()
+	{
+		InitialiseBattlersList();
+		
+		turn = 0;
+		round = 0;
+
+		CreateNewRoundQueues();
+		unresolvedQueue = OrderQueue();
+
+		InitialiseBattlersInventory();
+		InitialisePlayerBattlersInventory();
+		InitialiseEnemyBattlersInventory();
+		CalculateOrderedBattlersList();
+		CalculateAndInitializeOrderedBattlersInventory();
+
+		CurrentActor = unresolvedQueue.Dequeue();
+		CurrentActor.SetIsCurrentActor(true);
+		resolvedQueue.Enqueue(CurrentActor);
+	}
+
 	private void InitialiseBattleStates()
 	{
 		playerTurn = new PlayerTurn(this);
@@ -111,211 +291,6 @@ public BattleManager(Battle battle, Party party)
 		{
 			battleBehaviour = battleBehaviours[0];
 		}
-	}
-
-	private void Update()
-	{
-		battleState.HandleInput();
-	}
-
-	private void PlayerAction()
-	{
-		Debug.Log("Player Attack"); /////// Just a test
-		
-		
-		
-		//if (testBool == false)
-		//{
-		//	Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
-		//	StatModifier statModifier = new StatModifier(CurrentActor.StatTypeStringRefDictionary["Speed"], StatModifierTypes.Flat, 2000, 6);
-		//	CurrentActor.StatSystem.AddModifier(statModifier);
-		//	Debug.Log(CurrentActor.Name + " Speed is: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
-		//	testBool = true;
-		//}
-		//if (CurrentActor.Name == "Snoo" && testBool == true)
-		//	Debug.Log(CurrentActor.Name + " Speed should be 17 again, is it?: " + CurrentActor.StatSystem.GetStatValue(CurrentActor.StatTypeStringRefDictionary["Speed"]));
-		NextTurn();
-		OnCurrentActorChanged?.Invoke();
-	}
-
-	private IEnumerator EnemyAction()
-	{
-		yield return new WaitForSeconds(2f);
-		Debug.Log("Enemy Attack");
-		NextTurn();
-		OnCurrentActorChanged?.Invoke();
-	}
-
-	public void GetTargets(Skill skill)
-	{
-		targetManager.GetCurrentlyTargeted(skill, currentActor);
-	}
-
-	private void ChangeTargets()
-	{
-		targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-	}
-
-	private void UpdateState()
-	{
-		if (HasPlayerTeamLost())
-		{
-			ChangeState(battleLost);
-		}
-		if (HasPlayerTeamWon())
-		{
-			ChangeState(battleWon);
-		}
-		if (CurrentActor.IsPlayer)
-		{
-			ChangeState(playerTurn);
-		}
-		else if (!CurrentActor.IsPlayer)
-		{
-			ChangeState(enemyTurn);
-		}
-	}
-
-	private bool HasPlayerTeamWon()
-	{
-		Debug.LogWarning("Not fully implemented.");
-		return false;
-	}
-
-	private bool HasPlayerTeamLost()
-	{
-		Debug.LogWarning("Not fully implemented.");
-		return false;
-	}
-
-	private void NextTurn()
-	{
-		if (IsPlayerVictory())
-		{
-			ChangeState(battleWon);
-		}
-		else if (IsEnemyVictory())
-		{
-			ChangeState(battleLost);
-		}
-		
-		turn++;
-		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
-
-		unresolvedQueue = OrderQueue();
-
-		if (turn >= orderedBattlersList.Count)
-		{
-			NextRound();
-		}
-
-		CurrentActor = unresolvedQueue.Dequeue();
-		resolvedQueue.Enqueue(CurrentActor);
-
-		
-
-		Debug.Log("Current Turn: " + turn);
-		Debug.Log("CurrentActor: " + CurrentActor.Name);
-
-		OnCurrentActorChanged?.Invoke();
-		UpdateState();
-		if (CurrentActor.HealthSystem.IsDead)
-		{
-			NextTurn();
-		}
-	}
-
-	private bool IsPlayerVictory()
-	{
-		bool allDead = true;
-		foreach (CharacterSlot characterSlot in enemyBattlersCharacterInventory.CharacterSlots)
-		{
-			if (!characterSlot.Character.HealthSystem.IsDead)
-			{
-				allDead = false;
-			}
-		}
-		return allDead;
-	}	
-	private bool IsEnemyVictory()
-	{
-		bool allDead = true;
-		foreach (CharacterSlot characterSlot in playerBattlersCharacterInventory.CharacterSlots)
-		{
-			if (!characterSlot.Character.HealthSystem.IsDead)
-			{
-				allDead = false;
-			}
-		}
-		return allDead;
-	}
-
-	private void NextRound()
-	{
-		round++;
-		CreateNewRoundQueues();
-		unresolvedQueue = OrderQueue();
-
-		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
-		turn = 0;
-	}
-
-	private List<Character> CalculateOrderedBattlersList()
-	{
-		orderedBattlersList = new List<Character>();
-		foreach (Character battler in resolvedQueue)
-		{
-			orderedBattlersList.Add(battler);
-		}
-		foreach (Character battler in unresolvedQueue)
-		{
-			orderedBattlersList.Add(battler);
-		}
-		return orderedBattlersList;
-	}
-
-	private void InitialiseBattle()
-	{
-		InitialiseBattlersList();
-		
-		turn = 0;
-		round = 0;
-		CreateNewRoundQueues();
-		unresolvedQueue = OrderQueue();
-
-		InitialiseBattlersInventory();
-		InitialisePlayerBattlersInventory();
-		InitialiseEnemyBattlersInventory();
-		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
-
-		CurrentActor = unresolvedQueue.Dequeue();
-		CurrentActor.SetIsCurrentActor(true);
-		resolvedQueue.Enqueue(CurrentActor);
-	}
-
-	private Queue<Character> OrderQueue()
-	{
-		IEnumerable<Character> query = unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
-		Queue<Character> orderedRoundQueue = new Queue<Character>();
-		foreach (Character battler in query)
-		{
-			orderedRoundQueue.Enqueue(battler);
-		}
-		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
-		return orderedRoundQueue;
-	}
-
-	private void CreateNewRoundQueues()
-	{
-		unresolvedQueue = new Queue<Character>();
-		foreach (Character character in battlersList)
-		{
-			unresolvedQueue.Enqueue(character);
-		}
-		resolvedQueue = new Queue<Character>();
 	}
 
 	private void InitialiseBattlersList()
@@ -410,6 +385,10 @@ public BattleManager(Battle battle, Party party)
 		UpdateState();
 	}
 
+	#endregion
+
+	#region UI
+
 	private void InitialiseRadialMenu()
 	{
 		if (battleBehaviour != null)
@@ -425,6 +404,8 @@ public BattleManager(Battle battle, Party party)
 			battleBehaviour.BattlerDisplayUI.Initialise(this);
 		}
 	}
+
+	#endregion
 
 	#region BattleStates
 
@@ -446,13 +427,12 @@ public BattleManager(Battle battle, Party party)
 		public virtual void EnterState()
 		{
 			_outer.battleState = this;
-			//_outer.OnCurrentActorChanged?.Invoke();
-		}
-		public virtual void ExitState()
-		{
-			//_outer.OnCurrentActorChanged?.Invoke();
 		}
 
+		public virtual void ExitState()
+		{
+			_outer.TargetManager.ClearTargets();
+		}
 	}
 
 	public class BattleStart : BattleState
@@ -466,7 +446,6 @@ public BattleManager(Battle battle, Party party)
 			base.EnterState();
 
 			GameManager.Instance.StartCoroutine(_outer.WaitUntilBattleSceneFullyLoadedThenInitialiseBattle());
-			
 		}
 
 		public override void ExitState()
@@ -499,6 +478,10 @@ public BattleManager(Battle battle, Party party)
 			Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
 			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 			_outer.InitialiseRadialMenu();
+			if (_outer.CurrentActor.HealthSystem.IsDead)
+			{
+				_outer.NextTurn();
+			}
 		}
 
 		public override void ExitState()
@@ -517,14 +500,17 @@ public BattleManager(Battle battle, Party party)
 				_outer.PlayerAction();
 			}
 
-			if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+			if (_outer.TargetManager.IsTargeting)
 			{
-				if (Math.Abs(Input.GetAxis("Vertical")) > 0 || (Math.Abs(Input.GetAxis("Horizontal")) > 0))
+				if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
 				{
-					_outer.ChangeTargets();
+					if (Math.Abs(Input.GetAxis("Vertical")) > 0 || (Math.Abs(Input.GetAxis("Horizontal")) > 0))
+					{
+						_outer.ChangeTargets();
+					}
 				}
 			}
-
+				
 			if (Input.GetKeyUp(KeyCode.Return))
 			{
 				if (_outer.TargetManager.IsTargeting)
@@ -535,7 +521,6 @@ public BattleManager(Battle battle, Party party)
 			}
 		}
 	}
-
 
 	public class EnemyTurn : BattleState
 	{
@@ -555,8 +540,14 @@ public BattleManager(Battle battle, Party party)
 			StateActor.SetIsCurrentActor(true);
 			Debug.Log("We're in the enemy state, and the current actor is: " + StateActor.Name);
 			Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
-			GameManager.Instance.StartCoroutine(_outer.EnemyAction());
-
+			if (_outer.CurrentActor.HealthSystem.IsDead)
+			{
+				_outer.NextTurn();
+			}
+			else
+			{
+				GameManager.Instance.StartCoroutine(_outer.EnemyAction());
+			}
 		}
 
 		public override void ExitState()

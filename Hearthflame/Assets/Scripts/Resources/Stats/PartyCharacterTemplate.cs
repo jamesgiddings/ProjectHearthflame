@@ -9,6 +9,7 @@ using UnityEngine;
 public class PartyCharacterTemplate : Resource
 {
 	[SerializeField] private CharacterTemplate template;
+	[SerializeField] private Brain brain;
 	[SerializeField] private bool isUnlocked;
 	[SerializeField] private bool isRear;
 
@@ -21,6 +22,7 @@ public class PartyCharacterTemplate : Resource
 	public PartyCharacter PartyCharacter { get => partyCharacter; set => partyCharacter = value; }
 
 	public CharacterTemplate Template => template;
+	public Brain Brain => brain;
 
 	private void OnEnable()
 	{

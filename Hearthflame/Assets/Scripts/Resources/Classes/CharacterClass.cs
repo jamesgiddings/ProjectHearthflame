@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GramophoneUtils.Stats.LevelSystem;
 
+[Serializable]
 [CreateAssetMenu(fileName = "New Character Class", menuName = "Character Classes/Character Class")]
 public class CharacterClass : Resource
 {

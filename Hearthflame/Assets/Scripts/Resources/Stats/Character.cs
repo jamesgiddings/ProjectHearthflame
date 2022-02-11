@@ -26,6 +26,8 @@ namespace GramophoneUtils.Stats
 
 		private readonly CharacterTemplate characterTemplate;
 		private readonly PartyCharacterTemplate partyCharacterTemplate;
+
+		private readonly Brain brain;
 		
 		public readonly Dictionary<string, IStatType> StatTypeStringRefDictionary;
 		public string Name => name; //getter
@@ -42,6 +44,7 @@ namespace GramophoneUtils.Stats
 		public Inventory PartyInventory => partyInventory; //getter
 		public CharacterTemplate CharacterTemplate => characterTemplate; //getter
 		public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter
+		public Brain Brain => brain; //getter
 		public Character() { } //constructor 1
 		public Character(PartyCharacterTemplate partyCharacterTemplate, Party party) //constructor 2
 		{	
@@ -63,7 +66,10 @@ namespace GramophoneUtils.Stats
 			this.party = party;
 			partyInventory = party.PartyInventory;
 
+			this.brain = partyCharacterTemplate.Brain;
+			
 			skillSystem.Initialise();
+			brain.Initialise(this);
 		}
 
 		public void SetIsCurrentActor(bool value)

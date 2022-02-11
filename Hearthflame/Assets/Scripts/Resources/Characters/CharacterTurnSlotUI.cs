@@ -63,22 +63,22 @@ public class CharacterTurnSlotUI : CharacterSlotUI
             return false;
 		}
         else
-        return character.IsCurrentActor;
-      //  //if (characterInventory != null)
-      //  //    Debug.Log("SlotIndex: " + SlotIndex + " is checking if its Character is the current Actor. It thinks that it's actor is " + characterInventory.GetSlotByIndex(SlotIndex).Character.Name + " and thinks it IsCurrentActor is " + characterInventory.GetSlotByIndex(SlotIndex).Character.IsCurrentActor);
-      //  //    return characterInventory.GetSlotByIndex(SlotIndex).Character.IsCurrentActor;        
-      //  if (characterInventory != null)
-      //      Debug.Log("SlotIndex: " + SlotIndex + " is checking if its Character is the current Actor. It thinks that it's actor is " + character.Name + " and thinks it IsCurrentActor is " + character.IsCurrentActor);
-      //      if(character.IsCurrentActor != null)
-		    //{
-      //          return character.IsCurrentActor;
-      //      }
-      //  return false;
-            
+		{
+            return character.IsCurrentActor;
+        }
     }
 
+    public bool GetIsCharacterDead()
+    {
+        if (character == null)
+        {
+            return false;
+        }
+        else
+            return character.HealthSystem.IsDead;
+    }
 
-	public override void UpdateSlotUI()
+    public override void UpdateSlotUI()
 	{
         if (SlotResource == null)
         {
@@ -94,5 +94,12 @@ public class CharacterTurnSlotUI : CharacterSlotUI
         onCharacterSlotChanged?.Invoke();
 
         currentCharacterImage.enabled = GetIsCurrentCharacter();
+        if (GetIsCharacterDead())
+        {
+            if (SlotResource.Icon != null)
+            {
+                resourceIconImage.GetComponent<Image>().color = new Color32(255, 255, 225, 100); // greys out the characters image
+            }
+        }
     }
 }

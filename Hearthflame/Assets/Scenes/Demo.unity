@@ -2933,6 +2933,7 @@ MonoBehaviour:
   battle: {fileID: 11400000, guid: 155ce334592ff4c42b12e4fac1effc49, type: 2}
   sizeX: 5
   sizeY: 5
+  deactivateOnTrigger: 1
 --- !u!50 &851483437
 Rigidbody2D:
   serializedVersion: 4

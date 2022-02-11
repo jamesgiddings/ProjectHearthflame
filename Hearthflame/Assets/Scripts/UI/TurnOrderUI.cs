@@ -38,7 +38,6 @@ public class TurnOrderUI : MonoBehaviour
 		{
 			characterTurnSlotUIs[i].SlotResource = characterInventory.GetSlotByIndex(i).PartyCharacterTemplate;
 			characterTurnSlotUIs[i].Character = characterInventory.GetSlotByIndex(i).Character;
-			Debug.Log("New order: " + characterInventory.GetSlotByIndex(i).Character.Name);
 			characterTurnSlotUIs[i].GetIsCurrentCharacter();
 			characterTurnSlotUIs[i].UpdateSlotUI();
 		}

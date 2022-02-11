@@ -16,4 +16,6 @@ MonoBehaviour:
   name: Snee
   icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
   template: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  brain: {fileID: 11400000, guid: da4b8bd68f766414d9460ac053a6396a, type: 2}
   isUnlocked: 1
+  isRear: 0

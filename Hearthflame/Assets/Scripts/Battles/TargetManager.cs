@@ -55,16 +55,15 @@ public class TargetManager
 		}
 		else
 		{
-			Debug.LogError("Enemy targeting not implemented.");
-			//query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
-			//Debug.Log("Getting all possible targets");
+			Debug.LogWarning("need to reflect the target, when originator is enemey");
+			query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag()) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
+			Debug.Log("Getting all possible targets");
 
-			//List<Character> allPossibleTargets = new List<Character>();
-			//foreach (Character character in query)
-			//{
-			//	allPossibleTargets.Add(character);
-			//	Debug.Log(character.Name);
-			//}
+			foreach (Character character in query)
+			{
+				allPossibleTargets.Add(character);
+				Debug.Log(character.Name);
+			}
 		}
 
 		allPossibleTargetsCache = allPossibleTargets;

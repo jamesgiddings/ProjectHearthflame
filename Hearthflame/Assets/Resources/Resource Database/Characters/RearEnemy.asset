@@ -16,5 +16,6 @@ MonoBehaviour:
   name: RearEnemy
   icon: {fileID: 21300000, guid: 2456dd2824f5ec540830760922f5bac6, type: 3}
   template: {fileID: 11400000, guid: 7d5880954bfcc184cabc20fe3a8901f1, type: 2}
+  brain: {fileID: 11400000, guid: da4b8bd68f766414d9460ac053a6396a, type: 2}
   isUnlocked: 0
   isRear: 1

@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using GramophoneUtils.Stats;
 
 [CreateAssetMenu(fileName = "Resource Database", menuName = "Resources/Resource Database")]
 public class ResourceDatabase : ScriptableObject
 {
 	[SerializeField] private Resource[] resources;
+	[SerializeField] private CharacterClass[] characterClasses;
+	[SerializeField] private StatType[] stats;
+
+	public CharacterClass[] CharacterClasses => characterClasses; // getter
+	public StatType[] Stats => stats; // getter
 
 	private void Awake()
 	{
@@ -31,7 +37,6 @@ public class ResourceDatabase : ScriptableObject
 	{
 		if (!database.ContainsKey(resource.UID))
 		{
-			Debug.Log("WE ARE ADDING A RESOURCE");
 			database.Add(resource.UID, resource);
 		}
 	}

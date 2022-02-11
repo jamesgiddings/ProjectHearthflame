@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+
 public class BattleTrigger : MonoBehaviour
 {
 	[SerializeField] private Battle battle;
@@ -12,7 +13,7 @@ public class BattleTrigger : MonoBehaviour
 	[SerializeField] private float sizeX = 5;
 	[SerializeField] private float sizeY = 5;
 
-	[SerializeField] bool destroyOnTrigger;
+	[SerializeField] bool deactivateOnTrigger;
 	
 	private Rigidbody2D rb;
 	private BoxCollider2D boxCollider;
@@ -43,10 +44,10 @@ public class BattleTrigger : MonoBehaviour
 		{
 			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
 			SceneController.AdditiveLoadScene(battle, player.Party);
-		}
-		if (destroyOnTrigger)
-		{
-			Destroy(this.gameObject);
+			if (deactivateOnTrigger)
+			{
+				this.gameObject.SetActive(false);
+			}
 		}
 	}
 }
