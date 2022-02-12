@@ -7,6 +7,6 @@ public enum TargetAreaFlag // create an editor tool which populates this through
 	AllyFront = 1,
 	AllyRear = 2,
 
-	EnemyFront = 4,
-	EnemyRear = 8,
+	OpponentFront = 4,
+	OpponentRear = 8,
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Brain : ScriptableObject
 {
 	[SerializeField] protected CharacterClass characterClass;
+	[SerializeField] protected ResourceDatabase resourceDatabase;
 
 	protected Character brainOwner;
 

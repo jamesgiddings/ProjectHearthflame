@@ -70,9 +70,10 @@ public class Skill : Resource, IHotbarItem
 		return healings;
 	}
 
-	public void Use(List<Character> characters)
+	public void Use(List<Character> characterTargets, Character originator)
 	{
-		foreach (Character character in characters)
+		Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
+		foreach (Character character in characterTargets)
 		{
 			ApplyStatModifiers(character);
 			ApplyDamageObjects(character);

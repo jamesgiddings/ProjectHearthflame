@@ -42,30 +42,15 @@ public class TargetManager
 		Debug.Log(AllBattlers.Count);
 		IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();
-		if (originator.IsPlayer)
+		query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag(originator.IsPlayer)) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
+		Debug.Log("Getting all possible targets");
+
+		foreach (Character character in query)
 		{
-			query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag()) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
-			Debug.Log("Getting all possible targets");
-
-			foreach (Character character in query)
-			{
-				allPossibleTargets.Add(character);
-				Debug.Log(character.Name);
-			}
+			allPossibleTargets.Add(character);
+			Debug.Log(character.Name);
 		}
-		else
-		{
-			Debug.LogWarning("need to reflect the target, when originator is enemey");
-			query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag()) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
-			Debug.Log("Getting all possible targets");
-
-			foreach (Character character in query)
-			{
-				allPossibleTargets.Add(character);
-				Debug.Log(character.Name);
-			}
-		}
-
+		
 		allPossibleTargetsCache = allPossibleTargets;
 
 		return allPossibleTargets;
@@ -73,7 +58,7 @@ public class TargetManager
 
 	public void UseSkill(Character originator)
 	{
-		currentSkill.Use(GetCurrentlyTargeted(currentSkill, originator));
+		currentSkill.Use(GetCurrentlyTargeted(currentSkill, originator), originator);
 		ClearTargets();
 	}
 
@@ -93,10 +78,20 @@ public class TargetManager
 		switch (skill.TargetNumberFlag)
 		{
 			case TargetNumberFlag.Single:
-				int index = currentTargetsCache.Count > targetIndex ? targetIndex : 0;
-				currentlyTargeted.Add(currentTargetsCache[index]);
-				Debug.Log("targetIndex: " + targetIndex);
-				Debug.Log("currentTargetsCache.Count: " + currentTargetsCache.Count);
+				if (originator.IsPlayer)
+				{
+					int index = currentTargetsCache.Count > targetIndex ? targetIndex : 0;
+					currentlyTargeted.Add(currentTargetsCache[index]);
+					Debug.Log("targetIndex: " + targetIndex);
+					Debug.Log("currentTargetsCache.Count: " + currentTargetsCache.Count);
+				}
+				else
+				{
+					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(currentTargetsCache, skill));
+				}
+					
+
+				
 				break;
 			case TargetNumberFlag.All:
 				currentlyTargeted.AddRange(currentTargetsCache);

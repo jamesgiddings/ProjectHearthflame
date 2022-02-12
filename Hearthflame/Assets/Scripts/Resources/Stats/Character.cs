@@ -77,26 +77,48 @@ namespace GramophoneUtils.Stats
 			isCurrentActor = value; 
 		}
 
-		public TargetAreaFlag GetTargetAreaFlag()
+		public TargetAreaFlag GetTargetAreaFlag(bool IsOriginatorPlayer)
 		{
 			TargetAreaFlag characaterTargetAreaFlag = 0;
-
-			if (isPlayer && !isRear)
+			switch (IsOriginatorPlayer)
 			{
-				characaterTargetAreaFlag += (int)TargetAreaFlag.AllyFront;
-			}
-			else if (isPlayer && isRear)
-			{
-				characaterTargetAreaFlag += (int)TargetAreaFlag.AllyRear;
-			}
-			else if (!isPlayer && !isRear)
-			{
-				characaterTargetAreaFlag += (int)TargetAreaFlag.EnemyFront;
-			}
-			else if (!isPlayer && isRear)
-			{
-				characaterTargetAreaFlag += (int)TargetAreaFlag.EnemyRear;
-			}
+				case true:
+					if (isPlayer && !isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.AllyFront;
+					}
+					else if (isPlayer && isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.AllyRear;
+					}
+					else if (!isPlayer && !isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.OpponentFront;
+					}
+					else if (!isPlayer && isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.OpponentRear;
+					}
+					break;
+				case false:
+					if (isPlayer && !isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.OpponentFront;
+					}
+					else if (isPlayer && isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.OpponentRear;
+					}
+					else if (!isPlayer && !isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.AllyFront;
+					}
+					else if (!isPlayer && isRear)
+					{
+						characaterTargetAreaFlag += (int)TargetAreaFlag.AllyRear;
+					}
+					break;
+			}				
 			return characaterTargetAreaFlag;
 		}
 

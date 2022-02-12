@@ -1,8 +1,5 @@
 using GramophoneUtils.Stats;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Random Brain", menuName = "Brains/New Random Brain")]
@@ -14,8 +11,6 @@ public class RandomBrain : Brain
 	private RandomObjectCollection<Skill> randomSkillCollection;
 	private RandomObjectCollection<CharacterClass> randomCharacterClassCollection;
 
-	private ResourceDatabase resourceDatabase => (ResourceDatabase)AssetDatabase.LoadAssetAtPath("Assets / Scripts / Resources / Resource Database.asset", typeof(ResourceDatabase));
-
 #if UNITY_EDITOR
 	private void OnValidate()
 	{
@@ -26,6 +21,7 @@ public class RandomBrain : Brain
 				randomSkills.Add(new RandomObject<Skill>(skill, 1f));
 			}
 		}
+
 		randomSkillCollection = new RandomObjectCollection<Skill>(randomSkills);
 
 		if (randomTargets.Count == 0)
@@ -56,6 +52,7 @@ public class RandomBrain : Brain
 
 		foreach (Character character in availableTargets)
 		{
+			Debug.Log("randomCharacterClassCollection == null" + randomCharacterClassCollection == null);
 			randomTargets.Add(new RandomObject<Character>(character, randomCharacterClassCollection.GetWeighting(character.CharacterClass)));
 		}
 
@@ -64,6 +61,7 @@ public class RandomBrain : Brain
 		if (skill.TargetNumberFlag.HasFlag(TargetNumberFlag.Single))
 		{
 			targets.Add(randomTargetCollection.GetRandomObject().randomObject);
+			Debug.Log("targets.Count: " + targets.Count);
 			return targets;
 		}
 		return null;
