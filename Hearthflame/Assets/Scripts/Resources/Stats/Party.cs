@@ -8,8 +8,10 @@ namespace GramophoneUtils.Stats
 	{
 		[SerializeField] public UnityEvent onStatsChanged;
 		[SerializeField] public UnityEvent onInventoryItemsUpdated;
-
+	
 		private Inventory partyInventory = new Inventory(20, 10000);
+		private int partyInventorySize;
+		private int startingScrip;
 
 		[SerializeField] private PartyCharactersTemplateObject partyCharactersTemplateObject;
 
@@ -43,7 +45,20 @@ namespace GramophoneUtils.Stats
 			this.partyCharactersTemplateObject = partyCharactersTemplateObject;
 			this.onStatsChanged = onStatsChanged;
 			this.onInventoryItemsUpdated = onInventoryItemsUpdated;
+			this.startingScrip = startingScrip;
+			this.partyInventorySize = partyInventorySize;
+
 			partyInventory = new Inventory(partyInventorySize, startingScrip);
+		}
+
+		public Party InstantiateClone()
+		{
+			return new Party(
+				this.partyCharactersTemplateObject, 
+				this.onStatsChanged, 
+				this.onInventoryItemsUpdated, 
+				this.partyInventorySize, 
+				this.startingScrip);
 		}
 	}
 }

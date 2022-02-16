@@ -21,7 +21,7 @@ public class HealthDisplay : MonoBehaviour
 		this.character = character;
 	}
 
-	public void UpdateHealthDisplay()
+	public void UpdateHealthDisplay(int value = 0)
 	{
 		statLabel.text = "Health: ";
 		statValue.text = character.HealthSystem.CurrentHealth.ToString() + "/" + character.HealthSystem.MaxHealth.ToString();

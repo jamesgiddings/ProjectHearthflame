@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BattlerSprite : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class BattlerSprite : MonoBehaviour
     [SerializeField] private Image targetCursor;
     [SerializeField] private Image currentActorHighlight;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI floatingTextNotification;
     
     private Character character;
     private BattleManager battleManager;
@@ -27,6 +29,7 @@ public class BattlerSprite : MonoBehaviour
         battleManager.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
+        character.HealthSystem.OnHealthChanged += DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath += KillCharacter;
 	}
 
@@ -47,7 +50,7 @@ public class BattlerSprite : MonoBehaviour
         currentActorHighlight.gameObject.SetActive(character.IsCurrentActor);
     }
 
-    public void UpdateHealthSlider()
+    public void UpdateHealthSlider(int value)
 	{
         if (character.HealthSystem.MaxHealth == 0)
 		{
@@ -59,6 +62,31 @@ public class BattlerSprite : MonoBehaviour
             Debug.Log("Max Health: " + character.HealthSystem.MaxHealth);
             healthSlider.value = (float)character.HealthSystem.CurrentHealth / (float)character.HealthSystem.MaxHealth;
         }
+	}
+
+    public void DisplayFloatingTexts(int value)
+	{
+        StartCoroutine(DisplayFloatingTextsCoroutine(value));
+    }
+
+    public IEnumerator DisplayFloatingTextsCoroutine(int value)
+	{
+        Debug.Log("Display Floating texts NOW ----------------------------------------------------------");
+        while (character.GetIsAnyNotificationInQueue())
+        {
+            floatingTextNotification.gameObject.SetActive(true);
+            DisplayFloatingText(character.DequeueBattlerNoticiation());
+            yield return new WaitForSeconds(0.4f);
+        }
+        yield return new WaitForSeconds(1f);
+        floatingTextNotification.gameObject.SetActive(false);
+    }
+
+    public void DisplayFloatingText(int value)
+	{
+        Color textColor = (value >= 0) ? Color.green : Color.red;
+        floatingTextNotification.color = textColor;
+        floatingTextNotification.text = value.ToString();
 	}
 
     private void KillCharacter()

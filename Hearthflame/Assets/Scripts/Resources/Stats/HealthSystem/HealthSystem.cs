@@ -8,7 +8,7 @@ namespace GramophoneUtils.Stats
 	[Serializable]
 	public class HealthSystem
 	{
-		public Action OnHealthChanged;
+		public Action<int> OnHealthChanged;
 		public Action OnCharacterDeath;
 		
 		private int currentHealth;
@@ -39,18 +39,32 @@ namespace GramophoneUtils.Stats
 				currentHealth = maxHealth;
 			}
 
-			NotifySubscribersHealthChanged();
+			NotifySubscribersHealthChanged(increment);
 			CheckIsDeadAndNotify();
 			Debug.Log("My health is now: " + currentHealth);
 		}
 
+		public void IncrementCurrentHealthAsPercentageOfCurrentHealth(float percentageAsDecimal)
+		{
+			IncrementCurrentHealth((int)(currentHealth * percentageAsDecimal));
+		}
 
-
+		public void IncrementCurrentHealthAsPercentageOfMaxHealth(float percentageAsDecimal)
+		{
+			IncrementCurrentHealth((int)(maxHealth * percentageAsDecimal));
+		}		
+		
 		public void IncrementMaxHealth(int increment)
 		{
 			maxHealth += increment;
-			NotifySubscribersHealthChanged();
+			NotifySubscribersHealthChanged(increment);
 			CheckIsDeadAndNotify();
+		}
+
+		public void IncrementMaxHealthAsPercentageOfMaxHealth(float percentageAsDecimal)
+		{
+			// get percentage 
+			IncrementMaxHealth((int)(maxHealth * percentageAsDecimal));
 		}
 
 		public void IncrementWounds(int increment)
@@ -58,22 +72,34 @@ namespace GramophoneUtils.Stats
 			wounds += increment;
 		}
 
+		public void SetCurrentHealthToPercentage(float percentageAsDecimal)
+		{
+			SetCurrentHealth((int)(currentHealth * percentageAsDecimal));
+		}
+
+		public void SetMaxHealthToPercentage(float percentageAsDecimal)
+		{
+			SetMaxHealth((int)(currentHealth * percentageAsDecimal));
+		}
+
 		public void SetMaxHealth(int value)
 		{
+			int cache = maxHealth - value;
 			maxHealth = value;
-			NotifySubscribersHealthChanged();
+			NotifySubscribersHealthChanged(cache * -1);
 			CheckIsDeadAndNotify();
 		}
 
 		public void SetCurrentHealth(int value)
 		{
+			int cache = currentHealth - value;
 			currentHealth = value;
-			NotifySubscribersHealthChanged();
+			NotifySubscribersHealthChanged(cache * -1);
 			CheckIsDeadAndNotify();
 		}
-		private void NotifySubscribersHealthChanged()
+		private void NotifySubscribersHealthChanged(int value)
 		{
-			OnHealthChanged?.Invoke();
+			OnHealthChanged?.Invoke(value);
 		}
 
 		private bool CheckIsDeadAndNotify()

@@ -14,4 +14,9 @@ public static class SceneController
 		}
 		SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
 	}
+
+	public static void UnloadScene(string sceneName)
+	{
+		SceneManager.UnloadSceneAsync(sceneName);
+	}
 }

@@ -28,8 +28,11 @@ public class BattleManager
 	private BattleStart battleStart;
 	private BattleWon battleWon;
 	private BattleLost battleLost;
+	private BattleOver battleOver;
 
 	private List<Character> battlersList;
+	private List<Character> playerBattlersList;
+	private List<Character> enemyBattlersList;
 	private List<Character> orderedBattlersList;
 	private Queue<Character> unresolvedQueue;
 	private Queue<Character> resolvedQueue;
@@ -135,10 +138,12 @@ public BattleManager(Battle battle, Party party)
 		if (IsPlayerVictory())
 		{
 			ChangeState(battleWon);
+			return;
 		}
 		else if (IsEnemyVictory())
 		{
 			ChangeState(battleLost);
+			return;
 		}
 		
 		turn++;
@@ -194,7 +199,7 @@ public BattleManager(Battle battle, Party party)
 		unresolvedQueue = OrderQueue();
 
 		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
+		CalculateAndInitialiseOrderedBattlersInventory();
 		turn = 0;
 	}
 
@@ -207,7 +212,7 @@ public BattleManager(Battle battle, Party party)
 			orderedRoundQueue.Enqueue(battler);
 		}
 		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
+		CalculateAndInitialiseOrderedBattlersInventory();
 		return orderedRoundQueue;
 	}
 
@@ -238,7 +243,7 @@ public BattleManager(Battle battle, Party party)
 	#region Initialisation
 	private void InitialiseBattle()
 	{
-		InitialiseBattlersList();
+		InitialiseBattlersLists();
 		
 		turn = 0;
 		round = 0;
@@ -250,7 +255,7 @@ public BattleManager(Battle battle, Party party)
 		InitialisePlayerBattlersInventory();
 		InitialiseEnemyBattlersInventory();
 		CalculateOrderedBattlersList();
-		CalculateAndInitializeOrderedBattlersInventory();
+		CalculateAndInitialiseOrderedBattlersInventory();
 
 		CurrentActor = unresolvedQueue.Dequeue();
 		CurrentActor.SetIsCurrentActor(true);
@@ -264,6 +269,7 @@ public BattleManager(Battle battle, Party party)
 		battleStart = new BattleStart(this);
 		battleWon = new BattleWon(this);
 		battleLost = new BattleLost(this);
+		battleOver = new BattleOver(this);
 	}
 
 	private void SetIsBattleFullyLoaded(Scene scene)
@@ -293,25 +299,31 @@ public BattleManager(Battle battle, Party party)
 		}
 	}
 
-	private void InitialiseBattlersList()
+	private void InitialiseBattlersLists()
 	{
 		battlersList = new List<Character>();
+		playerBattlersList = new List<Character>();
+		enemyBattlersList = new List<Character>();
 
 		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
 		{
 			if (partyCharacter.IsUnlocked) // && IsFront
 			{
 				battlersList.Add(partyCharacter.Character);
+				playerBattlersList.Add(partyCharacter.Character);
 			}
 		}
+		
+		Party enemyPartyClone = battle.EnemyParty.InstantiateClone();
 
-		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
+		foreach (PartyCharacter partyCharacter in enemyPartyClone.PartyCharacters)
 		{
 			battlersList.Add(partyCharacter.Character);
+			enemyBattlersList.Add(partyCharacter.Character);
 		}
 	}
 
-	private CharacterInventory CalculateAndInitializeOrderedBattlersInventory()
+	private CharacterInventory CalculateAndInitialiseOrderedBattlersInventory()
 	{
 		InitializeOrderedBattlersInventory();
 		foreach (Character battler in orderedBattlersList)
@@ -330,12 +342,12 @@ public BattleManager(Battle battle, Party party)
 
 	private void InitialiseEnemyBattlersInventory()
 	{
-		int totalNumberOfEnemyBattlers = battle.EnemyParty.PartyCharacters.Length;
+		int totalNumberOfEnemyBattlers = enemyBattlersList.Count;
 		enemyBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfEnemyBattlers);
 
-		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
+		foreach (Character character in enemyBattlersList)
 		{
-			enemyBattlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			enemyBattlersCharacterInventory.AddCharacter(new CharacterSlot(character));
 			
 		}
 	}
@@ -367,9 +379,9 @@ public BattleManager(Battle battle, Party party)
 			}
 		}
 
-		foreach (PartyCharacter partyCharacter in battle.EnemyParty.PartyCharacters)
+		foreach (Character character in enemyBattlersList)
 		{
-			battlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
+			battlersCharacterInventory.AddCharacter(new CharacterSlot(character));
 		}
 	}
 
@@ -403,6 +415,15 @@ public BattleManager(Battle battle, Party party)
 		{
 			battleBehaviour.BattlerDisplayUI.Initialise(this);
 		}
+	}
+
+	#endregion
+
+	#region EndBattle
+
+	public void EndBattle()
+	{
+		SceneController.UnloadScene("BattleScene");
 	}
 
 	#endregion
@@ -577,7 +598,9 @@ public BattleManager(Battle battle, Party party)
 			base.EnterState();
 			// get the BattleReward class to show its popup 
 			_outer.battle.BattleReward.AddBattleReward(_outer.party);
-			Debug.Log("THE BATTLE HAS BEEN WON.");
+			_outer.battleBehaviour.BattleRewardsText.text = "You won some nice things";
+			_outer.battleBehaviour.BattleRewards.SetActive(true);
+
 		}
 
 		public override void ExitState()
@@ -592,6 +615,10 @@ public BattleManager(Battle battle, Party party)
 		{
 			//throw new NotImplementedException();
 			// allow the player to accept the reward from the battle popup but do nothing else
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				_outer.ChangeState(_outer.battleOver);
+			}
 		}
 	}
 
@@ -605,7 +632,6 @@ public BattleManager(Battle battle, Party party)
 		public override void EnterState()
 		{
 			base.EnterState();
-			// End the game
 		}
 
 		public override void ExitState()
@@ -619,5 +645,33 @@ public BattleManager(Battle battle, Party party)
 			//throw new NotImplementedException();
 		}
 	}
+
+	public class BattleOver : BattleState
+	{
+		public BattleOver(BattleManager outer)
+		{
+			_outer = outer;
+		}
+
+		public override void EnterState()
+		{
+			base.EnterState();
+			// End the game
+			_outer.EndBattle();
+			ExitState();
+		}
+
+		public override void ExitState()
+		{
+			base.ExitState();
+			GameManager.Instance.BattleSceneLoaded -= _outer.SetIsBattleFullyLoaded;
+		}
+
+		public override void HandleInput()
+		{
+			//throw new NotImplementedException();
+		}
+	}
+
 	#endregion
 }

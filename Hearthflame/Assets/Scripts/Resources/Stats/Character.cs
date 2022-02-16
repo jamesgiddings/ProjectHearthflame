@@ -28,6 +28,8 @@ namespace GramophoneUtils.Stats
 		private readonly PartyCharacterTemplate partyCharacterTemplate;
 
 		private readonly Brain brain;
+
+		private Queue<int> notificationQueue = new Queue<int>();
 		
 		public readonly Dictionary<string, IStatType> StatTypeStringRefDictionary;
 		public string Name => name; //getter
@@ -53,7 +55,10 @@ namespace GramophoneUtils.Stats
 			name = partyCharacterTemplate.Template.Name;
 			StatTypeStringRefDictionary = partyCharacterTemplate.Template.StatTypeStringRefDictionary;
 			statSystem = new StatSystem(partyCharacterTemplate.Template);
-			healthSystem = new HealthSystem(partyCharacterTemplate.Template); 
+			healthSystem = new HealthSystem(partyCharacterTemplate.Template);
+
+			healthSystem.OnHealthChanged += EnqueueBattlerNotification;
+
 			// subscribe to OnDeathEvent here? also, inject a reference to Ch aracter if needed
 			characterClass = partyCharacterTemplate.Template.CharacterClass;
 			this.skillSystem = new SkillSystem(partyCharacterTemplate, this);
@@ -70,6 +75,25 @@ namespace GramophoneUtils.Stats
 			
 			skillSystem.Initialise();
 			brain.Initialise(this);
+		}
+
+		private void EnqueueBattlerNotification(int value)
+		{
+			notificationQueue.Enqueue(value);
+		}
+
+		public int DequeueBattlerNoticiation()
+		{
+			return notificationQueue.Dequeue();
+		}
+
+		public bool GetIsAnyNotificationInQueue()
+		{
+			if (notificationQueue.Count > 0)
+			{
+				return true;
+			}
+			return false;
 		}
 
 		public void SetIsCurrentActor(bool value)
