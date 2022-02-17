@@ -11,13 +11,11 @@ public class BattleBehaviour : MonoBehaviour
     [SerializeField] private VoidEvent onCharactersUpdated;
     [SerializeField] private BattlerDisplayUI battlerDisplayUI;
     [SerializeField] private RadialMenu radialMenu;
-    [SerializeField] private GameObject battleRewards;
-    [SerializeField] private TextMeshProUGUI battleRewardsText;
+    [SerializeField] private BattleRewardsDisplayUI battleRewardsDisplayUI;
 
     public GameObject TurnOrderPrefab => turnOrderPrefab;
     public VoidEvent OnCharactersUpdated => onCharactersUpdated;
     public BattlerDisplayUI BattlerDisplayUI => battlerDisplayUI;
     public RadialMenu RadialMenu => radialMenu;
-    public GameObject BattleRewards => battleRewards;
-    public TextMeshProUGUI BattleRewardsText => battleRewardsText;
+    public BattleRewardsDisplayUI BattleRewardsDisplayUI => battleRewardsDisplayUI;
 }

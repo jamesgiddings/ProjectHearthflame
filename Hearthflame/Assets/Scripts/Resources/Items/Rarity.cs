@@ -6,9 +6,9 @@ namespace GramophoneUtils.Items
     public class Rarity : ScriptableObject
     {
         [SerializeField] private new string name = "New Rarity Name";
-        [SerializeField] private Color colour = new Color(1f, 1f, 1f, 1f);
+        [SerializeField] private Color colour = new Color(255, 255, 255, 1);
 
         public string Name => name;
-        public Color Colour => colour;
+        public UnityEngine.Color Colour => colour;
     }
 }

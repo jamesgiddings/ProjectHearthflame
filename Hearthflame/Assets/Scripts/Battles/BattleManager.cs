@@ -45,6 +45,7 @@ public class BattleManager
 	private Character currentActor;
 
 	public Action OnCurrentActorChanged;
+	public Action<BattleReward> OnBattleRewardsEarned;
 
 	public Action<Character> OnSkillUsed;
 
@@ -392,9 +393,15 @@ public BattleManager(Battle battle, Party party)
 		InitialiseBattle();
 		InitialiseBattlerDisplay();
 		InitialiseTurnOrderUI();
+		InitialiseBattleRewardsDisplayUI();
 		OnCurrentActorChanged?.Invoke();
 		// Start:
 		UpdateState();
+	}
+
+	private void InitialiseBattleRewardsDisplayUI()
+	{
+		battleBehaviour.BattleRewardsDisplayUI.Initialise(this);
 	}
 
 	#endregion
@@ -598,8 +605,9 @@ public BattleManager(Battle battle, Party party)
 			base.EnterState();
 			// get the BattleReward class to show its popup 
 			_outer.battle.BattleReward.AddBattleReward(_outer.party);
-			_outer.battleBehaviour.BattleRewardsText.text = "You won some nice things";
-			_outer.battleBehaviour.BattleRewards.SetActive(true);
+			_outer.OnBattleRewardsEarned?.Invoke(_outer.battle.BattleReward);
+			//_outer.battleBehaviour.BattleRewardsDisplayUI.text = "You won some nice things";
+			//_outer.battleBehaviour.BattleRewards.SetActive(true);
 
 		}
 
