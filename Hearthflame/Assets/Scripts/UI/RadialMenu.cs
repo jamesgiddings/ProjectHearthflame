@@ -17,6 +17,8 @@ public class RadialMenu : MonoBehaviour
 	[SerializeField] private Transform skillsElementsParent;
 	[SerializeField] private Transform positionElementsParent;
 
+	RMF_RadialMenu subMenu;
+
 	private BattleManager battleManager;
 	private Character character;
 
@@ -44,7 +46,7 @@ public class RadialMenu : MonoBehaviour
 
 	private RMF_RadialMenu InitialiseItemSubMenu()
 	{
-		RMF_RadialMenu subMenu = UnityEngine.Object.Instantiate(subMenuPrefab, itemsElementsParent).GetComponent<RMF_RadialMenu>();
+		subMenu = UnityEngine.Object.Instantiate(subMenuPrefab, itemsElementsParent).GetComponent<RMF_RadialMenu>();
 
 		Transform parent = subMenu.gameObject.transform.GetChild(0); // get the parent transform for the elements
 
@@ -126,6 +128,14 @@ public class RadialMenu : MonoBehaviour
 		{
 			oldElementsParent.GetComponent<Button>().onClick.RemoveAllListeners();
 			Destroy(menu.gameObject);
+		}
+	}
+
+	private void OnDisable()
+	{
+		foreach (var element in subMenu.GetComponent<RMF_RadialMenu>().elements)
+		{
+			element.button.onClick.RemoveAllListeners();
 		}
 	}
 }

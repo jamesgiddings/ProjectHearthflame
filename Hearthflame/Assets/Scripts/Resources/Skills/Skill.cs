@@ -75,7 +75,7 @@ public class Skill : Resource, IHotbarItem
 		Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
 		foreach (Character character in characterTargets)
 		{
-			ApplyStatModifiers(character);
+			ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
 			ApplyDamageObjects(character);
 			ApplyHealingObjects(character);
 		}

@@ -95,11 +95,12 @@ public class BattlerSprite : MonoBehaviour
         healthSlider.gameObject.SetActive(false);
     }
 
-	private void OnDestroy()
+	private void OnDisable()
 	{
         battleManager.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
+        character.HealthSystem.OnHealthChanged -= DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath -= KillCharacter;
     }
 }
