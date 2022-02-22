@@ -11,7 +11,7 @@ namespace GramophoneUtils.Stats
 		public StatSystem() { } //constructor 1
 		public StatSystem(CharacterTemplate template) //constructor 2
 		{
-			foreach (var stat in template.Stats)
+			foreach (var stat in template.Stats.Stats)
 			{
 				stats.Add(stat.StatType, new Stat(stat.Value));
 			}

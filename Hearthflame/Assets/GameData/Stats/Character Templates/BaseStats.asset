@@ -12,22 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bc15b53b7928042b854b53d4013898, type: 3}
   m_Name: BaseStats
   m_EditorClassIdentifier: 
-  stats:
-  - statType: {fileID: 11400000, guid: 2c01afbc47a489f4eb2f58c4cf99cc82, type: 2}
-    value: 1
-  - statType: {fileID: 11400000, guid: 0b63d8f9d65768443853a38be3cbf8d5, type: 2}
-    value: 11
-  - statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
-    value: 10
-  - statType: {fileID: 11400000, guid: 2f064fa505d4f124f8ab2be9db238c41, type: 2}
-    value: 10
-  - statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
-    value: 10
-  - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
-    value: 10
-  icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
+  UID: f1845bb1-04af-4fc2-a84f-2582175dce8e
   name: Snee
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  icon: {fileID: 21300000, guid: 8d95bcf261f259f4786a397bc66e3705, type: 3}
   characterClass: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   currentHealth: 100
   maxHealth: 100
   isPlayer: 1
+  color: {r: 0, g: 0, b: 0, a: 0}

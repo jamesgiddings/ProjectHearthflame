@@ -105,7 +105,3 @@ public class ProceduralTree : MonoBehaviour
     }
 }
 
-public class Branch
-{
-
-}

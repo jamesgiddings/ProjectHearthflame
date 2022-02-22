@@ -5,27 +5,26 @@ using System;
 
 namespace GramophoneUtils.Stats
 {
-   [CreateAssetMenu(fileName = "New Base Stats", menuName = "Characters/Character Template")]
-    public class CharacterTemplate : ScriptableObject
+   [CreateAssetMenu(fileName = "New Character Template", menuName = "Characters/Character Template")]
+    public class CharacterTemplate : Data
     {
         private Dictionary<string, IStatType> statTypeStringRefDictionary;
 
-        [SerializeField] private List<BaseStat> stats = new List<BaseStat>();
+        [SerializeField] private StatTemplate stats;
         [SerializeField] private Sprite icon;
-        [SerializeField] private new string name;
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth;
         [SerializeField] private bool isPlayer;
+        [SerializeField] private Color color;
 
-        public List<BaseStat> Stats => stats; //getter
+        public StatTemplate Stats => stats; //getter
         public Sprite Icon => icon; //getter
-        public string Name => name; //getter
         public CharacterClass CharacterClass => characterClass; //getter
         public int CurrentHealth => currentHealth; //getter
         public int MaxHealth => maxHealth; //getter
         public bool IsPlayer => isPlayer; //getter
-
+        public Color Color => color; //getter
 
         public Dictionary<string, IStatType> StatTypeStringRefDictionary
         {
@@ -33,7 +32,7 @@ namespace GramophoneUtils.Stats
             {
                 if (statTypeStringRefDictionary != null) { return statTypeStringRefDictionary; }
                 statTypeStringRefDictionary = new Dictionary<string, IStatType>();
-                foreach (BaseStat stat in stats)
+                foreach (BaseStat stat in stats.Stats)
                 {
                     statTypeStringRefDictionary.Add(stat.StatType.Name, stat.StatType);
                 }

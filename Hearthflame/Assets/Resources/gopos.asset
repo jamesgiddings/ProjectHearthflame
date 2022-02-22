@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bc15b53b7928042b854b53d4013898, type: 3}
+  m_Name: gopos
+  m_EditorClassIdentifier: 
+  UID: 00678aa9-158e-4115-9f28-30ce55e2d233
+  name: gopos
+  stats: {fileID: 0}
+  icon: {fileID: 0}
+  characterClass: {fileID: 0}
+  currentHealth: 0
+  maxHealth: 0
+  isPlayer: 0
+  color: {r: 0, g: 0, b: 0, a: 0}

@@ -12,22 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bc15b53b7928042b854b53d4013898, type: 3}
   m_Name: RearEnemy
   m_EditorClassIdentifier: 
-  stats:
-  - statType: {fileID: 11400000, guid: 2c01afbc47a489f4eb2f58c4cf99cc82, type: 2}
-    value: 4
-  - statType: {fileID: 11400000, guid: 0b63d8f9d65768443853a38be3cbf8d5, type: 2}
-    value: 4
-  - statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
-    value: 4
-  - statType: {fileID: 11400000, guid: 2f064fa505d4f124f8ab2be9db238c41, type: 2}
-    value: 4
-  - statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
-    value: 4
-  - statType: {fileID: 11400000, guid: 3a065f9982ce77443880e42c500f3442, type: 2}
-    value: 4
-  icon: {fileID: 21300000, guid: 2456dd2824f5ec540830760922f5bac6, type: 3}
+  UID: 42f7f285-6e04-4042-a321-3801408c97e6
   name: RearEnemon
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  icon: {fileID: 21300000, guid: 2456dd2824f5ec540830760922f5bac6, type: 3}
   characterClass: {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}
   currentHealth: 5
   maxHealth: 5
   isPlayer: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
