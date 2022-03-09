@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
-    [CreateAssetMenu(fileName = "New Stat Type", menuName = "StatSystem/Stat Type")]
+    [CreateAssetMenu(fileName = "New Stat Type", menuName = "Stat System/Stat Type")]
     public class StatType : ScriptableObject, IStatType
     {
         [SerializeField] private new string name = "New Stat Type Name";

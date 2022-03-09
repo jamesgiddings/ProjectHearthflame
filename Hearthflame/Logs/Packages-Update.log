@@ -45,3 +45,12 @@ The following packages were updated:
   com.unity.textmeshpro from version 2.0.1 to 3.0.6
 The following packages were removed:
   com.unity.package-manager-ui@2.2.0
+
+=== Tue Mar  8 08:25:35 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.2d.animation from version 5.0.10 to 5.1.0
+  com.unity.render-pipelines.universal from version 10.7.0 to 10.8.1

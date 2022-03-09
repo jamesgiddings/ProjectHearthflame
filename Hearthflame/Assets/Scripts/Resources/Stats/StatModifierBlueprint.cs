@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GramophoneUtils.Stats
 {
 	[Serializable]
-	[CreateAssetMenu(fileName = "New Stat Component Blueprint", menuName = "StatSystem/Stat Component Blueprint")]
+	[CreateAssetMenu(fileName = "New Stat Modifier Blueprint", menuName = "Stat System/Stat Modifier Blueprint")]
 	public class StatModifierBlueprint : ScriptableObject, IBlueprint
 	{
 		[SerializeField] private StatType statType;

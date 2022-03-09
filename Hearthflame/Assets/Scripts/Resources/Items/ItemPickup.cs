@@ -12,7 +12,7 @@ namespace GramophoneUtils.Items
         {
             foreach (ItemSlot itemSlot in itemSlots)
 			{
-                var itemContainer = other.GetComponent<PlayerBehaviour>().Party.PartyInventory;
+                var itemContainer = other.GetComponent<PlayerBehaviour>().PartyInventory;
 
                 if (itemContainer == null) { return; }
 

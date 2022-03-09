@@ -1,6 +1,7 @@
 using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.SavingLoading;
+using GramophoneUtils.Stats;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,9 +24,9 @@ public class CharacterInventory : CharacterContainer, ISaveable
 		List<CharacterSlotUI.ResourceSlotSaveData> tempList = new List<CharacterSlotUI.ResourceSlotSaveData>();
 		for (int i = 0; i < CharacterSlots.Length; i++)
 		{
-			if (CharacterSlots[i].PartyCharacterTemplate != null)
+			if (CharacterSlots[i].CharacterTemplate != null)
 			{
-				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].PartyCharacterTemplate.UID, GetSlotByIndex(i).Quantity));
+				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].CharacterTemplate.UID, GetSlotByIndex(i).Quantity));
 			}
 			else
 			{
@@ -48,7 +49,7 @@ public class CharacterInventory : CharacterContainer, ISaveable
 			if (saveData.characterSlotSaveData[i].resourceUID != null)
 			{
 				Resource resource = GameManager.Instance.ResourceDatabase.GetResourceByUID(saveData.characterSlotSaveData[i].resourceUID);
-				CharacterSlots[i].PartyCharacterTemplate = (PartyCharacterTemplate)resource;
+				CharacterSlots[i].CharacterTemplate = (CharacterTemplate)resource;
 				CharacterSlots[i].Quantity = saveData.characterSlotSaveData[i].resourceQuantity;
 			}
 		}

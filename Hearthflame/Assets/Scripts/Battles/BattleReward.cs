@@ -16,19 +16,19 @@ public class BattleReward: Data
 
 
 
-	public void AddBattleReward(Party party)
+	public void AddBattleReward(PlayerBehaviour player)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
 		{
-			var partyInventory = party.PartyInventory;
+			var partyInventory = player.PartyInventory;
 
 			if (partyInventory == null) { return; }
 			partyInventory.AddItem(itemSlot);
 		}
 
-		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
+		foreach (Character character in player.PlayerCharacters)
 		{
-			partyCharacter.Character.LevelSystem.AddExperience(experience);
+			character.LevelSystem.AddExperience(experience);
 		}
 	}
 

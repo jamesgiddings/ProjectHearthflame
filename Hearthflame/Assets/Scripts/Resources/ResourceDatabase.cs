@@ -35,6 +35,17 @@ public class ResourceDatabase : ScriptableObject
 
 	public void AddResource(Resource resource)
 	{
+		if (resource == null)
+		{
+			Debug.LogWarning(resource.name + " is null. Not added to resource database.");
+			return;
+		}
+		if (resource.UID == "")
+		{
+			Debug.LogWarning(resource.name + "'s resource.UID == null. Not added to resource database.");
+			return;
+		}
+		
 		if (!database.ContainsKey(resource.UID))
 		{
 			database.Add(resource.UID, resource);

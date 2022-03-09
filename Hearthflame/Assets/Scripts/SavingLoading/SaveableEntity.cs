@@ -22,6 +22,8 @@ namespace GramophoneUtils.SavingLoading
             // Store all the save data from the saveable components on this GameObject
             foreach (var saveable in GetComponents<ISaveable>())
             {
+                Debug.Log(saveable);
+                Debug.LogError("This cannot save multiple instances of the same component, it overwrites them");
                 state[saveable.GetType().ToString()] = saveable.CaptureState();
             }
 

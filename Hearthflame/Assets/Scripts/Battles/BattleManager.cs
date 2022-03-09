@@ -7,10 +7,13 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class BattleManager
+public class BattleManager : MonoBehaviour
 {
-	[SerializeField] private Battle battle;
-	[SerializeField] private Party party;
+	private Battle battle;
+	private PlayerBehaviour playerBehaviour;
+	private List<Character> playerCharacters;
+	private List<Character> enemyCharacters;
+
 
 	private bool isLoaded;
 	private int turn;
@@ -44,6 +47,7 @@ public class BattleManager
 
 	private Character currentActor;
 
+
 	public Action OnCurrentActorChanged;
 	public Action<BattleReward> OnBattleRewardsEarned;
 
@@ -57,6 +61,7 @@ public class BattleManager
 	public List<Character> BattlersList => battlersList;
 	public List<Character> OrderedBattlersList => orderedBattlersList;
 
+	TurnOrderUI turnOrderUI;
 	public TargetManager TargetManager => targetManager; // getter
 
 	public Character CurrentActor
@@ -64,24 +69,37 @@ public class BattleManager
 		get { return currentActor; } set { currentActor = value; }
 	}
 
-public BattleManager(Battle battle, Party party)
+	public void Initialise(Battle battle, PlayerBehaviour player)
 	{
 		this.battle = battle;
-		this.party = party;
-		FunctionUpdater.Create(() => Update());
+		this.playerBehaviour = player;
+		this.playerCharacters = player.PlayerCharacters;
+		this.enemyCharacters = battle.BattleCharacters;
+
 		isLoaded = false;
 		GameManager.Instance.BattleSceneLoaded += SetIsBattleFullyLoaded;
 
 		targetManager = new TargetManager(this);
 
+		//gameObject.SetActive(true);
+
 		InitialiseBattleStates();
 
 		ChangeState(battleStart);
+
 	}
+
+	//private void Start()
+	//{
+	//	gameObject.SetActive(false);
+	//}
 
 	private void Update()
 	{
-		battleState.HandleInput();
+		if (isLoaded)
+		{
+			battleState.HandleInput();
+		}
 	}
 
 	private void PlayerAction()
@@ -99,7 +117,8 @@ public BattleManager(Battle battle, Party party)
 		if (enemySkill != null)
 		{
 			TargetManager.GetCurrentlyTargeted(enemySkill, CurrentActor);
-			OnSkillUsed?.Invoke(CurrentActor);
+			if (TargetManager.CurrentTargetsCache.Count > 0)
+				OnSkillUsed?.Invoke(CurrentActor);
 		}
 		
 		
@@ -286,7 +305,7 @@ public BattleManager(Battle battle, Party party)
 		if (battleBehaviour != null)
 		{
 			turnOrderPrefab = battleBehaviour.TurnOrderPrefab;
-			TurnOrderUI turnOrderUI = UnityEngine.Object.Instantiate(turnOrderPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TurnOrderUI>();
+			turnOrderUI = UnityEngine.Object.Instantiate(turnOrderPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TurnOrderUI>();
 			turnOrderUI.Initialise(this);
 		}
 	}
@@ -306,21 +325,26 @@ public BattleManager(Battle battle, Party party)
 		playerBattlersList = new List<Character>();
 		enemyBattlersList = new List<Character>();
 
-		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
+		Debug.Log(playerCharacters.Count);
+		foreach (Character character in playerCharacters)
 		{
-			if (partyCharacter.IsUnlocked) // && IsFront
-			{
-				battlersList.Add(partyCharacter.Character);
-				playerBattlersList.Add(partyCharacter.Character);
+			if (character != null)
+			{ 
+				Debug.Log(playerCharacters.Count);
+				if (character.IsUnlocked) // && IsFront
+				{
+					battlersList.Add(character);
+					playerBattlersList.Add(character);
+				}
 			}
 		}
 		
-		Party enemyPartyClone = battle.EnemyParty.InstantiateClone();
+		List<Character> enemyCharacters = battle.BattleCharacters;
 
-		foreach (PartyCharacter partyCharacter in enemyPartyClone.PartyCharacters)
+		foreach (Character character in enemyCharacters)
 		{
-			battlersList.Add(partyCharacter.Character);
-			enemyBattlersList.Add(partyCharacter.Character);
+			battlersList.Add(character);
+			enemyBattlersList.Add(character);
 		}
 	}
 
@@ -336,7 +360,7 @@ public BattleManager(Battle battle, Party party)
 
 	private CharacterInventory InitializeOrderedBattlersInventory()
 	{
-		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
+		int totalNumberOfBattlers = playerCharacters.Count + battle.BattleCharacters.Count;
 		orderedBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
 		return orderedBattlersCharacterInventory;
 	}
@@ -355,28 +379,34 @@ public BattleManager(Battle battle, Party party)
 
 	private void InitialisePlayerBattlersInventory()
 	{
-		int totalNumberOfPlayerBattlers = party.PartyCharacters.Length;
+		int totalNumberOfPlayerBattlers = playerCharacters.Count;
 		playerBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfPlayerBattlers);
 
-		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
+		foreach (Character character in playerCharacters)
 		{
-			if (partyCharacter.IsUnlocked) // && IsFront
+			if (character != null)
 			{
-				playerBattlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
+				if (character.IsUnlocked) // && IsFront
+				{
+					playerBattlersCharacterInventory.AddCharacter(new CharacterSlot(character));
+				}
 			}
 		}
 	}
 
 	private void InitialiseBattlersInventory()
 	{
-		int totalNumberOfBattlers = party.PartyCharacters.Length + battle.EnemyParty.PartyCharacters.Length;
+		int totalNumberOfBattlers = playerCharacters.Count + battle.BattleCharacters.Count;
 		battlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfBattlers);
 
-		foreach (PartyCharacter partyCharacter in party.PartyCharacters)
+		foreach (Character character in playerCharacters)
 		{
-			if (partyCharacter.IsUnlocked) // && IsFront
+			if (character != null)
 			{
-				battlersCharacterInventory.AddCharacter(new CharacterSlot(partyCharacter.Character));
+				if (character.IsUnlocked) // && IsFront
+				{
+					battlersCharacterInventory.AddCharacter(new CharacterSlot(character));
+				}
 			}
 		}
 
@@ -430,6 +460,8 @@ public BattleManager(Battle battle, Party party)
 
 	public void EndBattle()
 	{
+		GameManager.Destroy(turnOrderUI.gameObject);
+
 		SceneController.UnloadScene("BattleScene");
 	}
 
@@ -541,7 +573,7 @@ public BattleManager(Battle battle, Party party)
 				
 			if (Input.GetKeyUp(KeyCode.Return))
 			{
-				if (_outer.TargetManager.IsTargeting)
+				if (_outer.TargetManager.IsTargeting && _outer.TargetManager.CurrentTargetsCache.Count > 0)
 				{
 					_outer.OnSkillUsed?.Invoke(StateActor);
 					_outer.PlayerAction();
@@ -604,7 +636,7 @@ public BattleManager(Battle battle, Party party)
 		{
 			base.EnterState();
 			// get the BattleReward class to show its popup 
-			_outer.battle.BattleReward.AddBattleReward(_outer.party);
+			_outer.battle.BattleReward.AddBattleReward(_outer.playerBehaviour);
 			_outer.OnBattleRewardsEarned?.Invoke(_outer.battle.BattleReward);
 			//_outer.battleBehaviour.BattleRewardsDisplayUI.text = "You won some nice things";
 			//_outer.battleBehaviour.BattleRewards.SetActive(true);

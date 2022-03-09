@@ -13,6 +13,8 @@ public class BattlerSprite : MonoBehaviour
     [SerializeField] private Image currentActorHighlight;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI floatingTextNotification;
+    [SerializeField] private Transform modifierPanel; 
+    [SerializeField] private GameObject statModifierImagePrefab; 
     
     private Character character;
     private BattleManager battleManager;
@@ -25,13 +27,15 @@ public class BattlerSprite : MonoBehaviour
 	{
         this.character = character;
         this.battleManager = battleManager;
-        this.spriteImage.sprite = character.PartyCharacterTemplate.Icon;
+        this.spriteImage.sprite = character.CharacterTemplate.Icon;
         battleManager.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
         character.HealthSystem.OnHealthChanged += DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath += KillCharacter;
-	}
+        UpdateHealthSlider(0);
+
+    }
 
 	private void UpdateTargetCursor(List<Character> targets)
 	{
@@ -61,6 +65,22 @@ public class BattlerSprite : MonoBehaviour
             Debug.Log("Current Health: " + character.HealthSystem.CurrentHealth);
             Debug.Log("Max Health: " + character.HealthSystem.MaxHealth);
             healthSlider.value = (float)character.HealthSystem.CurrentHealth / (float)character.HealthSystem.MaxHealth;
+        }
+	}
+
+    public void UpdateModifierPanel()
+	{
+		for (int i = 0; i < modifierPanel.childCount; i++)
+		{
+            Destroy(modifierPanel.GetChild(i));
+        }
+        
+        foreach (KeyValuePair<IStatType, Stat> keyValuePair in character.StatSystem.Stats)
+		{
+			foreach (StatModifier statModifier in keyValuePair.Value.Modifiers)
+			{
+                UnityEngine.Object.Instantiate(statModifierImagePrefab, modifierPanel);
+			}
         }
 	}
 

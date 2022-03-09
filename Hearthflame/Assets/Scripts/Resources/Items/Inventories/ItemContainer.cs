@@ -53,7 +53,6 @@ namespace GramophoneUtils.Items.Containers
                     if (itemSlot.quantity <= itemSlot.item.MaxStack)
                     {
                         itemSlots[i] = itemSlot;
-
                         itemSlot.quantity = 0;
 
                         onInventoryItemsUpdated.Invoke();

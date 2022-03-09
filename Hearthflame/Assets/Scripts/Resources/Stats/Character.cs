@@ -19,13 +19,14 @@ namespace GramophoneUtils.Stats
 
 		private bool isRear;
 		private bool isPlayer;
+		private bool isUnlocked;
 		private bool isCurrentActor = false;
 
 		private readonly Party party;
 		private readonly Inventory partyInventory;
 
 		private readonly CharacterTemplate characterTemplate;
-		private readonly PartyCharacterTemplate partyCharacterTemplate;
+		//private readonly PartyCharacterTemplate partyCharacterTemplate;
 
 		private readonly Brain brain;
 
@@ -41,41 +42,72 @@ namespace GramophoneUtils.Stats
 		public EquipmentInventory EquipmentInventory => equipmentInventory; //getter
 		public bool IsPlayer { get { return isPlayer; } set { isPlayer = value; } }
 		public bool IsRear { get { return isRear; } set { isRear = value; } }
+		public bool IsUnlocked { get { return isUnlocked; } set { isUnlocked = value; } }
 		public bool IsCurrentActor { get { return isCurrentActor; } }
 		public Party Party => party; //getter
 		public Inventory PartyInventory => partyInventory; //getter
 		public CharacterTemplate CharacterTemplate => characterTemplate; //getter
-		public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter
+		//public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter
 		public Brain Brain => brain; //getter
 		public Character() { } //constructor 1
-		public Character(PartyCharacterTemplate partyCharacterTemplate, Party party) //constructor 2
-		{	
-			this.partyCharacterTemplate = partyCharacterTemplate;
-			this.characterTemplate = partyCharacterTemplate.Template;
-			name = partyCharacterTemplate.Template.Name;
-			StatTypeStringRefDictionary = partyCharacterTemplate.Template.StatTypeStringRefDictionary;
-			statSystem = new StatSystem(partyCharacterTemplate.Template);
-			healthSystem = new HealthSystem(partyCharacterTemplate.Template);
+
+		public Character(CharacterTemplate characterTemplate, Inventory partyInventory) //constructor 2
+		{
+			//this.partyCharacterTemplate = partyCharacterTemplate;
+			this.characterTemplate = characterTemplate;
+			name = characterTemplate.Name;
+			statSystem = new StatSystem(characterTemplate, this);
+			StatTypeStringRefDictionary = statSystem.StatTypeStringRefDictionary;
+			healthSystem = new HealthSystem(characterTemplate);
 
 			healthSystem.OnHealthChanged += EnqueueBattlerNotification;
 
-			// subscribe to OnDeathEvent here? also, inject a reference to Ch aracter if needed
-			characterClass = partyCharacterTemplate.Template.CharacterClass;
-			this.skillSystem = new SkillSystem(partyCharacterTemplate, this);
+			// subscribe to OnDeathEvent here? also, inject a reference to Character if needed
+			characterClass = characterTemplate.CharacterClass;
+			this.skillSystem = new SkillSystem(this);
 			this.levelSystem = new LevelSystem(characterClass, this);
 			levelSystem.OnLevelChanged += characterClass.LevelUp;
-			equipmentInventory = new EquipmentInventory(this, party);
-			equipmentInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
-			isPlayer = partyCharacterTemplate.Template.IsPlayer;
-			isRear = partyCharacterTemplate.IsRear;
-			this.party = party;
-			partyInventory = party.PartyInventory;
+			equipmentInventory = new EquipmentInventory(this);
+			equipmentInventory.onInventoryItemsUpdated = partyInventory.onInventoryItemsUpdated;
+			this.partyInventory = partyInventory;
 
-			this.brain = partyCharacterTemplate.Brain;
-			
+			this.brain = CharacterTemplate.Brain;
+			this.IsUnlocked = CharacterTemplate.StartsUnlocked;
 			skillSystem.Initialise();
-			brain.Initialise(this);
+			if (brain != null)
+			{
+				brain.Initialise(this);
+			}
 		}
+
+		//public Character(PartyCharacterTemplate partyCharacterTemplate, Party party) //constructor 2
+		//{
+		//	this.partyCharacterTemplate = partyCharacterTemplate;
+		//	this.characterTemplate = partyCharacterTemplate.Template;
+		//	name = partyCharacterTemplate.Template.Name;
+		//	statSystem = new StatSystem(partyCharacterTemplate.Template, this);
+		//	StatTypeStringRefDictionary = statSystem.StatTypeStringRefDictionary;
+		//	healthSystem = new HealthSystem(partyCharacterTemplate.Template);
+
+		//	healthSystem.OnHealthChanged += EnqueueBattlerNotification;
+
+		//	// subscribe to OnDeathEvent here? also, inject a reference to Character if needed
+		//	characterClass = partyCharacterTemplate.Template.CharacterClass;
+		//	this.skillSystem = new SkillSystem(partyCharacterTemplate, this);
+		//	this.levelSystem = new LevelSystem(characterClass, this);
+		//	levelSystem.OnLevelChanged += characterClass.LevelUp;
+		//	equipmentInventory = new EquipmentInventory(this, party);
+		//	equipmentInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
+		//	isPlayer = partyCharacterTemplate.Template.IsPlayer;
+		//	isRear = partyCharacterTemplate.IsRear;
+		//	this.party = party;
+		//	partyInventory = party.PartyInventory;
+
+		//	this.brain = partyCharacterTemplate.Brain;
+
+		//	skillSystem.Initialise();
+		//	brain.Initialise(this);
+		//}
 
 		private void EnqueueBattlerNotification(int value)
 		{

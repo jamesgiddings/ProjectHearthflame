@@ -8,28 +8,46 @@ using UnityEngine.UI;
 
 public class TabPanelUI : MonoBehaviour
 {
-	[SerializeField] Transform tabParent;
-	[SerializeField] Transform tabContentParent;
-	[SerializeField] GameObject tabPrefab;
-	[SerializeField] GameObject tabContentPrefab;
-	[SerializeField] ItemDestroyer itemDestroyer;
+	[SerializeField] private Transform tabParent;
+	[SerializeField] private Transform tabContentParent;
+	[SerializeField] private GameObject tabPrefab;
+	[SerializeField] private GameObject tabContentPrefab;
+	[SerializeField] private ItemDestroyer itemDestroyer;
 	
-	[SerializeField] PlayerBehaviour playerBehaviour;
-
+	[SerializeField] private PlayerBehaviour playerBehaviour;
 
 	private void OnEnable()
 	{
 		tabContentParent.gameObject.SetActive(false);
-		foreach (PartyCharacter partyCharacter in playerBehaviour.Party.PartyCharacters)
+		if (playerBehaviour != null)
 		{
-			if (partyCharacter.IsUnlocked)
+			foreach (Character character in playerBehaviour.PlayerCharacters)
 			{
-				GameObject tabContentUI = Instantiate(tabContentPrefab, tabContentParent);
-				tabContentUI.GetComponent<TabContentUI>().Initialise(playerBehaviour.Party, partyCharacter.Character, itemDestroyer);
-				SetupTab(tabContentUI, partyCharacter.Character);
+				if (character != null)
+				{
+					if (character.IsUnlocked)
+					{
+						GameObject tabContentUI = Instantiate(tabContentPrefab, tabContentParent);
+						tabContentUI.GetComponent<TabContentUI>().Initialise(character, itemDestroyer);
+						SetupTab(tabContentUI, character);
+					}
+				}
 			}
+			tabContentParent.gameObject.SetActive(true);
 		}
-		tabContentParent.gameObject.SetActive(true);
+		else
+		{
+			Debug.LogWarning("No player found for UI to display.");
+		}
+	}
+
+	private void OnDisable()
+	{
+		for (int i = 0; i < tabContentParent.childCount; i++)
+		{
+			Destroy(tabContentParent.gameObject.transform.GetChild(i).gameObject);
+			Destroy(tabParent.gameObject.transform.GetChild(i).gameObject);
+		}
 	}
 
 	private void SetupTab(GameObject tabContentUI, Character character)

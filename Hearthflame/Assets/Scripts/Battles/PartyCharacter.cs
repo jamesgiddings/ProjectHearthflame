@@ -1,3 +1,4 @@
+using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,9 +37,9 @@ public class PartyCharacter
 
 	public Character Character => character; // getter
 
-	public PartyCharacter(PartyCharacterTemplate partyCharacterTemplate, Party party)
+	public PartyCharacter(CharacterTemplate characterTemplate, Inventory partyInventory)
 		{
-			this.character = new Character(partyCharacterTemplate, party);
-			this.isUnlocked = partyCharacterTemplate.IsUnlocked;
+			this.character = new Character(characterTemplate, partyInventory);
+			this.isUnlocked = characterTemplate.StartsUnlocked;
 		}
 }

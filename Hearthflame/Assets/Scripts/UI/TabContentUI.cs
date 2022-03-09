@@ -15,13 +15,11 @@ public class TabContentUI : MonoBehaviour
 	[SerializeField] MoneyDisplayUI moneyDisplayUI;
 	[SerializeField] LevelDisplayUI levelDisplayUI;
 
-	private Party party;
 	private Character character;
 	private ItemDestroyer itemDestroyer;
 
-	public void Initialise(Party party, Character character, GramophoneUtils.Items.ItemDestroyer itemDestroyer)
+	public void Initialise(Character character, GramophoneUtils.Items.ItemDestroyer itemDestroyer)
 	{
-		this.party = party;
 		this.character = character;
 		this.itemDestroyer = itemDestroyer;
 		
@@ -40,7 +38,7 @@ public class TabContentUI : MonoBehaviour
 
 	private void InitialiseMoneyDisplay()
 	{
-		moneyDisplayUI.SetInventory(party);
+		moneyDisplayUI.SetInventory(character.PartyInventory);
 	}
 
 	private void InitialiseStatsDisplay()
@@ -59,13 +57,13 @@ public class TabContentUI : MonoBehaviour
 	{
 		for (int i = 0; i < inventorySlotsHolder.childCount; i++)
 
-			inventorySlotsHolder.GetChild(i).gameObject.GetComponent<InventorySlotUI>().Initialise(party, character, itemDestroyer);
+			inventorySlotsHolder.GetChild(i).gameObject.GetComponent<InventorySlotUI>().Initialise(character, itemDestroyer);
 	}
 
 	private void InitialiseEquipmentSlots()
 	{
 		for (int i = 0; i < equipmentSlotsHolder.childCount; i++)
 
-			equipmentSlotsHolder.GetChild(i).gameObject.GetComponent<EquipmentSlotUI>().Initialise(party, character, itemDestroyer);
+			equipmentSlotsHolder.GetChild(i).gameObject.GetComponent<EquipmentSlotUI>().Initialise(character, itemDestroyer);
 	}
 }

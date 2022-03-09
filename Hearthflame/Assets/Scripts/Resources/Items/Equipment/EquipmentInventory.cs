@@ -2,6 +2,7 @@ using UnityEngine;
 using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Events;
 
 namespace GramophoneUtils.Items.Containers
 {
@@ -14,7 +15,7 @@ namespace GramophoneUtils.Items.Containers
 		public Action Refresh;
 
 		public Dictionary<EquipmentType, int> equipmentTypeToSlotIndex;
-		public EquipmentInventory(Character character, Party party, int size = 4, int money = 0)
+		public EquipmentInventory(Character character, int size = 4, int money = 0)
 		{
 			this.character = character;
 			itemSlots = new ItemSlot[size];
@@ -25,13 +26,17 @@ namespace GramophoneUtils.Items.Containers
 				{ EquipmentType.Weapon, 1 },
 				{ EquipmentType.Trinket, 2 },
 			};
-			onInventoryItemsUpdated = party.onInventoryItemsUpdated;
-			onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
+			if (character.PartyInventory != null)
+			{
+				this.onInventoryItemsUpdated = character.PartyInventory.onInventoryItemsUpdated;
+				this.onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
+			}
 		}
 
 		private void OnDestroy()
 		{
-			onInventoryItemsUpdated.RemoveListener(RefreshEquipmentInSlots);
+			if (character.PartyInventory != null)
+				onInventoryItemsUpdated.RemoveListener(RefreshEquipmentInSlots);
 		}
 
 		private void EquipItemInSlot(ItemSlot itemSlot)

@@ -18,7 +18,7 @@ public class SkillSystem
 
 	public Dictionary<Skill, int> LockedSkills => lockedSkills; // getter
 
-	public SkillSystem(PartyCharacterTemplate template, Character character) // constructor
+	public SkillSystem(Character character) // constructor
 	{
 		this.character = character;
 		unlockedSkills = new List<Skill>();

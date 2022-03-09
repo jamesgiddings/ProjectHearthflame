@@ -1,12 +1,12 @@
+using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class BattleTrigger : MonoBehaviour
+public class BattleTrigger : MonoBehaviour, ISaveable
 {
 	[SerializeField] private Battle battle;
 
@@ -17,6 +17,9 @@ public class BattleTrigger : MonoBehaviour
 	
 	private Rigidbody2D rb;
 	private BoxCollider2D boxCollider;
+
+	public Battle Battle => battle;
+	public bool DeactivateOnTrigger => deactivateOnTrigger;
 
 	private void OnDrawGizmos()
 	{
@@ -43,11 +46,37 @@ public class BattleTrigger : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
-			SceneController.AdditiveLoadScene(battle, player.Party);
+			battle.InstanceCharacters();
+			StartCoroutine(SceneController.AdditiveLoadScene(battle, player));
 			if (deactivateOnTrigger)
 			{
 				this.gameObject.SetActive(false);
 			}
 		}
 	}
+
+	#region SavingLoading
+	public object CaptureState()
+	{
+		Debug.Log("gameObject.activeInHierarchy while saving: " + gameObject.activeInHierarchy);
+		return new SaveData
+		{
+			IsActive = gameObject.activeInHierarchy
+			
+		};
+	}
+
+	public void RestoreState(object state)
+	{
+		var saveData = (SaveData)state;
+		Debug.Log("saveData.IsActive while loading: " + saveData.IsActive);
+		gameObject.SetActive(saveData.IsActive);
+	}
+
+	[Serializable]
+	public struct SaveData
+	{
+		public bool IsActive;
+	}
+	#endregion
 }

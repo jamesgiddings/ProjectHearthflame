@@ -76,7 +76,10 @@ public class Skill : Resource, IHotbarItem
 		foreach (Character character in characterTargets)
 		{
 			ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
-			ApplyDamageObjects(character);
+			
+			SendDamageStructs(character, originator);
+			SendHealingStructs(character, originator);
+			//ApplyModifiedDamageObjects(character);
 			ApplyHealingObjects(character);
 		}
 	}
@@ -89,7 +92,39 @@ public class Skill : Resource, IHotbarItem
 		}
 	}
 
-	private void ApplyDamageObjects(Character character)
+	private void SendDamageStructs(Character character, Character originator)
+	{
+		List<Damage> modifiedDamages = ModifyDamageStructs(originator);
+		character.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator);
+	}	
+
+	private void SendHealingStructs(Character character, Character originator)
+	{
+		List<Healing> modifiedHealings = ModifyHealingStructs(originator);
+		character.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator);
+	}
+
+	private List<Damage> ModifyDamageStructs(Character originator)
+	{
+		List<Damage> modifiedDamages = new List<Damage>();
+		foreach (Damage damage in skillDamages)
+		{
+			modifiedDamages.Add(originator.StatSystem.ModifyOutgoingDamage(damage));
+		}
+		return modifiedDamages;
+	}	
+	
+	private List<Healing> ModifyHealingStructs(Character originator)
+	{
+		List<Healing> modifiedHealings = new List<Healing>();
+		foreach (Healing healing in skillHealings)
+		{
+			modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
+		}
+		return modifiedHealings;
+	}
+
+	private void ApplyModifiedDamageObjects(Character character)
 	{
 		foreach (Damage damage in skillDamages)
 		{

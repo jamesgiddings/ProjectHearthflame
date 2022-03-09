@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] private ResourceDatabase resourceDatabase;
+	[SerializeField] private StatSystemConstants statSystemConstants;
 
     private static GameManager instance;
 
 	public ResourceDatabase ResourceDatabase => resourceDatabase; // getter
+	public StatSystemConstants StatSystemConstants => statSystemConstants; // getter
 
 	public Action<Scene> BattleSceneLoaded;
 

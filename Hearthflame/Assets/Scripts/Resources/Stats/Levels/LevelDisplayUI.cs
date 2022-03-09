@@ -9,7 +9,7 @@ public class LevelDisplayUI : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI levelText;
 	[SerializeField] private Slider experienceSlider;
-	[SerializeField] private Character character;
+	private Character character;
 
 	private LevelSystem levelSystem;
 	private LevelSystemAnimated levelSystemAnimated;
@@ -46,7 +46,7 @@ public class LevelDisplayUI : MonoBehaviour
 
 	private void SetLevelNumber(int levelNumber)
 	{
-		levelText.text = (levelNumber + 1).ToString() + " " + character.CharacterClass.Name; // the base level in the logic is 0, so the readable level is that +1
+		levelText.text = "Level " + (levelNumber + 1).ToString() + "\n" + character.CharacterClass.Name; // the base level in the logic is 0, so the readable level is that +1
 	}
 
 	private void OnDestroy()

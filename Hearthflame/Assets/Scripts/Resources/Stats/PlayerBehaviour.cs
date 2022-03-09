@@ -3,36 +3,58 @@ using UnityEngine;
 using GramophoneUtils.SavingLoading;
 using UnityEngine.Events;
 using GramophoneUtils.Items.Containers;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace GramophoneUtils.Stats
 {
 	public class PlayerBehaviour : MonoBehaviour, ISaveable
 	{
-		[SerializeField] private PartyTemplate partyTemplate;
-		private Party party;
+		[SerializeField] public UnityEvent onStatsChanged;
+		[SerializeField] public UnityEvent onInventoryItemsUpdated;
 
-		public Party Party
+		private Inventory partyInventory;
+		private int partyInventorySize;
+		private int startingScrip;
+
+		private string transitionTargetNameCache = "";
+
+		[SerializeField] private CharacterTemplate[] playerCharacterTemplates = new CharacterTemplate[8];
+
+		private List<Character> playerCharacters;
+
+		public CharacterTemplate[] PlayerCharacterTemplates => playerCharacterTemplates; // getter
+
+		public Inventory PartyInventory 
 		{
 			get
 			{
-				if (party != null) { return party; }
-				party = partyTemplate.CreateBlueprintInstance<Party>();
-				return party;
+				if (partyInventory != null) { return partyInventory;  };
+				partyInventory = new Inventory(24, 10000, onInventoryItemsUpdated);
+				return partyInventory;
+			}
+		}
+
+		public List<Character> PlayerCharacters
+		{
+			get
+			{
+				if (playerCharacters != null) { return playerCharacters; }
+				playerCharacters = InstanceCharacters();
+				return playerCharacters;
 			}
 		}
 
 		private void Start()
 		{
-			party.PartyInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
-
 			RegisterCharactersOnStatsChangedEvent();
 		}
 
 		private void RegisterCharactersOnStatsChangedEvent()
 		{
-			for (int i = 0; i < party.PartyCharacters.Length; i++)
+			for (int i = 0; i < PlayerCharacters.Count; i++)
 			{
-				RegisterCharacterOnStatsChangedEvent(party.PartyCharacters[i].Character);
+				RegisterCharacterOnStatsChangedEvent(PlayerCharacters[i]);
 			}
 		}
 
@@ -54,57 +76,72 @@ namespace GramophoneUtils.Stats
 
 		private void OnStatsChanged()
 		{
-			party.onStatsChanged.Invoke();
+			onStatsChanged.Invoke();
 		}
 
 		private void OnDestroy() // just deregister from the unity event
 		{
-			foreach (PartyCharacter partyCharacter in Party.PartyCharacters)
+			foreach (Character character in PlayerCharacters)
 			{
-				UnregisterCharacterOnStatsChangedEvent(partyCharacter.Character);
+				UnregisterCharacterOnStatsChangedEvent(character);
 			}
+		}
+
+		public List<Character> InstanceCharacters()
+		{
+			Debug.Log("Instancing player characters.");
+			playerCharacters = new List<Character>();
+			for (int i = 0; i < playerCharacterTemplates.Length; i++)
+			{
+				if (playerCharacterTemplates[i] != null)
+				{
+					playerCharacters.Add(new Character(playerCharacterTemplates[i], PartyInventory));
+					playerCharacters[i].IsPlayer = true;
+					playerCharacters[i].IsRear = (i > 3) ? true : false;
+				}
+			}
+			return playerCharacters;
 		}
 
 		#region SavingLoading
 		public object CaptureState()
 		{
-			Debug.Log("Player CaptureState()");
-			PartyCharacterSaveData[] partyCharactersSaveDatasCache = new PartyCharacterSaveData[Party.PartyCharacters.Length];
-			for (int i = 0; i < Party.PartyCharacters.Length; i++)
+			CharacterSaveData[] charactersSaveDatasCache = new CharacterSaveData[PlayerCharacters.Count];
+			for (int i = 0; i < PlayerCharacters.Count; i++)
 			{
 
-				partyCharactersSaveDatasCache[i] = new PartyCharacterSaveData
+				charactersSaveDatasCache[i] = new CharacterSaveData
 				{
 					// IsUnlocked
 
-					IsUnlocked = Party.PartyCharacters[i].IsUnlocked,
+					IsUnlocked = PlayerCharacters[i].IsUnlocked,
 
 					// IsRear
 
-					IsRear = Party.PartyCharacters[i].IsRear,
+					IsRear = PlayerCharacters[i].IsRear,
 
 					// LevelSystem
 
-					Level = Party.PartyCharacters[i].Character.LevelSystem.GetLevel(),
-					Experience = Party.PartyCharacters[i].Character.LevelSystem.GetExperience(),
+					Level = PlayerCharacters[i].LevelSystem.GetLevel(),
+					Experience = PlayerCharacters[i].LevelSystem.GetExperience(),
 
 					// StatSystem
 
-					Dexterity = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.CharacterTemplate.StatTypeStringRefDictionary["Dexterity"]),
-					Magic = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Magic"]),
-					Resilience = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Resilience"]),
-					Speed = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Speed"]),
-					Strength = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Strength"]),
-					Wits = Party.PartyCharacters[i].Character.StatSystem.GetBaseStatValue(Party.PartyCharacters[i].Character.StatTypeStringRefDictionary["Wits"]),
+					Dexterity = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatSystem.StatTypeStringRefDictionary["Dexterity"]),
+					Magic = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatTypeStringRefDictionary["Magic"]),
+					Resilience = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatTypeStringRefDictionary["Resilience"]),
+					Speed = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatTypeStringRefDictionary["Speed"]),
+					Strength = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatTypeStringRefDictionary["Strength"]),
+					Wits = PlayerCharacters[i].StatSystem.GetBaseStatValue(PlayerCharacters[i].StatTypeStringRefDictionary["Wits"]),
 
 					// HealthSystem
 
-					CurrentHealth = Party.PartyCharacters[i].Character.HealthSystem.CurrentHealth,
-					MaxHealth = Party.PartyCharacters[i].Character.HealthSystem.MaxHealth,
+					CurrentHealth = PlayerCharacters[i].HealthSystem.CurrentHealth,
+					MaxHealth = PlayerCharacters[i].HealthSystem.MaxHealth,
 
 					// EquipmentInventory
 
-					EquipmentInventorySaveData = Party.PartyCharacters[i].Character.EquipmentInventory.CaptureState()
+					EquipmentInventorySaveData = PlayerCharacters[i].EquipmentInventory.CaptureState()
 				};
 			}
 			return new SaveData
@@ -116,14 +153,14 @@ namespace GramophoneUtils.Stats
 
 				// PartyCharacters
 
-				partyCharactersSaveData = partyCharactersSaveDatasCache,
+				charactersSaveData = charactersSaveDatasCache,
 
 				// PartyInventory
 
-				PartyInventorySaveData = Party.PartyInventory.CaptureState()
+				PartyInventorySaveData = PartyInventory.CaptureState()
 			};
 		}
-		
+
 		public void RestoreState(object state)
 		{
 			var saveData = (SaveData)state;
@@ -134,51 +171,51 @@ namespace GramophoneUtils.Stats
 
 			// PartyCharacters
 
-			for (int i = 0; i < saveData.partyCharactersSaveData.Length; i++)
+			for (int i = 0; i < saveData.charactersSaveData.Length; i++)
 			{
 				// IsUnlocked
-				
-				Party.PartyCharacters[i].IsUnlocked = saveData.partyCharactersSaveData[i].IsUnlocked;
+
+				PlayerCharacters[i].IsUnlocked = saveData.charactersSaveData[i].IsUnlocked;
 
 				// IsRear
 
-				Party.PartyCharacters[i].IsRear = saveData.partyCharactersSaveData[i].IsRear;
+				PlayerCharacters[i].IsRear = saveData.charactersSaveData[i].IsRear;
 
-				Character character = Party.PartyCharacters[i].Character;
+				Character character = PlayerCharacters[i];
 
 				// LevelSystem
 
-				character.LevelSystem.SetLevel(saveData.partyCharactersSaveData[i].Level);
-				character.LevelSystem.SetExperience(saveData.partyCharactersSaveData[i].Experience);
+				character.LevelSystem.SetLevel(saveData.charactersSaveData[i].Level);
+				character.LevelSystem.SetExperience(saveData.charactersSaveData[i].Experience);
 
 				character.LevelSystem.LevelSystemAnimated.UpdateLevelSystemAnimated();
-				  
+
 				// StatSystem
 
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Dexterity"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Dexterity);
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Magic"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Magic);
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Resilience"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Resilience);
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Speed"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Speed);
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Strength"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Strength);
-				character.StatSystem.GetStat(character.CharacterTemplate.StatTypeStringRefDictionary["Wits"]).UpdateBaseValue(saveData.partyCharactersSaveData[i].Wits);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Dexterity"]).UpdateBaseValue(saveData.charactersSaveData[i].Dexterity);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Magic"]).UpdateBaseValue(saveData.charactersSaveData[i].Magic);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Resilience"]).UpdateBaseValue(saveData.charactersSaveData[i].Resilience);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Speed"]).UpdateBaseValue(saveData.charactersSaveData[i].Speed);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Strength"]).UpdateBaseValue(saveData.charactersSaveData[i].Strength);
+				character.StatSystem.GetStat(character.StatSystem.StatTypeStringRefDictionary["Wits"]).UpdateBaseValue(saveData.charactersSaveData[i].Wits);
 
 				// HealthSystem
 
-				character.HealthSystem.SetCurrentHealth(saveData.partyCharactersSaveData[i].CurrentHealth);
-				character.HealthSystem.SetMaxHealth(saveData.partyCharactersSaveData[i].MaxHealth);
+				character.HealthSystem.SetCurrentHealth(saveData.charactersSaveData[i].CurrentHealth);
+				character.HealthSystem.SetMaxHealth(saveData.charactersSaveData[i].MaxHealth);
 
 				// EquipmentInventory
 
-				character.EquipmentInventory.RestoreState(saveData.partyCharactersSaveData[i].EquipmentInventorySaveData);
+				character.EquipmentInventory.RestoreState(saveData.charactersSaveData[i].EquipmentInventorySaveData);
 			}
 
 			// PartyInventory
 
-			Party.PartyInventory.RestoreState(saveData.PartyInventorySaveData);
+			PartyInventory.RestoreState(saveData.PartyInventorySaveData);
 		}
 
 		[Serializable]
-		public struct PartyCharacterSaveData
+		public struct CharacterSaveData
 		{
 			// IsUnlocked
 			public bool IsUnlocked;
@@ -186,7 +223,7 @@ namespace GramophoneUtils.Stats
 			// IsRear
 
 			public bool IsRear;
-			
+
 			// LevelSystem
 			public int Level;
 			public int Experience;
@@ -210,11 +247,11 @@ namespace GramophoneUtils.Stats
 		public struct SaveData
 		{
 			// Position
-			
+
 			public float positionX;
 			public float positionY;
 
-			public PartyCharacterSaveData[] partyCharactersSaveData;
+			public CharacterSaveData[] charactersSaveData;
 
 			public object PartyInventorySaveData;
 		}

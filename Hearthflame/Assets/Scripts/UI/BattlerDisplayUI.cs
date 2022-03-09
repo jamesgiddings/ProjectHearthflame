@@ -49,19 +49,21 @@ public class BattlerDisplayUI : MonoBehaviour
 		for (int i = 0; i < characterInventory.CharacterSlots.Length; i++)
 		{
 			CharacterSlot characterSlot = characterInventory.CharacterSlots[i];
-			Debug.Log(characterSlot.PartyCharacterTemplate.IsUnlocked);
+			Debug.LogWarning("Broken.");
 			//Debug.Log(!characterSlot.Character.PartyCharacterTemplate.PartyCharacter.IsRear);
-
-			if (isPlayer)
+			if (characterSlot.Character != null)
 			{
-				if (characterSlot.PartyCharacterTemplate.IsUnlocked) //&& !characterSlot.Character.PartyCharacterTemplate.PartyCharacter.IsRear)
+				if (isPlayer)
+				{
+					if (true) //characterSlot.CharacterTemplate.IsUnlocked) //&& !characterSlot.Character.PartyCharacterTemplate.PartyCharacter.IsRear)
+					{
+						battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer);
+					}
+				}
+				else
 				{
 					battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer);
 				}
-			}
-			else
-			{
-				battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer);
 			}
 		}
 	}

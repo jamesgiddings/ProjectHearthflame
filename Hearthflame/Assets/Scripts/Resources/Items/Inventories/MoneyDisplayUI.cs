@@ -24,9 +24,9 @@ public class MoneyDisplayUI : MonoBehaviour
 		moneyValue.text = inventory.Money.ToString();
 	}
 
-	public void SetInventory(Party party)
+	public void SetInventory(Inventory partyInventory)
 	{
-		this.inventory = party.PartyInventory;
+		this.inventory = partyInventory;
 		UpdateMoneyDisplayUI();
 	}
 }

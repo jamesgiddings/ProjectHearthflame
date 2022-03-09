@@ -22,6 +22,8 @@ public class TargetManager
 
 	public Action<List<Character>> OnCurrentTargetsChanged;
 
+	public List<Character> CurrentTargetsCache => currentTargetsCache; // getter
+
 	public bool IsTargeting => isTargeting; // getter
 
 	public TargetManager(BattleManager battleManager)
@@ -81,7 +83,10 @@ public class TargetManager
 				if (originator.IsPlayer)
 				{
 					int index = currentTargetsCache.Count > targetIndex ? targetIndex : 0;
-					currentlyTargeted.Add(currentTargetsCache[index]);
+					if (currentTargetsCache.Count > 0)
+					{
+						currentlyTargeted.Add(currentTargetsCache[index]);
+					}
 					Debug.Log("targetIndex: " + targetIndex);
 					Debug.Log("currentTargetsCache.Count: " + currentTargetsCache.Count);
 				}
@@ -89,9 +94,6 @@ public class TargetManager
 				{
 					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(currentTargetsCache, skill));
 				}
-					
-
-				
 				break;
 			case TargetNumberFlag.All:
 				currentlyTargeted.AddRange(currentTargetsCache);
@@ -99,8 +101,12 @@ public class TargetManager
 			case TargetNumberFlag.AllExceptUser:
 				currentlyTargeted.AddRange(currentTargetsCache.Where(character => character != originator));
 				break;
+			case TargetNumberFlag.Self:
+				currentlyTargeted.AddRange(currentTargetsCache.Where(character => character == originator));
+				break;
 		}
-		OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
+		if (currentlyTargeted.Count > 0)
+			OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
 		return currentlyTargeted;
 	}
 

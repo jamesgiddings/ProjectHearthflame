@@ -7,10 +7,8 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 {
 	[SerializeField] private PlayerBehaviour playerBehaviour;
 
-	private Party party;
-
-	private PartyCharacter[] frontCharacters;
-	private PartyCharacter[] rearCharacters;
+	private Character[] frontCharacters;
+	private Character[] rearCharacters;
 
 	public PlayerBehaviour PlayerBehaviour { get { return playerBehaviour; } set { playerBehaviour = value; } }
 
@@ -19,19 +17,17 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 
 	private void OnEnable()
 	{
-		frontCharacters = new PartyCharacter[4];
-		rearCharacters = new PartyCharacter[4];
-
-		party = playerBehaviour.Party;
+		frontCharacters = new Character[4];
+		rearCharacters = new Character[4];
 
 		int frontIndex = 0;
 		int rearIndex = 0;
 
-		IEnumerable<PartyCharacter> query = party.PartyCharacters.Where(character => character.IsUnlocked == true);
-		List<PartyCharacter> unlockedCharacters = new List<PartyCharacter>();
-		foreach (PartyCharacter partyCharacter in query)
+		IEnumerable<Character> query = playerBehaviour.PlayerCharacters.Where(character => character.IsUnlocked == true);
+		List<Character> unlockedCharacters = new List<Character>();
+		foreach (Character character in query)
 		{
-			unlockedCharacters.Add(partyCharacter);
+			unlockedCharacters.Add(character);
 		}
 
 		for (int i = 0; i < unlockedCharacters.Count; i++)
@@ -56,8 +52,8 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (frontCharacters[i] != null)
 			{
-				PartyCharacterTemplate frontCharacter = UnityEngine.Object.Instantiate(frontCharacters[i].Character.PartyCharacterTemplate) as PartyCharacterTemplate;
-				frontCharacter.PartyCharacter = frontCharacters[i];
+				CharacterTemplate frontCharacter = UnityEngine.Object.Instantiate(frontCharacters[i].CharacterTemplate) as CharacterTemplate;
+				//frontCharacter.PartyCharacter = frontCharacters[i];
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = frontCharacter;
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -72,8 +68,8 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (rearCharacters[i] != null)
 			{
-				PartyCharacterTemplate rearCharacter = UnityEngine.Object.Instantiate(rearCharacters[i].Character.PartyCharacterTemplate) as PartyCharacterTemplate;
-				rearCharacter.PartyCharacter = rearCharacters[i];
+				CharacterTemplate rearCharacter = UnityEngine.Object.Instantiate(rearCharacters[i].CharacterTemplate) as CharacterTemplate;
+				//rearCharacter.PartyCharacter = rearCharacters[i];
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = rearCharacter;
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -118,6 +114,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 
 	private void UpdateCharacterSlots()
 	{
+		Debug.LogWarning("Broken");
 		for (int i = 0; i < FrontCharacterSlotsHolder.childCount; i++)
 		{
 			if (FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
