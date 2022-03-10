@@ -28,7 +28,7 @@ public class BattlerSprite : MonoBehaviour
         this.character = character;
         this.battleManager = battleManager;
         this.spriteImage.sprite = character.CharacterTemplate.Icon;
-        battleManager.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
+        battleManager.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
         character.HealthSystem.OnHealthChanged += DisplayFloatingTexts;
@@ -117,7 +117,7 @@ public class BattlerSprite : MonoBehaviour
 
 	private void OnDisable()
 	{
-        battleManager.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+        battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
         character.HealthSystem.OnHealthChanged -= DisplayFloatingTexts;

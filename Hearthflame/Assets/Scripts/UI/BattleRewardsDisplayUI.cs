@@ -12,12 +12,12 @@ public class BattleRewardsDisplayUI : MonoBehaviour
 	public void Initialise(BattleManager battleManager)
 	{
 		this.battleManager = battleManager;
-		battleManager.OnBattleRewardsEarned += UpdateDisplay;
+		battleManager.BattleDataModel.OnBattleRewardsEarned += UpdateDisplay;
 	}
 
 	public void OnDestroy()
 	{
-		battleManager.OnBattleRewardsEarned -= UpdateDisplay;
+		battleManager.BattleDataModel.OnBattleRewardsEarned -= UpdateDisplay;
 	}
 
 	public void UpdateDisplay(BattleReward battleReward)

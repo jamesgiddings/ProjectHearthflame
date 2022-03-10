@@ -34,14 +34,14 @@ public class RadialMenu : MonoBehaviour
 	public void InitialiseRadialMenu(BattleManager battleManager)
 	{
 		this.battleManager = battleManager;
-		this.character = battleManager.CurrentActor;
+		this.character = battleManager.BattleDataModel.CurrentActor;
 
 		InitialiseItemSubMenu();
 		InitialiseSkillsSubMenu();
 		UpdateDisplay();
 		//InitialisePositionSubMenu();
 
-		battleManager.OnCurrentActorChanged += UpdateDisplay;
+		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateDisplay;
 	}
 
 	private RMF_RadialMenu InitialiseItemSubMenu()
@@ -105,11 +105,11 @@ public class RadialMenu : MonoBehaviour
 
 	public void UpdateDisplay()
 	{
-		holder.SetActive(battleManager.CurrentActor.IsPlayer);
+		holder.SetActive(battleManager.BattleDataModel.CurrentActor.IsPlayer);
 				
-		if (battleManager.CurrentActor != this.character)
+		if (battleManager.BattleDataModel.CurrentActor != this.character)
 		{
-			this.character = battleManager.CurrentActor;
+			this.character = battleManager.BattleDataModel.CurrentActor;
 			if (character.IsPlayer)
 			{
 				DestroyOldMenu(itemsElementsParent);

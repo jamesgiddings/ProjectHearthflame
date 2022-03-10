@@ -29,18 +29,18 @@ public class TargetManager
 	public TargetManager(BattleManager battleManager)
 	{
 		this.battleManager = battleManager;
-		battleManager.OnSkillUsed += UseSkill;
+		battleManager.BattleDataModel.OnSkillUsed += UseSkill;
 	}
 
 	private void OnDestroy()
 	{
-		battleManager.OnSkillUsed -= UseSkill;
+		battleManager.BattleDataModel.OnSkillUsed -= UseSkill;
 	}
 	public List<Character> GetAllPossibleTargets(Skill skill, Character originator)
 	{
 		isTargeting = true;
 		currentSkill = skill;
-		List<Character> AllBattlers = battleManager.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
+		List<Character> AllBattlers = battleManager.BattleDataModel.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
 		Debug.Log(AllBattlers.Count);
 		IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();

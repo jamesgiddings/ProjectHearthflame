@@ -12,10 +12,12 @@ public class BattleBehaviour : MonoBehaviour
     [SerializeField] private BattlerDisplayUI battlerDisplayUI;
     [SerializeField] private RadialMenu radialMenu;
     [SerializeField] private BattleRewardsDisplayUI battleRewardsDisplayUI;
+    [SerializeField] private Camera battleCamera;
 
     public GameObject TurnOrderPrefab => turnOrderPrefab;
     public VoidEvent OnCharactersUpdated => onCharactersUpdated;
     public BattlerDisplayUI BattlerDisplayUI => battlerDisplayUI;
     public RadialMenu RadialMenu => radialMenu;
     public BattleRewardsDisplayUI BattleRewardsDisplayUI => battleRewardsDisplayUI;
+    public Camera BattleCamera => battleCamera;
 }

@@ -18,13 +18,12 @@ public class BattlerDisplayUI : MonoBehaviour
 	private CharacterInventory enemyBattlersList;
 	private CharacterInventory playerBattlersList;
 
-	private BattlerSprite[] battlerGameObjects;
+	private Battler[] battlerGameObjects;
 
 	public CharacterInventory PlayerBattlersList { get { return playerBattlersList; } set { playerBattlersList = value; } }
 	public CharacterInventory EnemyBattlersList { get { return enemyBattlersList; } set { enemyBattlersList = value; } }
 	public CharacterInventory OrderedBattlersListNew { get { return orderedBattlersListNew; } set { orderedBattlersListNew = value; } }
 	public CharacterInventory BattlersListNew { get { return battlersListNew; } set { battlersListNew = value; } }
-
 
 	#region Initialising
 	public void Initialise(BattleManager battleManager)
@@ -36,12 +35,12 @@ public class BattlerDisplayUI : MonoBehaviour
 		this.enemyBattlersList = battleManager.EnemyBattlersCharacterInventory;
 		this.playerBattlersList = battleManager.PlayerBattlersCharacterInventory;
 
-		battlerGameObjects = new BattlerSprite[battlersListNew.CharacterSlots.Length];
+		battlerGameObjects = new Battler[battlersListNew.CharacterSlots.Length];
 
 		InitialiseBattlers(playerBattlersList, true);
 		InitialiseBattlers(enemyBattlersList, false);
 
-		battleManager.OnCurrentActorChanged += UpdateDisplay;
+		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateDisplay;
 	}
 
 	private void InitialiseBattlers(CharacterInventory characterInventory, bool isPlayer)
@@ -57,25 +56,25 @@ public class BattlerDisplayUI : MonoBehaviour
 				{
 					if (true) //characterSlot.CharacterTemplate.IsUnlocked) //&& !characterSlot.Character.PartyCharacterTemplate.PartyCharacter.IsRear)
 					{
-						battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer);
+						battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer, i);
 					}
 				}
 				else
 				{
-					battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer);
+					battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer, i);
 				}
 			}
 		}
 	}
 
-	private BattlerSprite InitialiseBattler(CharacterSlot characterSlot, bool isPlayer)
+	private Battler InitialiseBattler(CharacterSlot characterSlot, bool isPlayer, int index)
 	{
 		Transform parent;
 		parent = (isPlayer)? playerTransform : enemyTransform;
 
-		BattlerSprite battler = UnityEngine.Object.Instantiate(battlerPrefab, parent).GetComponent<BattlerSprite>();
+		Battler battler = UnityEngine.Object.Instantiate(battlerPrefab, parent.GetChild(index)).GetComponent<Battler>();
 
-		battler.Initialise(battleManager, characterSlot.Character);
+		battler.Initialise(battleManager, characterSlot.Character, battleManager.BattleBehaviour.BattleCamera);
 
 		return battler;
 	}
@@ -91,7 +90,7 @@ public class BattlerDisplayUI : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		battleManager.OnCurrentActorChanged -= UpdateDisplay;
+		battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateDisplay;
 	}
 	#endregion
 }

@@ -30,10 +30,8 @@ public static class SceneController
 		if (battle != null && player != null)
 		{
 			BattleManager battleManager = Object.FindObjectOfType<BattleManager>(true);
-			Debug.Log(battleManager == null);
 			battleManager.Initialise(battle, player);
 		}
-
 	}
 
 	public static void UnloadScene(string sceneName)

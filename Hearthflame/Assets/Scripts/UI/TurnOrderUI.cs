@@ -16,7 +16,7 @@ public class TurnOrderUI : MonoBehaviour
 	{
 		this.battleManager = battleManager;
 		this.characterInventory = battleManager.OrderedBattlersCharacterInventory;
-		battleManager.OnCurrentActorChanged += UpdateTurnOrderUI;
+		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateTurnOrderUI;
 
 		characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
 
@@ -25,7 +25,7 @@ public class TurnOrderUI : MonoBehaviour
 			CharacterTurnSlotUI characterTurnSlotUI = UnityEngine.Object.Instantiate(characterTurnSlotPrefab, characterSlotsHolder).GetComponent<CharacterTurnSlotUI>();
 			characterTurnSlotUI.CharacterInventory = characterInventory;
 			characterTurnSlotUIs.Add(characterTurnSlotUI);
-			characterTurnSlotUI.SubscribeToOnCurrentActorChanged(battleManager.OnCurrentActorChanged);
+			characterTurnSlotUI.SubscribeToOnCurrentActorChanged(battleManager.BattleDataModel.OnCurrentActorChanged);
 			characterTurnSlotUI.SlotResource = characterSlot.CharacterTemplate;
 		}
 		characterInventory.onCharactersUpdated.Raise();
