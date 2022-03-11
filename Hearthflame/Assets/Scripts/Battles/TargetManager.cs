@@ -41,16 +41,12 @@ public class TargetManager
 		isTargeting = true;
 		currentSkill = skill;
 		List<Character> AllBattlers = battleManager.BattleDataModel.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
-		Debug.Log(AllBattlers.Count);
 		IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();
 		query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag(originator.IsPlayer)) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)
-		Debug.Log("Getting all possible targets");
-
 		foreach (Character character in query)
 		{
 			allPossibleTargets.Add(character);
-			Debug.Log(character.Name);
 		}
 		
 		allPossibleTargetsCache = allPossibleTargets;
@@ -87,8 +83,6 @@ public class TargetManager
 					{
 						currentlyTargeted.Add(currentTargetsCache[index]);
 					}
-					Debug.Log("targetIndex: " + targetIndex);
-					Debug.Log("currentTargetsCache.Count: " + currentTargetsCache.Count);
 				}
 				else
 				{
@@ -132,7 +126,6 @@ public class TargetManager
 						{
 							targetIndex = 0;
 						}
-						Debug.Log(targetIndex);
 						if (targetIndex > -1 && targetIndex < currentTargetsCache.Count)
 							currentlyTargeted.Add(currentTargetsCache[targetIndex]);
 						GameManager.Instance.StartCoroutine(InputDelay(0.1f));
@@ -147,7 +140,6 @@ public class TargetManager
 						{
 							targetIndex = 0;
 						}
-						Debug.Log(targetIndex);
 						if (targetIndex > -1 && targetIndex < currentTargetsCache.Count)
 							currentlyTargeted.Add(currentTargetsCache[targetIndex]);
 						GameManager.Instance.StartCoroutine(InputDelay(0.1f));

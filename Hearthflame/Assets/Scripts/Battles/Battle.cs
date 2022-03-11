@@ -26,8 +26,6 @@ public class Battle : Data
 	{
 		get
 		{
-			Debug.Log("GIO");
-			Debug.Log("battleCharacters != null: " + battleCharacters != null);
 			if (battleCharacters != null) { return battleCharacters; }
 			battleCharacters = InstanceCharacters();
 			return battleCharacters;
@@ -36,7 +34,6 @@ public class Battle : Data
 
 	public List<Character> InstanceCharacters()
 	{
-		Debug.Log("Instancing battle characters.");
 		battleCharacters = new List<Character>();
 		for (int i = 0; i < BattleCharacterTemplates.Length; i++)
 		{

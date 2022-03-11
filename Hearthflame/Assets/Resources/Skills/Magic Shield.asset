@@ -21,6 +21,7 @@ MonoBehaviour:
   targetAreaFlag: 1
   targetNumberFlag: 8
   targetTypeFlag: 1
+  skillAnimType: 5
   statModifierBlueprints:
   - {fileID: 11400000, guid: f55ea2dd99a3cd84bbc2f1ec6d5bb8da, type: 2}
   damageBlueprints: []

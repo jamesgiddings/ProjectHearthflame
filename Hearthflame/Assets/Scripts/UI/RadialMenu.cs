@@ -52,8 +52,6 @@ public class RadialMenu : MonoBehaviour
 
 		Button button = itemsElementsParent.GetComponent<Button>(); // get the button
 
-		Debug.Log("button is null: " + (button == null));
-
 		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); });
 
 		foreach (ItemSlot itemSlot in character.PartyInventory.ItemSlots) // add the items from the partyInventory
@@ -77,9 +75,7 @@ public class RadialMenu : MonoBehaviour
 
 		Transform parent = subMenu.gameObject.transform.GetChild(0); // get the parent transform for the elements
 
-		Button button = skillsElementsParent.GetComponent<Button>(); // get the button
-
-		Debug.Log("button == null: " + (button == null));
+		Button button = skillsElementsParent.GetComponent<Button>(); // get the buttons
 
 		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { battleManager.TargetManager.ClearTargets(); } });
 

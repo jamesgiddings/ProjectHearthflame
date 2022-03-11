@@ -19,6 +19,7 @@ MonoBehaviour:
   experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
   skillsAvailable:
   - {fileID: 11400000, guid: 69f0cab7f86133248a6339f40c71b6db, type: 2}
+  - {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
   levelStatEffects:
   - baseHealthIncrement: 10
     statComponentBlueprints:

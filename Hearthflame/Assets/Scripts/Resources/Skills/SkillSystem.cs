@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class SkillSystem
 	private List<Skill> unlockedSkills;
 	private Dictionary<Skill, int> lockedSkills;
 	private Skill activeSkill;
+
+	public Action<Skill, List<Character>> OnSkillUsed;
 
 	private int skillUseIncreaseMinimumInclusive = 1; // these are so we can set the range of 
 	private int skillUseIncreaseMaximumExclusive = 2; // possible increases when a skill is used.
@@ -27,13 +30,21 @@ public class SkillSystem
 
 	public void Initialise()
 	{
-		InitialiseLockedSkillsDictionary();
+		lockedSkills = InitialiseLockedSkillsDictionary();
+		if (lockedSkills.Count > 0)
+		{
+			activeSkill = GetDefaultNextActiveSkill();
+		}
+		else
+		{
+			activeSkill = null;
+		}
+		OnSkillUsed += IncreaseSkillUses;
 	}
 
 	private Dictionary<Skill, int> InitialiseLockedSkillsDictionary()
 	{
 		Dictionary<Skill, int> dict = new Dictionary<Skill, int>();
-
 		foreach (Skill skill in character.CharacterClass.SkillsAvailable)
 		{
 			if (skill.CanUnlock(skill, character))
@@ -45,24 +56,37 @@ public class SkillSystem
 				dict.Add(skill, 0);
 			}
 		}
-		Debug.Log("Character name: " + character.Name);
-		Debug.Log("Unlocked Skills: ");
-		foreach (Skill skill in UnlockedSkills)
-		{
-			Debug.Log(skill.name);
-		}		
-		Debug.Log("Locked Skills: ");
-		foreach (KeyValuePair<Skill, int> pair in LockedSkills)
-		{
-			Debug.Log(pair.Key.name);
-			Debug.Log(pair.Value);
-		}
 		return dict;
+	}
+
+	private Skill GetDefaultNextActiveSkill()
+	{
+		if (GetSkillsAvailableToStartUnlocking().Count > 0)
+		{
+			return GetSkillsAvailableToStartUnlocking()[0];
+		}
+		return null;
+	}
+
+	private List<Skill> GetSkillsAvailableToStartUnlocking()
+	{
+		List<Skill> skillsAvailable = new List<Skill>();
+		foreach (KeyValuePair<Skill, int> keyValuePair in lockedSkills)
+		{
+			if (keyValuePair.Key.CanStartUnlocking(keyValuePair.Key, character))
+			{
+				skillsAvailable.Add((keyValuePair.Key));
+			}
+		}
+		
+		return skillsAvailable;
+		
 	}
 
 	public void UnlockSkill(Skill skill)
 	{
 		unlockedSkills.Add(skill);
+		lockedSkills.Remove(skill);
 	}
 
 	public bool IsSkillUnlocked(Skill skill)
@@ -70,16 +94,27 @@ public class SkillSystem
 		return unlockedSkills.Contains(skill);
 	}
 
-	public void UseSkill(Skill skill)
+	public void IncreaseSkillUses(Skill skill, List<Character> targets)
 	{
-		if (skill == activeSkill)
+		if (activeSkill == null)
 		{
-			lockedSkills[skill] += SkillUseIncrease();
+			return;
+		}
+		if (skill.School == activeSkill.School)
+		{
+			if (lockedSkills.ContainsKey(activeSkill))
+			{
+				lockedSkills[activeSkill] += GetSkillIncreaseAmount();
+			}
+		}
+		if (activeSkill.CanUnlock(activeSkill, character))
+		{
+			UnlockSkill(activeSkill);
 		}
 	}
 
-	public int SkillUseIncrease()
+	public int GetSkillIncreaseAmount()
 	{
-		return Random.Range(skillUseIncreaseMinimumInclusive, skillUseIncreaseMaximumExclusive);
+		return UnityEngine.Random.Range(skillUseIncreaseMinimumInclusive, skillUseIncreaseMaximumExclusive);
 	}
 }

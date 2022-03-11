@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 public class Battler : MonoBehaviour
 {
@@ -21,14 +23,15 @@ public class Battler : MonoBehaviour
     private Character character;
     private BattleManager battleManager;
     private SpriteRenderer spriteRenderer;
+    private BattlerDisplayUI battlerDisplayUI;
 
     private Camera battleCamera;
-
-
 
     private bool isBeingTargeted;
 
     public bool IsBeingTargeted { get { return isBeingTargeted; } set { isBeingTargeted = value; } }
+
+    public Action OnTurnComplete;
 
     public void Initialise(BattleManager battleManager, Character character, Camera battleCamera)
     {
@@ -37,18 +40,83 @@ public class Battler : MonoBehaviour
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.spriteRenderer.sprite = character.CharacterTemplate.Icon;
         this.battleCamera = battleCamera;
+        this.battlerDisplayUI = battleManager.BattleBehaviour.BattlerDisplayUI;
         battleManager.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
         character.HealthSystem.OnHealthChanged += DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath += KillCharacter;
+        character.SkillSystem.OnSkillUsed += DisplayAnimation;
+
         UpdateHealthSlider(0);
 
         healthSlider.gameObject.GetComponent<RectTransform>().anchoredPosition = battlerStatsCanvas.WorldToCanvas(gameObject.transform.position + new Vector3(0f, healthSliderYOffset), battleCamera);
     }
 
+    private void DisplayAnimation(Skill skill, List<Character> targets)
+    {
+        switch (skill.SkillAnimType)
+        {
+            case (SkillAnimType.MeleePhysical):
+                foreach (Character target in targets)
+                {
+                    Vector3 startPos = gameObject.transform.position;
+                    Sequence sequence = DOTween.Sequence();
 
-    private void UpdateTargetCursor(List<Character> targets)
+                    //Vector3 targetPos = battlerDisplayUI.CharacterBattlerDictionary[target].transform.position + (gameObject.transform.position / 5);
+
+                    sequence.Append(gameObject.transform.DOMove(battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 1.5f));
+                    sequence.Append(gameObject.transform.DOShakeRotation(0.5f, 20f).OnComplete(() => skill.DoNextBit(targets, character)));
+                    sequence.Append(gameObject.transform.DOMove(startPos, 0.4f)).WaitForCompletion();
+                    sequence.Play().OnComplete(() => OnTurnComplete?.Invoke());
+                }
+                break;
+            case (SkillAnimType.MagicalProjectile):
+                gameObject.transform.DOShakeRotation(0.5f, 20f).WaitForCompletion();
+
+                Sequence projectileSequence = DOTween.Sequence();
+
+                List<GameObject> projectiles = new List<GameObject>();
+
+                foreach (Character target in targets)
+                {
+                    GameObject projectile = Instantiate(skill.ProjectilePrefab, gameObject.transform);
+                    projectile.transform.localPosition = new Vector3(0, 0, 0);
+                    projectile.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    projectiles.Add(projectile);
+                    projectileSequence.Join(projectile.transform.DOMove(battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 0.4f));
+                    projectileSequence.Join(projectile.transform.DOScale(2f, 0.4f));
+
+                }
+                projectileSequence.Play().OnComplete(() =>
+                {
+                    DestroyProjectiles(projectiles);
+                    skill.DoNextBit(targets, character);
+                    OnTurnComplete?.Invoke();
+                });
+
+                break;
+            case (SkillAnimType.BuffOrDebuff):
+                foreach (Character target in targets)
+                {
+                    Sequence sequence = DOTween.Sequence();
+
+                    sequence.Append(gameObject.transform.DOShakeRotation(0.5f, 20f).OnComplete(() => skill.DoNextBit(targets, character))).WaitForCompletion();
+                    sequence.Play().OnComplete(() => OnTurnComplete?.Invoke());
+                }
+                break;
+        }
+    }
+
+    private void DestroyProjectiles(List<GameObject> projectiles)
+	{
+		foreach (GameObject projectile in projectiles)
+		{
+            Destroy(projectile);
+		}
+	}
+
+	private void UpdateTargetCursor(List<Character> targets)
     {
         if (targets.Contains(character))
         {

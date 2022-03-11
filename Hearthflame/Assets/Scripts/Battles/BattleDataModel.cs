@@ -94,13 +94,10 @@ public class BattleDataModel
 		battlersList = new List<Character>();
 		playerBattlersList = new List<Character>();
 		enemyBattlersList = new List<Character>();
-
-		Debug.Log(playerCharacters.Count);
 		foreach (Character character in playerCharacters)
 		{
 			if (character != null)
 			{
-				Debug.Log(playerCharacters.Count);
 				if (character.IsUnlocked) // && IsFront
 				{
 					battlersList.Add(character);

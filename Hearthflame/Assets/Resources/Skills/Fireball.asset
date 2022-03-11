@@ -17,11 +17,15 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
+  school: 1
   prerequisites: []
   usesToUnlock: 0
   targetAreaFlag: 4
   targetNumberFlag: 1
   targetTypeFlag: 1
+  skillAnimType: 4
+  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+    type: 3}
   statModifierBlueprints: []
   damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}

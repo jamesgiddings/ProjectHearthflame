@@ -89,7 +89,6 @@ namespace GramophoneUtils.Stats
 
 		public List<Character> InstanceCharacters()
 		{
-			Debug.Log("Instancing player characters.");
 			playerCharacters = new List<Character>();
 			for (int i = 0; i < playerCharacterTemplates.Length; i++)
 			{

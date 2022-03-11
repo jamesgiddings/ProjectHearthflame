@@ -26,7 +26,6 @@ public class RandomObjectCollection<T>
 				weighting = item.weighting;
 			}
 		}
-		Debug.Log("It does indeed contain it.");
 		return weighting;
 	}
 
@@ -49,15 +48,12 @@ public class RandomObjectCollection<T>
 		}
 		weightingSum = GetWeightingSum();
 		float rand = UnityEngine.Random.Range(0f, weightingSum);
-		Debug.Log("rand: " + rand);
 		float runningSum = 0;
 		foreach (var randomObject in randomObjects)
 		{
 			runningSum += randomObject.weighting;
-			Debug.Log("runningSum: " + runningSum);
 			if (rand <= runningSum)
 			{
-				Debug.Log("Adding ");
 				return randomObject;
 			}
 		}

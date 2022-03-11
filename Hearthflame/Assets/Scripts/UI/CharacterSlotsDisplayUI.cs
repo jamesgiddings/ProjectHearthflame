@@ -119,9 +119,9 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				PartyCharacterTemplate partyCharacterTemplate = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as PartyCharacterTemplate;
-				partyCharacterTemplate.PartyCharacter.IsRear = false;
-				partyCharacterTemplate.PartyCharacter.Character.IsRear = false;
+				CharacterTemplate characterTemplate = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as CharacterTemplate;
+				//characterTemplate.IsRear = false;
+				//characterTemplate.PartyCharacter.Character.IsRear = false;
 			}
 		}
 
@@ -129,9 +129,9 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				PartyCharacterTemplate partyCharacterTemplate = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as PartyCharacterTemplate;
-				partyCharacterTemplate.PartyCharacter.IsRear = true;
-				partyCharacterTemplate.PartyCharacter.Character.IsRear = true;
+				CharacterTemplate characterTemplate = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as CharacterTemplate;
+				//characterTemplate.PartyCharacter.IsRear = true;
+				//characterTemplate.PartyCharacter.Character.IsRear = true;
 			}
 		}
 	}

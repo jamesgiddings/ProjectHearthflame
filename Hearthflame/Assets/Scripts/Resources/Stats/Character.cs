@@ -22,7 +22,6 @@ namespace GramophoneUtils.Stats
 		private bool isUnlocked;
 		private bool isCurrentActor = false;
 
-		private readonly Party party;
 		private readonly Inventory partyInventory;
 
 		private readonly CharacterTemplate characterTemplate;
@@ -44,7 +43,6 @@ namespace GramophoneUtils.Stats
 		public bool IsRear { get { return isRear; } set { isRear = value; } }
 		public bool IsUnlocked { get { return isUnlocked; } set { isUnlocked = value; } }
 		public bool IsCurrentActor { get { return isCurrentActor; } }
-		public Party Party => party; //getter
 		public Inventory PartyInventory => partyInventory; //getter
 		public CharacterTemplate CharacterTemplate => characterTemplate; //getter
 		//public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter

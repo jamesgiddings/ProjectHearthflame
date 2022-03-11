@@ -1,3 +1,4 @@
+using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,5 +6,5 @@ using UnityEngine;
 namespace GramophoneUtils.Events.CustomEvents
 {
     [CreateAssetMenu(fileName = "New Character Event", menuName = "Game Events/Character Event")]
-    public class CharacterEvent : BaseGameEvent<PartyCharacterTemplate> { }
+    public class CharacterEvent : BaseGameEvent<Character> { }
 }

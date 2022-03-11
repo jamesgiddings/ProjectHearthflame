@@ -9,11 +9,15 @@ using UnityEngine;
 public class Skill : Resource, IHotbarItem
 {
 	[SerializeField] private CharacterClass[] classRestrictions;
+	[SerializeField] private School school;
 	[SerializeField] private Skill[] prerequisites;
 	[SerializeField] private int usesToUnlock;
 	[SerializeField] private TargetAreaFlag targetAreaFlag;
 	[SerializeField] private TargetNumberFlag targetNumberFlag;
 	[SerializeField] private TargetTypeFlag targetTypeFlag = TargetTypeFlag.Alive;
+	[SerializeField] private SkillAnimType skillAnimType;
+
+	[SerializeField] private GameObject projectilePrefab;
 
 	[SerializeField] private List<StatModifierBlueprint> statModifierBlueprints;
 	[SerializeField] private List<DamageBlueprint> damageBlueprints;
@@ -21,12 +25,16 @@ public class Skill : Resource, IHotbarItem
 
 	public Action OnSkillUsed;
 	public CharacterClass[] ClassRestrictions => classRestrictions; // getter
+	public School School => school; //getter
 	public Skill[] Prerequisites => prerequisites; // getter
 	public int UsesToUnlock => usesToUnlock; // getter
 
 	public TargetAreaFlag TargetAreaFlag => targetAreaFlag;
 	public TargetNumberFlag TargetNumberFlag => targetNumberFlag;
 	public TargetTypeFlag TargetTypeFlag => targetTypeFlag;
+	public SkillAnimType SkillAnimType => skillAnimType;
+
+	public GameObject ProjectilePrefab => projectilePrefab;
 
 	private List<StatModifier> skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
 	private List<Damage> skillDamages { get { return InstanceSkillDamageBlueprints(); } }
@@ -72,15 +80,23 @@ public class Skill : Resource, IHotbarItem
 
 	public void Use(List<Character> characterTargets, Character originator)
 	{
-		Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
+		//Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
+
+		originator.SkillSystem.OnSkillUsed?.Invoke(this, characterTargets);
+	}
+
+	public void DoNextBit(List<Character> characterTargets, Character originator)
+	{
 		foreach (Character character in characterTargets)
 		{
+
 			ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
-			
+
+
 			SendDamageStructs(character, originator);
 			SendHealingStructs(character, originator);
 			//ApplyModifiedDamageObjects(character);
-			ApplyHealingObjects(character);
+			//ApplyHealingObjects(character);
 		}
 	}
 

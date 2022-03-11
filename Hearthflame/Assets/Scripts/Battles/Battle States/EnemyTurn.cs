@@ -27,7 +27,12 @@ public class EnemyTurn : BattleState
 		// choose skill
 		// get target
 		// use skill
+		battleManager.BattleBehaviour.BattlerDisplayUI.CharacterBattlerDictionary[StateActor].OnTurnComplete += EndOfEnemyAction;
+	}
 
+	private void EndOfEnemyAction()
+	{
+		battleManager.BattleBehaviour.BattlerDisplayUI.CharacterBattlerDictionary[StateActor].OnTurnComplete -= EndOfEnemyAction;
 		battleManager.BattleDataModel.NextTurn();
 		battleManager.BattleDataModel.OnCurrentActorChanged?.Invoke();
 	}
@@ -36,11 +41,7 @@ public class EnemyTurn : BattleState
 	{
 		base.EnterState();
 		StateActor = battleManager.BattleDataModel.CurrentActor;
-		Debug.Log("We're in the enemy state, and the current actor is: " + StateActor.Name);
-		Debug.Log("StateActor.IsCurrentActor. Should be false: " + StateActor.IsCurrentActor);
 		StateActor.SetIsCurrentActor(true);
-		Debug.Log("We're in the enemy state, and the current actor is: " + StateActor.Name);
-		Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 		if (battleManager.BattleDataModel.CurrentActor.HealthSystem.IsDead)
 		{
 			battleManager.BattleDataModel.NextTurn();
@@ -54,10 +55,7 @@ public class EnemyTurn : BattleState
 	public override void ExitState()
 	{
 		base.ExitState();
-		Debug.Log("We're leaving the enemy state, and the old actor is: " + StateActor.Name);
-		Debug.Log("The old Actor state should still be true. Is it? :- " + StateActor.IsCurrentActor);
 		StateActor.SetIsCurrentActor(false);
-		Debug.Log("The old Actor state should now be false. Is it? :- " + StateActor.IsCurrentActor);
 	}
 
 	public override void HandleInput()

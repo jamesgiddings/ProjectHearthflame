@@ -15,11 +15,7 @@ public class PlayerTurn : BattleState
 	{
 		base.EnterState();
 		StateActor = battleManager.BattleDataModel.CurrentActor;
-		Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
-		Debug.Log("StateActor.IsCurrentActor. Should be false: " + StateActor.IsCurrentActor);
 		StateActor.SetIsCurrentActor(true);
-		Debug.Log("We're in the player state, and the current actor is: " + StateActor.Name);
-		Debug.Log("StateActor.IsCurrentActor.  Should be true: " + StateActor.IsCurrentActor);
 		battleManager.InitialiseRadialMenu();
 		if (battleManager.BattleDataModel.CurrentActor.HealthSystem.IsDead)
 		{
@@ -30,10 +26,7 @@ public class PlayerTurn : BattleState
 	public override void ExitState()
 	{
 		base.ExitState();
-		Debug.Log("We're leaving the player state, and the old actor is: " + StateActor.Name);
-		Debug.Log("The old Actor state should still be true. Is it? :- " + StateActor.IsCurrentActor);
 		StateActor.SetIsCurrentActor(false);
-		Debug.Log("The old Actor state should now be false. Is it? :- " + StateActor.IsCurrentActor);
 	}
 
 	public override void HandleInput()
@@ -59,15 +52,15 @@ public class PlayerTurn : BattleState
 			if (battleManager.TargetManager.IsTargeting && battleManager.TargetManager.CurrentTargetsCache.Count > 0)
 			{
 				battleManager.BattleDataModel.OnSkillUsed?.Invoke(StateActor);
-				PlayerAction();
+				battleManager.BattleBehaviour.BattlerDisplayUI.CharacterBattlerDictionary[StateActor].OnTurnComplete += PlayerAction;
 			}
 		}
 	}
 
 	private void PlayerAction()
 	{
+		battleManager.BattleBehaviour.BattlerDisplayUI.CharacterBattlerDictionary[StateActor].OnTurnComplete -= PlayerAction;
 		battleManager.BattleDataModel.NextTurn();
 		battleManager.BattleDataModel.OnCurrentActorChanged?.Invoke();
 	}
-
 }

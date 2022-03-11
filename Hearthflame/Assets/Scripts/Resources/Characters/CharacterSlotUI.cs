@@ -52,7 +52,7 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
             resourceIconImage.sprite = SlotResource.Icon;
             if (isRear)
 			{
-                PartyCharacterTemplate character = SlotResource as PartyCharacterTemplate;
+                CharacterTemplate character = SlotResource as CharacterTemplate;
 			}
         }
 

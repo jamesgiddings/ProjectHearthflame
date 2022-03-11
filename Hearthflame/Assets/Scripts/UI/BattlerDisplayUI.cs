@@ -20,10 +20,14 @@ public class BattlerDisplayUI : MonoBehaviour
 
 	private Battler[] battlerGameObjects;
 
+	private Dictionary<Character, Battler> characterBattlerDictionary;
+
 	public CharacterInventory PlayerBattlersList { get { return playerBattlersList; } set { playerBattlersList = value; } }
 	public CharacterInventory EnemyBattlersList { get { return enemyBattlersList; } set { enemyBattlersList = value; } }
 	public CharacterInventory OrderedBattlersListNew { get { return orderedBattlersListNew; } set { orderedBattlersListNew = value; } }
 	public CharacterInventory BattlersListNew { get { return battlersListNew; } set { battlersListNew = value; } }
+
+	public Dictionary<Character, Battler> CharacterBattlerDictionary => characterBattlerDictionary;
 
 	#region Initialising
 	public void Initialise(BattleManager battleManager)
@@ -36,6 +40,8 @@ public class BattlerDisplayUI : MonoBehaviour
 		this.playerBattlersList = battleManager.PlayerBattlersCharacterInventory;
 
 		battlerGameObjects = new Battler[battlersListNew.CharacterSlots.Length];
+
+		characterBattlerDictionary = new Dictionary<Character, Battler>();
 
 		InitialiseBattlers(playerBattlersList, true);
 		InitialiseBattlers(enemyBattlersList, false);
@@ -57,11 +63,13 @@ public class BattlerDisplayUI : MonoBehaviour
 					if (true) //characterSlot.CharacterTemplate.IsUnlocked) //&& !characterSlot.Character.PartyCharacterTemplate.PartyCharacter.IsRear)
 					{
 						battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer, i);
+						characterBattlerDictionary.Add(characterSlot.Character, battlerGameObjects[i]);
 					}
 				}
 				else
 				{
 					battlerGameObjects[i] = InitialiseBattler(characterSlot, isPlayer, i);
+					characterBattlerDictionary.Add(characterSlot.Character, battlerGameObjects[i]);
 				}
 			}
 		}

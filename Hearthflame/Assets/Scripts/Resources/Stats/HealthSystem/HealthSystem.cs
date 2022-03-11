@@ -31,7 +31,6 @@ namespace GramophoneUtils.Stats
 
 		public void IncrementCurrentHealth(int increment)
 		{
-			Debug.Log("My health was: " + currentHealth);
 			currentHealth += increment;
 
 			if (currentHealth > MaxHealth)
@@ -41,7 +40,6 @@ namespace GramophoneUtils.Stats
 
 			NotifySubscribersHealthChanged(increment);
 			CheckIsDeadAndNotify();
-			Debug.Log("My health is now: " + currentHealth);
 		}
 
 		public void IncrementCurrentHealthAsPercentageOfCurrentHealth(float percentageAsDecimal)
@@ -119,13 +117,11 @@ namespace GramophoneUtils.Stats
 
 		public void AddDamage(Damage damage)
 		{
-			Debug.Log("Adding damage");
 			IncrementCurrentHealth(-(int)damage.Value);
 		}
 		
 		public void AddHealing(Healing healing)
 		{
-			Debug.Log("Adding damage");
 			IncrementCurrentHealth((int)healing.Value);
 		}
 	}
