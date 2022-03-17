@@ -4,9 +4,9 @@ using UnityEngine;
 public class Resource : Data
 {
     
-    [SerializeField] protected Sprite icon;
+    [SerializeField] protected Sprite sprite;
 
-    public Sprite Icon => icon; //getter
+    public Sprite Sprite => sprite; //getter
 
     //protected override void OnValidate()
     //{

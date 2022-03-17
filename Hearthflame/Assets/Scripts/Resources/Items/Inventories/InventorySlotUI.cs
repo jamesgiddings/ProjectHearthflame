@@ -83,7 +83,7 @@ namespace GramophoneUtils.Items.Containers
                 return;
             }
             EnableSlotUI(true);
-            resourceIconImage.sprite = ItemSlot.item.Icon;
+            resourceIconImage.sprite = ItemSlot.item.Sprite;
             itemQuantityText.text = ItemSlot.quantity > 1 ? ItemSlot.quantity.ToString() : "";
         }
 

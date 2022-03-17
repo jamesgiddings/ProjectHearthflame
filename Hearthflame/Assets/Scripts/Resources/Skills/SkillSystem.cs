@@ -11,7 +11,8 @@ public class SkillSystem
 	private Skill activeSkill;
 
 	public Action<Skill, List<Character>> OnSkillUsed;
-
+	public List<Skill> LockedSkillsList => new List<Skill>(lockedSkills.Keys);
+	
 	private int skillUseIncreaseMinimumInclusive = 1; // these are so we can set the range of 
 	private int skillUseIncreaseMaximumExclusive = 2; // possible increases when a skill is used.
 

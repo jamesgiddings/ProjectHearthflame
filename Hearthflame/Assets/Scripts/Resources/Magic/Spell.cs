@@ -13,7 +13,7 @@ namespace GramophoneUtils.Magic
         [SerializeField] private Element element = null;
 
         public string Name => name;
-        public Sprite Icon => Icon;
+        public Sprite Sprite => Sprite;
         public Element Element => element;
 
         public void Use()

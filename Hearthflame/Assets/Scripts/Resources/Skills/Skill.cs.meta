@@ -3,7 +3,13 @@ guid: a7cd0153750db294b998599321ab5397
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - icon: {instanceID: 0}
+  - projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+      type: 3}
+  - effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+      type: 3}
+  - animatorController: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

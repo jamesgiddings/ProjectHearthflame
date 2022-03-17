@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918b4767811b96845b52b2017e0cca95, type: 3}
+  m_Name: Very Small Resiliance Minus
+  m_EditorClassIdentifier: 
+  statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
+  modifierType: 0
+  value: -1
+  duration: 2

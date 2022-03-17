@@ -26,6 +26,7 @@ MonoBehaviour:
   skillAnimType: 4
   projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
+  animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
   statModifierBlueprints: []
   damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}

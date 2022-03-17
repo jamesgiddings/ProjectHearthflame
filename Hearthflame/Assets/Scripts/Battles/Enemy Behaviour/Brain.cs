@@ -9,7 +9,7 @@ public abstract class Brain : ScriptableObject
 
 	protected Character brainOwner;
 
-	public abstract Skill ChooseSkill();
+	public abstract Skill ChooseSkill(Character currentActor);
 
 	public abstract List<Character> ChooseTargets(List<Character> availableTargets, Skill skill);
 

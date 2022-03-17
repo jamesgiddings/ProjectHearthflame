@@ -85,9 +85,9 @@ public class CharacterTurnSlotUI : CharacterSlotUI
             EnableSlotUI(false);
             return;
         }
-        if (SlotResource.Icon != null)
+        if (SlotResource.Sprite != null)
         {
-            resourceIconImage.sprite = SlotResource.Icon;
+            resourceIconImage.sprite = SlotResource.Sprite;
         }
 
         EnableSlotUI(true);
@@ -96,7 +96,7 @@ public class CharacterTurnSlotUI : CharacterSlotUI
         currentCharacterImage.enabled = GetIsCurrentCharacter();
         if (GetIsCharacterDead())
         {
-            if (SlotResource.Icon != null)
+            if (SlotResource.Sprite != null)
             {
                 resourceIconImage.GetComponent<Image>().color = new Color32(255, 255, 225, 100); // greys out the characters image
             }

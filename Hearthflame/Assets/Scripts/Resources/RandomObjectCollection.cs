@@ -29,33 +29,59 @@ public class RandomObjectCollection<T>
 		return weighting;
 	}
 
-	public float GetWeightingSum()
+	public float GetWeightingSum(List<T> blacklist = null)
 	{
 		float sum = 0;
 
 		foreach (RandomObject<T> randomResource in randomObjects)
 		{
-			sum += randomResource.weighting;
+			if (blacklist != null)
+			{
+				if (!blacklist.Contains(randomResource.randomObject))
+					sum += randomResource.weighting;
+			}
+			else
+			{
+				sum += randomResource.weighting;
+			}
 		}
 		return sum;
 	}
 
-	public RandomObject<T> GetRandomObject()
+	public RandomObject<T> GetRandomObject(List<T> blacklist = null)
 	{		
 		if (randomObjects.Count == 0)
 		{
 			return default(RandomObject<T>);
 		}
-		weightingSum = GetWeightingSum();
+		weightingSum = GetWeightingSum(blacklist);
 		float rand = UnityEngine.Random.Range(0f, weightingSum);
 		float runningSum = 0;
+		
 		foreach (var randomObject in randomObjects)
 		{
-			runningSum += randomObject.weighting;
-			if (rand <= runningSum)
+			if (blacklist != null)
 			{
-				return randomObject;
+				Debug.Log("blacklist.Contains(randomObject.randomObject): " + randomObject.randomObject.ToString() + " = " + blacklist.Contains(randomObject.randomObject));
+				if (!blacklist.Contains(randomObject.randomObject))
+				{
+					runningSum += randomObject.weighting;
+					if (rand <= runningSum)
+					{
+						return randomObject;
+					}
+				}
 			}
+			else
+			{
+				runningSum += randomObject.weighting;
+				if (rand <= runningSum)
+				{
+					return randomObject;
+				}
+			}
+
+
 		}
 		return default(RandomObject<T>);
 	}

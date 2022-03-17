@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bc15b53b7928042b854b53d4013898, type: 3}
+  m_Name: Avienne
+  m_EditorClassIdentifier: 
+  UID: e91f937a-d921-45ec-8315-ab231064a42a
+  name: Avienne
+  sprite: {fileID: 8287090503234131463, guid: 3e8d2003b77948a41a3041afcf2a91ff, type: 3}
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  characterClass: {fileID: 11400000, guid: 6b5712bee7049ae4d86541e962de55a3, type: 2}
+  color: {r: 1, g: 0, b: 0, a: 0}
+  brain: {fileID: 0}
+  startsUnlocked: 1
+  startingLevel: 0
+  idle_Left: {fileID: 7400000, guid: 9d2cf4ce30995204aa8c5141b70475d2, type: 2}
+  idle_Right: {fileID: 7400000, guid: 573b9323d8d91dd49ba1cf76080887b4, type: 2}
+  idle_Up: {fileID: 7400000, guid: 3bf1d2cf91196a14082f803bd27a0c59, type: 2}
+  idle_Down: {fileID: 7400000, guid: dfdc919abae9e334a993a4964fb8e9dd, type: 2}
+  walk_Left: {fileID: 7400000, guid: 15d755df6d2fc134bbd6fdf854a3dee7, type: 2}
+  walk_Right: {fileID: 7400000, guid: a61364a0488dda2459e7bcf6dc8b0ad6, type: 2}
+  walk_Up: {fileID: 7400000, guid: 5296c003f6f6bd4459cd85f5a2929bb8, type: 2}
+  walk_Down: {fileID: 7400000, guid: b54d1c713ea2b834c9481699d26ae775, type: 2}
+  attack_Left: {fileID: 7400000, guid: 0a8b5f20b242cae4b97bf6e6cb8096b7, type: 2}
+  attack_Right: {fileID: 7400000, guid: a3b3d1c1efbdcb742b095f18dc724fb8, type: 2}
+  attack_Up: {fileID: 7400000, guid: ebb4ec3b3eceae54fb1c0a5717edd4e3, type: 2}
+  attack_Down: {fileID: 7400000, guid: c3a044263cf187b4e9c8d1d05ef333fd, type: 2}
+  cast_Left: {fileID: 7400000, guid: dd42646deca361c4d94762e9913ea5db, type: 2}
+  cast_Right: {fileID: 7400000, guid: cf21454cd181d564c8d1916eac03eb93, type: 2}
+  cast_Up: {fileID: 7400000, guid: 846f7a5e1003da3438ca646caf26751b, type: 2}
+  cast_Down: {fileID: 7400000, guid: a7be0774178dc1448b56e19395ebee24, type: 2}
+  die: {fileID: 7400000, guid: 7f638c4094093dc47ad19c56b8856c7b, type: 2}
+  dead: {fileID: 7400000, guid: 086f0801919285b4c842f33ff2c513c8, type: 2}
+  shoot_Left: {fileID: 7400000, guid: 7cad09d8632f7364eb13e6cb7069c031, type: 2}
+  shoot_Right: {fileID: 7400000, guid: c674b53cb4be0a440953e92f8599cef9, type: 2}
+  shoot_Up: {fileID: 7400000, guid: 329cd2ab7868cd24ab1499292b8b941f, type: 2}
+  shoot_Down: {fileID: 7400000, guid: 4ece3d384af30604d810f6eb9e76fc16, type: 2}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AvienneAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/AvienneAnimationController

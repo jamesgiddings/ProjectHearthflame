@@ -23,7 +23,7 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
             this.item = item;
 
             itemNameText.text = $"{item.Name} ({quantity})";
-            itemIconImage.sprite = item.Icon;
+            itemIconImage.sprite = item.Sprite;
         }
 
 		public void SelectItem()

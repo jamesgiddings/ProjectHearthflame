@@ -35,7 +35,7 @@ namespace GramophoneUtils.Items.Containers
 
 		public override void UpdateSlotUI()
 		{
-			resourceIconImage.sprite = SlotResource.Icon;
+			resourceIconImage.sprite = SlotResource.Sprite;
 
 			EnableSlotUI(true);
 

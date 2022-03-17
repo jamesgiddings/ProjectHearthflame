@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: e496856e570c9f843a41095df1eb3592
   name: Pyroblast
-  icon: {fileID: 21300000, guid: 8ec5b52b09d90074a83d61c1334190f9, type: 3}
+  sprite: {fileID: 0}
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   school: 1
@@ -27,6 +27,8 @@ MonoBehaviour:
   skillAnimType: 4
   projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
+  effectPrefab: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
   statModifierBlueprints: []
   damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}

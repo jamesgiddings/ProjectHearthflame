@@ -15,7 +15,7 @@ public class EnemyTurn : BattleState
 	{
 		yield return new WaitForSeconds(1f);
 
-		Skill enemySkill = battleManager.BattleDataModel.CurrentActor.Brain.ChooseSkill();
+		Skill enemySkill = battleManager.BattleDataModel.CurrentActor.Brain.ChooseSkill(battleManager.BattleDataModel.CurrentActor);
 
 		if (enemySkill != null)
 		{

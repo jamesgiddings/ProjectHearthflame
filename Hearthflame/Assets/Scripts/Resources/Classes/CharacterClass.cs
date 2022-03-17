@@ -8,6 +8,8 @@ using static GramophoneUtils.Stats.LevelSystem;
 [CreateAssetMenu(fileName = "New Character Class", menuName = "Character Classes/Character Class")]
 public class CharacterClass : Resource
 {
+	[SerializeField] private int baseHealth;
+	[SerializeField] private int baseMaxHealth;
 	[SerializeField] private int maxLevel;
 	[SerializeField] private ExperienceData experienceData;
 	[SerializeField] private List<Skill> skillsAvailable;
@@ -16,7 +18,7 @@ public class CharacterClass : Resource
 	[Serializable]
 	public class LevelStatEffect
 	{
-
+		[SerializeField] private List<Skill> skillsUnlocked; 
 		[SerializeField] private int baseHealthIncrement;
 		[SerializeField] private List<StatModifierBlueprint> statComponentBlueprints;
 		
@@ -26,7 +28,10 @@ public class CharacterClass : Resource
 
 	public ExperienceData ExperienceData => experienceData; //getter
 	public List<Skill> SkillsAvailable => skillsAvailable; //getter
-	
+
+	public int BaseHealth => baseHealth;
+	public int BaseMaxHealth => baseMaxHealth;
+
 	public void LevelUp(System.Object sender, EventArgs args)
 	{
 		// do levelling up here

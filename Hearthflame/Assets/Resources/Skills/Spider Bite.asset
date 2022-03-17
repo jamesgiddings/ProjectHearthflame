@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Spider Bite
+  m_EditorClassIdentifier: 
+  UID: fa30bf93-2ed0-41df-95b7-433e62eae364
+  name: Bite
+  sprite: {fileID: 0}
+  classRestrictions:
+  - {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
+  school: 2
+  prerequisites: []
+  usesToUnlock: 0
+  targetAreaFlag: 4
+  targetNumberFlag: 1
+  targetTypeFlag: 1
+  skillAnimType: 1
+  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+    type: 3}
+  effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+    type: 3}
+  animatorController: {fileID: 0}
+  statModifierBlueprints:
+  - {fileID: 11400000, guid: 07c9c7aec62ff8f4791ec9d64970eecc, type: 2}
+  damageBlueprints:
+  - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
+  healingBlueprints: []

@@ -16,12 +16,18 @@ MonoBehaviour:
   name: Magic Shield
   icon: {fileID: 21300000, guid: 5372afdb7d982a248a89012aa0c42002, type: 3}
   classRestrictions: []
+  school: 0
   prerequisites: []
   usesToUnlock: 0
   targetAreaFlag: 1
   targetNumberFlag: 8
   targetTypeFlag: 1
   skillAnimType: 5
+  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+    type: 3}
+  effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+    type: 3}
+  animatorController: {fileID: 9100000, guid: 326ab8ce442b4da4788fe0f0b0b70e67, type: 2}
   statModifierBlueprints:
   - {fileID: 11400000, guid: f55ea2dd99a3cd84bbc2f1ec6d5bb8da, type: 2}
   damageBlueprints: []

@@ -47,9 +47,9 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
             EnableSlotUI(false);
             return;
         }
-        if (SlotResource.Icon != null)
+        if (SlotResource.Sprite != null)
         {
-            resourceIconImage.sprite = SlotResource.Icon;
+            resourceIconImage.sprite = SlotResource.Sprite;
             if (isRear)
 			{
                 CharacterTemplate character = SlotResource as CharacterTemplate;

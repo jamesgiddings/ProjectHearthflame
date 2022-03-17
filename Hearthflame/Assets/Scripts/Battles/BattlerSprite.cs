@@ -27,7 +27,7 @@ public class BattlerSprite : MonoBehaviour
 	{
         this.character = character;
         this.battleManager = battleManager;
-        this.spriteImage.sprite = character.CharacterTemplate.Icon;
+        this.spriteImage.sprite = character.CharacterTemplate.Sprite;
         battleManager.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;

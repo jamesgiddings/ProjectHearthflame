@@ -18,6 +18,8 @@ public class Skill : Resource, IHotbarItem
 	[SerializeField] private SkillAnimType skillAnimType;
 
 	[SerializeField] private GameObject projectilePrefab;
+	[SerializeField] private GameObject effectPrefab;
+	[SerializeField] private RuntimeAnimatorController animatorController;
 
 	[SerializeField] private List<StatModifierBlueprint> statModifierBlueprints;
 	[SerializeField] private List<DamageBlueprint> damageBlueprints;
@@ -35,6 +37,8 @@ public class Skill : Resource, IHotbarItem
 	public SkillAnimType SkillAnimType => skillAnimType;
 
 	public GameObject ProjectilePrefab => projectilePrefab;
+	public GameObject EffectPrefab => effectPrefab;
+	public RuntimeAnimatorController AnimatorController => animatorController; //getter
 
 	private List<StatModifier> skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
 	private List<Damage> skillDamages { get { return InstanceSkillDamageBlueprints(); } }

@@ -44,7 +44,7 @@ public class NodeParser : MonoBehaviour
 		{
 			Dialogue.Chat chat = (Chat)baseNode;
 			SpeakerNameTextField.text = chat.character.Name;
-			SpeakerImage.sprite = chat.character.Icon;
+			SpeakerImage.sprite = chat.character.Sprite;
 			DialogueTextField.text = chat.text;
 
 			NodePort port = chat.GetOutputPort("output");

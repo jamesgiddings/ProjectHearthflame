@@ -16,11 +16,17 @@ MonoBehaviour:
   resourceDatabase: {fileID: 11400000, guid: 11aa0921c584c1144943a308681aad2c, type: 2}
   randomSkills:
   - randomObject: {fileID: 11400000, guid: 5ebcd8f392e6b4b439149b7c053d74ba, type: 2}
-    weighting: 1
+    weighting: 0
   - randomObject: {fileID: 11400000, guid: 3be275241d1b65e4098b8b499b239a7e, type: 2}
+    weighting: 0
+  - randomObject: {fileID: 11400000, guid: 69f0cab7f86133248a6339f40c71b6db, type: 2}
     weighting: 1
   randomTargets:
   - randomObject: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
     weighting: 1
   - randomObject: {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}
+    weighting: 1
+  - randomObject: {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
+    weighting: 1
+  - randomObject: {fileID: 11400000, guid: 6b5712bee7049ae4d86541e962de55a3, type: 2}
     weighting: 1

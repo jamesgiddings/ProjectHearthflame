@@ -20,7 +20,7 @@ public class SequenceBrain : Brain
 		}
 	}
 
-	public override Skill ChooseSkill()
+	public override Skill ChooseSkill(Character currentActor)
 	{
 		// Check skills are unlocked
 

@@ -23,10 +23,10 @@ namespace GramophoneUtils.Stats
 
 		public int Wounds => wounds; // getter
 
-		public HealthSystem(CharacterTemplate template)
+		public HealthSystem(CharacterClass characterClass)
 		{
-			this.currentHealth = template.CurrentHealth;
-			this.maxHealth = template.MaxHealth;
+			this.currentHealth = characterClass.BaseHealth;
+			this.maxHealth = characterClass.BaseMaxHealth;
 		}
 
 		public void IncrementCurrentHealth(int increment)

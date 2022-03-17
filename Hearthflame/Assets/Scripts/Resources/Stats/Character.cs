@@ -56,12 +56,13 @@ namespace GramophoneUtils.Stats
 			name = characterTemplate.Name;
 			statSystem = new StatSystem(characterTemplate, this);
 			StatTypeStringRefDictionary = statSystem.StatTypeStringRefDictionary;
-			healthSystem = new HealthSystem(characterTemplate);
+			characterClass = characterTemplate.CharacterClass;
+			healthSystem = new HealthSystem(characterClass);
 
 			healthSystem.OnHealthChanged += EnqueueBattlerNotification;
 
 			// subscribe to OnDeathEvent here? also, inject a reference to Character if needed
-			characterClass = characterTemplate.CharacterClass;
+			
 			this.skillSystem = new SkillSystem(this);
 			this.levelSystem = new LevelSystem(characterClass, this);
 			levelSystem.OnLevelChanged += characterClass.LevelUp;

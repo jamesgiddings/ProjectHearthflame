@@ -84,7 +84,7 @@ namespace GramophoneUtils.Items.Hotbars
 				EnableSlotUI(false);
                 return;
             }
-			resourceIconImage.sprite = SlotResource.Icon;
+			resourceIconImage.sprite = SlotResource.Sprite;
 
             EnableSlotUI(true);
 
