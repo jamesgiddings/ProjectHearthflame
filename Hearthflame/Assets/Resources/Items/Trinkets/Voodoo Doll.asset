@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Voodoo Doll
   m_EditorClassIdentifier: 
   UID: d1737bc441e9f8b48ab1f13262f15e90
-  icon: {fileID: 21300000, guid: 724cc1a574cd782428ba62055b49da31, type: 3}
   name: Voodoo Doll
+  sprite: {fileID: 21300000, guid: 724cc1a574cd782428ba62055b49da31, type: 3}
   description: A doll for cursing.
   rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
   sellPrice: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wooden Sword
   m_EditorClassIdentifier: 
   UID: 90949de3e470a9c47b7351dc1e2a5044
-  icon: {fileID: 21300000, guid: cb5e05ebc86fc664db70c52e2f6aaffb, type: 3}
   name: Wooden Sword
+  sprite: {fileID: 21300000, guid: cb5e05ebc86fc664db70c52e2f6aaffb, type: 3}
   description: A sword, made from wood.
   rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
   sellPrice: 1

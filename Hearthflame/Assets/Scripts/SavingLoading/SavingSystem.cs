@@ -8,39 +8,50 @@ namespace GramophoneUtils.SavingLoading
 {
     public class SavingSystem : MonoBehaviour
     {
-        [SerializeField] private string saveFileName = "SaveData";
 
-        private string SavePath => $"{Application.persistentDataPath}{saveFileName}.sav";
+        private string saveDirectory;
 
-        public void Save()
+        private void Awake()
         {
-            var state = LoadFile();
+            saveDirectory = Application.persistentDataPath;
+        }
+
+        public string GetPathFromName(string fileName)
+		{
+            return saveDirectory + "/" + fileName + ".sav";
+        }
+
+        public void Save(string fileName)
+        {
+            string filePath = GetPathFromName(fileName);
+            var state = LoadFile(filePath);
             CaptureState(state);
-            SaveFile(state);
+            SaveFile(state, filePath);
         }
 
-        public void Load()
+        public void Load(string fileName)
         {
-            RestoreState(LoadFile());
+            string filePath = GetPathFromName(fileName);
+            RestoreState(LoadFile(filePath));
         }
 
-        private Dictionary<string, object> LoadFile()
+        private Dictionary<string, object> LoadFile(string filePath)
         {
-            if (!File.Exists(SavePath))
+            if (!File.Exists(filePath))
             {
                 return new Dictionary<string, object>();
             }
 
-            using (FileStream stream = File.Open(SavePath, FileMode.Open))
+            using (FileStream stream = File.Open(filePath, FileMode.Open))
             {
                 var formatter = new BinaryFormatter();
                 return (Dictionary<string, object>)formatter.Deserialize(stream);
             }
         }
 
-        private void SaveFile(object state)
+        private void SaveFile(object state, string filePath)
         {
-            using (var stream = File.Open(SavePath, FileMode.Create))
+            using (var stream = File.Open(filePath, FileMode.Create))
             {
                 var formatter = new BinaryFormatter();
                 formatter.Serialize(stream, state);

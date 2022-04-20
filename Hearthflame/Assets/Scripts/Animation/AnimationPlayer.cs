@@ -134,7 +134,7 @@ public class AnimationPlayer
                 List<GameObject> physicalProjectiles = new List<GameObject>();
 
                 physicalProjectileSequence.AppendCallback(() => animator.Play(shoot));
-                physicalProjectileSequence.AppendInterval(4f).WaitForCompletion();
+                physicalProjectileSequence.AppendInterval(1f).WaitForCompletion();
                 physicalProjectileSequence.AppendCallback(() => animator.Play(idle));
                 physicalProjectileSequence.AppendInterval(0.05f).WaitForCompletion();
 

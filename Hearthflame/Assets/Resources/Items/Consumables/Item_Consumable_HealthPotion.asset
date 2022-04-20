@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 8af9584e013aa954da4945bea399ad0f
   name: Health Potion
+  sprite: {fileID: 21300000, guid: 4644bd469e8dcc140b63a73060c71603, type: 3}
   description: Healy boi
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
   sellPrice: 1
   maxStack: 5

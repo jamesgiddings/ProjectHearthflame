@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sword of Nipsying
   m_EditorClassIdentifier: 
   UID: b167c95f89da848439c3c9a6564f5f90
-  icon: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
   name: Sword of Nipsying
+  sprite: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
   description: Item description will go here.
   rarity: {fileID: 11400000, guid: a1c30af3df3f89643bba121811563121, type: 2}
   sellPrice: 11111111

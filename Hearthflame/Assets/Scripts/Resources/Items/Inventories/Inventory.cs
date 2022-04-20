@@ -50,13 +50,10 @@ namespace GramophoneUtils.Items.Containers
 		public void RestoreState(object state)
 		{
 			var saveData = (InventorySaveData)state;
-			Debug.Log("Restore state.");
 			GameManager.Instance.ResourceDatabase.Print();
 			money = saveData.money;
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{
-				Debug.Log("Resource UID == null:");
-				Debug.Log((saveData.itemSlotSaveData[i].resourceUID == null));
 
 				if (saveData.itemSlotSaveData[i].resourceUID != null)
 				{
