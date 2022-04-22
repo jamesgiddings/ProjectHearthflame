@@ -46,7 +46,10 @@ MonoBehaviour:
       _node: {fileID: -7365013186266961462}
       _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: input
+        node: {fileID: 3875424863909434474}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -108,7 +111,10 @@ MonoBehaviour:
       _node: {fileID: -6128487173444756535}
       _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: input
+        node: {fileID: 3875424863909434474}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -464,7 +470,53 @@ MonoBehaviour:
   - {fileID: -4216326169720342262}
   - {fileID: -7365013186266961462}
   - {fileID: 3917539637293640597}
-  current: {fileID: -4624151079997485496}
+  - {fileID: 3875424863909434474}
+  current: {fileID: -6128487173444756535}
+--- !u!114 &3875424863909434474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd7b2074a909284689a5ace6d13833a, type: 3}
+  m_Name: End
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 722.13446, y: -414.09662}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 3875424863909434474}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -6128487173444756535}
+        reroutePoints: []
+      - fieldName: output
+        node: {fileID: -7365013186266961462}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 3875424863909434474}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  input: {fileID: 0}
+  output: {fileID: 0}
 --- !u!114 &3917539637293640597
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -162,6 +162,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1216,6 +1217,53 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      hero_spritesheet_35: 21300070
+      hero_spritesheet_4: 21300008
+      hero_spritesheet_36: 21300072
+      hero_spritesheet_8: 21300016
+      hero_spritesheet_3: 21300006
+      hero_spritesheet_39: 21300078
+      hero_spritesheet_23: 21300046
+      hero_spritesheet_1: 21300002
+      hero_spritesheet_2: 21300004
+      hero_spritesheet_33: 21300066
+      hero_spritesheet_44: 21300088
+      hero_spritesheet_30: 21300060
+      hero_spritesheet_10: 21300020
+      hero_spritesheet_15: 21300030
+      hero_spritesheet_41: 21300082
+      hero_spritesheet_31: 21300062
+      hero_spritesheet_20: 21300040
+      hero_spritesheet_5: 21300010
+      hero_spritesheet_42: 21300084
+      hero_spritesheet_7: 21300014
+      hero_spritesheet_28: 21300056
+      hero_spritesheet_37: 21300074
+      hero_spritesheet_45: 21300090
+      hero_spritesheet_21: 21300042
+      hero_spritesheet_9: 21300018
+      hero_spritesheet_24: 21300048
+      hero_spritesheet_43: 21300086
+      hero_spritesheet_38: 21300076
+      hero_spritesheet_27: 21300054
+      hero_spritesheet_26: 21300052
+      hero_spritesheet_29: 21300058
+      hero_spritesheet_16: 21300032
+      hero_spritesheet_40: 21300080
+      hero_spritesheet_25: 21300050
+      hero_spritesheet_34: 21300068
+      hero_spritesheet_11: 21300022
+      hero_spritesheet_6: 21300012
+      hero_spritesheet_0: 21300000
+      hero_spritesheet_13: 21300026
+      hero_spritesheet_17: 21300034
+      hero_spritesheet_19: 21300038
+      hero_spritesheet_14: 21300028
+      hero_spritesheet_18: 21300036
+      hero_spritesheet_22: 21300044
+      hero_spritesheet_12: 21300024
+      hero_spritesheet_32: 21300064
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

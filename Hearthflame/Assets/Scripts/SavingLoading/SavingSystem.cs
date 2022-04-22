@@ -8,17 +8,9 @@ namespace GramophoneUtils.SavingLoading
 {
     public class SavingSystem : MonoBehaviour
     {
-
-        private string saveDirectory;
-
-        private void Awake()
-        {
-            saveDirectory = Application.persistentDataPath;
-        }
-
-        public string GetPathFromName(string fileName)
+        public static string GetPathFromName(string fileName)
 		{
-            return saveDirectory + "/" + fileName + ".sav";
+            return Application.persistentDataPath + "/" + fileName + ".sav";
         }
 
         public void Save(string fileName)

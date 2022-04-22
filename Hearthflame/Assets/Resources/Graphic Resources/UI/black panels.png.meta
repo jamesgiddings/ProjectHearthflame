@@ -138,6 +138,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1012,6 +1013,45 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      black panels_36: -6593042657019372870
+      black panels_27: 7559803123500873779
+      black panels_9: -8213754112271494859
+      black panels_17: -3568551403237440237
+      black panels_6: 5655336874070043788
+      black panels_23: 8018032934189422392
+      black panels_12: -2056707910008673731
+      black panels_3: -3617949902544317485
+      black panels_1: 6425230780191103388
+      black panels_10: -7127137322869366680
+      black panels_19: -2647397122512179019
+      black panels_21: -8444262242894192777
+      black panels_4: 3582199820329675522
+      black panels_22: -213313866550107656
+      black panels_25: 1477244707514380213
+      black panels_31: 3868619025974783559
+      black panels_34: 4072797641985655946
+      black panels_28: 1796579537174092138
+      black panels_30: 384563557583470803
+      black panels_37: -8294113505230647620
+      black panels_16: 8975442536118817269
+      black panels_18: -3947674239571082488
+      black panels_32: -2764746868370740070
+      black panels_7: 3997623208475013222
+      black panels_24: -310764599868188267
+      black panels_13: 8137363370961288709
+      black panels_8: 352315131564611828
+      black panels_0: 5857930158837236225
+      black panels_14: -501000365380630603
+      black panels_5: 4501448607356701819
+      black panels_15: 5197466890935270006
+      black panels_29: 596831362397840459
+      black panels_26: 2376745318871793214
+      black panels_33: -6496926852024874552
+      black panels_11: -4411045869449414776
+      black panels_35: -8989830518507170397
+      black panels_2: 647959173940871573
+      black panels_20: -8000906921163209790
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

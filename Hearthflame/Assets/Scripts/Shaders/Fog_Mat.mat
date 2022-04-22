@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fog_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: f099cbd5bf877af42a535e584d784fdb,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_2db60c0ec5b245448229a0f1d4e23c6d: 20
+    - Vector1_9233c4b68aec44d38c886a4aadf1acba: 25
+    m_Colors:
+    - Color_058f18e7e41b45fd8742ebaef7c57429: {r: 0.9528302, g: 0.9123799, b: 0.9123799,
+        a: 0}
+    - Color_c76b46024e044f55b938abf90ff464e0: {r: 1, g: 1, b: 1, a: 0.4117647}
+    - Vector2_a033b42420954e1291e658ff0c16bc02: {r: 0.05, g: 0, b: 0, a: 0}
+    - Vector2_c02251b436ab4d0997059112eecf26eb: {r: 0, g: 0.08, b: 0, a: 0}
+  m_BuildTextureStacks: []
