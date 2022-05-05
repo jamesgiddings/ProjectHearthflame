@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BattleWon : BattleState
+public class BattleWon : BattleSubState
 {
 	public BattleWon(BattleManager battleManager)
 	{

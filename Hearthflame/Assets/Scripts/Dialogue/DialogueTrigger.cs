@@ -8,8 +8,7 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour, ISaveable
 {
-	[SerializeField] private DialogueNodeParser dialogue;
-	[SerializeField] private GameObject dialoguePanel;
+	private DialogueUI dialogueUI;
 
 	[SerializeField] private float sizeX = 5;
 	[SerializeField] private float sizeY = 5;
@@ -19,7 +18,7 @@ public class DialogueTrigger : MonoBehaviour, ISaveable
 	private Rigidbody2D rb;
 	private BoxCollider2D boxCollider;
 
-	public DialogueNodeParser Dialogue => dialogue;
+	public DialogueUI DialogueUI => dialogueUI;
 	public bool DeactivateOnTrigger => deactivateOnTrigger;
 
 	private void OnDrawGizmos()
@@ -40,6 +39,7 @@ public class DialogueTrigger : MonoBehaviour, ISaveable
 		boxCollider = GetComponent<BoxCollider2D>();
 		boxCollider.isTrigger = true;
 		boxCollider.size = new Vector2(sizeX, sizeY);
+		dialogueUI = GetComponent<DialogueUI>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -48,11 +48,12 @@ public class DialogueTrigger : MonoBehaviour, ISaveable
 		{
 			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
 
-			dialogue.gameObject.SetActive(true);
+			dialogueUI.StartDialogue();
+			Debug.Log("dialogueUI should have started");
 
 			if (deactivateOnTrigger)
 			{
-				this.gameObject.SetActive(false);
+				boxCollider.enabled = false;
 			}
 		}
 	}

@@ -62,25 +62,24 @@ namespace GramophoneUtils.Stats
         public int StartingLevel => startingLevel; // getter
         public string AnimControllerPath;
         public string AnimControllerLoadPath;
+
 #if UNITY_EDITOR
         private UnityEditor.Animations.AnimatorController animatorController;
+
+        public UnityEditor.Animations.AnimatorController AnimatorController => animatorController; //getter
+
         public void OnValidate()
         {
             AnimControllerPath = "Assets/Resources/Animations/AnimationControllers/" + Name + "AnimationController.asset";
             AnimControllerLoadPath = "Animations/AnimationControllers/" + Name + "AnimationController";
+
             var _exists = AssetDatabase.LoadAssetAtPath(AnimControllerPath, typeof(UnityEditor.Animations.AnimatorController));
+
             if (animatorController == null)
             {
                 CreateController();
             }
         }
-
-
-        public UnityEditor.Animations.AnimatorController AnimatorController => animatorController; //getter
-
-
-
-
 
         public void CreateController()
         {

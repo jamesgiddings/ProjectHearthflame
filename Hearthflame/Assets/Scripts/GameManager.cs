@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private ResourceDatabase resourceDatabase;
 	[SerializeField] private StatSystemConstants statSystemConstants;
 
+	private Vector2 movement = Vector2.zero;
+	private Vector2 movementNormalized = Vector2.zero;
+
+	private GameState gameState;
+	private GameStateManager gameStateManager;
+
     private static GameManager instance;
 
 	public ResourceDatabase ResourceDatabase => resourceDatabase; // getter
@@ -16,7 +22,45 @@ public class GameManager : MonoBehaviour
 
 	public Action<Scene> BattleSceneLoaded;
 
-    public static GameManager Instance
+	public Vector2 Movement
+	{
+		get
+		{
+			return movement;
+		}
+		set
+		{
+			movement = value;
+		}
+	}
+
+	public Vector2 MovementNormalized
+	{
+		get
+		{
+			return movementNormalized;
+		}
+		set
+		{
+			movementNormalized = value;
+		}
+	}
+
+	public State GameState
+	{
+		get
+		{
+			if (gameState == null)
+			{
+				Debug.LogError("gameState is null.");
+			}
+			return gameState;
+		}
+	}
+
+	public GameStateManager GameStateManager => gameStateManager;
+
+	public static GameManager Instance
 	{
 		get
 		{
@@ -32,9 +76,15 @@ public class GameManager : MonoBehaviour
 	{
 		instance = this;
 		SceneManager.sceneLoaded += SceneLoaded;
+		gameStateManager = new GameStateManager();
 	}
 
-	private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    private void Update()
+    {
+		gameState.Update();
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		BattleSceneLoaded?.Invoke(scene);
 	}

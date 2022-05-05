@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using GramophoneUtils.Stats;
+using System;
+using UnityEditor;
 
+[Serializable]
 [CreateAssetMenu(fileName = "Resource Database", menuName = "Resources/Resource Database")]
 public class ResourceDatabase : ScriptableObject
 {
-	[SerializeField] private Resource[] resources;
+	[SerializeField] private List<Resource> resources;
 	[SerializeField] private CharacterClass[] characterClasses;
 	[SerializeField] private StatType[] stats;
+
+	private Dictionary<string, Resource> database = new Dictionary<string, Resource>();
+
+	public List<Resource> Resources => resources; 
 
 	public CharacterClass[] CharacterClasses => characterClasses; // getter
 	public StatType[] Stats => stats; // getter
@@ -29,9 +36,13 @@ public class ResourceDatabase : ScriptableObject
 		{
 			AddResource(resource);
 		}
+		RepopulateResourcesListFromDatabase();
 	}
 
-	private Dictionary<string, Resource> database = new Dictionary<string, Resource>();
+	public void RepopulateResourcesListFromDatabase()
+    {
+		resources = new List<Resource>(database.Values.ToList());
+	}
 
 	public void AddResource(Resource resource)
 	{
@@ -49,14 +60,22 @@ public class ResourceDatabase : ScriptableObject
 		if (!database.ContainsKey(resource.UID))
 		{
 			database.Add(resource.UID, resource);
+			return;
 		}
+        else
+        {
+			Debug.LogWarning("Database already contains " + resource.name + "'s resource.UID: " + resource.UID);
+			return;
+        }
 	}
 
 	public void RemoveResource(Resource resource)
 	{
-		if (!database.ContainsKey(resource.UID))
+		if (database.ContainsKey(resource.UID))
 		{
 			database.Remove(resource.UID);
+			RepopulateResourcesListFromDatabase();
+			Debug.Log("Removed" + resource.UID);
 		}
 	}
 
@@ -93,7 +112,7 @@ public class ResourceDatabase : ScriptableObject
 	{
 		Debug.Log("Resource Database print called.");
 		Debug.Log("Database Count: " + database.Values.Count);
-		Debug.Log("Resources Length: " + resources.Length);
+		Debug.Log("Resources Count: " + resources.Count);
 		foreach (KeyValuePair<string, Resource> entry in database)
 		{
 			Debug.Log(entry.Value.Name + ": " + entry.Key);

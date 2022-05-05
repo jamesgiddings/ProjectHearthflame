@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 5f;
 	private Rigidbody2D rb;
 
-	private Vector2 movementNormalized;
 	private Animator animator;
 
 	public Rigidbody2D Rigidbody => rb;
@@ -20,27 +19,20 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		// Input
-		Vector2 movement;
-		movement.x = Input.GetAxisRaw("Horizontal");
-		movement.y = Input.GetAxisRaw("Vertical");
+		animator.SetFloat("Horizontal", GameManager.Instance.Movement.x);
+		animator.SetFloat("Vertical", GameManager.Instance.Movement.y);
+		animator.SetFloat("Speed", GameManager.Instance.Movement.sqrMagnitude);
 
-		movementNormalized = movement.normalized;
-
-		animator.SetFloat("Horizontal", movement.x);
-		animator.SetFloat("Vertical", movement.y);
-		animator.SetFloat("Speed", movement.sqrMagnitude);
-
-		if (movement.x == 1 || movement.x == -1 || movement.y == 1 || movement.y == -1)
+		if (GameManager.Instance.Movement.x == 1 || GameManager.Instance.Movement.x == -1 || GameManager.Instance.Movement.y == 1 || GameManager.Instance.Movement.y == -1)
 		{
-			animator.SetFloat("LastX", movement.x);
-			animator.SetFloat("LastY", movement.y);
+			animator.SetFloat("LastX", GameManager.Instance.Movement.x);
+			animator.SetFloat("LastY", GameManager.Instance.Movement.y);
 		}
 	}
 
 	private void FixedUpdate()
 	{
 		// Movement
-		rb.MovePosition(rb.position + movementNormalized * moveSpeed * Time.fixedDeltaTime);
+		rb.MovePosition(rb.position + GameManager.Instance.MovementNormalized * moveSpeed * Time.fixedDeltaTime);
 	}
 }

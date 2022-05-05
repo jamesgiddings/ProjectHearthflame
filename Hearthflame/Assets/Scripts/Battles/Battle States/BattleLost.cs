@@ -1,4 +1,4 @@
-public class BattleLost : BattleState
+public class BattleLost : BattleSubState
 {
 	public BattleLost(BattleManager battleManager)
 	{

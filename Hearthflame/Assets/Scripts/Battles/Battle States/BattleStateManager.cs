@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BattleStateManager
 {
-	private BattleState battleState;
+	private BattleSubState battleState;
 
 	private PlayerTurn playerTurn;
 	private EnemyTurn enemyTurn;
@@ -20,7 +16,7 @@ public class BattleStateManager
 	public BattleLost BattleLost => battleLost;
 	public BattleOver BattleOver => battleOver;
 
-	public BattleState BattleState
+	public BattleSubState BattleState
 	{
 		get { return battleState; }
 		set { battleState = value; }
@@ -41,7 +37,7 @@ public class BattleStateManager
 		battleOver = new BattleOver(battleManager);
 	}
 
-	public void ChangeState(BattleState newBattleState)
+	public void ChangeState(BattleSubState newBattleState)
 	{
 		if (battleState != null)
 		{
@@ -54,5 +50,4 @@ public class BattleStateManager
 	{
 		battleState.HandleInput();
 	}
-
 }

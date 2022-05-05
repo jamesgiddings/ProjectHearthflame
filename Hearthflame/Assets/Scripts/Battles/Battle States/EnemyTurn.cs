@@ -2,7 +2,7 @@ using GramophoneUtils.Stats;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyTurn : BattleState
+public class EnemyTurn : BattleSubState
 {
 	private Character StateActor;
 

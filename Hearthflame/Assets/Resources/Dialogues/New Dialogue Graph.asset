@@ -210,6 +210,77 @@ MonoBehaviour:
     voiceClip: {fileID: 0}
   - text: Parpledarp
     voiceClip: {fileID: 0}
+--- !u!114 &-5189272670826601853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2002517843e69414b8995002eefa66e1, type: 3}
+  m_Name: Branch
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1368, y: 40}
+  ports:
+    keys:
+    - pass
+    - fail
+    - input
+    - output
+    values:
+    - _fieldName: pass
+      _node: {fileID: -5189272670826601853}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: fail
+      _node: {fileID: -5189272670826601853}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: -5189272670826601853}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: answers 4
+        node: {fileID: -4624151079997485496}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -5189272670826601853}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  input: {fileID: 0}
+  output: {fileID: 0}
+  conditions:
+  - _target: {fileID: 11400000, guid: a9da59c29f980494ca1c85c1caa3e54e, type: 2}
+    _methodName: get_Value
+    _args: []
+    _dynamic: 0
+    _typeName: Dialogue.Condition, Scripts, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    dirty: 0
+  pass: {fileID: 0}
+  fail: {fileID: 0}
 --- !u!114 &-4624151079997485496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +294,7 @@ MonoBehaviour:
   m_Name: Chat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1032, y: -568}
+  position: {x: -1352, y: -568}
   ports:
     keys:
     - answers
@@ -232,6 +303,8 @@ MonoBehaviour:
     - answers 0
     - answers 1
     - answers 2
+    - answers 3
+    - answers 4
     values:
     - _fieldName: answers
       _node: {fileID: -4624151079997485496}
@@ -297,6 +370,30 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
+    - _fieldName: answers 3
+      _node: {fileID: -4624151079997485496}
+      _typeQualifiedName: Dialogue.Chat+Answer, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 7625245934281532441}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: answers 4
+      _node: {fileID: -4624151079997485496}
+      _typeQualifiedName: Dialogue.Chat+Answer, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: -5189272670826601853}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
   input: {fileID: 0}
   output: {fileID: 0}
   character: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
@@ -307,6 +404,10 @@ MonoBehaviour:
   - text: ;[
     voiceClip: {fileID: 0}
   - text: Ppprt!
+    voiceClip: {fileID: 0}
+  - text: OOOOOOoo
+    voiceClip: {fileID: 0}
+  - text: Boool
     voiceClip: {fileID: 0}
 --- !u!114 &-4216326169720342262
 MonoBehaviour:
@@ -401,7 +502,7 @@ MonoBehaviour:
   m_Name: Chat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -680, y: -104}
+  position: {x: -600, y: -264}
   ports:
     keys:
     - answers
@@ -471,7 +572,67 @@ MonoBehaviour:
   - {fileID: -7365013186266961462}
   - {fileID: 3917539637293640597}
   - {fileID: 3875424863909434474}
-  current: {fileID: -6128487173444756535}
+  - {fileID: 1026782344706802859}
+  - {fileID: 7625245934281532441}
+  - {fileID: -5189272670826601853}
+  current: {fileID: 3875424863909434474}
+--- !u!114 &1026782344706802859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8033ebb924d43464ab3c372c8457585f, type: 3}
+  m_Name: Event
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -504, y: 200}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 1026782344706802859}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: pass
+        node: {fileID: 7625245934281532441}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 1026782344706802859}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  input: {fileID: 0}
+  output: {fileID: 0}
+  trigger:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: eed74bedebb945d499d979c1799ec874, type: 2}
+        m_TargetAssemblyTypeName: DialogueInt, Scripts
+        m_MethodName: Increment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3875424863909434474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,11 +646,12 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 722.13446, y: -414.09662}
+  position: {x: 744, y: -424}
   ports:
     keys:
     - input
     - output
+    - answers
     values:
     - _fieldName: input
       _node: {fileID: 3875424863909434474}
@@ -515,8 +677,21 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: 3875424863909434474}
+      _typeQualifiedName: System.Collections.Generic.List`1[[Dialogue.Chat+Answer,
+        Scripts, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
+  character: {fileID: 0}
+  text: 
+  answers: []
 --- !u!114 &3917539637293640597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,3 +750,83 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7625245934281532441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2002517843e69414b8995002eefa66e1, type: 3}
+  m_Name: Branch
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -936, y: 24}
+  ports:
+    keys:
+    - pass
+    - fail
+    - input
+    - output
+    values:
+    - _fieldName: pass
+      _node: {fileID: 7625245934281532441}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 1026782344706802859}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: fail
+      _node: {fileID: 7625245934281532441}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: 7625245934281532441}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: answers 3
+        node: {fileID: -4624151079997485496}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 7625245934281532441}
+      _typeQualifiedName: Dialogue.DialogueBaseNode, Scripts, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  input: {fileID: 0}
+  output: {fileID: 0}
+  conditions:
+  - _target: {fileID: 11400000, guid: eed74bedebb945d499d979c1799ec874, type: 2}
+    _methodName: GreaterThanOrEqualTo
+    _args:
+    - boolValue: 0
+      intValue: 3
+      floatValue: 0
+      stringValue: 
+      objectValue: {fileID: 0}
+      argType: 2
+    _dynamic: 0
+    _typeName: Dialogue.Condition, Scripts, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    dirty: 0
+  pass: {fileID: 0}
+  fail: {fileID: 0}
