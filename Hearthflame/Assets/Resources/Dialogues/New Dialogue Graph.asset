@@ -56,7 +56,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
   text: An enemon! Run!
   answers: []
 --- !u!114 &-6128487173444756535
@@ -121,7 +121,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
   text: Goodbye!
   answers: []
 --- !u!114 &-5527044651958495681
@@ -203,7 +203,7 @@ MonoBehaviour:
       _dynamic: 1
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: bbde9861680d3274fa3941358ef3ee7c, type: 2}
+  character: {fileID: 11400000, guid: b7fbadeefab484f499cdc0b14a591f42, type: 2}
   text: Hello to you, too.
   answers:
   - text: OK...watevs
@@ -396,7 +396,7 @@ MonoBehaviour:
       _dynamic: 1
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: 6a51b986f03eecb45b137a01c366d4c4, type: 2}
+  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
   text: Hello
   answers:
   - text: ;]
@@ -548,7 +548,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: c677bdf64cb5ee3439f1ef6743bfac18, type: 2}
+  character: {fileID: 11400000, guid: b7fbadeefab484f499cdc0b14a591f42, type: 2}
   text: Well, that's a shame!
   answers: []
 --- !u!114 &11400000
@@ -575,7 +575,7 @@ MonoBehaviour:
   - {fileID: 1026782344706802859}
   - {fileID: 7625245934281532441}
   - {fileID: -5189272670826601853}
-  current: {fileID: 3875424863909434474}
+  current: {fileID: -4624151079997485496}
 --- !u!114 &1026782344706802859
 MonoBehaviour:
   m_ObjectHideFlags: 0

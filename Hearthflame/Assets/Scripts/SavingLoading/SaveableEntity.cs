@@ -33,6 +33,7 @@ namespace GramophoneUtils.SavingLoading
 
         public void RestoreState(object state)
         {
+            Debug.Log("restoring");
             var stateDictionary = (Dictionary<string, object>)state;
 
             foreach (var saveable in GetComponents<ISaveable>())

@@ -20,6 +20,7 @@ MonoBehaviour:
   color: {r: 1, g: 0.59621054, b: 0, a: 0}
   brain: {fileID: 0}
   startsUnlocked: 1
+  portrait: {fileID: -1808233437, guid: f06069f7fda60e6409adebcd42b518a7, type: 3}
   startingLevel: 0
   idle_Left: {fileID: 7400000, guid: d36e7bc1578832a4db782832b5fac053, type: 2}
   idle_Right: {fileID: 7400000, guid: 67a8ef0093be2e24f806ce5a10063add, type: 2}

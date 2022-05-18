@@ -13,7 +13,9 @@ namespace GramophoneUtils.Stats
         [SerializeField] private Color color;
         [SerializeField] private Brain brain;
         [SerializeField] private bool startsUnlocked;
-        
+
+        [SerializeField] private Sprite portrait;
+
         [SerializeField] private int startingLevel = 0;
 
 
@@ -60,12 +62,17 @@ namespace GramophoneUtils.Stats
         public Brain Brain => brain; // getter
         public bool StartsUnlocked => startsUnlocked; // getter
         public int StartingLevel => startingLevel; // getter
+
+        public Sprite Portrait => portrait; // getter
+
         public string AnimControllerPath;
         public string AnimControllerLoadPath;
 
-#if UNITY_EDITOR
-        private UnityEditor.Animations.AnimatorController animatorController;
 
+
+#if UNITY_EDITOR
+
+        private UnityEditor.Animations.AnimatorController animatorController;
         public UnityEditor.Animations.AnimatorController AnimatorController => animatorController; //getter
 
         public void OnValidate()

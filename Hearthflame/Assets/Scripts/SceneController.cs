@@ -1,6 +1,5 @@
 using GramophoneUtils.Stats;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +11,7 @@ public static class SceneController
 
 	public static IEnumerator AdditiveLoadScene(Battle battle = null, PlayerBehaviour player = null)
 	{
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
 
 		asyncLoad.completed += (AsyncOperation) => { InitialiseBattleManager(battle, player); };
 
@@ -49,9 +48,34 @@ public static class SceneController
 		// Wait until the asynchronous scene fully loads
 		while (!asyncLoad.isDone)
 		{
-			yield return null;
+			yield return asyncLoad;
 		}
 	}
+	public static IEnumerator ChangeScene(int targetSceneBuildIndex, PlayerBehaviour player = null)
+	{
+		playerBehaviour = player;
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetSceneBuildIndex, LoadSceneMode.Single);
+
+		asyncLoad.completed += (AsyncOperation) => { SetPlayerPositionOnSceneChange(); };
+
+		// Wait until the asynchronous scene fully loads
+		while (!asyncLoad.isDone)
+		{
+			yield return asyncLoad;
+		}
+	}
+
+	public static void ChangeSceneSynchronous(int targetSceneBuildIndex, PlayerBehaviour player = null)
+	{
+		if (SceneManager.GetActiveScene().buildIndex == targetSceneBuildIndex)
+        {
+			return;
+        }
+		playerBehaviour = player;
+		SceneManager.LoadScene(targetSceneBuildIndex, LoadSceneMode.Single);
+	}
+
+
 
 	public static void CacheTransitionTriggerTargetName(string triggerName)
 	{
@@ -92,4 +116,27 @@ public static class SceneController
 		CacheTransitionTriggerTargetName("");
 	}
 
+	public static string GetActiveSceneName()
+	{
+		if (SceneManager.GetActiveScene() != null)
+		{
+			return SceneManager.GetActiveScene().name;
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	public static int GetActiveSceneBuildIndex()
+	{
+		if (SceneManager.GetActiveScene() != null)
+		{
+			return SceneManager.GetActiveScene().buildIndex;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

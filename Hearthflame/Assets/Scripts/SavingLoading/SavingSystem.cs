@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 namespace GramophoneUtils.SavingLoading
 {
@@ -60,8 +62,24 @@ namespace GramophoneUtils.SavingLoading
             state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
         }
 
-        private void RestoreState(Dictionary<string, object> state)
+        private async void RestoreState(Dictionary<string, object> state)
         {
+            // Restore the scene first:
+            int lastSceneBuildIndex = (int)state["lastSceneBuildIndex"];
+            //AsyncOperation asyncLoad = (AsyncOperation)SceneController.ChangeScene(lastSceneBuildIndex);
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(lastSceneBuildIndex);
+            while (asyncLoad.isDone == false)
+            {
+                await Task.Yield();
+            }
+            
+
+            
+
+            Debug.Log("coroutine done");
+            Debug.Log("Active Scene after:" + SceneController.GetActiveSceneName());
+            // Rest of state to restore:
+
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
             {
                 if (state.TryGetValue(saveable.Id, out object value))

@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace GramophoneUtils
 {
+#if UNITY_EDITOR
     public static class SerializationUtilities
     {
         //public static System.Reflection.FieldInfo GetFieldViaPath(this System.Type type, string path)
@@ -72,5 +73,6 @@ namespace GramophoneUtils
             return type;
         }
     }
+#endif
 }
 

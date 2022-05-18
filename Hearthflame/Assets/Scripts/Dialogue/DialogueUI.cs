@@ -50,7 +50,7 @@ public class DialogueUI : MonoBehaviour, ISaveable
 		{
 			Dialogue.Chat chat = (Chat)baseNode;
 			SpeakerNameTextField.text = chat.character.Name;
-			SpeakerImage.sprite = chat.character.Sprite;
+			SpeakerImage.sprite = chat.character.Portrait;
 			DialogueTextField.text = chat.text;
 
 			NodePort port = chat.GetOutputPort("output");

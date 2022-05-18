@@ -11,8 +11,10 @@ public class Battle : Data
 	//[SerializeField] public UnityEvent onInventoryItemsUpdated;
 
 	[SerializeField] private BattleReward battleReward;
+	[SerializeField] private GameObject battleBackground;
 
 	public BattleReward BattleReward => battleReward;
+	public GameObject BattleBackground => battleBackground;
 
 	private Inventory enemyInventory = new Inventory(20, 10000);
 	private int partyInventorySize;

@@ -1,10 +1,9 @@
+using GramophoneUtils.SavingLoading;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ISaveable
 {
 	[SerializeField] private ResourceDatabase resourceDatabase;
 	[SerializeField] private StatSystemConstants statSystemConstants;
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
 	public ResourceDatabase ResourceDatabase => resourceDatabase; // getter
 	public StatSystemConstants StatSystemConstants => statSystemConstants; // getter
 
-	public Action<Scene> BattleSceneLoaded;
+	public Action<Scene> OnSceneLoaded;
 
 	public Vector2 Movement
 	{
@@ -45,19 +44,6 @@ public class GameManager : MonoBehaviour
 			movementNormalized = value;
 		}
 	}
-
-	public State GameState
-	{
-		get
-		{
-			if (gameState == null)
-			{
-				Debug.LogError("gameState is null.");
-			}
-			return gameState;
-		}
-	}
-
 	public GameStateManager GameStateManager => gameStateManager;
 
 	public static GameManager Instance
@@ -81,16 +67,43 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-		gameState.Update();
+		gameStateManager.Update();
     }
 
     private void SceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		BattleSceneLoaded?.Invoke(scene);
+		OnSceneLoaded?.Invoke(scene);
 	}
 
 	private void OnDestroy()
 	{
 		SceneManager.sceneLoaded -= SceneLoaded;
 	}
-}
+
+	#region Saving Loading
+	public object CaptureState()
+	{
+		return new GameManagerSaveData
+		{
+			// Scene
+
+			Scene = SceneController.GetActiveSceneName()
+		};
+	}
+
+    public void RestoreState(object state)
+    {
+		var saveData = (GameManagerSaveData)state;
+
+		// Position
+		//Debug.Log("We are restoring the saved scene.");
+		//SceneController.ChangeScene(saveData.Scene);
+	}
+
+	[Serializable]
+	public struct GameManagerSaveData
+	{
+		public string Scene;
+	}
+		#endregion
+	}

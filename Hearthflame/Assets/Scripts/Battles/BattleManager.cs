@@ -2,6 +2,7 @@ using GramophoneUtils.Stats;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class BattleManager : MonoBehaviour
 {
@@ -21,10 +22,14 @@ public class BattleManager : MonoBehaviour
 	private CharacterInventory enemyBattlersCharacterInventory;
 	private CharacterInventory playerBattlersCharacterInventory;
 
+	private GameObject battleEnvironment;
+
 	public CharacterInventory BattlersCharacterInventory => battlersCharacterInventory;
 	public CharacterInventory OrderedBattlersCharacterInventory => orderedBattlersCharacterInventory;
 	public CharacterInventory EnemyBattlersCharacterInventory => enemyBattlersCharacterInventory;
 	public CharacterInventory PlayerBattlersCharacterInventory => playerBattlersCharacterInventory;
+
+	public GameObject BattleEnvironment => battleEnvironment;
 
 	private TurnOrderUI turnOrderUI;
 
@@ -53,6 +58,7 @@ public class BattleManager : MonoBehaviour
 	public void InitialiseBattle()
 	{
 		InitialiseBattleBehaviour();
+		InitialiseBattleEnvironment();
 		battleDataModel.InitialiseBattleModel();
 		InitialiseBattlerDisplay();
 		InitialiseTurnOrderUI();
@@ -62,7 +68,12 @@ public class BattleManager : MonoBehaviour
 		battleDataModel.UpdateState();
 	}
 
-	private void Update()
+    private void InitialiseBattleEnvironment()
+    {
+		battleEnvironment = Instantiate(battle.BattleBackground, battleBehaviour.BattleEnvironment.transform);
+    }
+
+    private void Update()
 	{
 		battleStateManager.HandleInput();
 	}
@@ -195,7 +206,7 @@ public class BattleManager : MonoBehaviour
 	{
 		GameManager.Destroy(turnOrderUI.gameObject);
 
-		SceneController.UnloadScene("BattleScene");
+		SceneController.UnloadScene("Battle Scene");
 	}
 
 	#endregion

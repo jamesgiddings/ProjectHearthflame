@@ -5,16 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Demo.unity
     guid: 975326c5f497e4d4fba51540d7522a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BattleScene.unity
     guid: c9cb537e1317f9248a23ebd21e89972c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Tile Scene.unity
     guid: 84c6496a9872ea54cb1ea64de73e02f7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI.unity
     guid: 6729b1710bb64d04780e74376776e273
+  - enabled: 1
+    path: Assets/Scenes/Slums/Slums.unity
+    guid: c5c903f30927ef9499d1471db17dd322
+  - enabled: 1
+    path: Assets/Scenes/Aydys' House/Aydys' Basement.unity
+    guid: 9d93311aa3a2a9c44b26cd4b70c06581
+  - enabled: 1
+    path: Assets/Scenes/Aydys' House/Aydys' Living Room.unity
+    guid: bace961e36c2494408b7f698eba5dd11
+  - enabled: 0
+    path: Assets/Scenes/New Scene.unity
+    guid: 065856acf21f5d94aa59899e19fa55c4
+  - enabled: 1
+    path: Assets/Scenes/Battle Scene.unity
+    guid: 549dfae9b5c575e46b932731ca90b053
   m_configObjects: {}

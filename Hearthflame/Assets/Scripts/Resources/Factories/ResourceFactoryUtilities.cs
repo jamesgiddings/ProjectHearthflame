@@ -4,6 +4,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class ResourceFactoryUtilities
 {
     public static string GenerateAssetPath(Resource resource, string name = "")
@@ -64,3 +65,4 @@ public class ResourceFactoryUtilities
         AssetDatabase.DeleteAsset(GetResourceAssetPath(resource));
     }
 }
+#endif

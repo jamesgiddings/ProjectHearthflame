@@ -4,6 +4,7 @@ using GramophoneUtils.Stats;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class ResourceFactory
 {
     public static Resource Create(string typeName)
@@ -52,3 +53,4 @@ public class ResourceFactory
         return resource;
     }
 }
+#endif
