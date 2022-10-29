@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class CharacterSlotsDisplayUI : MonoBehaviour
 {
-	[SerializeField] private PlayerBehaviour playerBehaviour;
+	[SerializeField] private PlayerModel playerModel;
 
 	private Character[] frontCharacters;
 	private Character[] rearCharacters;
 
-	public PlayerBehaviour PlayerBehaviour { get { return playerBehaviour; } set { playerBehaviour = value; } }
+	public PlayerModel PlayerModel { get { return playerModel; } set { playerModel = value; } }
 
 	[SerializeField] Transform FrontCharacterSlotsHolder; 
 	[SerializeField] Transform RearCharacterSlotsHolder; 
@@ -23,7 +23,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		int frontIndex = 0;
 		int rearIndex = 0;
 
-		IEnumerable<Character> query = playerBehaviour.PlayerCharacters.Where(character => character.IsUnlocked == true);
+		IEnumerable<Character> query = playerModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
 		List<Character> unlockedCharacters = new List<Character>();
 		foreach (Character character in query)
 		{

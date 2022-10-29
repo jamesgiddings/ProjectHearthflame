@@ -50,10 +50,10 @@ public class GameManager : MonoBehaviour, ISaveable
 	{
 		get
 		{
-			if(instance == null)
-			{
-				Debug.LogError("Game Manager is null.");
-			}
+			// if(instance == null)
+			// {
+			// 	Debug.LogError("Game Manager is null.");
+			// }
 			return instance;
 		}
 	}

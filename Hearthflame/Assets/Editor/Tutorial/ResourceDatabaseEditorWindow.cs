@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using GramophoneUtils.Stats;
 using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Events.CustomEvents;
+using Dialogue;
+using GramophoneUtils.Items;
 
 public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
 {
@@ -22,14 +25,32 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     float currentScrollViewHeight;
     bool resize = false;
     Rect cursorChangeRect;
-    private enum tabs
+    private enum Tabs
     {
-        Characters, Items, Dialogue, Battle, Skills, Stats
+        Characters, Items, Dialogue, Battle, Skills, Stats, AI
     }
 
-    private tabs tab;
+    private enum AiTabs
+    {
+        RandomBrain, SequenceBrain, BehaviourTreeBrain
+    }
 
-    string[] toolbarStrings = { "Characters", "Items", "Dialogue", "Battle", "Skills", "Stats"};
+    private enum ItemTabs
+    {
+        Consumable, Equipment
+    }
+
+    private Tabs tab;
+
+    private AiTabs aiTab;
+
+    private ItemTabs itemTab;
+    
+    
+
+    string[] toolbarStrings = { "Characters", "Items", "Dialogue", "Battle", "Skills", "Stats", "AI" };
+    string[] aiToolbarStrings = { "Random Brain", "Sequence Brain" };
+    string[] itemToolbarStrings = { "Consumable", "Equipment" };
     CharacterTemplate characterTemplate = null;
     EquipmentItem equipmentItem = null;
     string path = "";
@@ -54,15 +75,15 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     private void OnEnable()
     {
         CreateFilterDropdownList();
-        this.position = new Rect(200, 200, 400, 300);
-        currentScrollViewHeight = this.position.height / 2;
-        cursorChangeRect = new Rect(0, currentScrollViewHeight, this.position.width, 5f);
+        this.position = new Rect(200, 200, 900, 500);
+        currentScrollViewHeight = this.position.height / 4 * 3;
+        cursorChangeRect = new Rect(0, currentScrollViewHeight, this.position.width, 2f);
     }
 
     private void CreateFilterDropdownList()
     {
         resourceTypes = ReflectiveEnumerator.GetEnumerableOfType<Resource>();
-        resTypes = new List<System.Type>((IEnumerable<System.Type>)resourceTypes);
+        resTypes = new List<System.Type>(resourceTypes);
         resTypes.Add(typeof(Resource));
         resTypeStrings = new string[resTypes.Count + 1];
         for (int i = 0; i < resTypes.Count; i++)
@@ -78,16 +99,16 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
         GUI.DrawTexture(cursorChangeRect, EditorGUIUtility.whiteTexture);
         EditorGUIUtility.AddCursorRect(cursorChangeRect, MouseCursor.ResizeVertical);
 
-        if (Event.current.type == EventType.MouseDown && cursorChangeRect.Contains(Event.current.mousePosition))
+        if (UnityEngine.Event.current.type == EventType.MouseDown && cursorChangeRect.Contains(UnityEngine.Event.current.mousePosition))
         {
             resize = true;
         }
         if (resize)
         {
-            currentScrollViewHeight = Event.current.mousePosition.y;
+            currentScrollViewHeight = UnityEngine.Event.current.mousePosition.y;
             cursorChangeRect.Set(cursorChangeRect.x, currentScrollViewHeight, cursorChangeRect.width, cursorChangeRect.height);
         }
-        if (Event.current.type == EventType.MouseUp)
+        if (UnityEngine.Event.current.type == EventType.MouseUp)
             resize = false;
     }
 
@@ -96,12 +117,9 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     {
         GUILayout.BeginVertical();
         scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Height(currentScrollViewHeight));
-
-
-
+        
         CreateResourcesEditor();
-
-
+        
         GUILayout.EndScrollView();
 
         ResizeScrollView();
@@ -126,10 +144,10 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     private void CreateResourcesEditor()
     {
         GUILayout.Label("Resources Editor:", EditorStyles.boldLabel);
-        tab = (tabs)GUILayout.Toolbar((int)tab, toolbarStrings);
+        tab = (Tabs)GUILayout.Toolbar((int)tab, toolbarStrings);
         switch (tab)
         {
-            case tabs.Characters:
+            case Tabs.Characters:
                 
                 DisplayTabContent(typeof(CharacterTemplate));
                 
@@ -184,9 +202,21 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
                 //    }
                 //}
                 break;
-            case tabs.Items:
+            case Tabs.Items:
 
-                DisplayTabContent(typeof(EquipmentItem));
+                itemTab = (ItemTabs)GUILayout.Toolbar((int)itemTab, itemToolbarStrings);
+                switch (itemTab)
+                {
+                    case ItemTabs.Equipment:
+                        DisplayTabContent(typeof(EquipmentItem));
+                        break;
+                    case ItemTabs.Consumable:
+                        DisplayTabContent(typeof(ConsumableItem));
+                        break;
+                    default:
+                        break;
+                }
+                break;
 
                 //if (equipmentItem != null)
                 //    if (GUILayout.Button("Add EquipmentItem to database", GUILayout.ExpandWidth(false)))
@@ -236,7 +266,26 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
                 //    }
                 //}
                 break;
-            case tabs.Dialogue:
+            case Tabs.Dialogue:
+                DisplayTabContent(typeof(DialogueGraph));
+                break;
+            case Tabs.AI:
+                
+                aiTab = (AiTabs)GUILayout.Toolbar((int)aiTab, aiToolbarStrings);
+                switch (aiTab)
+                {
+                    case AiTabs.SequenceBrain:
+                        DisplayTabContent(typeof(SequenceBrain));
+                        break;
+                    case AiTabs.RandomBrain:
+                        DisplayTabContent(typeof(RandomBrain));
+                        break;
+                    case AiTabs.BehaviourTreeBrain:
+                        DisplayTabContent(typeof(BehaviourTreeBrain));
+                        throw new System.NotImplementedException();
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
@@ -295,7 +344,7 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
             _resourceDatabaseObject.Print();
         }
 
-        if (Event.current.keyCode == KeyCode.Return)
+        if (UnityEngine.Event.current.keyCode == KeyCode.Return)
         {
             searchText = searchTextField;
         }

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+// 
+// Summary of SaveableEntity:
+// This is the MonoBehaviour that is attached to an object in the scene that has one or more ISaveable component(s) that we want to save. 
+// 
+
 namespace GramophoneUtils.SavingLoading
 {
     [ExecuteAlways]
@@ -22,8 +27,8 @@ namespace GramophoneUtils.SavingLoading
             // Store all the save data from the saveable components on this GameObject
             foreach (var saveable in GetComponents<ISaveable>())
             {
-                Debug.Log(saveable);
-                Debug.LogError("This cannot save multiple instances of the same component, it overwrites them");
+                //Debug.Log(saveable);
+                //Debug.LogError("This cannot save multiple instances of the same component, it overwrites them");
                 state[saveable.GetType().ToString()] = saveable.CaptureState();
             }
 
@@ -33,7 +38,7 @@ namespace GramophoneUtils.SavingLoading
 
         public void RestoreState(object state)
         {
-            Debug.Log("restoring");
+            //Debug.Log("restoring");
             var stateDictionary = (Dictionary<string, object>)state;
 
             foreach (var saveable in GetComponents<ISaveable>())

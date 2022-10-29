@@ -84,14 +84,21 @@ namespace GramophoneUtils.Stats
 
             if (animatorController == null)
             {
-                CreateController();
+                if (_exists != null)
+                {
+                    animatorController = (UnityEditor.Animations.AnimatorController)_exists;
+                }
+                else
+                {
+                    CreateController();
+                }
             }
         }
 
         public void CreateController()
         {
             // Creates the controller
-            animatorController = UnityEditor.Animations.AnimatorController.CreateAnimatorControllerAtPath(AnimControllerPath) as UnityEditor.Animations.AnimatorController;
+            animatorController = UnityEditor.Animations.AnimatorController.CreateAnimatorControllerAtPath(AnimControllerPath);
 
 
             if (walk_Left != null)

@@ -559,7 +559,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 5c53c641aee11904f933eb9b329b74c5, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 89158a79b84e09649b50d1444f5f53fa, type: 2}
 --- !u!4 &555838567
 Transform:
   m_ObjectHideFlags: 0
@@ -831,6 +831,11 @@ PrefabInstance:
       objectReference: {fileID: 1497101564}
     - target: {fileID: 8240297581556101891, guid: 3b99a71870cc76b4c8347ec9181594fe,
         type: 3}
+      propertyPath: battleTilemapGrid
+      value: 
+      objectReference: {fileID: 430555398504084628}
+    - target: {fileID: 8240297581556101891, guid: 3b99a71870cc76b4c8347ec9181594fe,
+        type: 3}
       propertyPath: battleRewardsDisplayUI
       value: 
       objectReference: {fileID: 232853108}
@@ -1084,7 +1089,7 @@ PrefabInstance:
     - target: {fileID: 2735479314586754274, guid: b4ab337268f8080469bd79b144a6dc2c,
         type: 3}
       propertyPath: orthographic size
-      value: 15
+      value: 16.875
       objectReference: {fileID: 0}
     - target: {fileID: 2735479314877308627, guid: b4ab337268f8080469bd79b144a6dc2c,
         type: 3}
@@ -1344,6 +1349,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585974ec5a8a5b749ac29dab27ba9e5e, type: 3}
+--- !u!156049354 &430555398504084628 stripped
+Grid:
+  m_CorrespondingSourceObject: {fileID: 430555399279345753, guid: 585974ec5a8a5b749ac29dab27ba9e5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 430555398504084627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &843433556923946277
 PrefabInstance:
   m_ObjectHideFlags: 0

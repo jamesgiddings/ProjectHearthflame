@@ -7,7 +7,7 @@ using System;
 public class BattleManager : MonoBehaviour
 {
 	private Battle battle;
-	private PlayerBehaviour playerBehaviour;
+	private PlayerModel playerModel;
 		
 	private BattleBehaviour[] battleBehaviours;
 	private BattleBehaviour battleBehaviour;
@@ -37,16 +37,16 @@ public class BattleManager : MonoBehaviour
 	public TargetManager TargetManager => targetManager; // getter
 	public BattleDataModel BattleDataModel => battleDataModel; // getter
 
-	public PlayerBehaviour PlayerBehaviour => playerBehaviour;
+	public PlayerModel PlayerModel => playerModel;
 
 	public BattleBehaviour BattleBehaviour => battleBehaviour;
 
 	public Battle Battle => battle;
 
-	public void Initialise(Battle battle, PlayerBehaviour player)
+	public void Initialise(Battle battle, PlayerModel player)
 	{
 		this.battle = battle;
-		this.playerBehaviour = player;
+		this.playerModel = player;
 
 		battleStateManager = new BattleStateManager(this);
 		battleDataModel = new BattleDataModel(this, battle, battleBehaviour);
@@ -70,7 +70,7 @@ public class BattleManager : MonoBehaviour
 
     private void InitialiseBattleEnvironment()
     {
-		battleEnvironment = Instantiate(battle.BattleBackground, battleBehaviour.BattleEnvironment.transform);
+		battleEnvironment = Instantiate(battle.BattleBackground, battleBehaviour.BattleTilemapGrid.transform);
     }
 
     private void Update()

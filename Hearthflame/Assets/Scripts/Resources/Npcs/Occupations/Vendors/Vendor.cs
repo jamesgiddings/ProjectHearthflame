@@ -37,7 +37,7 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
             var playerBehaviour = other.GetComponent<PlayerBehaviour>();
             if (playerBehaviour == null) { return; }
 
-            var otherItemContainer = playerBehaviour.PartyInventory;
+            var otherItemContainer = ServiceLocator.Instance.PlayerModel.PartyInventory;
 
             VendorData vendorData = new VendorData(otherItemContainer, itemContainer);
             Debug.Log(vendorData.BuyingItemContainer.GetAllUniqueItems().Count + " + " + vendorData.SellingItemContainer.GetAllUniqueItems().Count);

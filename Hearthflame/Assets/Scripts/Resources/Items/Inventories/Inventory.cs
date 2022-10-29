@@ -23,19 +23,19 @@ namespace GramophoneUtils.Items.Containers
 		
 		public object CaptureState()
 		{
-			Debug.Log("We are in Inventory.CaptureState()");
-			GameManager.Instance.ResourceDatabase.Print();
+			//Debug.Log("We are in Inventory.CaptureState()");
+			//GameManager.Instance.ResourceDatabase.Print();
 			List <ResourceSlotUI.ResourceSlotSaveData> tempList = new List<ResourceSlotUI.ResourceSlotSaveData>();
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{
 				if(ItemSlots[i].item != null)
 				{
-					Debug.Log("We are saving:  + " + ItemSlots[i].item.Name);
+					//Debug.Log("We are saving:  + " + ItemSlots[i].item.Name);
 					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
 				}
 				else
 				{
-					Debug.Log("This item slot is empty.");
+					//Debug.Log("This item slot is empty.");
 					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData("", 0));
 				}
 			}
@@ -50,7 +50,7 @@ namespace GramophoneUtils.Items.Containers
 		public void RestoreState(object state)
 		{
 			var saveData = (InventorySaveData)state;
-			GameManager.Instance.ResourceDatabase.Print();
+			//GameManager.Instance.ResourceDatabase.Print();
 			money = saveData.money;
 			for (int i = 0; i < ItemSlots.Length; i++)
 			{

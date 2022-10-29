@@ -12,7 +12,7 @@ AnimatorController:
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: 7666281987865704981}
+    m_StateMachine: {fileID: 258476054118845313}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -22,7 +22,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1107 &7666281987865704981
+--- !u!1107 &258476054118845313
 AnimatorStateMachine:
   serializedVersion: 6
   m_ObjectHideFlags: 1

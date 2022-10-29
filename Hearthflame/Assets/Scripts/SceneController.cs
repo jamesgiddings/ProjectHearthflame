@@ -9,7 +9,7 @@ public static class SceneController
 	private static string transitionTargetNameCache;
 	private static PlayerBehaviour playerBehaviour;
 
-	public static IEnumerator AdditiveLoadScene(Battle battle = null, PlayerBehaviour player = null)
+	public static IEnumerator AdditiveLoadScene(Battle battle = null, PlayerModel player = null)
 	{
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
 
@@ -24,7 +24,7 @@ public static class SceneController
 
 	}
 
-	private static void InitialiseBattleManager(Battle battle = null, PlayerBehaviour player = null)
+	private static void InitialiseBattleManager(Battle battle = null, PlayerModel player = null)
 	{
 		if (battle != null && player != null)
 		{
@@ -38,44 +38,24 @@ public static class SceneController
 		SceneManager.UnloadSceneAsync(sceneName);
 	}
 
-	public static IEnumerator ChangeScene(string targetSceneName, PlayerBehaviour player = null)
+	public static IEnumerator ChangeScene(string targetSceneName, PlayerBehaviour player = null, bool fromLoad = false)
 	{
-		playerBehaviour = player;
+        ServiceLocator.Instance.SavingSystem.SaveOnSceneChange();
+        playerBehaviour = player;
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Single);
 
-		asyncLoad.completed += (AsyncOperation) => { SetPlayerPositionOnSceneChange(); };
+        asyncLoad.completed += (AsyncOperation) => { LoadSceneStateOnSceneChange(); };
+        asyncLoad.completed += (AsyncOperation) => { SetPlayerPositionOnSceneChange(); };
 		
 		// Wait until the asynchronous scene fully loads
 		while (!asyncLoad.isDone)
 		{
 			yield return asyncLoad;
 		}
-	}
-	public static IEnumerator ChangeScene(int targetSceneBuildIndex, PlayerBehaviour player = null)
-	{
-		playerBehaviour = player;
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetSceneBuildIndex, LoadSceneMode.Single);
 
-		asyncLoad.completed += (AsyncOperation) => { SetPlayerPositionOnSceneChange(); };
+        
 
-		// Wait until the asynchronous scene fully loads
-		while (!asyncLoad.isDone)
-		{
-			yield return asyncLoad;
-		}
-	}
-
-	public static void ChangeSceneSynchronous(int targetSceneBuildIndex, PlayerBehaviour player = null)
-	{
-		if (SceneManager.GetActiveScene().buildIndex == targetSceneBuildIndex)
-        {
-			return;
-        }
-		playerBehaviour = player;
-		SceneManager.LoadScene(targetSceneBuildIndex, LoadSceneMode.Single);
-	}
-
-
+    }
 
 	public static void CacheTransitionTriggerTargetName(string triggerName)
 	{
@@ -90,23 +70,24 @@ public static class SceneController
 
 	public static void SetPlayerPositionOnSceneChange(AsyncOperation obj = null)
 	{
-		Debug.Log("Scene name: " + SceneManager.GetActiveScene().name);
+		Debug.Log("Position setting");
+		//Debug.Log("Scene name: " + SceneManager.GetActiveScene().name);
 		//Debug.LogError("Needs to wait until asynchronous scene load is complete.");
 		Transform targetTransform = null;
 		TransitionTrigger[] transitionTriggers = GameManager.FindObjectsOfType<TransitionTrigger>();
-		Debug.Log("transitionTriggers.Length" + transitionTriggers.Length);
+		//Debug.Log("transitionTriggers.Length" + transitionTriggers.Length);
 		foreach (TransitionTrigger trigger in transitionTriggers)
 		{
-			Debug.Log(trigger.TransitionTriggerName);
-			Debug.Log(GetCachedTransitionTriggerTargetName());
-			if (trigger.TransitionTriggerName == GetCachedTransitionTriggerTargetName())
+			//Debug.Log(trigger.OriginTransition);
+			//Debug.Log(GetCachedTransitionTriggerTargetName());
+			if (trigger.OriginTransition == GetCachedTransitionTriggerTargetName())
 			{
-				Debug.Log("True");
-				Debug.Log("trigger.GetComponentInChildren<Transform>().name: " + trigger.EntryPoint);
+				//Debug.Log("True");
+				//Debug.Log("trigger.GetComponentInChildren<Transform>().name: " + trigger.EntryPoint);
 				targetTransform = trigger.EntryPoint;
 			}
 		}
-		Debug.Log("targetTransform:" + targetTransform);
+		//Debug.Log("targetTransform:" + targetTransform);
 		if (targetTransform != null)
 		{
 			GameObject.FindGameObjectsWithTag("Player")[0].gameObject.transform.position = targetTransform.position;
@@ -116,7 +97,15 @@ public static class SceneController
 		CacheTransitionTriggerTargetName("");
 	}
 
-	public static string GetActiveSceneName()
+    public static void LoadSceneStateOnSceneChange(AsyncOperation obj = null) // at the moment, this isn't getting called
+	{
+        Debug.Log("Scene name: " + SceneManager.GetActiveScene().name);
+        ServiceLocator.Instance.SavingSystem.LoadOnSceneChange();
+        if (obj != null)
+            obj.completed -= SetPlayerPositionOnSceneChange;
+    }
+
+    public static string GetActiveSceneName()
 	{
 		if (SceneManager.GetActiveScene() != null)
 		{

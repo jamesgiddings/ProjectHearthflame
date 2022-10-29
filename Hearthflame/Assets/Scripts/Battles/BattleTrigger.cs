@@ -5,21 +5,26 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(SaveableEntity))]
 
-public class BattleTrigger : MonoBehaviour, ISaveable
+public class BattleTrigger : StatefulTrigger
 {
 	[SerializeField] private Battle battle;
 
-	[SerializeField] private float sizeX = 5;
-	[SerializeField] private float sizeY = 5;
-
-	[SerializeField] bool deactivateOnTrigger;
-	
-	private Rigidbody2D rb;
-	private BoxCollider2D boxCollider;
-
 	public Battle Battle => battle;
-	public bool DeactivateOnTrigger => deactivateOnTrigger;
+	private SpriteRenderer spriteRenderer;
+    
+	protected override void Start()
+	{
+        base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = battle.BattleSprite;
+        if (battle.DeactivateOnComplete && battle.IsComplete)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
 
 	private void OnDrawGizmos()
 	{
@@ -27,56 +32,46 @@ public class BattleTrigger : MonoBehaviour, ISaveable
 		Gizmos.DrawSphere(transform.position, 1);
 	}
 
-	private void Start()
-	{
-		Initialize();
-	}
-
-	private void Initialize()
-	{
-		rb = GetComponent<Rigidbody2D>();
-		rb.gravityScale = 0;
-		boxCollider = GetComponent<BoxCollider2D>();
-		boxCollider.isTrigger = true;
-		boxCollider.size = new Vector2(sizeX, sizeY);
-	}
-
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Player")
 		{
-			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
-			battle.InstanceCharacters();
-			StartCoroutine(SceneController.AdditiveLoadScene(battle, player));
-			if (deactivateOnTrigger)
-			{
-				this.gameObject.SetActive(false);
-			}
+			TriggerAction();
 		}
 	}
 
-	#region SavingLoading
-	public object CaptureState()
+    protected override void TriggerAction()
+    {
+        battle.InstanceCharacters();
+        StartCoroutine(SceneController.AdditiveLoadScene(battle, ServiceLocator.Instance.PlayerModel));
+        if (deactivateOnTrigger)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    #region SavingLoading
+    public override object CaptureState()
 	{
-		Debug.Log("gameObject.activeInHierarchy while saving: " + gameObject.activeInHierarchy);
 		return new SaveData
 		{
-			IsActive = gameObject.activeInHierarchy
-			
-		};
+			IsActive = gameObject.activeInHierarchy,
+            IsComplete = battle.IsComplete
+        };
 	}
 
-	public void RestoreState(object state)
+	public override void RestoreState(object state)
 	{
 		var saveData = (SaveData)state;
-		Debug.Log("saveData.IsActive while loading: " + saveData.IsActive);
 		gameObject.SetActive(saveData.IsActive);
+		battle.IsComplete = battle.IsComplete;
 	}
 
 	[Serializable]
 	public struct SaveData
 	{
 		public bool IsActive;
+		public bool IsComplete;
 	}
 	#endregion
 }

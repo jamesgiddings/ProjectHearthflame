@@ -11,7 +11,7 @@ public class BattleWon : BattleSubState
 	{
 		base.EnterState();
 		// get the BattleReward class to show its popup 
-		battleManager.Battle.BattleReward.AddBattleReward(battleManager.PlayerBehaviour);
+		battleManager.Battle.BattleReward.AddBattleReward(battleManager.PlayerModel);
 		battleManager.BattleDataModel.OnBattleRewardsEarned?.Invoke(battleManager.Battle.BattleReward);
 
 	}

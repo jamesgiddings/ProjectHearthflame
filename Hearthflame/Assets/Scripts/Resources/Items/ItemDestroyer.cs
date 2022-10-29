@@ -1,4 +1,5 @@
 ﻿using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Stats;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace GramophoneUtils.Items
 {
     public class ItemDestroyer : MonoBehaviour
     {
-        [SerializeField] private Inventory inventory = null;
+        [SerializeField] private PlayerModel playerModel = null;
         [SerializeField] private TextMeshProUGUI areYouSureText = null;
 
         private int slotIndex = 0;
@@ -23,7 +24,7 @@ namespace GramophoneUtils.Items
 
         public void Destroy()
         {
-            inventory.RemoveAt(slotIndex);
+            playerModel.PartyInventory.RemoveAt(slotIndex);
 
             gameObject.SetActive(false);
         }

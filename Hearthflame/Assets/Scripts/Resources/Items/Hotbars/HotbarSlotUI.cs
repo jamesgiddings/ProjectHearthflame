@@ -38,7 +38,9 @@ namespace GramophoneUtils.Items.Hotbars
         {
             ResourceDragHandler resourceDragHandler = eventData.pointerDrag.GetComponent<ResourceDragHandler>();
             SkillDragHandler skillDragHandler = eventData.pointerDrag.GetComponent<SkillDragHandler>();
-            if (resourceDragHandler == null) { return; }
+            if (resourceDragHandler == null) { 
+                Debug.Log("resourceDragHandler is null");
+                return; }
             if (!(resourceDragHandler == null))
 			{
                 EquipmentSlotUI equipmentSlot = resourceDragHandler.ResourceSlotUI as EquipmentSlotUI;

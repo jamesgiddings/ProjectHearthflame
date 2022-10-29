@@ -2,7 +2,7 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Brain : ScriptableObject
+public abstract class Brain : Resource
 {
 	[SerializeField] protected CharacterClass characterClass;
 	[SerializeField] protected ResourceDatabase resourceDatabase;

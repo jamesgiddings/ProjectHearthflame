@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Aydys' House/Aydys' Living Room.unity
+- path: Assets/Scenes/Slums/Slums.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

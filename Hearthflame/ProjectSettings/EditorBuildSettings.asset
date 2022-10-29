@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Aydys' House/Aydys' Living Room.unity
     guid: bace961e36c2494408b7f698eba5dd11
   - enabled: 0
+    path: Assets/Scenes/Slums Gauntlet/Slums Gauntlet.unity
+    guid: 7a769dd76020059438c28b61d7b8a2ff
+  - enabled: 0
     path: Assets/Scenes/New Scene.unity
     guid: 065856acf21f5d94aa59899e19fa55c4
   - enabled: 1

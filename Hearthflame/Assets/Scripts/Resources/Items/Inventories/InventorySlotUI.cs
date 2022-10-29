@@ -56,7 +56,9 @@ namespace GramophoneUtils.Items.Containers
             {
                 Debug.LogError("inventory is null.");
             }
-            if (resourceDragHandler == null) { return; }
+            if (resourceDragHandler == null) { 
+                Debug.Log("resourceDragHandler is null");
+                return; }
 
             if ((resourceDragHandler.ResourceSlotUI as InventorySlotUI) != null)
             {

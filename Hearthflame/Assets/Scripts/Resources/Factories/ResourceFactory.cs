@@ -1,6 +1,7 @@
 using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
+using Dialogue;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,9 +13,6 @@ public class ResourceFactory
         Resource resource = null;
         switch (typeName)
         {
-            case "EquipmentItem":
-                resource = Create<EquipmentItem>();
-                return resource;
             case "ConsumableItem":
                 resource = Create<ConsumableItem>();
                 return resource;
@@ -24,8 +22,20 @@ public class ResourceFactory
             case "CharacterClass":
                 resource = Create<CharacterClass>();
                 return resource;
+            case "DialogueGraph":
+                resource = Create<DialogueGraph>();
+                return resource;
+            case "EquipmentItem":
+                resource = Create<EquipmentItem>();
+                return resource;
             case "Skill":
                 resource = Create<Skill>();
+                return resource;
+            case "SequenceBrain":
+                resource = Create<SequenceBrain>();                
+                return resource;
+            case "RandomBrain":
+                resource = Create<RandomBrain>();
                 return resource;
             default:
                 break;

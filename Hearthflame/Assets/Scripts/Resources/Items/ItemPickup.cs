@@ -1,26 +1,70 @@
-using GramophoneUtils.Interactables;
-using GramophoneUtils.Stats;
+using System;
 using UnityEngine;
 
 namespace GramophoneUtils.Items
 {
-    public class ItemPickup : MonoBehaviour, IInteractable
+    public class ItemPickup : StatefulTrigger
     {
         [SerializeField] private ItemSlot[] itemSlots;
 
-        public void Interact(GameObject other)
+        private void OnDrawGizmos()
         {
-            foreach (ItemSlot itemSlot in itemSlots)
-			{
-                var itemContainer = other.GetComponent<PlayerBehaviour>().PartyInventory;
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 1);
+        }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag == "Player")
+            {
+                TriggerAction();
+            }            
+        }
+
+        protected override void TriggerAction()
+        {
+            var itemContainer = ServiceLocator.Instance.PlayerModel.PartyInventory;
+
+            foreach (ItemSlot itemSlot in itemSlots)
+            {
                 if (itemContainer == null) { return; }
 
                 if (itemContainer.AddItem(itemSlot).quantity == 0)
                 {
-                    Destroy(gameObject);
+                    this.gameObject.SetActive(false);
+                }
+
+                if (deactivateOnTrigger)
+                {
+                    this.gameObject.SetActive(false);
                 }
             }
         }
+
+        #region SavingLoading
+        public override object CaptureState()
+        {
+            return new SaveData
+            {
+                IsActive = gameObject.activeInHierarchy
+            };
+        }
+
+        public override void RestoreState(object state)
+        {
+            var saveData = (SaveData)state;
+            gameObject.SetActive(saveData.IsActive);
+        }
+
+        [Serializable]
+        public struct SaveData
+        {
+            public bool IsActive;
+        }
+        #endregion
+
+
     }
+
+    	
 }

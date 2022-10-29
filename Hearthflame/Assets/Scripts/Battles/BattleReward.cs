@@ -15,8 +15,8 @@ public class BattleReward: Data
 	[SerializeField] ItemSlot[] itemSlots;
 
 
-
-	public void AddBattleReward(PlayerBehaviour player)
+    
+	public void AddBattleReward(PlayerModel player)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
 		{

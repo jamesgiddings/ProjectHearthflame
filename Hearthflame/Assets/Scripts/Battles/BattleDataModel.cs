@@ -10,7 +10,7 @@ public class BattleDataModel
 	private BattleStateManager battleStateManager;
 	private Battle battle;
 	private BattleBehaviour battleBehaviour;
-	private PlayerBehaviour playerBehaviour;
+	private PlayerModel playerModel;
 
 	private List<Character> playerCharacters;
 	private List<Character> enemyCharacters;
@@ -51,10 +51,10 @@ public class BattleDataModel
 		this.battle = battle;
 		this.battleBehaviour = battleBehaviour;
 		this.battleStateManager = battleManager.BattleStateManager;
-
+        
 		this.battle = battle;
-		this.playerBehaviour = battleManager.PlayerBehaviour;
-		this.playerCharacters = playerBehaviour.PlayerCharacters;
+		this.playerModel = battleManager.PlayerModel;
+		this.playerCharacters = playerModel.PlayerCharacters;
 		this.enemyCharacters = battle.BattleCharacters;
 	}
 	

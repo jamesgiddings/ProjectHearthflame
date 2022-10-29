@@ -14,14 +14,14 @@ public class TabPanelUI : MonoBehaviour
 	[SerializeField] private GameObject tabContentPrefab;
 	[SerializeField] private ItemDestroyer itemDestroyer;
 	
-	[SerializeField] private PlayerBehaviour playerBehaviour;
+	[SerializeField] private PlayerModel playerModel;
 
 	private void OnEnable()
 	{
 		tabContentParent.gameObject.SetActive(false);
-		if (playerBehaviour != null)
+		if (playerModel != null)
 		{
-			foreach (Character character in playerBehaviour.PlayerCharacters)
+			foreach (Character character in playerModel.PlayerCharacters)
 			{
 				if (character != null)
 				{
