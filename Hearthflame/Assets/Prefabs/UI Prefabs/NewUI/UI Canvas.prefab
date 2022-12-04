@@ -794,7 +794,7 @@ MonoBehaviour:
   tabContentPrefab: {fileID: 6107600461722824021, guid: 88c177c3fa788aa41bbc7e176b37bd35,
     type: 3}
   itemDestroyer: {fileID: 0}
-  playerBehaviour: {fileID: 0}
+  playerModel: {fileID: 0}
 --- !u!1 &9163752836276063891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2143,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8191
 --- !u!1 &9163752837133179079
 GameObject:
   m_ObjectHideFlags: 0

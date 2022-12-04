@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: b4e7af0b63507644983ef3d11eeb3004
   name: Fireball
-  icon: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
+  sprite: {fileID: 0}
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   school: 1
@@ -26,6 +26,7 @@ MonoBehaviour:
   skillAnimType: 4
   projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
+  effectPrefab: {fileID: 0}
   animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
   statModifierBlueprints: []
   damageBlueprints:

@@ -6,40 +6,41 @@ using System.Linq;
 using Enum.Extensions;
 using System;
 
-public class TargetManager 
+public class TargetManager : MonoBehaviour
 {
 	private BattleManager battleManager;
 
-	private bool isTargeting;
+	private bool _isTargeting;
 
-	private Skill currentSkill;
+	private Skill _currentSkill;
 
-	private int targetIndex = 0;
+	private int _targetIndex = 0;
 
 	private List<Character> allPossibleTargetsCache = new List<Character>();
 
-	private List<Character> currentTargetsCache = new List<Character>();
+	private List<Character> _currentTargetsCache = new List<Character>();
 
 	public Action<List<Character>> OnCurrentTargetsChanged;
 
-	public List<Character> CurrentTargetsCache => currentTargetsCache; // getter
+	public List<Character> CurrentTargetsCache => _currentTargetsCache; // getter
 
-	public bool IsTargeting => isTargeting; // getter
+	public bool IsTargeting => _isTargeting; // getter
 
-	public TargetManager(BattleManager battleManager)
+    private void OnEnable()
 	{
-		this.battleManager = battleManager;
-		battleManager.BattleDataModel.OnSkillUsed += UseSkill;
-	}
+        battleManager = ServiceLocator.Instance.BattleManager;
+        battleManager.BattleDataModel.OnSkillUsed += UseSkill;
+    }
 
-	private void OnDestroy()
+    private void OnDisable()
 	{
 		battleManager.BattleDataModel.OnSkillUsed -= UseSkill;
 	}
+
 	public List<Character> GetAllPossibleTargets(Skill skill, Character originator)
 	{
-		isTargeting = true;
-		currentSkill = skill;
+		_isTargeting = true;
+		_currentSkill = skill;
 		List<Character> AllBattlers = battleManager.BattleDataModel.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
 		IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();
@@ -56,47 +57,47 @@ public class TargetManager
 
 	public void UseSkill(Character originator)
 	{
-		currentSkill.Use(GetCurrentlyTargeted(currentSkill, originator), originator);
+        _currentSkill.Use(GetCurrentlyTargeted(_currentSkill, originator), originator);
 		ClearTargets();
 	}
 
 	public void ClearTargets()
-	{		
-		currentTargetsCache.Clear();
-		OnCurrentTargetsChanged?.Invoke(currentTargetsCache);
-		currentSkill = null;
-		targetIndex = 0;
-		isTargeting = false;
+	{
+		_currentTargetsCache.Clear();
+		OnCurrentTargetsChanged?.Invoke(_currentTargetsCache);
+		_currentSkill = null;
+		_targetIndex = 0;
+		_isTargeting = false;
 	}
 
 	public List<Character> GetCurrentlyTargeted(Skill skill, Character originator)
 	{
-		currentTargetsCache = new List<Character>(GetAllPossibleTargets(skill, originator));
+		_currentTargetsCache = new List<Character>(GetAllPossibleTargets(skill, originator));
 		List<Character> currentlyTargeted = new List<Character>();
 		switch (skill.TargetNumberFlag)
 		{
 			case TargetNumberFlag.Single:
 				if (originator.IsPlayer)
 				{
-					int index = currentTargetsCache.Count > targetIndex ? targetIndex : 0;
-					if (currentTargetsCache.Count > 0)
+					int index = _currentTargetsCache.Count > _targetIndex ? _targetIndex : 0; // loop around the possible targets
+					if (_currentTargetsCache.Count > 0)
 					{
-						currentlyTargeted.Add(currentTargetsCache[index]);
+						currentlyTargeted.Add(_currentTargetsCache[index]);
 					}
 				}
 				else
 				{
-					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(currentTargetsCache, skill));
+					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(_currentTargetsCache, skill));
 				}
 				break;
 			case TargetNumberFlag.All:
-				currentlyTargeted.AddRange(currentTargetsCache);
+				currentlyTargeted.AddRange(_currentTargetsCache);
 				break;
 			case TargetNumberFlag.AllExceptUser:
-				currentlyTargeted.AddRange(currentTargetsCache.Where(character => character != originator));
+				currentlyTargeted.AddRange(_currentTargetsCache.Where(character => character != originator));
 				break;
 			case TargetNumberFlag.Self:
-				currentlyTargeted.AddRange(currentTargetsCache.Where(character => character == originator));
+				currentlyTargeted.AddRange(_currentTargetsCache.Where(character => character == originator));
 				break;
 		}
 		if (currentlyTargeted.Count > 0)
@@ -106,7 +107,7 @@ public class TargetManager
 
 	public List<Character> ChangeTargeted(Vector2 direction) //float x, float y)
 	{
-		switch (currentSkill.TargetNumberFlag)
+		switch (_currentSkill.TargetNumberFlag)
 		{
 			case TargetNumberFlag.Single:
 				List<Character> currentlyTargeted = new List<Character>();
@@ -117,31 +118,31 @@ public class TargetManager
 					case Vector2 vector when (vector.x <= 0f && Math.Abs(vector.x) > Math.Abs(vector.y)): // move left
 						break;
 					case Vector2 vector when (vector.y >= 0f && Math.Abs(vector.y) > Math.Abs(vector.x)): // move down
-						targetIndex--;
-						if (targetIndex < 0)
+						_targetIndex--;
+						if (_targetIndex < 0)
 						{
-							targetIndex = currentTargetsCache.Count - 1;
+							_targetIndex = _currentTargetsCache.Count - 1;
 						}
-						if (targetIndex > (currentTargetsCache.Count - 1))
+						if (_targetIndex > (_currentTargetsCache.Count - 1))
 						{
-							targetIndex = 0;
+							_targetIndex = 0;
 						}
-						if (targetIndex > -1 && targetIndex < currentTargetsCache.Count)
-							currentlyTargeted.Add(currentTargetsCache[targetIndex]);
+						if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
+							currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
 						GameManager.Instance.StartCoroutine(InputDelay(0.1f));
 						break;
 					case Vector2 vector when (vector.y <= 0f && Math.Abs(vector.y) > Math.Abs(vector.x)): // move up
-						targetIndex++;
-						if (targetIndex < 0)
+						_targetIndex++;
+						if (_targetIndex < 0)
 						{
-							targetIndex = currentTargetsCache.Count - 1;
+							_targetIndex = _currentTargetsCache.Count - 1;
 						}
-						if (targetIndex > (currentTargetsCache.Count - 1))
+						if (_targetIndex > (_currentTargetsCache.Count - 1))
 						{
-							targetIndex = 0;
+							_targetIndex = 0;
 						}
-						if (targetIndex > -1 && targetIndex < currentTargetsCache.Count)
-							currentlyTargeted.Add(currentTargetsCache[targetIndex]);
+						if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
+							currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
 						GameManager.Instance.StartCoroutine(InputDelay(0.1f));
 						break;
 						
@@ -149,7 +150,7 @@ public class TargetManager
 				OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
 				return currentlyTargeted;
 			default:
-				return currentTargetsCache;
+				return _currentTargetsCache;
 		}
 	}
 

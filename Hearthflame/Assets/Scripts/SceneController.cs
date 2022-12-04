@@ -7,31 +7,6 @@ public static class SceneController
 {
 
 	private static string transitionTargetNameCache;
-	private static PlayerBehaviour playerBehaviour;
-
-	public static IEnumerator AdditiveLoadScene(Battle battle = null, PlayerModel player = null)
-	{
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Battle Scene", LoadSceneMode.Additive);
-
-		asyncLoad.completed += (AsyncOperation) => { InitialiseBattleManager(battle, player); };
-
-
-		// Wait until the asynchronous scene fully loads
-		while (!asyncLoad.isDone)
-		{
-			yield return null;
-		}
-
-	}
-
-	private static void InitialiseBattleManager(Battle battle = null, PlayerModel player = null)
-	{
-		if (battle != null && player != null)
-		{
-			BattleManager battleManager = Object.FindObjectOfType<BattleManager>(true);
-			battleManager.Initialise(battle, player);
-		}
-	}
 
 	public static void UnloadScene(string sceneName)
 	{
@@ -41,7 +16,6 @@ public static class SceneController
 	public static IEnumerator ChangeScene(string targetSceneName, PlayerBehaviour player = null, bool fromLoad = false)
 	{
         ServiceLocator.Instance.SavingSystem.SaveOnSceneChange();
-        playerBehaviour = player;
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Single);
 
         asyncLoad.completed += (AsyncOperation) => { LoadSceneStateOnSceneChange(); };
@@ -52,9 +26,6 @@ public static class SceneController
 		{
 			yield return asyncLoad;
 		}
-
-        
-
     }
 
 	public static void CacheTransitionTriggerTargetName(string triggerName)

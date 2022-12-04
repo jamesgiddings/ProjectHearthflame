@@ -1,18 +1,22 @@
+using GramophoneUtils.Events.CustomEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMenuState : MonoBehaviour
+public class GameMenuState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void EnterState()
     {
-        
+        base.EnterState();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState()
     {
-        
+        base.ExitState();
+    }
+
+    public override void HandleInput() 
+    {
+        base.HandleInput();
     }
 }

@@ -9,6 +9,7 @@ namespace GramophoneUtils.Stats
 	public class HealthSystem
 	{
 		public Action<int> OnHealthChanged;
+		public Action<BattlerNotificationImpl> OnHealthChangedNotification;
 		public Action OnCharacterDeath;
 		
 		private int currentHealth;
@@ -98,6 +99,8 @@ namespace GramophoneUtils.Stats
 		private void NotifySubscribersHealthChanged(int value)
 		{
 			OnHealthChanged?.Invoke(value);
+			BattlerNotificationImpl battlerNotificationImpl = new BattlerNotificationImpl(value.ToString(), value <= 0 ? Color.red : Color.green);
+			OnHealthChangedNotification?.Invoke(battlerNotificationImpl);
 		}
 
 		private bool CheckIsDeadAndNotify()

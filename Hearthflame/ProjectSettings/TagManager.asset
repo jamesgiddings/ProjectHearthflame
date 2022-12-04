@@ -9,16 +9,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Sky
   - Water
   - UI
   - UI Drag and Drop
-  - 
+  - Background
   - Interactable
-  - Projectile
   - Foreground
+  - Ground
   - Player
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -45,12 +45,24 @@ TagManager:
   - name: Background
     uniqueID: 456533209
     locked: 0
-  - name: Player
-    uniqueID: 2393378671
+  - name: Sky
+    uniqueID: 684647391
     locked: 0
   - name: Foreground
     uniqueID: 798331267
     locked: 0
+  - name: Ground
+    uniqueID: 1843178061
+    locked: 0
+  - name: Interactables
+    uniqueID: 3818603031
+    locked: 0
+  - name: Player
+    uniqueID: 2393378671
+    locked: 0
   - name: Projectiles
     uniqueID: 1811155961
+    locked: 0
+  - name: UI
+    uniqueID: 968580291
     locked: 0

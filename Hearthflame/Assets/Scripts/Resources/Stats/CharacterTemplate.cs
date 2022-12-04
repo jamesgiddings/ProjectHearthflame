@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEditor;
+using Sirenix.OdinInspector;
 
 
 namespace GramophoneUtils.Stats
@@ -8,38 +9,80 @@ namespace GramophoneUtils.Stats
    [CreateAssetMenu(fileName = "New Character Template", menuName = "Characters/Character Template")]
     public class CharacterTemplate : Resource
     {
-        [SerializeField] private StatTemplate stats;
+        
+        [VerticalGroup("General/Split/Left")]
+        [TextArea(3, 5)]
+        [SerializeField] private string description;
+        [BoxGroup("Class")]
         [SerializeField] private CharacterClass characterClass;
-        [SerializeField] private Color color;
-        [SerializeField] private Brain brain;
-        [SerializeField] private bool startsUnlocked;
 
+        [BoxGroup("Stats")]
+        [SerializeField] private StatTemplate stats;
+        [BoxGroup("Stats")]
+        [SerializeField] private bool startsUnlocked;
+        [BoxGroup("Stats")]
+        [SerializeField] private int startingLevel = 0;
+        [BoxGroup("Stats")]
+        [SerializeField] private GameObject characterPrefab;
+
+        [BoxGroup("AI")]
+        [SerializeField] private Brain brain;
+
+        [VerticalGroup("General/Split/Right/Sprites")]
+        [PreviewField(60), LabelWidth(50)]
         [SerializeField] private Sprite portrait;
 
-        [SerializeField] private int startingLevel = 0;
+        [VerticalGroup("General/Split/Left")]
+        [SerializeField] private Color color;
+        
+        [FoldoutGroup("Animation")]
+        public string AnimControllerPath;
+        [FoldoutGroup("Animation")]
+        public string AnimControllerLoadPath;
 
-
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip idle_Left;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip idle_Right;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip idle_Up;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip idle_Down;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip walk_Left;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip walk_Right;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip walk_Up;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip walk_Down;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip attack_Left;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip attack_Right;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip attack_Up;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip attack_Down;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip cast_Left;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip cast_Right;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip cast_Up;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip cast_Down;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip die;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip dead;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip shoot_Left;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip shoot_Right;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip shoot_Up;
+        [FoldoutGroup("Animation/Animation Clips")]
         [SerializeField] private AnimationClip shoot_Down;
 
         public AnimationClip Walk_Left => walk_Left;
@@ -61,12 +104,15 @@ namespace GramophoneUtils.Stats
         public Color Color => color; //getter
         public Brain Brain => brain; // getter
         public bool StartsUnlocked => startsUnlocked; // getter
+        public string Description => description; // getter
+
+        public GameObject CharacterObject => characterPrefab; // getter
         public int StartingLevel => startingLevel; // getter
 
+        
         public Sprite Portrait => portrait; // getter
 
-        public string AnimControllerPath;
-        public string AnimControllerLoadPath;
+
 
 
 

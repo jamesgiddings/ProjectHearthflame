@@ -8,10 +8,11 @@ using TMPro;
 
 public class Battler : MonoBehaviour
 {
+    [SerializeField] private Vector2 healthSliderPosOffset;
     [SerializeField] private SpriteRenderer targetCursor;
     [SerializeField] private SpriteRenderer currentActorHighlight;
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI floatingTextNotification;
+    [SerializeField] private TextMeshPro floatingText;
     [SerializeField] private Transform modifierPanel;
     [SerializeField] private GameObject statModifierImagePrefab;
     [SerializeField] private Canvas battlerStatsCanvas;
@@ -21,42 +22,51 @@ public class Battler : MonoBehaviour
     private Character character;
     private BattleManager battleManager;
     private SpriteRenderer spriteRenderer;
-    private BattlerDisplayUI battlerDisplayUI;
     private AnimationPlayer animationPlayer;
 
-    private Camera battleCamera;
-
-    private bool isBeingTargeted;
-
-    public bool IsBeingTargeted { get { return isBeingTargeted; } set { isBeingTargeted = value; } }
+    private bool isInitialised = false;
 
     public Action OnTurnComplete;
 
-    public AnimationPlayer AnimationPlayer;
-
-    public void Initialise(BattleManager battleManager, Character character, Camera battleCamera)
+    public void Initialise(BattleManager battleManager, Character character)
     {
         this.character = character;
         this.battleManager = battleManager;
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.spriteRenderer.sprite = character.CharacterTemplate.Sprite;
-        this.battleCamera = battleCamera;
-        this.battlerDisplayUI = battleManager.BattleBehaviour.BattlerDisplayUI;
         this.animationPlayer = new AnimationPlayer(this, character, battleManager);
+
         battleManager.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
-        character.HealthSystem.OnHealthChanged += DisplayFloatingTexts;
+        character.HealthSystem.OnHealthChangedNotification += DisplayFloatingTexts;
+        character.StatSystem.OnStatSystemNotification += DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath += KillCharacter;
         character.SkillSystem.OnSkillUsed += animationPlayer.DisplayAnimation;
 
         UpdateHealthSlider(0);
-
-        healthSlider.gameObject.GetComponent<RectTransform>().anchoredPosition = battlerStatsCanvas.WorldToCanvas(gameObject.transform.position + new Vector3(0f, healthSliderYOffset), battleCamera);
-       
-
+        isInitialised = true;
     }
 
+    public void SetHealthSliderPosition()
+    {
+        RectTransform canvasRect = healthSlider.gameObject.GetComponent<RectTransform>(); //.anchoredPosition = battlerStatsCanvas.WorldToCanvas(gameObject.transform.position + new Vector3(-2.2f, healthSliderYOffset)); // TODO FIX
+        Vector2 uiOffset = new Vector2((float)canvasRect.sizeDelta.x / 2f, (float)canvasRect.sizeDelta.y / 2f);
+
+        Vector2 pos = gameObject.transform.position;  // get the game object position
+        pos += healthSliderPosOffset; // add the offset from the inspector
+        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);  //convert game object position to VievportPoint
+
+        // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
+        canvasRect.anchorMin = viewportPoint;
+        canvasRect.anchorMax = viewportPoint;
+        gameObject.SetActive(true);
+    }
+
+    public void DisplayBattleUI(bool value)
+    {
+        healthSlider.gameObject.SetActive(value);
+    }
 
 	private void UpdateTargetCursor(List<Character> targets)
     {
@@ -103,28 +113,28 @@ public class Battler : MonoBehaviour
         }
     }
 
-    public void DisplayFloatingTexts(int value)
+    public void DisplayFloatingTexts(BattlerNotificationImpl notification)
     {
-        StartCoroutine(DisplayFloatingTextsCoroutine(value));
+        StartCoroutine(DisplayFloatingTextsCoroutine(notification));
     }
 
-    public IEnumerator DisplayFloatingTextsCoroutine(int value)
+    public IEnumerator DisplayFloatingTextsCoroutine(BattlerNotificationImpl notification)
     {
         while (character.GetIsAnyNotificationInQueue())
         {
-            floatingTextNotification.gameObject.SetActive(true);
+            floatingText.gameObject.SetActive(true);
             DisplayFloatingText(character.DequeueBattlerNoticiation());
             yield return new WaitForSeconds(0.4f);
         }
         yield return new WaitForSeconds(1f);
-        floatingTextNotification.gameObject.SetActive(false);
+        floatingText.gameObject.SetActive(false);
     }
 
-    public void DisplayFloatingText(int value)
+    public void DisplayFloatingText(BattlerNotificationImpl notification)
     {
-        Color textColor = (value >= 0) ? Color.green : Color.red;
-        floatingTextNotification.color = textColor;
-        floatingTextNotification.text = value.ToString();
+        Color textColor = notification.GetColor();
+        floatingText.color = textColor;
+        floatingText.text = notification.GetMessage();
     }
 
     private void KillCharacter()
@@ -133,13 +143,28 @@ public class Battler : MonoBehaviour
         healthSlider.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
+    public void Uninitialise()
     {
         battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
         battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
-        character.HealthSystem.OnHealthChanged -= DisplayFloatingTexts;
+        character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
+        character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath -= KillCharacter;
         character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+    }
+
+    private void OnDisable()
+    {
+        if (isInitialised) // TODO this is a hack
+        {
+            battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+            battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
+            character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
+            character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
+            character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
+            character.HealthSystem.OnCharacterDeath -= KillCharacter;
+            character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+        }
     }
 }

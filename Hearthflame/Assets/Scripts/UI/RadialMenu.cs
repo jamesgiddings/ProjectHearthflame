@@ -127,11 +127,21 @@ public class RadialMenu : MonoBehaviour
 		}
 	}
 
+	public void RemoveMenu()
+	{
+        DestroyOldMenu(itemsElementsParent);
+        DestroyOldMenu(skillsElementsParent);
+		holder.SetActive(false);
+    }
+
 	private void OnDisable()
 	{
-		foreach (var element in subMenu.GetComponent<RMF_RadialMenu>().elements)
+		if (subMenu != null)
 		{
-			element.button.onClick.RemoveAllListeners();
-		}
+            foreach (var element in subMenu.GetComponent<RMF_RadialMenu>().elements)
+            {
+                element.button.onClick.RemoveAllListeners();
+            }
+        }
 	}
 }

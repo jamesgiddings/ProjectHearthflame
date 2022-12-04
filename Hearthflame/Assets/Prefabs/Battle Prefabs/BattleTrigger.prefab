@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1395244710932093268}
   - component: {fileID: 246086946010677365}
   - component: {fileID: 1193537866}
-  - component: {fileID: 1193537862}
   m_Layer: 8
   m_Name: BattleTrigger
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395244710932093266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.350708, y: -7.416031, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,7 +49,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.78232, y: -0.44853258}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -61,7 +60,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56464, y: 1.8970652}
   m_EdgeRadius: 0
 --- !u!50 &1395244710932093269
 Rigidbody2D:
@@ -99,7 +98,7 @@ MonoBehaviour:
   deactivateOnTrigger: 1
   colliderSizeX: 5
   colliderSizeY: 5
-  battle: {fileID: 11400000, guid: 155ce334592ff4c42b12e4fac1effc49, type: 2}
+  battle: {fileID: 0}
 --- !u!114 &246086946010677365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b4757e08233ad4780662091d374b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 46fba056-15fb-4e61-9f11-69afa940834d
+  id: 
 --- !u!212 &1193537866
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,8 +150,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 798331267
-  m_SortingLayer: 3
+  m_SortingLayerID: -1901588625
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -165,16 +164,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1193537862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395244710932093266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b4757e08233ad4780662091d374b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: a2ea3c6f-c25a-4dc6-ba37-e93c00cc4332

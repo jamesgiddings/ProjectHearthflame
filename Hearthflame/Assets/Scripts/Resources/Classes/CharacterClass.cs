@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,29 @@ using static GramophoneUtils.Stats.LevelSystem;
 [CreateAssetMenu(fileName = "New Character Class", menuName = "Character Classes/Character Class")]
 public class CharacterClass : Resource
 {
-	[SerializeField] private int baseHealth;
-	[SerializeField] private int baseMaxHealth;
-	[SerializeField] private int maxLevel;
+    [VerticalGroup("General/Split/Left")]
+    [TextArea(3, 5)]
+    [SerializeField] private string description;
+
+    [ProgressBar(0, 300)]
+    [SerializeField] private int baseMaxHealth;
+    [ProgressBar(0, 300)]
+    [SerializeField] private int baseHealth;
+    [ProgressBar(1, 40)]
+    [SerializeField] private int maxLevel;
 	[SerializeField] private ExperienceData experienceData;
 	[SerializeField] private List<Skill> skillsAvailable;
+    [FoldoutGroup("Level Progression")]
+    [TableList(IsReadOnly = true, AlwaysExpanded = true)]
 	[SerializeField] private List<LevelStatEffect> levelStatEffects;
 
 	[Serializable]
 	public class LevelStatEffect
 	{
-		[SerializeField] private List<Skill> skillsUnlocked; 
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private List<Skill> skillsUnlocked; 
 		[SerializeField] private int baseHealthIncrement;
+        [TableList(AlwaysExpanded = true)]
 		[SerializeField] private List<StatModifierBlueprint> statComponentBlueprints;
 		
 		public List<StatModifierBlueprint> StatComponentBlueprints => statComponentBlueprints;

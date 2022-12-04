@@ -3,17 +3,15 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using Cinemachine;
 
 public class BattleManager : MonoBehaviour
 {
 	private Battle battle;
-	private PlayerModel playerModel;
-		
-	private BattleBehaviour[] battleBehaviours;
-	private BattleBehaviour battleBehaviour;
+	
+	[SerializeField] private BattleBehaviour battleBehaviour;
 	private GameObject turnOrderPrefab;
 
-	private BattleStateManager battleStateManager;
 	private BattleDataModel battleDataModel;
 	private TargetManager targetManager;
 
@@ -22,66 +20,46 @@ public class BattleManager : MonoBehaviour
 	private CharacterInventory enemyBattlersCharacterInventory;
 	private CharacterInventory playerBattlersCharacterInventory;
 
-	private GameObject battleEnvironment;
+	private CinemachineVirtualCamera cinemachineVirtualCamera;
 
 	public CharacterInventory BattlersCharacterInventory => battlersCharacterInventory;
 	public CharacterInventory OrderedBattlersCharacterInventory => orderedBattlersCharacterInventory;
 	public CharacterInventory EnemyBattlersCharacterInventory => enemyBattlersCharacterInventory;
 	public CharacterInventory PlayerBattlersCharacterInventory => playerBattlersCharacterInventory;
 
-	public GameObject BattleEnvironment => battleEnvironment;
-
 	private TurnOrderUI turnOrderUI;
-
-	public BattleStateManager BattleStateManager => battleStateManager; // getter
 	public TargetManager TargetManager => targetManager; // getter
 	public BattleDataModel BattleDataModel => battleDataModel; // getter
-
-	public PlayerModel PlayerModel => playerModel;
 
 	public BattleBehaviour BattleBehaviour => battleBehaviour;
 
 	public Battle Battle => battle;
 
-	public void Initialise(Battle battle, PlayerModel player)
+	private void OnEnable()
 	{
-		this.battle = battle;
-		this.playerModel = player;
+        battle.InstanceCharacters();
+        battleDataModel = ServiceLocator.Instance.BattleDataModel;
+        targetManager = ServiceLocator.Instance.TargetManager;
+        battleDataModel.InitialiseBattleModel();
+        InitialiseBattlerDisplay();
+        InitialiseTurnOrderUI();
+        InitialiseBattleRewardsDisplayUI();
+        battleDataModel.OnCurrentActorChanged?.Invoke();
 
-		battleStateManager = new BattleStateManager(this);
-		battleDataModel = new BattleDataModel(this, battle, battleBehaviour);
-		targetManager = new TargetManager(this);
-
-		battleStateManager.ChangeState(battleStateManager.BattleStart);
-	}
-
-	public void InitialiseBattle()
-	{
-		InitialiseBattleBehaviour();
-		InitialiseBattleEnvironment();
-		battleDataModel.InitialiseBattleModel();
-		InitialiseBattlerDisplay();
-		InitialiseTurnOrderUI();
-		InitialiseBattleRewardsDisplayUI();
-		battleDataModel.OnCurrentActorChanged?.Invoke();
-		// Start:
-		battleDataModel.UpdateState();
-	}
-
-    private void InitialiseBattleEnvironment()
-    {
-		battleEnvironment = Instantiate(battle.BattleBackground, battleBehaviour.BattleTilemapGrid.transform);
+        // Move to next state:
+        battleDataModel.Invoke("UpdateState", 0.5f);
     }
 
-    private void Update()
-	{
-		battleStateManager.HandleInput();
-	}
+        public void SetBattle(Battle battle)
+    {
+		this.battle = battle;
+    }
 
 	public void GetTargets(Skill skill)
 	{
 		targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor);
-	}
+        Debug.Log("GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count: " + targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count);
+    }
 
 	public void ChangeTargets()
 	{
@@ -137,6 +115,7 @@ public class BattleManager : MonoBehaviour
 	public void InitialiseEnemyBattlersInventory()
 	{
 		int totalNumberOfEnemyBattlers = BattleDataModel.EnemyCharacters.Count;
+		Debug.Log("totalNumberOfEnemyBattlers: " + totalNumberOfEnemyBattlers);
 		enemyBattlersCharacterInventory = new CharacterInventory(battleBehaviour.OnCharactersUpdated, totalNumberOfEnemyBattlers);
 
 		foreach (Character character in BattleDataModel.EnemyCharacters)
@@ -173,15 +152,6 @@ public class BattleManager : MonoBehaviour
 		}
 	}
 
-	private void InitialiseBattleBehaviour()
-	{
-		battleBehaviours = GameObject.FindObjectsOfType<BattleBehaviour>();
-		if (battleBehaviours.Length > 0)
-		{
-			battleBehaviour = battleBehaviours[0];
-		}
-	}
-
 	public void InitialiseRadialMenu()
 	{
 		if (battleBehaviour != null)
@@ -192,21 +162,31 @@ public class BattleManager : MonoBehaviour
 
 	private void InitialiseBattlerDisplay()
 	{
-		if (battleBehaviour != null)
-		{
-			battleBehaviour.BattlerDisplayUI.Initialise(this);
-		}
+        ServiceLocator.Instance.BattlerDisplayUI.Initialise(this);
 	}
 
-	#endregion
+    #endregion
 
-	#region EndBattle
+    #region EndBattle
 
-	public void EndBattle()
+    public void EndBattle()
 	{
-		GameManager.Destroy(turnOrderUI.gameObject);
+        Destroy(turnOrderUI.gameObject);
+        ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.ExplorationState);
+		UninitialiseBattlers();
+	}
 
-		SceneController.UnloadScene("Battle Scene");
+	private void UninitialiseBattlers()
+	{
+		Battler[] battlers = ServiceLocator.Instance.BattlerDisplayUI.BattlerGameObjects;
+
+        foreach (Battler battler in battlers)
+		{
+			if (battler != null)
+			{
+                battler.Uninitialise();
+            }
+		}
 	}
 
 	#endregion

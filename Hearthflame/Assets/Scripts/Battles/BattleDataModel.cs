@@ -1,13 +1,14 @@
 using GramophoneUtils.Stats;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BattleDataModel
+public class BattleDataModel : MonoBehaviour
 {
 	private BattleManager battleManager;
-	private BattleStateManager battleStateManager;
+	private StateManager battleStateManager;
 	private Battle battle;
 	private BattleBehaviour battleBehaviour;
 	private PlayerModel playerModel;
@@ -19,18 +20,18 @@ public class BattleDataModel
 	private List<Character> playerBattlersList;
 	private List<Character> enemyBattlersList;
 	private List<Character> orderedBattlersList;
-	private Queue<Character> unresolvedQueue;
-	private Queue<Character> resolvedQueue;
+	private Queue<Character> unresolvedQueue = new Queue<Character>();
+	private Queue<Character> resolvedQueue = new Queue<Character>();
 
-	private Character currentActor;
+    private Character currentActor;
 
 	public Action OnCurrentActorChanged;
 	public Action<BattleReward> OnBattleRewardsEarned;
 
 	public Action<Character> OnSkillUsed;
 
-	private int turn;
-	private int round;
+    private int _turn;
+    private int _round;
 	public List<Character> EnemyBattlersList => enemyBattlersList;
 	public List<Character> PlayerBattlersList => playerBattlersList;
 	public List<Character> BattlersList => battlersList;
@@ -39,31 +40,31 @@ public class BattleDataModel
 	public List<Character> PlayerCharacters => playerCharacters;
 	public List<Character> EnemyCharacters => enemyCharacters;
 
+    [ShowInInspector] public int CurrentTurn => _turn;
+    [ShowInInspector] public int CurrentRound => _round;
+
 	public Character CurrentActor
 	{
 		get { return currentActor; }
 		set { currentActor = value; }
 	}
-
-	public BattleDataModel(BattleManager battleManager, Battle battle, BattleBehaviour battleBehaviour)
-	{
-		this.battleManager = battleManager;
-		this.battle = battle;
-		this.battleBehaviour = battleBehaviour;
-		this.battleStateManager = battleManager.BattleStateManager;
-        
-		this.battle = battle;
-		this.playerModel = battleManager.PlayerModel;
-		this.playerCharacters = playerModel.PlayerCharacters;
-		this.enemyCharacters = battle.BattleCharacters;
-	}
-	
+		
 	public void InitialiseBattleModel()
 	{
-		InitialiseBattlersLists();
+		OnCurrentActorChanged = null; // TODO, hack, because there was a memory leak from battler
+		OnSkillUsed = null; // TODO, hack as above
 
-		turn = 0;
-		round = 0;
+        battleManager = ServiceLocator.Instance.BattleManager;
+        battleBehaviour = battleManager.BattleBehaviour;
+		battleStateManager = ServiceLocator.Instance.BattleStateManager;
+        playerModel =  ServiceLocator.Instance.PlayerModel;
+        battle = ServiceLocator.Instance.BattleManager.Battle;
+        this.playerCharacters = playerModel.PlayerCharacters;
+        this.enemyCharacters = battle.BattleCharacters;
+        InitialiseBattlersLists();
+
+		_turn = 0;
+		_round = 0;
 
 		CreateNewRoundQueues();
 		unresolvedQueue = OrderQueue();
@@ -74,9 +75,19 @@ public class BattleDataModel
 		CalculateOrderedBattlersList();
 		battleManager.CalculateAndInitialiseOrderedBattlersInventory();
 
-		CurrentActor = unresolvedQueue.Dequeue();
-		CurrentActor.SetIsCurrentActor(true);
-		resolvedQueue.Enqueue(CurrentActor);
+		UpdateCurrentActor();
+	}
+
+	private void UpdateCurrentActor()
+	{
+		if (currentActor != null)
+		{
+			currentActor.SetIsCurrentActor(false);
+		}
+        currentActor = unresolvedQueue.Dequeue();
+		resolvedQueue.Enqueue(currentActor);
+		currentActor.SetIsCurrentActor(true);
+		OnCurrentActorChanged?.Invoke();
 	}
 
 	private void CreateNewRoundQueues()
@@ -94,6 +105,7 @@ public class BattleDataModel
 		battlersList = new List<Character>();
 		playerBattlersList = new List<Character>();
 		enemyBattlersList = new List<Character>();
+
 		foreach (Character character in playerCharacters)
 		{
 			if (character != null)
@@ -117,15 +129,16 @@ public class BattleDataModel
 
 	public void NextRound()
 	{
-		round++;
+		_round++;
 		CreateNewRoundQueues();
 		unresolvedQueue = OrderQueue();
 
 		CalculateOrderedBattlersList();
 		battleManager.CalculateAndInitialiseOrderedBattlersInventory();
-		turn = 0;
+		_turn = 0;
 	}
-		private Queue<Character> OrderQueue()
+
+	private Queue<Character> OrderQueue()
 	{
 		IEnumerable<Character> query = unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
 		Queue<Character> orderedRoundQueue = new Queue<Character>();
@@ -154,7 +167,7 @@ public class BattleDataModel
 
 	private bool IsPlayerVictory()
 	{
-		bool allDead = true;
+  		bool allDead = true;
 		foreach(Character character in enemyBattlersList)
 		{
 			if (!character.HealthSystem.IsDead)
@@ -181,42 +194,42 @@ public class BattleDataModel
 
 	public void NextTurn()
 	{
+
 		if (IsPlayerVictory())
 		{
-			battleStateManager.ChangeState(battleManager.BattleStateManager.BattleWon);
+			battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
 			return;
 		}
 		else if (IsEnemyVictory())
 		{
-			battleStateManager.ChangeState(battleManager.BattleStateManager.BattleLost);
+			battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
 			return;
 		}
 
-		turn++;
+		_turn++;
 		Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
 
 		unresolvedQueue = OrderQueue();
 
-		if (turn >= orderedBattlersList.Count)
+		if (_turn >= orderedBattlersList.Count)
 		{
 			NextRound();
 		}
 
-		CurrentActor = unresolvedQueue.Dequeue();
-		resolvedQueue.Enqueue(CurrentActor);
-		OnCurrentActorChanged?.Invoke();
+		UpdateCurrentActor();
 		UpdateState();
+		
 	}
 
 	public void UpdateState()
 	{
-		if (CurrentActor.IsPlayer)
+		if (currentActor.IsPlayer)
 		{
-			battleStateManager.ChangeState(battleStateManager.PlayerTurn);
+			battleStateManager.ChangeState(ServiceLocator.Instance.PlayerTurnState);
 		}
-		else if (!CurrentActor.IsPlayer)
+		else if (!currentActor.IsPlayer)
 		{
-			battleStateManager.ChangeState(battleStateManager.EnemyTurn);
+			battleStateManager.ChangeState(ServiceLocator.Instance.EnemyTurnState);
 		}
 	}
 }

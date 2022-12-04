@@ -25,11 +25,10 @@ namespace GramophoneUtils.Stats
 		private readonly Inventory partyInventory;
 
 		private readonly CharacterTemplate characterTemplate;
-		//private readonly PartyCharacterTemplate partyCharacterTemplate;
 
 		private readonly Brain brain;
 
-		private Queue<int> notificationQueue = new Queue<int>();
+		private Queue<BattlerNotificationImpl> notificationQueue = new Queue<BattlerNotificationImpl>();
 		
 		public readonly Dictionary<string, IStatType> StatTypeStringRefDictionary;
 		public string Name => name; //getter
@@ -45,7 +44,6 @@ namespace GramophoneUtils.Stats
 		public bool IsCurrentActor { get { return isCurrentActor; } }
 		public Inventory PartyInventory => partyInventory; //getter
 		public CharacterTemplate CharacterTemplate => characterTemplate; //getter
-		//public PartyCharacterTemplate PartyCharacterTemplate => partyCharacterTemplate; //getter
 		public Brain Brain => brain; //getter
 		public Character() { } //constructor 1
 
@@ -59,14 +57,15 @@ namespace GramophoneUtils.Stats
 			characterClass = characterTemplate.CharacterClass;
 			healthSystem = new HealthSystem(characterClass);
 
-			healthSystem.OnHealthChanged += EnqueueBattlerNotification;
+			healthSystem.OnHealthChangedNotification += EnqueueBattlerNotification; // TODO UNSUBSCRIBE
+            statSystem.OnStatSystemNotification += EnqueueBattlerNotification; // TODO UNSUBSCRIBE
 
-			// subscribe to OnDeathEvent here? also, inject a reference to Character if needed
-			
-			this.skillSystem = new SkillSystem(this);
+            // subscribe to OnDeathEvent here? also, inject a reference to Character if needed
+
+            this.skillSystem = new SkillSystem(this);
 			this.levelSystem = new LevelSystem(characterClass, this);
-			levelSystem.OnLevelChanged += characterClass.LevelUp;
-			equipmentInventory = new EquipmentInventory(this);
+			levelSystem.OnLevelChanged += characterClass.LevelUp; // TODO UNSUBSCRIBE
+            equipmentInventory = new EquipmentInventory(this);
 			equipmentInventory.onInventoryItemsUpdated = partyInventory.onInventoryItemsUpdated;
 			this.partyInventory = partyInventory;
 
@@ -79,41 +78,12 @@ namespace GramophoneUtils.Stats
 			}
 		}
 
-		//public Character(PartyCharacterTemplate partyCharacterTemplate, Party party) //constructor 2
-		//{
-		//	this.partyCharacterTemplate = partyCharacterTemplate;
-		//	this.characterTemplate = partyCharacterTemplate.Template;
-		//	name = partyCharacterTemplate.Template.Name;
-		//	statSystem = new StatSystem(partyCharacterTemplate.Template, this);
-		//	StatTypeStringRefDictionary = statSystem.StatTypeStringRefDictionary;
-		//	healthSystem = new HealthSystem(partyCharacterTemplate.Template);
-
-		//	healthSystem.OnHealthChanged += EnqueueBattlerNotification;
-
-		//	// subscribe to OnDeathEvent here? also, inject a reference to Character if needed
-		//	characterClass = partyCharacterTemplate.Template.CharacterClass;
-		//	this.skillSystem = new SkillSystem(partyCharacterTemplate, this);
-		//	this.levelSystem = new LevelSystem(characterClass, this);
-		//	levelSystem.OnLevelChanged += characterClass.LevelUp;
-		//	equipmentInventory = new EquipmentInventory(this, party);
-		//	equipmentInventory.onInventoryItemsUpdated = party.onInventoryItemsUpdated;
-		//	isPlayer = partyCharacterTemplate.Template.IsPlayer;
-		//	isRear = partyCharacterTemplate.IsRear;
-		//	this.party = party;
-		//	partyInventory = party.PartyInventory;
-
-		//	this.brain = partyCharacterTemplate.Brain;
-
-		//	skillSystem.Initialise();
-		//	brain.Initialise(this);
-		//}
-
-		private void EnqueueBattlerNotification(int value)
+		private void EnqueueBattlerNotification(BattlerNotificationImpl notification)
 		{
-			notificationQueue.Enqueue(value);
+			notificationQueue.Enqueue(notification);
 		}
 
-		public int DequeueBattlerNoticiation()
+		public BattlerNotificationImpl DequeueBattlerNoticiation()
 		{
 			return notificationQueue.Dequeue();
 		}

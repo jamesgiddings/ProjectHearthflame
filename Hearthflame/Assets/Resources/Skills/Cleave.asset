@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Cleave
+  m_EditorClassIdentifier: 
+  UID: 2ebe94e6-452a-46af-a38d-945cced3b768
+  name: Cleave
+  sprite: {fileID: 0}
+  classRestrictions:
+  - {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
+  school: 2
+  prerequisites: []
+  usesToUnlock: 0
+  targetAreaFlag: 4
+  targetNumberFlag: 2
+  targetTypeFlag: 1
+  skillAnimType: 1
+  projectilePrefab: {fileID: 0}
+  effectPrefab: {fileID: 0}
+  animatorController: {fileID: 0}
+  statModifierBlueprints: []
+  damageBlueprints:
+  - {fileID: 11400000, guid: afe48b2818af5374881c18450e823fdc, type: 2}
+  healingBlueprints: []

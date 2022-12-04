@@ -1,16 +1,20 @@
 using System;
 using UnityEngine;
 
-public class GameStateManager
+public class GameStateManager : MonoBehaviour
 {
-	private GameState gameState;
+	private State gameState;
 
 	private GameBattleState gameBattleState;
 	private GameExplorationState gameExplorationState;
+	private GameMenuState menuState;
 
-	public GameBattleState GameBattleState => gameBattleState;
+    public GameBattleState GameBattleState => gameBattleState;
+    public GameExplorationState GameExplorationState => gameExplorationState;
 
-	public GameState GameState
+	public GameMenuState MenuState => menuState;
+
+    public State GameState
 	{
 		get {
 				if (gameState == null)
@@ -22,36 +26,39 @@ public class GameStateManager
 		set { gameState = value; }
 	}
 
-	public GameStateManager()
+	public void Awake()
 	{
-		InitialiseGameStates();
-		SetStartingState();
-	}
+        InitialiseGameStates();
+        SetStartingState();
+    }
 
-    private void SetStartingState()
+	private void SetStartingState()
     {
 		 ChangeState(gameExplorationState);
     }
 
-    public void Update()
+/*    public void Update() // TODO, now states are monobehaviours, this is probably not needed
     {
 		gameState.Update();
-	}
+	}*/
 
 	private void InitialiseGameStates()
 	{
-		gameBattleState = new GameBattleState();
-		gameExplorationState = new GameExplorationState();
-	}
+		gameBattleState = GetComponentInChildren<GameBattleState>(true);
+		gameExplorationState = GetComponentInChildren<GameExplorationState>(true);
+		menuState = GetComponentInChildren<GameMenuState>(true);
+    }
 
-	public void ChangeState(GameState newGameState)
+	public void ChangeState(State newGameState)
 	{
 		if (gameState != null)
 		{
 			gameState.ExitState();
+			gameState.gameObject.SetActive(false);
 		}
-		newGameState.EnterState();
-		gameState = newGameState;
+        newGameState.EnterState();
+        newGameState.gameObject.SetActive(true);
+        gameState = newGameState;
 	}
 
 	public void HandleInput()

@@ -42,8 +42,8 @@ public class BattleTrigger : StatefulTrigger
 
     protected override void TriggerAction()
     {
-        battle.InstanceCharacters();
-        StartCoroutine(SceneController.AdditiveLoadScene(battle, ServiceLocator.Instance.PlayerModel));
+		ServiceLocator.Instance.BattleManager.SetBattle(battle);
+		ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.BattleState);
         if (deactivateOnTrigger)
         {
             this.gameObject.SetActive(false);

@@ -3,6 +3,8 @@ using GramophoneUtils.Items.Containers;
 using System.Text;
 using UnityEngine;
 using GramophoneUtils.Stats;
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 namespace GramophoneUtils.Items
 {
@@ -11,6 +13,11 @@ namespace GramophoneUtils.Items
     {
         [Header("Consumable Data")]
         [SerializeField] private string useText = "Does something, maybe?";
+
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private List<StatModifierBlueprint> consumableEffectBlueprints;
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private CharacterClass[] classRestrictions;
 
         public override string GetInfoDisplayText()
         {

@@ -17,6 +17,27 @@ namespace GramophoneUtils.Stats
 	{
 		private string transitionTargetNameCache = "";
 
+        private Dictionary<Character, Battler> playerBattlers = new Dictionary<Character, Battler>();
+        public Dictionary<Character, Battler> PlayerBattlers => playerBattlers; // getter
+
+        private void Start()
+		{
+			List<Character> characters = ServiceLocator.Instance.PlayerModel.PlayerCharacters;
+			
+
+            for (int i = 0; i < characters.Count; i++)
+			{
+				if (characters[i] != null && characters[i].CharacterTemplate.CharacterObject != null)
+                {
+                    {
+                        Battler battler = Instantiate(characters[i].CharacterTemplate.CharacterObject, transform.position + new Vector3(-2 * i, 0, 0), Quaternion.identity, transform).GetComponent<Battler>();
+						playerBattlers.Add(characters[i], battler);
+                    }
+                }
+			}
+		}
+        
+
 		#region SavingLoading
 		public object CaptureState()
 		{
@@ -38,9 +59,11 @@ namespace GramophoneUtils.Stats
 			// Position
 			Debug.Log("We are resetting the player's position.");
 			gameObject.transform.position = new Vector3(saveData.positionX, saveData.positionY);
-
 			
-		}
+
+
+
+        }
 
 		
 

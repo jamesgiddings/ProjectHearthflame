@@ -22,11 +22,12 @@ namespace GramophoneUtils.Stats
 
         private Inventory partyInventory;
         
-        [SerializeField] private CharacterTemplate[] playerCharacterTemplates = new CharacterTemplate[8];
+        [SerializeField] private CharacterTemplate[] characterTemplates = new CharacterTemplate[8];
 
         private List<Character> playerCharacters;
-
-        public CharacterTemplate[] PlayerCharacterTemplates => playerCharacterTemplates; // getter
+       
+        public CharacterTemplate[] CharacterTemplates => characterTemplates; // getter
+        
 
         public Inventory PartyInventory
         {
@@ -93,11 +94,11 @@ namespace GramophoneUtils.Stats
         public List<Character> InstanceCharacters()
         {
             playerCharacters = new List<Character>();
-            for (int i = 0; i < playerCharacterTemplates.Length; i++)
+            for (int i = 0; i < characterTemplates.Length; i++)
             {
-                if (playerCharacterTemplates[i] != null)
+                if (characterTemplates[i] != null)
                 {
-                    playerCharacters.Add(new Character(playerCharacterTemplates[i], PartyInventory));
+                    playerCharacters.Add(new Character(characterTemplates[i], PartyInventory));
                     playerCharacters[i].IsPlayer = true;
                     playerCharacters[i].IsRear = (i > 3) ? true : false;
                 }

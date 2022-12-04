@@ -265,7 +265,6 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
                 //        //Selection.activeObject = example;
                 //    }
                 //}
-                break;
             case Tabs.Dialogue:
                 DisplayTabContent(typeof(DialogueGraph));
                 break;

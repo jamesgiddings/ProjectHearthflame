@@ -23,22 +23,27 @@ public class AnimationPlayer
 	{
         this.battler = battler;
         this.character = character;
+        Debug.Log(this.character.Name + " is getting a new Animation player");
         this.battleManager = battleManager;
-        this.battlerDisplayUI = battleManager.BattleBehaviour.BattlerDisplayUI;
-
+        this.battlerDisplayUI = ServiceLocator.Instance.BattlerDisplayUI;
+        Debug.Log("The number when in the constructor for animation player is: " + ServiceLocator.Instance.BattlerDisplayUI.CharacterBattlerDictionary.Count);
         animator = battler.gameObject.GetComponent<Animator>();
 
         SetAnimationDirections();
 
         Debug.Log(character.Name + " animator: " + (animator == null));
         Debug.Log(character.Name + "'s animControllerPath: " + character.CharacterTemplate.AnimControllerPath);
-        RuntimeAnimatorController runtimeAnimatorController = Resources.Load(character.CharacterTemplate.AnimControllerLoadPath) as RuntimeAnimatorController;
-        animator.runtimeAnimatorController = runtimeAnimatorController;
+        if (!character.IsPlayer)
+        {
+            RuntimeAnimatorController runtimeAnimatorController = Resources.Load(character.CharacterTemplate.AnimControllerLoadPath) as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = runtimeAnimatorController;
+        }
+
         
-        Debug.Log(character.CharacterTemplate.AnimControllerPath);
-        Debug.Log(character.Name + " runtimeAnimatorController: " + (animator.runtimeAnimatorController == null));
+        //Debug.Log(character.CharacterTemplate.AnimControllerPath);
+        //Debug.Log(character.Name + " runtimeAnimatorController: " + (animator.runtimeAnimatorController == null));
         animator.enabled = true;
-        Debug.Log(character.Name);
+        //Debug.Log(character.Name);
 
         animator.Play(idle);
     }
@@ -47,21 +52,21 @@ public class AnimationPlayer
 	{
         if (character.IsPlayer)
         {
-            attack = "Attack_Left";
-            idle = "Idle_Left";
-            walkToAttack = "Walk_Left";
-            walkFromAttack = "Walk_Right";
-            cast = "Cast_Left";
-            shoot = "Shoot_Left";
-        }
-		else
-		{
             attack = "Attack_Right";
             idle = "Idle_Right";
             walkToAttack = "Walk_Right";
             walkFromAttack = "Walk_Left";
             cast = "Cast_Right";
             shoot = "Shoot_Right";
+        }
+		else
+		{
+            attack = "Attack_Left";
+            idle = "Idle_Left";
+            walkToAttack = "Walk_Left";
+            walkFromAttack = "Walk_Right";
+            cast = "Cast_Left";
+            shoot = "Shoot_Left";
         }
     }
 
@@ -70,22 +75,23 @@ public class AnimationPlayer
         switch (skill.SkillAnimType)
         {
             case (SkillAnimType.MeleePhysical):
+                Sequence sequence = DOTween.Sequence();
+                Vector3 startPos = battler.gameObject.transform.position;
                 foreach (Character target in targets)
                 {
-                    Vector3 startPos = battler.gameObject.transform.position;
-                    Sequence sequence = DOTween.Sequence();
-
+                    Vector3 currentPos = battler.gameObject.transform.position;
                     Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 0.65f);
                     sequence.AppendCallback(() => animator.Play(walkToAttack));
-                    sequence.Append(battler.gameObject.transform.DOMove(targetPos, 1.2f));
+                    sequence.Append(battler.gameObject.transform.DOMove(targetPos, 0.4f));
                     sequence.AppendCallback(() => animator.Play(attack));
-                    sequence.Append(battler.gameObject.transform.DOShakeRotation(0.5f, 2).OnComplete(() => skill.DoNextBit(targets, character)));
-                    sequence.AppendCallback(() => animator.Play(walkFromAttack));
-                    sequence.Append(battler.gameObject.transform.DOMove(startPos, 0.7f));
-                    sequence.AppendCallback(() => animator.Play(idle));
-                    sequence.AppendInterval(0.5f).WaitForCompletion();
-                    sequence.Play().OnComplete(() => battler.OnTurnComplete?.Invoke());
+                    
                 }
+                sequence.Append(battler.gameObject.transform.DOShakeRotation(0.5f, 2).OnComplete(() => skill.DoNextBit(targets, character)));
+                sequence.AppendCallback(() => animator.Play(walkFromAttack));
+                sequence.Append(battler.gameObject.transform.DOMove(startPos, 0.4f));
+                sequence.AppendCallback(() => animator.Play(idle));
+                sequence.AppendInterval(0.5f).WaitForCompletion();
+                sequence.Play().OnComplete(() => battler.OnTurnComplete?.Invoke());
                 break;
             case (SkillAnimType.MagicalProjectile):
                 Sequence projectileSequence = DOTween.Sequence();

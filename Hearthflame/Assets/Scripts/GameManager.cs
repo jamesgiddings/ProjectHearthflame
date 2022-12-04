@@ -11,9 +11,6 @@ public class GameManager : MonoBehaviour, ISaveable
 	private Vector2 movement = Vector2.zero;
 	private Vector2 movementNormalized = Vector2.zero;
 
-	private GameState gameState;
-	private GameStateManager gameStateManager;
-
     private static GameManager instance;
 
 	public ResourceDatabase ResourceDatabase => resourceDatabase; // getter
@@ -44,7 +41,6 @@ public class GameManager : MonoBehaviour, ISaveable
 			movementNormalized = value;
 		}
 	}
-	public GameStateManager GameStateManager => gameStateManager;
 
 	public static GameManager Instance
 	{
@@ -62,13 +58,12 @@ public class GameManager : MonoBehaviour, ISaveable
 	{
 		instance = this;
 		SceneManager.sceneLoaded += SceneLoaded;
-		gameStateManager = new GameStateManager();
 	}
 
-    private void Update()
+/*    private void Update() // Todo this can probably go no the states are monobehaviours
     {
-		gameStateManager.Update();
-    }
+		ServiceLocator.Instance.GameStateManager.Update();
+    }*/
 
     private void SceneLoaded(Scene scene, LoadSceneMode mode)
 	{

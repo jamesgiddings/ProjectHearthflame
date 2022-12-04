@@ -31,5 +31,5 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: c6dcaf39a2a0dcf4aa10179cc8b496c9, type: 2}
   statModifierBlueprints: []
   damageBlueprints:
-  - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
+  - {fileID: 11400000, guid: 27a92f9a5cc5c094d8b8a72fc3b0b751, type: 2}
   healingBlueprints: []

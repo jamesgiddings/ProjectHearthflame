@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SpriteWithShadow
-  m_Shader: {fileID: -6465566751694194690, guid: 11ee09a0d90a3bb4ca031ee8f2de8a55,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 8c48d4d1678bb5e4b942e86cb2927460, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -21,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 500dcb414b35b9f419d1ce95c35ac867, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -39,9 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &9123919925870927275
 MonoBehaviour:

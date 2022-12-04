@@ -1,12 +1,42 @@
+using GramophoneUtils.Events.CustomEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State
-{
-	public abstract void HandleInput();
+public class State : MonoBehaviour {
 
-	public abstract void EnterState();
+    [SerializeField] private StateEvent enterStateEvent;
+    [SerializeField] private StateEvent exitStateEvent;
 
-	public abstract void ExitState();
+    public virtual void HandleInput() {}
+
+    public virtual void EnterState() 
+    {
+        this.gameObject.SetActive(true);
+        if (enterStateEvent != null)
+        {
+            enterStateEvent.Raise(this);
+        } else
+        {
+            Debug.LogError("enterStateEvent not set");
+        }
+    }
+
+	public virtual void ExitState()
+    {
+        this.gameObject.SetActive(false);
+        if (exitStateEvent != null)
+        {
+            exitStateEvent.Raise(this);
+        }
+        else
+        {
+            Debug.LogError("enterStateEvent not set");
+        }
+    }
+
+    public void Update()
+    {
+        HandleInput();
+    }
 }

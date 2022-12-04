@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716914488a000324ab9fda8ac5898f53, type: 3}
+  m_Name: New Battle 1
+  m_EditorClassIdentifier: 
+  UID: 
+  name: 
+  deactivateOnComplete: 0
+  battleSprite: {fileID: 8338271107121680049, guid: ef600f3966e5faa42b67c3c85b8b62c2,
+    type: 3}
+  battleReward: {fileID: 11400000, guid: 1d731f94270fb254780abbc39970f2cd, type: 2}
+  battleMusic: {fileID: 0}
+  itemSlots: []
+  battleCharacterTemplates:
+  - {fileID: 11400000, guid: ebaca1e67576ba54b8c8f1727cb51795, type: 2}

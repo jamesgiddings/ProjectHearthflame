@@ -1,26 +1,18 @@
+using GramophoneUtils.Events.CustomEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBattleState : GameState
+public class GameBattleState : State
 {
+
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        base.EnterState(); 
     }
-
-    public override void ExitState()
+    public override void ExitState() 
     {
-        throw new System.NotImplementedException();
+        base.ExitState();
     }
-
-    public override void HandleInput()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Update()
-    {
-
-    }
+    public override void HandleInput() {}
 }

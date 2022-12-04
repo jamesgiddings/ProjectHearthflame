@@ -15,13 +15,18 @@ MonoBehaviour:
   UID: 3c3ac2c2-07dd-46ac-b994-7ac5466f2a27
   name: Aydys
   sprite: {fileID: -5583110387267390088, guid: f06069f7fda60e6409adebcd42b518a7, type: 3}
-  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  description: 
   characterClass: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
-  color: {r: 1, g: 0.59621054, b: 0, a: 0}
-  brain: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   startsUnlocked: 1
-  portrait: {fileID: -1808233437, guid: f06069f7fda60e6409adebcd42b518a7, type: 3}
   startingLevel: 0
+  characterPrefab: {fileID: 671265247890858097, guid: 6489102ddfb638d43a2be05f9a072482,
+    type: 3}
+  brain: {fileID: 0}
+  portrait: {fileID: -1808233437, guid: f06069f7fda60e6409adebcd42b518a7, type: 3}
+  color: {r: 1, g: 0.59621054, b: 0, a: 0}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AydysAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/AydysAnimationController
   idle_Left: {fileID: 7400000, guid: d36e7bc1578832a4db782832b5fac053, type: 2}
   idle_Right: {fileID: 7400000, guid: 67a8ef0093be2e24f806ce5a10063add, type: 2}
   idle_Up: {fileID: 7400000, guid: 27aa5335a02b91f4097913eaa0f70fc6, type: 2}
@@ -44,5 +49,3 @@ MonoBehaviour:
   shoot_Right: {fileID: 7400000, guid: 1f95b22b9bd386841acd1d1ab2fc07df, type: 2}
   shoot_Up: {fileID: 7400000, guid: 4855cd8ae25fd4044b0338d36a9283ee, type: 2}
   shoot_Down: {fileID: 7400000, guid: 0d53567c5c7906a4bb4644ba43ca81d5, type: 2}
-  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AydysAnimationController.asset
-  AnimControllerLoadPath: Animations/AnimationControllers/AydysAnimationController

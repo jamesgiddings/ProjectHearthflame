@@ -3,6 +3,7 @@ using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "New Battle", menuName = "Battles/Battle")]
 public class Battle : Data
@@ -10,17 +11,22 @@ public class Battle : Data
     [Header("Battle Trigger")]
     [SerializeField] private bool deactivateOnComplete;
 
+	[PreviewField(60), HideLabel]
+	[HorizontalGroup("Split", 60)]
     [SerializeField] private Sprite battleSprite;
+
+    [VerticalGroup("Split/Right"), LabelWidth(120)]
     [SerializeField] private BattleReward battleReward;
-	[SerializeField] private GameObject battleBackground;
+    [VerticalGroup("Split/Right"), LabelWidth(120)]
     [SerializeField] private GameObject battleMusic;
 
     [Header("Battle Opponents")]
+    [TableList(ShowIndexLabels = true)]
     [SerializeField] private ItemSlot[] itemSlots;
+    [TableList(DrawScrollView = true, MaxScrollViewHeight = 200, MinScrollViewHeight = 100)]
     [SerializeField] private CharacterTemplate[] battleCharacterTemplates;
 
     public BattleReward BattleReward => battleReward;
-	public GameObject BattleBackground => battleBackground;
 
 	public Sprite BattleSprite => battleSprite;
 

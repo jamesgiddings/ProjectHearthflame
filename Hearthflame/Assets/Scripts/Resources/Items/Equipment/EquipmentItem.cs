@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace GramophoneUtils.Items.Containers
 {
@@ -15,8 +16,10 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private EquipmentType equipmentType;
 		[SerializeField] private bool isUnique = false;
 		[SerializeField] private string flavourText = "Flavour text here.";
-		[SerializeField] private List<StatModifierBlueprint> weaponEffectBlueprints;
-		[SerializeField] private CharacterClass[] classRestrictions;
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private List<StatModifierBlueprint> weaponEffectBlueprints;
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private CharacterClass[] classRestrictions;
 
 		private List<StatModifier> equipmentEffects { get { return InstanceEquipmentEffectBlueprints(); } }
 

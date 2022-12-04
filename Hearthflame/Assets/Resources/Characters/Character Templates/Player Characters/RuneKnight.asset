@@ -15,13 +15,18 @@ MonoBehaviour:
   UID: 7f1f8f69-20c0-4734-89f1-4ab74f2b045b
   name: The Rune Knight
   sprite: {fileID: 1817346964837690549, guid: 500dcb414b35b9f419d1ce95c35ac867, type: 3}
-  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  description: 
   characterClass: {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  brain: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   startsUnlocked: 1
-  portrait: {fileID: -901992293, guid: 193646214d563244c95237efe150f55a, type: 3}
   startingLevel: 0
+  characterPrefab: {fileID: 1579067926254414493, guid: fec749b0d0e56cf45991a97a7be2bc24,
+    type: 3}
+  brain: {fileID: 0}
+  portrait: {fileID: -901992293, guid: 193646214d563244c95237efe150f55a, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/The Rune KnightAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/The Rune KnightAnimationController
   idle_Left: {fileID: 7400000, guid: a2791a3a841337e48b581710d3a1f2c7, type: 2}
   idle_Right: {fileID: 7400000, guid: 87535720d85100d44a52c98f75f1804b, type: 2}
   idle_Up: {fileID: 7400000, guid: 5d81c6f449167e74db8622f66af0a5a1, type: 2}
@@ -44,5 +49,3 @@ MonoBehaviour:
   shoot_Right: {fileID: 7400000, guid: 00504a0927267e44ca1897acfbb20961, type: 2}
   shoot_Up: {fileID: 7400000, guid: 3947be8d9fb3f7c4ab088b07717827a3, type: 2}
   shoot_Down: {fileID: 7400000, guid: 8ce0ba73359ec7f40bcbb423e8147230, type: 2}
-  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/The Rune KnightAnimationController.asset
-  AnimControllerLoadPath: Animations/AnimationControllers/The Rune KnightAnimationController

@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 897da615-7a16-43c3-bfe1-3f62f2999902
   name: New Battle
-  deactivateOnTrigger: 0
   deactivateOnComplete: 0
   battleSprite: {fileID: 2650242802887809672, guid: ef600f3966e5faa42b67c3c85b8b62c2,
     type: 3}
   battleReward: {fileID: 11400000, guid: 1d731f94270fb254780abbc39970f2cd, type: 2}
-  battleBackground: {fileID: 7450268838280013534, guid: 08f10222f044c9349aaea77a2a1836d4,
-    type: 3}
   battleMusic: {fileID: 0}
   itemSlots: []
   battleCharacterTemplates:

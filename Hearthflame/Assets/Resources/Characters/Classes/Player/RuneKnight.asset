@@ -15,13 +15,16 @@ MonoBehaviour:
   UID: 0ccafb30-9ce0-4c5a-8b1b-22ac38f99dc7
   name: Rune Knight
   sprite: {fileID: 0}
-  baseHealth: 100
+  description: 
   baseMaxHealth: 100
-  maxLevel: 100
+  baseHealth: 100
+  maxLevel: 20
   experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
   skillsAvailable:
   - {fileID: 11400000, guid: 69f0cab7f86133248a6339f40c71b6db, type: 2}
   - {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
+  - {fileID: 11400000, guid: 83330ecbffd48284aae04b696d8e8c2c, type: 2}
+  - {fileID: 11400000, guid: 00c8785b7ba4bb74e92090ca734ec996, type: 2}
   levelStatEffects:
   - skillsUnlocked: []
     baseHealthIncrement: 10

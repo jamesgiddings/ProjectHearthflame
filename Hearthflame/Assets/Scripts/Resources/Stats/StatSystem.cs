@@ -13,7 +13,9 @@ namespace GramophoneUtils.Stats
 		private Dictionary<string, IStatType> statTypeStringRefDictionary = new Dictionary<string, IStatType>();
 
 		private readonly Dictionary<IStatType, Stat> stats = new Dictionary<IStatType, Stat>();
-		public Dictionary<IStatType, Stat> Stats => stats; //getter
+
+        public Action<BattlerNotificationImpl> OnStatSystemNotification;
+        public Dictionary<IStatType, Stat> Stats => stats; //getter
 		public StatSystem() { } //constructor 1
 		public StatSystem(CharacterTemplate template, Character character) //constructor 2
 		{			
@@ -175,9 +177,10 @@ namespace GramophoneUtils.Stats
 		public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, Character originator)
 		{
 			List<Damage> filteredDamages = FilterMisses(receivedDamages, originator);
-			if (filteredDamages.Count == 0)
+			if (filteredDamages.Count == 0 && receivedDamages.Count > 0)
 			{
-				Debug.LogWarning("Need to implement an announcement of a miss.");
+				string evasionString = receivedDamages[0].AttackType == AttackType.Magic ? "Resist!" : "Miss!";
+				OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString)); // TODO move this string to a constants file
 				return;
 			}
 			List<Damage> modifiedDamages = new List<Damage>();

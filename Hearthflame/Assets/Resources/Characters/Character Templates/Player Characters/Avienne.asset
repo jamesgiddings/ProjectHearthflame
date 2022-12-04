@@ -15,12 +15,18 @@ MonoBehaviour:
   UID: e91f937a-d921-45ec-8315-ab231064a42a
   name: Avienne
   sprite: {fileID: 8287090503234131463, guid: 3e8d2003b77948a41a3041afcf2a91ff, type: 3}
-  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  description: 
   characterClass: {fileID: 11400000, guid: 6b5712bee7049ae4d86541e962de55a3, type: 2}
-  color: {r: 1, g: 0, b: 0, a: 0}
-  brain: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   startsUnlocked: 1
   startingLevel: 0
+  characterPrefab: {fileID: 6492955683650429222, guid: 973d4c63fb92d6d49816a2ef4e6b8f64,
+    type: 3}
+  brain: {fileID: 0}
+  portrait: {fileID: 0}
+  color: {r: 1, g: 0, b: 0, a: 0}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AvienneAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/AvienneAnimationController
   idle_Left: {fileID: 7400000, guid: 9d2cf4ce30995204aa8c5141b70475d2, type: 2}
   idle_Right: {fileID: 7400000, guid: 573b9323d8d91dd49ba1cf76080887b4, type: 2}
   idle_Up: {fileID: 7400000, guid: 3bf1d2cf91196a14082f803bd27a0c59, type: 2}
@@ -43,5 +49,3 @@ MonoBehaviour:
   shoot_Right: {fileID: 7400000, guid: c674b53cb4be0a440953e92f8599cef9, type: 2}
   shoot_Up: {fileID: 7400000, guid: 329cd2ab7868cd24ab1499292b8b941f, type: 2}
   shoot_Down: {fileID: 7400000, guid: 4ece3d384af30604d810f6eb9e76fc16, type: 2}
-  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AvienneAnimationController.asset
-  AnimControllerLoadPath: Animations/AnimationControllers/AvienneAnimationController

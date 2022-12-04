@@ -1,15 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "New Scene Transition Object", menuName = "Scene Transition")]
 public class SceneTransitionObject : ScriptableObject
 {
-    [SerializeField] private string sceneName = "SceneName";
-    [SerializeField] private string transitionName = "TransitionName";
+    [SerializeField] private string _sceneName = "SceneName";
+    [SerializeField] private string _transitionName = "TransitionName";
     
-    public String SceneName => sceneName;
-    public String TransitionName => transitionName;
+    public String SceneName => _sceneName;
+    public String TransitionName => _transitionName;
+
+    public void SetSceneName(string sceneName)
+    {
+        _sceneName = sceneName;
+    }
+
+    public void SetTransitionName(string transitionName)
+    {
+        _transitionName = transitionName;
+    }
 }
