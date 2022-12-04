@@ -1,4 +1,9 @@
-﻿using XNode;
+﻿using Dialogue;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static XNode.Node;
+using XNode;
 
 namespace Dialogue {
 	public abstract class DialogueBaseNode : Node {

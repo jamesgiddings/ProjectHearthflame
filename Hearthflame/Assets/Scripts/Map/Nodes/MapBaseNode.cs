@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using XNode;
 
 namespace GramophoneUtils.Maps
 {
-    public class MapBaseNode : Node
+    public abstract class MapBaseNode : Node
     {
-        // Start is called before the first frame update
-        void Start()
+        [Input(backingValue = ShowBackingValue.Never)] public MapBaseNode input;
+        [Output(backingValue = ShowBackingValue.Never)] public MapBaseNode output;
+
+        abstract public void Trigger();
+
+        public override object GetValue(NodePort port)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            return null;
         }
     }
 }
