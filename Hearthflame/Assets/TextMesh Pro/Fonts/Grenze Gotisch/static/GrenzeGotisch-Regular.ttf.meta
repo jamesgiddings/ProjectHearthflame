@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: c9731c0576d92e0429b1da2e691baeb6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Grenze Gotisch
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 250e7d45c5e914243a62708820e90263, type: 3}
+  - {fileID: 12800000, guid: 2733e53efbf827343bc79e2741b2df4e, type: 3}
+  - {fileID: 12800000, guid: 041293637acc09b4280b8facacdab746, type: 3}
+  - {fileID: 12800000, guid: 0201f18ae03b1fd4da01dae9d547c5d0, type: 3}
+  - {fileID: 12800000, guid: 05a2501cde053284bba001bdc518581a, type: 3}
+  - {fileID: 12800000, guid: d36dc55e8ef266d46ac93155649d9210, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

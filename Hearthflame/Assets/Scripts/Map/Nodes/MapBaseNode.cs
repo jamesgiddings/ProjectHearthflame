@@ -3,10 +3,10 @@ using XNode;
 
 namespace GramophoneUtils.Maps
 {
+    [NodeWidth(500)]
     public abstract class MapBaseNode : Node
     {
         [Input(backingValue = ShowBackingValue.Never)] public MapBaseNode input;
-        [Output(backingValue = ShowBackingValue.Never)] public MapBaseNode output;
 
         abstract public void Trigger();
 
@@ -16,5 +16,3 @@ namespace GramophoneUtils.Maps
         }
     }
 }
-
-

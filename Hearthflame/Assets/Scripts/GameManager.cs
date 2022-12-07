@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour, ISaveable
 		return new GameManagerSaveData
 		{
 			// Scene
-
-			Scene = SceneController.GetActiveSceneName()
+			
+			Scene = ServiceLocator.Instance.ServiceLocatorObject.SceneController.GetActiveSceneName()
 		};
 	}
 
@@ -101,4 +101,5 @@ public class GameManager : MonoBehaviour, ISaveable
 		public string Scene;
 	}
 		#endregion
-	}
+
+}

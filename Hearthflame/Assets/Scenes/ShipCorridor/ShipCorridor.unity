@@ -123,6 +123,97 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &243451909
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1635287907}
+    m_Modifications:
+    - target: {fileID: 4052211145977353013, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: sizeX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052211145977353013, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: sizeY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052211145977353013, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: _sceneConnectionObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 3964e783bb61d474cbbc3cf8eb224911,
+        type: 2}
+    - target: {fileID: 7016254375796047538, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_Name
+      value: TransitionCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -47.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8, type: 3}
+--- !u!4 &243451910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7199434061448918434, guid: bbe717ec9fd1e6b46b1fb9ce4fa160d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 243451909}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &316503899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -549,11 +640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07a7af95c14534db59b02410eded2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: Map1
-  targetTransitionTriggerName: 
-  transitionTriggerName: 
-  origin: {fileID: 11400000, guid: 112cc8f2a5078224fbb4b1ab580b49e3, type: 2}
-  target: {fileID: 11400000, guid: 7edf8c358bd131e4b89da4db276c48d8, type: 2}
+  _sceneConnectionObject: {fileID: 11400000, guid: 73dfdaf4cf226f44682abffad1dcc57a,
+    type: 2}
   entryPoint: {fileID: 0}
   sizeX: 5
   sizeY: 5
@@ -769,6 +857,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1856420346}
+  - {fileID: 243451910}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

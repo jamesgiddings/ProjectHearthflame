@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Maps/Map1.unity
+- path: Assets/Scenes/ShipCorridor/ShipCorridor.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

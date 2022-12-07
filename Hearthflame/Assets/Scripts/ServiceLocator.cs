@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ServiceLocator : MonoBehaviour 
 {
-    
+    [SerializeField, Required] private ServiceLocatorObject _serviceLocatorObject;
     [SerializeField] private DialogueUI _dialogueUI;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Camera _mainCamera;
@@ -51,6 +51,7 @@ public class ServiceLocator : MonoBehaviour
 
 
     public static ServiceLocator Instance { get; private set; }
+    public ServiceLocatorObject ServiceLocatorObject => _serviceLocatorObject;
     public UIServiceLocator UIServiceLocator => _uiServiceLocator;
     public DialogueUI DialogueUI => _dialogueUI;
     public EventSystem EventSystem => _eventSystem;

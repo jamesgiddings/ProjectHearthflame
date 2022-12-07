@@ -1,6 +1,4 @@
-using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -25,18 +23,13 @@ namespace GramophoneUtils.Deprecated
             _button = GetComponent<Button>();
         }
 
-        public void ChangeScene()
-        {
-            SceneController.CacheTransitionTriggerTargetName(_sceneTransitionObject.TransitionName);
-            StartCoroutine(SceneController.ChangeScene(_sceneTransitionObject.SceneName, ServiceLocator.Instance.PlayerBehaviour));
-        }
 
 #if UNITY_EDITOR
         [Button("Create Scene Transition Object")]
         public void CreateSceneTransitionObject()
         {
             _sceneTransitionObject = ScriptableObject.CreateInstance(typeof(SceneTransitionObject)) as SceneTransitionObject;
-            _sceneTransitionObject.SetSceneName(_sceneName);
+            _sceneTransitionObject.SceneName = _sceneName;
             string assetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Scenes/" + _sceneName + "/" + _sceneName + "SceneTransitionObject.asset");
             AssetDatabase.CreateAsset(_sceneTransitionObject, assetPath);
             AssetDatabase.SaveAssets();

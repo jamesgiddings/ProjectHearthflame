@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef89c74ac784274d96227e303aa27a7, type: 3}
   m_Name: Map1SceneTransitionObject
   m_EditorClassIdentifier: 
+  UID: 
+  name: 
+  sprite: {fileID: 0}
+  _triggerName: Tiddle
   _sceneName: Map1
-  _transitionName: TransitionName
+  _transitionName: StairsShipCorridorMap1

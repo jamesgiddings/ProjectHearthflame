@@ -23,7 +23,7 @@ public class LevelSystemAnimated
 	{
 		SetLevelSystem(levelSystem);
 		updateTimerMax = .016f;
-		FunctionUpdater.Create(() => Update()); 
+		FunctionUpdater.Create(() => Update()); //TODO this is messy
 	}
 
 	private void SetLevelSystem(LevelSystem levelSystem)

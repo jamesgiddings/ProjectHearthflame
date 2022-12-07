@@ -1017,6 +1017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cd0893efd979348a04a969585375df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _serviceLocatorObject: {fileID: 11400000, guid: 95ba770c049128b4db528e2a78a3fd9a,
+    type: 2}
   _dialogueUI: {fileID: 0}
   _eventSystem: {fileID: 7965813866651838242}
   _mainCamera: {fileID: 5438692968433053546}
