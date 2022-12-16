@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ShipCorridor/ShipCorridor.unity
+- path: Assets/Scenes/The Charmed Forest/The_Charmed_Forest.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class Data : ScriptableObject
+public abstract class Data : ScriptableObject
 {
     [HideInInspector]
     [ScriptableObjectId]

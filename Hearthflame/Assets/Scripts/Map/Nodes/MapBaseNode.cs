@@ -1,12 +1,21 @@
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using System;
+using UnityEditor;
 using UnityEngine;
 using XNode;
+using Object = UnityEngine.Object;
 
 namespace GramophoneUtils.Maps
 {
     [NodeWidth(500)]
     public abstract class MapBaseNode : Node
     {
-        [Input(backingValue = ShowBackingValue.Never)] public MapBaseNode input;
+        [SerializeField] private string _sceneName;
+
+        [HideInInspector] public Action OnNodeChanged;
+
+        public string SceneName => _sceneName;
 
         abstract public void Trigger();
 

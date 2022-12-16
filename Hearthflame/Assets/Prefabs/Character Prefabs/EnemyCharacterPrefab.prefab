@@ -65,7 +65,12 @@ PrefabInstance:
     - target: {fileID: 470861782177315537, guid: f6f8be75ff5a8314bb1e4f9400629c16,
         type: 3}
       propertyPath: m_Name
-      value: CharacterPrefab
+      value: EnemyCharacterPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985769597387191513, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f8be75ff5a8314bb1e4f9400629c16, type: 3}

@@ -22,11 +22,14 @@ namespace GramophoneUtils.Stats
 
         private Inventory partyInventory;
         
-        [SerializeField] private CharacterTemplate[] characterTemplates = new CharacterTemplate[8];
+        [SerializeField] private CharacterTemplate[] _characterTemplates = new CharacterTemplate[6];
+        [SerializeField] private CharacterTemplate[] _rearCharacterTemplates = new CharacterTemplate[6]; // TODO hack while getting rear to work
 
-        private List<Character> playerCharacters;
+        private List<Character> _playerCharacters;
+        private List<Character> _rearCharacters;
        
-        public CharacterTemplate[] CharacterTemplates => characterTemplates; // getter
+        public CharacterTemplate[] CharacterTemplates => _characterTemplates; // getter
+        public CharacterTemplate[] RearCharacterTemplates => _rearCharacterTemplates; // getter
         
 
         public Inventory PartyInventory
@@ -43,9 +46,19 @@ namespace GramophoneUtils.Stats
         {
             get
             {
-                if (playerCharacters != null) { return playerCharacters; }
-                playerCharacters = InstanceCharacters();
-                return playerCharacters;
+                if (_playerCharacters != null) { return _playerCharacters; }
+                _playerCharacters = InstanceCharacters();
+                return _playerCharacters;
+            }
+        }
+
+        public List<Character> RearCharacters
+        {
+            get
+            {
+                if (_rearCharacters != null) { return _rearCharacters; }
+                _rearCharacters = InstanceRearCharacters();
+                return _rearCharacters;
             }
         }
 
@@ -93,17 +106,32 @@ namespace GramophoneUtils.Stats
 
         public List<Character> InstanceCharacters()
         {
-            playerCharacters = new List<Character>();
-            for (int i = 0; i < characterTemplates.Length; i++)
+            _playerCharacters = new List<Character>();
+            for (int i = 0; i < _characterTemplates.Length; i++)
             {
-                if (characterTemplates[i] != null)
+                if (_characterTemplates[i] != null)
                 {
-                    playerCharacters.Add(new Character(characterTemplates[i], PartyInventory));
-                    playerCharacters[i].IsPlayer = true;
-                    playerCharacters[i].IsRear = (i > 3) ? true : false;
+                    _playerCharacters.Add(new Character(_characterTemplates[i], PartyInventory));
+                    _playerCharacters[i].IsPlayer = true;
+                    /*playerCharacters[i].IsRear = (i > 3) ? true : false;*/
                 }
             }
-            return playerCharacters;
+            return _playerCharacters;
+        }
+
+        public List<Character> InstanceRearCharacters()
+        {
+            _rearCharacters = new List<Character>();
+            for (int i = 0; i < _rearCharacterTemplates.Length; i++)
+            {
+                if (_rearCharacterTemplates[i] != null)
+                {
+                    _rearCharacters.Add(new Character(_rearCharacterTemplates[i], PartyInventory));
+                    _rearCharacters[i].IsPlayer = true;
+                    _rearCharacters[i].IsRear = true;
+                }
+            }
+            return _rearCharacters;
         }
 
         #region SavingLoading

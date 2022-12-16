@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class CharacterSlotsDisplayUI : MonoBehaviour
 {
-	[SerializeField] private PlayerModel playerModel;
+	private PlayerModel _playerModel;
 
 	private Character[] frontCharacters;
 	private Character[] rearCharacters;
 
-	public PlayerModel PlayerModel { get { return playerModel; } set { playerModel = value; } }
+	public PlayerModel PlayerModel { get { return _playerModel; } set { _playerModel = value; } }
 
 	[SerializeField] Transform FrontCharacterSlotsHolder; 
-	[SerializeField] Transform RearCharacterSlotsHolder; 
+	[SerializeField] Transform RearCharacterSlotsHolder;
 
 	private void OnEnable()
 	{
-		frontCharacters = new Character[4];
-		rearCharacters = new Character[4];
+        _playerModel = ServiceLocator.Instance.PlayerModel;
+        frontCharacters = new Character[3];
+		rearCharacters = new Character[3];
 
 		int frontIndex = 0;
 		int rearIndex = 0;
 
-		IEnumerable<Character> query = playerModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
+		IEnumerable<Character> query = _playerModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
 		List<Character> unlockedCharacters = new List<Character>();
 		foreach (Character character in query)
 		{

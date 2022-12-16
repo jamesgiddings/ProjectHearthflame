@@ -4,68 +4,78 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using GramophoneUtils.Battles;
 
 [CreateAssetMenu(fileName = "New Battle", menuName = "Battles/Battle")]
 public class Battle : Data
 {
     [Header("Battle Trigger")]
-    [SerializeField] private bool deactivateOnComplete;
+    [SerializeField] private bool _deactivateOnComplete;
 
 	[PreviewField(60), HideLabel]
 	[HorizontalGroup("Split", 60)]
-    [SerializeField] private Sprite battleSprite;
+    [SerializeField] private Sprite _battleSprite;
 
     [VerticalGroup("Split/Right"), LabelWidth(120)]
-    [SerializeField] private BattleReward battleReward;
+    [SerializeField] private BattleReward _battleReward;
     [VerticalGroup("Split/Right"), LabelWidth(120)]
-    [SerializeField] private GameObject battleMusic;
+    [SerializeField] private GameObject _battleMusic;
 
     [Header("Battle Opponents")]
     [TableList(ShowIndexLabels = true)]
-    [SerializeField] private ItemSlot[] itemSlots;
+    [SerializeField] private ItemSlot[] _itemSlots;
     [TableList(DrawScrollView = true, MaxScrollViewHeight = 200, MinScrollViewHeight = 100)]
-    [SerializeField] private CharacterTemplate[] battleCharacterTemplates;
+    [SerializeField] private CharacterTemplate[] _battleCharacterTemplates;
 
-    public BattleReward BattleReward => battleReward;
+	[SerializeField] private BattleWinConditions _battleWinConditions;
 
-	public Sprite BattleSprite => battleSprite;
+	[Header("Battle Rear")]
+	[SerializeField] private BattleRear _battleRear;
 
-	private Inventory enemyInventory = new Inventory(20, 10000);
+    public BattleReward BattleReward => _battleReward;
 
-    public bool IsComplete { get { return isComplete; } set { isComplete = value; } }
+	public Sprite BattleSprite => _battleSprite;
+
+	private Inventory _enemyInventory = new Inventory(20, 10000);
+
+    public bool IsComplete { get { return _isComplete; } set { _isComplete = value; } }
     
-    private bool isComplete = false;
+    private bool _isComplete = false;
 
-	public bool DeactivateOnComplete => deactivateOnComplete;
+	public bool DeactivateOnComplete => _deactivateOnComplete;
 
-    private List<Character> battleCharacters;
+    private List<Character> _battleCharacters;
 
-	public CharacterTemplate[] BattleCharacterTemplates => battleCharacterTemplates; // getter
+	public CharacterTemplate[] BattleCharacterTemplates => _battleCharacterTemplates; // getter
 
-	public Inventory EnemyInventory => enemyInventory; // getter
+    public BattleWinConditions BattleWinConditions => _battleWinConditions;
+
+    public BattleRear BattleRear => _battleRear;
+
+    public Inventory EnemyInventory => _enemyInventory; // getter
 
 	public List<Character> BattleCharacters
 	{
 		get
 		{
-			if (battleCharacters != null) { return battleCharacters; }
-			battleCharacters = InstanceCharacters();
-			return battleCharacters;
+			if (_battleCharacters != null) { return _battleCharacters; }
+			_battleCharacters = InstanceCharacters();
+			return _battleCharacters;
 		}
 	}
 
 	public List<Character> InstanceCharacters()
 	{
-		battleCharacters = new List<Character>();
+		_battleCharacters = new List<Character>();
 		for (int i = 0; i < BattleCharacterTemplates.Length; i++)
 		{
-			if (battleCharacterTemplates[i] != null)
+			if (_battleCharacterTemplates[i] != null)
 			{
-				battleCharacters.Add(new Character(battleCharacterTemplates[i], enemyInventory));
-				battleCharacters[i].IsPlayer = false;
+				_battleCharacters.Add(new Character(_battleCharacterTemplates[i], _enemyInventory));
+				_battleCharacters[i].IsPlayer = false;
 			}
 		}
-		return battleCharacters;
+		return _battleCharacters;
 	}
 
 

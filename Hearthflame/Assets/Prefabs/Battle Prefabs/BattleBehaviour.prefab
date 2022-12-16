@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a1c58b0c493aa428f2dc531b9c4398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnOrderPrefab: {fileID: 3214878544727847114, guid: bfb2f6bc481facf4e9f18498ede3be5f,
+  _rearBattlePrefab: {fileID: 0}
+  _turnOrderPrefab: {fileID: 3214878544727847114, guid: bfb2f6bc481facf4e9f18498ede3be5f,
     type: 3}
-  onCharactersUpdated: {fileID: 11400000, guid: e4b240577176e0c4da9e471adb468e9c,
+  _onCharactersUpdated: {fileID: 11400000, guid: e4b240577176e0c4da9e471adb468e9c,
     type: 2}
-  battlerDisplayUI: {fileID: 0}
-  radialMenu: {fileID: 0}
-  battleRewardsDisplayUI: {fileID: 0}
-  battleCamera: {fileID: 0}
+  _radialMenu: {fileID: 0}
+  _battleRewardsDisplayUI: {fileID: 0}

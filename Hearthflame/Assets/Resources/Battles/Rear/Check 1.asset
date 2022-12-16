@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64425b265bf76a4a8b6f979de8080a2, type: 3}
+  m_Name: Check 1
+  m_EditorClassIdentifier: 
+  _statType: {fileID: 11400000, guid: 0b63d8f9d65768443853a38be3cbf8d5, type: 2}
+  _difficulty: 60
+  _displayName: Open the lock with magic

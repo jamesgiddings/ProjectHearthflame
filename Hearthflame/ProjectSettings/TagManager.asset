@@ -13,12 +13,12 @@ TagManager:
   - Water
   - UI
   - UI Drag and Drop
-  - Background
   - Interactable
-  - Foreground
   - Ground
   - Player
   - Projectile
+  - 
+  - 
   - 
   - 
   - 
@@ -42,27 +42,42 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: 6
     uniqueID: 456533209
     locked: 0
-  - name: Sky
+  - name: 5
     uniqueID: 684647391
     locked: 0
-  - name: Foreground
+  - name: 4
     uniqueID: 798331267
     locked: 0
-  - name: Ground
+  - name: 3
     uniqueID: 1843178061
     locked: 0
-  - name: Interactables
+  - name: 2
     uniqueID: 3818603031
     locked: 0
-  - name: Player
+  - name: 1
     uniqueID: 2393378671
     locked: 0
-  - name: Projectiles
+  - name: 0 (Ground)
     uniqueID: 1811155961
     locked: 0
-  - name: UI
+  - name: -1
     uniqueID: 968580291
+    locked: 0
+  - name: -2
+    uniqueID: 287506491
+    locked: 0
+  - name: -3
+    uniqueID: 505765359
+    locked: 0
+  - name: -4
+    uniqueID: 322898837
+    locked: 0
+  - name: -5
+    uniqueID: 46831355
+    locked: 0
+  - name: -6
+    uniqueID: 392269907
     locked: 0

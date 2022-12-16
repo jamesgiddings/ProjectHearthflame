@@ -7,13 +7,15 @@ using UnityEngine.Events;
 
 public class BattleBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject turnOrderPrefab;
-    [SerializeField] private VoidEvent onCharactersUpdated;
-    [SerializeField] private RadialMenu radialMenu;
-    [SerializeField] private BattleRewardsDisplayUI battleRewardsDisplayUI;
+    [SerializeField] private GameObject _rearBattlePrefab;
+    [SerializeField] private GameObject _turnOrderPrefab;
+    [SerializeField] private VoidEvent _onCharactersUpdated;
+    [SerializeField] private RadialMenu _radialMenu;
+    [SerializeField] private BattleRewardsDisplayUI _battleRewardsDisplayUI;
 
-    public GameObject TurnOrderPrefab => turnOrderPrefab;
-    public VoidEvent OnCharactersUpdated => onCharactersUpdated;
-    public RadialMenu RadialMenu => radialMenu;
-    public BattleRewardsDisplayUI BattleRewardsDisplayUI => battleRewardsDisplayUI;
+    public GameObject RearBattlePrefab => _rearBattlePrefab;
+    public GameObject TurnOrderPrefab => _turnOrderPrefab;
+    public VoidEvent OnCharactersUpdated => _onCharactersUpdated;
+    public RadialMenu RadialMenu => _radialMenu;
+    public BattleRewardsDisplayUI BattleRewardsDisplayUI => _battleRewardsDisplayUI;
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [Serializable]
-public class Resource : Data
+public abstract class Resource : Data
 {
     [VerticalGroup("General/Split/Right")]
     [VerticalGroup("General/Split/Right/Sprites", 30)]
@@ -11,4 +11,5 @@ public class Resource : Data
     [SerializeField] protected Sprite sprite;
 
     public Sprite Sprite => sprite;
+
 }

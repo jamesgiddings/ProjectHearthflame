@@ -11,7 +11,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class TransitionTrigger : MonoBehaviour, ISaveable
 {
-    [SerializeField] private SceneConnectionObject _sceneConnectionObject;
+    [SerializeField, Required] private TransitionObject _transitionObject;
     
 	[SerializeField] private Transform entryPoint;
 
@@ -23,7 +23,7 @@ public class TransitionTrigger : MonoBehaviour, ISaveable
 	private Rigidbody2D rb;
 	private BoxCollider2D boxCollider;
 
-    public string OriginTransition => _sceneConnectionObject.TriggerName;
+    public TransitionObject TransitionObject => _transitionObject;
 
 	public Transform EntryPoint
 	{
@@ -62,7 +62,7 @@ public class TransitionTrigger : MonoBehaviour, ISaveable
 	{
         if (other.tag == "Player")
 		{   
-			_sceneConnectionObject.ChangeScene();
+			_transitionObject.ChangeScene();
 
             if (deactivateOnTrigger)
 			{
@@ -71,29 +71,24 @@ public class TransitionTrigger : MonoBehaviour, ISaveable
 		}
 	}
 
-    #region Utilities
+	#region Utilities
 
 #if UNITY_EDITOR
 
-    [Button("Create SceneConnectionObject")]
-    public void CreateSceneConnectionObjectFromDestinationSceneName(String destinationSceneName)
-    {
-		_sceneConnectionObject = ScriptableObject.CreateInstance(typeof(SceneConnectionObject)) as SceneConnectionObject;
-        _sceneConnectionObject.Scene1Name = destinationSceneName;
-		_sceneConnectionObject.Scene2Name = EditorSceneManager.GetActiveScene().name;
-        _sceneConnectionObject.TriggerName = gameObject.name;
-        string assetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Scenes/Transition Objects/"  + _sceneConnectionObject.Scene2Name + "_" + destinationSceneName + "_" +  _sceneConnectionObject.TriggerName + "_" + "SceneTransitionObject.asset");
-		AssetDatabase.CreateAsset(_sceneConnectionObject, assetPath);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }
+	private void OnValidate()
+	{
+		if (_transitionObject != null)
+		{
+            this.name = _transitionObject.name + "_Trigger";
+        }
+	}
 
 #endif
 
-    #endregion
+	#endregion
 
-    #region SavingLoading
-    public object CaptureState()
+	#region SavingLoading
+	public object CaptureState()
 	{
         return new SaveData
 		{

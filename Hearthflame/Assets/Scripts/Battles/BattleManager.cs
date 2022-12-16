@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour
         battleDataModel.InitialiseBattleModel();
         InitialiseBattlerDisplay();
         InitialiseTurnOrderUI();
+		InitialiseRearBattleUI();
         InitialiseBattleRewardsDisplayUI();
         battleDataModel.OnCurrentActorChanged?.Invoke();
 
@@ -121,7 +122,6 @@ public class BattleManager : MonoBehaviour
 		foreach (Character character in BattleDataModel.EnemyCharacters)
 		{
 			enemyBattlersCharacterInventory.AddCharacter(new CharacterSlot(character));
-
 		}
 	}
 
@@ -152,6 +152,11 @@ public class BattleManager : MonoBehaviour
 		}
 	}
 
+	private void InitialiseRearBattleUI()
+	{
+		battleBehaviour.RearBattlePrefab.SetActive(true);
+	}
+
 	public void InitialiseRadialMenu()
 	{
 		if (battleBehaviour != null)
@@ -172,6 +177,7 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
 	{
         Destroy(turnOrderUI.gameObject);
+        battleBehaviour.RearBattlePrefab.SetActive(false);
         ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.ExplorationState);
 		UninitialiseBattlers();
 	}

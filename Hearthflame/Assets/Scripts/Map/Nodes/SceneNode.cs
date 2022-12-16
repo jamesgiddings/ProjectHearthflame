@@ -1,9 +1,12 @@
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XNode;
 using static Dialogue.Chat;
+using Object = UnityEngine.Object;
 
 namespace GramophoneUtils.Maps
 {
@@ -13,41 +16,43 @@ namespace GramophoneUtils.Maps
     /// unlocked, as it is a scriptable object - that is tracked in the MapNodeParser, which is
     /// a monobehaviour.
     /// </summary>
-    [NodeTint("#CCFFCC")]
+    [NodeTint("#3F5A4D")]
     public class SceneNode : MapBaseNode
     {
-        public string SceneName = "";
-        [Output(dynamicPortList = true)] public List<SceneConnectionObject> Connections = new List<SceneConnectionObject>();
+        [Input(backingValue = ShowBackingValue.Never, connectionType = ConnectionType.Override)] public TransitionNode entryTransition;
+        [Output(backingValue = ShowBackingValue.Never, connectionType = ConnectionType.Override)] public TransitionNode exitTransition;
 
-        [SerializeField] private SceneConnectionObject _currentSceneConnectionObject;
+        [SerializeField, BoxGroup("Lock and visibility status at start of game")] private bool _revealed = true;
+        [SerializeField, BoxGroup("Lock and visibility status at start of game")] private bool _locked = true;
 
-        public SceneConnectionObject CurrentSceneConnectionObject => _currentSceneConnectionObject;
+        public bool Revealed => _revealed;
+        public bool Locked => _locked;
 
-        public void SelectScene()
-        {
-            int index = 0;
-            NodePort port = null;
-            if (Connections.Count == 0)
-            {
-                port = GetOutputPort("output");
-            }
-            else
-            {
-                if (Connections.Count <= index) return;
-                port = GetOutputPort("connections " + index);
-            }
+        private TransitionObject _transitionObjectReference;
 
-            if (port == null) return;
-            for (int i = 0; i < port.ConnectionCount; i++)
-            {
-                NodePort connection = port.GetConnection(i);
-                (connection.node as MapBaseNode).Trigger();
-            }
-        }
-
+        #region API
         public override void Trigger()
         {
             (graph as MapGraph).Current = this;
+            if (_transitionObjectReference != null)
+            {
+                _transitionObjectReference.ChangeScene();
+            }
         }
+
+        public void SetRevealed(bool value, TransitionObject transitionObjectReference)
+        {
+            _revealed = value;
+            _transitionObjectReference = transitionObjectReference; // this provides the reference to the TransitionObject which allowed this node to be accessible, and is what should be used in transitioning scenes.
+            OnNodeChanged?.Invoke();
+        }
+
+        public void SetLocked(bool value)
+        {
+            _locked = value;
+            OnNodeChanged?.Invoke();
+        }
+
+        #endregion
     }
 }

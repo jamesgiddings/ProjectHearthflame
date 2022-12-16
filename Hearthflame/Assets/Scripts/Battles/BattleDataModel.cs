@@ -1,3 +1,4 @@
+using GramophoneUtils.Battles;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System;
@@ -10,6 +11,7 @@ public class BattleDataModel : MonoBehaviour
 	private BattleManager battleManager;
 	private StateManager battleStateManager;
 	private Battle battle;
+	private BattleRear _battleRear;
 	private BattleBehaviour battleBehaviour;
 	private PlayerModel playerModel;
 
@@ -18,6 +20,7 @@ public class BattleDataModel : MonoBehaviour
 
 	private List<Character> battlersList;
 	private List<Character> playerBattlersList;
+	private List<Character> rearPlayerBattlersList;
 	private List<Character> enemyBattlersList;
 	private List<Character> orderedBattlersList;
 	private Queue<Character> unresolvedQueue = new Queue<Character>();
@@ -32,7 +35,10 @@ public class BattleDataModel : MonoBehaviour
 
     private int _turn;
     private int _round;
-	public List<Character> EnemyBattlersList => enemyBattlersList;
+
+    public BattleRear BattleRear => _battleRear;
+
+    public List<Character> EnemyBattlersList => enemyBattlersList;
 	public List<Character> PlayerBattlersList => playerBattlersList;
 	public List<Character> BattlersList => battlersList;
 	public List<Character> OrderedBattlersList => orderedBattlersList;
@@ -59,7 +65,9 @@ public class BattleDataModel : MonoBehaviour
 		battleStateManager = ServiceLocator.Instance.BattleStateManager;
         playerModel =  ServiceLocator.Instance.PlayerModel;
         battle = ServiceLocator.Instance.BattleManager.Battle;
+		_battleRear = ServiceLocator.Instance.BattleManager.Battle.BattleRear;
         this.playerCharacters = playerModel.PlayerCharacters;
+		this.rearPlayerBattlersList = playerModel.RearCharacters;
         this.enemyCharacters = battle.BattleCharacters;
         InitialiseBattlersLists();
 
@@ -167,32 +175,17 @@ public class BattleDataModel : MonoBehaviour
 
 	private bool IsPlayerVictory()
 	{
-  		bool allDead = true;
-		foreach(Character character in enemyBattlersList)
-		{
-			if (!character.HealthSystem.IsDead)
-			{
-				allDead = false;
-			}
-		}
-
-		return allDead;
+		return battle.BattleWinConditions.IsPlayerVictory(this);
 	}
 
-	private bool IsEnemyVictory()
-	{
-		bool allDead = true;
-		foreach (Character character in playerBattlersList)
-		{
-			if (!character.HealthSystem.IsDead)
-			{
-				allDead = false;
-			}
-		}
-		return allDead;
-	}
+    private bool IsEnemyVictory()
+    {
+        return battle.BattleWinConditions.IsEnemyVictory(this);
+    }
 
-	public void NextTurn()
+
+
+    public void NextTurn()
 	{
 
 		if (IsPlayerVictory())
@@ -215,6 +208,8 @@ public class BattleDataModel : MonoBehaviour
 		{
 			NextRound();
 		}
+
+		_battleRear.MakeChecks(rearPlayerBattlersList); // this is the rear battle step. Todo: We should move this to a separate battlestate
 
 		UpdateCurrentActor();
 		UpdateState();

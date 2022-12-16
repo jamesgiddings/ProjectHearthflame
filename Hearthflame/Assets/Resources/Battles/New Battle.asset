@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 897da615-7a16-43c3-bfe1-3f62f2999902
   name: New Battle
-  deactivateOnComplete: 0
-  battleSprite: {fileID: 2650242802887809672, guid: ef600f3966e5faa42b67c3c85b8b62c2,
+  _deactivateOnComplete: 0
+  _battleSprite: {fileID: -3438905571476058607, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
-  battleReward: {fileID: 11400000, guid: 1d731f94270fb254780abbc39970f2cd, type: 2}
-  battleMusic: {fileID: 0}
-  itemSlots: []
-  battleCharacterTemplates:
+  _battleReward: {fileID: 11400000, guid: 1d731f94270fb254780abbc39970f2cd, type: 2}
+  _battleMusic: {fileID: 0}
+  _itemSlots: []
+  _battleCharacterTemplates:
   - {fileID: 11400000, guid: ebaca1e67576ba54b8c8f1727cb51795, type: 2}
   - {fileID: 11400000, guid: 7d5880954bfcc184cabc20fe3a8901f1, type: 2}
   - {fileID: 11400000, guid: bbde9861680d3274fa3941358ef3ee7c, type: 2}
+  _battleWinConditions: {fileID: 11400000, guid: 030072b44ac4e744ca39c57edec9e437,
+    type: 2}
+  _battleRear: {fileID: 11400000, guid: 8c25ebd8344159643bb72bbc25649eed, type: 2}

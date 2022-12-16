@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class Battler : MonoBehaviour
 {
@@ -27,6 +28,64 @@ public class Battler : MonoBehaviour
     private bool isInitialised = false;
 
     public Action OnTurnComplete;
+
+    #region Callbacks
+
+    private void OnDisable()
+    {
+        if (isInitialised) // TODO this is a hack
+        {
+            battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+            battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
+            character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
+            character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
+            character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
+            character.HealthSystem.OnCharacterDeath -= KillCharacter;
+            character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+        }
+    }
+
+    #endregion
+
+    #region API
+
+    public void SetCharacterMovementIsLeader(int sortingGroupIndex)
+    {
+        CharacterMovement characterMovement = GetComponent<CharacterMovement>();
+        SortingGroup sortingGroup = GetComponent<SortingGroup>();
+        if (characterMovement == null)
+        {
+            Debug.LogError("no FollowerMove component on battler.");
+            return;
+        }
+        if (sortingGroup == null)
+        {
+            Debug.LogError("no SortingGroup component on battler.");
+            return;
+        }
+        characterMovement.SetIsFollower(false);
+        sortingGroup.sortingOrder = sortingGroupIndex;
+    }
+
+    public void ConnectFollowerToLeader(CharacterMovement followee, float gap, int sortingGroupIndex)
+    {
+        CharacterMovement characterMovement = GetComponent<CharacterMovement>();
+        SortingGroup sortingGroup = GetComponent<SortingGroup>();
+        if (characterMovement == null)
+        {
+            Debug.LogError("no FollowerMove component on battler.");
+            return;
+        }
+        if (sortingGroup == null)
+        {
+            Debug.LogError("no SortingGroup component on battler.");
+            return;
+        }
+        characterMovement.SetIsFollower(true);
+        characterMovement.SetFollowee(followee);
+        characterMovement.SetGap(gap);
+        sortingGroup.sortingOrder = sortingGroupIndex;
+    }
 
     public void Initialise(BattleManager battleManager, Character character)
     {
@@ -66,18 +125,6 @@ public class Battler : MonoBehaviour
     public void DisplayBattleUI(bool value)
     {
         healthSlider.gameObject.SetActive(value);
-    }
-
-	private void UpdateTargetCursor(List<Character> targets)
-    {
-        if (targets.Contains(character))
-        {
-            targetCursor.gameObject.SetActive(true);
-        }
-        else
-        {
-            targetCursor.gameObject.SetActive(false);
-        }
     }
 
     public void UpdateCurrentActorHighlightState()
@@ -137,12 +184,6 @@ public class Battler : MonoBehaviour
         floatingText.text = notification.GetMessage();
     }
 
-    private void KillCharacter()
-    {
-        spriteRenderer.color = new Color32(255, 255, 225, 100); // greys out the characters image
-        healthSlider.gameObject.SetActive(false);
-    }
-
     public void Uninitialise()
     {
         battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
@@ -154,17 +195,27 @@ public class Battler : MonoBehaviour
         character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
     }
 
-    private void OnDisable()
+    #endregion
+
+    #region Utilities
+
+    private void UpdateTargetCursor(List<Character> targets)
     {
-        if (isInitialised) // TODO this is a hack
+        if (targets.Contains(character))
         {
-            battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
-            battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
-            character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
-            character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
-            character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
-            character.HealthSystem.OnCharacterDeath -= KillCharacter;
-            character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+            targetCursor.gameObject.SetActive(true);
+        }
+        else
+        {
+            targetCursor.gameObject.SetActive(false);
         }
     }
+
+    private void KillCharacter()
+    {
+        spriteRenderer.color = new Color32(255, 255, 225, 100); // greys out the characters image
+        healthSlider.gameObject.SetActive(false);
+    }
+
+    #endregion
 }

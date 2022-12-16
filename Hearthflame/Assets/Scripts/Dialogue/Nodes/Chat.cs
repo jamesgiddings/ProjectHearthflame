@@ -16,7 +16,6 @@ namespace Dialogue {
             public string text;
             public AudioClip voiceClip;
         }
-
         public void AnswerQuestion(int index) {
             Debug.Log("Answering Question " + index);
             NodePort port = null;

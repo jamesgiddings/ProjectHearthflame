@@ -7,14 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Trigger : MonoBehaviour
 {
-    [SerializeField] protected bool deactivateOnTrigger;
-    [SerializeField] private float colliderSizeX = 5;
-    [SerializeField] private float colliderSizeY = 5;
+    [SerializeField] protected bool _deactivateOnTrigger;
+    [SerializeField] private float _colliderSizeX = 5;
+    [SerializeField] private float _colliderSizeY = 5;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
+    protected Rigidbody2D RigidBody;
+    private BoxCollider2D _boxCollider;
     
-    public bool DeactivateOnTrigger => deactivateOnTrigger;
+    public bool DeactivateOnTrigger => _deactivateOnTrigger;
 
     private void OnDrawGizmos()
     {
@@ -29,10 +29,10 @@ public abstract class Trigger : MonoBehaviour
 
     private void Initialize()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        boxCollider = GetComponent<BoxCollider2D>();
-        boxCollider.isTrigger = true;
+        RigidBody = GetComponent<Rigidbody2D>();
+        RigidBody.gravityScale = 0;
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -40,7 +40,7 @@ public abstract class Trigger : MonoBehaviour
         if (other.tag == "Player")
         {
             TriggerAction();
-            if (deactivateOnTrigger)
+            if (_deactivateOnTrigger)
             {
                 this.gameObject.SetActive(false);
             }

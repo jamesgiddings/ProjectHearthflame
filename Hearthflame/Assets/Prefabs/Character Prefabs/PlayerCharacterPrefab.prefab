@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3189775130565388211, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 470861782177315536, guid: f6f8be75ff5a8314bb1e4f9400629c16,
         type: 3}
       propertyPath: m_RootOrder
@@ -67,45 +72,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacterPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7869760677871207265, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869760677871207265, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: _characterController2D
+      value: 
+      objectReference: {fileID: 4489327632251187528}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f8be75ff5a8314bb1e4f9400629c16, type: 3}
---- !u!1 &6736369685910413484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 470861782177315537, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+--- !u!114 &4489327632251187528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7330164128964111157, guid: f6f8be75ff5a8314bb1e4f9400629c16,
     type: 3}
   m_PrefabInstance: {fileID: 6626117498273667709}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &655744496899646430
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6736369685910413484}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &5999351901743749216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6736369685910413484}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4fc980a2fcda94c8a543d5ef3f6fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 18093fe43583c394ea54563e62d2f635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5

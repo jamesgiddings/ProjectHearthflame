@@ -44,7 +44,8 @@ public class BattleTrigger : StatefulTrigger
     {
 		ServiceLocator.Instance.BattleManager.SetBattle(battle);
 		ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.BattleState);
-        if (deactivateOnTrigger)
+		GetComponent<SpriteRenderer>().enabled = false; // TODO hack. this won't reenable
+        if (_deactivateOnTrigger)
         {
             this.gameObject.SetActive(false);
         }

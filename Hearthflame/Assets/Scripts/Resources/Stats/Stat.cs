@@ -49,13 +49,15 @@ namespace GramophoneUtils.Stats
 		{
 			isDirty = true;
 			baseValue = newBase;
-			OnStatChanged?.Invoke();
+            baseValue = baseValue < 0f ? 0f : baseValue; // baseValue should not go below 0.
+            OnStatChanged?.Invoke();
 		}
 
 		public void IncrementBaseValue(float increment)
 		{
 			isDirty = true;
 			baseValue += increment;
+			baseValue = baseValue < 0f ? 0f : baseValue; // baseValue should not go below 0.
 			OnStatChanged?.Invoke();
 		}
 
@@ -120,7 +122,7 @@ namespace GramophoneUtils.Stats
 				}
 			}
 			// Workaround for float calculation errors, like displaying 12.00001 instead of 12
-			return (float)Math.Round(finalValue, 4);
+			return finalValue < 0f ? 0f : (float)Math.Round(finalValue, 4); // the final value should not be below 0.
 		}
 	}
 

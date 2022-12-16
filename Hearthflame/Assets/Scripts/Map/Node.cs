@@ -15,7 +15,6 @@ namespace GramophoneUtils.Deprecated
     {
         [SerializeField] private string _sceneName = "";
         [SerializeField] private List<Node> _connectedNodes;
-        [SerializeField] private SceneTransitionObject _sceneTransitionObject;
         private Button _button;
 
         private void OnEnable()
@@ -25,16 +24,7 @@ namespace GramophoneUtils.Deprecated
 
 
 #if UNITY_EDITOR
-        [Button("Create Scene Transition Object")]
-        public void CreateSceneTransitionObject()
-        {
-            _sceneTransitionObject = ScriptableObject.CreateInstance(typeof(SceneTransitionObject)) as SceneTransitionObject;
-            _sceneTransitionObject.SceneName = _sceneName;
-            string assetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Scenes/" + _sceneName + "/" + _sceneName + "SceneTransitionObject.asset");
-            AssetDatabase.CreateAsset(_sceneTransitionObject, assetPath);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
+
 #endif
     }
 }

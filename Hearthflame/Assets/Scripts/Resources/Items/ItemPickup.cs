@@ -34,7 +34,7 @@ namespace GramophoneUtils.Items
                     this.gameObject.SetActive(false);
                 }
 
-                if (deactivateOnTrigger)
+                if (_deactivateOnTrigger)
                 {
                     this.gameObject.SetActive(false);
                 }

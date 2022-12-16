@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		// Movement
-		rb.MovePosition(rb.position + GameManager.Instance.MovementNormalized * moveSpeed * Time.fixedDeltaTime);
+		rb.AddForce(rb.position + GameManager.Instance.MovementNormalized * moveSpeed * Time.fixedDeltaTime);
+		//rb.MovePosition(rb.position + GameManager.Instance.MovementNormalized * moveSpeed * Time.fixedDeltaTime);
 	}
 }

@@ -1,5 +1,177 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9171453380427105030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7e013ef6f66ca4c9118c54375b4f33, type: 3}
+  m_Name: Map Entry
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: -2376, y: -712}
+  ports:
+    keys:
+    - output
+    - input
+    values:
+    - _fieldName: output
+      _node: {fileID: -9171453380427105030}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 6120919402582476654}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: -9171453380427105030}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: BaseScene
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: 6ebc5f73b32b9e3458dad04e8b2bdfb4, type: 2}
+--- !u!114 &-9028871817032774088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f461ca51caa0a8438f582b687d7db33, type: 3}
+  m_Name: Aydys' Basement
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: 1320, y: -328}
+  ports:
+    keys:
+    - entryTransition
+    - exitTransition
+    values:
+    - _fieldName: entryTransition
+      _node: {fileID: -9028871817032774088}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 715632652863561590}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exitTransition
+      _node: {fileID: -9028871817032774088}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Aydys' Basement
+  entryTransition: {fileID: 0}
+  exitTransition: {fileID: 0}
+  _revealed: 1
+  _locked: 1
+--- !u!114 &-9020864031699764622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c920e3f40cec92428a0a86f52ef531c, type: 3}
+  m_Name: ShipCorridor_Map Junction
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: 24, y: -504}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: -9020864031699764622}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exitTransition
+        node: {fileID: -4909100958396676638}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: -9020864031699764622}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 2585532540526326567}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: 0b19230066960b540b39787ace3150d9, type: 2}
 --- !u!114 &-4909100958396676638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,53 +184,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f461ca51caa0a8438f582b687d7db33, type: 3}
   m_Name: ShipCorridor
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: 40}
+  position: {x: -536, y: -600}
   ports:
     keys:
-    - Connections
-    - input
-    - Connections 0
+    - entryTransition
+    - exitTransition
     values:
-    - _fieldName: Connections
+    - _fieldName: entryTransition
       _node: {fileID: -4909100958396676638}
-      _typeQualifiedName: System.Collections.Generic.List`1[[GramophoneUtils.Maps.SceneNode+Connection,
-        Scripts, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: input
-      _node: {fileID: -4909100958396676638}
-      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: Connections 0
-        node: {fileID: -3631343424053902322}
+      - fieldName: output
+        node: {fileID: 3321860719894262972}
         reroutePoints: []
       _direction: 0
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: Connections 0
+    - _fieldName: exitTransition
       _node: {fileID: -4909100958396676638}
-      _typeQualifiedName: GramophoneUtils.Maps.SceneNode+Connection, Scripts, Version=0.0.0.0,
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: input
-        node: {fileID: -3631343424053902322}
+        node: {fileID: -9020864031699764622}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
-      _dynamic: 1
-  input: {fileID: 0}
-  SceneName: ShipCorridor
-  Connections:
-  - _origin: {fileID: 11400000, guid: 112cc8f2a5078224fbb4b1ab580b49e3, type: 2}
-    _destination: {fileID: 11400000, guid: de5f98b4e1b5be640bd8ac7a9fec611a, type: 2}
+      _dynamic: 0
+  _sceneName: ShipCorridor
+  entryTransition: {fileID: 0}
+  exitTransition: {fileID: 0}
+  _revealed: 1
+  _locked: 0
 --- !u!114 &-3631343424053902322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,53 +244,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f461ca51caa0a8438f582b687d7db33, type: 3}
   m_Name: Ship2
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: -216}
+  position: {x: -536, y: -328}
   ports:
     keys:
-    - Connections
-    - input
-    - Connections 0
+    - entryTransition
+    - exitTransition
     values:
-    - _fieldName: Connections
+    - _fieldName: entryTransition
       _node: {fileID: -3631343424053902322}
-      _typeQualifiedName: System.Collections.Generic.List`1[[GramophoneUtils.Maps.SceneNode+Connection,
-        Scripts, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: input
-      _node: {fileID: -3631343424053902322}
-      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: Connections 0
-        node: {fileID: -4909100958396676638}
+      - fieldName: output
+        node: {fileID: 546848267435332031}
         reroutePoints: []
       _direction: 0
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: Connections 0
+    - _fieldName: exitTransition
       _node: {fileID: -3631343424053902322}
-      _typeQualifiedName: GramophoneUtils.Maps.SceneNode+Connection, Scripts, Version=0.0.0.0,
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: input
-        node: {fileID: -4909100958396676638}
+        node: {fileID: 8582304798347250445}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
-      _dynamic: 1
-  input: {fileID: 0}
-  SceneName: Ship2
-  Connections:
-  - _origin: {fileID: 11400000, guid: de5f98b4e1b5be640bd8ac7a9fec611a, type: 2}
-    _destination: {fileID: 11400000, guid: 112cc8f2a5078224fbb4b1ab580b49e3, type: 2}
+      _dynamic: 0
+  _sceneName: Ship2
+  entryTransition: {fileID: 0}
+  exitTransition: {fileID: 0}
+  _revealed: 1
+  _locked: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +310,370 @@ MonoBehaviour:
   nodes:
   - {fileID: -4909100958396676638}
   - {fileID: -3631343424053902322}
+  - {fileID: 8582304798347250445}
+  - {fileID: 6120919402582476654}
+  - {fileID: -9020864031699764622}
+  - {fileID: 3321860719894262972}
+  - {fileID: 546848267435332031}
+  - {fileID: -9171453380427105030}
+  - {fileID: -9028871817032774088}
+  - {fileID: 2585532540526326567}
+  - {fileID: 715632652863561590}
+--- !u!114 &546848267435332031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c920e3f40cec92428a0a86f52ef531c, type: 3}
+  m_Name: Map Junction 1_Ship2
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: -1096, y: -376}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 546848267435332031}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 6120919402582476654}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 546848267435332031}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: entryTransition
+        node: {fileID: -3631343424053902322}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: 1975c50d10d1dc44b898f63ba025ee51, type: 2}
+--- !u!114 &715632652863561590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c920e3f40cec92428a0a86f52ef531c, type: 3}
+  m_Name: Map Junction_Aydys' Basement
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: 1208, y: -600}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 715632652863561590}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 2585532540526326567}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 715632652863561590}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: entryTransition
+        node: {fileID: -9028871817032774088}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: 4e94843798bdb5c41bed3a03847b7efb, type: 2}
+--- !u!114 &2585532540526326567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c856bc0332e3bc94790066c22b17583b, type: 3}
+  m_Name: Map Junction
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: 632, y: -488}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 2585532540526326567}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -9020864031699764622}
+        reroutePoints: []
+      - fieldName: output
+        node: {fileID: 8582304798347250445}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 2585532540526326567}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 715632652863561590}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+--- !u!114 &3321860719894262972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c920e3f40cec92428a0a86f52ef531c, type: 3}
+  m_Name: Map Junction 1_ShipCorridor
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: -1064, y: -856}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 3321860719894262972}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 6120919402582476654}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 3321860719894262972}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: entryTransition
+        node: {fileID: -4909100958396676638}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: 671a6e93ae43b35439192d65acc1fc6d, type: 2}
+--- !u!114 &6120919402582476654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c856bc0332e3bc94790066c22b17583b, type: 3}
+  m_Name: Map Junction 1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: -1736, y: -776}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 6120919402582476654}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: -9171453380427105030}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 6120919402582476654}
+      _typeQualifiedName: GramophoneUtils.Maps.TransitionNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 3321860719894262972}
+        reroutePoints: []
+      - fieldName: input
+        node: {fileID: 546848267435332031}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+--- !u!114 &8582304798347250445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c920e3f40cec92428a0a86f52ef531c, type: 3}
+  m_Name: Ship2_Map Junction
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNodeChanged
+      Entry: 6
+      Data: 
+  graph: {fileID: 11400000}
+  position: {x: 24, y: -280}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 8582304798347250445}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: exitTransition
+        node: {fileID: -3631343424053902322}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 8582304798347250445}
+      _typeQualifiedName: GramophoneUtils.Maps.MapBaseNode, Scripts, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 2585532540526326567}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _sceneName: Map1
+  input: {fileID: 0}
+  output: {fileID: 0}
+  _transitionObject: {fileID: 11400000, guid: c0dc01c83a3346043a1cd1d8fb20bb79, type: 2}

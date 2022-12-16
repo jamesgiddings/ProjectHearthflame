@@ -1,0 +1,287 @@
+using GramophoneUtils.Stats;
+using Sirenix.OdinInspector;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace GramophoneUtils.Battles
+{
+    [CreateAssetMenu(fileName = "EnemiesKilled", menuName = "Battles/EnemiesKilled")]
+    public class EnemiesKilledConditions : ScriptableObject
+    {
+        [SerializeField] private bool _killAll;
+
+        [SerializeField, HideIf("_hideAnyOf"), Tooltip("Only one of these lists should be used.")] private List<CharacterTemplate> _anyOf;
+        [SerializeField, HideIf("_hideAllOf"), Tooltip("Only one of these lists should be used.")] private List<CharacterTemplate> _allOf;
+        [SerializeField, HideIf("_hideAnyOfClass"), Tooltip("Only one of these lists should be used.")] private List<CharacterClass> _anyOfClass;
+        [SerializeField, HideIf("_hideAllOfClass"), Tooltip("Only one of these lists should be used.")] private List<CharacterClass> _allOfClass;
+       
+        #region Only show one list in editor
+
+        // properties which hide fields based on one of the lists being used.
+
+        private int _anyOfCount
+        {
+            get
+            {
+                if (_anyOf != null) { return _anyOf.Count; }
+                return 0;
+            }
+        }
+
+        private int _allOfCount
+        {
+            get
+            {
+                if (_allOf != null) { return _allOf.Count; }
+                return 0;
+            }
+        }
+
+        private int _anyOfClassCount
+        {
+            get
+            {
+                if (_anyOfClass != null) { return _anyOfClass.Count; }
+                return 0;
+            }
+        }
+
+        private int _allOfClassCount
+        {
+            get
+            {
+                if (_allOfClass != null) { return _allOfClass.Count; }
+                return 0;
+            }
+        }
+
+        private bool _hideAnyOf
+        {
+            get
+            {
+                if (_allOfCount > 0 || _anyOfClassCount > 0 || _allOfClassCount > 0 || _killAll)
+                {
+                    _anyOf = new List<CharacterTemplate>();
+                    return true;
+                }
+                
+                return false;
+            }
+        }
+
+        private bool _hideAllOf
+        {
+            get
+            {
+                if (_anyOfCount > 0 || _anyOfClassCount > 0 || _allOfClassCount > 0 || _killAll)
+                {
+                    _allOf = new List<CharacterTemplate>();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private bool _hideAnyOfClass
+        {
+            get
+            {
+                if (_anyOfCount > 0 || _allOfCount > 0 || _allOfClassCount > 0 || _killAll)
+                {
+                    _anyOfClass = new List<CharacterClass>();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private bool _hideAllOfClass
+        {
+            get
+            {
+                if (_allOfCount > 0 || _anyOfClassCount > 0 || _anyOfCount > 0 || _killAll)
+                {
+                    _allOfClass = new List<CharacterClass>();
+                    return true;
+                }
+                return false;
+            }
+        }
+#endregion 
+
+        public bool KillAll => _killAll;
+
+        public List<CharacterTemplate> AnyOf => _anyOf;
+        public List<CharacterTemplate> AllOf => _allOf;
+        public List<CharacterClass> AnyOfClass => _anyOfClass;
+        public List<CharacterClass> AllOfClass => _allOfClass;
+
+        #region API
+        public bool HaveEnemiesKilledConditionsBeenMet(BattleDataModel battleDataModel)
+        {
+            if (_killAll) 
+            {
+                return AreAllEnemiesKilled(battleDataModel); // this condition supersedes the others so we can return early if condition is met.
+            }
+
+            if (_allOfCount > 0)
+            {
+                if (AreAnyEnemiesInTheAllOfListStillAlive(battleDataModel))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            if (_allOfClassCount > 0)
+            {
+                if (AreAnyEnemiesInTheAllOfClassListStillAlive(battleDataModel))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+
+            if (_anyOfCount > 0)
+            {
+                if (HaveNoEnemiesInTheAnyOfListBeenKilled(battleDataModel))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            if (_anyOfClassCount > 0)
+            {
+                if (HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(battleDataModel))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+
+            return true;
+        }
+
+        #endregion
+
+        #region Utilities
+        private bool AreAllEnemiesKilled(BattleDataModel battleDataModel)
+        {
+            bool allDead = true;
+            foreach (Character character in battleDataModel.EnemyBattlersList)
+            {
+                if (!character.HealthSystem.IsDead)
+                {
+                    allDead = false;
+                }
+            }
+
+            return allDead;
+        }
+
+        private bool AreAnyEnemiesInTheAllOfListStillAlive(BattleDataModel battleDataModel)
+        {
+            foreach (CharacterTemplate characterTemplate in _allOf) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
+            {
+                foreach (Character character in battleDataModel.EnemyBattlersList)
+                {
+                    if (characterTemplate.UID.Equals(character.CharacterTemplate.UID))
+                    {
+                        if (!character.HealthSystem.IsDead)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool AreAnyEnemiesInTheAllOfClassListStillAlive(BattleDataModel battleDataModel)
+        {
+            foreach (CharacterClass characterClass in _allOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
+            {
+                foreach (Character character in battleDataModel.EnemyBattlersList)
+                {
+                    if (characterClass.UID.Equals(character.CharacterClass.UID))
+                    {
+                        if (!character.HealthSystem.IsDead)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        private bool HaveNoEnemiesInTheAnyOfListBeenKilled(BattleDataModel battleDataModel)
+        {
+            foreach (CharacterTemplate characterTemplate in _anyOf)
+            {
+                foreach (Character character in battleDataModel.EnemyBattlersList)
+                {
+                    if (characterTemplate.UID.Equals(character.CharacterTemplate.UID))
+                    {
+                        if (character.HealthSystem.IsDead)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        private bool HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(BattleDataModel battleDataModel)
+        {
+            foreach (CharacterClass characterClass in _anyOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
+            {
+                foreach (Character character in battleDataModel.EnemyBattlersList)
+                {
+                    if (characterClass.Equals(character.CharacterClass))
+                    {
+                        if (character.HealthSystem.IsDead)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (_killAll)
+            {
+                _anyOf = null;
+                _allOf = null;
+                _anyOfClass = null;
+                _allOfClass = null;
+            }
+        }
+#endif
+
+        #endregion
+    }
+}

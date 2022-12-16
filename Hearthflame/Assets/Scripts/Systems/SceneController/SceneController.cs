@@ -7,7 +7,7 @@ using GramophoneUtils.Utilities;
 [CreateAssetMenu(fileName = "Scene Controller", menuName = "Systems/Scene Controller")]
 public class SceneController : ScriptableObjectThatCanRunCoroutines
 {
-	private string _transitionTargetNameCache;
+	private TransitionObject _cachedTransitionObject;
 
 	public IEnumerator ChangeSceneCoroutine(string destinationScene)
 	{
@@ -22,31 +22,30 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
         }
     }
 
-	public void ChangeScene(SceneConnectionObject sceneConnectionObject)
+	public void ChangeScene(TransitionObject transitionObject)
 	{
-		string destinationScene = GetDestinationSceneName(sceneConnectionObject);
         ServiceLocator.Instance.SavingSystem.SaveOnSceneChange();
-        CacheTransitionTriggerTargetName(sceneConnectionObject.TriggerName);
-        StartCoroutine(ChangeSceneCoroutine(destinationScene));
+        CacheTransitionObject(transitionObject);
+        StartCoroutine(ChangeSceneCoroutine(transitionObject.DestinationSceneName));
     }
 
-	public void CacheTransitionTriggerTargetName(string triggerName)
+	public void CacheTransitionObject(TransitionObject transitionObject)
 	{
-		_transitionTargetNameCache = triggerName;
+		_cachedTransitionObject = transitionObject;
 	}
 
-	public string GetCachedTransitionTriggerTargetName()
-	{
-		return _transitionTargetNameCache;
-	}
+    public TransitionObject CachedTransitionObject()
+    {
+        return _cachedTransitionObject;
+    }
 
-	public void SetPlayerPositionOnSceneChange(AsyncOperation obj = null)
+    public void SetPlayerPositionOnSceneChange(AsyncOperation obj = null)
 	{
 		Transform targetTransform = null;
 		TransitionTrigger[] transitionTriggers = GameManager.FindObjectsOfType<TransitionTrigger>();
 		foreach (TransitionTrigger trigger in transitionTriggers)
 		{
-			if (trigger.OriginTransition == GetCachedTransitionTriggerTargetName())
+			if (trigger.TransitionObject == CachedTransitionObject())
 			{
 				targetTransform = trigger.EntryPoint;
 			}
@@ -56,7 +55,10 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
 			GameObject.FindGameObjectsWithTag("Player")[0].gameObject.transform.position = targetTransform.position;
 		}
 		if (obj != null)
-			obj.completed -= SetPlayerPositionOnSceneChange;
+		{
+            obj.completed -= SetPlayerPositionOnSceneChange;
+        }
+			
 	}
 
     public void LoadSceneStateOnSceneChange(AsyncOperation obj = null) // at the moment, this isn't getting called
@@ -72,11 +74,11 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
 	/// If the connection object's scene 1 is the active scene, then the destination is scene 2.
 	/// Vice versa.
 	/// </summary>
-	/// <param name="sceneConnectionObject"></param>
+	/// <param name="transitionObject"></param>
 	/// <returns></returns>
-	private string GetDestinationSceneName(SceneConnectionObject sceneConnectionObject)
+	public string GetDestinationSceneName(TransitionObject transitionObject)
 	{
-		return sceneConnectionObject.Scene1Name.Equals(GetActiveSceneName()) ? sceneConnectionObject.Scene2Name : sceneConnectionObject.Scene1Name;
+		return transitionObject.Scene1Name.Equals(GetActiveSceneName()) ? transitionObject.Scene2Name : transitionObject.Scene1Name;
 	}
 
     public string GetActiveSceneName()
