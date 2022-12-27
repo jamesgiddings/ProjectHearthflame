@@ -1,10 +1,6 @@
-using GramophoneUtils.Maps;
 using GramophoneUtils.SavingLoading;
-using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -16,7 +12,7 @@ public class TransitionTrigger : MonoBehaviour, ISaveable
 	[SerializeField] private Transform entryPoint;
 
 	[SerializeField] private float sizeX = 5;
-	[SerializeField] private float sizeY = 5;
+	[SerializeField] private float sizeY = 15;
 
 	[SerializeField] private bool deactivateOnTrigger;
 

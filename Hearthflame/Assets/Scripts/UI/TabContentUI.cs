@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;

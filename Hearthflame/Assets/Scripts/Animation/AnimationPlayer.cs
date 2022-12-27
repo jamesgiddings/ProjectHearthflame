@@ -2,6 +2,7 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using GramophoneUtils.Characters;
 
 public class AnimationPlayer
 {
@@ -10,7 +11,7 @@ public class AnimationPlayer
     private Character character;
     private BattleManager battleManager;
 
-    private BattlerDisplayUI battlerDisplayUI;
+    private CharacterGameObjectManager _characterGameObjectManager;
 
     private string attack;
     private string idle;
@@ -25,17 +26,16 @@ public class AnimationPlayer
         this.character = character;
         Debug.Log(this.character.Name + " is getting a new Animation player");
         this.battleManager = battleManager;
-        this.battlerDisplayUI = ServiceLocator.Instance.BattlerDisplayUI;
-        Debug.Log("The number when in the constructor for animation player is: " + ServiceLocator.Instance.BattlerDisplayUI.CharacterBattlerDictionary.Count);
+        _characterGameObjectManager = ServiceLocator.Instance.CharacterGameObjectManager;
         animator = battler.gameObject.GetComponent<Animator>();
 
         SetAnimationDirections();
 
         Debug.Log(character.Name + " animator: " + (animator == null));
-        Debug.Log(character.Name + "'s animControllerPath: " + character.CharacterTemplate.AnimControllerPath);
+        Debug.Log(character.Name + "'s animControllerPath: " + character.AnimControllerPath);
         if (!character.IsPlayer)
         {
-            RuntimeAnimatorController runtimeAnimatorController = Resources.Load(character.CharacterTemplate.AnimControllerLoadPath) as RuntimeAnimatorController;
+            RuntimeAnimatorController runtimeAnimatorController = Resources.Load(character.AnimControllerLoadPath) as RuntimeAnimatorController;
             animator.runtimeAnimatorController = runtimeAnimatorController;
         }
 
@@ -66,7 +66,7 @@ public class AnimationPlayer
             walkToAttack = "Walk_Left";
             walkFromAttack = "Walk_Right";
             cast = "Cast_Left";
-            shoot = "Shoot_Left";
+            shoot = "Cast_Left";
         }
     }
 
@@ -80,7 +80,7 @@ public class AnimationPlayer
                 foreach (Character target in targets)
                 {
                     Vector3 currentPos = battler.gameObject.transform.position;
-                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 0.65f);
+                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, _characterGameObjectManager.CharacterBattlerDictionary[target].transform.position, 0.65f);
                     sequence.AppendCallback(() => animator.Play(walkToAttack));
                     sequence.Append(battler.gameObject.transform.DOMove(targetPos, 0.4f));
                     sequence.AppendCallback(() => animator.Play(attack));
@@ -111,7 +111,7 @@ public class AnimationPlayer
                     projectile.transform.localPosition = new Vector3(0, 0, 0);
                     projectile.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
-                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 0.85f);
+                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, _characterGameObjectManager.CharacterBattlerDictionary[target].transform.position, 0.85f);
 
                     Vector2 dir = targetPos - battler.transform.position;
 
@@ -152,7 +152,7 @@ public class AnimationPlayer
                     physicalProjectile.transform.localPosition = new Vector3(0, 0, 0);
                     //physicalProjectile.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
-                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, battlerDisplayUI.CharacterBattlerDictionary[target].transform.position, 0.85f);
+                    Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, _characterGameObjectManager.CharacterBattlerDictionary[target].transform.position, 0.85f);
 
                     Vector2 dir = targetPos - battler.transform.position;
 
@@ -188,8 +188,6 @@ public class AnimationPlayer
                     buffDebuffSequence.AppendCallback(() => animator.Play(idle));
                     buffDebuffSequence.AppendInterval(0.1f).WaitForCompletion();
                     buffDebuffSequence.AppendCallback(() => skill.DoNextBit(targets, character));
-
-
 
                     buffDebuffSequence.Insert(0.5f, effectSpriteRenderer.DOFade(0f, 0.8f).From());
                     buffDebuffSequence.AppendInterval(0.1f);

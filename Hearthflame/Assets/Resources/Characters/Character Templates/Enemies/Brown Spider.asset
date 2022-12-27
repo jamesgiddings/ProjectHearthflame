@@ -15,12 +15,17 @@ MonoBehaviour:
   UID: 0c93bf4a-0aa4-4199-aedf-571d3f3de39a
   name: Spider
   sprite: {fileID: 2650242802887809672, guid: ef600f3966e5faa42b67c3c85b8b62c2, type: 3}
-  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  description: 
   characterClass: {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
-  color: {r: 0.2830189, g: 0.11574102, b: 0.0146849435, a: 0}
-  brain: {fileID: 11400000, guid: 9b260bc88a777364a9f5b8d8d14caf33, type: 2}
+  stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   startsUnlocked: 0
   startingLevel: 0
+  characterPrefab: {fileID: 0}
+  brain: {fileID: 11400000, guid: 9b260bc88a777364a9f5b8d8d14caf33, type: 2}
+  portrait: {fileID: 0}
+  color: {r: 0.2830189, g: 0.11574102, b: 0.0146849435, a: 0}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/SpiderAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/SpiderAnimationController
   idle_Left: {fileID: 7400000, guid: 22a3f6da81caa3a49b05be51b39a4da5, type: 2}
   idle_Right: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
   idle_Up: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
@@ -43,5 +48,3 @@ MonoBehaviour:
   shoot_Right: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
   shoot_Up: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
   shoot_Down: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
-  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/SpiderAnimationController.asset
-  AnimControllerLoadPath: Animations/AnimationControllers/SpiderAnimationController

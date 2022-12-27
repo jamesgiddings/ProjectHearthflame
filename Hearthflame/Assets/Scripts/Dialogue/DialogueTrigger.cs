@@ -46,7 +46,7 @@ public class DialogueTrigger : MonoBehaviour, ISaveable
 	{
 		if (other.tag == "Player")
 		{
-			PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
+			CharacterGameObjectManager player = other.gameObject.GetComponent<CharacterGameObjectManager>();
 
 			dialogueUI.StartDialogue();
 			Debug.Log("dialogueUI should have started");

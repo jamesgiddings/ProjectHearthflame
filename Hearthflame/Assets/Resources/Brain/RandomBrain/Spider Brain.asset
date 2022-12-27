@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 52d0a82a-dcd9-4288-bc86-5ae2712dc6dd
   name: 
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   characterClass: {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
   resourceDatabase: {fileID: 11400000, guid: 11aa0921c584c1144943a308681aad2c, type: 2}
   randomSkills:
   - randomObject: {fileID: 11400000, guid: d61e5ffa15053d14f85b08d96646593f, type: 2}
-    weighting: 0.1
-  - randomObject: {fileID: 11400000, guid: 93261eef68b6e6345b7e1d3ca1b2f031, type: 2}
     weighting: 1
+  - randomObject: {fileID: 11400000, guid: 93261eef68b6e6345b7e1d3ca1b2f031, type: 2}
+    weighting: 0.3
   randomTargets:
   - randomObject: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
     weighting: 1

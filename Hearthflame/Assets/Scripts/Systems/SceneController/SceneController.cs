@@ -11,6 +11,8 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
 
 	public IEnumerator ChangeSceneCoroutine(string destinationScene)
 	{
+        yield return new WaitUntil(() => ServiceLocator.Instance.LoadingStateManager.State == ServiceLocator.Instance.UnloadingOldScene); // Wait until the fade has completed
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationScene, LoadSceneMode.Single);
 
         asyncLoad.completed += (AsyncOperation) => { LoadSceneStateOnSceneChange(); };
@@ -24,7 +26,12 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
 
 	public void ChangeScene(TransitionObject transitionObject)
 	{
-        ServiceLocator.Instance.SavingSystem.SaveOnSceneChange();
+		if (ServiceLocator.Instance != null)
+		{
+            ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.LoadingState);
+            ServiceLocator.Instance.SavingSystem.SaveOnSceneChange();
+        }
+        
         CacheTransitionObject(transitionObject);
         StartCoroutine(ChangeSceneCoroutine(transitionObject.DestinationSceneName));
     }
@@ -48,11 +55,12 @@ public class SceneController : ScriptableObjectThatCanRunCoroutines
 			if (trigger.TransitionObject == CachedTransitionObject())
 			{
 				targetTransform = trigger.EntryPoint;
+				break;
 			}
 		}
 		if (targetTransform != null)
 		{
-			GameObject.FindGameObjectsWithTag("Player")[0].gameObject.transform.position = targetTransform.position;
+			ServiceLocator.Instance.CharacterGameObjectManager.SetPlayerStartTransform(targetTransform);
 		}
 		if (obj != null)
 		{

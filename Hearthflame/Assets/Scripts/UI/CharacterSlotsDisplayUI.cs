@@ -1,30 +1,34 @@
+using GramophoneUtils.Characters;
+using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterSlotsDisplayUI : MonoBehaviour
 {
-	private PlayerModel _playerModel;
+	private CharacterModel _characterModel;
 
 	private Character[] frontCharacters;
 	private Character[] rearCharacters;
 
-	public PlayerModel PlayerModel { get { return _playerModel; } set { _playerModel = value; } }
+	public CharacterModel CharacterModel { get { return _characterModel; } set { _characterModel = value; } }
 
+	[SerializeField] public CharacterOrderEvent OnCharacterOrderChanged;
 	[SerializeField] Transform FrontCharacterSlotsHolder; 
 	[SerializeField] Transform RearCharacterSlotsHolder;
 
 	private void OnEnable()
 	{
-        _playerModel = ServiceLocator.Instance.PlayerModel;
+        _characterModel = ServiceLocator.Instance.CharacterModel;
         frontCharacters = new Character[3];
 		rearCharacters = new Character[3];
 
 		int frontIndex = 0;
 		int rearIndex = 0;
 
-		IEnumerable<Character> query = _playerModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
+		IEnumerable<Character> query = _characterModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
 		List<Character> unlockedCharacters = new List<Character>();
 		foreach (Character character in query)
 		{
@@ -53,8 +57,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (frontCharacters[i] != null)
 			{
-				CharacterTemplate frontCharacter = UnityEngine.Object.Instantiate(frontCharacters[i].CharacterTemplate) as CharacterTemplate;
-				//frontCharacter.PartyCharacter = frontCharacters[i];
+				Character frontCharacter = frontCharacters[i];
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = frontCharacter;
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -69,8 +72,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (rearCharacters[i] != null)
 			{
-				CharacterTemplate rearCharacter = UnityEngine.Object.Instantiate(rearCharacters[i].CharacterTemplate) as CharacterTemplate;
-				//rearCharacter.PartyCharacter = rearCharacters[i];
+				Character rearCharacter = rearCharacters[i];
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = rearCharacter;
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -84,7 +86,8 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 
 	private void OnDisable()
 	{
-		UnregisterOnCharacterSlotChangedEvents();
+		UpdateCharacterSlots();
+        UnregisterOnCharacterSlotChangedEvents();
 	}
 
 	private void RegisterOnCharacterSlotChangedEvents()
@@ -115,14 +118,12 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 
 	private void UpdateCharacterSlots()
 	{
-		Debug.LogWarning("Broken");
 		for (int i = 0; i < FrontCharacterSlotsHolder.childCount; i++)
 		{
 			if (FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				CharacterTemplate characterTemplate = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as CharacterTemplate;
-				//characterTemplate.IsRear = false;
-				//characterTemplate.PartyCharacter.Character.IsRear = false;
+				Character character = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as Character;
+                character.IsRear = false;
 			}
 		}
 
@@ -130,10 +131,12 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				CharacterTemplate characterTemplate = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as CharacterTemplate;
-				//characterTemplate.PartyCharacter.IsRear = true;
-				//characterTemplate.PartyCharacter.Character.IsRear = true;
+				Character character = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as Character;
+				character.IsRear = true;
 			}
 		}
-	}
+
+		OnCharacterOrderChanged.Raise(new CharacterOrder(frontCharacters, rearCharacters));
+
+    }
 }

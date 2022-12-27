@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/UI.unity
     guid: 6729b1710bb64d04780e74376776e273
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Slums/Slums.unity
     guid: c5c903f30927ef9499d1471db17dd322
+  - enabled: 1
+    path: Assets/Scenes/The Charmed Forest/The_Charmed_Forest.unity
+    guid: 83c9d7d58dcd6384b8167c17d217b010
   - enabled: 1
     path: Assets/Scenes/Aydys' House/Aydys' Basement.unity
     guid: 9d93311aa3a2a9c44b26cd4b70c06581
@@ -26,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ship2/Ship2.unity
     guid: 9babb028e4371ab44b0caeb4caa1583e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Aydys' House/Aydys' Living Room.unity
     guid: bace961e36c2494408b7f698eba5dd11
   - enabled: 0
@@ -41,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShipCorridor/ShipCorridor.unity
     guid: a4122b4b0e810204c94677f2c6a4aefc
+  - enabled: 1
+    path: Assets/Scenes/Main Menu/Main_Menu.unity
+    guid: 5a267bfc8dddaad4a9119c37e6fb51c9
   m_configObjects: {}

@@ -23,7 +23,7 @@ namespace GramophoneUtils.Items
 
         protected override void TriggerAction()
         {
-            var itemContainer = ServiceLocator.Instance.PlayerModel.PartyInventory;
+            var itemContainer = ServiceLocator.Instance.CharacterModel.PartyInventory;
 
             foreach (ItemSlot itemSlot in itemSlots)
             {

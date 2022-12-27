@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacterPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 470861782177315537, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7869760677871207265, guid: f6f8be75ff5a8314bb1e4f9400629c16,
         type: 3}
       propertyPath: m_Enabled

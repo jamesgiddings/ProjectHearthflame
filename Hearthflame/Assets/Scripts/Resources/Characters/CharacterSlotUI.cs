@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
@@ -52,7 +53,7 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
             resourceIconImage.sprite = SlotResource.Sprite;
             if (isRear)
 			{
-                CharacterTemplate character = SlotResource as CharacterTemplate;
+                Character character = SlotResource as Character;
 			}
         }
 

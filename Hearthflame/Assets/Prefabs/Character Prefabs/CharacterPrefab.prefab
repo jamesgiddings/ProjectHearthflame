@@ -140,6 +140,7 @@ MonoBehaviour:
   modifierPanel: {fileID: 6843162117360429672}
   statModifierImagePrefab: {fileID: 5893657797447581522}
   battlerStatsCanvas: {fileID: 3015946351841652286}
+  _onCharacterDeath: {fileID: 11400000, guid: bcf232d9ebeae0f4bbd1bdb9cb9c80a1, type: 2}
   healthSliderYOffset: 1.23
 --- !u!114 &8141992778145925218
 MonoBehaviour:
@@ -292,7 +293,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470861782177315537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c684f9e6cdeb62542a271d19537b54db, type: 3}
   m_Name: 
@@ -717,7 +718,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -5940080768935645475, guid: 1e924bdef19c0424bbd9b9c69961608a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -762,7 +763,8 @@ MonoBehaviour:
   m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1e924bdef19c0424bbd9b9c69961608a, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5940080768935645475, guid: 1e924bdef19c0424bbd9b9c69961608a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -828,7 +830,7 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3611194854823798761}
   m_maskType: 0
 --- !u!210 &5132003129933169477

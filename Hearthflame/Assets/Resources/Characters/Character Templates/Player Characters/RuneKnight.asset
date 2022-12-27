@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 7f1f8f69-20c0-4734-89f1-4ab74f2b045b
   name: The Rune Knight
-  sprite: {fileID: 1817346964837690549, guid: 500dcb414b35b9f419d1ce95c35ac867, type: 3}
+  _sprite: {fileID: 0}
   description: 
   characterClass: {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
   stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}

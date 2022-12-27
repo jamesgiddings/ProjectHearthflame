@@ -1,4 +1,5 @@
 ﻿using GramophoneUtils.Stats; // for testing
+using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEditor; // for testing
@@ -9,10 +10,11 @@ namespace GramophoneUtils.Items.Containers
 {
     public class InventorySlotUI : ResourceSlotUI, IDropHandler
     {
-        [SerializeField] protected Inventory inventory;
+        
+        [ShowInInspector] protected Inventory inventory;
         [SerializeField] private TextMeshProUGUI itemQuantityText;
 
-        private Character character;
+        private GramophoneUtils.Characters.Character character;
 
         public override Resource SlotResource
         {
@@ -22,11 +24,11 @@ namespace GramophoneUtils.Items.Containers
 
 		public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
         public Inventory Inventory => inventory;
-        public Character Character => character;
+        public GramophoneUtils.Characters.Character Character => character;
 
-        public virtual void Initialise(Character character, ItemDestroyer itemDestroyer)
+        public virtual void Initialise(GramophoneUtils.Characters.Character character, ItemDestroyer itemDestroyer)
 		{
-            this.inventory = character.PartyInventory;
+            inventory = character.PartyInventory;
             this.character = character;
             InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();
             if (dragHandler != null)

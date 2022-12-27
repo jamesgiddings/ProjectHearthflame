@@ -34,10 +34,10 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
 
         public void Trigger(GameObject other)
         {
-            var playerBehaviour = other.GetComponent<PlayerBehaviour>();
+            var playerBehaviour = other.GetComponent<CharacterGameObjectManager>();
             if (playerBehaviour == null) { return; }
 
-            var otherItemContainer = ServiceLocator.Instance.PlayerModel.PartyInventory;
+            var otherItemContainer = ServiceLocator.Instance.CharacterModel.PartyInventory;
 
             VendorData vendorData = new VendorData(otherItemContainer, itemContainer);
             Debug.Log(vendorData.BuyingItemContainer.GetAllUniqueItems().Count + " + " + vendorData.SellingItemContainer.GetAllUniqueItems().Count);

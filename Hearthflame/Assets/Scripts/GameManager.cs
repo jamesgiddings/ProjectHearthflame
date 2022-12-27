@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, ISaveable
 {
 	[SerializeField] private ResourceDatabase resourceDatabase;
-	[SerializeField] private StatSystemConstants statSystemConstants;
 
 	private Vector2 movement = Vector2.zero;
 	private Vector2 movementNormalized = Vector2.zero;
@@ -14,7 +13,6 @@ public class GameManager : MonoBehaviour, ISaveable
     private static GameManager instance;
 
 	public ResourceDatabase ResourceDatabase => resourceDatabase; // getter
-	public StatSystemConstants StatSystemConstants => statSystemConstants; // getter
 
 	public Action<Scene> OnSceneLoaded;
 
@@ -56,16 +54,22 @@ public class GameManager : MonoBehaviour, ISaveable
 
 	private void Awake()
 	{
+		Debug.Log("1");
 		instance = this;
 		SceneManager.sceneLoaded += SceneLoaded;
 	}
 
-/*    private void Update() // Todo this can probably go no the states are monobehaviours
-    {
-		ServiceLocator.Instance.GameStateManager.Update();
-    }*/
+	private void Start()
+	{
+        Debug.Log("3");
+    }
 
-    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+	/*    private void Update() // Todo this can probably go no the states are monobehaviours
+		{
+			ServiceLocator.Instance.GameStateManager.Update();
+		}*/
+
+	private void SceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		OnSceneLoaded?.Invoke(scene);
 	}

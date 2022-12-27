@@ -23,31 +23,15 @@ public class RearBattleUI : MonoBehaviour
         }
     }
 
-
+    private void OnDisable()
+    {
+        for (int i = 0; i < _sliderParent.childCount; i++)
+        {
+            Destroy(_sliderParent.GetChild(i).gameObject);
+        }
+    }
 
     #endregion
-
-    /*    [SerializeField] TextMeshProUGUI statLabel;
-        [SerializeField] TextMeshProUGUI statValue;
-        [SerializeField] Character character;
-
-        private void OnEnable()
-        {
-            character.HealthSystem.OnHealthChanged += UpdateHealthDisplay;
-            UpdateHealthDisplay();
-        }
-
-        public void Initialise(Character character)
-        {
-            this.character = character;
-        }
-
-        public void UpdateHealthDisplay(int value = 0)
-        {
-            statLabel.text = "Health: ";
-            statValue.text = character.HealthSystem.CurrentHealth.ToString() + "/" + character.HealthSystem.MaxHealth.ToString();
-        }*/
-
 
     #region Utilities
 

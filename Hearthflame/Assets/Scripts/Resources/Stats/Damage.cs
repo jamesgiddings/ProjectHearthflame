@@ -13,6 +13,6 @@ public struct Damage
 		this.Value = Math.Abs(value);
 		this.Element = element;
 		this.AttackType = attackType;
-		this.source = null;
+		this.source = source;
 	}
 }

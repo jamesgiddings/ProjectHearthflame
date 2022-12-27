@@ -14,10 +14,10 @@ namespace GramophoneUtils.Stats
 		public class LevelChangedEventArgs : EventArgs
 		{
 			public int Level { get; set; }
-			public Character Character { get; set; }
+			public GramophoneUtils.Characters.Character Character { get; set; }
 		}
 
-		private readonly Character character;
+		private readonly GramophoneUtils.Characters.Character character;
 		private int level;
 		private int experience;
 		private LevelSystemAnimated levelSystemAnimated;
@@ -27,7 +27,7 @@ namespace GramophoneUtils.Stats
 
 		public LevelSystemAnimated LevelSystemAnimated => levelSystemAnimated; //getter
 
-		public LevelSystem(CharacterClass characterClass, Character character, int level = 0, int experience = 0)
+		public LevelSystem(CharacterClass characterClass, GramophoneUtils.Characters.Character character, int level = 0, int experience = 0)
 		{
 			this.level = level;
 			this.experience = experience;

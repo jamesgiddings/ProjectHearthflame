@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 566d1de405a4fb94083e409db5ef034b
   name: Speed Potion
-  sprite: {fileID: 21300000, guid: 1029e0f27ea15ec4ab57f97c0452c0eb, type: 3}
+  _sprite: {fileID: 21300000, guid: 1029e0f27ea15ec4ab57f97c0452c0eb, type: 3}
   description: Gotta go fast
   rarity: {fileID: 11400000, guid: 0b671ad502b4b754184dc8291f37253b, type: 2}
   sellPrice: 5
   maxStack: 3
   useText: Does something, maybe?
+  consumableEffectBlueprints: []
+  classRestrictions: []

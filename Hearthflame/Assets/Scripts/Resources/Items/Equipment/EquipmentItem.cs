@@ -40,7 +40,7 @@ namespace GramophoneUtils.Items.Containers
 			return effects;
 		}
 
-		public void Equip(Character character)
+		public void Equip(GramophoneUtils.Characters.Character character)
 		{
 			foreach (StatModifier weaponEffect in equipmentEffects)
 			{
@@ -82,7 +82,7 @@ namespace GramophoneUtils.Items.Containers
 			return builder.ToString();
 		}
 
-		public void Unequip(Character character)
+		public void Unequip(GramophoneUtils.Characters.Character character)
 		{
 			foreach (KeyValuePair<IStatType, Stat> entry in character.StatSystem.Stats)
 			{
@@ -90,7 +90,7 @@ namespace GramophoneUtils.Items.Containers
 			}
 		}
 
-		public override void Use(Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI)
 		{
 			character.EquipmentInventory.TryToEquip(this, inventorySlotUI);
 		}

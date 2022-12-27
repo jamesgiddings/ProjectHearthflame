@@ -1,7 +1,9 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,9 +21,9 @@ public class CharacterContainer : ICharacterContainer
     {
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].CharacterTemplate != null)
+            if (characterSlots[i].Character != null)
             {
-                if (characterSlots[i].CharacterTemplate == characterSlot.CharacterTemplate)
+                if (characterSlots[i].Character == characterSlot.Character)
                 {
                     int slotRemainingSpace = characterSlots[i].MaxStack - characterSlots[i].Quantity;
 
@@ -47,7 +49,7 @@ public class CharacterContainer : ICharacterContainer
 
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].CharacterTemplate == null)
+            if (characterSlots[i].Character == null)
             {
                 if (characterSlot.Quantity <= characterSlot.MaxStack)
                 {
@@ -75,9 +77,9 @@ public class CharacterContainer : ICharacterContainer
     {
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].CharacterTemplate != null)
+            if (characterSlots[i].Character != null)
             {
-                if (characterSlots[i].CharacterTemplate == characterSlot.CharacterTemplate)
+                if (characterSlots[i].Character == characterSlot.Character)
                 {
                     if (characterSlots[i].Quantity < characterSlot.Quantity)
                     {
@@ -105,17 +107,17 @@ public class CharacterContainer : ICharacterContainer
         }
     }
 
-    public List<CharacterTemplate> GetAllUniqueCharacters()
+    public List<Character> GetAllUniqueCharacters()
     {
-        List<CharacterTemplate> characters = new List<CharacterTemplate>();
+        List<Character> characters = new List<Character>();
 
         for (int i = 0; i < characterSlots.Length; i++)
         {
-            if (characterSlots[i].CharacterTemplate == null) { continue; }
+            if (characterSlots[i].Character == null) { continue; }
 
-            if (characters.Contains(characterSlots[i].CharacterTemplate)) { continue; }
+            if (characters.Contains(characterSlots[i].Character)) { continue; }
 
-            characters.Add(characterSlots[i].CharacterTemplate);
+            characters.Add(characterSlots[i].Character);
         }
 
         return characters;
@@ -137,9 +139,9 @@ public class CharacterContainer : ICharacterContainer
 
         if (firstSlot.Equals(secondSlot)) { return; }
 
-        if (secondSlot.CharacterTemplate != null && firstSlot.CharacterTemplate != null)
+        if (secondSlot.Character != null && firstSlot.Character != null)
         {
-            if (firstSlot.CharacterTemplate == secondSlot.CharacterTemplate)
+            if (firstSlot.Character == secondSlot.Character)
             {
                 int secondSlotRemainingSpace = secondSlot.MaxStack - secondSlot.Quantity;
 
@@ -162,12 +164,12 @@ public class CharacterContainer : ICharacterContainer
         onCharactersUpdated.Raise();
     }
 
-    public virtual bool HasCharacter(CharacterTemplate character)
+    public virtual bool HasCharacter(Character character)
     {
         foreach (CharacterSlot characterSlot in characterSlots)
         {
-            if (characterSlot.CharacterTemplate == null) { continue; }
-            if (characterSlot.CharacterTemplate != character) { continue; }
+            if (characterSlot.Character == null) { continue; }
+            if (characterSlot.Character != character) { continue; }
 
             return true;
         }
@@ -175,14 +177,14 @@ public class CharacterContainer : ICharacterContainer
         return false;
     }
 
-    public virtual int GetTotalQuantity(CharacterTemplate character)
+    public virtual int GetTotalQuantity(Character character)
     {
         int totalCount = 0;
 
         foreach (CharacterSlot characterSlot in characterSlots)
         {
-            if (characterSlot.CharacterTemplate == null) { continue; }
-            if (characterSlot.CharacterTemplate != character) { continue; }
+            if (characterSlot.Character == null) { continue; }
+            if (characterSlot.Character != character) { continue; }
 
             totalCount += characterSlot.Quantity;
         }

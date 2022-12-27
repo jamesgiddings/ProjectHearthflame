@@ -4,6 +4,7 @@ using GramophoneUtils.Stats;
 using Dialogue;
 using UnityEditor;
 using UnityEngine;
+using GramophoneUtils.Characters;
 
 #if UNITY_EDITOR
 public class ResourceFactory
@@ -16,8 +17,8 @@ public class ResourceFactory
             case "ConsumableItem":
                 resource = Create<ConsumableItem>();
                 return resource;
-            case "CharacterTemplate":
-                resource = Create<CharacterTemplate>();
+            case "Character":
+                resource = Create<Character>();
                 return resource;
             case "CharacterClass":
                 resource = Create<CharacterClass>();

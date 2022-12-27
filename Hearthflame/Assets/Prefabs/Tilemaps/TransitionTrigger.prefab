@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 33791030165520103}
   - component: {fileID: 2502652770315721705}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EntryPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4052211145977353013}
   - component: {fileID: -4969264850740030942}
   - component: {fileID: 3836867059737956791}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TransitionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21252918, y: 0.09812069}
+  m_Offset: {x: 0.21252918, y: 0.22818708}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -106,7 +106,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.013586, y: 0.99129295}
+  m_Size: {x: 1.013586, y: 11.4616}
   m_EdgeRadius: 0
 --- !u!114 &4052211145977353013
 MonoBehaviour:

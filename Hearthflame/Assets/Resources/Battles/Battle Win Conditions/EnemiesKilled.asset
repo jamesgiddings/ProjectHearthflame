@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f44474a3b6bca04ebe8f9084680e491, type: 3}
   m_Name: EnemiesKilled
   m_EditorClassIdentifier: 
-  _killAll: 0
-  _anyOf:
-  - {fileID: 11400000, guid: ebaca1e67576ba54b8c8f1727cb51795, type: 2}
+  _killAll: 1
+  _anyOf: []
   _allOf: []
   _anyOfClass: []
   _allOfClass: []

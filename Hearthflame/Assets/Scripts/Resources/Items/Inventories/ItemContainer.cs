@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,14 @@ namespace GramophoneUtils.Items.Containers
         public ItemSlot[] ItemSlots { get => itemSlots; }
         public int Money { get { return money; } set { money = value; } }
 
-        public ItemSlot GetSlotByIndex(int index) => itemSlots[index];
+        public ItemSlot GetSlotByIndex(int index) 
+        {
+            if (index < 0 || index >= itemSlots.Length)
+            {
+                throw new Exception(index + " is out of range for item container: " + this.ToString());
+            }
+            return itemSlots[index];
+        }
 
         public virtual ItemSlot AddItem(ItemSlot itemSlot)
         {

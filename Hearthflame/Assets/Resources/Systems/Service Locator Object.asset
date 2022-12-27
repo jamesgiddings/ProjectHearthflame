@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f41656f1c342f54b9d56eac3211fbbc, type: 3}
   m_Name: Service Locator Object
   m_EditorClassIdentifier: 
+  _constants: {fileID: 11400000, guid: 300e5fa0b82768242846d1bfdcf2f674, type: 2}
+  _statSystemConstants: {fileID: 11400000, guid: 7f85578c166af3444bd078b9ed9aea58,
+    type: 2}
   _sceneController: {fileID: 11400000, guid: 3e23e9dd57c746f46918ce02dbf93bea, type: 2}

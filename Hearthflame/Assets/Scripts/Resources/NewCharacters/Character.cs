@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace GramophoneUtils.Actors
+namespace GramophoneUtils.Characters
 {
     [CreateAssetMenu(fileName = "New Character", menuName = "Characters/Character")]
     public class Character : InstantiableResource<Character>, IInstantiable<Character>
@@ -39,11 +39,10 @@ namespace GramophoneUtils.Actors
         [VerticalGroup("General/Split/Left")]
         [SerializeField] private Color _color;
 
-        private readonly StatSystem statSystem;
-        private readonly HealthSystem healthSystem;
-        private readonly LevelSystem levelSystem;
-        private readonly CharacterClass characterClass;
-        private readonly SkillSystem skillSystem;
+        private StatSystem statSystem;
+        private HealthSystem healthSystem;
+        private LevelSystem levelSystem;
+        private SkillSystem skillSystem;
         private EquipmentInventory _equipmentInventory;
 
         private bool isRear;
@@ -51,29 +50,26 @@ namespace GramophoneUtils.Actors
         private bool isUnlocked;
         private bool isCurrentActor = false;
 
-        private readonly Inventory partyInventory;
-
-        private readonly CharacterTemplate characterTemplate;
-
-        private readonly Brain brain;
+        private Inventory _partyInventory;
 
         private Queue<BattlerNotificationImpl> notificationQueue = new Queue<BattlerNotificationImpl>();
 
-        public readonly Dictionary<string, IStatType> StatTypeStringRefDictionary;
-        public string Name => name; //getter
-        public StatSystem StatSystem => statSystem; //getter
+        public Dictionary<string, IStatType> StatTypeStringRefDictionary;
         public HealthSystem HealthSystem => healthSystem; //getter
         public LevelSystem LevelSystem => levelSystem; //getter
-        public CharacterClass CharacterClass => characterClass; //getter
+        public CharacterClass CharacterClass => _characterClass; //getter
         public SkillSystem SkillSystem => skillSystem; //getter
         public EquipmentInventory EquipmentInventory => _equipmentInventory; //getter
+
+        [ShowInInspector]
+        /*public StatSystem StatSystem { get { return statSystem; } set { statSystem = value; } }*/
+        public StatSystem StatSystem => statSystem;
         public bool IsPlayer { get { return isPlayer; } set { isPlayer = value; } }
         public bool IsRear { get { return isRear; } set { isRear = value; } }
         public bool IsUnlocked { get { return isUnlocked; } set { isUnlocked = value; } }
         public bool IsCurrentActor { get { return isCurrentActor; } }
-        public Inventory PartyInventory => partyInventory; //getter
-        public CharacterTemplate CharacterTemplate => characterTemplate; //getter
-        public Brain Brain => brain; //getter
+        public Inventory PartyInventory { get { return _partyInventory; } set { _partyInventory = value; } } // TODO hack, find a better place to set the partyInventory 
+        public Brain Brain => _brain; //getter
         public Character() { } //constructor 1
 
 #if UNITY_EDITOR
@@ -145,12 +141,11 @@ namespace GramophoneUtils.Actors
         public AnimationClip Cast_Down => _cast_Down;
         public AnimationClip Die => _die;
         public StatTemplate Stats => _stats; //getter
-        //public CharacterClass CharacterClass => _characterClass; //getter
         public Color Color => _color; //getter
         //public Brain Brain => _brain; // getter
         public bool StartsUnlocked => _startsUnlocked; // getter
         public string Description => _description; // getter
-        public GameObject CharacterObject => _characterPrefab; // getter
+        public GameObject CharacterPrefab => _characterPrefab; // getter
         public int StartingLevel => _startingLevel; // getter
 
         public Sprite Portrait => _portrait; // getter
@@ -159,8 +154,9 @@ namespace GramophoneUtils.Actors
 
         #region Callbacks
 
+
 #if UNITY_EDITOR
-        public void OnValidate()
+        private void OnValidate()
         {
             AnimControllerPath = "Assets/Resources/Animations/AnimationControllers/" + Name + "AnimationController.asset";
             AnimControllerLoadPath = "Animations/AnimationControllers/" + Name + "AnimationController";
@@ -179,6 +175,19 @@ namespace GramophoneUtils.Actors
                 }
             }
         }
+
+        private void OnDisable()
+        {
+            if (healthSystem != null)
+            {
+                healthSystem.OnHealthChangedNotification = null;
+            }
+            if (statSystem != null)
+            {
+                statSystem.OnStatSystemNotification = null;
+            }            
+        }
+
 #endif
 
         #endregion
@@ -216,11 +225,14 @@ namespace GramophoneUtils.Actors
             }
         }*/
 
-        public override Character Instance(Character instantiable)
+        public override Character Instance()
         {
-            throw new NotImplementedException();
-        }
+            Character instancedCharacter = CreateInstance<Character>();
 
+            InitialiseInstancedCharacter(instancedCharacter);
+
+            return instancedCharacter;
+        }
 
         public BattlerNotificationImpl DequeueBattlerNoticiation()
         {
@@ -301,6 +313,41 @@ namespace GramophoneUtils.Actors
         #endregion
 
         #region Utilities
+
+        private void InitialiseInstancedCharacter(Character instancedCharacter)
+        {
+            instancedCharacter.name = this.name;
+            instancedCharacter._sprite = this._sprite;
+            instancedCharacter._portrait = this._portrait;
+            instancedCharacter._stats = this._stats;
+            instancedCharacter.statSystem = new StatSystem(instancedCharacter);
+            instancedCharacter.StatTypeStringRefDictionary = instancedCharacter.StatSystem.StatTypeStringRefDictionary;
+            instancedCharacter._characterClass = this._characterClass;
+            instancedCharacter.healthSystem = new HealthSystem(this._characterClass);
+
+            instancedCharacter.healthSystem.OnHealthChangedNotification += instancedCharacter.EnqueueBattlerNotification; // TODO UNSUBSCRIBE
+            instancedCharacter.statSystem.OnStatSystemNotification += instancedCharacter.EnqueueBattlerNotification; // TODO UNSUBSCRIBE
+
+            // subscribe to OnDeathEvent here? also, inject a reference to Character if needed
+
+            instancedCharacter.skillSystem = new SkillSystem(instancedCharacter);
+            instancedCharacter.skillSystem.Initialise();
+            instancedCharacter.levelSystem = new LevelSystem(instancedCharacter._characterClass, instancedCharacter);
+            instancedCharacter.levelSystem.OnLevelChanged += _characterClass.LevelUp; // TODO UNSUBSCRIBE
+            instancedCharacter._equipmentInventory = new EquipmentInventory(instancedCharacter);
+
+            instancedCharacter._brain = this.Brain;
+            instancedCharacter.IsUnlocked = this.StartsUnlocked;
+            
+            if (instancedCharacter._brain != null)
+            {
+                instancedCharacter._brain.Initialise(instancedCharacter);
+            }
+
+            instancedCharacter._characterPrefab = this._characterPrefab;
+            instancedCharacter.AnimControllerLoadPath = this.AnimControllerLoadPath;
+            instancedCharacter.AnimControllerPath = this.AnimControllerPath;
+        }
 
         private void EnqueueBattlerNotification(BattlerNotificationImpl notification)
         {

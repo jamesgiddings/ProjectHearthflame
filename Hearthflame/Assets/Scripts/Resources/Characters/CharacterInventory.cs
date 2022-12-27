@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.SavingLoading;
@@ -10,7 +11,8 @@ using UnityEngine.Events;
 
 public class CharacterInventory : CharacterContainer, ISaveable
 {
-	public CharacterInventory(VoidEvent onCharactersUpdated, int size = 8)
+    #region API
+    public CharacterInventory(VoidEvent onCharactersUpdated, int size = 8)
 	{
 		if (onCharactersUpdated != null)
 		{
@@ -18,15 +20,18 @@ public class CharacterInventory : CharacterContainer, ISaveable
 		}
 		characterSlots = new CharacterSlot[size];
 	}
+
+	#endregion
+
 	#region SavingLoading
 	public object CaptureState()
 	{
 		List<CharacterSlotUI.ResourceSlotSaveData> tempList = new List<CharacterSlotUI.ResourceSlotSaveData>();
 		for (int i = 0; i < CharacterSlots.Length; i++)
 		{
-			if (CharacterSlots[i].CharacterTemplate != null)
+			if (CharacterSlots[i].Character != null)
 			{
-				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].CharacterTemplate.UID, GetSlotByIndex(i).Quantity));
+				tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(CharacterSlots[i].Character.UID, GetSlotByIndex(i).Quantity));
 			}
 			else
 			{
@@ -49,7 +54,7 @@ public class CharacterInventory : CharacterContainer, ISaveable
 			if (saveData.characterSlotSaveData[i].resourceUID != null)
 			{
 				Resource resource = GameManager.Instance.ResourceDatabase.GetResourceByUID(saveData.characterSlotSaveData[i].resourceUID);
-				CharacterSlots[i].CharacterTemplate = (CharacterTemplate)resource;
+				CharacterSlots[i].Character = (Character)resource;
 				CharacterSlots[i].Quantity = saveData.characterSlotSaveData[i].resourceQuantity;
 			}
 		}

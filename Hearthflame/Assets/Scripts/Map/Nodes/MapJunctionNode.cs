@@ -1,8 +1,5 @@
 using Sirenix.Utilities;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 namespace GramophoneUtils.Maps
@@ -29,13 +26,6 @@ namespace GramophoneUtils.Maps
         }
         #region Utilities
 
-#if UNITY_EDITOR
-
-        private void OnValidate()
-        {
-            //GetAvailableSceneNodes();
-        }
-
         private void GetAvailableSceneNodes()
         {
             HashSet<TransitionNode> connectedNodes = MapNodeParser.GetConnectedTransitionNodes(this);
@@ -43,6 +33,15 @@ namespace GramophoneUtils.Maps
             connectedNodes.ForEach((x) => x.RevealConnectedSceneNodes());
             //HashSet<SceneNodePathWrapper> connectedSceneNodes = MapNodeParser.GetConnectedSceneNodePaths(this);
         }
+
+#if UNITY_EDITOR
+
+        private void OnValidate()
+        {
+            //GetAvailableSceneNodes();
+        }
+
+
 #endif
 
         #endregion

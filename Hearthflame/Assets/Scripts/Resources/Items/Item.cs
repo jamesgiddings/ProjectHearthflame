@@ -14,6 +14,6 @@ namespace GramophoneUtils.Items
 
         public abstract string GetInfoDisplayText();
 
-        public abstract void Use(Character character, InventorySlotUI inventorySlotUI);
+        public abstract void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI);
     }
 }

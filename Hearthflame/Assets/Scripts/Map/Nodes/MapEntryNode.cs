@@ -49,6 +49,7 @@ namespace GramophoneUtils.Maps
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
-    }
 #endif
+    }
+
 }

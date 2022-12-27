@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Brown Spider
+  m_EditorClassIdentifier: 
+  UID: 
+  name: BrownSpider
+  _sprite: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
+    type: 3}
+  _description: 
+  _characterClass: {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
+  _stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 0
+  _startingLevel: 0
+  _characterPrefab: {fileID: 5730661112063783411, guid: f06bec351d7f8a546872e599170d794f,
+    type: 3}
+  _brain: {fileID: 11400000, guid: 9b260bc88a777364a9f5b8d8d14caf33, type: 2}
+  _portrait: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
+    type: 3}
+  _color: {r: 0.2830189, g: 0.13659446, b: 0.07342472, a: 1}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/BrownSpiderAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/BrownSpiderAnimationController
+  _idle_Left: {fileID: 7400000, guid: 22a3f6da81caa3a49b05be51b39a4da5, type: 2}
+  _idle_Right: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
+  _idle_Up: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
+  _idle_Down: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
+  _walk_Left: {fileID: 7400000, guid: fe1b998da7e59d0479004067cfdc3145, type: 2}
+  _walk_Right: {fileID: 7400000, guid: f3d71cd414d31bf4890ea6942e35188e, type: 2}
+  _walk_Up: {fileID: 7400000, guid: f3d71cd414d31bf4890ea6942e35188e, type: 2}
+  _walk_Down: {fileID: 7400000, guid: f3d71cd414d31bf4890ea6942e35188e, type: 2}
+  _attack_Left: {fileID: 7400000, guid: 8ff2167760eba5742bebe4cbcc7eac86, type: 2}
+  _attack_Right: {fileID: 7400000, guid: c4eea6a90f5373c40a7696d63afad26b, type: 2}
+  _attack_Up: {fileID: 7400000, guid: 8ff2167760eba5742bebe4cbcc7eac86, type: 2}
+  _attack_Down: {fileID: 7400000, guid: c4eea6a90f5373c40a7696d63afad26b, type: 2}
+  _cast_Left: {fileID: 7400000, guid: e5187a342db974648b2702dfbe561c72, type: 2}
+  _cast_Right: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
+  _cast_Up: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
+  _cast_Down: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
+  _die: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
+  _dead: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
+  _shoot_Left: {fileID: 7400000, guid: e5187a342db974648b2702dfbe561c72, type: 2}
+  _shoot_Right: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
+  _shoot_Up: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}
+  _shoot_Down: {fileID: 7400000, guid: 9f788efefcea8ce4faaf06720a205ef1, type: 2}

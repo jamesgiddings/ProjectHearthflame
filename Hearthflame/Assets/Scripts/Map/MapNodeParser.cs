@@ -1,3 +1,4 @@
+using Dialogue;
 using GramophoneUtils.Maps;
 using GramophoneUtils.SavingLoading;
 using Sirenix.OdinInspector;
@@ -29,7 +30,15 @@ public class MapNodeParser : SerializedMonoBehaviour, ISaveable
         /*        _mapGraph.Restart();
                 ParseCurrentNode();*/
         TransitionObject cachedTransitionObject = ServiceLocator.Instance.ServiceLocatorObject.SceneController.CachedTransitionObject();
-        _mapGraph.Current = _mapGraph.TransitionObjectToNodeDictionary[cachedTransitionObject];
+        if (cachedTransitionObject == null)
+        {
+            _mapGraph.Current = _mapGraph.nodes.Find(x => x is MapEntryNode) as MapEntryNode;
+        } 
+        else
+        {
+            _mapGraph.Current = _mapGraph.TransitionObjectToNodeDictionary[cachedTransitionObject];
+        }
+        
         _mapGraph.Current.Trigger();
     }
 

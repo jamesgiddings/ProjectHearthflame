@@ -784,7 +784,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9163752836250582257}
   - component: {fileID: 9163752836250582258}
-  - component: {fileID: 9163752836250582259}
   m_Layer: 5
   m_Name: MainInfo
   m_TagString: Untagged
@@ -827,26 +826,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyCode: 99
   objectToToggle: {fileID: 9163752837241233224}
---- !u!114 &9163752836250582259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9163752836250582256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f1a65e038adea4d8608358f4ae220e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tabParent: {fileID: 9163752836601507152}
-  tabContentParent: {fileID: 9163752836784342894}
-  tabPrefab: {fileID: 2346733222643748916, guid: d69a1eaddbd2bce46a2eed7e0d2cd1fb,
-    type: 3}
-  tabContentPrefab: {fileID: 6107600461722824021, guid: 88c177c3fa788aa41bbc7e176b37bd35,
-    type: 3}
-  itemDestroyer: {fileID: 0}
-  playerModel: {fileID: 0}
 --- !u!1 &9163752836276063891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,6 +2337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9163752837241233225}
+  - component: {fileID: 5263942652644901551}
   m_Layer: 5
   m_Name: MainInfoParent
   m_TagString: Untagged
@@ -2387,6 +2367,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5263942652644901551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163752837241233224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f1a65e038adea4d8608358f4ae220e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabParent: {fileID: 9163752836601507152}
+  tabContentParent: {fileID: 9163752836784342894}
+  tabPrefab: {fileID: 2346733222643748916, guid: d69a1eaddbd2bce46a2eed7e0d2cd1fb,
+    type: 3}
+  tabContentPrefab: {fileID: 6107600461722824021, guid: 88c177c3fa788aa41bbc7e176b37bd35,
+    type: 3}
+  itemDestroyer: {fileID: 0}
 --- !u!1 &9163752837286644147
 GameObject:
   m_ObjectHideFlags: 0

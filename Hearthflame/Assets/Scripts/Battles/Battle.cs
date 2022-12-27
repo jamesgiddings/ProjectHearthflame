@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using GramophoneUtils.Battles;
+using GramophoneUtils.Characters;
 
 [CreateAssetMenu(fileName = "New Battle", menuName = "Battles/Battle")]
 public class Battle : Data
 {
+    #region Attributes/Fields
+
     [Header("Battle Trigger")]
     [SerializeField] private bool _deactivateOnComplete;
 
@@ -25,7 +28,7 @@ public class Battle : Data
     [TableList(ShowIndexLabels = true)]
     [SerializeField] private ItemSlot[] _itemSlots;
     [TableList(DrawScrollView = true, MaxScrollViewHeight = 200, MinScrollViewHeight = 100)]
-    [SerializeField] private CharacterTemplate[] _battleCharacterTemplates;
+    [SerializeField] private Character[] _battleCharacterBlueprints;
 
 	[SerializeField] private BattleWinConditions _battleWinConditions;
 
@@ -44,10 +47,6 @@ public class Battle : Data
 
 	public bool DeactivateOnComplete => _deactivateOnComplete;
 
-    private List<Character> _battleCharacters;
-
-	public CharacterTemplate[] BattleCharacterTemplates => _battleCharacterTemplates; // getter
-
     public BattleWinConditions BattleWinConditions => _battleWinConditions;
 
     public BattleRear BattleRear => _battleRear;
@@ -58,25 +57,30 @@ public class Battle : Data
 	{
 		get
 		{
-			if (_battleCharacters != null) { return _battleCharacters; }
-			_battleCharacters = InstanceCharacters();
-			return _battleCharacters;
+			return InstanceCharacters();
 		}
 	}
 
-	public List<Character> InstanceCharacters()
-	{
-		_battleCharacters = new List<Character>();
-		for (int i = 0; i < BattleCharacterTemplates.Length; i++)
-		{
-			if (_battleCharacterTemplates[i] != null)
-			{
-				_battleCharacters.Add(new Character(_battleCharacterTemplates[i], _enemyInventory));
-				_battleCharacters[i].IsPlayer = false;
-			}
-		}
-		return _battleCharacters;
-	}
+    #endregion
+
+    #region Utilities
+
+    private List<Character> InstanceCharacters()
+    {
+        List<Character> _battleCharacters = new List<Character>();
+        for (int i = 0; i < _battleCharacterBlueprints.Length; i++)
+        {
+            if (_battleCharacterBlueprints[i] != null)
+            {
+                _battleCharacters.Add(_battleCharacterBlueprints[i].Instance());
+                _battleCharacters[i].IsPlayer = false;
+                _battleCharacters[i].PartyInventory = _enemyInventory;
+            }
+        }
+        return _battleCharacters;
+    }
+
+    #endregion
 
 
 }

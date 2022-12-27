@@ -59,5 +59,12 @@ public class TransitionObject : ScriptableObject
         _originSceneName = _scene1Name == _destinationSceneName ? _originSceneName : _destinationSceneName;
         ServiceLocator.Instance.ServiceLocatorObject.SceneController.ChangeScene(this);
     }
+
+    public void ChangeScene(ServiceLocatorObject serviceLocatorObject)
+    {
+        _destinationSceneName = serviceLocatorObject.SceneController.GetDestinationSceneName(this);
+        _originSceneName = _scene1Name == _destinationSceneName ? _originSceneName : _destinationSceneName;
+        serviceLocatorObject.SceneController.ChangeScene(this);
+    }
     #endregion
 }

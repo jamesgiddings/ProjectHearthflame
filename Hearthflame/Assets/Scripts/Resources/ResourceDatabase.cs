@@ -30,14 +30,27 @@ public class ResourceDatabase : ScriptableObject
 		}
 	}
 
+#if UNITY_EDITOR
+
 	protected virtual void OnValidate()
 	{
 		foreach (Resource resource in resources)
 		{
-			AddResource(resource);
+			if (resource != null)
+			{
+                AddResource(resource);
+            } 
+			else
+			{
+				resources.Remove(resource);
+				Debug.LogError("Found a null resource. It has been removed from the resource databse source list. OnValidate needs to run again.");
+				return;
+			}
 		}
 		RepopulateResourcesListFromDatabase();
 	}
+
+#endif
 
 	public void RepopulateResourcesListFromDatabase()
     {

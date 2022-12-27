@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInstantiable<T>
 {
-    T Instance(T instantiable);
+    T Instance();
 }

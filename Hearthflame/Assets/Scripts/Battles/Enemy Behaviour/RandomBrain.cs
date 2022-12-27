@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,4 +1,5 @@
 using GramophoneUtils.Battles;
+using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace GramophoneUtils.Battles
         public bool IsFrontLost(BattleDataModel battleDataModel)
         {
             bool allDead = true;
-            foreach (Character character in battleDataModel.PlayerBattlersList)
+            foreach (Character character in ServiceLocator.Instance.CharacterModel.FrontPlayerCharactersList)
             {
                 if (!character.HealthSystem.IsDead)
                 {

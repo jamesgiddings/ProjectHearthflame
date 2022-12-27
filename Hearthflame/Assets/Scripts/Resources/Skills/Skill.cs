@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Items.Hotbars;
 using GramophoneUtils.Stats;
 using System;

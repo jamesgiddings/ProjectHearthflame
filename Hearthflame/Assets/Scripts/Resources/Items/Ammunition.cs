@@ -23,7 +23,7 @@ namespace GramophoneUtils.Items
             return builder.ToString();
         }
 
-		public override void Use(Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI)
 		{
 			throw new System.NotImplementedException();
 		}

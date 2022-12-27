@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using GramophoneUtils.Stats;
+using GramophoneUtils.Characters;
 
 public class LevelDisplayUI : MonoBehaviour
 {

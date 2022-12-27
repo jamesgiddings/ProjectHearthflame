@@ -7,6 +7,7 @@ using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Events.CustomEvents;
 using Dialogue;
 using GramophoneUtils.Items;
+using GramophoneUtils.Characters;
 
 public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
 {
@@ -45,13 +46,13 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     private AiTabs aiTab;
 
     private ItemTabs itemTab;
-    
-    
+
+
 
     string[] toolbarStrings = { "Characters", "Items", "Dialogue", "Battle", "Skills", "Stats", "AI" };
     string[] aiToolbarStrings = { "Random Brain", "Sequence Brain" };
     string[] itemToolbarStrings = { "Consumable", "Equipment" };
-    CharacterTemplate characterTemplate = null;
+    Character character = null;
     EquipmentItem equipmentItem = null;
     string path = "";
 
@@ -117,9 +118,9 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
     {
         GUILayout.BeginVertical();
         scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Height(currentScrollViewHeight));
-        
+
         CreateResourcesEditor();
-        
+
         GUILayout.EndScrollView();
 
         ResizeScrollView();
@@ -148,10 +149,10 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
         switch (tab)
         {
             case Tabs.Characters:
-                
+
                 DisplayTabContent(typeof(CharacterTemplate));
-                
-                
+
+
                 //if (characterTemplate != null)
                 //    if (GUILayout.Button("Add Character to database", GUILayout.ExpandWidth(false)))
                 //    {
@@ -218,58 +219,58 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
                 }
                 break;
 
-                //if (equipmentItem != null)
-                //    if (GUILayout.Button("Add EquipmentItem to database", GUILayout.ExpandWidth(false)))
-                //    {
-                //        _resourceDatabaseObject.AddResource(equipmentItem);
-                //        _resourceDatabaseObject.RepopulateResourcesListFromDatabase();
-                //        EditorUtility.SetDirty(_resourceDatabaseObject);
-                //        if (equipmentItem.Name != "")
-                //        {
-                //            string extension = string.Format("Assets/Resources/{0}.asset", equipmentItem.Name);
-                //            Debug.Log("extension: " + extension);
-                //            Debug.Log(path);
+            //if (equipmentItem != null)
+            //    if (GUILayout.Button("Add EquipmentItem to database", GUILayout.ExpandWidth(false)))
+            //    {
+            //        _resourceDatabaseObject.AddResource(equipmentItem);
+            //        _resourceDatabaseObject.RepopulateResourcesListFromDatabase();
+            //        EditorUtility.SetDirty(_resourceDatabaseObject);
+            //        if (equipmentItem.Name != "")
+            //        {
+            //            string extension = string.Format("Assets/Resources/{0}.asset", equipmentItem.Name);
+            //            Debug.Log("extension: " + extension);
+            //            Debug.Log(path);
 
-                //            Debug.Log(AssetDatabase.GenerateUniqueAssetPath(extension));
-                //            string AssetRenameErrorMessage = AssetDatabase.RenameAsset(path, AssetDatabase.GenerateUniqueAssetPath(equipmentItem.Name));
-                //            if (AssetRenameErrorMessage != string.Empty)
-                //            {
-                //                Debug.LogError(AssetRenameErrorMessage);
-                //            }
-                //        }
-                //        Repaint();
-                //    }
-                //Editor equipmentEditor = Editor.CreateEditor(equipmentItem);
-                //if (equipmentItem != null)
-                //{
-                //    equipmentEditor.OnInspectorGUI();
-                //}
-                //if (equipmentItem == null)
-                //{
-                //    if (GUILayout.Button("New Equipment Item", GUILayout.ExpandWidth(false)))
-                //    {
-                //        equipmentItem = ScriptableObject.CreateInstance(typeof(EquipmentItem)) as EquipmentItem;
+            //            Debug.Log(AssetDatabase.GenerateUniqueAssetPath(extension));
+            //            string AssetRenameErrorMessage = AssetDatabase.RenameAsset(path, AssetDatabase.GenerateUniqueAssetPath(equipmentItem.Name));
+            //            if (AssetRenameErrorMessage != string.Empty)
+            //            {
+            //                Debug.LogError(AssetRenameErrorMessage);
+            //            }
+            //        }
+            //        Repaint();
+            //    }
+            //Editor equipmentEditor = Editor.CreateEditor(equipmentItem);
+            //if (equipmentItem != null)
+            //{
+            //    equipmentEditor.OnInspectorGUI();
+            //}
+            //if (equipmentItem == null)
+            //{
+            //    if (GUILayout.Button("New Equipment Item", GUILayout.ExpandWidth(false)))
+            //    {
+            //        equipmentItem = ScriptableObject.CreateInstance(typeof(EquipmentItem)) as EquipmentItem;
 
-                //        path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/EquipmentItem.asset");
+            //        path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/EquipmentItem.asset");
 
-                //        AssetDatabase.CreateAsset(equipmentItem, path);
-                //        AssetDatabase.SaveAssets();
-                //        AssetDatabase.Refresh();
+            //        AssetDatabase.CreateAsset(equipmentItem, path);
+            //        AssetDatabase.SaveAssets();
+            //        AssetDatabase.Refresh();
 
-                //        CharacterTemplate loadedAsset = (CharacterTemplate)AssetDatabase.LoadAssetAtPath<CharacterTemplate>(path);
-                //        //testDatabase.CharacterTemplates.Add(loadedAsset);
+            //        CharacterTemplate loadedAsset = (CharacterTemplate)AssetDatabase.LoadAssetAtPath<CharacterTemplate>(path);
+            //        //testDatabase.CharacterTemplates.Add(loadedAsset);
 
-                //        newlyCreatedTemplate = EditorGUILayout.ObjectField(newlyCreatedTemplate, typeof(CharacterTemplate), true);
-                //        //EditorUtility.FocusProjectWindow();
+            //        newlyCreatedTemplate = EditorGUILayout.ObjectField(newlyCreatedTemplate, typeof(CharacterTemplate), true);
+            //        //EditorUtility.FocusProjectWindow();
 
-                //        //Selection.activeObject = example;
-                //    }
-                //}
+            //        //Selection.activeObject = example;
+            //    }
+            //}
             case Tabs.Dialogue:
                 DisplayTabContent(typeof(DialogueGraph));
                 break;
             case Tabs.AI:
-                
+
                 aiTab = (AiTabs)GUILayout.Toolbar((int)aiTab, aiToolbarStrings);
                 switch (aiTab)
                 {

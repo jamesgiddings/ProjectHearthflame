@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System;
@@ -12,8 +13,8 @@ namespace GramophoneUtils.Battles
     {
         [SerializeField] private bool _killAll;
 
-        [SerializeField, HideIf("_hideAnyOf"), Tooltip("Only one of these lists should be used.")] private List<CharacterTemplate> _anyOf;
-        [SerializeField, HideIf("_hideAllOf"), Tooltip("Only one of these lists should be used.")] private List<CharacterTemplate> _allOf;
+        [SerializeField, HideIf("_hideAnyOf"), Tooltip("Only one of these lists should be used.")] private List<Character> _anyOf;
+        [SerializeField, HideIf("_hideAllOf"), Tooltip("Only one of these lists should be used.")] private List<Character> _allOf;
         [SerializeField, HideIf("_hideAnyOfClass"), Tooltip("Only one of these lists should be used.")] private List<CharacterClass> _anyOfClass;
         [SerializeField, HideIf("_hideAllOfClass"), Tooltip("Only one of these lists should be used.")] private List<CharacterClass> _allOfClass;
        
@@ -63,7 +64,7 @@ namespace GramophoneUtils.Battles
             {
                 if (_allOfCount > 0 || _anyOfClassCount > 0 || _allOfClassCount > 0 || _killAll)
                 {
-                    _anyOf = new List<CharacterTemplate>();
+                    _anyOf = new List<Character>();
                     return true;
                 }
                 
@@ -77,7 +78,7 @@ namespace GramophoneUtils.Battles
             {
                 if (_anyOfCount > 0 || _anyOfClassCount > 0 || _allOfClassCount > 0 || _killAll)
                 {
-                    _allOf = new List<CharacterTemplate>();
+                    _allOf = new List<Character>();
                     return true;
                 }
                 return false;
@@ -113,22 +114,24 @@ namespace GramophoneUtils.Battles
 
         public bool KillAll => _killAll;
 
-        public List<CharacterTemplate> AnyOf => _anyOf;
-        public List<CharacterTemplate> AllOf => _allOf;
+        public List<Character> AnyOf => _anyOf;
+        public List<Character> AllOf => _allOf;
         public List<CharacterClass> AnyOfClass => _anyOfClass;
         public List<CharacterClass> AllOfClass => _allOfClass;
 
         #region API
         public bool HaveEnemiesKilledConditionsBeenMet(BattleDataModel battleDataModel)
         {
+            CharacterModel characterModel = ServiceLocator.Instance.CharacterModel;
+
             if (_killAll) 
             {
-                return AreAllEnemiesKilled(battleDataModel); // this condition supersedes the others so we can return early if condition is met.
+                return AreAllEnemiesKilled(characterModel); // this condition supersedes the others so we can return early if condition is met.
             }
 
             if (_allOfCount > 0)
             {
-                if (AreAnyEnemiesInTheAllOfListStillAlive(battleDataModel))
+                if (AreAnyEnemiesInTheAllOfListStillAlive(characterModel))
                 {
                     return false;
                 }
@@ -140,7 +143,7 @@ namespace GramophoneUtils.Battles
 
             if (_allOfClassCount > 0)
             {
-                if (AreAnyEnemiesInTheAllOfClassListStillAlive(battleDataModel))
+                if (AreAnyEnemiesInTheAllOfClassListStillAlive(characterModel))
                 {
                     return false;
                 }
@@ -153,7 +156,7 @@ namespace GramophoneUtils.Battles
 
             if (_anyOfCount > 0)
             {
-                if (HaveNoEnemiesInTheAnyOfListBeenKilled(battleDataModel))
+                if (HaveNoEnemiesInTheAnyOfListBeenKilled(characterModel))
                 {
                     return false;
                 }
@@ -165,7 +168,7 @@ namespace GramophoneUtils.Battles
 
             if (_anyOfClassCount > 0)
             {
-                if (HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(battleDataModel))
+                if (HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(characterModel))
                 {
                     return false;
                 }
@@ -182,10 +185,10 @@ namespace GramophoneUtils.Battles
         #endregion
 
         #region Utilities
-        private bool AreAllEnemiesKilled(BattleDataModel battleDataModel)
+        private bool AreAllEnemiesKilled(CharacterModel characterModel)
         {
             bool allDead = true;
-            foreach (Character character in battleDataModel.EnemyBattlersList)
+            foreach (Character character in characterModel.FrontEnemyCharactersList)
             {
                 if (!character.HealthSystem.IsDead)
                 {
@@ -196,15 +199,15 @@ namespace GramophoneUtils.Battles
             return allDead;
         }
 
-        private bool AreAnyEnemiesInTheAllOfListStillAlive(BattleDataModel battleDataModel)
+        private bool AreAnyEnemiesInTheAllOfListStillAlive(CharacterModel characterModel)
         {
-            foreach (CharacterTemplate characterTemplate in _allOf) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
+            foreach (Character character in _allOf) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character character in battleDataModel.EnemyBattlersList)
+                foreach (Character enemyCharacter in characterModel.FrontEnemyCharactersList)
                 {
-                    if (characterTemplate.UID.Equals(character.CharacterTemplate.UID))
+                    if (character.UID.Equals(enemyCharacter.UID))
                     {
-                        if (!character.HealthSystem.IsDead)
+                        if (!enemyCharacter.HealthSystem.IsDead)
                         {
                             return true;
                         }
@@ -214,11 +217,11 @@ namespace GramophoneUtils.Battles
             return false;
         }
 
-        private bool AreAnyEnemiesInTheAllOfClassListStillAlive(BattleDataModel battleDataModel)
+        private bool AreAnyEnemiesInTheAllOfClassListStillAlive(CharacterModel characterModel)
         {
             foreach (CharacterClass characterClass in _allOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character character in battleDataModel.EnemyBattlersList)
+                foreach (Character character in characterModel.FrontEnemyCharactersList)
                 {
                     if (characterClass.UID.Equals(character.CharacterClass.UID))
                     {
@@ -233,15 +236,15 @@ namespace GramophoneUtils.Battles
         }
 
 
-        private bool HaveNoEnemiesInTheAnyOfListBeenKilled(BattleDataModel battleDataModel)
+        private bool HaveNoEnemiesInTheAnyOfListBeenKilled(CharacterModel characterModel)
         {
-            foreach (CharacterTemplate characterTemplate in _anyOf)
+            foreach (Character character in _anyOf)
             {
-                foreach (Character character in battleDataModel.EnemyBattlersList)
+                foreach (Character enemyCharacter in characterModel.FrontEnemyCharactersList)
                 {
-                    if (characterTemplate.UID.Equals(character.CharacterTemplate.UID))
+                    if (character.UID.Equals(enemyCharacter.UID))
                     {
-                        if (character.HealthSystem.IsDead)
+                        if (enemyCharacter.HealthSystem.IsDead)
                         {
                             return false;
                         }
@@ -251,11 +254,11 @@ namespace GramophoneUtils.Battles
             return true;
         }
 
-        private bool HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(BattleDataModel battleDataModel)
+        private bool HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(CharacterModel characterModel)
         {
             foreach (CharacterClass characterClass in _anyOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character character in battleDataModel.EnemyBattlersList)
+                foreach (Character character in characterModel.FrontEnemyCharactersList)
                 {
                     if (characterClass.Equals(character.CharacterClass))
                     {

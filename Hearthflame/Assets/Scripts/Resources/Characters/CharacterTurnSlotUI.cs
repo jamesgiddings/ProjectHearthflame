@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GramophoneUtils.Stats;
+using GramophoneUtils.Characters;
 
 public class CharacterTurnSlotUI : CharacterSlotUI
 {

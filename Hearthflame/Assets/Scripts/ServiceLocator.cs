@@ -10,8 +10,8 @@ public class ServiceLocator : MonoBehaviour
     [SerializeField] private DialogueUI _dialogueUI;
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Camera _mainCamera;
-    [SerializeField] private PlayerBehaviour _playerBehaviour;
-    [SerializeField] private PlayerModel _playerModel;
+    [SerializeField] private CharacterGameObjectManager _characterGameObjectManager;
+    [SerializeField] private CharacterModel _characterModel;
     [SerializeField] private SavingSystem _savingSystem;
     [SerializeField] private UIServiceLocator _uiServiceLocator;
     [SerializeField] private GameManager _gameManager;
@@ -23,6 +23,10 @@ public class ServiceLocator : MonoBehaviour
     [SerializeField] private State _explorationState;
     [BoxGroup("States/Game States")]
     [SerializeField] private State _battleState;
+    [BoxGroup("States/Game States")]
+    [SerializeField] private State _loadingState;
+    [BoxGroup("States/Game States")]
+    [SerializeField] private State _menuState;
     [BoxGroup("States/Battle States")]
     [SerializeField] private StateManager _battleStateManager;
     [BoxGroup("States/Battle States")]
@@ -37,6 +41,16 @@ public class ServiceLocator : MonoBehaviour
     [SerializeField] private State _playerTurnState;
     [BoxGroup("States/Battle States")]
     [SerializeField] private State _enemyTurnState;
+    [BoxGroup("States/Loading States")]
+    [SerializeField] private StateManager _loadingStateManager;
+    [BoxGroup("States/Loading States")]
+    [SerializeField] private State _waitForFade;
+    [BoxGroup("States/Loading States")]
+    [SerializeField] private State _unloadingOldScene;
+    [BoxGroup("States/Loading States")]
+    [SerializeField] private State _gameObjectCallbacksState;
+    [BoxGroup("States/Loading States")]
+    [SerializeField] private State _initiatingCharactersState;
 
     [BoxGroup("Battles")]
     [SerializeField] private BattlerDisplayUI _battlerDisplayUI;
@@ -47,22 +61,21 @@ public class ServiceLocator : MonoBehaviour
     [BoxGroup("Battles")]
     [SerializeField] private TargetManager _targetManager;
 
-
-
-
     public static ServiceLocator Instance { get; private set; }
     public ServiceLocatorObject ServiceLocatorObject => _serviceLocatorObject;
     public UIServiceLocator UIServiceLocator => _uiServiceLocator;
     public DialogueUI DialogueUI => _dialogueUI;
     public EventSystem EventSystem => _eventSystem;
     public Camera MainCamera => _mainCamera;
-    public PlayerBehaviour PlayerBehaviour => _playerBehaviour;
-    public PlayerModel PlayerModel => _playerModel;
+    public CharacterGameObjectManager CharacterGameObjectManager => _characterGameObjectManager;
+    public CharacterModel CharacterModel => _characterModel;
     public SavingSystem SavingSystem => _savingSystem;
     public GameManager GameManager => _gameManager;
     public StateManager GameStateManager => _gameStateManager;
     public State BattleState => _battleState;
     public State ExplorationState => _explorationState;
+    public State LoadingState => _loadingState;
+    public State MenuState => _menuState;
     public StateManager BattleStateManager => _battleStateManager;
     public State BattleStartState => _battleStartState;
     public State BattleWonState => _battleWonState;
@@ -70,6 +83,11 @@ public class ServiceLocator : MonoBehaviour
     public State BattleOverState => _battleOverState;
     public State PlayerTurnState => _playerTurnState;
     public State EnemyTurnState => _enemyTurnState;
+    public StateManager LoadingStateManager => _loadingStateManager;
+    public State WaitForFade => _waitForFade;
+    public State UnloadingOldScene => _unloadingOldScene;
+    public State GameObjectCallbacksState => _gameObjectCallbacksState;
+    public State InstantiatingCharactersState => _initiatingCharactersState;
     public BattlerDisplayUI BattlerDisplayUI => _battlerDisplayUI;
     public BattleManager BattleManager => _battleManager;
     public BattleDataModel BattleDataModel => _battleDataModel;

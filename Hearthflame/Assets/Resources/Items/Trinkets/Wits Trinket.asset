@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 8455039229e877541b251fc70899281f
   name: Wits Trinket
-  sprite: {fileID: 21300000, guid: c2aa30053460aa740a49a7a1a4c02799, type: 3}
+  _sprite: {fileID: 21300000, guid: 073d3bc6631565b4fb3fde03c512b4d7, type: 3}
   description: A trinket that sharpens the wit of the bearer.
   rarity: {fileID: 11400000, guid: bd9a8eda009dbfb40984111ff5866cd8, type: 2}
   sellPrice: 1

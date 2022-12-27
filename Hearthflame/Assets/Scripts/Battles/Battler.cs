@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using GramophoneUtils.Characters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
+using Sirenix.OdinInspector;
+using GramophoneUtils.Events.CustomEvents;
 
 public class Battler : MonoBehaviour
 {
@@ -17,6 +20,7 @@ public class Battler : MonoBehaviour
     [SerializeField] private Transform modifierPanel;
     [SerializeField] private GameObject statModifierImagePrefab;
     [SerializeField] private Canvas battlerStatsCanvas;
+    [SerializeField] private CharacterEvent _onCharacterDeath;
 
     [SerializeField] private float healthSliderYOffset;
 
@@ -31,23 +35,40 @@ public class Battler : MonoBehaviour
 
     #region Callbacks
 
+    private void OnEnable()
+    {
+        if (ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState)
+        {
+            GetComponent<CharacterMovement>().enabled = true;
+        }
+    }
+
     private void OnDisable()
     {
         if (isInitialised) // TODO this is a hack
         {
-            battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
-            battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
+            ServiceLocator.Instance.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+            ServiceLocator.Instance.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
             character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
             character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
             character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
             character.HealthSystem.OnCharacterDeath -= KillCharacter;
             character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+            isInitialised = false;
         }
     }
 
     #endregion
 
     #region API
+
+    [Button]
+    public void TestIncrementHealth(int increment)
+    {
+        Debug.Log(increment);
+        Debug.Log(character.Name);
+        character.HealthSystem.IncrementCurrentHealth(increment);
+    }
 
     public void SetCharacterMovementIsLeader(int sortingGroupIndex)
     {
@@ -92,11 +113,11 @@ public class Battler : MonoBehaviour
         this.character = character;
         this.battleManager = battleManager;
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        this.spriteRenderer.sprite = character.CharacterTemplate.Sprite;
+        this.spriteRenderer.sprite = character.Sprite;
         this.animationPlayer = new AnimationPlayer(this, character, battleManager);
 
-        battleManager.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
-        battleManager.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
+        ServiceLocator.Instance.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
+        ServiceLocator.Instance.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged += UpdateHealthSlider;
         character.HealthSystem.OnHealthChangedNotification += DisplayFloatingTexts;
         character.StatSystem.OnStatSystemNotification += DisplayFloatingTexts;
@@ -186,13 +207,15 @@ public class Battler : MonoBehaviour
 
     public void Uninitialise()
     {
-        battleManager.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
-        battleManager.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
+        if (!isInitialised) { return; }
+        ServiceLocator.Instance.BattleDataModel.OnCurrentActorChanged -= UpdateCurrentActorHighlightState;
+        ServiceLocator.Instance.TargetManager.OnCurrentTargetsChanged -= UpdateTargetCursor;
         character.HealthSystem.OnHealthChanged -= UpdateHealthSlider;
         character.HealthSystem.OnHealthChangedNotification -= DisplayFloatingTexts;
         character.StatSystem.OnStatSystemNotification -= DisplayFloatingTexts;
         character.HealthSystem.OnCharacterDeath -= KillCharacter;
         character.SkillSystem.OnSkillUsed -= animationPlayer.DisplayAnimation;
+        isInitialised = false;
     }
 
     #endregion
@@ -215,6 +238,7 @@ public class Battler : MonoBehaviour
     {
         spriteRenderer.color = new Color32(255, 255, 225, 100); // greys out the characters image
         healthSlider.gameObject.SetActive(false);
+        _onCharacterDeath?.Raise(character);
     }
 
     #endregion

@@ -1,3 +1,5 @@
+using GramophoneUtils.Characters;
+using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,38 +10,57 @@ public class TurnOrderUI : MonoBehaviour
 
 	[SerializeField] private GameObject _characterTurnSlotPrefab;
 
-	private BattleManager _battleManager;
-	private CharacterInventory _characterInventory;
+	private CharacterModel _characterModel;
+	private BattleDataModel _battleDataModel;
 	private List<CharacterTurnSlotUI> _characterTurnSlotUIs;
 
-	public void Initialise(BattleManager battleManager) 
+    #region API
+
+    public void Initialise()
 	{
-		this._battleManager = battleManager;
-		this._characterInventory = battleManager.OrderedBattlersCharacterInventory;
-		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateTurnOrderUI;
+		_battleDataModel = ServiceLocator.Instance.BattleDataModel;
+		_characterModel = ServiceLocator.Instance.CharacterModel;
+    ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged += UpdateTurnOrderUI;
 
 		_characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
 
-		foreach (CharacterSlot characterSlot in _characterInventory.CharacterSlots)
+		foreach (Character character in _characterModel.AllFrontCharactersList)
 		{
-			CharacterTurnSlotUI characterTurnSlotUI = UnityEngine.Object.Instantiate(_characterTurnSlotPrefab, _characterSlotsHolder).GetComponent<CharacterTurnSlotUI>();
-			characterTurnSlotUI.CharacterInventory = _characterInventory;
+			CharacterTurnSlotUI characterTurnSlotUI = Instantiate(_characterTurnSlotPrefab, _characterSlotsHolder).GetComponent<CharacterTurnSlotUI>();
 			_characterTurnSlotUIs.Add(characterTurnSlotUI);
-			characterTurnSlotUI.SubscribeToOnCurrentActorChanged(battleManager.BattleDataModel.OnCurrentActorChanged);
-			characterTurnSlotUI.SlotResource = characterSlot.CharacterTemplate;
+			characterTurnSlotUI.SubscribeToOnCurrentActorChanged(ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged);
+			characterTurnSlotUI.SlotResource = character;
 		}
-		_characterInventory.onCharactersUpdated.Raise();
+	}
+
+	public void ReinitialiseOnBattlerChange()
+	{
+		RemoveAllSlots();
+        Initialise();
 	}
 
 	public void UpdateTurnOrderUI()
 	{
-		this._characterInventory = _battleManager.OrderedBattlersCharacterInventory;
 		for (int i = 0; i < _characterTurnSlotUIs.Count; i++)
 		{
-			_characterTurnSlotUIs[i].SlotResource = _characterInventory.GetSlotByIndex(i).CharacterTemplate;
-			_characterTurnSlotUIs[i].Character = _characterInventory.GetSlotByIndex(i).Character;
-			_characterTurnSlotUIs[i].GetIsCurrentCharacter();
+			_characterTurnSlotUIs[i].SlotResource = _battleDataModel.OrderedBattlersList[i];
+			_characterTurnSlotUIs[i].Character = _battleDataModel.OrderedBattlersList[i];
+            _characterTurnSlotUIs[i].GetIsCurrentCharacter();
 			_characterTurnSlotUIs[i].UpdateSlotUI();
 		}
 	}
+
+    #endregion
+
+    #region Utilities
+
+	private void RemoveAllSlots()
+	{
+        for (int i = 0; i < _characterSlotsHolder.childCount; i++)
+        {
+            Destroy(_characterSlotsHolder.GetChild(i).gameObject);
+        }
+    }
+
+    #endregion
 }

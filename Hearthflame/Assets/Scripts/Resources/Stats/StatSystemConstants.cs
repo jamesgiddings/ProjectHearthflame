@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stat System Constants", menuName = "Stat System/Stat System Constants")]
+[CreateAssetMenu(fileName = "Stat System Constants", menuName = "Constants/Stat System Constants")]
 public class StatSystemConstants : ScriptableObject
 {
-	[SerializeField] public float BaseMeleeEvasion;
-	[SerializeField] public float BaseMeleeAccuracy;	
-	[SerializeField] public float BaseRangedEvasion;
-	[SerializeField] public float BaseRangedAccuracy;
-	[SerializeField] public float BaseMagicAccuracy;
-	[SerializeField] public float BaseMagicEvasion;
+	[SerializeField] public float BaseMeleeEvasion = 1f;
+	[SerializeField] public float BaseMeleeAccuracy = 1f;	
+	[SerializeField] public float BaseRangedEvasion = 1f;
+	[SerializeField] public float BaseRangedAccuracy = 1f;
+	[SerializeField] public float BaseMagicAccuracy = 1f;
+	[SerializeField] public float BaseMagicEvasion = 1f;
 
 	// Strength
-	[SerializeField] public float StrengthMultiplier;
+	[SerializeField] public float StrengthMultiplier = 1f;
 
 	// Magic
-	[SerializeField] public float MagicMultiplier;
+	[SerializeField] public float MagicMultiplier = 1f;
 
 	// Dexterity
-	[SerializeField] public float DexterityMultiplier;	
+	[SerializeField] public float DexterityMultiplier = 1f;	
 	
 	// Speed
-	[SerializeField] public float SpeedMultiplier;
+	[SerializeField] public float SpeedMultiplier = 1f;
 
 	// Armour
-	[SerializeField] public float BasePhysicalArmour;
-	[SerializeField] public float BaseFireArmour;
-	[SerializeField] public float BaseElectricityArmour;
+	[SerializeField] public float BasePhysicalArmour = 1f;
+	[SerializeField] public float BaseFireArmour = 1f;
+	[SerializeField] public float BaseElectricityArmour = 1f;
 }

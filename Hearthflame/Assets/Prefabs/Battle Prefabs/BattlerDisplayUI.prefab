@@ -44,17 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c770264f91c214c9af94c94195eea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: characterBattlerDictionary
-      Entry: 6
-      Data: 
   battlerPrefab: {fileID: 5730661112063783410, guid: f06bec351d7f8a546872e599170d794f,
     type: 3}

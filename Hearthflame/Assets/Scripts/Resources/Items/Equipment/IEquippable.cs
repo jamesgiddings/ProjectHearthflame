@@ -4,7 +4,7 @@ namespace GramophoneUtils.Items
 {
 	public interface IEquippable
 	{
-		public void Equip(Character statSystem);
-		public void Unequip(Character statSystem);
+		public void Equip(GramophoneUtils.Characters.Character statSystem);
+		public void Unequip(GramophoneUtils.Characters.Character statSystem);
 	}
 }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +31,9 @@ namespace GramophoneUtils.Stats
 			this.maxHealth = characterClass.BaseMaxHealth;
 		}
 
-		public void IncrementCurrentHealth(int increment)
+		#region API
+
+        public void IncrementCurrentHealth(int increment)
 		{
 			currentHealth += increment;
 
@@ -96,7 +99,21 @@ namespace GramophoneUtils.Stats
 			NotifySubscribersHealthChanged(cache * -1);
 			CheckIsDeadAndNotify();
 		}
-		private void NotifySubscribersHealthChanged(int value)
+
+        public void AddDamage(Damage damage)
+        {
+            IncrementCurrentHealth(-(int)damage.Value);
+        }
+
+        public void AddHealing(Healing healing)
+        {
+            IncrementCurrentHealth((int)healing.Value);
+        }
+
+        #endregion
+
+        #region Utilities
+        private void NotifySubscribersHealthChanged(int value)
 		{
 			OnHealthChanged?.Invoke(value);
 			BattlerNotificationImpl battlerNotificationImpl = new BattlerNotificationImpl(value.ToString(), value <= 0 ? Color.red : Color.green);
@@ -118,15 +135,7 @@ namespace GramophoneUtils.Stats
 			return false;
 		}
 
-		public void AddDamage(Damage damage)
-		{
-			IncrementCurrentHealth(-(int)damage.Value);
-		}
-		
-		public void AddHealing(Healing healing)
-		{
-			IncrementCurrentHealth((int)healing.Value);
-		}
+        #endregion
 	}
 }
 

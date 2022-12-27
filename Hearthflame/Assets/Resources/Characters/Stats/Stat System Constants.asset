@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e995cec5684339a408f3e857cc8a7881, type: 3}
   m_Name: Stat System Constants
   m_EditorClassIdentifier: 
-  BaseEvasion: 0.5
-  BaseAccuracy: 0.5
+  BaseMeleeEvasion: 1
+  BaseMeleeAccuracy: 1
+  BaseRangedEvasion: 1
+  BaseRangedAccuracy: 1
+  BaseMagicAccuracy: 1
+  BaseMagicEvasion: 1
   StrengthMultiplier: 1.4
-  BaseArmour: 1
+  MagicMultiplier: 1
+  DexterityMultiplier: 1
+  SpeedMultiplier: 1
+  BasePhysicalArmour: 1
+  BaseFireArmour: 1
+  BaseElectricityArmour: 1

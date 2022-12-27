@@ -1,4 +1,5 @@
 using GramophoneUtils.Events.CustomEvents;
+using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,12 @@ using UnityEngine;
 public class GameExplorationState : State
 {
 
+    #region API
+
     public override void EnterState()
     {
         base.EnterState();
+        SetCharacterMovement(true);
     }
 
     public override void ExitState()
@@ -21,8 +25,7 @@ public class GameExplorationState : State
         base.HandleInput();
     }
 
-    public void Update()
-    {
+    #endregion
 
-    }
+
 }

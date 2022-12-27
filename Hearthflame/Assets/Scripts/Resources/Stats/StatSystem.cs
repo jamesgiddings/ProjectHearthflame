@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,10 @@ namespace GramophoneUtils.Stats
 
         public Action<BattlerNotificationImpl> OnStatSystemNotification;
         public Dictionary<IStatType, Stat> Stats => stats; //getter
-		public StatSystem() { } //constructor 1
-		public StatSystem(CharacterTemplate template, Character character) //constructor 2
-		{			
-			foreach (var stat in template.Stats.Stats)
+
+		public StatSystem(Character character) //constructor 2
+		{
+			foreach (var stat in character.Stats.Stats)
 			{
 				stats.Add(stat.StatType, new Stat(stat.Value));
 				statTypeStringRefDictionary.Add(stat.StatType.Name, stat.StatType);
@@ -106,32 +107,32 @@ namespace GramophoneUtils.Stats
 
 		public float GetMeleeAccuracy()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseMeleeAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Strength"]) * GameManager.Instance.StatSystemConstants.StrengthMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Accuracy"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMeleeAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.StrengthMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Accuracy"]);
 		}
 
 		public float GetRangedAccuracy()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Dexterity"]) * GameManager.Instance.StatSystemConstants.DexterityMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Accuracy"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Dexterity"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.DexterityMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Accuracy"]);
 		}
 
 		public float GetMagicAccuracy()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Magic"]) * GameManager.Instance.StatSystemConstants.MagicMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Accuracy"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.MagicMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Accuracy"]);
 		}
 
 		public float GetMeleeEvasion()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseMeleeEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * GameManager.Instance.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Evasion"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMeleeEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Evasion"]);
 		}
 
 		public float GetRangedEvasion()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseRangedEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * GameManager.Instance.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Evasion"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Evasion"]);
 		}
 
 		public float GetMagicEvasion()
 		{
-			return GameManager.Instance.StatSystemConstants.BaseMagicEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * GameManager.Instance.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Evasion"]);
+			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMagicEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Evasion"]);
 		}
 
 		private List<Damage> FilterMisses(List<Damage> receivedDamages, Character originator)
@@ -176,11 +177,12 @@ namespace GramophoneUtils.Stats
 
 		public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, Character originator)
 		{
-			List<Damage> filteredDamages = FilterMisses(receivedDamages, originator);
+            Debug.Log(character.Name + "'s character.GetInstanceID()" + character.GetInstanceID());
+            List<Damage> filteredDamages = FilterMisses(receivedDamages, originator);
 			if (filteredDamages.Count == 0 && receivedDamages.Count > 0)
 			{
-				string evasionString = receivedDamages[0].AttackType == AttackType.Magic ? "Resist!" : "Miss!";
-				OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString)); // TODO move this string to a constants file
+				string evasionString = receivedDamages[0].AttackType == AttackType.Magic ? ServiceLocator.Instance.ServiceLocatorObject.Constants.MagicEvasionText : ServiceLocator.Instance.ServiceLocatorObject.Constants.PhysicalEvasionText;
+				OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString));
 				return;
 			}
 			List<Damage> modifiedDamages = new List<Damage>();
@@ -206,7 +208,10 @@ namespace GramophoneUtils.Stats
 		{
 			foreach (Damage damage in modifiedDamages)
 			{
-				character.HealthSystem.AddDamage(damage);
+                Debug.Log(damage.Value);
+                Debug.Log(character.Name);
+                character.HealthSystem.AddDamage(damage);
+
 			}
 		}
 		
@@ -220,7 +225,7 @@ namespace GramophoneUtils.Stats
 
 		public Damage ModifyIncomingDamage(Damage damage)
 		{
-			float newValue = damage.Value - GameManager.Instance.StatSystemConstants.BasePhysicalArmour;
+			float newValue = damage.Value - ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BasePhysicalArmour;
 
 			return new Damage(newValue, damage.Element, damage.AttackType, damage.source);
 		}
@@ -234,14 +239,14 @@ namespace GramophoneUtils.Stats
 
 		public Damage ModifyOutgoingDamage(Damage damage)
 		{
-			float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * GameManager.Instance.StatSystemConstants.StrengthMultiplier);
+			float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.StrengthMultiplier); //TODO, move this to serviceLocator
 
 			return new Damage(newValue, damage.Element, damage.AttackType, damage.source);
 		}		
 		
 		public Healing ModifyOutgoingHealing(Healing healing)
 		{
-			float newValue = healing.Value + (GetStatValue(StatTypeStringRefDictionary["Magic"]) * GameManager.Instance.StatSystemConstants.MagicMultiplier);
+			float newValue = healing.Value + (GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.MagicMultiplier);
 
 			return new Healing(newValue, healing.source);
 		}

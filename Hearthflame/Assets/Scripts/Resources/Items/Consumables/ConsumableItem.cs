@@ -31,7 +31,7 @@ namespace GramophoneUtils.Items
             return builder.ToString();
         }
 
-		public override void Use(Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI)
 		{
             Debug.Log($"Drinking {Name}");
             // Do use code here

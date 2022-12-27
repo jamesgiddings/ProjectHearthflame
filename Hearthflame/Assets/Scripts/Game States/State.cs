@@ -1,4 +1,5 @@
 using GramophoneUtils.Events.CustomEvents;
+using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,17 @@ public class State : MonoBehaviour {
 
     [SerializeField] private StateEvent enterStateEvent;
     [SerializeField] private StateEvent exitStateEvent;
+
+    #region Callbacks
+
+    public void Update()
+    {
+        HandleInput();
+    }
+
+    #endregion
+
+    #region API
 
     public virtual void HandleInput() {}
 
@@ -35,8 +47,15 @@ public class State : MonoBehaviour {
         }
     }
 
-    public void Update()
+    #endregion
+
+    #region Utilities
+
+    protected void SetCharacterMovement(bool value)
     {
-        HandleInput();
+        FindObjectsOfType<Battler>().ForEach((b) => b.gameObject.GetComponent<CharacterMovement>().enabled = value);
     }
+
+    #endregion
+
 }

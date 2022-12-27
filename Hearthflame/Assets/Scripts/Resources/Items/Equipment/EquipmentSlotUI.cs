@@ -9,7 +9,7 @@ namespace GramophoneUtils.Items.Containers
     {
         [SerializeField] private EquipmentType equipmentType;
 
-		public override void Initialise(Character character, ItemDestroyer itemDestroyer)
+		public override void Initialise(GramophoneUtils.Characters.Character character, ItemDestroyer itemDestroyer)
 		{
             inventory = character.EquipmentInventory;
             InventoryItemDragHandler dragHandler = transform.GetChild(0).gameObject.GetComponent<InventoryItemDragHandler>();

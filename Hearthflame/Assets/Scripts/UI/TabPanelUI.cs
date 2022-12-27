@@ -1,3 +1,4 @@
+using GramophoneUtils.Characters;
 using GramophoneUtils.Items;
 using GramophoneUtils.Stats;
 using System;
@@ -13,15 +14,13 @@ public class TabPanelUI : MonoBehaviour
 	[SerializeField] private GameObject tabPrefab;
 	[SerializeField] private GameObject tabContentPrefab;
 	[SerializeField] private ItemDestroyer itemDestroyer;
-	
-	[SerializeField] private PlayerModel playerModel;
 
 	private void OnEnable()
 	{
 		tabContentParent.gameObject.SetActive(false);
-		if (playerModel != null)
+		if (ServiceLocator.Instance.CharacterModel != null)
 		{
-			foreach (Character character in playerModel.PlayerCharacters)
+			foreach (Character character in ServiceLocator.Instance.CharacterModel.PlayerCharacters)
 			{
 				if (character != null)
 				{

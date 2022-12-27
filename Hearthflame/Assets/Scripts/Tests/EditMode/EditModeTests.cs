@@ -7,6 +7,7 @@ using UnityEngine.TestTools;
 using GramophoneUtils.Stats;
 using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Characters;
 
 public class EditModeTests
 {

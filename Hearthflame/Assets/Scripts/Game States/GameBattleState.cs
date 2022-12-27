@@ -23,12 +23,4 @@ public class GameBattleState : State
     public override void HandleInput() {}
 
     #endregion
-
-    #region Utilities
-
-    private void SetCharacterMovement(bool value)
-    {
-        FindObjectsOfType<Battler>().ForEach((b) => b.gameObject.GetComponent<CharacterMovement>().enabled = value);
-    }
-    #endregion
 }

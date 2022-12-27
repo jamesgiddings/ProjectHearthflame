@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using GramophoneUtils.Characters;
 
 [CreateAssetMenu(fileName = "New Battle Reward", menuName = "Battles/Battle Reward")]
 public class BattleReward: Data
@@ -16,7 +17,7 @@ public class BattleReward: Data
 
 
     
-	public void AddBattleReward(PlayerModel player)
+	public void AddBattleReward(CharacterModel player)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
 		{

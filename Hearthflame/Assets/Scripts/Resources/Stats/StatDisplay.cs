@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using GramophoneUtils.Stats;
+using GramophoneUtils.Characters;
 
 public class StatDisplay : MonoBehaviour
 {

@@ -1,8 +1,5 @@
-using GramophoneUtils.Items;
+using GramophoneUtils.Characters;
 using GramophoneUtils.Items.Containers;
-using GramophoneUtils.Stats;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GramophoneUtils.Events.CustomEvents

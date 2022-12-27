@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803e2d6a400cc734787d17d2fd80ac43, type: 3}
   m_Name: BattleWinConditions
   m_EditorClassIdentifier: 
-  _isRearWinRequired: 1
+  _isRearWinRequired: 0
   _enemiesKilled: {fileID: 11400000, guid: d487399039c0a6848a1606b357393c63, type: 2}
   _roundsSurvived: 0

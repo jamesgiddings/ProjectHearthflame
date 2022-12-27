@@ -7,12 +7,24 @@ using UnityEngine;
 /// </summary>
 public class EntryPosition : MonoBehaviour
 {
-    [SerializeField] private float yPos = -7.3f;
+    #region Attributes/Fields/Properties
+    
     [SerializeField] private float zPos = 0f;
+
+    #endregion
+
+    #region Callbacks
 
     private void Start()
     {
         float xPos = this.gameObject.transform.position.x;
+        float yPos = this.gameObject.transform.position.y;
         this.gameObject.transform.position = new Vector3(xPos, yPos, zPos);
     }
+
+    #endregion
+
+    #region API
+
+    #endregion
 }

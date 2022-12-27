@@ -7,7 +7,7 @@ namespace GramophoneUtils.Items
 {
     public class ItemDestroyer : MonoBehaviour
     {
-        [SerializeField] private PlayerModel playerModel = null;
+        [SerializeField] private CharacterModel playerModel = null;
         [SerializeField] private TextMeshProUGUI areYouSureText = null;
 
         private int slotIndex = 0;

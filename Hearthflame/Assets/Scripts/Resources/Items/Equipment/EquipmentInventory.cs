@@ -3,6 +3,7 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using System;
 using UnityEngine.Events;
+using GramophoneUtils.Characters;
 
 namespace GramophoneUtils.Items.Containers
 {
@@ -28,34 +29,24 @@ namespace GramophoneUtils.Items.Containers
 			};
 			if (character.PartyInventory != null)
 			{
-				this.onInventoryItemsUpdated = character.PartyInventory.onInventoryItemsUpdated;
-				this.onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
+				ConnectToCharacter(character);
 			}
 		}
-
-		private void OnDestroy()
+        #region Callbacks
+        private void OnDestroy()
 		{
 			if (character.PartyInventory != null)
 				onInventoryItemsUpdated.RemoveListener(RefreshEquipmentInSlots);
 		}
+		#endregion
 
-		private void EquipItemInSlot(ItemSlot itemSlot)
-		{
-			if (itemSlot.item as EquipmentItem != null)
-			{
-				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Equip(character);
-			}
-		}
+		#region API
 
-		private void UnequipItemFromSlot(ItemSlot itemSlot)
+		public void ConnectToCharacter(Character character)
 		{
-			if (itemSlot.item as EquipmentItem != null)
-			{
-				IEquippable equippable = (EquipmentItem)itemSlot.item;
-				equippable.Unequip(character);
-			}
-		}
+            this.onInventoryItemsUpdated = character.PartyInventory.onInventoryItemsUpdated;
+            this.onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
+        }
 
 		public void RefreshEquipmentInSlots()
 		{
@@ -125,8 +116,34 @@ namespace GramophoneUtils.Items.Containers
 				{
 					Swap(Character.PartyInventory, originalSlot.SlotIndex, this, equipmentTypeToSlotIndex[equipmentItem.EquipmentType]);
 				}
-				RefreshEquipmentInSlots();
+
+                RefreshEquipmentInSlots();
 			}
 		}
-	}
+
+        #endregion
+
+        #region Utilities
+
+        private void EquipItemInSlot(ItemSlot itemSlot)
+        {
+            if (itemSlot.item as EquipmentItem != null)
+            {
+                IEquippable equippable = (EquipmentItem)itemSlot.item;
+                equippable.Equip(character);
+            }
+        }
+
+        private void UnequipItemFromSlot(ItemSlot itemSlot)
+        {
+            if (itemSlot.item as EquipmentItem != null)
+            {
+                IEquippable equippable = (EquipmentItem)itemSlot.item;
+                equippable.Unequip(character);
+            }
+        }
+
+        #endregion
+    }
+
 }
