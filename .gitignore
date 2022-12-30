@@ -3,13 +3,13 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 /Builds
-/Hearthflame/Library/
-/Hearthflame/Temp/
-/Hearthflame/Oo]bj/
-/Hearthflame/Build/
-/Hearthflame//Builds/
-/Hearthflame//Logs/
-/Hearthflame/Usersettings/
+/Warrior-Pilgrims/Library/
+/Warrior-Pilgrims/Temp/
+/Warrior-Pilgrims/Oo]bj/
+/Warrior-Pilgrims/Build/
+/Warrior-Pilgrims//Builds/
+/Warrior-Pilgrims//Logs/
+/Warrior-Pilgrims/Usersettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
