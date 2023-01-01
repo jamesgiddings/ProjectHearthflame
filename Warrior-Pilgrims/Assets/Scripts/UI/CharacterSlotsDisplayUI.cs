@@ -136,7 +136,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 			}
 		}
 
-		OnCharacterOrderChanged.Raise(new CharacterOrder(frontCharacters, rearCharacters));
+		OnCharacterOrderChanged.Raise(new CharacterOrder(frontCharacters));
 
     }
 }

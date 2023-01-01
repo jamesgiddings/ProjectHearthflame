@@ -131,7 +131,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &822295787387413389
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,7 +148,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &2305013085684249528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &3594519075094012398
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -746,7 +746,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &2592817851907700085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2353,6 +2353,16 @@ PrefabInstance:
       propertyPath: _battlerParent
       value: 
       objectReference: {fileID: 1948878763168792457}
+    - target: {fileID: 584415697, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1, type: 3}
+      propertyPath: _frontBattlerPosition
+      value: 
+      objectReference: {fileID: 5274669892593997697, guid: 43c0c4cbadb91e24fbb007a20b76f3be,
+        type: 3}
+    - target: {fileID: 584415697, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1, type: 3}
+      propertyPath: _frontBattlerPositionPrefab
+      value: 
+      objectReference: {fileID: 5274669892593997697, guid: 43c0c4cbadb91e24fbb007a20b76f3be,
+        type: 3}
     - target: {fileID: 584415698, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1, type: 3}
       propertyPath: id
       value: 1f765be4-f0f3-4ba2-8346-f449a22620aa
@@ -2431,6 +2441,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2539212353321144437}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MoveEnemyBattlersForward
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GramophoneUtils.Stats.CharacterGameObjectManager, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1, type: 3}

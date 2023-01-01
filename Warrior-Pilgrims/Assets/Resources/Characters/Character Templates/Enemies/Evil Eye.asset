@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 42f7f285-6e04-4042-a321-3801408c97e6
   name: RearEnemon
-  sprite: {fileID: -4556660915178727136, guid: ef600f3966e5faa42b67c3c85b8b62c2, type: 3}
+  _sprite: {fileID: 0}
   description: 
   characterClass: {fileID: 11400000, guid: 4c175e1e5aadd684cab66496433ed410, type: 2}
   stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   startsUnlocked: 0
   startingLevel: 0
-  characterPrefab: {fileID: 0}
+  characterPrefab: {fileID: 5730661112063783411, guid: f06bec351d7f8a546872e599170d794f,
+    type: 3}
   brain: {fileID: 11400000, guid: c7ce8b378cd851a4c9d4cbd7c7369cfd, type: 2}
   portrait: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}

@@ -44,8 +44,8 @@ public class TargetManager : MonoBehaviour
 		_currentSkill = skill;
 		//List<Character> AllBattlers = battleManager.BattleDataModel.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
 		List<Character> AllBattlers = new List<Character>();
-		AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.FrontPlayerCharactersList); // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
-        AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.FrontEnemyCharactersList);
+		AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.PlayerCharacters); // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
+        AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.EnemyCharacters);
         IEnumerable<Character> query;
 		List<Character> allPossibleTargets = new List<Character>();
 		query = AllBattlers.Where(battler => skill.TargetAreaFlag.Has(battler.GetTargetAreaFlag(originator.IsPlayer)) && skill.TargetTypeFlag.Has(battler.GetTargetTypeFlag())); // check that the skills (mixed) TargetAreaFlag contains the battlers TargetAreaFlag (which should just be one area)

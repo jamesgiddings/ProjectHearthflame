@@ -4,14 +4,11 @@ using GramophoneUtils.SavingLoading;
 using UnityEngine.Events;
 using GramophoneUtils.Items.Containers;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using GramophoneUtils.Characters;
 using Sirenix.OdinInspector;
-using UnityEngine.TextCore.Text;
 using Character = GramophoneUtils.Characters.Character;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using GramophoneUtils.Events.CustomEvents;
+using System.Collections;
 
 namespace GramophoneUtils.Stats
 {
@@ -52,14 +49,15 @@ namespace GramophoneUtils.Stats
         [ShowInInspector] public CharacterOrder PlayerCharacterOrder => _playerCharacterOrder;
         [ShowInInspector] public CharacterOrder EnemyCharacterOrder => _enemyCharacterOrder;
 
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
         public List<Character> PlayerCharacters
         {
             get
             {
-                if (_playerCharacters != null) { return _playerCharacters; }
+                if (_playerCharacterOrder != null) { return _playerCharacterOrder.GetCharacters().ToList(); }
                 _playerCharacters = InstanceCharacters();
-                List<Character> _frontCharacters = new List<Character>();
-                List<Character> _rearCharacters = new List<Character>();
                 foreach (Character character in _playerCharacters)
                 {
 
@@ -69,104 +67,167 @@ namespace GramophoneUtils.Stats
                     }
 
                     ConnectInventories(character);
-                    if (character.IsRear)
-                    {
-                        _rearCharacters.Add(character);
-                    }
-                    else
-                    {
-                        _frontCharacters.Add(character);
-                    }
                 }
 
-                _playerCharacterOrder = new CharacterOrder(_frontCharacters, _rearCharacters);
+                _playerCharacterOrder = new CharacterOrder(_playerCharacters.ToArray());
                 OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
                 return _playerCharacters;
             }
         }
 
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
         public List<Character> EnemyCharacters
-        {
-            get
-            {
-                return _enemyCharacters;
-            }
-        }
-
-        [ShowInInspector] public Character[] FrontPlayerCharacters
-        {
-            get
-            {
-                if (_playerCharacterOrder == null)
-                {
-                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
-                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
-                }
-                return _playerCharacterOrder.FrontCharacters;
-            }
-        }
-
-        [ShowInInspector] public Character[] RearPlayerCharacters
-        {
-            get
-            {
-                if (_playerCharacterOrder == null)
-                {
-                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
-                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
-                }
-                return _playerCharacterOrder.RearCharacters;
-            }
-        }
-
-        [ShowInInspector] public Character[] FrontEnemyCharacters
         {
             get
             {
                 if (_enemyCharacterOrder == null)
                 {
-                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters, new List<Character>());
+                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
                     OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
                 }
-                return _enemyCharacterOrder.FrontCharacters;
-            }
-        }
-
-
-
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
-        public List<Character> FrontPlayerCharactersList
-        {
-            get
-            {
-                IEnumerable<Character> allNonNull = from nonNull in FrontPlayerCharacters where nonNull != null && nonNull.IsUnlocked select nonNull;
-                return allNonNull.ToList();
+                return _enemyCharacterOrder.GetCharacters().ToList();
             }
         }
 
 #if !UNITY_EDITOR
         [ShowInInspector]
 #endif
-        public List<Character> RearPlayerCharactersList
+        public List<Character> ReserveEnemyCharacters
         {
             get
             {
-                IEnumerable<Character> allNonNull = from nonNull in RearPlayerCharacters where nonNull != null && nonNull.IsUnlocked select nonNull;
-                return allNonNull.ToList();
+                return _reserveEnemyCharacters;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif 
+        public Character Slot1PlayerCharacter
+        {
+            get
+            {
+                if (_playerCharacterOrder == null)
+                {
+                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
+                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                }
+                return _playerCharacterOrder.Slot1Character;
             }
         }
 
 #if !UNITY_EDITOR
         [ShowInInspector]
 #endif
-        public List<Character> FrontEnemyCharactersList
+        public Character Slot2PlayerCharacter
         {
             get
             {
-                IEnumerable<Character> allNonNull = from nonNull in FrontEnemyCharacters where nonNull != null select nonNull;
-                return allNonNull.ToList();
+                if (_playerCharacterOrder == null)
+                {
+                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
+                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                }
+                return _playerCharacterOrder.Slot2Character;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
+        public Character Slot3PlayerCharacter
+        {
+            get
+            {
+                if (_playerCharacterOrder == null)
+                {
+                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
+                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                }
+                return _playerCharacterOrder.Slot3Character;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
+        public Character Slot4PlayerCharacter
+        {
+            get
+            {
+                if (_playerCharacterOrder == null)
+                {
+                    _playerCharacterOrder = new CharacterOrder(_playerCharacters == null ? PlayerCharacters.ToArray() : _playerCharacters.ToArray());
+                    OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                }
+                return _playerCharacterOrder.Slot4Character;
+            }
+        }
+
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif 
+        public Character Slot1EnemyCharacter
+        {
+            get
+            {
+                if (_enemyCharacterOrder == null)
+                {
+                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
+                    OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+                }
+                return _enemyCharacterOrder.Slot1Character;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
+        public Character Slot2EnemyCharacter
+        {
+            get
+            {
+                if (_enemyCharacterOrder == null)
+                {
+                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
+                    OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+                }
+                return _enemyCharacterOrder.Slot2Character;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
+        public Character Slot3EnemyCharacter
+        {
+            get
+            {
+                if (_enemyCharacterOrder == null)
+                {
+                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
+                    OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+                }
+                return _enemyCharacterOrder.Slot3Character;
+            }
+        }
+
+#if !UNITY_EDITOR
+        [ShowInInspector]
+#endif
+        public Character Slot4EnemyCharacter
+        {
+            get
+            {
+                if (_enemyCharacterOrder == null)
+                {
+                    _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
+                    OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+                }
+                return _enemyCharacterOrder.Slot4Character;
             }
         }
 
@@ -184,31 +245,16 @@ namespace GramophoneUtils.Stats
 #if !UNITY_EDITOR
         [ShowInInspector]
 #endif
-        public List<Character> AllFrontCharactersList
-        {
-            get
-            {
-                List<Character> allFrontCharacters = new List<Character>();
-                allFrontCharacters.AddRange(FrontPlayerCharactersList);
-                allFrontCharacters.AddRange(FrontEnemyCharactersList);
-                return allFrontCharacters;
-            }
-        }
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
-        public List<Character> AllCharactersList
+        public List<Character> AllCharacters
         {
             get
             {
                 List<Character> allCharacters = new List<Character>();
-                allCharacters.AddRange(AllFrontCharactersList);
-                allCharacters.AddRange(RearPlayerCharactersList);
-                IEnumerable<Character> allNonNull = from nonNull in FrontEnemyCharacters where nonNull != null select nonNull;
+                allCharacters.AddRange(PlayerCharacters);
+                allCharacters.AddRange(EnemyCharacters);
                 return allCharacters;
             }
         }
-
 
 #endregion
 
@@ -237,36 +283,6 @@ namespace GramophoneUtils.Stats
 
         #region API
 
-        public Character GetFrontPlayerCharacterByPosition(int position)
-        {
-            if (position < 0 || position > FrontPlayerCharacters.Length)
-            {
-                Debug.LogWarning("Position out of range");
-                return null;
-            }
-            return FrontPlayerCharacters[position];
-        }
-
-        public Character GetRearPlayerCharacterByPosition(int position)
-        {
-            if (position < 0 || position > RearPlayerCharacters.Length)
-            {
-                Debug.LogWarning("Position out of range");
-                return null;
-            }
-            return RearPlayerCharacters[position];
-        }
-
-        public Character GetFrontEnemyCharacterByPosition(int position)
-        {
-            if (position < 0 || position > FrontEnemyCharacters.Length)
-            {
-                Debug.LogWarning("Position out of range");
-                return null;
-            }
-            return FrontEnemyCharacters[position];
-        }
-
         public List<Character> InstanceCharacters()
         {
             _playerCharacters = new List<Character>();
@@ -277,7 +293,6 @@ namespace GramophoneUtils.Stats
                 {
                     _playerCharacters.Add(_playerCharacterBlueprints[i].Instance());
                     _playerCharacters.Last<Character>().IsPlayer = true;
-                    _playerCharacters.Last<Character>().IsRear = (i > 2) ? true : false;
                     _playerCharacters.Last<Character>().PartyInventory = GetPartyInventory();
                 }
             }
@@ -324,16 +339,7 @@ namespace GramophoneUtils.Stats
         /// <param name="character"></param>
         public void RegisterCharacterDeath(Character character)
         {
-            if(character.IsPlayer)
-            {
-                AddEnemyToDeadEnemyCharactersList(character);
-                // todo dead player characters should be swapped to the rear? maybe the ui just gives the option for that
-            }
-            else
-            {
-                AddEnemyToDeadEnemyCharactersList(character);
-                RemoveEnemyCharacter(character);
-            }
+            StartCoroutine(CharacterDeathCoroutine(character));
         }
 
         /// <summary>
@@ -359,7 +365,7 @@ namespace GramophoneUtils.Stats
             _deadEnemyCharacters.Add(character);
         }
 
-        public void AddEnemyToDeadPlayerCharactersList(Character character)
+        public void AddPlayerToDeadPlayerCharactersList(Character character)
         {
             _deadPlayerCharacters.Add(character);
         }
@@ -368,15 +374,15 @@ namespace GramophoneUtils.Stats
         {
             if (_enemyCharacterOrder == null)
             {
-                _enemyCharacterOrder = new CharacterOrder(_enemyCharacters, new List<Character>()); // make an empty enemyCharacterOrder
+                _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray()); // make an empty enemyCharacterOrder
             }
-            _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersToFrontAndReturnRemainder(charactersToAdd);
+            _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersAndReturnRemainder(charactersToAdd);
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
         public void ReplaceEnemyCharacters(List<Character> charactersToReplaceWith)
         {
-            _enemyCharacterOrder = new CharacterOrder(charactersToReplaceWith, new List<Character>());
+            _enemyCharacterOrder = new CharacterOrder(charactersToReplaceWith.ToArray());
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
@@ -394,9 +400,29 @@ namespace GramophoneUtils.Stats
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
-        #endregion 
+        #endregion
 
         #region Utilities
+        private IEnumerator CharacterDeathCoroutine(Character character)
+        {
+            if (character.IsPlayer)
+            {
+                AddPlayerToDeadPlayerCharactersList(character);
+                // todo dead player characters should be swapped to the rear? maybe the ui just gives the option for that
+            }
+            else
+            {
+                AddEnemyToDeadEnemyCharactersList(character);
+                RemoveEnemyCharacter(character);
+                yield return new WaitForSeconds(0.5f);
+                _enemyCharacterOrder.MoveCharactersForwardIntoSpaces();
+                ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
+                yield return new WaitForSeconds(0.5f);
+                _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersAndReturnRemainder(_reserveEnemyCharacters);
+                OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+            }
+        }
+
         private void ConnectInventories(Character character)
         {
             character.PartyInventory = this._partyInventory;

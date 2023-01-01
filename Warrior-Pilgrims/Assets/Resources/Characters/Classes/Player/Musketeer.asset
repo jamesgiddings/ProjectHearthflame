@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: f50f2d1a5f4efb5439fe9aaf377ca70d
   name: Musketeer
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   description: 
   baseMaxHealth: 100
   baseHealth: 100
@@ -86,3 +86,4 @@ MonoBehaviour:
   - skillsUnlocked: []
     baseHealthIncrement: 0
     statComponentBlueprints: []
+  size: 1

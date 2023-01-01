@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 0ccafb30-9ce0-4c5a-8b1b-22ac38f99dc7
   name: Rune Knight
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   description: 
   baseMaxHealth: 100
   baseHealth: 100
@@ -426,3 +426,4 @@ MonoBehaviour:
     baseHealthIncrement: 10
     statComponentBlueprints:
     - {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
+  size: 1

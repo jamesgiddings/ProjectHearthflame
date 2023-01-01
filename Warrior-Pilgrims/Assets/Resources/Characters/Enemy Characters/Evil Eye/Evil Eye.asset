@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Evil Eye
+  m_EditorClassIdentifier: 
+  UID: 
+  name: Evil Eye
+  _sprite: {fileID: -4556660915178727136, guid: 528858e6e6597fc42a1be63f8c52deb3,
+    type: 3}
+  _description: 
+  _characterClass: {fileID: 11400000, guid: 4c175e1e5aadd684cab66496433ed410, type: 2}
+  _stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 0
+  _startingLevel: 0
+  _characterPrefab: {fileID: 5730661112063783411, guid: f06bec351d7f8a546872e599170d794f,
+    type: 3}
+  _brain: {fileID: 11400000, guid: c7ce8b378cd851a4c9d4cbd7c7369cfd, type: 2}
+  _portrait: {fileID: -4556660915178727136, guid: 528858e6e6597fc42a1be63f8c52deb3,
+    type: 3}
+  _color: {r: 0, g: 0, b: 0, a: 0}
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Evil EyeAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/Evil EyeAnimationController
+  _idle_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _idle_Right: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _idle_Up: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _idle_Down: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _walk_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _walk_Right: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _walk_Up: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _walk_Down: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _attack_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _attack_Right: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _attack_Up: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _attack_Down: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _cast_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _cast_Right: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _cast_Up: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _cast_Down: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _die: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _dead: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _shoot_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _shoot_Right: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _shoot_Up: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}
+  _shoot_Down: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 815383a5-2816-419b-90aa-20b6fa3f9748
   name: Spider
-  sprite: {fileID: -4556660915178727136, guid: ef600f3966e5faa42b67c3c85b8b62c2, type: 3}
+  _sprite: {fileID: 0}
   description: 
   baseMaxHealth: 30
   baseHealth: 30
@@ -40,3 +40,4 @@ MonoBehaviour:
   - skillsUnlocked: []
     baseHealthIncrement: 10
     statComponentBlueprints: []
+  size: 2

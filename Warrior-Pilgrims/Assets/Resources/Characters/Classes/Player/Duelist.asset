@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: d596f7f9-fd73-4a55-8f29-012cf40502d3
   name: Duelist
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   description: 
   baseMaxHealth: 150
   baseHealth: 150
@@ -148,3 +148,4 @@ MonoBehaviour:
   - skillsUnlocked: []
     baseHealthIncrement: 0
     statComponentBlueprints: []
+  size: 1

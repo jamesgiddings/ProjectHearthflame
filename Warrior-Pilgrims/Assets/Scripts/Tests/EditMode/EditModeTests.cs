@@ -14,13 +14,18 @@ public class EditModeTests
 	[Test]
 	public void StatsTestsSimplePasses()
 	{
-		string relativePath = "Assets/GameData/Stats/Strength.asset";
+		string relativePath = "Assets/Resources/Characters/Stats/Stats/Base Stats/Strength.asset";
 		StatType statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
-		StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
-		Character character = new Character();
+		relativePath = "Assets/Resources/Characters/Player Characters/The Rune Knight.asset";
+        Character characterBlueprint = AssetDatabase.LoadAssetAtPath<Character>(relativePath);
+		Character character = characterBlueprint.Instance();
+        StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
 
-		Assert.AreEqual(0, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
+		Assert.NotNull(character);
+        Assert.NotNull(statType);
 
+        Assert.AreEqual(0, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
+		
 		character.StatSystem.AddModifier(testModifier);
 
 		Assert.AreEqual(1, character.StatSystem.GetStat(statType).Modifiers.Count); // the new strength stat in statSystem should have 1 modifier now.
@@ -41,7 +46,7 @@ public class EditModeTests
 
 		Assert.AreEqual(currentStatValue + 15f + 8f, character.StatSystem.GetStat(statType).Value); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
-		relativePath = "Assets/GameData/Stats/Magic.asset";
+		relativePath = "Assets/Resources/Characters/Stats/Stats/Base Stats/Strength.asset";
 		statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
 
 		currentStatValue = character.StatSystem.GetStat(statType).Value;
@@ -84,20 +89,22 @@ public class EditModeTests
 	[Test]
 	public void ItemStatsTestsSimplePasses()
 	{
-		string relativePath = "Assets/GameData/Stats/Strength.asset";
+		string relativePath = "Assets/Resources/Characters/Stats/Stats/Base Stats/Strength.asset";
 		StatType statType = AssetDatabase.LoadAssetAtPath<StatType>(relativePath);
 		StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
-		Character statSystem = new Character();
+        relativePath = "Assets/Resources/Characters/Player Characters/The Rune Knight.asset";
+        Character characterBlueprint = AssetDatabase.LoadAssetAtPath<Character>(relativePath);
+        Character character = characterBlueprint.Instance();
 
-		float statBeforeEquip = statSystem.StatSystem.GetStatValue(statType);
+		float statBeforeEquip = character.StatSystem.GetStatValue(statType);
 		
 		string relativePathWeapon = "Assets/Resources/Items/Weapons/Sword of Nipsying.asset";
 		EquipmentItem weaponItem = AssetDatabase.LoadAssetAtPath<EquipmentItem>(relativePathWeapon);
-		weaponItem.Equip(statSystem);
+		weaponItem.Equip(character);
 
-		Assert.AreEqual(statBeforeEquip + 5f, statSystem.StatSystem.GetStat(statType).Value);
-		weaponItem.Unequip(statSystem);
-		Assert.AreEqual(statBeforeEquip, statSystem.StatSystem.GetStat(statType).Value);
+		Assert.AreEqual(statBeforeEquip + 5f, character.StatSystem.GetStat(statType).Value);
+		weaponItem.Unequip(character);
+		Assert.AreEqual(statBeforeEquip, character.StatSystem.GetStat(statType).Value);
 	}
 
 	[Test]
@@ -113,7 +120,7 @@ public class EditModeTests
 	[Test]
 	public void LevelSystemTests()
 	{
-		string relativePath = "Assets/GameData/Classes/HearthPriest.asset";
+		string relativePath = "Assets/Resources/Characters/Classes/Player/HearthPriest.asset";
 		CharacterClass characterClass = AssetDatabase.LoadAssetAtPath<CharacterClass>(relativePath);
 		Character character = new Character();
 		LevelSystem levelSystem = new LevelSystem(characterClass, character);

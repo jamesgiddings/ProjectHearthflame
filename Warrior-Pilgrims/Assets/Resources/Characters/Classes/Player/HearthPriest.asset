@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 8966c4f7debd5804491e39950abb0684
   name: Hearth Priest
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   description: 
   baseMaxHealth: 100
   baseHealth: 100
@@ -92,3 +92,4 @@ MonoBehaviour:
   - skillsUnlocked: []
     baseHealthIncrement: 0
     statComponentBlueprints: []
+  size: 1

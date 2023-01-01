@@ -2,7 +2,6 @@ using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -188,9 +187,16 @@ namespace GramophoneUtils.Battles
         private bool AreAllEnemiesKilled(CharacterModel characterModel)
         {
             bool allDead = true;
-            foreach (Character character in characterModel.FrontEnemyCharactersList)
+            foreach (Character enemyCharacter in characterModel.EnemyCharacters)
             {
-                if (!character.HealthSystem.IsDead)
+                if (!enemyCharacter.HealthSystem.IsDead)
+                {
+                    allDead = false;
+                }
+            }
+            foreach (Character enemyCharacter in characterModel.ReserveEnemyCharacters)
+            {
+                if (!enemyCharacter.HealthSystem.IsDead)
                 {
                     allDead = false;
                 }
@@ -203,7 +209,17 @@ namespace GramophoneUtils.Battles
         {
             foreach (Character character in _allOf) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character enemyCharacter in characterModel.FrontEnemyCharactersList)
+                foreach (Character enemyCharacter in characterModel.EnemyCharacters)
+                {
+                    if (character.UID.Equals(enemyCharacter.UID))
+                    {
+                        if (!enemyCharacter.HealthSystem.IsDead)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                foreach (Character enemyCharacter in characterModel.ReserveEnemyCharacters)
                 {
                     if (character.UID.Equals(enemyCharacter.UID))
                     {
@@ -221,7 +237,17 @@ namespace GramophoneUtils.Battles
         {
             foreach (CharacterClass characterClass in _allOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character character in characterModel.FrontEnemyCharactersList)
+                foreach (Character character in characterModel.EnemyCharacters)
+                {
+                    if (characterClass.UID.Equals(character.CharacterClass.UID))
+                    {
+                        if (!character.HealthSystem.IsDead)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                foreach (Character character in characterModel.ReserveEnemyCharacters)
                 {
                     if (characterClass.UID.Equals(character.CharacterClass.UID))
                     {
@@ -240,7 +266,17 @@ namespace GramophoneUtils.Battles
         {
             foreach (Character character in _anyOf)
             {
-                foreach (Character enemyCharacter in characterModel.FrontEnemyCharactersList)
+                foreach (Character enemyCharacter in characterModel.EnemyCharacters)
+                {
+                    if (character.UID.Equals(enemyCharacter.UID))
+                    {
+                        if (enemyCharacter.HealthSystem.IsDead)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                foreach (Character enemyCharacter in characterModel.ReserveEnemyCharacters)
                 {
                     if (character.UID.Equals(enemyCharacter.UID))
                     {
@@ -258,9 +294,19 @@ namespace GramophoneUtils.Battles
         {
             foreach (CharacterClass characterClass in _anyOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
-                foreach (Character character in characterModel.FrontEnemyCharactersList)
+                foreach (Character character in characterModel.EnemyCharacters)
                 {
-                    if (characterClass.Equals(character.CharacterClass))
+                    if (characterClass.UID.Equals(character.CharacterClass.UID))
+                    {
+                        if (character.HealthSystem.IsDead)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                foreach (Character character in characterModel.ReserveEnemyCharacters)
+                {
+                    if (characterClass.UID.Equals(character.CharacterClass.UID))
                     {
                         if (character.HealthSystem.IsDead)
                         {

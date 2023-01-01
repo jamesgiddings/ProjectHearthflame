@@ -24,7 +24,7 @@ public class TurnOrderUI : MonoBehaviour
 
 		_characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
 
-		foreach (Character character in _characterModel.AllFrontCharactersList)
+		foreach (Character character in _characterModel.AllCharacters)
 		{
 			CharacterTurnSlotUI characterTurnSlotUI = Instantiate(_characterTurnSlotPrefab, _characterSlotsHolder).GetComponent<CharacterTurnSlotUI>();
 			_characterTurnSlotUIs.Add(characterTurnSlotUI);

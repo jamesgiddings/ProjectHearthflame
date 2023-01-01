@@ -59,7 +59,7 @@ namespace GramophoneUtils.Battles
         public bool IsFrontLost(BattleDataModel battleDataModel)
         {
             bool allDead = true;
-            foreach (Character character in ServiceLocator.Instance.CharacterModel.FrontPlayerCharactersList)
+            foreach (Character character in ServiceLocator.Instance.CharacterModel.PlayerCharacters)
             {
                 if (!character.HealthSystem.IsDead)
                 {

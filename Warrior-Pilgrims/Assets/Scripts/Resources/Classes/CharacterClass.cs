@@ -24,6 +24,7 @@ public class CharacterClass : Resource
     [FoldoutGroup("Level Progression")]
     [TableList(IsReadOnly = true, AlwaysExpanded = true)]
 	[SerializeField] private List<LevelStatEffect> levelStatEffects;
+	[SerializeField] private int size = 1;
 
 	[Serializable]
 	public class LevelStatEffect
@@ -43,6 +44,7 @@ public class CharacterClass : Resource
 
 	public int BaseHealth => baseHealth;
 	public int BaseMaxHealth => baseMaxHealth;
+	public int Size => size;
 
 	public void LevelUp(System.Object sender, EventArgs args)
 	{

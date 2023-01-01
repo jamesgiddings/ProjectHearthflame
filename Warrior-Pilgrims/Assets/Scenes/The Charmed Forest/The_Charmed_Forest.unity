@@ -1057,6 +1057,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterModel
       objectReference: {fileID: 0}
+    - target: {fileID: 819539840999830553, guid: b46926b404b906d47ba4a74320ec31dc,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 941622311855194057, guid: b46926b404b906d47ba4a74320ec31dc,
         type: 3}
       propertyPath: m_RootOrder

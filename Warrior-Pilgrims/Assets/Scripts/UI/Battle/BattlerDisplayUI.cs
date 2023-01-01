@@ -36,12 +36,12 @@ public class BattlerDisplayUI : MonoBehaviour
 		_battleDataModel = ServiceLocator.Instance.BattleDataModel;
 		_characterModel = ServiceLocator.Instance.CharacterModel;
 		
-		battlerGameObjects = new Battler[_characterModel.AllFrontCharactersList.Count];
+		battlerGameObjects = new Battler[_characterModel.AllCharacters.Count];
 		characterBattlerDictionary = new Dictionary<Character, Battler>();
 
-        playerBattlers = new Battler[_characterModel.FrontPlayerCharacters.Length];
-        enemyBattlers = new Battler[_characterModel.FrontEnemyCharacters.Length];
-		playerBattlers = InitialisePlayerBattlers(_characterModel.FrontPlayerCharactersList);
+        playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
+        enemyBattlers = new Battler[_characterModel.EnemyCharacters.Count];
+		playerBattlers = InitialisePlayerBattlers(_characterModel.PlayerCharacters);
         //enemyBattlers = InitialiseEnemyBattlers(_battleDataModel.EnemyBattlersCharacterInventory);
 
         battlerGameObjects = playerBattlers.Concat(enemyBattlers).ToArray();
@@ -50,7 +50,7 @@ public class BattlerDisplayUI : MonoBehaviour
     private Battler[] InitialisePlayerBattlers(List<Character> characters)
     {
         int newCharacterStartIndex = playerBattlers.Length;
-        Battler[] newPlayerBattlers = new Battler[_characterModel.FrontPlayerCharactersList.Count];
+        Battler[] newPlayerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
         for (int i = newCharacterStartIndex; i < playerBattlers.Length; i++)
         {
             int j = 0;
@@ -102,12 +102,12 @@ public class BattlerDisplayUI : MonoBehaviour
 			return;
 		}
 		Debug.LogError("For some reason this isn't called when we add a character from the rear");
-        battlerGameObjects = new Battler[_characterModel.AllFrontCharactersList.Count];
+        battlerGameObjects = new Battler[_characterModel.AllCharacters.Count];
 
 		for (int i = characterBattlerDictionary.Keys.Count - 1; i >= 0; i--)
 		{
 			Character character = characterBattlerDictionary.ElementAt(i).Key;
-            if (character.IsPlayer && !_characterModel.FrontPlayerCharacters.Contains(character))
+            if (character.IsPlayer && !_characterModel.PlayerCharacters.Contains(character))
 			{
 				characterBattlerDictionary[character].Uninitialise();
                 characterBattlerDictionary.Remove(character);
@@ -127,10 +127,10 @@ public class BattlerDisplayUI : MonoBehaviour
                     battler.Uninitialise();
                 }*/
 
-        IEnumerable<Character> uninitialisedCharacters = from uninitialised in _characterModel.FrontPlayerCharacters.Except(characterBattlerDictionary.Keys) select uninitialised;
+        IEnumerable<Character> uninitialisedCharacters = from uninitialised in _characterModel.PlayerCharacters.Except(characterBattlerDictionary.Keys) select uninitialised;
         
-        playerBattlers = new Battler[_characterModel.FrontPlayerCharactersList.Count];
-        playerBattlers.Concat(InitialisePlayerBattlers(_characterModel.FrontPlayerCharactersList));
+        playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
+        playerBattlers.Concat(InitialisePlayerBattlers(_characterModel.PlayerCharacters));
 		Debug.Log("characterBattlerDictionary.Count: " + characterBattlerDictionary.Count);
         battlerGameObjects = playerBattlers.Concat(enemyBattlers).ToArray();
     }

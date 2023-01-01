@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [Serializable]
-public abstract class Resource : Data
+public class Resource : Data
 {
     [VerticalGroup("General/Split/Right")]
     [VerticalGroup("General/Split/Right/Sprites", 30)]

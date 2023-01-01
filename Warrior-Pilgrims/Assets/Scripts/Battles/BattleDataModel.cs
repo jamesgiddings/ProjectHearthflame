@@ -1,7 +1,6 @@
 using GramophoneUtils.Battles;
 using GramophoneUtils.Characters;
 using GramophoneUtils.Events.CustomEvents;
-using GramophoneUtils.Events.UnityEvents;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System;
@@ -105,8 +104,6 @@ public class BattleDataModel : MonoBehaviour
             NextRound();
         }
 
-        _battleRear.MakeChecks(_characterModel.RearPlayerCharactersList); // this is the rear battle step. Todo: We should move this to a separate battlestate
-
         UpdateCurrentActor();
         UpdateState();
 
@@ -143,20 +140,18 @@ public class BattleDataModel : MonoBehaviour
 	private void CreateNewRoundQueues()
 	{
 		unresolvedQueue = new Queue<Character>();
-		foreach (Character character in _characterModel.AllFrontCharactersList)
+		foreach (Character character in _characterModel.AllCharacters)
 		{
 			unresolvedQueue.Enqueue(character);
 		}
 		resolvedQueue = new Queue<Character>();
 	}
 
-
-
 	private Queue<Character> OrderQueue()
 	{
 		List<Character> frontAndEnemyCharacters = new List<Character>();
-		frontAndEnemyCharacters.AddRange(_characterModel.FrontPlayerCharactersList);
-		frontAndEnemyCharacters.AddRange(_characterModel.FrontEnemyCharactersList);
+		frontAndEnemyCharacters.AddRange(_characterModel.PlayerCharacters);
+		frontAndEnemyCharacters.AddRange(_characterModel.EnemyCharacters);
 		IEnumerable<Character> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(resolvedQueue) select unresolved;
 
 		unresolvedQueue.Clear();
