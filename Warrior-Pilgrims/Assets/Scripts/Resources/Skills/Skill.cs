@@ -1,195 +1,229 @@
 using GramophoneUtils.Characters;
 using GramophoneUtils.Items.Hotbars;
 using GramophoneUtils.Stats;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Skill", menuName = "Character Classes/Skills")]
-public class Skill : Resource, IHotbarItem
+[Serializable, CreateAssetMenu(fileName = "New Skill", menuName = "Character Classes/Skills")]
+public class Skill : Resource, ISkill, IHotbarItem
 {
-	[SerializeField] private CharacterClass[] classRestrictions;
-	[SerializeField] private School school;
-	[SerializeField] private Skill[] prerequisites;
-	[SerializeField] private int usesToUnlock;
-	[SerializeField] private TargetAreaFlag targetAreaFlag;
-	[SerializeField] private TargetNumberFlag targetNumberFlag;
-	[SerializeField] private TargetTypeFlag targetTypeFlag = TargetTypeFlag.Alive;
-	[SerializeField] private SkillAnimType skillAnimType;
+    #region Attributes/Fields/Properties
 
-	[SerializeField] private GameObject projectilePrefab;
-	[SerializeField] private GameObject effectPrefab;
-	[SerializeField] private RuntimeAnimatorController animatorController;
+    [SerializeField] private CharacterClass[] _classRestrictions;
+    public CharacterClass[] ClassRestrictions => _classRestrictions;
 
-	[SerializeField] private List<StatModifierBlueprint> statModifierBlueprints;
-	[SerializeField] private List<DamageBlueprint> damageBlueprints;
-	[SerializeField] private List<HealingBlueprint> healingBlueprints;
+    [SerializeField] private School _school;
+    public School School => _school;
 
-	public Action OnSkillUsed;
-	public CharacterClass[] ClassRestrictions => classRestrictions; // getter
-	public School School => school; //getter
-	public Skill[] Prerequisites => prerequisites; // getter
-	public int UsesToUnlock => usesToUnlock; // getter
+    [SerializeField] private Skill[] _prerequisites;
+    public ISkill[] Prerequisites => _prerequisites;
 
-	public TargetAreaFlag TargetAreaFlag => targetAreaFlag;
-	public TargetNumberFlag TargetNumberFlag => targetNumberFlag;
-	public TargetTypeFlag TargetTypeFlag => targetTypeFlag;
-	public SkillAnimType SkillAnimType => skillAnimType;
+    [SerializeField] private int _usesToUnlock;
+    public int UsesToUnlock => _usesToUnlock;
 
-	public GameObject ProjectilePrefab => projectilePrefab;
-	public GameObject EffectPrefab => effectPrefab;
-	public RuntimeAnimatorController AnimatorController => animatorController; //getter
+    [SerializeField] private TargetAreaFlag _targetAreaFlag;
+    public TargetAreaFlag TargetAreaFlag => _targetAreaFlag;
 
-	private List<StatModifier> skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
-	private List<Damage> skillDamages { get { return InstanceSkillDamageBlueprints(); } }
-	private List<Healing> skillHealings { get { return InstanceSkillHealingBlueprints(); } }
+    [SerializeField] private TargetNumberFlag _targetNumberFlag;
+    public TargetNumberFlag TargetNumberFlag => _targetNumberFlag;
 
-	private List<StatModifier> InstanceSkillStatModifierBlueprints()
-	{
-		List<StatModifier> statModifiers = new List<StatModifier>();
-		if (statModifierBlueprints.Count > 0)
-		{
-			foreach (var blueprint in statModifierBlueprints)
-			{
-				statModifiers.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
-			}
-		}
-		return statModifiers;
-	}
-	private List<Damage> InstanceSkillDamageBlueprints()
-	{
-		List<Damage> damages = new List<Damage>();
-		if (damageBlueprints.Count > 0)
-		{
-			foreach (var blueprint in damageBlueprints)
-			{
-				damages.Add(blueprint.CreateBlueprintInstance<Damage>(this));
-			}
-		}
-		return damages;
-	}	
-	
-	private List<Healing> InstanceSkillHealingBlueprints()
-	{
-		List<Healing> healings = new List<Healing>();
-		if (healingBlueprints.Count > 0)
-		{
-			foreach (var blueprint in healingBlueprints)
-			{
-				healings.Add(blueprint.CreateBlueprintInstance<Healing>(this));
-			}
-		}
-		return healings;
-	}
+    [SerializeField] private TargetTypeFlag _targetTypeFlag = TargetTypeFlag.Alive;
+    public TargetTypeFlag TargetTypeFlag => _targetTypeFlag;
 
-	public void Use(List<Character> characterTargets, Character originator)
-	{
-		//Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
+    [SerializeField] private SkillAnimType _skillAnimType;
+    public SkillAnimType SkillAnimType => _skillAnimType;
 
-		originator.SkillSystem.OnSkillUsed?.Invoke(this, characterTargets);
-	}
+    [SerializeField] private GameObject _projectilePrefab;
+    public GameObject ProjectilePrefab => _projectilePrefab;
 
-	public void DoNextBit(List<Character> characterTargets, Character originator)
-	{
-		foreach (Character character in characterTargets)
-		{
+    [SerializeField] private GameObject _effectPrefab;
+    public GameObject EffectPrefab => _effectPrefab;
 
-			ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
+    [SerializeField] private RuntimeAnimatorController _animatorController;
+    public RuntimeAnimatorController AnimatorController => _animatorController;
+
+    [SerializeField] private List<StatModifierBlueprint> _statModifierBlueprints;
+    [SerializeField] private List<DamageBlueprint> _damageBlueprints;
+    [SerializeField] private List<HealingBlueprint> _healingBlueprints;
+
+    public Action OnSkillUsed;
+    
+    private List<StatModifier> _skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
+    private List<Damage> _skillDamages { get { return InstanceSkillDamageBlueprints(); } }
+    private List<Healing> _skillHealings { get { return InstanceSkillHealingBlueprints(); } }
+
+    #endregion
+
+    #region Constructors
+    #endregion
+
+    #region Callbacks
+    #endregion
+
+    #region Public Functions
+
+    public void Use(List<Character> characterTargets, Character originator)
+    {
+        //Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
+
+        originator.SkillSystem.OnSkillUsed?.Invoke(this, characterTargets);
+    }
+
+    public void DoNextBit(List<Character> characterTargets, Character originator)
+    {
+        foreach (Character character in characterTargets)
+        {
+
+            ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
 
 
-			SendDamageStructs(character, originator);
-			SendHealingStructs(character, originator);
-			//ApplyModifiedDamageObjects(character);
-			//ApplyHealingObjects(character);
-		}
-	}
+            SendDamageStructs(character, originator);
+            SendHealingStructs(character, originator);
+        }
+    }
 
-	private void ApplyStatModifiers(Character character)
-	{
-		foreach (StatModifier statModifier in skillStatModifiers)
-		{
-			character.StatSystem.AddModifier(statModifier);
-		}
-	}
+    public bool CanStartUnlocking(ISkill skill, Character character)
+    {
+        if (character.CharacterClass.SkillsAvailable.Contains(skill))
+        {
+            if (_prerequisites.Intersect(character.SkillSystem.UnlockedSkills).Count() == _prerequisites.Count()) // if the intersection of the two lists is the same length, then the UnlockedSkills contains all the prerequiste skills
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	private void SendDamageStructs(Character character, Character originator)
-	{
-		List<Damage> modifiedDamages = ModifyDamageStructs(originator);
-		character.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator);
-	}	
+    public bool CanUnlock(ISkill skill, Character character)
+    {
+        if (CanStartUnlocking(skill, character))
+        {
+            if (skill.UsesToUnlock == 0)
+            {
+                return true;
+            }
+            else if (character.SkillSystem.LockedSkills.ContainsKey(skill))
+            {
+                if (character.SkillSystem.LockedSkills[skill] >= skill.UsesToUnlock)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	private void SendHealingStructs(Character character, Character originator)
-	{
-		List<Healing> modifiedHealings = ModifyHealingStructs(originator);
-		character.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator);
-	}
+#if UNITY_EDITOR
 
-	private List<Damage> ModifyDamageStructs(Character originator)
-	{
-		List<Damage> modifiedDamages = new List<Damage>();
-		foreach (Damage damage in skillDamages)
-		{
-			modifiedDamages.Add(originator.StatSystem.ModifyOutgoingDamage(damage));
-		}
-		return modifiedDamages;
-	}	
-	
-	private List<Healing> ModifyHealingStructs(Character originator)
-	{
-		List<Healing> modifiedHealings = new List<Healing>();
-		foreach (Healing healing in skillHealings)
-		{
-			modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
-		}
-		return modifiedHealings;
-	}
+    [Button("Create Random Skill Object")]
+    public void CreateRandomSkillObject()
+    {
+        RandomSkillObject randomSkillObject = CreateInstance(typeof(RandomSkillObject)) as RandomSkillObject;
+        string assetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Skills/Random Skill Objects/" + this.name + "RandomSkillObject.asset");
+        AssetDatabase.CreateAsset(randomSkillObject, assetPath);
+        Skill skill = AssetDatabase.LoadAssetAtPath<Skill>("Assets/Resources/Skills/" + this.Name + ".asset");
+        randomSkillObject.SetWeightedObject(skill, skill);
+        randomSkillObject.Weighting = 1f;
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.SetDirty(randomSkillObject);
+    }
 
-	private void ApplyModifiedDamageObjects(Character character)
-	{
-		foreach (Damage damage in skillDamages)
-		{
-			character.HealthSystem.AddDamage(damage);
-		}
-	}
+#endif
 
-	private void ApplyHealingObjects(Character character)
-	{
-		foreach (Healing healing in skillHealings)
-		{
-			character.HealthSystem.AddHealing(healing);
-		}
-	}
+    #endregion
 
+    #region Protected Functions
+    #endregion
 
-	public bool CanStartUnlocking(Skill skill, Character character)
-	{
-		if (character.CharacterClass.SkillsAvailable.Contains(skill))
-		{
-			if (prerequisites.Intersect(character.SkillSystem.UnlockedSkills).Count() == prerequisites.Count()) // if the intersection of the two lists is the same length, then the UnlockedSkills contains all the prerequiste skills
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    #region Private Functions
 
-	public bool CanUnlock(Skill skill, Character character)
-	{
-		if (CanStartUnlocking(skill, character))
-		{
-			if (skill.usesToUnlock == 0)
-			{
-				return true;
-			}
-			else if (character.SkillSystem.LockedSkills.ContainsKey(skill))
-			{
-				if (character.SkillSystem.LockedSkills[skill] >= skill.usesToUnlock)
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    private List<StatModifier> InstanceSkillStatModifierBlueprints()
+    {
+        List<StatModifier> statModifiers = new List<StatModifier>();
+        if (_statModifierBlueprints.Count > 0)
+        {
+            foreach (var blueprint in _statModifierBlueprints)
+            {
+                statModifiers.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
+            }
+        }
+        return statModifiers;
+    }
+
+    private List<Damage> InstanceSkillDamageBlueprints()
+    {
+        List<Damage> damages = new List<Damage>();
+        if (_damageBlueprints.Count > 0)
+        {
+            foreach (var blueprint in _damageBlueprints)
+            {
+                damages.Add(blueprint.CreateBlueprintInstance<Damage>(this));
+            }
+        }
+        return damages;
+    }
+
+    private List<Healing> InstanceSkillHealingBlueprints()
+    {
+        List<Healing> healings = new List<Healing>();
+        if (_healingBlueprints.Count > 0)
+        {
+            foreach (var blueprint in _healingBlueprints)
+            {
+                healings.Add(blueprint.CreateBlueprintInstance<Healing>(this));
+            }
+        }
+        return healings;
+    }
+
+    private void ApplyStatModifiers(Character character)
+    {
+        foreach (StatModifier statModifier in _skillStatModifiers)
+        {
+            character.StatSystem.AddModifier(statModifier);
+        }
+    }
+
+    private void SendDamageStructs(Character target, Character originator)
+    {
+        List<Damage> modifiedDamages = ModifyDamageStructs(originator);
+        target.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator);
+    }
+
+    private void SendHealingStructs(Character target, Character originator)
+    {
+        List<Healing> modifiedHealings = ModifyHealingStructs(originator);
+        target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator);
+    }
+
+    private List<Damage> ModifyDamageStructs(Character originator)
+    {
+        List<Damage> modifiedDamages = new List<Damage>();
+        foreach (Damage damage in _skillDamages)
+        {
+            modifiedDamages.Add(originator.StatSystem.ModifyOutgoingDamage(damage));
+        }
+        return modifiedDamages;
+    }
+
+    private List<Healing> ModifyHealingStructs(Character originator)
+    {
+        List<Healing> modifiedHealings = new List<Healing>();
+        foreach (Healing healing in _skillHealings)
+        {
+            modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
+        }
+        return modifiedHealings;
+    }
+
+    #endregion
+
+    #region Inner Classes
+    #endregion
+
 }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.tvOS;
 using Object = System.Object;
 
 [Serializable]
@@ -73,13 +72,22 @@ public class CharacterOrder
     {
         _slots = CreateDictionaryWithKeysAndNullValues();
 
-        Character[] arrayCache = new Character[_numberOfSlots - 1];
-        if (characters.Length != _numberOfSlots)
+        int numberOfCharacters = 0;
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != null)
+            {
+                numberOfCharacters++;
+            }
+        }
+
+        Character[] arrayCache = new Character[_numberOfSlots];
+        if (characters.Length != _numberOfSlots || numberOfCharacters != characters.Length)
         {
             int charactersIndex = 0;
             for (int arrayCacheIndex = 0; arrayCacheIndex < arrayCache.Length; arrayCacheIndex++)
             {
-                if ((characters.Length - 1) < arrayCacheIndex)
+                if ((characters.Length - 1) < charactersIndex)
                 {
                     break;
                 }
@@ -97,6 +105,10 @@ public class CharacterOrder
         for (int i = 0; i < characters.Length; i++)
         {
             _slots[i] = characters[i];
+            if (characters[i] != null)
+            {
+                Debug.Log(characters[i].Name);
+            }
         }
     }
 
@@ -117,24 +129,26 @@ public class CharacterOrder
         return null;        
     }
 
-    public void MoveCharactersForwardIntoSpaces()
+    /// <summary>
+    /// If there are spaces, moves the characters forwards (to a lower slot index).
+    /// Includes characters from the slot index and below
+    /// </summary>
+    /// <param name="includeFromIndex"></param>
+    public void MoveCharactersForwardIntoSpaces(int includeFromIndex = 3)
     {
-        for (int i = 0; i < NumberOfSlots; i++)
+        if (includeFromIndex > NumberOfSlots - 1) { includeFromIndex = NumberOfSlots - 1; }
+
+        for (int i = 0; i < (includeFromIndex + 1); i++)
         {
             if (_slots[i] == null)
             {
                 Character characterToMove = null;
-                for (int j = i + 1; j < NumberOfSlots; j++)
+                for (int j = i + 1; j < (includeFromIndex + 1); j++)
                 {
                     if (_slots[j] != null)
                     {
                         characterToMove = _slots[j];
-                        MoveCharacterToSlot(characterToMove, i, j);
-                        Debug.Log("0:" + (_slots[0] == null ? "null" : _slots[0].Name));
-                        Debug.Log("1:" + (_slots[1] == null ? "null" : _slots[1].Name));
-                        Debug.Log("2:" + (_slots[2] == null ? "null" : _slots[2].Name));
-                        Debug.Log("3:" + (_slots[3] == null ? "null" : _slots[3].Name));
-                        Debug.LogError("This appears to work, but beacuse the characters are still in the battler dictionary, they are not redrawn. We need a function that moves them when it is appropriate.");
+                        SwapCharacterIntoSlot(characterToMove, i);
                         break;
                     }
                 }
@@ -144,9 +158,50 @@ public class CharacterOrder
                 }
             }
         }
-
     }
 
+    /// <summary>
+    /// If there are spaces, moves the characters backwards (to a higher slot index).
+    /// Includes characters from the slot index and above
+    /// </summary>
+    /// <param name="includeFromIndex"></param>
+    public void MoveCharactersBackwardIntoSpaces(int includeFromIndex = 0)
+    {
+        if (includeFromIndex < 0) { includeFromIndex = 0; }
+        for (int i = NumberOfSlots - 1; i > (includeFromIndex - 1); i--)
+        {
+            if (_slots[i] == null)
+            {
+                Character characterToMove = null;
+                for (int j = i - 1; j > (includeFromIndex - 1); j--)
+                {
+                    if (_slots[j] != null)
+                    {
+                        characterToMove = _slots[j];
+
+                        if (characterToMove.CharacterClass.Size == 2)
+                        {
+                            SwapCharacterIntoSlot(characterToMove, i - 1);
+                        }
+                        else
+                        {
+                            SwapCharacterIntoSlot(characterToMove, i);
+                        }
+                        break;
+                    }
+                }
+                if (characterToMove == null)
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Get all the characters in the character order
+    /// </summary>
+    /// <returns>Returns a unique set of Characters as a HashSet, with no null values</returns>
     public HashSet<Character> GetCharacters()
     {
         HashSet<Character> characters = new HashSet<Character>();
@@ -161,6 +216,42 @@ public class CharacterOrder
     }
 
     /// <summary>
+    /// A positive value counts as moving backwards, a negative value counts as forward.
+    /// Forward is closer to the centre of the battle (a lower slot index) and backward is away from the centre of the battle (a highger slot index).
+    /// </summary>
+    /// <param name="characterToMove"></param>
+    /// <param name="slotsToMove"></param>
+    public void MoveCharacter(Character characterToMove, int slotsToMove)
+    {
+        if (slotsToMove == 0) { return; } // no move
+
+        int oldSlotIndex = GetSlotIndexByCharacter(characterToMove);
+
+        int newSlotIndex = oldSlotIndex + slotsToMove;
+
+        if (!ValidateMove(characterToMove, newSlotIndex))
+        {
+            newSlotIndex = GetValidSlotIndexFromInvalidSlotIndex(characterToMove, oldSlotIndex, newSlotIndex);
+        }
+        
+        if (slotsToMove > 0) // move character backwards
+        {
+            RemoveCharacter(characterToMove);
+            MoveCharactersForwardIntoSpaces(newSlotIndex); // but move other characters backwards to balance
+        }
+        else // move character forwards
+        {
+            RemoveCharacter(characterToMove);
+            MoveCharactersBackwardIntoSpaces(newSlotIndex); // but move other characters backwards to balance
+        }
+        _slots[newSlotIndex] = characterToMove;
+        if (characterToMove.CharacterClass.Size == 2)
+        {
+            _slots[newSlotIndex + 1] = characterToMove;
+        }
+    }
+
+    /// <summary>
     /// Moves the character passed into the slotIndex (this is the 0-indexed number
     /// for the slot). If the characterToMove is size 2 and in the last slot, this 
     /// will give a warning, and just not move the character.
@@ -171,8 +262,11 @@ public class CharacterOrder
     /// <param name="newSlotIndex"></param>
     /// <param name="oldSlotIndex"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void MoveCharacterToSlot(Character characterToMove, int newSlotIndex, int oldSlotIndex)
+    public void SwapCharacterIntoSlot(Character characterToMove, int newSlotIndex)
     {
+        int oldSlotIndex = GetSlotIndexByCharacter(characterToMove);
+        if (oldSlotIndex == -1) { return; }
+
         if (!ValidateMove(characterToMove, newSlotIndex)) { return; }
 
         Character cachedCharacter1; 
@@ -185,19 +279,44 @@ public class CharacterOrder
         }
         else if (characterToMove.CharacterClass.Size == 2)
         {
-            cachedCharacter1 = _slots[newSlotIndex];
-            cachedCharacter2 = _slots[newSlotIndex + 1] == characterToMove ? null : _slots[newSlotIndex + 1];
-            _slots[newSlotIndex] = characterToMove;
-            _slots[newSlotIndex + 1] = characterToMove;
+            int moveLength = Math.Abs(oldSlotIndex - newSlotIndex);
 
-            if (cachedCharacter2 == null) // we're just moving forward one
+            if (moveLength < 1 || moveLength > 2)
             {
-                _slots[oldSlotIndex + 1] = cachedCharacter1;
+                throw new ArgumentOutOfRangeException("Maximum move for size 2 character should be 2.");
             }
-            else
+
+            if (moveLength == 2) // this can only happen from position index 0 -> 2, or 2 -> 0, so it is a straight swap.
             {
+                cachedCharacter1 = _slots[newSlotIndex];
+                cachedCharacter2 = _slots[newSlotIndex + 1];
+
+                _slots[newSlotIndex] = characterToMove;
+                _slots[newSlotIndex + 1] = characterToMove;
+
                 _slots[oldSlotIndex] = cachedCharacter1;
                 _slots[oldSlotIndex + 1] = cachedCharacter2;
+            }
+            else // a move of length 1 move could be forward or backward and from position index 1, 2 or 3.
+            {
+                if(oldSlotIndex > newSlotIndex) // moving left
+                {
+                    cachedCharacter1 = _slots[newSlotIndex];
+
+                    _slots[newSlotIndex] = characterToMove;
+                    _slots[newSlotIndex + 1] = characterToMove;
+
+                    _slots[oldSlotIndex + 1] = cachedCharacter1;
+                }
+                else // moving right
+                {
+                    cachedCharacter1 = _slots[newSlotIndex + 1];
+
+                    _slots[newSlotIndex] = characterToMove;
+                    _slots[newSlotIndex + 1] = characterToMove;
+
+                    _slots[oldSlotIndex] = cachedCharacter1;
+                }
             }
         }
     }
@@ -224,7 +343,6 @@ public class CharacterOrder
         if (characters.Count == 0) { return characters; } 
         for (int i = 0; i < NumberOfSlots; i++)
         {
-            
             
             if (characters[j].CharacterClass.Size == 1 && _slots[i] == null)
             {
@@ -274,21 +392,55 @@ public class CharacterOrder
     {
         if (characterToMove == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException("Character for move was null.");
         }
 
         if (!_slots.ContainsValue(characterToMove))
         {
-            Debug.LogWarning("Attempting to move a character that is not in the character order.");
-            return false;
+            throw new Exception("Attempting to move a character that is not in the character order.");
         }
 
         if (characterToMove.CharacterClass.Size == 2 && slotIndex == NumberOfSlots - 1)
         {
-            Debug.LogWarning("Attempting to place a size 2 character in a slot with only 1 space. Move aborted.");
+            return false;
+        }
+
+        if (slotIndex < 0 || slotIndex > (NumberOfSlots - 1))
+        {
             return false;
         }
         return true;
+    }
+
+    private int GetValidSlotIndexFromInvalidSlotIndex(Character characterToMove, int oldSlotIndex, int proposedNewSlotIndex)
+    {
+        bool moveForwards = oldSlotIndex > proposedNewSlotIndex;
+        int validNewSlotIndex;
+
+        if (characterToMove.CharacterClass.Size == 2)
+        {
+            if (moveForwards)
+            {
+                validNewSlotIndex = proposedNewSlotIndex < 0 ? 0 : proposedNewSlotIndex > (_numberOfSlots - 2) ? (_numberOfSlots - 2) : proposedNewSlotIndex;
+            }
+            else
+            {
+                validNewSlotIndex = (_numberOfSlots - 2) - oldSlotIndex; // can only move to the penultimate place as a size 2
+            }
+        }
+        else
+        {
+            if (moveForwards)
+            {
+                validNewSlotIndex = proposedNewSlotIndex < 0 ? 0 : proposedNewSlotIndex > (_numberOfSlots - 1) ? (_numberOfSlots - 1) : proposedNewSlotIndex;
+            }
+            else
+            {
+                validNewSlotIndex = (_numberOfSlots - 1) - oldSlotIndex;
+            }
+        }
+
+        return validNewSlotIndex;
     }
 
     private Dictionary<int, Character> CreateDictionaryWithKeysAndNullValues()

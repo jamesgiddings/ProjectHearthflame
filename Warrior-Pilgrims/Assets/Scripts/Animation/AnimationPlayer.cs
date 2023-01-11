@@ -9,7 +9,6 @@ public class AnimationPlayer
 	private Animator animator;
     private Battler battler;
     private Character character;
-    private BattleManager battleManager;
 
     private CharacterGameObjectManager _characterGameObjectManager;
 
@@ -20,12 +19,11 @@ public class AnimationPlayer
     private string cast;
     private string shoot;
 
-    public AnimationPlayer(Battler battler, Character character, BattleManager battleManager)
+    public AnimationPlayer(Battler battler, Character character)
 	{
         this.battler = battler;
         this.character = character;
         Debug.Log(this.character.Name + " is getting a new Animation player");
-        this.battleManager = battleManager;
         _characterGameObjectManager = ServiceLocator.Instance.CharacterGameObjectManager;
         animator = battler.gameObject.GetComponent<Animator>();
 
@@ -70,7 +68,7 @@ public class AnimationPlayer
         }
     }
 
-	public void DisplayAnimation(Skill skill, List<Character> targets)
+	public void DisplayAnimation(ISkill skill, List<Character> targets)
     {
         switch (skill.SkillAnimType)
         {

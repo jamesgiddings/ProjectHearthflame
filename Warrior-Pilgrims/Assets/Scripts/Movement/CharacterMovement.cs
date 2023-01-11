@@ -1,3 +1,4 @@
+using GramophoneUtils.Events.CustomEvents;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -13,12 +14,38 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private CharacterMovement _followee;
     [ShowIf("_isFollower"), PropertyTooltip("This is the distance the character will follow at.")]
     [SerializeField] private float _gap;
+
+    [BoxGroup("Moevement By State")]
+    [SerializeField] private StateManager _gameStateManager;
+    [BoxGroup("Moevement By State")]
+    [SerializeField] private State _explorationState;
+    [BoxGroup("Moevement By State")]
+    [SerializeField] private StateEvent _enterExplorationState;
+    [BoxGroup("Moevement By State")]
+    [SerializeField] private StateEvent _enterBattleState;
+
     private float _speedAdjustmentCoefficientToMaintainGap = 40f;
 
     private float _horizontalMove = 0f;
     private bool _jump;
 
     #region Callbacks
+
+    private void OnEnable()
+    {
+        if (_gameStateManager.State != null)
+        {
+            if (_gameStateManager.State == _explorationState)
+            {
+                SetIsEnabled(true);
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        SetIsEnabled(false);
+    }
 
     void Start()
     {
@@ -62,8 +89,6 @@ public class CharacterMovement : MonoBehaviour
         {
             _horizontalMove = 0f; // stop the characters motion
         }
-
-
     }
 
     private void FixedUpdate()
@@ -114,6 +139,15 @@ public class CharacterMovement : MonoBehaviour
     {
         _isFollower = value;
     }
+
+    public void SetIsEnabled(bool value)
+    {
+        this.enabled = value;
+    }
+
+    #endregion
+
+    #region Utilities
 
     #endregion
 }

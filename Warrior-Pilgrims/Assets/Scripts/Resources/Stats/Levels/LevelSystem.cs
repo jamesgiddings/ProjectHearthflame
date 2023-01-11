@@ -112,7 +112,7 @@ namespace GramophoneUtils.Stats
 
 		public bool IsMaxLevel(int level)
 		{
-			return level == experienceRequirements.Length - 1;
+			return level == characterClass.MaxLevel - 1; // LevelSystem works in levels starting at zero, so we subtract 1 from the characterClass MaxLevel which starts at 1.
 		}
 	}
 }

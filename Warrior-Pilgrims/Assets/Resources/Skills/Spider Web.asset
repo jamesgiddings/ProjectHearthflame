@@ -13,24 +13,23 @@ MonoBehaviour:
   m_Name: Spider Web
   m_EditorClassIdentifier: 
   UID: eec3960f-ef33-432a-a846-75e87c50ec2d
-  name: Web
-  sprite: {fileID: 0}
-  classRestrictions:
-  - {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
-  school: 0
-  prerequisites: []
-  usesToUnlock: 0
-  targetAreaFlag: 12
-  targetNumberFlag: 2
-  targetTypeFlag: 1
-  skillAnimType: 3
-  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+  name: Spider Web
+  _sprite: {fileID: 0}
+  _classRestrictions: []
+  _school: 2
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 12
+  _targetNumberFlag: 2
+  _targetTypeFlag: 1
+  _skillAnimType: 3
+  _projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
-  effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+  _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
     type: 3}
-  animatorController: {fileID: 9100000, guid: 9bc1efec7131407458845a638f46b93b, type: 2}
-  statModifierBlueprints:
+  _animatorController: {fileID: 9100000, guid: 9bc1efec7131407458845a638f46b93b, type: 2}
+  _statModifierBlueprints:
   - {fileID: 11400000, guid: 0d63f1257d11e0e4fa44011a2164c449, type: 2}
   - {fileID: 11400000, guid: cc8515336ad85824fb385add4308355e, type: 2}
-  damageBlueprints: []
-  healingBlueprints: []
+  _damageBlueprints: []
+  _healingBlueprints: []

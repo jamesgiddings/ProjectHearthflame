@@ -3,6 +3,7 @@ using GramophoneUtils.Stats;
 using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Enemy Turn State", menuName = "States/Battle Sub States/Enemy Turn State")]
 public class EnemyTurnState : BattleSubState
 {
 	private Character StateActor;
@@ -21,7 +22,7 @@ public class EnemyTurnState : BattleSubState
 
         yield return new WaitForSeconds(1f);
 
-		Skill enemySkill = BattleManager.BattleDataModel.CurrentActor.Brain.ChooseSkill(BattleManager.BattleDataModel.CurrentActor);
+		ISkill enemySkill = BattleManager.BattleDataModel.CurrentActor.Brain.ChooseSkill(BattleManager.BattleDataModel.CurrentActor);
 
 		if (enemySkill != null)
 		{
@@ -40,8 +41,9 @@ public class EnemyTurnState : BattleSubState
 	{
 		Debug.Log("EndOfEnemyAction()");
         ServiceLocator.Instance.CharacterGameObjectManager.CharacterBattlerDictionary[StateActor].OnTurnComplete -= EndOfEnemyAction;
-		BattleManager.BattleDataModel.NextTurn();
-	}
+        //BattleManager.BattleDataModel.NextTurn();
+        ServiceLocator.Instance.BattleStateManager.ChangeState(ServiceLocator.Instance.ServiceLocatorObject.PostCharacterTurnState);
+    }
 
 	public override void EnterState()
 	{

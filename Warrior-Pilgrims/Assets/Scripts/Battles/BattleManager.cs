@@ -1,65 +1,79 @@
-using GramophoneUtils.Stats;
 using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
-using System;
-using Cinemachine;
-using GramophoneUtils.Characters;
 using System.Linq;
+using GramophoneUtils.Utilities;
+using GramophoneUtils.Events.CustomEvents;
 
-public class BattleManager : MonoBehaviour
+[CreateAssetMenu(fileName = "Battle Manager", menuName = "Battles/Systems/Battle Manager")]
+public class BattleManager : ScriptableObjectThatCanRunCoroutines
 {
-	private Battle battle;
-	
-	[SerializeField] private BattleBehaviour battleBehaviour;
-	private GameObject turnOrderPrefab;
+    #region Attributes/Fields/Properties
 
-	private BattleDataModel battleDataModel;
+    [SerializeField] private GameObject _rearBattlePrefab;
+    public GameObject RearBattlePrefab => _rearBattlePrefab;
+
+    [SerializeField] private GameObject _turnOrderPrefab;
+    public GameObject TurnOrderPrefab => _turnOrderPrefab;
+
+    [SerializeField] private VoidEvent _onCharactersUpdated;
+    public VoidEvent OnCharactersUpdated => _onCharactersUpdated;
+
+    [SerializeField] private GameObject _radialMenuPrefab;
+
+    private RadialMenu _radialMenu;
+
+    [SerializeField] private GameObject _battleRewardsPrefab;
+
+    private BattleRewardsDisplayUI _battleRewardsDisplayUI;
+
+    private Battle _battle;
+	
+	private BattleDataModel _battleDataModel;
+
 	private TargetManager targetManager;
 
-	private CharacterInventory battlersCharacterInventory;
-	private CharacterInventory orderedBattlersCharacterInventory;
-	private CharacterInventory enemyBattlersCharacterInventory;
-	private CharacterInventory playerBattlersCharacterInventory;
-
-	public CharacterInventory BattlersCharacterInventory => battlersCharacterInventory;
-	public CharacterInventory OrderedBattlersCharacterInventory => orderedBattlersCharacterInventory;
-	public CharacterInventory EnemyBattlersCharacterInventory => enemyBattlersCharacterInventory;
-	public CharacterInventory PlayerBattlersCharacterInventory => playerBattlersCharacterInventory;
-
 	private TurnOrderUI turnOrderUI;
+
+    private RearBattleUI _rearBattleUI;
 	public TargetManager TargetManager => targetManager; // getter
-	public BattleDataModel BattleDataModel => battleDataModel; // getter
+	public BattleDataModel BattleDataModel => _battleDataModel; // getter
 
-	public BattleBehaviour BattleBehaviour => battleBehaviour;
+	public Battle Battle => _battle;
 
-	public Battle Battle => battle;
+    #endregion
 
-	private void OnEnable()
+    #region Callbacks
+    #endregion
+
+    #region API
+
+    public void InitialiseBattleManager()
 	{
-        battleDataModel = ServiceLocator.Instance.BattleDataModel;
+        _battleDataModel = ServiceLocator.Instance.BattleDataModel;
         targetManager = ServiceLocator.Instance.TargetManager;
-        ServiceLocator.Instance.CharacterModel.AddEnemyCharacters(battle.BattleCharacters);
-        battleDataModel.InitialiseBattleModel();
-		//InitialiseBattlerDisplay();
-
-		
+        ServiceLocator.Instance.CharacterModel.AddEnemyCharacters(_battle.BattleCharacters);
+        _battleDataModel.InitialiseBattleModel();
 
         InitialiseTurnOrderUI();
 		InitialiseRearBattleUI();
         InitialiseBattleRewardsDisplayUI();
-        battleDataModel.OnCurrentActorChanged?.Invoke();
+        _battleDataModel.OnCurrentActorChanged?.Invoke();
 
         // Move to next state:
-        battleDataModel.Invoke("UpdateState", 0.5f);
+        //_battleDataModel.UpdateState(0.5f);
     }
 
-        public void SetBattle(Battle battle)
+    public void SetBattle(Battle battle)
     {
-		this.battle = battle;
+		this._battle = battle;
     }
 
-	public void GetTargets(Skill skill)
+    public void InitialiseRadialMenu()
+    {
+        _radialMenu = Instantiate(_radialMenuPrefab, ServiceLocator.Instance.BattleUITransform).GetComponent<RadialMenu>();
+        _radialMenu.InitialiseRadialMenu(this);
+    }
+
+    public void GetTargets(ISkill skill)
 	{
 		targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor);
         Debug.Log("GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count: " + targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count);
@@ -70,52 +84,47 @@ public class BattleManager : MonoBehaviour
 		targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 	}
 
-	#region UI
+    public void EndBattle()
+    {
+        Destroy(turnOrderUI.gameObject);
+        Destroy(_battleRewardsDisplayUI.gameObject);
+        _rearBattlePrefab.SetActive(false);
+        ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.ExplorationState);
+    }
 
-	private void InitialiseBattleRewardsDisplayUI()
-	{
-		battleBehaviour.BattleRewardsDisplayUI.Initialise(this);
-	}
-
-	
-
-	private void InitialiseTurnOrderUI()
-	{
-		if (battleBehaviour != null)
-		{
-			turnOrderPrefab = battleBehaviour.TurnOrderPrefab;
-			turnOrderUI = UnityEngine.Object.Instantiate(turnOrderPrefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<TurnOrderUI>();
-			turnOrderUI.Initialise();
-		}
-	}
-
-	private void InitialiseRearBattleUI()
-	{
-		battleBehaviour.RearBattlePrefab.SetActive(true);
-	}
-
-	public void InitialiseRadialMenu()
-	{
-		if (battleBehaviour != null)
-		{
-			battleBehaviour.RadialMenu.InitialiseRadialMenu(this);
-		}
-	}
-
+    public void AddBattleReward()
+    {
+        _battle.BattleReward.AddBattleReward(ServiceLocator.Instance.CharacterModel);
+        _battleDataModel.OnBattleRewardsEarned?.Invoke(_battle.BattleReward);
+    }
 
     #endregion
 
-    #region EndBattle
 
-    public void EndBattle()
-	{
-        Destroy(turnOrderUI.gameObject);
-        battleBehaviour.RearBattlePrefab.SetActive(false);
-        ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.ExplorationState);
-		//UninitialiseBattlers();
-	}
+    #region Utilities
 
-	private void UninitialiseBattlers()
+
+    private void InitialiseBattleRewardsDisplayUI()
+    {
+        _battleRewardsDisplayUI = Instantiate(_battleRewardsPrefab, ServiceLocator.Instance.BattleUITransform).GetComponent<BattleRewardsDisplayUI>();
+        _battleRewardsDisplayUI.Initialise(this);
+    }
+
+    private void InitialiseTurnOrderUI()
+    {
+        //turnOrderUI = Instantiate(_turnOrderPrefab, ServiceLocator.Instance.BattleUITransform).GetComponent<TurnOrderUI>();
+        turnOrderUI = Instantiate(_turnOrderPrefab, ServiceLocator.Instance.transform).GetComponent<TurnOrderUI>(); // TODO fix this, it only works when it isn't on a canvas
+        turnOrderUI.Initialise();
+    }
+
+    private void InitialiseRearBattleUI()
+    {
+        _rearBattleUI = Instantiate(_rearBattlePrefab, ServiceLocator.Instance.BattleUITransform).GetComponent<RearBattleUI>();
+        //_rearBattlePrefab.SetActive(true);
+    }
+
+
+    private void UninitialiseBattlers()
 	{
 		Battler[] battlers = ServiceLocator.Instance.CharacterGameObjectManager.CharacterBattlerDictionary.Values.ToArray();
 

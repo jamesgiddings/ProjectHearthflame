@@ -18,15 +18,17 @@ MonoBehaviour:
     type: 3}
   _description: 
   _characterClass: {fileID: 11400000, guid: 4c175e1e5aadd684cab66496433ed410, type: 2}
-  _stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   _startsUnlocked: 0
   _startingLevel: 0
   _characterPrefab: {fileID: 5730661112063783411, guid: f06bec351d7f8a546872e599170d794f,
     type: 3}
-  _brain: {fileID: 11400000, guid: c7ce8b378cd851a4c9d4cbd7c7369cfd, type: 2}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: f293459a6c3090441957faae1ecfec64, type: 2}
   _portrait: {fileID: -4556660915178727136, guid: 528858e6e6597fc42a1be63f8c52deb3,
     type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
+  _isPlayer: 0
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Evil EyeAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/Evil EyeAnimationController
   _idle_Left: {fileID: 7400000, guid: 71fdf6a53b036ad4090c29b6853bcedf, type: 2}

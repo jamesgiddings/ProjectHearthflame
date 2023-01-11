@@ -24,7 +24,9 @@ public class RadialMenu : MonoBehaviour
 	private Character character;
 
 	private List<Item> items = new List<Item>();
-	private List<Skill> skills = new List<Skill>();
+	private List<ISkill> skills = new List<ISkill>();
+
+    #region API
 
     public Character Character
 	{
@@ -45,7 +47,14 @@ public class RadialMenu : MonoBehaviour
 		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateDisplay;
 	}
 
-	private RMF_RadialMenu InitialiseItemSubMenu()
+	public void Destroy()
+	{
+		Destroy(this.gameObject);
+	}
+
+    #endregion
+
+    private RMF_RadialMenu InitialiseItemSubMenu()
 	{
 		subMenu = UnityEngine.Object.Instantiate(subMenuPrefab, itemsElementsParent).GetComponent<RMF_RadialMenu>();
 
@@ -80,7 +89,7 @@ public class RadialMenu : MonoBehaviour
 
 		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { battleManager.TargetManager.ClearTargets(); } });
 
-		foreach (Skill skill in character.SkillSystem.UnlockedSkills) // add the unlocked skills from the SkillSystem
+		foreach (ISkill skill in character.SkillSystem.UnlockedSkills) // add the unlocked skills from the SkillSystem
 		{
 			//Debug.LogWarning("This should actually add from that characters quickbar, not the partyInventory"); //todo
 			skills.Add(skill);

@@ -6,43 +6,60 @@ using UnityEngine;
 using System.Linq;
 using Enum.Extensions;
 using System;
+using GramophoneUtils.Utilities;
+using Sirenix.OdinInspector;
+using GramophoneUtils.Events.CustomEvents;
+using UnityEngine.Events;
+using GramophoneUtils.Events.Listeners;
 
-public class TargetManager : MonoBehaviour
+[CreateAssetMenu(fileName = "Battle Target Manager", menuName = "Battles/Systems/Battle Target Manager")]
+public class TargetManager : ScriptableObjectThatCanRunCoroutines
 {
-	private BattleManager battleManager;
+    #region Attributes/Fields/Properties
 
-	private bool _isTargeting;
+    [SerializeField, Required] private BattleDataModel _battleDataModel;
 
-	private Skill _currentSkill;
+	[SerializeField] private ScriptableObjectStateListener OnBattleEnterStateListener;
+	[SerializeField] private ScriptableObjectStateListener OnBattleExitStateListener;
+
+    private bool _isTargeting;
+
+	[ShowInInspector]
+	private ISkill _currentSkill;
 
 	private int _targetIndex = 0;
 
 	private List<Character> allPossibleTargetsCache = new List<Character>();
 
+	[ShowInInspector]
 	private List<Character> _currentTargetsCache = new List<Character>();
 
 	public Action<List<Character>> OnCurrentTargetsChanged;
 
+	[ShowInInspector]
 	public List<Character> CurrentTargetsCache => _currentTargetsCache; // getter
 
+	[ShowInInspector]
 	public bool IsTargeting => _isTargeting; // getter
 
-    private void OnEnable()
-	{
-        battleManager = ServiceLocator.Instance.BattleManager;
-        battleManager.BattleDataModel.OnSkillUsed += UseSkill;
+    #endregion
+
+    #region API
+
+    public void SubscribeToBattleDataModelOnSkillUsed()
+    {
+        ServiceLocator.Instance.BattleDataModel.OnSkillUsed += UseSkill;
     }
 
-    private void OnDisable()
-	{
-		battleManager.BattleDataModel.OnSkillUsed -= UseSkill;
-	}
+    public void UnsubscribeFromBattleDataModelOnSkillUsed()
+    {
+        ServiceLocator.Instance.BattleDataModel.OnSkillUsed -= UseSkill;
+    }
 
-	public List<Character> GetAllPossibleTargets(Skill skill, Character originator)
+    public List<Character> GetAllPossibleTargets(ISkill skill, Character originator)
 	{
 		_isTargeting = true;
 		_currentSkill = skill;
-		//List<Character> AllBattlers = battleManager.BattleDataModel.BattlersList; // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
 		List<Character> AllBattlers = new List<Character>();
 		AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.PlayerCharacters); // we want to use the BattlersList, not the ordered list becuase Battlers list is what is used to determine the order they are displayed.
         AllBattlers.AddRange(ServiceLocator.Instance.CharacterModel.EnemyCharacters);
@@ -74,7 +91,7 @@ public class TargetManager : MonoBehaviour
 		_isTargeting = false;
 	}
 
-	public List<Character> GetCurrentlyTargeted(Skill skill, Character originator)
+	public List<Character> GetCurrentlyTargeted(ISkill skill, Character originator)
 	{
 		_currentTargetsCache = new List<Character>(GetAllPossibleTargets(skill, originator));
 		List<Character> currentlyTargeted = new List<Character>();
@@ -91,7 +108,7 @@ public class TargetManager : MonoBehaviour
 				}
 				else
 				{
-					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(_currentTargetsCache, skill));
+					currentlyTargeted.AddRange(originator.Brain.ChooseTargets(originator, skill));
 				}
 				break;
 			case TargetNumberFlag.All:
@@ -117,40 +134,38 @@ public class TargetManager : MonoBehaviour
 				List<Character> currentlyTargeted = new List<Character>();
 				switch (direction)
 				{
-					case Vector2 vector when (vector.x >= 0f && Math.Abs(vector.x) > Math.Abs(vector.y)): // move right
-						break;
-					case Vector2 vector when (vector.x <= 0f && Math.Abs(vector.x) > Math.Abs(vector.y)): // move left
-						break;
-					case Vector2 vector when (vector.y >= 0f && Math.Abs(vector.y) > Math.Abs(vector.x)): // move down
-						_targetIndex--;
-						if (_targetIndex < 0)
-						{
-							_targetIndex = _currentTargetsCache.Count - 1;
-						}
-						if (_targetIndex > (_currentTargetsCache.Count - 1))
-						{
-							_targetIndex = 0;
-						}
-						if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
-							currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
-						GameManager.Instance.StartCoroutine(InputDelay(0.1f));
-						break;
-					case Vector2 vector when (vector.y <= 0f && Math.Abs(vector.y) > Math.Abs(vector.x)): // move up
-						_targetIndex++;
-						if (_targetIndex < 0)
-						{
-							_targetIndex = _currentTargetsCache.Count - 1;
-						}
-						if (_targetIndex > (_currentTargetsCache.Count - 1))
-						{
-							_targetIndex = 0;
-						}
-						if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
-							currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
-						GameManager.Instance.StartCoroutine(InputDelay(0.1f));
-						break;
-						
-				}
+					case Vector2 vector when (vector.y >= 0f && Math.Abs(vector.y) > Math.Abs(vector.x) || // move down
+                    vector.x >= 0f && Math.Abs(vector.x) > Math.Abs(vector.y)): // move left
+                        _targetIndex++;
+                        if (_targetIndex < 0)
+                        {
+                            _targetIndex = _currentTargetsCache.Count - 1;
+                        }
+                        if (_targetIndex > (_currentTargetsCache.Count - 1))
+                        {
+                            _targetIndex = 0;
+                        }
+                        if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
+                            currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
+                        StartCoroutine(InputDelay(0.1f));
+                        break;
+					case Vector2 vector when (vector.y <= 0f && Math.Abs(vector.y) > Math.Abs(vector.x) || // move up
+                    vector.x <= 0f && Math.Abs(vector.x) > Math.Abs(vector.y)): // move right
+                        _targetIndex--;
+                        if (_targetIndex < 0)
+                        {
+                            _targetIndex = _currentTargetsCache.Count - 1;
+                        }
+                        if (_targetIndex > (_currentTargetsCache.Count - 1))
+                        {
+                            _targetIndex = 0;
+                        }
+                        if (_targetIndex > -1 && _targetIndex < _currentTargetsCache.Count)
+                            currentlyTargeted.Add(_currentTargetsCache[_targetIndex]);
+                        StartCoroutine(InputDelay(0.1f));
+                        break;
+
+                }
 				OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
 				return currentlyTargeted;
 			default:
@@ -158,14 +173,20 @@ public class TargetManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator InputDelay(float time)
-	{
-		yield return new WaitForSeconds(time);
-	}
-
 	public Character GetTargetByMouse()
 	{
 		Debug.LogError("Mouse targeting not implemented.");
 		return null;
 	}
+
+    #endregion
+
+    #region Utilities
+    private IEnumerator InputDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
+
+    #endregion
+
 }

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d73640312e0be4a806d612a3533197, type: 3}
+  m_Name: TargetToSlots_XXXX_OXXXandXXXX_XOXXandXXXX_XXOXandXXXX_XXXO
+  m_EditorClassIdentifier: 
+  _targetCombinations:
+  - rid: 5443654707522306048
+  - rid: 5443654707522306049
+  - rid: 5443654707522306050
+  - rid: 5443654707522306051
+  references:
+    version: 2
+    RefIds:
+    - rid: 5443654707522306048
+      type: {class: TargetCombination, ns: , asm: Scripts}
+      data:
+        _allySlot1: 0
+        _allySlot2: 0
+        _allySlot3: 0
+        _allySlot4: 0
+        _enemySlot1: 1
+        _enemySlot2: 0
+        _enemySlot3: 0
+        _enemySlot4: 0
+    - rid: 5443654707522306049
+      type: {class: TargetCombination, ns: , asm: Scripts}
+      data:
+        _allySlot1: 0
+        _allySlot2: 0
+        _allySlot3: 0
+        _allySlot4: 0
+        _enemySlot1: 0
+        _enemySlot2: 1
+        _enemySlot3: 0
+        _enemySlot4: 0
+    - rid: 5443654707522306050
+      type: {class: TargetCombination, ns: , asm: Scripts}
+      data:
+        _allySlot1: 0
+        _allySlot2: 0
+        _allySlot3: 0
+        _allySlot4: 0
+        _enemySlot1: 0
+        _enemySlot2: 0
+        _enemySlot3: 1
+        _enemySlot4: 0
+    - rid: 5443654707522306051
+      type: {class: TargetCombination, ns: , asm: Scripts}
+      data:
+        _allySlot1: 0
+        _allySlot2: 0
+        _allySlot3: 0
+        _allySlot4: 0
+        _enemySlot1: 0
+        _enemySlot2: 0
+        _enemySlot3: 0
+        _enemySlot4: 1

@@ -150,7 +150,7 @@ public class ResourceDatabaseEditorWindow : ExtendedEditorWindow
         {
             case Tabs.Characters:
 
-                DisplayTabContent(typeof(CharacterTemplate));
+                DisplayTabContent(typeof(Character));
 
 
                 //if (characterTemplate != null)

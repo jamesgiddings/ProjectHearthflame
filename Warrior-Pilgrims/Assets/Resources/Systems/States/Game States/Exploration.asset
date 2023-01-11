@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebb1f73b5dc1e34a8f90816cfe6ea37, type: 3}
+  m_Name: Exploration
+  m_EditorClassIdentifier: 
+  enterStateEvent: {fileID: 11400000, guid: 83cd5d6eac3e96c41aa001f756a9d068, type: 2}
+  exitStateEvent: {fileID: 11400000, guid: 00485d7952dc43146882985cc4b573b9, type: 2}
+  _subStateManager: {fileID: 0}
+  _stateExitTimerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _exitState: {fileID: 0}
+  _exitStateStateManager: {fileID: 0}
+  _delay: 0
+  _onAfterEnterUnityEvents: []
+  _onBeforeExitUnityEvents: []

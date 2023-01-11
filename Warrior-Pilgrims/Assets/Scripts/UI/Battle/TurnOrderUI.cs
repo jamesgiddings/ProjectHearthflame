@@ -14,13 +14,24 @@ public class TurnOrderUI : MonoBehaviour
 	private BattleDataModel _battleDataModel;
 	private List<CharacterTurnSlotUI> _characterTurnSlotUIs;
 
-    #region API
+	#region Callbacks
 
-    public void Initialise()
+	private void OnDestroy()
+	{
+        ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged = null;
+    }
+
+	#endregion
+
+	#region Public Functions
+
+	public void Initialise()
 	{
 		_battleDataModel = ServiceLocator.Instance.BattleDataModel;
 		_characterModel = ServiceLocator.Instance.CharacterModel;
-    ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged += UpdateTurnOrderUI;
+		ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged = null;
+
+        ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged += UpdateTurnOrderUI;
 
 		_characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
 
@@ -35,13 +46,16 @@ public class TurnOrderUI : MonoBehaviour
 
 	public void ReinitialiseOnBattlerChange()
 	{
-		RemoveAllSlots();
+        ServiceLocator.Instance.BattleManager.BattleDataModel.OnCurrentActorChanged = null;
+        RemoveAllSlots();
         Initialise();
 	}
 
 	public void UpdateTurnOrderUI()
 	{
-		for (int i = 0; i < _characterTurnSlotUIs.Count; i++)
+		ReinitialiseOnBattlerChange();
+
+        for (int i = 0; i < _characterTurnSlotUIs.Count; i++)
 		{
 			_characterTurnSlotUIs[i].SlotResource = _battleDataModel.OrderedBattlersList[i];
 			_characterTurnSlotUIs[i].Character = _battleDataModel.OrderedBattlersList[i];
@@ -52,7 +66,7 @@ public class TurnOrderUI : MonoBehaviour
 
     #endregion
 
-    #region Utilities
+    #region Private Functions
 
 	private void RemoveAllSlots()
 	{

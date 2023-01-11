@@ -8,9 +8,9 @@ namespace GramophoneUtils.Items.Containers
 {
 	public class SkillSlotUI : ResourceSlotUI, IDragHandler
 	{
-		[SerializeField] private Skill slotSkill;
+		[SerializeField] private ISkill slotSkill;
 
-		public override Resource SlotResource => slotSkill;
+		public override Resource SlotResource => (Resource) slotSkill;
 
 		public void OnDrag(PointerEventData eventData)
 		{

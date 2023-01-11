@@ -5,10 +5,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using GramophoneUtils.Utilities;
 
 namespace GramophoneUtils.SavingLoading
-{    
-    public class SavingSystem : MonoBehaviour
+{
+    [CreateAssetMenu(fileName = "Saving System", menuName = "Saving and Loading/Saving System")]
+    public class SavingSystem : ScriptableObjectThatCanRunCoroutines
     {
         [SerializeField] private string statePath = "state";
 

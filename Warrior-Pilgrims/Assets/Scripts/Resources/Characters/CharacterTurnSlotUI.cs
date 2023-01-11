@@ -53,17 +53,29 @@ public class CharacterTurnSlotUI : CharacterSlotUI
 
 	public bool IsCurrentCharacter
     {
-        get { return isCurrentCharacter; }
-        set { isCurrentCharacter = value; currentCharacterImage.enabled = value; UpdateSlotUI(); }
+        get 
+        { 
+            return isCurrentCharacter; 
+        }
+        set 
+        { 
+            isCurrentCharacter = value; 
+            currentCharacterImage.enabled = value; 
+            UpdateSlotUI(); 
+        }
     }
 
     public bool GetIsCurrentCharacter()
 	{
-        if (character == null)
+        if (character == null && slotResource == null)
 		{
             return false;
 		}
-        else
+        else if ((Character) slotResource != null)
+        {
+            Character characterFromSlotResource = (Character) slotResource;
+            return characterFromSlotResource.IsCurrentActor;
+        }
 		{
             return character.IsCurrentActor;
         }
@@ -95,6 +107,7 @@ public class CharacterTurnSlotUI : CharacterSlotUI
         onCharacterSlotChanged?.Invoke();
 
         currentCharacterImage.enabled = GetIsCurrentCharacter();
+
         if (GetIsCharacterDead())
         {
             if (SlotResource.Sprite != null)

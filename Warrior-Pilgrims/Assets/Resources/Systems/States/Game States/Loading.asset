@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebb1f73b5dc1e34a8f90816cfe6ea37, type: 3}
+  m_Name: Loading
+  m_EditorClassIdentifier: 
+  enterStateEvent: {fileID: 11400000, guid: 012f3f7ddbdf95b4496c2aab0b36346a, type: 2}
+  exitStateEvent: {fileID: 11400000, guid: a2741a52d2a77a94290defbe2017a6e4, type: 2}
+  _subStateManager: {fileID: 11400000, guid: ea47f03035f3f514ea4e51e1941ee26d, type: 2}
+  _stateExitTimerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _exitState: {fileID: 0}
+  _exitStateStateManager: {fileID: 0}
+  _delay: 0
+  _onAfterEnterUnityEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+  _onBeforeExitUnityEvents: []

@@ -2,28 +2,44 @@ using GramophoneUtils.Battles;
 using GramophoneUtils.Characters;
 using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Stats;
+using GramophoneUtils.Utilities;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BattleDataModel : MonoBehaviour
+[CreateAssetMenu(fileName = "Battle Data Model", menuName = "Battles/Systems/Battle Data Model")]
+public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 {
     #region Attributes/Properties
 
-    private StateManager battleStateManager;
+    private StateManager _battleStateManager;
+
 	private Battle _battle;
+
 	private BattleRear _battleRear;
-	private CharacterModel _characterModel;
+    public BattleRear BattleRear => _battleRear;
+
+    private CharacterModel _characterModel;
 
 	private List<Character> _orderedBattlersList;
-	private Queue<Character> unresolvedQueue = new Queue<Character>();
-	private Queue<Character> resolvedQueue = new Queue<Character>();
+    public List<Character> OrderedBattlersList => _orderedBattlersList;
 
-    private Character currentActor;
+	private Queue<Character> _unresolvedQueue = new Queue<Character>();
 
-	public Action OnCurrentActorChanged;
+	private Queue<Character> _resolvedQueue = new Queue<Character>();
+
+    private Character _currentActor;
+    public Character CurrentActor
+    {
+        get { return _currentActor; }
+        set { _currentActor = value; }
+    }
+
+    public Action OnCurrentActorChanged;
+
 	public Action<BattleReward> OnBattleRewardsEarned;
 
 	[SerializeField] public VoidEvent OnBattlerCollectionsUpdated;
@@ -31,50 +47,40 @@ public class BattleDataModel : MonoBehaviour
     public Action<Character> OnSkillUsed;
 
     private int _turn;
-    private int _round;
-
-	public List<Character> OrderedBattlersList => _orderedBattlersList;
-    
-    public BattleRear BattleRear => _battleRear;
-
     [ShowInInspector] public int CurrentTurn => _turn;
-    [ShowInInspector] public int CurrentRound => _round;
 
-	public Character CurrentActor
-	{
-		get { return currentActor; }
-		set { currentActor = value; }
-	}
+    private int _round;
+    [ShowInInspector] public int CurrentRound => _round;
 
     #endregion
 
-    #region API
+    #region Public Functions
 
     public void InitialiseBattleModel()
 	{
 		OnCurrentActorChanged = null; // TODO, hack, because there was a memory leak from battler
 		OnSkillUsed = null; // TODO, hack as above
 
-		battleStateManager = ServiceLocator.Instance.BattleStateManager;
+		_battleStateManager = ServiceLocator.Instance.BattleStateManager;
         _characterModel =  ServiceLocator.Instance.CharacterModel;
         _battle = ServiceLocator.Instance.BattleManager.Battle;
 		_battleRear = ServiceLocator.Instance.BattleManager.Battle.BattleRear;
 
 		_turn = 0;
-		_round = 0;
+		_round = -1;
 
 		CreateNewRoundQueues();
-		unresolvedQueue = OrderQueue();
+		_unresolvedQueue = OrderQueue();
 		CalculateOrderedBattlersList();
 
-		UpdateCurrentActor();
+		/*UpdateCurrentActor();*/
 	}
 
     public void NextRound()
     {
         _round++;
         CreateNewRoundQueues();
-        unresolvedQueue = OrderQueue();
+        _unresolvedQueue = OrderQueue();
 
         CalculateOrderedBattlersList();
         _turn = 0;
@@ -82,85 +88,127 @@ public class BattleDataModel : MonoBehaviour
 
     public void NextTurn()
     {
-        if (IsPlayerVictory())
+/*        if (IsPlayerVictory())
         {
-            battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
+            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
             return;
         }
         else if (IsEnemyVictory())
         {
-            battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
+            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
             return;
         }
 
-        unresolvedQueue = OrderQueue();
-        OnBattlerCollectionsUpdated?.Raise();
+        UpdateUnresolvedQueue();
 
-        _turn++;
-        Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
-
-        if (_turn >= _orderedBattlersList.Count)
-        {
-            NextRound();
-        }
+        AdvanceTurn();
 
         UpdateCurrentActor();
-        UpdateState();
-
+        UpdateState();*/
     }
 
-    public void UpdateState()
+    public void UpdateUnresolvedQueue()
     {
-        if (currentActor.IsPlayer)
+        _unresolvedQueue = OrderQueue();
+        OnBattlerCollectionsUpdated?.Raise();
+        OnCurrentActorChanged?.Invoke();
+    }
+
+    public void RespondToBattleLossOrVictory()
+	{
+        if (IsPlayerVictory())
         {
-            battleStateManager.ChangeState(ServiceLocator.Instance.PlayerTurnState);
+            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
+            return;
         }
-        else if (!currentActor.IsPlayer)
+        else if (IsEnemyVictory())
         {
-            battleStateManager.ChangeState(ServiceLocator.Instance.EnemyTurnState);
+            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
+            return;
         }
+    }
+
+	public void UpdateState()
+    {
+        if (_currentActor.IsPlayer)
+        {
+            _battleStateManager.ChangeState(ServiceLocator.Instance.PlayerTurnState);
+        }
+        else if (!_currentActor.IsPlayer)
+        {
+            _battleStateManager.ChangeState(ServiceLocator.Instance.EnemyTurnState);
+        }
+    }
+
+    public void UpdateCurrentActor()
+	{
+		if (_currentActor != null)
+		{
+			_currentActor.SetIsCurrentActor(false);
+		}
+
+        _currentActor = _unresolvedQueue.Dequeue();
+        _resolvedQueue.Enqueue(_currentActor);
+        _currentActor.SetIsCurrentActor(true);
+        OnCurrentActorChanged?.Invoke();
+	}
+
+    public bool IsEndOFRound()
+    {
+        return (_turn >= _orderedBattlersList.Count);
+    }
+
+    public void AdvanceTurn()
+    {
+        _turn++;
+        Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
+    }
+
+    public void UpdateState(float delay)
+    {
+		StartCoroutine(DelayForSecondsThenUpdateState(delay));
+    }
+
+    public void CreateNewRoundQueues()
+    {
+        _unresolvedQueue = new Queue<Character>();
+        foreach (Character character in _characterModel.AllCharacters)
+        {
+            _unresolvedQueue.Enqueue(character);
+        }
+        _resolvedQueue = new Queue<Character>();
+        OnBattlerCollectionsUpdated?.Raise();
+    }
+
+    public void RaiseActionsAtEndOfState()
+    {
+        OnBattlerCollectionsUpdated?.Raise();
+        OnCurrentActorChanged?.Invoke();
     }
 
     #endregion
 
-    #region Utilities
-
-    private void UpdateCurrentActor()
+    #region Private Functions
+    private IEnumerator DelayForSecondsThenUpdateState(float delay)
 	{
-		if (currentActor != null)
-		{
-			currentActor.SetIsCurrentActor(false);
-		}
-        currentActor = unresolvedQueue.Dequeue();
-		resolvedQueue.Enqueue(currentActor);
-		currentActor.SetIsCurrentActor(true);
-		OnCurrentActorChanged?.Invoke();
-	}
-
-	private void CreateNewRoundQueues()
-	{
-		unresolvedQueue = new Queue<Character>();
-		foreach (Character character in _characterModel.AllCharacters)
-		{
-			unresolvedQueue.Enqueue(character);
-		}
-		resolvedQueue = new Queue<Character>();
-	}
+		yield return new WaitForSeconds(delay);
+		UpdateState();
+    }
 
 	private Queue<Character> OrderQueue()
 	{
 		List<Character> frontAndEnemyCharacters = new List<Character>();
 		frontAndEnemyCharacters.AddRange(_characterModel.PlayerCharacters);
 		frontAndEnemyCharacters.AddRange(_characterModel.EnemyCharacters);
-		IEnumerable<Character> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(resolvedQueue) select unresolved;
+		IEnumerable<Character> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(_resolvedQueue) select unresolved;
 
-		unresolvedQueue.Clear();
+		_unresolvedQueue.Clear();
 		foreach (Character battler in unresolvedQuery)
 		{
-			unresolvedQueue.Enqueue(battler);
+			_unresolvedQueue.Enqueue(battler);
 		}
 
-        IEnumerable<Character> ordereredUnresolvedQuery = unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
+        IEnumerable<Character> ordereredUnresolvedQuery = _unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
 		Queue<Character> orderedRoundQueue = new Queue<Character>();
 		foreach (Character battler in ordereredUnresolvedQuery)
 		{
@@ -173,11 +221,11 @@ public class BattleDataModel : MonoBehaviour
 	private List<Character> CalculateOrderedBattlersList()
 	{
 		_orderedBattlersList = new List<Character>();
-		foreach (Character battler in resolvedQueue)
+		foreach (Character battler in _resolvedQueue)
 		{
 			_orderedBattlersList.Add(battler);
 		}
-		foreach (Character battler in unresolvedQueue)
+		foreach (Character battler in _unresolvedQueue)
 		{
 			_orderedBattlersList.Add(battler);
 		}

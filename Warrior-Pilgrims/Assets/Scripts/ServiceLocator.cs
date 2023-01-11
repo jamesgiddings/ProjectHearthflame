@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ServiceLocator : MonoBehaviour 
+public class ServiceLocator : MonoBehaviour, IServiceLocator
 {
     [SerializeField, Required] private ServiceLocatorObject _serviceLocatorObject;
     [SerializeField] private DialogueUI _dialogueUI;
@@ -15,6 +15,10 @@ public class ServiceLocator : MonoBehaviour
     [SerializeField] private SavingSystem _savingSystem;
     [SerializeField] private UIServiceLocator _uiServiceLocator;
     [SerializeField] private GameManager _gameManager;
+
+    [BoxGroup("Input")]
+    [SerializeField] private PlayerInputBehaviour _playerInputBehaviour;
+    public PlayerInputBehaviour PlayerInputBehaviour => _playerInputBehaviour;
 
     [BoxGroup("States")]
     [BoxGroup("States/Game States")]
@@ -29,6 +33,8 @@ public class ServiceLocator : MonoBehaviour
     [SerializeField] private State _menuState;
     [BoxGroup("States/Battle States")]
     [SerializeField] private StateManager _battleStateManager;
+    [BoxGroup("States/Battle States")]
+    [SerializeField] private State _battleInitialisationState;
     [BoxGroup("States/Battle States")]
     [SerializeField] private State _battleStartState;
     [BoxGroup("States/Battle States")]
@@ -50,8 +56,10 @@ public class ServiceLocator : MonoBehaviour
     [BoxGroup("States/Loading States")]
     [SerializeField] private State _gameObjectCallbacksState;
     [BoxGroup("States/Loading States")]
-    [SerializeField] private State _initiatingCharactersState;
+    [SerializeField] private State _instantiantingCharactersState;
 
+    [BoxGroup("Battles")]
+    [SerializeField] private Transform _battleUITransform;
     [BoxGroup("Battles")]
     [SerializeField] private BattlerDisplayUI _battlerDisplayUI;
     [BoxGroup("Battles")]
@@ -77,6 +85,7 @@ public class ServiceLocator : MonoBehaviour
     public State LoadingState => _loadingState;
     public State MenuState => _menuState;
     public StateManager BattleStateManager => _battleStateManager;
+    public State BattleInitialisationState => _battleInitialisationState;
     public State BattleStartState => _battleStartState;
     public State BattleWonState => _battleWonState;
     public State BattleLostState => _battleLostState;
@@ -87,7 +96,8 @@ public class ServiceLocator : MonoBehaviour
     public State WaitForFade => _waitForFade;
     public State UnloadingOldScene => _unloadingOldScene;
     public State GameObjectCallbacksState => _gameObjectCallbacksState;
-    public State InstantiatingCharactersState => _initiatingCharactersState;
+    public State InstantiatingCharactersState => _instantiantingCharactersState;
+    public Transform BattleUITransform => _battleUITransform;
     public BattlerDisplayUI BattlerDisplayUI => _battlerDisplayUI;
     public BattleManager BattleManager => _battleManager;
     public BattleDataModel BattleDataModel => _battleDataModel;

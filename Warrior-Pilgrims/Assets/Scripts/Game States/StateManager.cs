@@ -1,63 +1,62 @@
-using Sirenix.OdinInspector;
+using GramophoneUtils.Utilities;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+[CreateAssetMenu(fileName = "State Manager", menuName = "States/State Manager")]
+public class StateManager : ScriptableObjectThatCanRunCoroutines
 {
-    [SerializeField]
-    [ChildGameObjectsOnly(IncludeSelf = false)]
-    State startingState;
-    private State state;
+    #region Attributes/Fields/Properties
 
     [SerializeField]
-    [ChildGameObjectsOnly(IncludeSelf = false)]
-    [InfoBox("States can only be selected from children of the manager")]
-    private State[] states;
+    private State _startingState;
+    public State StartingState => _startingState;
 
-    public State[] States => states;
-
+    private State _state;
     public State State
     {
         get
         {
-            if (state == null)
+            if (_state == null)
             {
                 Debug.LogError("state is null.");
             }
-            return state;
+            return _state;
         }
-        set { state = value; }
+        set { _state = value; }
     }
 
-    public void OnEnable()
-    {
-        InitialiseStates();
-        SetStartingState();
-    }
+    [SerializeField]
+    private State[] _states;
 
-    private void SetStartingState()
-    {
-        ChangeState(startingState);
-    }
+    public State[] States => _states;
 
-    private void InitialiseStates()
+    #endregion
+
+    #region API
+
+    public void SetStartingState()
     {
-        
+        ChangeState(_startingState);
     }
 
     public void ChangeState(State newState)
     {
-        if (state != null)
+        if (_state != null)
         {
-            state.ExitState();
-            state.gameObject.SetActive(false);
+            _state.ExitState();
         }
-        newState.gameObject.SetActive(true);
         newState.EnterState();
-        state = newState;
+        _state = newState;
     }
 
     public void HandleInput()
     {
-        state.HandleInput();
+        _state.HandleInput();
+        if (_state.SubStateManager != null)
+        {
+            _state.SubStateManager.State.HandleInput();
+        }
     }
+
+
+    #endregion
 }

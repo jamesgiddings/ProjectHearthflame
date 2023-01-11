@@ -16,7 +16,6 @@ public class GameBattleState : State
         
     public override void ExitState() 
     {
-        SetCharacterMovement(true);
         base.ExitState();
     }
 

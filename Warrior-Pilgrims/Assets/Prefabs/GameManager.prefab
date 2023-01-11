@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceDatabase: {fileID: 11400000, guid: 11aa0921c584c1144943a308681aad2c, type: 2}
-  statSystemConstants: {fileID: 11400000, guid: 1dfc02729eb1ca74992d28942e5e613b,
-    type: 2}
 --- !u!114 &5886501389914505324
 MonoBehaviour:
   m_ObjectHideFlags: 0

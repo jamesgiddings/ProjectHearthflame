@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEditor;
 
 
-[CustomEditor(typeof(RandomBrain))]
+[CustomEditor(typeof(RandomBrainDeprecated))]
 public class RandomBrainEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        RandomBrain brain = (RandomBrain)target;
+        RandomBrainDeprecated brain = (RandomBrainDeprecated)target;
 
         if (GUILayout.Button("Reset Skills"))
         {
@@ -22,4 +22,3 @@ public class RandomBrainEditor : Editor
         }
     }
 }
-

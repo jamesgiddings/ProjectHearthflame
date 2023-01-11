@@ -7,27 +7,27 @@ using UnityEngine;
 public class SkillSystem
 {
 	private Character character;
-	private List<Skill> unlockedSkills;
-	private Dictionary<Skill, int> lockedSkills;
-	private Skill activeSkill;
+	private List<ISkill> unlockedSkills;
+	private Dictionary<ISkill, int> lockedSkills;
+	private ISkill activeSkill;
 
-	public Action<Skill, List<Character>> OnSkillUsed;
-	public List<Skill> LockedSkillsList => new List<Skill>(lockedSkills.Keys);
+	public Action<ISkill, List<Character>> OnSkillUsed;
+	public List<ISkill> LockedSkillsList => new List<ISkill>(lockedSkills.Keys);
 	
 	private int skillUseIncreaseMinimumInclusive = 1; // these are so we can set the range of 
 	private int skillUseIncreaseMaximumExclusive = 2; // possible increases when a skill is used.
 
 	public Character Character => character;
 
-	public List<Skill> UnlockedSkills => unlockedSkills; // getter
+	public List<ISkill> UnlockedSkills => unlockedSkills; // getter
 
-	public Dictionary<Skill, int> LockedSkills => lockedSkills; // getter
+	public Dictionary<ISkill, int> LockedSkills => lockedSkills; // getter
 
 	public SkillSystem(Character character) // constructor
 	{
 		this.character = character;
-		unlockedSkills = new List<Skill>();
-		lockedSkills = new Dictionary<Skill, int>();
+		unlockedSkills = new List<ISkill>();
+		lockedSkills = new Dictionary<ISkill, int>();
 	}
 
 	public void Initialise()
@@ -44,10 +44,10 @@ public class SkillSystem
 		OnSkillUsed += IncreaseSkillUses;
 	}
 
-	private Dictionary<Skill, int> InitialiseLockedSkillsDictionary()
+	private Dictionary<ISkill, int> InitialiseLockedSkillsDictionary()
 	{
-		Dictionary<Skill, int> dict = new Dictionary<Skill, int>();
-		foreach (Skill skill in character.CharacterClass.SkillsAvailable)
+		Dictionary<ISkill, int> dict = new Dictionary<ISkill, int>();
+		foreach (ISkill skill in character.CharacterClass.SkillsAvailable)
 		{
 			if (skill.CanUnlock(skill, character))
 			{
@@ -61,7 +61,7 @@ public class SkillSystem
 		return dict;
 	}
 
-	private Skill GetDefaultNextActiveSkill()
+	private ISkill GetDefaultNextActiveSkill()
 	{
 		if (GetSkillsAvailableToStartUnlocking().Count > 0)
 		{
@@ -70,10 +70,10 @@ public class SkillSystem
 		return null;
 	}
 
-	private List<Skill> GetSkillsAvailableToStartUnlocking()
+	private List<ISkill> GetSkillsAvailableToStartUnlocking()
 	{
-		List<Skill> skillsAvailable = new List<Skill>();
-		foreach (KeyValuePair<Skill, int> keyValuePair in lockedSkills)
+		List<ISkill> skillsAvailable = new List<ISkill>();
+		foreach (KeyValuePair<ISkill, int> keyValuePair in lockedSkills)
 		{
 			if (keyValuePair.Key.CanStartUnlocking(keyValuePair.Key, character))
 			{
@@ -85,18 +85,18 @@ public class SkillSystem
 		
 	}
 
-	public void UnlockSkill(Skill skill)
+	public void UnlockSkill(ISkill skill)
 	{
 		unlockedSkills.Add(skill);
 		lockedSkills.Remove(skill);
 	}
 
-	public bool IsSkillUnlocked(Skill skill)
+	public bool IsSkillUnlocked(ISkill skill)
 	{
 		return unlockedSkills.Contains(skill);
 	}
 
-	public void IncreaseSkillUses(Skill skill, List<Character> targets)
+	public void IncreaseSkillUses(ISkill skill, List<Character> targets)
 	{
 		if (activeSkill == null)
 		{

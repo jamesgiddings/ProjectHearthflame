@@ -15,29 +15,33 @@ MonoBehaviour:
   UID: 815383a5-2816-419b-90aa-20b6fa3f9748
   name: Spider
   _sprite: {fileID: 0}
-  description: 
-  baseMaxHealth: 30
+  _description: 
+  _baseMaxHealth: 30
   baseHealth: 30
-  maxLevel: 5
-  experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
-  skillsAvailable:
-  - {fileID: 11400000, guid: d61e5ffa15053d14f85b08d96646593f, type: 2}
-  - {fileID: 11400000, guid: 93261eef68b6e6345b7e1d3ca1b2f031, type: 2}
-  levelStatEffects:
-  - skillsUnlocked: []
-    baseHealthIncrement: 10
+  _maxLevel: 10
+  _experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
+  _skillsAvailable:
+  - _underlyingValue: {fileID: 11400000, guid: d61e5ffa15053d14f85b08d96646593f, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 93261eef68b6e6345b7e1d3ca1b2f031, type: 2}
+  _levelStatEffects:
+  - baseHealthIncrement: 0
     statComponentBlueprints: []
-  - skillsUnlocked: []
-    baseHealthIncrement: 10
+  - baseHealthIncrement: 0
     statComponentBlueprints: []
-  - skillsUnlocked: []
-    baseHealthIncrement: 10
+  - baseHealthIncrement: 0
     statComponentBlueprints: []
-  - skillsUnlocked:
-    - {fileID: 11400000, guid: 93261eef68b6e6345b7e1d3ca1b2f031, type: 2}
-    baseHealthIncrement: 10
+  - baseHealthIncrement: 0
     statComponentBlueprints: []
-  - skillsUnlocked: []
-    baseHealthIncrement: 10
+  - baseHealthIncrement: 0
     statComponentBlueprints: []
-  size: 1
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  - baseHealthIncrement: 0
+    statComponentBlueprints: []
+  _size: 1

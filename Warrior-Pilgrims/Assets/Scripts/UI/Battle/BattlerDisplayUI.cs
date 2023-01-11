@@ -1,21 +1,13 @@
 using GramophoneUtils.Stats;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using Sirenix.OdinInspector;
-using GramophoneUtils.Characters;
-using UnityEngine.TextCore.Text;
 using Character = GramophoneUtils.Characters.Character;
 
 public class BattlerDisplayUI : MonoBehaviour
 {
 	[SerializeField] private Transform battlerPrefab;
 	
-	private BattleManager battleManager;
-	private BattleDataModel _battleDataModel;
 	private CharacterModel _characterModel;
 
 	private Battler[] playerBattlers;
@@ -32,8 +24,6 @@ public class BattlerDisplayUI : MonoBehaviour
 	#region Initialising
 	public void Initialise(BattleManager battleManager)
 	{
-		this.battleManager = battleManager;
-		_battleDataModel = ServiceLocator.Instance.BattleDataModel;
 		_characterModel = ServiceLocator.Instance.CharacterModel;
 		
 		battlerGameObjects = new Battler[_characterModel.AllCharacters.Count];
@@ -42,7 +32,6 @@ public class BattlerDisplayUI : MonoBehaviour
         playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
         enemyBattlers = new Battler[_characterModel.EnemyCharacters.Count];
 		playerBattlers = InitialisePlayerBattlers(_characterModel.PlayerCharacters);
-        //enemyBattlers = InitialiseEnemyBattlers(_battleDataModel.EnemyBattlersCharacterInventory);
 
         battlerGameObjects = playerBattlers.Concat(enemyBattlers).ToArray();
 	}
@@ -61,34 +50,13 @@ public class BattlerDisplayUI : MonoBehaviour
                 if (character.IsUnlocked && !character.IsRear)
                 {
                     newPlayerBattlers[i] = ServiceLocator.Instance.CharacterGameObjectManager.CharacterBattlerDictionary[character];
-                    newPlayerBattlers[i].Initialise(battleManager, character);
+                    newPlayerBattlers[i].Initialise(character);
                     characterBattlerDictionary.Add(character, newPlayerBattlers[i]);
                 }
             }
         }
 		return newPlayerBattlers;
     }
-
-/*    private Battler[] InitialiseEnemyBattlers(CharacterInventory characterInventory)
-	{
-
-        enemyBattlers = new Battler[_battleDataModel.EnemyBattlersCharacterInventory.CharacterSlots.Length];
-        for (int i = 0; i < characterInventory.CharacterSlots.Length; i++)
-		{
-			CharacterSlot characterSlot = characterInventory.CharacterSlots[i];
-			if (characterSlot.Character != null)
-			{
-				Debug.Log("AN ENEMY: ------------------------------> " + characterSlot.Character.Name);
-                enemyBattlers[i] = InitialiseEnemyBattler(characterSlot, i);
-				characterBattlerDictionary.Add(characterSlot.Character, enemyBattlers[i]);
-				Debug.Log(characterBattlerDictionary[characterSlot.Character]);
-			}
-		}
-		Debug.Log("The finished CHARACTER BATTLER DICTIONARY size: " + characterBattlerDictionary.Count);
-		BattlerDisplayUI[] displayUIs = FindObjectsOfType<BattlerDisplayUI>();
-		Debug.Log("DISPLAYUIS.Length: " + displayUIs.Length);
-        return enemyBattlers;
-    }*/
 
 	public void OnEnterBattle()
 	{
@@ -114,19 +82,6 @@ public class BattlerDisplayUI : MonoBehaviour
             }
         }
 
-        /*		foreach (Character character in characterBattlerDictionary.Keys) // Remove all players as they will be readded if they are still in the front.
-                {
-                    if (character.IsPlayer)
-                    {
-                        characterBattlerDictionary.Remove(character);
-                    }
-                }*/
-
-        /*        foreach (Battler battler in playerBattlers)
-                {
-                    battler.Uninitialise();
-                }*/
-
         IEnumerable<Character> uninitialisedCharacters = from uninitialised in _characterModel.PlayerCharacters.Except(characterBattlerDictionary.Keys) select uninitialised;
         
         playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
@@ -135,20 +90,7 @@ public class BattlerDisplayUI : MonoBehaviour
         battlerGameObjects = playerBattlers.Concat(enemyBattlers).ToArray();
     }
 
-
-
-	private Battler InitialiseEnemyBattler(CharacterSlot characterSlot, int index)
-	{
-
-        Battler battler = Instantiate(battlerPrefab, ServiceLocator.Instance.CharacterGameObjectManager.transform.position + new Vector3(2 + (2 * index), 0, 0), Quaternion.identity).GetComponent<Battler>();
-        
-		battler.Initialise(battleManager, characterSlot.Character);
-
-		return battler;
-	}
-
     #endregion
-
 
     #region EndOfLife
 

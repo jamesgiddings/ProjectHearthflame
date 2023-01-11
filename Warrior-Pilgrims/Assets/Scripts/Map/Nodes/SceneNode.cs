@@ -30,7 +30,7 @@ namespace GramophoneUtils.Maps
 
         private TransitionObject _transitionObjectReference;
 
-        #region API
+        #region Public Functions
         public override void Trigger()
         {
             (graph as MapGraph).Current = this;

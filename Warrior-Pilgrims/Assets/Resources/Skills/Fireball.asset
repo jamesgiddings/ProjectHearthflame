@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: b4e7af0b63507644983ef3d11eeb3004
   name: Fireball
-  sprite: {fileID: 0}
-  classRestrictions:
-  - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
-  school: 1
-  prerequisites: []
-  usesToUnlock: 0
-  targetAreaFlag: 4
-  targetNumberFlag: 1
-  targetTypeFlag: 1
-  skillAnimType: 4
-  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+  _sprite: {fileID: 0}
+  _classRestrictions: []
+  _school: 1
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 4
+  _targetNumberFlag: 1
+  _targetTypeFlag: 1
+  _skillAnimType: 4
+  _projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
-  effectPrefab: {fileID: 0}
-  animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
-  statModifierBlueprints: []
-  damageBlueprints:
+  _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+    type: 3}
+  _animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
+  _statModifierBlueprints: []
+  _damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
-  healingBlueprints: []
+  _healingBlueprints: []

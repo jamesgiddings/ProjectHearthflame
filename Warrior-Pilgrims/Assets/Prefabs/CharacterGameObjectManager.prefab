@@ -110,6 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _battlerParent: {fileID: 0}
   battlerGap: 2
+  _frontBattlerPositionPrefab: {fileID: 5274669892593997697, guid: 43c0c4cbadb91e24fbb007a20b76f3be,
+    type: 3}
 --- !u!114 &584415698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +170,11 @@ MonoBehaviour:
   _isFollower: 0
   _followee: {fileID: 0}
   _gap: 0
+  _gameStateManager: {fileID: 11400000, guid: b83312378993c5d48b443791ece59323, type: 2}
+  _explorationState: {fileID: 11400000, guid: b66556b51f7b68a41b7d4da7664312dd, type: 2}
+  _enterExplorationState: {fileID: 11400000, guid: 83cd5d6eac3e96c41aa001f756a9d068,
+    type: 2}
+  _enterBattleState: {fileID: 11400000, guid: cd82d0e072dc1be4bbef77de93c12ae9, type: 2}
 --- !u!210 &7764277307584208193
 SortingGroup:
   m_ObjectHideFlags: 0

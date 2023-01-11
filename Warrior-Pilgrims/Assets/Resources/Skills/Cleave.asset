@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 2ebe94e6-452a-46af-a38d-945cced3b768
   name: Cleave
-  sprite: {fileID: 0}
-  classRestrictions:
+  _sprite: {fileID: 0}
+  _classRestrictions:
   - {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
-  school: 2
-  prerequisites: []
-  usesToUnlock: 0
-  targetAreaFlag: 4
-  targetNumberFlag: 2
-  targetTypeFlag: 1
-  skillAnimType: 1
-  projectilePrefab: {fileID: 0}
-  effectPrefab: {fileID: 0}
-  animatorController: {fileID: 0}
-  statModifierBlueprints: []
-  damageBlueprints:
+  _school: 2
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 4
+  _targetNumberFlag: 2
+  _targetTypeFlag: 1
+  _skillAnimType: 1
+  _projectilePrefab: {fileID: 0}
+  _effectPrefab: {fileID: 0}
+  _animatorController: {fileID: 0}
+  _statModifierBlueprints: []
+  _damageBlueprints:
   - {fileID: 11400000, guid: afe48b2818af5374881c18450e823fdc, type: 2}
-  healingBlueprints: []
+  _healingBlueprints: []

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65fd6329a848bc458c28b19ee654f9d, type: 3}
+  m_Name: Test Object References
+  m_EditorClassIdentifier: 
+  _character1: {fileID: 11400000, guid: 369bd0e839dce0049a2fa8dce8c26a65, type: 2}
+  _character2: {fileID: 11400000, guid: 7a4031f4f632ab244a3f01fd779ea5c6, type: 2}
+  _character3: {fileID: 11400000, guid: da214a8b9f2d3144b91ef69bf04ad229, type: 2}
+  _enemy1: {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
+  _enemy2: {fileID: 11400000, guid: 2149b79823b06d64dbdaf1fa9d159787, type: 2}
+  _enemy3: {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
+  _hearthPriest: {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
+  _duelist: {fileID: 11400000, guid: 6b5712bee7049ae4d86541e962de55a3, type: 2}
+  _theRuneKnight: {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
+  _musketeer: {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}
+  _resource: {fileID: 11400000, guid: 3b42225a4e132ec40886d42bcc7614dc, type: 2}
+  _equipmentItem1: {fileID: 11400000, guid: 7152801aa9f48aa4da2a298f494b2e62, type: 2}
+  _battleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
+  _targetToSlots_XXXX_OXXX: {fileID: 11400000, guid: 7fb344cda92430944aaf670a28f39083,
+    type: 2}
+  _targetToSlots_XXXX_OOXXandXXXX_XXOO: {fileID: 11400000, guid: d3eb08f3404fcf641b419391872e4fa1,
+    type: 2}
+  _targetToSlots_XXXX_OOXXandXXXX_XXOOandXXXX_XXOXandXXXX_XXXO: {fileID: 11400000,
+    guid: 118827180577a6444a23c18a8e28d178, type: 2}
+  _OOOO: {fileID: 11400000, guid: 5e01e60918686374f8d1726e947ff25b, type: 2}
+  _XXXO: {fileID: 11400000, guid: c4e878db0a62b8745823940805186c1b, type: 2}
+  _randomSkillObjectCollection: {fileID: 11400000, guid: 386f84d5a217af74087a883300ab25a5,
+    type: 2}
+  _randomCharacterClassObjectCollection: {fileID: 11400000, guid: 04f1008ea97e4af40a5367cfd40ad7d4,
+    type: 2}
+  _cleave:
+    _underlyingValue: {fileID: 11400000, guid: 83330ecbffd48284aae04b696d8e8c2c, type: 2}
+  _bash:
+    _underlyingValue: {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
+  _shoot:
+    _underlyingValue: {fileID: 11400000, guid: 5a8b3dcd59789ad4c9aa83e58b8c3fa6, type: 2}

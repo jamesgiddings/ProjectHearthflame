@@ -14,22 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: e496856e570c9f843a41095df1eb3592
   name: Pyroblast
-  sprite: {fileID: 0}
-  classRestrictions:
-  - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
-  school: 1
-  prerequisites:
+  _sprite: {fileID: 0}
+  _classRestrictions: []
+  _school: 0
+  _prerequisites:
   - {fileID: 11400000, guid: 5ebcd8f392e6b4b439149b7c053d74ba, type: 2}
-  usesToUnlock: 1
-  targetAreaFlag: -1
-  targetNumberFlag: 4
-  targetTypeFlag: 1
-  skillAnimType: 4
-  projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+  _usesToUnlock: 1
+  _targetAreaFlag: 15
+  _targetNumberFlag: 4
+  _targetTypeFlag: 1
+  _skillAnimType: 4
+  _projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
     type: 3}
-  effectPrefab: {fileID: 0}
-  animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
-  statModifierBlueprints: []
-  damageBlueprints:
+  _effectPrefab: {fileID: 0}
+  _animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
+  _statModifierBlueprints: []
+  _damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
-  healingBlueprints: []
+  _healingBlueprints: []

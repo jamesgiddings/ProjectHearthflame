@@ -8,7 +8,7 @@ public class CentreCameraOnLoad : MonoBehaviour
 
     public void CenterCamera()
     {
-        Debug.LogError("To do, centre camera here");
+        Debug.LogWarning("To do, centre camera here");
     }
 
     #endregion

@@ -13,22 +13,24 @@ MonoBehaviour:
   m_Name: Brown Spider
   m_EditorClassIdentifier: 
   UID: 
-  name: BrownSpider
+  name: Brown Spider
   _sprite: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
   _description: 
   _characterClass: {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
-  _stats: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
   _startsUnlocked: 0
   _startingLevel: 0
   _characterPrefab: {fileID: 5730661112063783411, guid: f06bec351d7f8a546872e599170d794f,
     type: 3}
-  _brain: {fileID: 11400000, guid: 9b260bc88a777364a9f5b8d8d14caf33, type: 2}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: 2c1b508b39a1cf14f9c056cbaf4cd0ba, type: 2}
   _portrait: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
   _color: {r: 0.2830189, g: 0.13659446, b: 0.07342472, a: 1}
-  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/BrownSpiderAnimationController.asset
-  AnimControllerLoadPath: Animations/AnimationControllers/BrownSpiderAnimationController
+  _isPlayer: 0
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Brown SpiderAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/Brown SpiderAnimationController
   _idle_Left: {fileID: 7400000, guid: 22a3f6da81caa3a49b05be51b39a4da5, type: 2}
   _idle_Right: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}
   _idle_Up: {fileID: 7400000, guid: 6dbb693d86d25d347bdc2a9d000bac23, type: 2}

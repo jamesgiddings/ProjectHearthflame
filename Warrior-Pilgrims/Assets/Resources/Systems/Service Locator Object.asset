@@ -16,3 +16,25 @@ MonoBehaviour:
   _statSystemConstants: {fileID: 11400000, guid: 7f85578c166af3444bd078b9ed9aea58,
     type: 2}
   _sceneController: {fileID: 11400000, guid: 3e23e9dd57c746f46918ce02dbf93bea, type: 2}
+  _testObjectReferences: {fileID: 11400000, guid: aaadc1351fe2d334595bd0ab41786c34,
+    type: 2}
+  _gameStateManager: {fileID: 11400000, guid: b83312378993c5d48b443791ece59323, type: 2}
+  _gameBattleState: {fileID: 11400000, guid: ad7a4988b327617448a6cdb0d86eb297, type: 2}
+  _gameLoadingState: {fileID: 11400000, guid: bd675567f4bde0c4da5f329fe207e895, type: 2}
+  _gameMenuState: {fileID: 11400000, guid: bc3c3140fa6fd5e47a53367bcc049eb5, type: 2}
+  _gameExplorationState: {fileID: 11400000, guid: b66556b51f7b68a41b7d4da7664312dd,
+    type: 2}
+  _battleStateManager: {fileID: 11400000, guid: 587ce225f3f2aff40912c0e13226531f,
+    type: 2}
+  _battleInitialisationState: {fileID: 11400000, guid: 49b49f321712f744d8a0ec34cb0db8c6,
+    type: 2}
+  _battleLostState: {fileID: 11400000, guid: a437674e9cbde884c9312d5b4b4e6769, type: 2}
+  _battleOverState: {fileID: 11400000, guid: 86fbcdfe40c813f45a871bd118ba820d, type: 2}
+  _battleStartState: {fileID: 11400000, guid: b61d7a84ee8158e49a37cb0e8d4f1e68, type: 2}
+  _battleWonState: {fileID: 11400000, guid: bcb5786df8e724a4ab5b3fccfd24746b, type: 2}
+  _enemyTurnState: {fileID: 11400000, guid: 3df7aeb89eb20774aac59854d95df525, type: 2}
+  _playerTurnState: {fileID: 11400000, guid: fd29bfe01a197c24b86217e18569c263, type: 2}
+  _postCharacterTurn: {fileID: 11400000, guid: 2e8c7d884a99965428f31fbd087dcea1, type: 2}
+  _preCharacterTurn: {fileID: 11400000, guid: 207db17ecfc69c348871471a38683fb2, type: 2}
+  _preRound: {fileID: 11400000, guid: 6d14a02ab5951d34e8396cd300455496, type: 2}
+  _postRound: {fileID: 11400000, guid: a055042378d27974b866e90db8fded7c, type: 2}

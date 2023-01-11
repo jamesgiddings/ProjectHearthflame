@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebb1f73b5dc1e34a8f90816cfe6ea37, type: 3}
+  m_Name: Battle Won
+  m_EditorClassIdentifier: 
+  enterStateEvent: {fileID: 11400000, guid: 4c1fb83a61213e1448b92a0c7f6f127e, type: 2}
+  exitStateEvent: {fileID: 11400000, guid: 182d4f4206a970444b91d37a0c3adaf0, type: 2}
+  _subStateManager: {fileID: 0}
+  _stateExitTimerEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _delayedCommandsEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _exitState: {fileID: 11400000, guid: 86fbcdfe40c813f45a871bd118ba820d, type: 2}
+  _exitStateStateManager: {fileID: 11400000, guid: 587ce225f3f2aff40912c0e13226531f,
+    type: 2}
+  _delay:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  _eventDelay: 0
+  _delayedCommands: []
+  _onAfterEnterUnityEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
+        m_TargetAssemblyTypeName: BattleManager, Scripts
+        m_MethodName: AddBattleReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onBeforeExitUnityEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
+        m_TargetAssemblyTypeName: BattleDataModel, Scripts
+        m_MethodName: RaiseActionsAtEndOfState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

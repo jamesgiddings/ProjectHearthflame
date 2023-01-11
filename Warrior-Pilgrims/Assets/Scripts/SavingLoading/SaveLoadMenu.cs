@@ -8,7 +8,6 @@ using GramophoneUtils.SavingLoading;
 
 public class SaveLoadMenu : MonoBehaviour
 {
-	[SerializeField] SavingSystem savingSystem;
 	[SerializeField] string[] slotFileNames;
 	[SerializeField] Transform saveSlotParent;
 	[SerializeField] GameObject saveSlotPrefab;
@@ -37,7 +36,7 @@ public class SaveLoadMenu : MonoBehaviour
 		{
 			Debug.Log(saveSlotDictionary[slotFileName]);
 			SaveSlotUI saveSlotUI = saveSlotDictionary[slotFileName];
-			saveSlotUI.onSaveClicked += savingSystem.Save;
+			saveSlotUI.onSaveClicked += ServiceLocator.Instance.SavingSystem.Save;
 			saveSlotUI.onSaveClicked += ConnectSlots;
 			Debug.Log(SavingSystem.GetPathFromName(slotFileName));
 			if (File.Exists(SavingSystem.GetPathFromName(slotFileName)))
@@ -45,8 +44,8 @@ public class SaveLoadMenu : MonoBehaviour
 				saveSlotDictionary[slotFileName].SetLoadButtonActive(true);
 				saveSlotDictionary[slotFileName].SetDeleteButtonActive(true);
 				saveSlotDictionary[slotFileName].SetInfoText(slotFileName);
-				saveSlotDictionary[slotFileName].onLoadClicked += savingSystem.Load;
-				saveSlotDictionary[slotFileName].onDeleteClicked += savingSystem.Delete;
+				saveSlotDictionary[slotFileName].onLoadClicked += ServiceLocator.Instance.SavingSystem.Load;
+				saveSlotDictionary[slotFileName].onDeleteClicked += ServiceLocator.Instance.SavingSystem.Delete;
 			}
 			else
 			{
@@ -60,11 +59,11 @@ public class SaveLoadMenu : MonoBehaviour
 	{
 		foreach (string slotFileName in slotFileNames)
 		{
-			saveSlotDictionary[slotFileName].onSaveClicked -= savingSystem.Save;
+			saveSlotDictionary[slotFileName].onSaveClicked -= ServiceLocator.Instance.SavingSystem.Save;
 			if (File.Exists(SavingSystem.GetPathFromName(slotFileName)))
 			{
-				saveSlotDictionary[slotFileName].onLoadClicked -= savingSystem.Load;
-				saveSlotDictionary[slotFileName].onDeleteClicked -= savingSystem.Delete;
+				saveSlotDictionary[slotFileName].onLoadClicked -= ServiceLocator.Instance.SavingSystem.Load;
+				saveSlotDictionary[slotFileName].onDeleteClicked -= ServiceLocator.Instance.SavingSystem.Delete;
 			}
 		}
 	}

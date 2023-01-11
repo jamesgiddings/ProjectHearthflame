@@ -281,11 +281,17 @@ namespace GramophoneUtils.Stats
 
         #endregion
 
-        #region API
+        #region Public Functions
 
         public List<Character> InstanceCharacters()
         {
             _playerCharacters = new List<Character>();
+
+            if(_playerCharacterBlueprints == null)
+            {
+                Debug.LogWarning("_playerCharacterBlueprints was null.");
+                return _playerCharacters;
+            }
 
             for (int i = 0; i < _playerCharacterBlueprints.Length; i++)
             {
@@ -339,7 +345,16 @@ namespace GramophoneUtils.Stats
         /// <param name="character"></param>
         public void RegisterCharacterDeath(Character character)
         {
-            StartCoroutine(CharacterDeathCoroutine(character));
+            if (character.IsPlayer)
+            {
+                AddPlayerToDeadPlayerCharactersList(character);
+                // todo dead player characters should be swapped to the rear? maybe the ui just gives the option for that
+            }
+            else
+            {
+                AddEnemyToDeadEnemyCharactersList(character);
+                RemoveEnemyCharacter(character);
+            }
         }
 
         /// <summary>
@@ -400,27 +415,41 @@ namespace GramophoneUtils.Stats
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
+        /*        /// <summary>
+                /// This sets the player character order manually to allow for testing in edit mode
+                /// </summary>
+                /// <param name="characterOrder"></param>
+                public void SetPlayerCharacterOrder(CharacterOrder characterOrder)
+                {
+                    _playerCharacterOrder = characterOrder;
+                }
+
+                /// <summary>
+                /// This sets the enemy character order manually to allow for testing in edit mode
+                /// </summary>
+                /// <param name="characterOrder"></param>
+                public void SetEnemyCharacterOrder(CharacterOrder characterOrder)
+                {
+                    _enemyCharacterOrder = characterOrder;
+                }*/
+
+        public void StartCharacterDeathCoroutine()
+        {
+            StartCoroutine(CharacterDeathCoroutine());
+        }
+
         #endregion
 
-        #region Utilities
-        private IEnumerator CharacterDeathCoroutine(Character character)
+        #region Private Functions
+
+        private IEnumerator CharacterDeathCoroutine()
         {
-            if (character.IsPlayer)
-            {
-                AddPlayerToDeadPlayerCharactersList(character);
-                // todo dead player characters should be swapped to the rear? maybe the ui just gives the option for that
-            }
-            else
-            {
-                AddEnemyToDeadEnemyCharactersList(character);
-                RemoveEnemyCharacter(character);
-                yield return new WaitForSeconds(0.5f);
-                _enemyCharacterOrder.MoveCharactersForwardIntoSpaces();
-                ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
-                yield return new WaitForSeconds(0.5f);
-                _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersAndReturnRemainder(_reserveEnemyCharacters);
-                OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
-            }
+            yield return new WaitForSeconds(0.2f);
+            _enemyCharacterOrder.MoveCharactersForwardIntoSpaces();
+            ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
+            yield return new WaitForSeconds(0.5f);
+            _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersAndReturnRemainder(_reserveEnemyCharacters);
+            OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
         private void ConnectInventories(Character character)

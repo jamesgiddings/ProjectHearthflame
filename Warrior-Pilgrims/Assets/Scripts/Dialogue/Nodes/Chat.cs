@@ -1,4 +1,5 @@
-﻿using GramophoneUtils.Stats;
+﻿using GramophoneUtils.Characters;
+using GramophoneUtils.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Dialogue {
     [NodeTint("#CCFFCC")]
     public class Chat : DialogueBaseNode {
 
-        public CharacterTemplate character;
+        public Character character;
         [TextArea] public string text;
         [Output(dynamicPortList = true)] public List<Answer> answers = new List<Answer>();
 

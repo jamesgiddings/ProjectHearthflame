@@ -12,7 +12,6 @@ using GramophoneUtils.Events.CustomEvents;
 
 public class Battler : MonoBehaviour
 {
-    [SerializeField] private Vector2 healthSliderPosOffset;
     [SerializeField] private SpriteRenderer targetCursor;
     [SerializeField] private SpriteRenderer currentActorHighlight;
     [SerializeField] private Slider healthSlider;
@@ -22,10 +21,7 @@ public class Battler : MonoBehaviour
     [SerializeField] private Canvas battlerStatsCanvas;
     [SerializeField] private CharacterEvent _onCharacterDeath;
 
-    [SerializeField] private float healthSliderYOffset;
-
     private Character character;
-    private BattleManager battleManager;
     private SpriteRenderer spriteRenderer;
     private AnimationPlayer animationPlayer;
 
@@ -40,6 +36,11 @@ public class Battler : MonoBehaviour
         if (ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState)
         {
             GetComponent<CharacterMovement>().enabled = true;
+        }
+        if (ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.BattleState)
+        {
+            healthSlider.enabled = true;
+            statModifierImagePrefab.SetActive(true);
         }
     }
 
@@ -108,13 +109,12 @@ public class Battler : MonoBehaviour
         sortingGroup.sortingOrder = sortingGroupIndex;
     }
 
-    public void Initialise(BattleManager battleManager, Character character)
+    public void Initialise(Character character)
     {
         this.character = character;
-        this.battleManager = battleManager;
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.spriteRenderer.sprite = character.Sprite;
-        this.animationPlayer = new AnimationPlayer(this, character, battleManager);
+        this.animationPlayer = new AnimationPlayer(this, character);
 
         ServiceLocator.Instance.BattleDataModel.OnCurrentActorChanged += UpdateCurrentActorHighlightState;
         ServiceLocator.Instance.TargetManager.OnCurrentTargetsChanged += UpdateTargetCursor;
@@ -125,27 +125,16 @@ public class Battler : MonoBehaviour
         character.SkillSystem.OnSkillUsed += animationPlayer.DisplayAnimation;
 
         UpdateHealthSlider(0);
+
+        DisplayBattleUI(ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.BattleState);
+
         isInitialised = true;
-    }
-
-    public void SetHealthSliderPosition()
-    {
-        RectTransform canvasRect = healthSlider.gameObject.GetComponent<RectTransform>(); //.anchoredPosition = battlerStatsCanvas.WorldToCanvas(gameObject.transform.position + new Vector3(-2.2f, healthSliderYOffset)); // TODO FIX
-        Vector2 uiOffset = new Vector2((float)canvasRect.sizeDelta.x / 2f, (float)canvasRect.sizeDelta.y / 2f);
-
-        Vector2 pos = gameObject.transform.position;  // get the game object position
-        pos += healthSliderPosOffset; // add the offset from the inspector
-        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);  //convert game object position to VievportPoint
-
-        // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
-        canvasRect.anchorMin = viewportPoint;
-        canvasRect.anchorMax = viewportPoint;
-        gameObject.SetActive(true);
     }
 
     public void DisplayBattleUI(bool value)
     {
         healthSlider.gameObject.SetActive(value);
+        statModifierImagePrefab.SetActive(value);
     }
 
     public void UpdateCurrentActorHighlightState()

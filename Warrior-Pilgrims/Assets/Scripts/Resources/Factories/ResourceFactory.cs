@@ -36,7 +36,7 @@ public class ResourceFactory
                 resource = Create<SequenceBrain>();                
                 return resource;
             case "RandomBrain":
-                resource = Create<RandomBrain>();
+                resource = Create<RandomBrainDeprecated>();
                 return resource;
             default:
                 break;

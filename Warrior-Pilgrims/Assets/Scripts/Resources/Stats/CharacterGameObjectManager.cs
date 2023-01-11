@@ -63,7 +63,7 @@ namespace GramophoneUtils.Stats
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
                     Battler battler = Instantiate(character.CharacterPrefab, instantiationPosition + new Vector3(-2 * i, 0, 0), Quaternion.identity, _battlerParent).GetComponent<Battler>();
-                    battler.Initialise(ServiceLocator.Instance.BattleManager, character);
+                    battler.Initialise(character);
                     
                     if (i == 0) // this is the first character, which will directly follow the playerBehaviour
                     {
@@ -96,7 +96,7 @@ namespace GramophoneUtils.Stats
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
                     Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3((2 * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
-                    battler.Initialise(ServiceLocator.Instance.BattleManager, character);
+                    battler.Initialise(character);
 
                     battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     
@@ -153,7 +153,11 @@ namespace GramophoneUtils.Stats
             }
             foreach (Character character in characterList)
             {
-                StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 20f));
+                if (_characterBattlerDictionary.ContainsKey(character))
+                {
+                    StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 2f));
+                }
+                
             }
         }
 
