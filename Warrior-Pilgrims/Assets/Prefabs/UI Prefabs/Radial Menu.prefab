@@ -952,6 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea7e3908765aab4087032f42ab8fa37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _battleManager: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
+  battleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
   holder: {fileID: 6445347122686912374}
   subMenuPrefab: {fileID: 5708130899785205040, guid: c78798b62743c1948b0e1a6310f31a37,
     type: 3}

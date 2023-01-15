@@ -18,78 +18,16 @@ MonoBehaviour:
   _stateExitTimerEvent:
     m_PersistentCalls:
       m_Calls: []
-  _delayedCommandsEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 087d6eec9d30c2b47b8855513958befd, type: 2}
-        m_TargetAssemblyTypeName: RespondToBattleLossOrVictoryCommand, Scripts
-        m_MethodName: Execute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: d416c338999b95e4e94150048b17de74, type: 2}
-        m_TargetAssemblyTypeName: CharacterDeathCoroutineCommand, Scripts
-        m_MethodName: Execute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: f4c6cffd0e66c3643b9d81756de1c130, type: 2}
-        m_TargetAssemblyTypeName: AdvanceTurnCommand, Scripts
-        m_MethodName: Execute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: c4157c5c45ef53f42a0d40e2cb2764c5, type: 2}
-        m_TargetAssemblyTypeName: ExitToPreRoundOrPreCharacterTurnCommand, Scripts
-        m_MethodName: Execute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _tasks:
+  - _underlyingValue: {fileID: 11400000, guid: ee5964568aaa5c74baab0a1e48d6ddfe, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: d416c338999b95e4e94150048b17de74, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: b5990c43f7d5ffb4b8818da4fa6b853e, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 4a7e05986f614d8429db0e87923473b3, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: bdd18b5fc07d9054589a8832fb0e307e, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 3e79f098d1ba02c4c8b25b5960a152b7, type: 2}
   _exitState: {fileID: 0}
   _exitStateStateManager: {fileID: 0}
   _delay:
     UseConstant: 1
     ConstantValue: 0
     Variable: {fileID: 0}
-  _eventDelay: 0.1
-  _delayedCommands: []
-  _onAfterEnterUnityEvents: []
-  _onBeforeExitUnityEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
-        m_TargetAssemblyTypeName: BattleDataModel, Scripts
-        m_MethodName: RaiseActionsAtEndOfState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

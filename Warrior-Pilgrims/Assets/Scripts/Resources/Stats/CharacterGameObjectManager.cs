@@ -84,12 +84,17 @@ namespace GramophoneUtils.Stats
 
         public void InstantiateEnemyCharacters()
         {
+            // Todo, this is being called outside of battle and I don't know why
+
+            CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
+
+            if (enemyCharacterOrder == null) { return; }
+
             if (_frontBattlerPosition == null)
             {
                 _frontBattlerPosition = Instantiate(_frontBattlerPositionPrefab, this.transform.position + new Vector3(2, 0, 0), Quaternion.identity).GetComponent<CharacterMovement>();
             }
-            CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
-            
+
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
                 Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
@@ -130,7 +135,13 @@ namespace GramophoneUtils.Stats
         [Button]
         public void MoveEnemyBattlersForward()
         {
+
+            // Todo, this is being called outside of battle and I don't know why
+
             CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
+
+            if(enemyCharacterOrder == null) { return; }
+
             int numberOfCharacters = enemyCharacterOrder.GetCharacters().Count;
             List<Character> characterList = new List<Character>();
             
@@ -221,7 +232,10 @@ namespace GramophoneUtils.Stats
         {
             battler.GetComponent<CharacterMovement>().enabled = true;
             yield return new WaitForSeconds(seconds);
-            battler.GetComponent<CharacterMovement>().enabled = false;
+            if (battler != null)
+            {
+                battler.GetComponent<CharacterMovement>().enabled = false;
+            }
         }
 
         private void DestroyAllBattlers()

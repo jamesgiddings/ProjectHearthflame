@@ -44,7 +44,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines
 
     #endregion
 
-    #region API
+    #region Public Functions
 
     public void SubscribeToBattleDataModelOnSkillUsed()
     {
@@ -121,8 +121,12 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines
 				currentlyTargeted.AddRange(_currentTargetsCache.Where(character => character == originator));
 				break;
 		}
+
 		if (currentlyTargeted.Count > 0)
-			OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
+		{
+            OnCurrentTargetsChanged?.Invoke(currentlyTargeted);
+        }
+			
 		return currentlyTargeted;
 	}
 
@@ -179,10 +183,20 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines
 		return null;
 	}
 
-    #endregion
+#if UNITY_EDITOR
 
-    #region Utilities
-    private IEnumerator InputDelay(float time)
+	public void SimulatePlayerTargeting(ISkill skill, List<Character> charactersToTarget, Character originator)
+	{
+		_currentSkill = skill;
+        _currentSkill.Use(charactersToTarget, originator);
+        ClearTargets();
+    }
+
+#endif
+#endregion
+
+	#region Private Functions
+	private IEnumerator InputDelay(float time)
     {
         yield return new WaitForSeconds(time);
     }

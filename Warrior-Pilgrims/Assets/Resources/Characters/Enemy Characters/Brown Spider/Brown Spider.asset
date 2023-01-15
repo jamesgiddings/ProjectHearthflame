@@ -28,6 +28,8 @@ MonoBehaviour:
   _portrait: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
   _color: {r: 0.2830189, g: 0.13659446, b: 0.07342472, a: 1}
+  _equipmentInventory: {fileID: 11400000, guid: 9507997e9b933a44b877405873a54814,
+    type: 2}
   _isPlayer: 0
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Brown SpiderAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/Brown SpiderAnimationController

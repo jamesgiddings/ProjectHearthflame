@@ -4,6 +4,7 @@ using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Characters;
 using NSubstitute;
 using GramophoneUtils.SavingLoading;
+using GramophoneUtils.Stats;
 
 public class BasicEditModeTest
 {
@@ -12,6 +13,8 @@ public class BasicEditModeTest
 	protected Constants Constants;
 
 	protected ServiceLocator MockServiceLocator;
+
+	protected CharacterModel CharacterModel;
 
 	protected Character Character1Blueprint;
 	protected Character Character2Blueprint;
@@ -47,6 +50,8 @@ public class BasicEditModeTest
 		ServiceLocatorObject = AssetDatabase.LoadAssetAtPath<ServiceLocatorObject>(ServiceLocatorObject.PathToServiceLocatorObject);
         TestObjectReferences = ServiceLocatorObject.TestObjectReferences;
 		Constants = ServiceLocatorObject.Constants;
+
+		CharacterModel = ServiceLocatorObject.CharacterModel;
 
 		Character1Blueprint = TestObjectReferences.Character1;
 		Character2Blueprint = TestObjectReferences.Character2;

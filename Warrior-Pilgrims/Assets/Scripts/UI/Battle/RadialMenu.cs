@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 public class RadialMenu : MonoBehaviour
 {
+	[SerializeField] private BattleManager _battleManager;
+	[SerializeField] private BattleDataModel battleDataModel;
+
 	[SerializeField] private GameObject holder;
 
 	[SerializeField] private GameObject subMenuPrefab;
@@ -20,7 +23,6 @@ public class RadialMenu : MonoBehaviour
 
 	RMF_RadialMenu subMenu;
 
-	private BattleManager battleManager;
 	private Character character;
 
 	private List<Item> items = new List<Item>();
@@ -34,17 +36,17 @@ public class RadialMenu : MonoBehaviour
 		set { character = value; UpdateDisplay(); Debug.Log("Setting character" ); }
 	}
 
-	public void InitialiseRadialMenu(BattleManager battleManager)
+	public void InitialiseRadialMenu()
 	{
-		this.battleManager = battleManager;
-		this.character = battleManager.BattleDataModel.CurrentActor;
+		this.character = _battleManager.BattleDataModel.CurrentActor;
 
 		InitialiseItemSubMenu();
 		InitialiseSkillsSubMenu();
 		UpdateDisplay();
+
 		//InitialisePositionSubMenu();
 
-		battleManager.BattleDataModel.OnCurrentActorChanged += UpdateDisplay;
+		//battleManager.BattleDataModel.OnCurrentActorChanged += UpdateDisplay;
 	}
 
 	public void Destroy()
@@ -87,7 +89,7 @@ public class RadialMenu : MonoBehaviour
 
 		Button button = skillsElementsParent.GetComponent<Button>(); // get the buttons
 
-		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { battleManager.TargetManager.ClearTargets(); } });
+		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { _battleManager.TargetManager.ClearTargets(); } });
 
 		foreach (ISkill skill in character.SkillSystem.UnlockedSkills) // add the unlocked skills from the SkillSystem
 		{
@@ -97,7 +99,7 @@ public class RadialMenu : MonoBehaviour
 			rMF_RadialMenuElement.text.text = skill.Name;
 			subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
 
-			rMF_RadialMenuElement.button.onClick.AddListener(delegate { battleManager.GetTargets(skill); });
+			rMF_RadialMenuElement.button.onClick.AddListener(delegate { _battleManager.GetTargets(skill); });
 
 		}
 
@@ -111,21 +113,21 @@ public class RadialMenu : MonoBehaviour
 
 	public void UpdateDisplay()
 	{
-		holder.SetActive(battleManager.BattleDataModel.CurrentActor.IsPlayer);
-				
-		if (battleManager.BattleDataModel.CurrentActor != this.character)
-		{
-			this.character = battleManager.BattleDataModel.CurrentActor;
-			if (character.IsPlayer)
-			{
-				DestroyOldMenu(itemsElementsParent);
-				DestroyOldMenu(skillsElementsParent);
+		if (_battleManager.BattleDataModel.CurrentActor == null) { return; }
 
-				InitialiseItemSubMenu();
-				InitialiseSkillsSubMenu();  
-			}
+		holder.SetActive(_battleManager.BattleDataModel.CurrentActor.IsPlayer);
+		
+		this.character = _battleManager.BattleDataModel.CurrentActor;
+		if (character.IsPlayer)
+		{
+			DestroyOldMenu(itemsElementsParent);
+			DestroyOldMenu(skillsElementsParent);
+
+			InitialiseItemSubMenu();
+			InitialiseSkillsSubMenu();  
 		}
 	}
+
 
 	private void DestroyOldMenu(Transform oldElementsParent)
 	{

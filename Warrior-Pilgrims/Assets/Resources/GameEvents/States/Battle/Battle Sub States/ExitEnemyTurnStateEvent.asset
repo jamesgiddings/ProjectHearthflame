@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95db178ba39834ba767dfe7399daac, type: 3}
   m_Name: ExitEnemyTurnStateEvent
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject:
+  - _underlyingValue: {fileID: 11400000, guid: 7fe54bdeb2a1e0844aa1e27cc37da401, type: 2}

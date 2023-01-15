@@ -25,6 +25,7 @@ MonoBehaviour:
   _resource: {fileID: 11400000, guid: 3b42225a4e132ec40886d42bcc7614dc, type: 2}
   _equipmentItem1: {fileID: 11400000, guid: 7152801aa9f48aa4da2a298f494b2e62, type: 2}
   _battleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
+  _battleManager: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
   _targetToSlots_XXXX_OXXX: {fileID: 11400000, guid: 7fb344cda92430944aaf670a28f39083,
     type: 2}
   _targetToSlots_XXXX_OOXXandXXXX_XXOO: {fileID: 11400000, guid: d3eb08f3404fcf641b419391872e4fa1,
@@ -43,3 +44,6 @@ MonoBehaviour:
     _underlyingValue: {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
   _shoot:
     _underlyingValue: {fileID: 11400000, guid: 5a8b3dcd59789ad4c9aa83e58b8c3fa6, type: 2}
+  _battle1: {fileID: 11400000, guid: a5bc8189a708ac649b06c8697b06ec32, type: 2}
+  _testState: {fileID: 11400000, guid: 9f3868c33a2fbfe4189889ec0f7f72f5, type: 2}
+  _partyInventory: {fileID: 11400000, guid: 5c2f7a62535fbf647a7b2f9e4276325d, type: 2}

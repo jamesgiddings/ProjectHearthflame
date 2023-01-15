@@ -1,11 +1,14 @@
 using AYellowpaper;
 using GramophoneUtils.Events.CustomEvents;
+using GramophoneUtils.Events.Listeners;
 using GramophoneUtils.Utilities;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +21,6 @@ public class State : ScriptableObjectThatCanRunCoroutines {
     [ShowInInspector, TextArea] private string _stateFunctionDescription;
 #endif
 
-
     [SerializeField] private StateEvent enterStateEvent;
     [SerializeField] private StateEvent exitStateEvent;
 
@@ -28,8 +30,8 @@ public class State : ScriptableObjectThatCanRunCoroutines {
     [BoxGroup("Exit State After Delay")]
     [SerializeField] private UnityEvent<float, State, StateManager> _stateExitTimerEvent;
 
-    [BoxGroup("Invoke Event After Delay")]
-    [SerializeField] private UnityEvent<float> _delayedCommandsEvent;
+    [BoxGroup("Event Tasks")]
+    [SerializeField] private List<InterfaceReference<ITask>> _tasks;
 
     [BoxGroup("Default Exit State On Condition"), Tooltip("The state to exit to.")]
     [SerializeField] private State _exitState;
@@ -37,15 +39,6 @@ public class State : ScriptableObjectThatCanRunCoroutines {
     [SerializeField] private StateManager _exitStateStateManager;
     [BoxGroup("Default Exit State On Condition"), Tooltip("The time in seconds before exiting the state.")]
     [SerializeField] private FloatReference _delay;
-
-    [BoxGroup("Delayed ICommands"), Tooltip("The time in seconds before executing the ICommand.")]
-    [SerializeField] private float _eventDelay;
-    [BoxGroup("Delayed ICommands"), Tooltip("The commands to execute after the delay.")]
-    [SerializeField] private List<InterfaceReference<ICommand>> _delayedCommands;
-
-    [SerializeField] private List<UnityEvent> _onAfterEnterUnityEvents;
-
-    [SerializeField] private List<UnityEvent> _onBeforeExitUnityEvents;
 
     private bool _active = false;
 
@@ -72,17 +65,13 @@ public class State : ScriptableObjectThatCanRunCoroutines {
 
         RaiseEnterStateEvent();
 
-        InvokeAfterEnterEvents();
+        OnEnterTasksComplete();
 
-        StartTimerIfDelayedEventSet();
         StartTimerIfDelayedExitEventSet();
     }
 
-
     public virtual void ExitState()
     {
-        InvokeBeforeExitEvents();
-
         RaiseExitStateEvent();
 
         SetActive(false);
@@ -116,14 +105,6 @@ public class State : ScriptableObjectThatCanRunCoroutines {
         }
     }
 
-    public void ExecuteCommandsAfterDelay()
-    {
-        if (IsActive())
-        {
-            StartCoroutine(ExecuteCommandsAfterDelayCoroutine(_eventDelay));
-        }
-    }
-
     public void Wait(float seconds)
     {
         if (IsActive())
@@ -137,9 +118,40 @@ public class State : ScriptableObjectThatCanRunCoroutines {
         FindObjectsOfType<Battler>().ForEach((b) => b.gameObject.GetComponent<CharacterMovement>().enabled = value);
     }
 
+#if UNITY_EDITOR
+
+    [Button("Create State Listeners")]
+    public void CreateStateListeners(string stateName)
+    {
+        ScriptableObjectStateListener enterStateListener = CreateInstance(typeof(ScriptableObjectStateListener)) as ScriptableObjectStateListener;
+        ScriptableObjectStateListener exitStateListener = CreateInstance(typeof(ScriptableObjectStateListener)) as ScriptableObjectStateListener;
+        string path = "Assets/Resources/GameEvents/States/Listeners/";
+        string exitAssetPath = AssetDatabase.GenerateUniqueAssetPath(path + "/Exit " + stateName + " State Listener.asset");
+        string enterAssetPath = AssetDatabase.GenerateUniqueAssetPath(path + "/Enter " + stateName + " State Listener.asset");
+        Debug.Log(exitAssetPath);
+        Debug.Log(enterAssetPath);
+        AssetDatabase.CreateAsset(enterStateListener, enterAssetPath);
+        AssetDatabase.CreateAsset(exitStateListener, exitAssetPath);
+    }
+
+#endif
+
     #endregion
 
     #region Private Functions
+
+    private async void OnEnterTasksComplete()
+    {
+        //var tasks = new Task[_tasks.Count];
+
+        for (int i = 0; i < _tasks.Count; i++)
+        {
+            //tasks[i] = _tasks[i].Value.Execute();
+            await _tasks[i].Value.Execute();
+        }
+
+        //await Task.WhenAll(tasks);
+    }
 
     private IEnumerator WaitCoroutine(float seconds)
     {
@@ -151,14 +163,6 @@ public class State : ScriptableObjectThatCanRunCoroutines {
         if (_stateExitTimerEvent != null)
         {
             _stateExitTimerEvent?.Invoke(_delay, _exitState, _exitStateStateManager);
-        }
-    }
-
-    private void StartTimerIfDelayedEventSet()
-    {
-        if (_delayedCommandsEvent != null)
-        {
-            _delayedCommandsEvent?.Invoke(_eventDelay);
         }
     }
 
@@ -185,17 +189,6 @@ public class State : ScriptableObjectThatCanRunCoroutines {
             else
             {
                 Debug.LogError("SubStateManager.StartingState is null, so cannot enter.");
-            }
-        }
-    }
-
-    private void InvokeAfterEnterEvents()
-    {
-        if (IsActive())
-        {
-            for (int i = 0; i < _onAfterEnterUnityEvents.Count; i++)
-            {
-                _onAfterEnterUnityEvents[i]?.Invoke();
             }
         }
     }
@@ -227,33 +220,10 @@ public class State : ScriptableObjectThatCanRunCoroutines {
         }
     }
 
-    private void InvokeBeforeExitEvents()
-    {
-        if (IsActive())
-        {
-            for (int i = 0; i < _onBeforeExitUnityEvents.Count; i++)
-            {
-                _onBeforeExitUnityEvents[i]?.Invoke();
-            }
-        }
-    }
-
     private IEnumerator ChangeStateAfterDelayCoroutine(float delay, State state, StateManager stateManager)
     {
         yield return new WaitForSeconds(delay);
         stateManager.ChangeState(state);
-    }
-
-    private IEnumerator ExecuteCommandsAfterDelayCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        foreach (InterfaceReference<ICommand> interfaceReference in _delayedCommands)
-        {
-            if(interfaceReference.Value != null)
-            {
-                interfaceReference.Value.Execute();
-            }
-        }
     }
 
     #endregion

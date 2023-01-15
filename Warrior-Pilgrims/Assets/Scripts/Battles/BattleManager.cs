@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using GramophoneUtils.Utilities;
 using GramophoneUtils.Events.CustomEvents;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "Battle Manager", menuName = "Battles/Systems/Battle Manager")]
 public class BattleManager : ScriptableObjectThatCanRunCoroutines
@@ -44,7 +45,7 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
     #region Callbacks
     #endregion
 
-    #region API
+    #region Public Functions
 
     public void InitialiseBattleManager()
 	{
@@ -56,6 +57,7 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
         InitialiseTurnOrderUI();
 		InitialiseRearBattleUI();
         InitialiseBattleRewardsDisplayUI();
+        InitialiseRadialMenu();
         _battleDataModel.OnCurrentActorChanged?.Invoke();
 
         // Move to next state:
@@ -70,9 +72,22 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
     public void InitialiseRadialMenu()
     {
         _radialMenu = Instantiate(_radialMenuPrefab, ServiceLocator.Instance.BattleUITransform).GetComponent<RadialMenu>();
-        _radialMenu.InitialiseRadialMenu(this);
+        //_radialMenu.InitialiseRadialMenu();
     }
 
+    [Button]
+    public void UpdateRadialMenu()
+    {
+        _radialMenu.UpdateDisplay();
+    }
+
+    [Button]
+    public void DestroyRadialMenu()
+    {
+        _radialMenu.Destroy();
+    }
+
+    [Button]
     public void GetTargets(ISkill skill)
 	{
 		targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor);
@@ -88,6 +103,7 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
     {
         Destroy(turnOrderUI.gameObject);
         Destroy(_battleRewardsDisplayUI.gameObject);
+        DestroyRadialMenu();
         _rearBattlePrefab.SetActive(false);
         ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.ExplorationState);
     }

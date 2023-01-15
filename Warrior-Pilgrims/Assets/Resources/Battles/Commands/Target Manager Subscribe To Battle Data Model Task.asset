@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2aa1408eb24db04184c76cb48097ca7, type: 3}
+  m_Name: Target Manager Subscribe To Battle Data Model Task
+  m_EditorClassIdentifier: 
+  BattleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
+  _targetManager: {fileID: 11400000, guid: 3c57dc877581b9b4b95815e1a30a8b1a, type: 2}
+  _toggle: 1

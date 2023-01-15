@@ -14,6 +14,8 @@ public class GeneralStateTests : BasicEditModeTest
     private State _gameMenuState;
     private State _gameExplorationState;
 
+    private State _testState;
+
     #endregion
 
     #region Constructors
@@ -35,6 +37,8 @@ public class GeneralStateTests : BasicEditModeTest
         _gameLoadingState = ServiceLocatorObject.GameLoadingState;
         _gameMenuState = ServiceLocatorObject.GameMenuState;
         _gameExplorationState = ServiceLocatorObject.GameExplorationState;
+
+        _testState = TestObjectReferences.TestState;
     }
 
     [Test]
@@ -74,6 +78,8 @@ public class GeneralStateTests : BasicEditModeTest
 
         Assert.NotNull(_gameStateManager.StartingState);
         Assert.NotNull(_gameStateManager.State);
+
+        _gameStateManager.ChangeState(_testState);
     }
 
     [Test]

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450689570d6d5d64aa36537b73bfd2a6, type: 3}
   m_Name: GameEvent_Character_OnCharacterDeath
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject:
+  - _underlyingValue: {fileID: 11400000, guid: 8a5fb94a7758f5c4183e8dbd9d88e8b3, type: 2}

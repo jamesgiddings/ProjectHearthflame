@@ -18,6 +18,7 @@ public class Battle : Data
 	[PreviewField(60), HideLabel]
 	[HorizontalGroup("Split", 60)]
     [SerializeField] private Sprite _battleSprite;
+    public Sprite BattleSprite => _battleSprite;
 
     [VerticalGroup("Split/Right"), LabelWidth(120)]
     [SerializeField] private BattleReward _battleReward;
@@ -37,9 +38,10 @@ public class Battle : Data
 
     public BattleReward BattleReward => _battleReward;
 
-	public Sprite BattleSprite => _battleSprite;
+	
 
-	private Inventory _enemyInventory = new Inventory(20, 10000);
+    [SerializeField] private Inventory _enemyInventory;
+    public Inventory EnemyInventory =>_enemyInventory;
 
     public bool IsComplete { get { return _isComplete; } set { _isComplete = value; } }
     
@@ -50,8 +52,6 @@ public class Battle : Data
     public BattleWinConditions BattleWinConditions => _battleWinConditions;
 
     public BattleRear BattleRear => _battleRear;
-
-    public Inventory EnemyInventory => _enemyInventory; // getter
 
 	public List<Character> BattleCharacters
 	{

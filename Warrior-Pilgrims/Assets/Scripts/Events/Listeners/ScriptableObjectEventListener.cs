@@ -12,36 +12,6 @@ namespace GramophoneUtils.Events.Listeners
 
         [SerializeField] private UER unityEventResponse = null;
 
-#if UNITY_EDITOR
-
-        private void OnValidate()
-        {
-            if (gameEvent == null) 
-            { 
-                return; 
-            }
-            GameEvent.RegisterListener(this);
-        }
-        
-#endif
-
-        private void OnEnable()
-        {
-            if (gameEvent == null) 
-            { 
-                return; 
-            }
-
-            GameEvent.RegisterListener(this);
-        }
-
-        private void OnDisable()
-        {
-            if (gameEvent == null) return;
-
-            GameEvent.UnregisterListener(this);
-        }
-
         public void OnEventRaised(T item)
         {
             if (unityEventResponse != null)

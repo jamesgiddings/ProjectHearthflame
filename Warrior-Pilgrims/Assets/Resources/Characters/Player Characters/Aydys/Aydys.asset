@@ -27,6 +27,8 @@ MonoBehaviour:
     _underlyingValue: {fileID: 11400000, guid: f044a0b883cc0ab4f8ade334857912d4, type: 2}
   _portrait: {fileID: -1808233437, guid: f06069f7fda60e6409adebcd42b518a7, type: 3}
   _color: {r: 1, g: 0, b: 0, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: 1d3e1aed9417647428917571420efcf0,
+    type: 2}
   _isPlayer: 1
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AydysAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/AydysAnimationController

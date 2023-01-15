@@ -16,6 +16,7 @@ MonoBehaviour:
   _statSystemConstants: {fileID: 11400000, guid: 7f85578c166af3444bd078b9ed9aea58,
     type: 2}
   _sceneController: {fileID: 11400000, guid: 3e23e9dd57c746f46918ce02dbf93bea, type: 2}
+  characterModel: {fileID: 11400000, guid: 11401e1f862ecda43af8a0e01fd52aa5, type: 2}
   _testObjectReferences: {fileID: 11400000, guid: aaadc1351fe2d334595bd0ab41786c34,
     type: 2}
   _gameStateManager: {fileID: 11400000, guid: b83312378993c5d48b443791ece59323, type: 2}
@@ -38,3 +39,4 @@ MonoBehaviour:
   _preCharacterTurn: {fileID: 11400000, guid: 207db17ecfc69c348871471a38683fb2, type: 2}
   _preRound: {fileID: 11400000, guid: 6d14a02ab5951d34e8396cd300455496, type: 2}
   _postRound: {fileID: 11400000, guid: a055042378d27974b866e90db8fded7c, type: 2}
+  _battleManager: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}

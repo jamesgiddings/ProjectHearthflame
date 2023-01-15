@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class LightFlicker : MonoBehaviour
 {
-	[Header("Intensity Flicker")] 
+	/*[Header("Intensity Flicker")] 
 
 	[SerializeField] float minimumIntensityModifier;
 	[SerializeField] float maximumIntensityModifier;
@@ -128,5 +128,5 @@ public static class FlickerTweeners
 	public static Tweener DOIntensity(this UnityEngine.Rendering.Universal.Light2D target, float endValue, float duration)
 	{
 		return DOTween.To(() => target.intensity, x => target.intensity = x, endValue, duration).SetTarget(target);
-	}
+	}*/
 }

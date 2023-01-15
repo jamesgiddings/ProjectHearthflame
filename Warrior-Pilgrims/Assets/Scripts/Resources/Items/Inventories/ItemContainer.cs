@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace GramophoneUtils.Items.Containers
-{    public class ItemContainer : IItemContainer
+{    
+
+    public class ItemContainer : ScriptableObject, IItemContainer
     {
         [SerializeField] protected int money = 100;
         [SerializeField] protected ItemSlot[] itemSlots = new ItemSlot[0];

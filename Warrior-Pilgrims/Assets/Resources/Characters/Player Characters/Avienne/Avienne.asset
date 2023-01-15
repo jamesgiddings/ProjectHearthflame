@@ -27,6 +27,8 @@ MonoBehaviour:
   _portrait: {fileID: 3155209142526937495, guid: 3e8d2003b77948a41a3041afcf2a91ff,
     type: 3}
   _color: {r: 1, g: 0, b: 0, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: 73b1d6536aa18b945875389b5954ea1b,
+    type: 2}
   _isPlayer: 1
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/AvienneAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/AvienneAnimationController

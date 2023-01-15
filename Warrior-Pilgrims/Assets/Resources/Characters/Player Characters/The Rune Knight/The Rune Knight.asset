@@ -27,6 +27,8 @@ MonoBehaviour:
     _underlyingValue: {fileID: 11400000, guid: beb34f8116de95c46bc966c708e44bf6, type: 2}
   _portrait: {fileID: -901992293, guid: 193646214d563244c95237efe150f55a, type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: 706eee3c57491e3499bd2b6e693cc26e,
+    type: 2}
   _isPlayer: 1
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/The Rune KnightAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/The Rune KnightAnimationController

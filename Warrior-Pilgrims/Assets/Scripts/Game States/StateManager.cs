@@ -31,7 +31,16 @@ public class StateManager : ScriptableObjectThatCanRunCoroutines
 
     #endregion
 
-    #region API
+    #region Callbacks
+
+    private void OnDisable()
+    {
+        _state = null;
+    }
+
+    #endregion
+
+    #region Public Functions
 
     public void SetStartingState()
     {

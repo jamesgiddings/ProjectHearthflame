@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95db178ba39834ba767dfe7399daac, type: 3}
   m_Name: EnterEnemyTurnStateEvent
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject:
+  - _underlyingValue: {fileID: 11400000, guid: 263fb6e27f9e90a45a6c89061f04cb90, type: 2}

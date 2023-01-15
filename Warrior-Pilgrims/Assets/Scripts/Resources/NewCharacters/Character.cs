@@ -65,8 +65,18 @@ namespace GramophoneUtils.Characters
         private SkillSystem _skillSystem;
         public SkillSystem SkillSystem => _skillSystem;
 
-        private EquipmentInventory _equipmentInventory;
-        public EquipmentInventory EquipmentInventory => _equipmentInventory;
+        [SerializeField] private EquipmentInventory _equipmentInventory;
+        public EquipmentInventory EquipmentInventory
+        {
+            get
+            {
+                return _equipmentInventory;
+            }
+            set
+            {
+                _equipmentInventory = value;
+            }
+        }
 
         private bool _isRear;
         public bool IsRear { get { return _isRear; } set { _isRear = value; } }
@@ -371,6 +381,22 @@ namespace GramophoneUtils.Characters
             EditorUtility.SetDirty(this);
         }
 
+        [Button("Create Equipment Inventory")]
+        public void CreateEquipmentInventory()
+        {
+            EquipmentInventory equipmentInventory = CreateInstance(typeof(EquipmentInventory)) as EquipmentInventory;
+            string directory = _isPlayer ? "Player Characters" : "Enemy Characters";
+            string assetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Characters/" + directory + "/" + this.Name + "/" + this.Name + "EquipmentInventory.asset");
+            AssetDatabase.CreateAsset(equipmentInventory, assetPath);
+            equipmentInventory.Initialise();
+            _equipmentInventory = equipmentInventory;
+            EditorUtility.SetDirty(equipmentInventory);
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+
 #endif
 
         #endregion
@@ -397,8 +423,8 @@ namespace GramophoneUtils.Characters
             instancedCharacter._skillSystem.Initialise();
             instancedCharacter._levelSystem = new LevelSystem(instancedCharacter._characterClass, instancedCharacter);
             instancedCharacter._levelSystem.OnLevelChanged += _characterClass.LevelUp; // TODO UNSUBSCRIBE
-            instancedCharacter._equipmentInventory = new EquipmentInventory(instancedCharacter);
-
+            instancedCharacter._equipmentInventory = _equipmentInventory;
+            instancedCharacter._equipmentInventory.Initialise(4);
             instancedCharacter._brain = this._brain;
             instancedCharacter.IsUnlocked = this._startsUnlocked;
             instancedCharacter._characterPrefab = this._characterPrefab;

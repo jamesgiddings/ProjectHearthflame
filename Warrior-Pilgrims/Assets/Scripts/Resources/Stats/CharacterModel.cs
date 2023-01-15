@@ -9,6 +9,8 @@ using Character = GramophoneUtils.Characters.Character;
 using System.Linq;
 using GramophoneUtils.Events.CustomEvents;
 using System.Collections;
+using GramophoneUtils.Utilities;
+using System.Threading.Tasks;
 
 namespace GramophoneUtils.Stats
 {
@@ -16,42 +18,73 @@ namespace GramophoneUtils.Stats
     /// <summary>
     /// This class provides references to the data model for characters (player and enemy)/
     /// </summary>
-    public class CharacterModel : MonoBehaviour, ISaveable
+    [CreateAssetMenu(fileName = "Character Model", menuName = "Characters/Character Model")]
+    public class CharacterModel : ScriptableObjectThatCanRunCoroutines, ICharacterModel, ISaveable
     {
-        #region Attributes/Fields
+        #region Attributes/Fields/Properties
 
         [SerializeField] public UnityEvent onStatsChanged;
         [SerializeField] public UnityEvent onInventoryItemsUpdated;
         [SerializeField] public VoidEvent OnCharacterModelPlayerCharacterOrderUpdated;
         [SerializeField] public VoidEvent OnCharacterModelEnemyCharacterOrderUpdated;
+
+        private bool _unhandledCharacterDeath = false;
         [SerializeField] public CharacterEvent OnCharacterDeath;
 
-        [SerializeField] private int _partyInventorySize = 20;
-        [SerializeField] private int _startingScrip = 10000;
+        [SerializeField] private Inventory _partyInventory;
+        [ShowInInspector] public Inventory PartyInventory => _partyInventory;
 
-        private Inventory _partyInventory;
-        private Inventory _enemyInventory;
+        [SerializeField] private Inventory _enemyInventory;
+        [ShowInInspector] public Inventory EnemyInventory => _enemyInventory;
 
         [SerializeField] private Character[] _playerCharacterBlueprints = new Character[6];
+        public Character[] PlayerCharacterBlueprints
+        {
+            get
+            {
+                return _playerCharacterBlueprints;
+            }
+        }
 
         private List<Character> _playerCharacters = null;
         private List<Character> _enemyCharacters = new List<Character>();
         private List<Character> _reserveEnemyCharacters = new List<Character>();
         private List<Character> _deadEnemyCharacters = new List<Character>();
+        public List<Character> DeadEnemyCharacters => _deadEnemyCharacters;
+
         private List<Character> _deadPlayerCharacters = new List<Character>();
+        public List<Character> DeadPlayerCharacters => _deadPlayerCharacters;
 
         private CharacterOrder _playerCharacterOrder = null;
         private CharacterOrder _enemyCharacterOrder = null;
 
-        [ShowInInspector] public Inventory PartyInventory => _partyInventory;
-        [ShowInInspector] public Inventory EnemyInventory => _enemyInventory;
 
-        [ShowInInspector] public CharacterOrder PlayerCharacterOrder => _playerCharacterOrder;
-        [ShowInInspector] public CharacterOrder EnemyCharacterOrder => _enemyCharacterOrder;
+        public CharacterOrder PlayerCharacterOrder
+        {
+            get
+            {
+                _playerCharacterOrder = new CharacterOrder(PlayerCharacters.ToArray());
+                OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                return _playerCharacterOrder;
+            }
+            set
+            {
+                _playerCharacterOrder = value;
+            }
+        }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
+        public CharacterOrder EnemyCharacterOrder
+        {
+            get
+            {
+                return _enemyCharacterOrder;
+            }
+            set
+            {
+                _enemyCharacterOrder = value;
+            }
+        }
+
         public List<Character> PlayerCharacters
         {
             get
@@ -68,16 +101,10 @@ namespace GramophoneUtils.Stats
 
                     ConnectInventories(character);
                 }
-
-                _playerCharacterOrder = new CharacterOrder(_playerCharacters.ToArray());
-                OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
                 return _playerCharacters;
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public List<Character> EnemyCharacters
         {
             get
@@ -91,9 +118,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public List<Character> ReserveEnemyCharacters
         {
             get
@@ -102,9 +126,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif 
         public Character Slot1PlayerCharacter
         {
             get
@@ -118,9 +139,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
+
         public Character Slot2PlayerCharacter
         {
             get
@@ -134,9 +153,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public Character Slot3PlayerCharacter
         {
             get
@@ -150,9 +166,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public Character Slot4PlayerCharacter
         {
             get
@@ -166,10 +179,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif 
         public Character Slot1EnemyCharacter
         {
             get
@@ -183,9 +192,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public Character Slot2EnemyCharacter
         {
             get
@@ -199,9 +205,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public Character Slot3EnemyCharacter
         {
             get
@@ -215,9 +218,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public Character Slot4EnemyCharacter
         {
             get
@@ -231,9 +231,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public List<Character> DeadEnemyCharactersList
         {
             get
@@ -242,9 +239,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#if !UNITY_EDITOR
-        [ShowInInspector]
-#endif
         public List<Character> AllCharacters
         {
             get
@@ -256,20 +250,21 @@ namespace GramophoneUtils.Stats
             }
         }
 
-#endregion
+        #endregion
 
         #region Callbacks
 
-        private void Awake()
+        private void OnEnable()
         {
-            Debug.Log(PlayerCharacters);
-        }
+            _playerCharacters = null;
+            _enemyCharacters = new List<Character>();
+            _reserveEnemyCharacters = new List<Character>();
+            _deadEnemyCharacters = new List<Character>();
+            _deadPlayerCharacters = new List<Character>();
 
-        private void Start()
-        {
-            RegisterCharactersOnStatsChangedEvent();
+            _playerCharacterOrder = null;
+            _enemyCharacterOrder = null;
         }
-
 
         private void OnDestroy() // just deregister from the unity event
         {
@@ -287,31 +282,25 @@ namespace GramophoneUtils.Stats
         {
             _playerCharacters = new List<Character>();
 
-            if(_playerCharacterBlueprints == null)
+            if (PlayerCharacterBlueprints == null)
             {
-                Debug.LogWarning("_playerCharacterBlueprints was null.");
+                Debug.LogWarning("PlayerCharacterBlueprints was null.");
                 return _playerCharacters;
             }
 
-            for (int i = 0; i < _playerCharacterBlueprints.Length; i++)
+            for (int i = 0; i < PlayerCharacterBlueprints.Length; i++)
             {
-                if (_playerCharacterBlueprints[i] != null)
+                if (PlayerCharacterBlueprints[i] != null)
                 {
-                    _playerCharacters.Add(_playerCharacterBlueprints[i].Instance());
-                    _playerCharacters.Last<Character>().IsPlayer = true;
-                    _playerCharacters.Last<Character>().PartyInventory = GetPartyInventory();
+                    _playerCharacters.Add(PlayerCharacterBlueprints[i].Instance());
+                    _playerCharacters.Last().IsPlayer = true;
+                    _playerCharacters.Last().PartyInventory = PartyInventory;
                 }
             }
-            return _playerCharacters;
-        }
 
-        public Inventory GetPartyInventory()
-        {
-            if (_partyInventory == null)
-            {
-                _partyInventory = new Inventory(_partyInventorySize, _startingScrip, onInventoryItemsUpdated);
-            }
-            return _partyInventory;
+            RegisterCharactersOnStatsChangedEvent();
+
+            return _playerCharacters;
         }
 
         public void RemoveEnemyCharacter(Character characterToRemove)
@@ -345,6 +334,7 @@ namespace GramophoneUtils.Stats
         /// <param name="character"></param>
         public void RegisterCharacterDeath(Character character)
         {
+            _unhandledCharacterDeath = true;
             if (character.IsPlayer)
             {
                 AddPlayerToDeadPlayerCharactersList(character);
@@ -367,12 +357,29 @@ namespace GramophoneUtils.Stats
         }
 
         /// <summary>
+        /// Removes all dead players from the list.
+        /// </summary>
+        public void ClearDeadPlayerCharactersList()
+        {
+            _deadPlayerCharacters.Clear();
+        }
+
+        /// <summary>
         /// Resets the enemyCharacterOrder to null.
         /// To be called at the end of the battle.
         /// </summary>
         public void ResetEnemyCharacterOrder()
         {
             _enemyCharacterOrder = null;
+        }
+
+        /// <summary>
+        /// Resets the playerCharacterOrder to null.
+        /// To be called at the end of the battle.
+        /// </summary>
+        public void ResetPlayerCharacterOrder()
+        {
+            _playerCharacterOrder = null;
         }
 
         public void AddEnemyToDeadEnemyCharactersList(Character character)
@@ -415,54 +422,47 @@ namespace GramophoneUtils.Stats
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
-        /*        /// <summary>
-                /// This sets the player character order manually to allow for testing in edit mode
-                /// </summary>
-                /// <param name="characterOrder"></param>
-                public void SetPlayerCharacterOrder(CharacterOrder characterOrder)
-                {
-                    _playerCharacterOrder = characterOrder;
-                }
-
-                /// <summary>
-                /// This sets the enemy character order manually to allow for testing in edit mode
-                /// </summary>
-                /// <param name="characterOrder"></param>
-                public void SetEnemyCharacterOrder(CharacterOrder characterOrder)
-                {
-                    _enemyCharacterOrder = characterOrder;
-                }*/
-
-        public void StartCharacterDeathCoroutine()
+        public async Task AwaitCharacterDeathSequence()
         {
-            StartCoroutine(CharacterDeathCoroutine());
+            await CharacterDeathSequence();
         }
 
         #endregion
 
         #region Private Functions
 
-        private IEnumerator CharacterDeathCoroutine()
+        private async Task CharacterDeathSequence()
         {
-            yield return new WaitForSeconds(0.2f);
-            _enemyCharacterOrder.MoveCharactersForwardIntoSpaces();
+            // Todo this is going through the full sequence even when things are not dead.
+
+            OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+            float end = Time.time + 0.2f;
+            while (Time.time < end)
+            {
+                await Task.Yield();
+            }
             ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
-            yield return new WaitForSeconds(0.5f);
+            end = Time.time + 0.3f;
+            while (Time.time < end)
+            {
+                await Task.Yield();
+            }
             _reserveEnemyCharacters = _enemyCharacterOrder.AddCharactersAndReturnRemainder(_reserveEnemyCharacters);
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+            _unhandledCharacterDeath = false;
         }
 
         private void ConnectInventories(Character character)
         {
-            character.PartyInventory = this._partyInventory;
-            character.EquipmentInventory.ConnectToCharacter(character);
+            character.PartyInventory = this.PartyInventory;
+            character.EquipmentInventory.ConnectToCharacter(character, PartyInventory);
         }
 
         private void RegisterCharactersOnStatsChangedEvent()
         {
-            for (int i = 0; i < PlayerCharacters.Count; i++)
+            for (int i = 0; i < _playerCharacters.Count; i++)
             {
-                RegisterCharacterOnStatsChangedEvent(PlayerCharacters[i]);
+                RegisterCharacterOnStatsChangedEvent(_playerCharacters[i]);
             }
         }
 

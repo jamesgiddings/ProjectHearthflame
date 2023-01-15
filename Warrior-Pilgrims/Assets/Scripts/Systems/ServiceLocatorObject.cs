@@ -1,3 +1,4 @@
+using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,11 @@ public class ServiceLocatorObject : ScriptableObject
 
     private static string _pathToServiceLocatorObject = "Assets/Resources/Systems/Service Locator Object.asset";
     public static string PathToServiceLocatorObject => _pathToServiceLocatorObject;
-    
+
+    [BoxGroup("Characters")]
+    [SerializeField] private CharacterModel characterModel;
+    public CharacterModel CharacterModel => characterModel;
+
     [BoxGroup("Tests")]
     [SerializeField] private TestObjectReferences _testObjectReferences;
     public TestObjectReferences TestObjectReferences => _testObjectReferences;
@@ -67,12 +72,12 @@ public class ServiceLocatorObject : ScriptableObject
     public State BattleWonState => _battleWonState;
 
     [BoxGroup("States/Battle")]
-    [SerializeField] private State _enemyTurnState;
-    public State EnemyTurnState => _enemyTurnState;
+    [SerializeField] private EnemyTurnState _enemyTurnState;
+    public EnemyTurnState EnemyTurnState => _enemyTurnState;
 
     [BoxGroup("States/Battle")]
-    [SerializeField] private State _playerTurnState;
-    public State PlayerTurnState => _playerTurnState;
+    [SerializeField] private PlayerTurnState _playerTurnState;
+    public PlayerTurnState PlayerTurnState => _playerTurnState;
 
     [BoxGroup("States/Battle")]
     [SerializeField] private State _postCharacterTurn;
@@ -89,5 +94,10 @@ public class ServiceLocatorObject : ScriptableObject
     [BoxGroup("States/Battle")]
     [SerializeField] private State _postRound;
     public State PostRoundState => _postRound;
+
+    [BoxGroup("Battle")]
+    [BoxGroup("Battle/Battle Objects")]
+    [SerializeField] private BattleManager _battleManager;
+    public BattleManager BattleManager => _battleManager;
 
 }

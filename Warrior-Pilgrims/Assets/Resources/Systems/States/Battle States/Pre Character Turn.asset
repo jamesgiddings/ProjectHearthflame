@@ -18,44 +18,12 @@ MonoBehaviour:
   _stateExitTimerEvent:
     m_PersistentCalls:
       m_Calls: []
-  _delayedCommandsEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_TargetAssemblyTypeName: State, Scripts
-        m_MethodName: ExecuteCommandsAfterDelay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _tasks:
+  - _underlyingValue: {fileID: 11400000, guid: b5990c43f7d5ffb4b8818da4fa6b853e, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: ea0a7c2cf9c15e64a8652b18d3643d07, type: 2}
   _exitState: {fileID: 0}
   _exitStateStateManager: {fileID: 0}
   _delay:
     UseConstant: 1
     ConstantValue: 0
     Variable: {fileID: 0}
-  _eventDelay: 0.1
-  _delayedCommands:
-  - _underlyingValue: {fileID: 11400000, guid: b5990c43f7d5ffb4b8818da4fa6b853e, type: 2}
-  - _underlyingValue: {fileID: 11400000, guid: ea0a7c2cf9c15e64a8652b18d3643d07, type: 2}
-  _onAfterEnterUnityEvents: []
-  _onBeforeExitUnityEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
-        m_TargetAssemblyTypeName: BattleDataModel, Scripts
-        m_MethodName: RaiseActionsAtEndOfState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

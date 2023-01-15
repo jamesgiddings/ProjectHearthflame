@@ -205,6 +205,7 @@ public class CharacterOrder
     public HashSet<Character> GetCharacters()
     {
         HashSet<Character> characters = new HashSet<Character>();
+        //Debug.Log(_slots == null); // TODO Optimise, this is being called hundreds of times, possibly during character death
         foreach (var item in _slots)
         {
             if (item.Value != null)

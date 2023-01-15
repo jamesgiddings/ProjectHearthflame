@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b95db178ba39834ba767dfe7399daac, type: 3}
   m_Name: ExitBattleOverStateEvent
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject:
+  - _underlyingValue: {fileID: 11400000, guid: 749126ac43366354d8890af279257753, type: 2}

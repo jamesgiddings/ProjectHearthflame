@@ -1,22 +1,28 @@
 using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Turn State", menuName = "States/Battle Sub States/Player Turn State")]
 public class PlayerTurnState : BattleSubState
 {
-	private Character StateActor;
+    #region Attributes/Fields/Properties
 
-	public override void EnterState()
+    private Character StateActor;
+
+    #endregion
+
+    #region Public Functions
+
+    public override void EnterState()
 	{
-		base.EnterState();
+        base.EnterState();
 		StateActor = BattleManager.BattleDataModel.CurrentActor;
-        BattleManager.InitialiseRadialMenu();
-		if (StateActor.HealthSystem.IsDead)
+/*		if (StateActor.HealthSystem.IsDead)
 		{
 			BattleManager.BattleDataModel.NextTurn();
-		}
+		}*/
 	}
 
 	public override void ExitState()
@@ -52,11 +58,26 @@ public class PlayerTurnState : BattleSubState
         }
     }
 
-	private void PlayerAction()
+#if UNITY_EDITOR
+
+    public void SimulatePlayerAction(ISkill skill, List<Character> targets, Character originator)
+    {
+        BattleManager.TargetManager.SimulatePlayerTargeting(skill, targets, originator);
+        ServiceLocator.Instance.BattleStateManager.ChangeState(ServiceLocator.Instance.ServiceLocatorObject.PostCharacterTurnState);
+    }
+
+#endif
+
+
+#endregion
+
+    #region Private Functions
+
+    private void PlayerAction()
 	{
         ServiceLocator.Instance.CharacterGameObjectManager.CharacterBattlerDictionary[StateActor].OnTurnComplete -= PlayerAction;
-        //BattleManager.BattleDataModel.NextTurn();
         ServiceLocator.Instance.BattleStateManager.ChangeState(ServiceLocator.Instance.ServiceLocatorObject.PostCharacterTurnState);
-
 	}
+
+    #endregion 
 }

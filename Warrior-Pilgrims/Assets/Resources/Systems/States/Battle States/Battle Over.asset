@@ -17,57 +17,14 @@ MonoBehaviour:
   _subStateManager: {fileID: 0}
   _stateExitTimerEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 3c57dc877581b9b4b95815e1a30a8b1a, type: 2}
-        m_TargetAssemblyTypeName: TargetManager, Scripts
-        m_MethodName: UnsubscribeFromBattleDataModelOnSkillUsed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _delayedCommandsEvent:
-    m_PersistentCalls:
       m_Calls: []
-  _exitState: {fileID: 0}
-  _exitStateStateManager: {fileID: 0}
+  _tasks:
+  - _underlyingValue: {fileID: 11400000, guid: 2a4382b5ac8794b4190d1b432a14844e, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 73943f6420949104480d9c758cb33ad3, type: 2}
+  _exitState: {fileID: 11400000, guid: b66556b51f7b68a41b7d4da7664312dd, type: 2}
+  _exitStateStateManager: {fileID: 11400000, guid: b83312378993c5d48b443791ece59323,
+    type: 2}
   _delay:
     UseConstant: 1
-    ConstantValue: 0
+    ConstantValue: 0.1
     Variable: {fileID: 0}
-  _eventDelay: 0
-  _delayedCommands: []
-  _onAfterEnterUnityEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
-        m_TargetAssemblyTypeName: BattleManager, Scripts
-        m_MethodName: EndBattle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _onBeforeExitUnityEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
-        m_TargetAssemblyTypeName: BattleDataModel, Scripts
-        m_MethodName: RaiseActionsAtEndOfState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

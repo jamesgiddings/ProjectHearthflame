@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Battle Data Model", menuName = "Battles/Systems/Battle Data Model")]
@@ -84,29 +85,11 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 
         CalculateOrderedBattlersList();
         _turn = 0;
+        OnBattlerCollectionsUpdated?.Raise();
+        OnCurrentActorChanged?.Invoke();
     }
 
-    public void NextTurn()
-    {
-/*        if (IsPlayerVictory())
-        {
-            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
-            return;
-        }
-        else if (IsEnemyVictory())
-        {
-            _battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
-            return;
-        }
-
-        UpdateUnresolvedQueue();
-
-        AdvanceTurn();
-
-        UpdateCurrentActor();
-        UpdateState();*/
-    }
-
+    [Button]
     public void UpdateUnresolvedQueue()
     {
         _unresolvedQueue = OrderQueue();
@@ -114,22 +97,25 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
         OnCurrentActorChanged?.Invoke();
     }
 
-    public void RespondToBattleLossOrVictory()
+    [Button]
+    public bool RespondToBattleLossOrVictory()
 	{
         if (IsPlayerVictory())
         {
             _battleStateManager.ChangeState(ServiceLocator.Instance.BattleWonState);
-            return;
+            return true;
         }
         else if (IsEnemyVictory())
         {
             _battleStateManager.ChangeState(ServiceLocator.Instance.BattleLostState);
-            return;
+            return true;
         }
+        return false;
     }
 
-	public void UpdateState()
+	public async Task UpdateState()
     {
+        await Task.Delay(100);
         if (_currentActor.IsPlayer)
         {
             _battleStateManager.ChangeState(ServiceLocator.Instance.PlayerTurnState);
@@ -140,7 +126,13 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
         }
     }
 
-    public void UpdateCurrentActor()
+    public void UpdateStateWithSmallDelay()
+    {
+        StartCoroutine(DelayForSecondsThenUpdateState(0.1f));
+    }
+
+    [Button]
+    public async Task UpdateCurrentActor()
 	{
 		if (_currentActor != null)
 		{
@@ -151,6 +143,7 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
         _resolvedQueue.Enqueue(_currentActor);
         _currentActor.SetIsCurrentActor(true);
         OnCurrentActorChanged?.Invoke();
+        await Task.Delay(10);
 	}
 
     public bool IsEndOFRound()
@@ -158,6 +151,7 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
         return (_turn >= _orderedBattlersList.Count);
     }
 
+    [Button]
     public void AdvanceTurn()
     {
         _turn++;
@@ -169,6 +163,7 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 		StartCoroutine(DelayForSecondsThenUpdateState(delay));
     }
 
+    [Button]
     public void CreateNewRoundQueues()
     {
         _unresolvedQueue = new Queue<Character>();
@@ -180,11 +175,13 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
         OnBattlerCollectionsUpdated?.Raise();
     }
 
+    [Button]
     public void RaiseActionsAtEndOfState()
     {
         OnBattlerCollectionsUpdated?.Raise();
         OnCurrentActorChanged?.Invoke();
     }
+
 
     #endregion
 
@@ -197,20 +194,23 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 
 	private Queue<Character> OrderQueue()
 	{
+
+        //Todo, this gets ordered three times at the start of the battle, find out why
 		List<Character> frontAndEnemyCharacters = new List<Character>();
 		frontAndEnemyCharacters.AddRange(_characterModel.PlayerCharacters);
 		frontAndEnemyCharacters.AddRange(_characterModel.EnemyCharacters);
 		IEnumerable<Character> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(_resolvedQueue) select unresolved;
+        _unresolvedQueue.Clear();
 
-		_unresolvedQueue.Clear();
-		foreach (Character battler in unresolvedQuery)
+        unresolvedQuery = from chara in unresolvedQuery orderby chara.StatSystem.GetStatValue(chara.StatTypeStringRefDictionary["Speed"]) * -1 select chara;
+
+        foreach (Character battler in unresolvedQuery)
 		{
 			_unresolvedQueue.Enqueue(battler);
 		}
 
-        IEnumerable<Character> ordereredUnresolvedQuery = _unresolvedQueue.OrderBy(character => character.StatSystem.GetStatValue(character.StatTypeStringRefDictionary["Speed"]) * -1); // * - 1 reverses the order of the list
 		Queue<Character> orderedRoundQueue = new Queue<Character>();
-		foreach (Character battler in ordereredUnresolvedQuery)
+		foreach (Character battler in unresolvedQuery)
 		{
 			orderedRoundQueue.Enqueue(battler);
 		}

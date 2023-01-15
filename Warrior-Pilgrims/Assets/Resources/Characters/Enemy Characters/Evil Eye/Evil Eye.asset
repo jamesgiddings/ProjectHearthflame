@@ -28,6 +28,8 @@ MonoBehaviour:
   _portrait: {fileID: -4556660915178727136, guid: 528858e6e6597fc42a1be63f8c52deb3,
     type: 3}
   _color: {r: 0, g: 0, b: 0, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: 5b1ec78a981dc4b4eb6de67659a7ada7,
+    type: 2}
   _isPlayer: 0
   AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Evil EyeAnimationController.asset
   AnimControllerLoadPath: Animations/AnimationControllers/Evil EyeAnimationController

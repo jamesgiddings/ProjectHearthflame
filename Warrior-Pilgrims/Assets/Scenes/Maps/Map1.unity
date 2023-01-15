@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: -7552582706839291426, guid: ab7de13c1d4a8f04490ec8b34e2e7561,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ab7de13c1d4a8f04490ec8b34e2e7561,
         type: 3}
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
 --- !u!114 &640474948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,7 +805,7 @@ RectTransform:
   m_Children:
   - {fileID: 551390926}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -842,7 +842,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &758724164
 MonoBehaviour:
@@ -910,6 +910,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1515225169}
+    - target: {fileID: 432776425059799888, guid: b46926b404b906d47ba4a74320ec31dc,
+        type: 3}
+      propertyPath: id
+      value: f4611cf9-ec1e-4587-914c-16f31dd93492
+      objectReference: {fileID: 0}
     - target: {fileID: 1478633522293057269, guid: b46926b404b906d47ba4a74320ec31dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1089,7 +1094,7 @@ PrefabInstance:
     - target: {fileID: 7965813866255894493, guid: b46926b404b906d47ba4a74320ec31dc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7965813866255894493, guid: b46926b404b906d47ba4a74320ec31dc,
         type: 3}
@@ -1230,7 +1235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1101755930
 MonoBehaviour:

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d166bba54653a4ca860218c8b8a610, type: 3}
   m_Name: GameEvent_Character_OnCharacterOrderChanged
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject:
+  - _underlyingValue: {fileID: 11400000, guid: f22e724aadf8a4348b5fe36eb66b0172, type: 2}

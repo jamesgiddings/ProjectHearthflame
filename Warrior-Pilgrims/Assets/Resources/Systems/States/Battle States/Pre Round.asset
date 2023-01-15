@@ -17,43 +17,13 @@ MonoBehaviour:
   _subStateManager: {fileID: 0}
   _stateExitTimerEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_TargetAssemblyTypeName: State, Scripts
-        m_MethodName: ChangeStateAfterDelay
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _delayedCommandsEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_TargetAssemblyTypeName: State, Scripts
-        m_MethodName: ExecuteCommandsAfterDelay
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _exitState: {fileID: 11400000, guid: 207db17ecfc69c348871471a38683fb2, type: 2}
-  _exitStateStateManager: {fileID: 11400000, guid: 587ce225f3f2aff40912c0e13226531f,
-    type: 2}
+      m_Calls: []
+  _tasks:
+  - _underlyingValue: {fileID: 11400000, guid: 183aa50ebfe3c5f40bb60bffbdfffdde, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 231f56ee6d611474097e8b168874154a, type: 2}
+  _exitState: {fileID: 0}
+  _exitStateStateManager: {fileID: 0}
   _delay:
     UseConstant: 1
-    ConstantValue: 0.2
+    ConstantValue: 0
     Variable: {fileID: 0}
-  _eventDelay: 0.1
-  _delayedCommands:
-  - _underlyingValue: {fileID: 11400000, guid: 183aa50ebfe3c5f40bb60bffbdfffdde, type: 2}
-  _onAfterEnterUnityEvents: []
-  _onBeforeExitUnityEvents: []

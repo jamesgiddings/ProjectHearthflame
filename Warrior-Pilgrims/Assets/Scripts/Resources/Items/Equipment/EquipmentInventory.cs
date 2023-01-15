@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Events;
 using GramophoneUtils.Characters;
+using Sirenix.OdinInspector;
 
 namespace GramophoneUtils.Items.Containers
 {
-	[Serializable]
+	[Serializable, CreateAssetMenu(fileName = "Equipment Inventory", menuName = "Containers/Equipment Inventory")]
 	public class EquipmentInventory : Inventory
     {
 		private Character character;
@@ -16,22 +17,7 @@ namespace GramophoneUtils.Items.Containers
 		public Action Refresh;
 
 		public Dictionary<EquipmentType, int> equipmentTypeToSlotIndex;
-		public EquipmentInventory(Character character, int size = 4, int money = 0)
-		{
-			this.character = character;
-			itemSlots = new ItemSlot[size];
-			this.money = money;
-			equipmentTypeToSlotIndex = new Dictionary<EquipmentType, int>()
-			{
-				{ EquipmentType.Armor, 0 },
-				{ EquipmentType.Weapon, 1 },
-				{ EquipmentType.Trinket, 2 },
-			};
-			if (character.PartyInventory != null)
-			{
-				ConnectToCharacter(character);
-			}
-		}
+
         #region Callbacks
         private void OnDestroy()
 		{
@@ -40,11 +26,24 @@ namespace GramophoneUtils.Items.Containers
 		}
 		#endregion
 
-		#region API
+		#region Public Functions
 
-		public void ConnectToCharacter(Character character)
+		public void Initialise(int size = 4)
 		{
-            this.onInventoryItemsUpdated = character.PartyInventory.onInventoryItemsUpdated;
+            
+            itemSlots = new ItemSlot[size];
+            equipmentTypeToSlotIndex = new Dictionary<EquipmentType, int>()
+            {
+                { EquipmentType.Armor, 0 },
+                { EquipmentType.Weapon, 1 },
+                { EquipmentType.Trinket, 2 },
+            };
+        }
+
+		public void ConnectToCharacter(Character character, Inventory _partyInventory)
+		{
+            this.character = character;
+            this.onInventoryItemsUpdated = _partyInventory.onInventoryItemsUpdated;
             this.onInventoryItemsUpdated.AddListener(RefreshEquipmentInSlots);
         }
 

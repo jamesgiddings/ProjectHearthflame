@@ -15,10 +15,10 @@ public class EnemyTurnState : BattleSubState
 		// but the original change state call from playerturnstate was not popped off the stack, so it would then change back to
 		// the previous state.
 
-        if (BattleManager.BattleDataModel.CurrentActor.HealthSystem.IsDead)
+/*        if (BattleManager.BattleDataModel.CurrentActor.HealthSystem.IsDead)
         {
             BattleManager.BattleDataModel.NextTurn(); // Problem? 
-        }
+        }*/
 
         yield return new WaitForSeconds(1f);
 

@@ -59,6 +59,10 @@ public class TestObjectReferences : ScriptableObject
     [SerializeField] private BattleDataModel _battleDataModel;
     public BattleDataModel BattleDataModel => _battleDataModel;
 
+    [BoxGroup("Battle Objects")]
+    [SerializeField] private BattleManager _battleManager;
+    public BattleManager BattleManager => _battleManager;
+
     [BoxGroup("Battle Objects/Targeting")]
     [SerializeField] private TargetToSlots _targetToSlots_XXXX_OXXX;
     public TargetToSlots TargetToSlots_XXXX_OXXX => _targetToSlots_XXXX_OXXX;
@@ -98,4 +102,17 @@ public class TestObjectReferences : ScriptableObject
     [BoxGroup("Battle Objects/Skills")]
     [SerializeField] private InterfaceReference<ISkill> _shoot;
     public ISkill Shoot => _shoot.Value;
+
+    [BoxGroup("Battle Objects/Battle")]
+    [SerializeField] private Battle _battle1;
+    public Battle Battle1 => _battle1;
+
+    [BoxGroup("Test States")]
+    [SerializeField] private State _testState;
+    public State TestState => _testState;
+
+    [BoxGroup("Items")]
+    [BoxGroup("Items/Containers")]
+    [SerializeField] private Inventory _partyInventory;
+    public Inventory PartyInventory => _partyInventory;
 }

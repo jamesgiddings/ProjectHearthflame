@@ -6,9 +6,37 @@ using UnityEngine.Events;
 
 namespace GramophoneUtils.Items.Containers
 {
-	[Serializable]
-	public class Inventory : ItemContainer, ISaveable
+	[Serializable, CreateAssetMenu(fileName = "Inventory", menuName = "Containers/Inventory")]
+    public class Inventory : ItemContainer, ISaveable
 	{
+		#region Attributes/Fields/Properties
+
+		[SerializeField] private ItemSlot[] _startingItemSlots;
+
+		#endregion
+
+		#region Callbacks
+
+		private void OnEnable()
+		{
+			if(itemSlots == null) { return; }
+
+			for (int i = 0; i < itemSlots.Length; i++)
+			{
+				if(i < _startingItemSlots.Length)
+				{
+					itemSlots[i] = _startingItemSlots[i];
+
+				}
+				else
+				{
+					itemSlots[i].item = null;
+                }
+			}
+		}
+
+		#endregion
+
 		public Inventory(int size = 20, int money = 0, UnityEvent onInventoryItemsUpdated = null)
 			{
 				if (onInventoryItemsUpdated != null)

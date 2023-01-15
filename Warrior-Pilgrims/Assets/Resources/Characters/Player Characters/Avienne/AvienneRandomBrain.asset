@@ -17,4 +17,5 @@ MonoBehaviour:
   _sprite: {fileID: 0}
   _randomSkillObjectCollection: {fileID: 11400000, guid: 386f84d5a217af74087a883300ab25a5,
     type: 2}
-  _randomCharacterClassObjectCollection: {fileID: 0}
+  _randomCharacterClassObjectCollection: {fileID: 11400000, guid: 04f1008ea97e4af40a5367cfd40ad7d4,
+    type: 2}
