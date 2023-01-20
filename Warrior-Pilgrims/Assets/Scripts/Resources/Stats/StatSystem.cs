@@ -204,7 +204,18 @@ namespace GramophoneUtils.Stats
 			ApplyModifiedHealingObjects(modifiedHealings);
 		}
 
-		private void ApplyModifiedDamageObjects(List<Damage> modifiedDamages)
+        public void ReceiveModifiedMoveStructs(List<Move> receivedMoves, Character originator)
+        {
+            List<Move> modifiedMoves = new List<Move>();
+            foreach (Move move in receivedMoves)
+            {
+                modifiedMoves.Add(ModifyIncomingMove(move));
+            }
+
+            ApplyModifiedMoveObjects(modifiedMoves);
+        }
+
+        private void ApplyModifiedDamageObjects(List<Damage> modifiedDamages)
 		{
 			foreach (Damage damage in modifiedDamages)
 			{
@@ -223,7 +234,28 @@ namespace GramophoneUtils.Stats
 			}
 		}
 
-		public Damage ModifyIncomingDamage(Damage damage)
+        private void ApplyModifiedMoveObjects(List<Move> modifiedMoves)
+        {
+            foreach (Move move in modifiedMoves)
+            {
+				if (move.Value == 0)
+				{
+					continue;
+				}
+
+				CharacterOrder characterOrder = ServiceLocator.Instance.ServiceLocatorObject.CharacterModel.GetCharacterOrderByCharacter(character);
+                if (move.MoveByValue)
+				{
+					characterOrder.MoveCharacter(character, move.Value);
+                }
+				else
+				{
+                    characterOrder.SwapCharacterIntoSlot(character, move.Value);
+                }
+            }
+        }
+
+        public Damage ModifyIncomingDamage(Damage damage)
 		{
 			float newValue = damage.Value - ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BasePhysicalArmour;
 
@@ -237,7 +269,14 @@ namespace GramophoneUtils.Stats
 			return new Healing(newValue, healing.source);
 		}
 
-		public Damage ModifyOutgoingDamage(Damage damage)
+        internal Move ModifyIncomingMove(Move move)
+        {
+            int newValue = move.Value; // TODO, decide if this will have any effect
+
+            return new Move(newValue, move.MoveByValue, move.source);
+        }
+
+        public Damage ModifyOutgoingDamage(Damage damage)
 		{
 			float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.StrengthMultiplier); //TODO, move this to serviceLocator
 
@@ -251,6 +290,13 @@ namespace GramophoneUtils.Stats
 			return new Healing(newValue, healing.source);
 		}
 
-		#endregion
-	}
+        internal Move ModifyOutgoingMove(Move move)
+        {
+			int newValue = move.Value; // TODO, decide if this will have any effect
+
+            return new Move(newValue, move.MoveByValue, move.source);
+        }
+
+        #endregion
+    }
 }

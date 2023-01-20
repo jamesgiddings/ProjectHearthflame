@@ -1,3 +1,4 @@
+using AYellowpaper;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ public class TargetManagerSubscribeToBattleDataModelTask : BattleStateTask
 {
     #region Attributes/Fields/Properties
 
-    [SerializeField] private TargetManager _targetManager;
+    [SerializeField] private InterfaceReference<ITargetManager> _targetManager;
     [SerializeField] private bool _toggle;
 
     #endregion
@@ -25,10 +26,10 @@ public class TargetManagerSubscribeToBattleDataModelTask : BattleStateTask
     {
         if (_toggle)
         {
-            _targetManager.SubscribeToBattleDataModelOnSkillUsed();
+            _targetManager.Value.SubscribeToBattleDataModelOnSkillUsed();
             return Task.CompletedTask;
         }
-        _targetManager.UnsubscribeFromBattleDataModelOnSkillUsed();
+        _targetManager.Value.UnsubscribeFromBattleDataModelOnSkillUsed();
         return Task.CompletedTask;
     }
 

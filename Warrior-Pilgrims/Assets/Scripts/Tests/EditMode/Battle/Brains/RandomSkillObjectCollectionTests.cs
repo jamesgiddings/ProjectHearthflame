@@ -25,10 +25,6 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
 
     private RandomSkillObjectCollection _randomSkillObjectCollection;
 
-    private ISkill _shoot;
-    private ISkill _bash;
-    private ISkill _cleave;
-
     #endregion
 
     #region Constructors
@@ -68,10 +64,6 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
         _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
 
         _randomSkillObjectCollection = TestObjectReferences.RandomSkillObjectCollection;
-
-        _shoot = TestObjectReferences.Shoot;
-        _cleave = TestObjectReferences.Cleave;
-        _bash = TestObjectReferences.Bash;
     }
 
     [Test]
@@ -103,15 +95,15 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
             Debug.Log(_randomSkillObjectCollection.RandomSkillObjects[i].WeightedObject.Name);
         }
 
-        Assert.NotNull(_bash);
+        Assert.NotNull(Bash);
 
         Assert.AreEqual(3, _randomSkillObjectCollection.RandomSkillObjects.Count);
 
-        Assert.True(skills.Contains(_bash.Name));
-        Assert.True(skills.Contains(_cleave.Name));
-        Assert.True(skills.Contains(_shoot.Name));
+        Assert.True(skills.Contains(Bash.Name));
+        Assert.True(skills.Contains(Cleave.Name));
+        Assert.True(skills.Contains(Shoot.Name));
 
-        Assert.AreEqual(_bash, _randomSkillObjectCollection.GetRandomObject(new List<ISkill>() { _cleave, _shoot }).WeightedObject);
+        Assert.AreEqual(Bash, _randomSkillObjectCollection.GetRandomObject(new List<ISkill>() { Cleave, Shoot }).WeightedObject);
     }
 
     [Test]
@@ -125,15 +117,15 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
             Debug.Log(_randomSkillObjectCollection.RandomSkillObjects[i].WeightedObject.Name);
         }
 
-        Assert.NotNull(_bash);
+        Assert.NotNull(Bash);
 
         Assert.AreEqual(3, _randomSkillObjectCollection.RandomSkillObjects.Count);
 
-        Assert.True(skills.Contains(_bash.Name));
-        Assert.True(skills.Contains(_cleave.Name));
-        Assert.True(skills.Contains(_shoot.Name));
+        Assert.True(skills.Contains(Bash.Name));
+        Assert.True(skills.Contains(Cleave.Name));
+        Assert.True(skills.Contains(Shoot.Name));
 
-        Assert.AreEqual(_shoot, _randomSkillObjectCollection.GetRandomObject(null, new List<ISkill>() { _shoot }).WeightedObject);
+        Assert.AreEqual(Shoot, _randomSkillObjectCollection.GetRandomObject(null, new List<ISkill>() { Shoot }).WeightedObject);
     }
 
     [Test]
@@ -147,15 +139,15 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
             Debug.Log(_randomSkillObjectCollection.RandomSkillObjects[i].WeightedObject.Name);
         }
 
-        Assert.NotNull(_bash);
+        Assert.NotNull(Bash);
 
         Assert.AreEqual(3, _randomSkillObjectCollection.RandomSkillObjects.Count);
 
-        Assert.True(skills.Contains(_bash.Name));
-        Assert.True(skills.Contains(_cleave.Name));
-        Assert.True(skills.Contains(_shoot.Name));
+        Assert.True(skills.Contains(Bash.Name));
+        Assert.True(skills.Contains(Cleave.Name));
+        Assert.True(skills.Contains(Shoot.Name));
 
-        Assert.AreEqual(_cleave, _randomSkillObjectCollection.GetRandomObject(new List<ISkill>() { _shoot }, new List<ISkill>() { _cleave, _shoot }).WeightedObject);
+        Assert.AreEqual(Cleave, _randomSkillObjectCollection.GetRandomObject(new List<ISkill>() { Shoot }, new List<ISkill>() { Cleave, Shoot }).WeightedObject);
     }
 
     [Test]
@@ -169,13 +161,13 @@ public class RandomSkillObjectCollectionTests : BasicEditModeTest
             Debug.Log(_randomSkillObjectCollection.RandomSkillObjects[i].WeightedObject.Name);
         }
 
-        Assert.NotNull(_bash);
+        Assert.NotNull(Bash);
 
         Assert.AreEqual(3, _randomSkillObjectCollection.RandomSkillObjects.Count);
 
-        Assert.True(skills.Contains(_bash.Name));
-        Assert.True(skills.Contains(_cleave.Name));
-        Assert.True(skills.Contains(_shoot.Name));
+        Assert.True(skills.Contains(Bash.Name));
+        Assert.True(skills.Contains(Cleave.Name));
+        Assert.True(skills.Contains(Shoot.Name));
 
         Assert.Throws<Exception>(() => _randomSkillObjectCollection.GetRandomObject(null, new List<ISkill>() { })); // throws exception when whitelist is empty
     }

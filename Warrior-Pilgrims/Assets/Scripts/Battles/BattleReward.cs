@@ -17,7 +17,7 @@ public class BattleReward: Data
 
 
     
-	public void AddBattleReward(CharacterModel player)
+	public void AddBattleReward(ICharacterModel player)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
 		{

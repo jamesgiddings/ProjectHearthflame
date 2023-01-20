@@ -30,12 +30,12 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
 	
 	private BattleDataModel _battleDataModel;
 
-	private TargetManager targetManager;
+	private ITargetManager targetManager;
 
 	private TurnOrderUI turnOrderUI;
 
     private RearBattleUI _rearBattleUI;
-	public TargetManager TargetManager => targetManager; // getter
+	public ITargetManager TargetManager => targetManager; // getter
 	public BattleDataModel BattleDataModel => _battleDataModel; // getter
 
 	public Battle Battle => _battle;
@@ -89,15 +89,15 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
 
     [Button]
     public void GetTargets(ISkill skill)
-	{
-		targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor);
+    {
+        targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor);
         Debug.Log("GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count: " + targetManager.GetCurrentlyTargeted(skill, BattleDataModel.CurrentActor).Count);
     }
 
-	public void ChangeTargets()
-	{
-		targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-	}
+    public void ChangeTargets()
+    {
+        targetManager.ChangeTargeted(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+    }
 
     public void EndBattle()
     {

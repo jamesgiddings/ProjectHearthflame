@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d4b035e8545a04ca8b7c9c33635bcb, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: 392, y: 200}
   ports:
@@ -56,7 +65,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
+  character: {fileID: 11400000, guid: 369bd0e839dce0049a2fa8dce8c26a65, type: 2}
   text: An enemon! Run!
   answers: []
 --- !u!114 &-6128487173444756535
@@ -71,6 +80,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d4b035e8545a04ca8b7c9c33635bcb, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: 40, y: -376}
   ports:
@@ -121,7 +139,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
+  character: {fileID: 11400000, guid: 7a4031f4f632ab244a3f01fd779ea5c6, type: 2}
   text: Goodbye!
   answers: []
 --- !u!114 &-5527044651958495681
@@ -136,6 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d4b035e8545a04ca8b7c9c33635bcb, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -472, y: -568}
   ports:
@@ -203,7 +230,7 @@ MonoBehaviour:
       _dynamic: 1
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: b7fbadeefab484f499cdc0b14a591f42, type: 2}
+  character: {fileID: 11400000, guid: da214a8b9f2d3144b91ef69bf04ad229, type: 2}
   text: Hello to you, too.
   answers:
   - text: OK...watevs
@@ -222,6 +249,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2002517843e69414b8995002eefa66e1, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -1368, y: 40}
   ports:
@@ -293,6 +329,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d4b035e8545a04ca8b7c9c33635bcb, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -1352, y: -568}
   ports:
@@ -396,7 +441,7 @@ MonoBehaviour:
       _dynamic: 1
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: ec5598f73af1a26418eeaae6d7c89533, type: 2}
+  character: {fileID: 11400000, guid: 7a4031f4f632ab244a3f01fd779ea5c6, type: 2}
   text: Hello
   answers:
   - text: ;]
@@ -421,6 +466,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2002517843e69414b8995002eefa66e1, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -232, y: -88}
   ports:
@@ -501,6 +555,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d4b035e8545a04ca8b7c9c33635bcb, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -600, y: -264}
   ports:
@@ -548,7 +611,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 11400000, guid: b7fbadeefab484f499cdc0b14a591f42, type: 2}
+  character: {fileID: 11400000, guid: 7a4031f4f632ab244a3f01fd779ea5c6, type: 2}
   text: Well, that's a shame!
   answers: []
 --- !u!114 &11400000
@@ -565,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: 0be0c00c-8b97-4192-a79c-e53d7522b6f8
   name: 
-  sprite: {fileID: 0}
+  _sprite: {fileID: 0}
   nodes:
   - {fileID: -4624151079997485496}
   - {fileID: -5527044651958495681}
@@ -591,6 +654,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8033ebb924d43464ab3c372c8457585f, type: 3}
   m_Name: Event
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -504, y: 200}
   ports:
@@ -648,6 +720,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd7b2074a909284689a5ace6d13833a, type: 3}
   m_Name: End
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: 744, y: -424}
   ports:
@@ -707,6 +788,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8033ebb924d43464ab3c372c8457585f, type: 3}
   m_Name: Event
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: 344, y: -136}
   ports:
@@ -765,6 +855,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2002517843e69414b8995002eefa66e1, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   graph: {fileID: 11400000}
   position: {x: -936, y: 24}
   ports:

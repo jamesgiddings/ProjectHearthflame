@@ -348,6 +348,7 @@ MonoBehaviour:
   _isFollower: 0
   _followee: {fileID: 0}
   _gap: 0
+  _tolerance: 0.1
   _gameStateManager: {fileID: 11400000, guid: b83312378993c5d48b443791ece59323, type: 2}
   _explorationState: {fileID: 11400000, guid: b66556b51f7b68a41b7d4da7664312dd, type: 2}
   _enterExplorationState: {fileID: 11400000, guid: 83cd5d6eac3e96c41aa001f756a9d068,

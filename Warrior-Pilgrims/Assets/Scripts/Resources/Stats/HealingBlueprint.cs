@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(fileName = "New Healing Blueprint Object", menuName = "Stat System/Healing Blueprint Object")]
+[CreateAssetMenu(fileName = "New Healing Blueprint Object", menuName = "Skills/Effects/Healing Blueprint Object")]
 public class HealingBlueprint : ScriptableObject, IBlueprint
 {
 	[SerializeField] float value;

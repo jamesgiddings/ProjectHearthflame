@@ -172,6 +172,46 @@ namespace GramophoneUtils.Stats
             }
         }
 
+        [Button]
+        public void MoveEnemyBattlersBackward()
+        {
+
+            // Todo, this is being called outside of battle and I don't know why
+
+            CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
+
+            if (enemyCharacterOrder == null) { return; }
+
+            int numberOfCharacters = enemyCharacterOrder.GetCharacters().Count;
+            List<Character> characterList = new List<Character>();
+
+            for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
+            {
+                Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
+                if (character != null)
+                {
+                    if (!characterList.Contains(character))
+                    {
+                        characterList.Add(enemyCharacterOrder.GetCharacterBySlotIndex(i));
+                    }
+                }
+            }
+            for (int i = 0; i < characterList.Count; i++)
+            {
+                Battler battler = _characterBattlerDictionary[characterList[i]];
+
+                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
+            }
+            foreach (Character character in characterList)
+            {
+                if (_characterBattlerDictionary.ContainsKey(character))
+                {
+                    StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 2f));
+                }
+
+            }
+        }
+
         public void UpdatePlayerBattlers()
 		{
             if (_characterBattlerDictionary.Count == 0) { return; } 
@@ -220,7 +260,10 @@ namespace GramophoneUtils.Stats
                     Destroy(battlerGameObject);
                 }
             }
-            Destroy(_frontBattlerPosition.gameObject);
+            if(_frontBattlerPosition != null)
+            {
+                Destroy(_frontBattlerPosition.gameObject);
+            }
             _frontBattlerPosition = null;
         }
 

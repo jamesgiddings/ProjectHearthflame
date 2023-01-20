@@ -131,6 +131,7 @@ public class Battler : MonoBehaviour
         isInitialised = true;
     }
 
+
     public void DisplayBattleUI(bool value)
     {
         healthSlider.gameObject.SetActive(value);

@@ -20,7 +20,7 @@ public class BasicPlayModeTest
 
     protected ServiceLocator MockServiceLocator;
 
-    protected CharacterModel CharacterModel;
+    protected ICharacterModel CharacterModel;
 
     protected Character Character1Blueprint;
     protected Character Character2Blueprint;

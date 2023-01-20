@@ -43,6 +43,9 @@ public class TargetsObject : ITargets
 
     public List<Character> ChangeCurrentlyTargeted(Vector2 direction)
     {
+        //Todo, here we have to assess the maximum number of characters in a particular target field, i.e. ally or opponent, and then cap the _currentCombinationINDEX at the lower of the two.
+
+
         Debug.Log("_characterCombinations.Count:" + _characterCombinations.Count);
         List<Character> currentlyTargeted = new List<Character>();
         switch (direction)
@@ -89,8 +92,6 @@ public class TargetsObject : ITargets
     public List<Character> GetCurrentlyTargeted()
     {
         if (_characterCombinations == null || _characterCombinations.Count == 0) { return new List<Character>(); }
-/*        Debug.Log("Hooray: " + _currentCombinationIndex);
-        Debug.Log(_characterCombinations[_currentCombinationIndex].Count);*/
         return _characterCombinations[_currentCombinationIndex];
     }
 
@@ -114,7 +115,13 @@ public class TargetsObject : ITargets
             List<Character> chars = targetCombination.GetCombination(allyCharacters, opponentCharacters);
             Debug.Log("List of chars: ");
             chars.ForEach(x => Debug.Log(x.Name));
-            combinations.Add(targetCombination.GetCombination(allyCharacters, opponentCharacters));
+
+            List<Character> combination = targetCombination.GetCombination(allyCharacters, opponentCharacters);
+            if (combination.Count > 0) // check there are actually characters there.
+            {
+                combinations.Add(combination);
+            }
+            
         }
 
         return combinations;

@@ -70,21 +70,23 @@ public class AnimationPlayer
 
 	public void DisplayAnimation(ISkill skill, List<Character> targets)
     {
+        List<Character> targetsCache = new List<Character> ();
+        targetsCache.AddRange(targets);
+
         switch (skill.SkillAnimType)
         {
             case (SkillAnimType.MeleePhysical):
                 Sequence sequence = DOTween.Sequence();
                 Vector3 startPos = battler.gameObject.transform.position;
-                foreach (Character target in targets)
+                foreach (Character target in targetsCache)
                 {
                     Vector3 currentPos = battler.gameObject.transform.position;
                     Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, _characterGameObjectManager.CharacterBattlerDictionary[target].transform.position, 0.65f);
                     sequence.AppendCallback(() => animator.Play(walkToAttack));
                     sequence.Append(battler.gameObject.transform.DOMove(targetPos, 0.4f));
                     sequence.AppendCallback(() => animator.Play(attack));
-                    
                 }
-                sequence.Append(battler.gameObject.transform.DOShakeRotation(0.5f, 2).OnComplete(() => skill.DoNextBit(targets, character)));
+                sequence.Append(battler.gameObject.transform.DOShakeRotation(0.5f, 2).OnComplete(() => skill.DoNextBit(targetsCache, character)));
                 sequence.AppendCallback(() => animator.Play(walkFromAttack));
                 sequence.Append(battler.gameObject.transform.DOMove(startPos, 0.4f));
                 sequence.AppendCallback(() => animator.Play(idle));
@@ -101,7 +103,7 @@ public class AnimationPlayer
                 projectileSequence.AppendCallback(() => animator.Play(idle));
                 projectileSequence.AppendInterval(0.05f).WaitForCompletion();
 
-                foreach (Character target in targets)
+                foreach (Character target in targetsCache)
                 {
                     GameObject projectile = Object.Instantiate(skill.ProjectilePrefab, battler.gameObject.transform);
                     Animator projectileAnimator = projectile.GetComponent<Animator>();
@@ -125,7 +127,7 @@ public class AnimationPlayer
                 projectileSequence.Play().OnComplete(() =>
                 {
                     DestroyProjectiles(projectiles);
-                    skill.DoNextBit(targets, character);
+                    skill.DoNextBit(targetsCache, character);
                     animator.Play(idle);
                     battler.OnTurnComplete?.Invoke();
                 });
@@ -142,7 +144,7 @@ public class AnimationPlayer
                 physicalProjectileSequence.AppendCallback(() => animator.Play(idle));
                 physicalProjectileSequence.AppendInterval(0.05f).WaitForCompletion();
 
-                foreach (Character target in targets)
+                foreach (Character target in targetsCache)
                 {
                     GameObject physicalProjectile = Object.Instantiate(skill.ProjectilePrefab, battler.gameObject.transform);
                     Animator pysicalProjectileAnimator = physicalProjectile.GetComponent<Animator>();
@@ -165,14 +167,14 @@ public class AnimationPlayer
                 physicalProjectileSequence.Play().OnComplete(() =>
                 {
                     DestroyProjectiles(physicalProjectiles);
-                    skill.DoNextBit(targets, character);
+                    skill.DoNextBit(targetsCache, character);
                     animator.Play(idle);
                     battler.OnTurnComplete?.Invoke();
                 });
 
                 break;
             case (SkillAnimType.BuffOrDebuff):
-                foreach (Character target in targets)
+                foreach (Character target in targetsCache)
                 {
                     GameObject effect = Object.Instantiate(skill.EffectPrefab, battler.gameObject.transform);
                     Animator effectAnimator = effect.GetComponent<Animator>();
@@ -185,7 +187,7 @@ public class AnimationPlayer
                     buffDebuffSequence.AppendInterval(0.8f).WaitForCompletion();
                     buffDebuffSequence.AppendCallback(() => animator.Play(idle));
                     buffDebuffSequence.AppendInterval(0.1f).WaitForCompletion();
-                    buffDebuffSequence.AppendCallback(() => skill.DoNextBit(targets, character));
+                    buffDebuffSequence.AppendCallback(() => skill.DoNextBit(targetsCache, character));
 
                     buffDebuffSequence.Insert(0.5f, effectSpriteRenderer.DOFade(0f, 0.8f).From());
                     buffDebuffSequence.AppendInterval(0.1f);

@@ -1,3 +1,4 @@
+using AYellowpaper;
 using GramophoneUtils.Characters;
 using GramophoneUtils.Items.Hotbars;
 using GramophoneUtils.Stats;
@@ -8,53 +9,80 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[Serializable, CreateAssetMenu(fileName = "New Skill", menuName = "Character Classes/Skills")]
+[Serializable, CreateAssetMenu(fileName = "New Skill", menuName = "Skills")]
 public class Skill : Resource, ISkill, IHotbarItem
 {
     #region Attributes/Fields/Properties
 
+    [BoxGroup("Skill Progression")]
     [SerializeField] private CharacterClass[] _classRestrictions;
     public CharacterClass[] ClassRestrictions => _classRestrictions;
 
+    [BoxGroup("Skill Progression")]
     [SerializeField] private School _school;
     public School School => _school;
 
+    [BoxGroup("Skill Progression")]
     [SerializeField] private Skill[] _prerequisites;
     public ISkill[] Prerequisites => _prerequisites;
 
+    [BoxGroup("Skill Progression")]
     [SerializeField] private int _usesToUnlock;
     public int UsesToUnlock => _usesToUnlock;
 
+    [BoxGroup("Positioning")]
+    [BoxGroup("Positioning/Target")]
     [SerializeField] private TargetAreaFlag _targetAreaFlag;
     public TargetAreaFlag TargetAreaFlag => _targetAreaFlag;
 
+    [BoxGroup("Positioning/Target")]
     [SerializeField] private TargetNumberFlag _targetNumberFlag;
     public TargetNumberFlag TargetNumberFlag => _targetNumberFlag;
 
+    [BoxGroup("Positioning/Target")]
     [SerializeField] private TargetTypeFlag _targetTypeFlag = TargetTypeFlag.Alive;
     public TargetTypeFlag TargetTypeFlag => _targetTypeFlag;
-
+    
+    [BoxGroup("Positioning/Target")]
     [SerializeField] private SkillAnimType _skillAnimType;
     public SkillAnimType SkillAnimType => _skillAnimType;
 
+    [BoxGroup("Positioning/Target")]
+    [SerializeField] private InterfaceReference<ITargetToSlots> _targetToSlots;
+    public ITargetToSlots TargetToSlots => _targetToSlots.Value;
+
+    [BoxGroup("Positioning/Use From")]
+    [SerializeField] private InterfaceReference<IUseFromSlot> _useFromSlot;
+    public IUseFromSlot UseFromSlot => _useFromSlot.Value;
+
+    [BoxGroup("Scene Objects")]
     [SerializeField] private GameObject _projectilePrefab;
     public GameObject ProjectilePrefab => _projectilePrefab;
 
+    [BoxGroup("Scene Objects")]
     [SerializeField] private GameObject _effectPrefab;
     public GameObject EffectPrefab => _effectPrefab;
 
+    [BoxGroup("Scene Objects")]
     [SerializeField] private RuntimeAnimatorController _animatorController;
     public RuntimeAnimatorController AnimatorController => _animatorController;
 
+    [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<StatModifierBlueprint> _statModifierBlueprints;
+    [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<DamageBlueprint> _damageBlueprints;
+    [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<HealingBlueprint> _healingBlueprints;
+    [BoxGroup("Effect Blueprints")]
+    [SerializeField] private List<MoveBlueprint> _moveBlueprints;
 
     public Action OnSkillUsed;
     
     private List<StatModifier> _skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
     private List<Damage> _skillDamages { get { return InstanceSkillDamageBlueprints(); } }
     private List<Healing> _skillHealings { get { return InstanceSkillHealingBlueprints(); } }
+
+    private List<Move> _skillMoves { get { return InstanceSkillMovesBlueprints(); } }
 
     #endregion
 
@@ -66,23 +94,22 @@ public class Skill : Resource, ISkill, IHotbarItem
 
     #region Public Functions
 
-    public void Use(List<Character> characterTargets, Character originator)
+    public virtual void Use(List<Character> characterTargets, Character originator)
     {
         //Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
 
         originator.SkillSystem.OnSkillUsed?.Invoke(this, characterTargets);
     }
 
-    public void DoNextBit(List<Character> characterTargets, Character originator)
+    public virtual void DoNextBit(List<Character> characterTargets, Character originator)
     {
         foreach (Character character in characterTargets)
         {
-
             ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
-
 
             SendDamageStructs(character, originator);
             SendHealingStructs(character, originator);
+            SendMoveStructs(character, originator);
         }
     }
 
@@ -181,6 +208,19 @@ public class Skill : Resource, ISkill, IHotbarItem
         return healings;
     }
 
+    private List<Move> InstanceSkillMovesBlueprints()
+    {
+        List<Move> moves = new List<Move>();
+        if (_moveBlueprints.Count > 0)
+        {
+            foreach (var blueprint in _moveBlueprints)
+            {
+                moves.Add(blueprint.CreateBlueprintInstance<Move>(this));
+            }
+        }
+        return moves;
+    }
+
     private void ApplyStatModifiers(Character character)
     {
         foreach (StatModifier statModifier in _skillStatModifiers)
@@ -201,6 +241,12 @@ public class Skill : Resource, ISkill, IHotbarItem
         target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator);
     }
 
+    private void SendMoveStructs(Character target, Character originator)
+    {
+        List<Move> modifiedStructs = ModifyMoveStructs(originator);
+        target.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator);
+    }
+
     private List<Damage> ModifyDamageStructs(Character originator)
     {
         List<Damage> modifiedDamages = new List<Damage>();
@@ -219,6 +265,16 @@ public class Skill : Resource, ISkill, IHotbarItem
             modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
         }
         return modifiedHealings;
+    }
+
+    private List<Move> ModifyMoveStructs(Character originator)
+    {
+        List<Move> modifiedMoves = new List<Move>();
+        foreach (Move move in _skillMoves)
+        {
+            modifiedMoves.Add(originator.StatSystem.ModifyOutgoingMove(move));
+        }
+        return modifiedMoves;
     }
 
     #endregion

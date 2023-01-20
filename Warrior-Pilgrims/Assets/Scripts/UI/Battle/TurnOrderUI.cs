@@ -11,7 +11,7 @@ public class TurnOrderUI : MonoBehaviour
 
 	[SerializeField] private GameObject _characterTurnSlotPrefab;
 
-	private CharacterModel _characterModel;
+	private ICharacterModel _characterModel;
 	private BattleDataModel _battleDataModel;
 	private List<CharacterTurnSlotUI> _characterTurnSlotUIs;
 

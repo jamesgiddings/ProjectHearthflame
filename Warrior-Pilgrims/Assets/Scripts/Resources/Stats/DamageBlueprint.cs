@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(fileName = "New Damage Blueprint Object", menuName = "Stat System/Damage Blueprint Object")]
+[CreateAssetMenu(fileName = "New Damage Blueprint Object", menuName = "Skills/Effects/Damage Blueprint Object")]
 public class DamageBlueprint : ScriptableObject, IBlueprint
 {
 	[SerializeField] float value;

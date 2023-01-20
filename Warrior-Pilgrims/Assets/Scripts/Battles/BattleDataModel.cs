@@ -23,7 +23,7 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 	private BattleRear _battleRear;
     public BattleRear BattleRear => _battleRear;
 
-    private CharacterModel _characterModel;
+    private ICharacterModel _characterModel;
 
 	private List<Character> _orderedBattlersList;
     public List<Character> OrderedBattlersList => _orderedBattlersList;

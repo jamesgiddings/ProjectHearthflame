@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private CharacterMovement _followee;
     [ShowIf("_isFollower"), PropertyTooltip("This is the distance the character will follow at.")]
     [SerializeField] private float _gap;
+    [SerializeField] private float _tolerance = 3f;
 
     [BoxGroup("Moevement By State")]
     [SerializeField] private StateManager _gameStateManager;
@@ -33,6 +34,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_gameStateManager == null)
+        {
+            return;
+        }
+
         if (_gameStateManager.State != null)
         {
             if (_gameStateManager.State == _explorationState)
@@ -67,11 +73,13 @@ public class CharacterMovement : MonoBehaviour
                 _jump = true;
             }
             return;
-        } else if (_followee != null)
+        }
+        else if (_followee != null)
         {
-            if (Math.Abs(transform.position.x - _followee.GetTransform().position.x) > _gap)
+            float distance = Math.Abs(transform.position.x - _followee.GetTransform().position.x);
+            if (distance > _gap + _tolerance)
             {
-                float speedAdjustment = Math.Max(Math.Abs((transform.position.x - _followee.GetTransform().position.x)) - _gap, 0f);
+                float speedAdjustment = Math.Max(distance - _gap, 0f);
 
                 float x = _followee.GetTransform().position.x - transform.position.x;
                 float y = _followee.GetTransform().position.y - transform.position.y;
@@ -80,16 +88,64 @@ public class CharacterMovement : MonoBehaviour
                 x /= hyp;
                 _horizontalMove = x * (_moveSpeed + (speedAdjustment * _speedAdjustmentCoefficientToMaintainGap));
             }
+            else if (distance < _gap - _tolerance && ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.BattleState)
+            {
+                float x = _followee.GetTransform().position.x - transform.position.x;
+                float y = _followee.GetTransform().position.y - transform.position.y;
+
+                float hyp = (float)Math.Sqrt(x * x + y * y);
+                x /= hyp;
+
+                _horizontalMove = -x * _moveSpeed;
+            }
             else
             {
                 _horizontalMove = 0f;
             }
             return;
-        } else // don't move
+        }
+        else // don't move
         {
             _horizontalMove = 0f; // stop the characters motion
         }
     }
+
+    /* void Update()
+     {
+         if (!_isFollower && ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState)
+         {
+             _horizontalMove = Input.GetAxisRaw("Horizontal") * _moveSpeed;
+
+             if (Input.GetButtonDown("Jump"))
+             {
+                 _jump = true;
+             }
+             return;
+         } else if (_followee != null)
+         {
+             if (Math.Abs(transform.position.x - _followee.GetTransform().position.x) > _gap)
+             {
+                 float speedAdjustment = Math.Max(Math.Abs((transform.position.x - _followee.GetTransform().position.x)) - _gap, 0f);
+
+                 float x = _followee.GetTransform().position.x - transform.position.x;
+                 float y = _followee.GetTransform().position.y - transform.position.y;
+
+                 float hyp = (float)Math.Sqrt(x * x + y * y);
+                 x /= hyp;
+                 _horizontalMove = x * (_moveSpeed + (speedAdjustment * _speedAdjustmentCoefficientToMaintainGap));
+             }
+             else
+             {
+                 _horizontalMove = 0f;
+             }
+             return;
+         } else // don't move
+         {
+             _horizontalMove = 0f; // stop the characters motion
+         }
+     }*/
+
+
 
     private void FixedUpdate()
     {

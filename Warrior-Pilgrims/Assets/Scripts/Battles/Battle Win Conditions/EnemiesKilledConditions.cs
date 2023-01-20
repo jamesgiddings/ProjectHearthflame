@@ -121,7 +121,7 @@ namespace GramophoneUtils.Battles
         #region API
         public bool HaveEnemiesKilledConditionsBeenMet(BattleDataModel battleDataModel)
         {
-            CharacterModel characterModel = ServiceLocator.Instance.CharacterModel;
+            ICharacterModel characterModel = ServiceLocator.Instance.CharacterModel;
 
             if (_killAll) 
             {
@@ -184,7 +184,7 @@ namespace GramophoneUtils.Battles
         #endregion
 
         #region Utilities
-        private bool AreAllEnemiesKilled(CharacterModel characterModel)
+        private bool AreAllEnemiesKilled(ICharacterModel characterModel)
         {
             bool allDead = true;
             foreach (Character enemyCharacter in characterModel.EnemyCharacters)
@@ -205,7 +205,7 @@ namespace GramophoneUtils.Battles
             return allDead;
         }
 
-        private bool AreAnyEnemiesInTheAllOfListStillAlive(CharacterModel characterModel)
+        private bool AreAnyEnemiesInTheAllOfListStillAlive(ICharacterModel characterModel)
         {
             foreach (Character character in _allOf) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
@@ -233,7 +233,7 @@ namespace GramophoneUtils.Battles
             return false;
         }
 
-        private bool AreAnyEnemiesInTheAllOfClassListStillAlive(CharacterModel characterModel)
+        private bool AreAnyEnemiesInTheAllOfClassListStillAlive(ICharacterModel characterModel)
         {
             foreach (CharacterClass characterClass in _allOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {
@@ -262,7 +262,7 @@ namespace GramophoneUtils.Battles
         }
 
 
-        private bool HaveNoEnemiesInTheAnyOfListBeenKilled(CharacterModel characterModel)
+        private bool HaveNoEnemiesInTheAnyOfListBeenKilled(ICharacterModel characterModel)
         {
             foreach (Character character in _anyOf)
             {
@@ -290,7 +290,7 @@ namespace GramophoneUtils.Battles
             return true;
         }
 
-        private bool HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(CharacterModel characterModel)
+        private bool HaveNoEnemiesOfClassInTheAnyOfClassListBeenKilled(ICharacterModel characterModel)
         {
             foreach (CharacterClass characterClass in _anyOfClass) // foreach characterTemplate that must be killed, if a character in the enemyList has that characterTemplate, return false.
             {

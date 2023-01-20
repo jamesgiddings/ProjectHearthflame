@@ -44,6 +44,8 @@ MonoBehaviour:
     _underlyingValue: {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
   _shoot:
     _underlyingValue: {fileID: 11400000, guid: 5a8b3dcd59789ad4c9aa83e58b8c3fa6, type: 2}
+  _magicShield:
+    _underlyingValue: {fileID: 11400000, guid: 69f0cab7f86133248a6339f40c71b6db, type: 2}
   _battle1: {fileID: 11400000, guid: a5bc8189a708ac649b06c8697b06ec32, type: 2}
   _testState: {fileID: 11400000, guid: 9f3868c33a2fbfe4189889ec0f7f72f5, type: 2}
   _partyInventory: {fileID: 11400000, guid: 5c2f7a62535fbf647a7b2f9e4276325d, type: 2}

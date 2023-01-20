@@ -41,6 +41,12 @@ public class BasicEditModeTest
 
 	protected EquipmentItem EquipmentItem1;
 
+    protected ISkill Shoot;
+    protected ISkill Bash;
+    protected ISkill Cleave;
+    protected ISkill MagicShield;
+
+
 	protected ISaveable MockSaveable;
 	protected object testObject;
 
@@ -66,7 +72,12 @@ public class BasicEditModeTest
 		TheRuneKnight = TestObjectReferences.TheRuneKnight;
 		Musketeer = TestObjectReferences.Musketeer;
 
-		EquipmentItem1 = TestObjectReferences.EquipmentItem1;
+        Shoot = TestObjectReferences.Shoot;
+        Cleave = TestObjectReferences.Cleave;
+        Bash = TestObjectReferences.Bash;
+		MagicShield = TestObjectReferences.MagicShield;
+
+        EquipmentItem1 = TestObjectReferences.EquipmentItem1;
         testObject = new object();
 		CreateMockSaveable();
     }

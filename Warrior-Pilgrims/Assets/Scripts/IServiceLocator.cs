@@ -12,7 +12,7 @@ public interface IServiceLocator
     public EventSystem EventSystem { get; }
     public Camera MainCamera { get; }
     public CharacterGameObjectManager CharacterGameObjectManager { get; }
-    public CharacterModel CharacterModel { get; }
+    public ICharacterModel CharacterModel { get; }
     public SavingSystem SavingSystem { get; }
     public GameManager GameManager { get; }
     public StateManager GameStateManager { get; }
@@ -35,5 +35,5 @@ public interface IServiceLocator
     public BattlerDisplayUI BattlerDisplayUI { get; }
     public BattleManager BattleManager { get; }
     public BattleDataModel BattleDataModel { get; }
-    public TargetManager TargetManager { get; }
+    public ITargetManager TargetManager { get; }
 }

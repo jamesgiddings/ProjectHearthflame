@@ -23,6 +23,10 @@ MonoBehaviour:
   _targetNumberFlag: 8
   _targetTypeFlag: 1
   _skillAnimType: 5
+  _targetToSlots:
+    _underlyingValue: {fileID: 11400000, guid: 2cb2776b74f877b41b415fab7217a151, type: 2}
+  _useFromSlot:
+    _underlyingValue: {fileID: 11400000, guid: 5e01e60918686374f8d1726e947ff25b, type: 2}
   _projectilePrefab: {fileID: 0}
   _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
     type: 3}

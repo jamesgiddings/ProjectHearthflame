@@ -8,7 +8,7 @@ public class BattlerDisplayUI : MonoBehaviour
 {
 	[SerializeField] private Transform battlerPrefab;
 	
-	private CharacterModel _characterModel;
+	private ICharacterModel _characterModel;
 
 	private Battler[] playerBattlers;
 	private Battler[] enemyBattlers;

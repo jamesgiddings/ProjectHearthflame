@@ -8,12 +8,12 @@ using UnityEngine.Events;
 
 public class CharacterSlotsDisplayUI : MonoBehaviour
 {
-	private CharacterModel _characterModel;
+	private ICharacterModel _characterModel;
 
 	private Character[] frontCharacters;
 	private Character[] rearCharacters;
 
-	public CharacterModel CharacterModel { get { return _characterModel; } set { _characterModel = value; } }
+	public ICharacterModel CharacterModel { get { return _characterModel; } set { _characterModel = value; } }
 
 	[SerializeField] public CharacterOrderEvent OnCharacterOrderChanged;
 	[SerializeField] Transform FrontCharacterSlotsHolder; 

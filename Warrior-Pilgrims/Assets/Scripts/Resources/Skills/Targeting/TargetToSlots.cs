@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// A scriptable object to add to skills which can target multiple characters in various arrays of slots. 
 /// </summary>
-[CreateAssetMenu(fileName = "TargetToSlots_Multiple_Various", menuName = "Character Classes/Skills/Targeting/TargetToSlots_Multiple_Various")]
+[CreateAssetMenu(fileName = "TargetToSlots_Multiple_Various", menuName = "Skills/Targeting/TargetToSlots_Multiple_Various")]
 public class TargetToSlots : ScriptableObject, ITargetToSlots
 {
     #region Attributes/Fields/Properties

@@ -72,7 +72,7 @@ public class RadialMenu : MonoBehaviour
 			if (itemSlot.item != null)
 			{
 				items.Add(itemSlot.item);
-				RMF_RadialMenuElement rMF_RadialMenuElement = UnityEngine.Object.Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
+				RMF_RadialMenuElement rMF_RadialMenuElement = Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
 				rMF_RadialMenuElement.text.text = itemSlot.item.Name;
 				subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
 			}
@@ -83,7 +83,7 @@ public class RadialMenu : MonoBehaviour
 
 	private RMF_RadialMenu InitialiseSkillsSubMenu()
 	{
-		RMF_RadialMenu subMenu = UnityEngine.Object.Instantiate(subMenuPrefab, skillsElementsParent).GetComponent<RMF_RadialMenu>();
+		RMF_RadialMenu subMenu = Instantiate(subMenuPrefab, skillsElementsParent).GetComponent<RMF_RadialMenu>();
 
 		Transform parent = subMenu.gameObject.transform.GetChild(0); // get the parent transform for the elements
 
@@ -94,13 +94,16 @@ public class RadialMenu : MonoBehaviour
 		foreach (ISkill skill in character.SkillSystem.UnlockedSkills) // add the unlocked skills from the SkillSystem
 		{
 			//Debug.LogWarning("This should actually add from that characters quickbar, not the partyInventory"); //todo
-			skills.Add(skill);
-			RMF_RadialMenuElement rMF_RadialMenuElement = UnityEngine.Object.Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
-			rMF_RadialMenuElement.text.text = skill.Name;
-			subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
+			if (skill.UseFromSlot.CanUseFromSlot(character))
+			{
+                skills.Add(skill);
 
-			rMF_RadialMenuElement.button.onClick.AddListener(delegate { _battleManager.GetTargets(skill); });
+                RMF_RadialMenuElement rMF_RadialMenuElement = Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
+                rMF_RadialMenuElement.text.text = skill.Name;
+                subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
 
+                rMF_RadialMenuElement.button.onClick.AddListener(delegate { _battleManager.GetTargets(skill); });
+            }
 		}
 
 		return subMenu;

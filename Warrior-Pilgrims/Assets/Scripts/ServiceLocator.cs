@@ -1,3 +1,4 @@
+using AYellowpaper;
 using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
@@ -11,7 +12,7 @@ public class ServiceLocator : MonoBehaviour, IServiceLocator
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private CharacterGameObjectManager _characterGameObjectManager;
-    [SerializeField] private CharacterModel _characterModel;
+    [SerializeField] private InterfaceReference<ICharacterModel> _characterModel;
     [SerializeField] private SavingSystem _savingSystem;
     [SerializeField] private UIServiceLocator _uiServiceLocator;
     [SerializeField] private GameManager _gameManager;
@@ -67,7 +68,7 @@ public class ServiceLocator : MonoBehaviour, IServiceLocator
     [BoxGroup("Battles")]
     [SerializeField] private BattleDataModel _battleDataModel;
     [BoxGroup("Battles")]
-    [SerializeField] private TargetManager _targetManager;
+    [SerializeField] private InterfaceReference<ITargetManager> _targetManager;
 
     public static ServiceLocator Instance { get; private set; }
     public ServiceLocatorObject ServiceLocatorObject => _serviceLocatorObject;
@@ -76,7 +77,7 @@ public class ServiceLocator : MonoBehaviour, IServiceLocator
     public EventSystem EventSystem => _eventSystem;
     public Camera MainCamera => _mainCamera;
     public CharacterGameObjectManager CharacterGameObjectManager => _characterGameObjectManager;
-    public CharacterModel CharacterModel => _characterModel;
+    public ICharacterModel CharacterModel => _characterModel.Value;
     public SavingSystem SavingSystem => _savingSystem;
     public GameManager GameManager => _gameManager;
     public StateManager GameStateManager => _gameStateManager;
@@ -101,7 +102,7 @@ public class ServiceLocator : MonoBehaviour, IServiceLocator
     public BattlerDisplayUI BattlerDisplayUI => _battlerDisplayUI;
     public BattleManager BattleManager => _battleManager;
     public BattleDataModel BattleDataModel => _battleDataModel;
-    public TargetManager TargetManager => _targetManager;
+    public ITargetManager TargetManager => _targetManager.Value;
 
     void Awake()
     {

@@ -7,6 +7,7 @@ namespace GramophoneUtils.Stats
 {
     public interface ICharacterModel
     {
+        IAnimationService AnimationService { get; }
         List<Character> AllCharacters { get; }
         List<Character> DeadEnemyCharacters { get; }
         List<Character> DeadEnemyCharactersList { get; }
@@ -28,6 +29,7 @@ namespace GramophoneUtils.Stats
         Character Slot4EnemyCharacter { get; }
         Character Slot4PlayerCharacter { get; }
 
+        Task PerformAction();
         void AddEnemyCharacters(List<Character> charactersToAdd);
         void AddEnemyToDeadEnemyCharactersList(Character character);
         void AddPlayerToDeadPlayerCharactersList(Character character);

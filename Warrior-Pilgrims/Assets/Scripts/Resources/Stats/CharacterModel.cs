@@ -23,6 +23,9 @@ namespace GramophoneUtils.Stats
     {
         #region Attributes/Fields/Properties
 
+        [SerializeField] private readonly IAnimationService _animationService;
+        public IAnimationService AnimationService => _animationService;
+
         [SerializeField] public UnityEvent onStatsChanged;
         [SerializeField] public UnityEvent onInventoryItemsUpdated;
         [SerializeField] public VoidEvent OnCharacterModelPlayerCharacterOrderUpdated;
@@ -278,6 +281,17 @@ namespace GramophoneUtils.Stats
 
         #region Public Functions
 
+        public async Task PerformAction()
+        {
+            // Do some initial processing
+
+            // Wait for the animation to complete
+            await _animationService.PlayAnimation(IAnimationService.AnimationType.Idle);
+            throw new NotImplementedException();
+            // Continue with the action after the animation is complete
+            // Do some more processing
+        }
+
         public List<Character> InstanceCharacters()
         {
             _playerCharacters = new List<Character>();
@@ -382,6 +396,29 @@ namespace GramophoneUtils.Stats
             _playerCharacterOrder = null;
         }
 
+        /// <summary>
+        /// Gets the character order by the character parameter
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns>
+        /// Returns the CharacterOrder object if the character was found in one of the CharacterModel's
+        /// CharacterOrder objects.
+        /// </returns>
+        public CharacterOrder GetCharacterOrderByCharacter(Character character)
+        {
+            // TODO test
+
+            if (PlayerCharacterOrder.GetCharacters().Contains(character))
+            {
+                return PlayerCharacterOrder;
+            }
+            else if (EnemyCharacterOrder.GetCharacters().Contains(character))
+            {
+                return EnemyCharacterOrder;
+            }
+            return null;
+        }
+
         public void AddEnemyToDeadEnemyCharactersList(Character character)
         {
             _deadEnemyCharacters.Add(character);
@@ -435,12 +472,14 @@ namespace GramophoneUtils.Stats
         {
             // Todo this is going through the full sequence even when things are not dead.
 
-            OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
+            EnemyCharacterOrder.MoveCharactersForwardIntoSpaces();
+
             float end = Time.time + 0.2f;
             while (Time.time < end)
             {
                 await Task.Yield();
             }
+
             ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
             end = Time.time + 0.3f;
             while (Time.time < end)

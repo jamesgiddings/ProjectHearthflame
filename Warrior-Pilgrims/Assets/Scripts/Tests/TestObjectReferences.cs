@@ -103,6 +103,10 @@ public class TestObjectReferences : ScriptableObject
     [SerializeField] private InterfaceReference<ISkill> _shoot;
     public ISkill Shoot => _shoot.Value;
 
+    [BoxGroup("Battle Objects/Skills")]
+    [SerializeField] private InterfaceReference<ISkill> _magicShield;
+    public ISkill MagicShield => _magicShield.Value;
+
     [BoxGroup("Battle Objects/Battle")]
     [SerializeField] private Battle _battle1;
     public Battle Battle1 => _battle1;

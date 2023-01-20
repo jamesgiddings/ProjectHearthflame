@@ -100,4 +100,8 @@ public class ServiceLocatorObject : ScriptableObject
     [SerializeField] private BattleManager _battleManager;
     public BattleManager BattleManager => _battleManager;
 
+    [BoxGroup("Battle/Battle Objects")]
+    [SerializeField] private BattleDataModel _battleDataModel;
+    public BattleDataModel BattleDataModel => _battleDataModel;
+
 }

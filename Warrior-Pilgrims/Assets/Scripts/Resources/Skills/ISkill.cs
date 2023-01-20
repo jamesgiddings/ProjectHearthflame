@@ -11,6 +11,8 @@ public interface ISkill
     TargetNumberFlag TargetNumberFlag { get; }
     TargetAreaFlag TargetAreaFlag { get; }
     TargetTypeFlag TargetTypeFlag { get; }
+    ITargetToSlots TargetToSlots { get; }
+    IUseFromSlot UseFromSlot { get; }
 
     School School { get; }
     int UsesToUnlock { get; }
@@ -30,13 +32,13 @@ public interface ISkill
 
     #region Public Functions
 
-    public void Use(List<Character> characterTargets, Character originator);
+    void Use(List<Character> characterTargets, Character originator);
 
-    public void DoNextBit(List<Character> characterTargets, Character originator);
+    void DoNextBit(List<Character> characterTargets, Character originator);
 
-    public bool CanStartUnlocking(ISkill skill, Character character);
+    bool CanStartUnlocking(ISkill skill, Character character);
 
-    public bool CanUnlock(ISkill skill, Character character);
+    bool CanUnlock(ISkill skill, Character character);
 
     #endregion
 

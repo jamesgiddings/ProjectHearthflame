@@ -1,4 +1,5 @@
 using GramophoneUtils.Utilities;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "State Manager", menuName = "States/State Manager")]
@@ -10,7 +11,8 @@ public class StateManager : ScriptableObjectThatCanRunCoroutines
     private State _startingState;
     public State StartingState => _startingState;
 
-    private State _state;
+    [ShowInInspector] private State _state;
+
     public State State
     {
         get

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Target Manager Subscribe To Battle Data Model Task
   m_EditorClassIdentifier: 
   BattleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
-  _targetManager: {fileID: 11400000, guid: 3c57dc877581b9b4b95815e1a30a8b1a, type: 2}
+  _targetManager:
+    _underlyingValue: {fileID: 11400000, guid: 060db0c78bcb79448972f6d44dd6f2bd, type: 2}
   _toggle: 1

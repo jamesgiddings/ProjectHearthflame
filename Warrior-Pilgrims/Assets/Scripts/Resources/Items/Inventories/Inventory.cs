@@ -23,33 +23,48 @@ namespace GramophoneUtils.Items.Containers
 
 			for (int i = 0; i < itemSlots.Length; i++)
 			{
-				if(i < _startingItemSlots.Length)
-				{
-					itemSlots[i] = _startingItemSlots[i];
-
-				}
-				else
-				{
-					itemSlots[i].item = null;
-                }
+				ResetSlotToStartingState(i);
 			}
 		}
 
 		#endregion
 
 		public Inventory(int size = 20, int money = 0, UnityEvent onInventoryItemsUpdated = null)
+		{
+			if (onInventoryItemsUpdated != null)
 			{
-				if (onInventoryItemsUpdated != null)
-				{
-					this.onInventoryItemsUpdated = onInventoryItemsUpdated;
-				}
-				itemSlots = new ItemSlot[size];
-				this.money = money;
+				this.onInventoryItemsUpdated = onInventoryItemsUpdated;
 			}
+			itemSlots = new ItemSlot[size];
+			this.money = money;
+		}
 
-		#region SavingLoading
-		
-		public object CaptureState()
+        #region Private Functions
+
+        private void ResetSlotToStartingState(int i)
+        {
+			if(_startingItemSlots != null)
+			{
+                if (i < _startingItemSlots.Length)
+                {
+                    itemSlots[i] = _startingItemSlots[i];
+                }
+				else
+				{
+                    itemSlots[i].item = null;
+                }
+            }
+            else
+            {
+                itemSlots[i].item = null;
+            }
+        }
+
+        #endregion
+
+        #region SavingLoading
+
+        public object CaptureState()
 		{
 			//Debug.Log("We are in Inventory.CaptureState()");
 			//GameManager.Instance.ResourceDatabase.Print();
