@@ -10,9 +10,11 @@ using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Characters;
 using UnityEngine.SceneManagement;
 using GramophoneUtils.SavingLoading;
+using System.Threading.Tasks;
+using UnityEditor.SceneManagement;
 
 [TestFixture]
-public class BasicPlayModeTest
+public class BasicPlayModeTest : MonoBehaviour
 {
     protected ServiceLocatorObject ServiceLocatorObject;
     protected TestObjectReferences TestObjectReferences;
@@ -77,13 +79,17 @@ public class BasicPlayModeTest
         EquipmentItem1 = TestObjectReferences.EquipmentItem1;
         testObject = new object();
         SceneManager.LoadScene("Test_Scene", LoadSceneMode.Single);
+
+        ServiceLocatorObject.SavingSystem.Load(TestObjectReferences.TestSaveFile);
     }
 
     [TearDown]
-    public void TearDown()
+    public async void TearDown()
     {
-        Debug.Log("We are here -------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        SceneManager.LoadScene("Test_Scene", LoadSceneMode.Single);
+/*        ServiceLocator.Destroy(ServiceLocator.Instance.gameObject);
+        AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        await Task.Run(() => UnloadSceneWait(5000));
+        SceneManager.OpenScene("Blank_Scene");*/
     }
 
     #region Utilities

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using GramophoneUtils.Utilities;
+using Sirenix.OdinInspector;
 
 namespace GramophoneUtils.SavingLoading
 {
@@ -13,6 +14,7 @@ namespace GramophoneUtils.SavingLoading
     public class SavingSystem : ScriptableObjectThatCanRunCoroutines
     {
         [SerializeField] private string statePath = "state";
+        [SerializeField] private ServiceLocatorObject _serviceLocatorObject;
 
         public static string GetPathFromName(string fileName)
 		{
@@ -27,10 +29,19 @@ namespace GramophoneUtils.SavingLoading
             SaveFile(state, filePath);
         }
 
+        [Button]
+        public void SaveTestFile(string fileName)
+        {
+            string filePath = GetPathFromName(fileName);
+            var state = LoadFile(filePath);
+            CaptureState(state);
+            SaveFile(state, filePath);
+        }
+
         public void Load(string fileName)
         {
             string filePath = GetPathFromName(fileName);
-            ServiceLocator.Instance.GameStateManager.ChangeState(ServiceLocator.Instance.LoadingState);
+            _serviceLocatorObject.GameStateManager.ChangeState(_serviceLocatorObject.GameLoadingState);
             RestoreState(LoadFile(filePath));
         }
 
@@ -90,6 +101,7 @@ namespace GramophoneUtils.SavingLoading
             }
             
             state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
+            Debug.Log(state["lastSceneBuildIndex"]);
         }
 
         private async void RestoreState(Dictionary<string, object> state, bool changeScene = true)
@@ -98,6 +110,7 @@ namespace GramophoneUtils.SavingLoading
             {
                 // Restore the scene first:
                 int lastSceneBuildIndex = (int)state["lastSceneBuildIndex"];
+                Debug.Log(lastSceneBuildIndex);
                 AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(lastSceneBuildIndex);
                 while (asyncLoad.isDone == false)
                 {

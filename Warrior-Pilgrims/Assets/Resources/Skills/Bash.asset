@@ -36,4 +36,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27a92f9a5cc5c094d8b8a72fc3b0b751, type: 2}
   _healingBlueprints: []
   _moveBlueprints:
-  - {fileID: 11400000, guid: 6b1f78a661daeb1479f691dc7ca5f86d, type: 2}
+  - {fileID: 11400000, guid: 99120395bd1b88d4eaa271a3013c88e8, type: 2}

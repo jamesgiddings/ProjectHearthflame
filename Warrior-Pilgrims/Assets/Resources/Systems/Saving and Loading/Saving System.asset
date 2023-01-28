@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Saving System
   m_EditorClassIdentifier: 
   statePath: state
+  _serviceLocatorObject: {fileID: 11400000, guid: 95ba770c049128b4db528e2a78a3fd9a,
+    type: 2}

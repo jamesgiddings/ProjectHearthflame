@@ -858,15 +858,164 @@ namespace GramophoneUtils.Tests
             Assert.AreEqual(Size2EnemyCharacter4, _playerCharacterOrder.GetCharacterBySlotIndex(3));
         }
 
-            #endregion
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInMiddleAtStartAndMoveBackwardIsAppliedToCharacterInSlot0()
+        {
+            _playerCharacterOrder = new CharacterOrder(Character1, Size2EnemyCharacter2, Size2EnemyCharacter2, Character2);
 
-            #region Protected Functions
-            #endregion
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
 
-            #region Private Functions
-            #endregion
+            _playerCharacterOrder.MoveCharacter(Character1, 1); // Move Character1 to slot 2. It should not go to slot 1, because size2enemycharacter takes up two slots
 
-            #region Inner Classes
-            #endregion
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder = new CharacterOrder(Character1, Character2, Size2EnemyCharacter2, Size2EnemyCharacter2);
         }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInMiddleAtStartAndMoveBackwardIsAppliedToCharacterInSlot3()
+        {
+            _playerCharacterOrder = new CharacterOrder(Character1, Size2EnemyCharacter2, Size2EnemyCharacter2, Character2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Character2, 1); // Move Character1 to slot 2. It should not go to slot 1, because size2enemycharacter takes up two slots
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder = new CharacterOrder(Character1, Character2, Size2EnemyCharacter2, Size2EnemyCharacter2);
+        }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInMiddleAtStartAndMoveForwardIsAppliedToCharacterInSlot0()
+        {
+            _playerCharacterOrder = new CharacterOrder(Character1, Size2EnemyCharacter2, Size2EnemyCharacter2, Character2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Character1, -1); // Move Character1 to slot 2. It should not go to slot 1, because size2enemycharacter takes up two slots
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+        }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInMiddleAtStartAndMoveForwardIsAppliedToCharacterInSlot3()
+        {
+            _playerCharacterOrder = new CharacterOrder(Character1, Size2EnemyCharacter2, Size2EnemyCharacter2, Character2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Character2, -1); // Move Character1 to slot 2. It should not go to slot 1, because size2enemycharacter takes up two slots
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+        }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInSlot0AtStartAndMoveForward1IsAppliedToCharacterInSlot0()
+        {
+            _playerCharacterOrder = new CharacterOrder(Size2EnemyCharacter2, Size2EnemyCharacter2, Character1, Character2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Size2EnemyCharacter2, -1); // Move Character1 to slot 2. It should not go to slot 1, because size2enemycharacter takes up two slots
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+        }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInSlot0AtStartAndMoveBackward1IsAppliedToCharacterInSlot0()
+        {
+            _playerCharacterOrder = new CharacterOrder(Size2EnemyCharacter2, Size2EnemyCharacter2, Character1, Character2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Size2EnemyCharacter2, 1); 
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+        }
+
+        [Test]
+        public void AssertMoveCharacterWorksWithSize2CharactersWhereSizeTwoCharacterIsInSlot3AtStartAndMoveForward1IsAppliedToCharacterInSlot3()
+        {
+            _playerCharacterOrder = new CharacterOrder(Character1, Character2, Size2EnemyCharacter2, Size2EnemyCharacter2);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+            _playerCharacterOrder.MoveCharacter(Size2EnemyCharacter2, -1);
+
+            Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
+            Assert.AreEqual(Character1, _playerCharacterOrder.GetCharacterBySlotIndex(0));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(1));
+            Assert.AreEqual(Size2EnemyCharacter2, _playerCharacterOrder.GetCharacterBySlotIndex(2));
+            Assert.AreEqual(Character2, _playerCharacterOrder.GetCharacterBySlotIndex(3));
+
+        }
+
+        #endregion
+
+        #region Protected Functions
+        #endregion
+
+        #region Private Functions
+        #endregion
+
+        #region Inner Classes
+        #endregion
+    }
 }

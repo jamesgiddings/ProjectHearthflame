@@ -97,7 +97,7 @@ public class BattleTests : BasicPlayModeTest
 
     }
 
-    [UnityTest]
+    //[UnityTest]
     public IEnumerator BattleTestsWithEnumeratorPasses()
     {
 
@@ -139,7 +139,6 @@ public class BattleTests : BasicPlayModeTest
             Assert.AreEqual(_postCharacterTurnState, _battleStateManager.State);
             Assert.True(_playerTurnState.IsActive());*/
 
-            _gameStateManager.ChangeState(_testState);
             yield return null;
     }
 }

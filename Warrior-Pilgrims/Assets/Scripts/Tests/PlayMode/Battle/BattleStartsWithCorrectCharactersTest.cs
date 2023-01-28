@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-[TestFixture]
 public class BattleStartsWithCorrectCharactersTest : BasicPlayModeTest
 {
     [UnityTest]
@@ -18,6 +17,7 @@ public class BattleStartsWithCorrectCharactersTest : BasicPlayModeTest
         yield return new WaitUntil(() => ServiceLocator.Instance.BattleStateManager.State == ServiceLocator.Instance.BattleStartState);
         Assert.True(ServiceLocator.Instance.BattleStateManager.State == ServiceLocator.Instance.BattleStartState);
         Assert.AreEqual(6, ServiceLocator.Instance.BattleDataModel.OrderedBattlersList.Count);
+        ServiceLocatorObject.BattleStateManager.ChangeState(ServiceLocatorObject.BattleOverState);
         yield return null;
     }
 }

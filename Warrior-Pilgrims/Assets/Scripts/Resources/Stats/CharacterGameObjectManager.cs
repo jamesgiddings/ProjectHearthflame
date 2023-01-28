@@ -74,7 +74,7 @@ namespace GramophoneUtils.Stats
                     {
                         battler.ConnectFollowerToLeader(_characterBattlerDictionary[playerCharacterOrder.GetCharacterBySlotIndex(0)].GetComponent<CharacterMovement>(), battlerGap * i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     }
-
+                    Debug.Log(character.Name);
                     _characterBattlerDictionary.Add(character, battler);
                 }
             }
@@ -84,7 +84,7 @@ namespace GramophoneUtils.Stats
 
         public void InstantiateEnemyCharacters()
         {
-            // Todo, this is being called outside of battle and I don't know why
+            // Todo, this is being called outside of battle and I don't know why and loads of times in battle
 
             CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
 
@@ -168,7 +168,6 @@ namespace GramophoneUtils.Stats
                 {
                     StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 2f));
                 }
-                
             }
         }
 
@@ -194,10 +193,16 @@ namespace GramophoneUtils.Stats
                     {
                         characterList.Add(enemyCharacterOrder.GetCharacterBySlotIndex(i));
                     }
+                    if (character.CharacterClass.Size == 2)
+                    {
+                        i++;
+                    }
                 }
             }
             for (int i = 0; i < characterList.Count; i++)
             {
+                Debug.Log(characterList[i].Name);
+                Debug.Log(_characterBattlerDictionary.Values.Count);
                 Battler battler = _characterBattlerDictionary[characterList[i]];
 
                 battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
@@ -208,7 +213,6 @@ namespace GramophoneUtils.Stats
                 {
                     StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 2f));
                 }
-
             }
         }
 

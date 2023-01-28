@@ -41,3 +41,4 @@ MonoBehaviour:
   _postRound: {fileID: 11400000, guid: a055042378d27974b866e90db8fded7c, type: 2}
   _battleManager: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
   _battleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
+  _savingSystem: {fileID: 11400000, guid: 46c184559cae47f40b8dcf38cc94e87b, type: 2}

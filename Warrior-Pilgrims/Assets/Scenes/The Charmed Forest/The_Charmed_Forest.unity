@@ -1955,12 +1955,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 10.35
       objectReference: {fileID: 0}
-    - target: {fileID: 7965813866255894482, guid: b46926b404b906d47ba4a74320ec31dc,
-        type: 3}
-      propertyPath: _targetManager._underlyingValue
-      value: 
-      objectReference: {fileID: 11400000, guid: 060db0c78bcb79448972f6d44dd6f2bd,
-        type: 2}
     - target: {fileID: 7965813866255894483, guid: b46926b404b906d47ba4a74320ec31dc,
         type: 3}
       propertyPath: m_Name

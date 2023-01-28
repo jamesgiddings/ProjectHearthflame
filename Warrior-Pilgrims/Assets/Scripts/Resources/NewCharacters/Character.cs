@@ -2,6 +2,7 @@ using AYellowpaper;
 using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -96,6 +97,7 @@ namespace GramophoneUtils.Characters
 
         public Dictionary<string, IStatType> StatTypeStringRefDictionary;
 
+        public Action OnCharacterTurnElapsed;
 
 #if UNITY_EDITOR
         private UnityEditor.Animations.AnimatorController animatorController;
@@ -323,6 +325,15 @@ namespace GramophoneUtils.Characters
             }
         }
 
+        /// <summary>
+        /// Unlike the global Turn class, this offers the same functionality, but at a character level.
+        /// This is advanced during battle, the Turn class is advanced outside of battle.
+        /// </summary>
+        public void AdvanceCharacterTurn()
+        {
+            OnCharacterTurnElapsed?.Invoke();
+        }
+
 #if UNITY_EDITOR
         public void CreateController()
         {
@@ -428,6 +439,7 @@ namespace GramophoneUtils.Characters
             instancedCharacter._characterPrefab = this._characterPrefab;
             instancedCharacter.AnimControllerLoadPath = this.AnimControllerLoadPath;
             instancedCharacter.AnimControllerPath = this.AnimControllerPath;
+
         }
 
         private void EnqueueBattlerNotification(BattlerNotificationImpl notification)

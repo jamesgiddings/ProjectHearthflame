@@ -117,6 +117,8 @@ public class RadialMenu : MonoBehaviour
 	public void UpdateDisplay()
 	{
 		if (_battleManager.BattleDataModel.CurrentActor == null) { return; }
+		if (holder == null) { return; } // TODO, tidy up, this is a messy way to prevent problems in testing
+		if (ServiceLocator.Instance.ServiceLocatorObject.GameStateManager.State != ServiceLocator.Instance.ServiceLocatorObject.GameBattleState) { return; }
 
 		holder.SetActive(_battleManager.BattleDataModel.CurrentActor.IsPlayer);
 		

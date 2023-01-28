@@ -1,3 +1,4 @@
+using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -103,5 +104,9 @@ public class ServiceLocatorObject : ScriptableObject
     [BoxGroup("Battle/Battle Objects")]
     [SerializeField] private BattleDataModel _battleDataModel;
     public BattleDataModel BattleDataModel => _battleDataModel;
+
+    [BoxGroup("Saving/Loading")]
+    [SerializeField] private SavingSystem _savingSystem;
+    public SavingSystem SavingSystem => _savingSystem;
 
 }

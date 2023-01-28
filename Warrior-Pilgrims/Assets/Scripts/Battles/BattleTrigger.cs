@@ -2,6 +2,7 @@ using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]

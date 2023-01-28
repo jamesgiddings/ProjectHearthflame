@@ -230,15 +230,37 @@ public class CharacterOrder
 
         int newSlotIndex = oldSlotIndex + slotsToMove;
 
+        // if the character in the newSlotIndex is size 2, we need to check if
+        // we are targeting it's first or second slot. If we are targeting its
+        // first slot, and moving backwards (positive move value) we need to move
+        // back one additional space. Vice versa for moving forwards, so we find the
+        // unit increment to move an additional step in the direction we need.
+
+        Character characterInNewSlotIndex = null;
+
+        _slots.TryGetValue(newSlotIndex, out characterInNewSlotIndex);
+
+        if (characterInNewSlotIndex != null && characterInNewSlotIndex.CharacterClass.Size == 2)
+        {
+            int unitIncrement = slotsToMove / Math.Abs(slotsToMove);
+
+            if (_slots[newSlotIndex + unitIncrement] == characterInNewSlotIndex)
+            {
+                newSlotIndex += unitIncrement;
+            }
+        }
+
         if (!ValidateMove(characterToMove, newSlotIndex))
         {
             newSlotIndex = GetValidSlotIndexFromInvalidSlotIndex(characterToMove, oldSlotIndex, newSlotIndex);
+            if (newSlotIndex == oldSlotIndex) { return; } // no move
         }
         
         if (slotsToMove > 0) // move character backwards
         {
             RemoveCharacter(characterToMove);
-            MoveCharactersForwardIntoSpaces(newSlotIndex); // but move other characters backwards to balance
+            int slotToMoveForwardFrom = characterToMove.CharacterClass.Size == 2 ? newSlotIndex + 1 : newSlotIndex;
+            MoveCharactersForwardIntoSpaces(slotToMoveForwardFrom); // but move other characters backwards to balance
         }
         else // move character forwards
         {
@@ -422,22 +444,22 @@ public class CharacterOrder
         {
             if (moveForwards)
             {
-                validNewSlotIndex = proposedNewSlotIndex < 0 ? 0 : proposedNewSlotIndex > (_numberOfSlots - 2) ? (_numberOfSlots - 2) : proposedNewSlotIndex;
+                validNewSlotIndex = 0;
             }
             else
             {
-                validNewSlotIndex = (_numberOfSlots - 2) - oldSlotIndex; // can only move to the penultimate place as a size 2
+                validNewSlotIndex = _numberOfSlots - 2; // can only move to the penultimate place as a size 2
             }
         }
         else
         {
             if (moveForwards)
             {
-                validNewSlotIndex = proposedNewSlotIndex < 0 ? 0 : proposedNewSlotIndex > (_numberOfSlots - 1) ? (_numberOfSlots - 1) : proposedNewSlotIndex;
+                validNewSlotIndex = 0;
             }
             else
             {
-                validNewSlotIndex = (_numberOfSlots - 1) - oldSlotIndex;
+                validNewSlotIndex = _numberOfSlots - 1;
             }
         }
 

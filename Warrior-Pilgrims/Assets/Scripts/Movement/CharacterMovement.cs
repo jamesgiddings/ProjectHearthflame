@@ -90,13 +90,15 @@ public class CharacterMovement : MonoBehaviour
             }
             else if (distance < _gap - _tolerance && ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.BattleState)
             {
+                float speedAdjustment = Math.Max(_gap - distance, 0f);
+
                 float x = _followee.GetTransform().position.x - transform.position.x;
                 float y = _followee.GetTransform().position.y - transform.position.y;
 
                 float hyp = (float)Math.Sqrt(x * x + y * y);
                 x /= hyp;
 
-                _horizontalMove = -x * _moveSpeed;
+                _horizontalMove = -x * (_moveSpeed + (speedAdjustment * _speedAdjustmentCoefficientToMaintainGap));
             }
             else
             {

@@ -38,6 +38,7 @@ namespace GramophoneUtils.Stats
 				stats.Add(modifier.StatType, stat);
 			}
 			stat.AddModifier(modifier);
+			modifier.SubscribeToCharacterOnTurnElapsed(character);
 			modifier.OnDurationElapsed += RemoveModifier;
 		}
 
@@ -100,7 +101,8 @@ namespace GramophoneUtils.Stats
 				return;
 			}
 			stat.RemoveModifier(modifier);
-			modifier.OnDurationElapsed -= RemoveModifier;
+            modifier.UnsubscribeFromCharacterOnTurnElapsed(character);
+            modifier.OnDurationElapsed -= RemoveModifier;
 		}
 
 		#region Derived Stats

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.TestTools;
-public class ServiceLocatorObjectsTests : BasicPlayModeTest
+public class AssertServiceLocatorObjectsTests : BasicPlayModeTest
 {
     [UnityTest]
     public IEnumerator Assert_That_Service_Locator_Objects_Are_Not_Null()

@@ -119,4 +119,8 @@ public class TestObjectReferences : ScriptableObject
     [BoxGroup("Items/Containers")]
     [SerializeField] private Inventory _partyInventory;
     public Inventory PartyInventory => _partyInventory;
+
+    [BoxGroup("Saving-Loading")]
+    [SerializeField] private string testSaveFile;
+    public string TestSaveFile => testSaveFile;
 }

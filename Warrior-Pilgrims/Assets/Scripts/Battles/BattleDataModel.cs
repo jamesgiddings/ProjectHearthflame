@@ -155,7 +155,8 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
     public void AdvanceTurn()
     {
         _turn++;
-        Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
+        _currentActor.AdvanceCharacterTurn(); // this sends off events that tick forward stat modifiers and effects
+        //Turn.AdvanceTurn(); // this sends off events that tick forward stat modifiers and effects
     }
 
     public void UpdateState(float delay)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using GramophoneUtils.Characters;
 
 namespace GramophoneUtils.Stats
 {
@@ -15,15 +16,36 @@ namespace GramophoneUtils.Stats
 	[Serializable]
 	public class StatModifier
 	{
-		[SerializeField] private IStatType statType;
-		[SerializeField] private StatModifierTypes modifierType;
-		[SerializeField] private float value;
-		[SerializeField] private int duration = -1;
-		[SerializeField] private readonly object source = null;
+		#region Attributes/Fields/Properties
 
-		public Action<StatModifier> OnDurationElapsed;
+		private bool _isSubscribedToOnCharacterTurnAdvance = false;
 
-		public StatModifier(IStatType statType, StatModifierTypes modifierType, float value, int duration = -1, object source = null)
+        [SerializeField] private IStatType statType;
+        public IStatType StatType => statType;
+
+
+        [SerializeField] private StatModifierTypes modifierType;
+        public StatModifierTypes ModifierType => modifierType;
+
+
+        [SerializeField] private float value;
+        public float Value => value;
+
+
+        [SerializeField] private int duration = -1;
+        public int Duration => duration;
+
+
+        [SerializeField] private readonly object source = null;
+        public object Source => source;
+
+        public Action<StatModifier> OnDurationElapsed;
+
+        #endregion
+
+        #region Constructors
+
+        public StatModifier(IStatType statType, StatModifierTypes modifierType, float value, int duration = -1, object source = null)
 		{
 			this.statType = statType;
 			this.modifierType = modifierType;
@@ -36,13 +58,29 @@ namespace GramophoneUtils.Stats
 			}
 		}
 
-		public IStatType StatType => statType;
-		public StatModifierTypes ModifierType => modifierType;
-		public float Value => value;
-		public int Duration => duration;
-		public object Source => source;
+        #endregion
 
-		public void DecrementDuration()
+        #region Public Functions
+
+		public void SubscribeToCharacterOnTurnElapsed(Character character)
+		{
+			if (!_isSubscribedToOnCharacterTurnAdvance)
+			{
+                character.OnCharacterTurnElapsed += DecrementDuration;
+            }
+			_isSubscribedToOnCharacterTurnAdvance = true;
+        }
+
+        public void UnsubscribeFromCharacterOnTurnElapsed(Character character)
+        {
+            if (_isSubscribedToOnCharacterTurnAdvance)
+            {
+                character.OnCharacterTurnElapsed -= DecrementDuration;
+            }
+            _isSubscribedToOnCharacterTurnAdvance = false;
+        }
+
+        public void DecrementDuration()
 		{
 			duration -= 1;
 			if (duration <= 0)
@@ -55,6 +93,7 @@ namespace GramophoneUtils.Stats
 		{
 			OnDurationElapsed?.Invoke(this);
 		}
+
+		#endregion
 	}
-	
 }
