@@ -164,7 +164,7 @@ public class Battler : MonoBehaviour
 
         foreach (KeyValuePair<IStatType, Stat> keyValuePair in character.StatSystem.Stats)
         {
-            foreach (StatModifier statModifier in keyValuePair.Value.Modifiers)
+            foreach (StatModifier statModifier in keyValuePair.Value.StatModifiers)
             {
                 UnityEngine.Object.Instantiate(statModifierImagePrefab, modifierPanel);
             }

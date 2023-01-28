@@ -30,11 +30,11 @@ public class StatSystemTests : BasicEditModeTest
         Assert.NotNull(character);
         Assert.NotNull(Constants.Strength);
 
-        Assert.AreEqual(0, character.StatSystem.GetStat(Constants.Strength).Modifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
+        Assert.AreEqual(0, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have no modifiers so far.
 
         character.StatSystem.AddModifier(testModifier);
 
-        Assert.AreEqual(1, character.StatSystem.GetStat(Constants.Strength).Modifiers.Count); // the new strength stat in statSystem should have 1 modifier now.
+        Assert.AreEqual(1, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have 1 modifier now.
 
         int iterations = 0;
         while (iterations < 5)
@@ -42,7 +42,7 @@ public class StatSystemTests : BasicEditModeTest
             Turn.AdvanceTurn();
             iterations++;
         }
-        Assert.AreEqual(0, character.StatSystem.GetStat(Constants.Strength).Modifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
+        Assert.AreEqual(0, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
         float currentStatValue = character.StatSystem.GetStat(Constants.Strength).Value;
         StatModifier testModifier2 = new StatModifier(Constants.Strength, StatModifierTypes.Flat, 15f, -1);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,16 @@ namespace GramophoneUtils.Stats
 {
 	public interface IStat
 	{
-		float Value { get; }
+        Action OnStatChanged { get; set; }
+        float Value { get; }
+        List<StatModifier> StatModifiers { get; }
 
-		void UpdateBaseValue(float newBase);
-		void AddModifier(StatModifier modifier);
+        float GetBaseValue();
+        void UpdateBaseValue(float newBase);
+		void IncrementBaseValue(float increment);
+        void AddModifier(StatModifier modifier);
 		bool RemoveModifier(StatModifier modifier);
-	}
-}
+        bool RemoveAllModifiersFromSource(object source);
 
+    }
+}
