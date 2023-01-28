@@ -84,7 +84,7 @@ namespace GramophoneUtils.Items.Containers
 
 		public void Unequip(GramophoneUtils.Characters.Character character)
 		{
-			foreach (KeyValuePair<IStatType, Stat> entry in character.StatSystem.Stats)
+			foreach (KeyValuePair<IStatType, IStat> entry in character.StatSystem.Stats)
 			{
 				entry.Value.RemoveAllModifiersFromSource(this);
 			}

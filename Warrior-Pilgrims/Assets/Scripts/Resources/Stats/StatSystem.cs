@@ -13,10 +13,10 @@ namespace GramophoneUtils.Stats
 
 		private Dictionary<string, IStatType> statTypeStringRefDictionary = new Dictionary<string, IStatType>();
 
-		private readonly Dictionary<IStatType, Stat> stats = new Dictionary<IStatType, Stat>();
+		private readonly Dictionary<IStatType, IStat> stats = new Dictionary<IStatType, IStat>();
 
         public Action<BattlerNotificationImpl> OnStatSystemNotification;
-        public Dictionary<IStatType, Stat> Stats => stats; //getter
+        public Dictionary<IStatType, IStat> Stats => stats; //getter
 
 		public StatSystem(Character character) //constructor 2
 		{
@@ -32,7 +32,7 @@ namespace GramophoneUtils.Stats
 
 		public void AddModifier(StatModifier modifier)
 		{
-			if (!stats.TryGetValue(modifier.StatType, out Stat stat))
+			if (!stats.TryGetValue(modifier.StatType, out IStat stat))
 			{
 				stat = new Stat(modifier.StatType);
 				stats.Add(modifier.StatType, stat);
@@ -44,7 +44,7 @@ namespace GramophoneUtils.Stats
 
 		public void UpdateStatBaseValue(StatModifierBlueprint statComponentBlueprint)
 		{
-			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
+			if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
 			{
 				stat = new Stat(statComponentBlueprint.StatType);
 				stats.Add(statComponentBlueprint.StatType, stat);
@@ -54,7 +54,7 @@ namespace GramophoneUtils.Stats
 		
 		public void IncrementStatBaseValue(StatModifierBlueprint statComponentBlueprint)
 		{
-			if (!stats.TryGetValue(statComponentBlueprint.StatType, out Stat stat))
+			if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
 			{
 				stat = new Stat(statComponentBlueprint.StatType);
 				stats.Add(statComponentBlueprint.StatType, stat);
@@ -62,9 +62,9 @@ namespace GramophoneUtils.Stats
 			stat.IncrementBaseValue(statComponentBlueprint.Value);
 		}
 
-		public Stat GetStat(IStatType type)
+		public IStat GetStat(IStatType type)
 		{
-			if (!stats.TryGetValue(type, out Stat stat))
+			if (!stats.TryGetValue(type, out IStat stat))
 			{
 				stat = new Stat(type);
 				stats.Add(type, stat);
@@ -74,7 +74,7 @@ namespace GramophoneUtils.Stats
 
 		public float GetStatValue(IStatType type)
 		{
-			if (!stats.TryGetValue(type, out Stat stat))
+			if (!stats.TryGetValue(type, out IStat stat))
 			{
 				stat = new Stat(type);
 				stats.Add(type, stat);
@@ -85,7 +85,7 @@ namespace GramophoneUtils.Stats
 
 		public float GetBaseStatValue(IStatType type)
 		{
-			if (!stats.TryGetValue(type, out Stat stat))
+			if (!stats.TryGetValue(type, out IStat stat))
 			{
 				stat = new Stat(type);
 				stats.Add(type, stat);
@@ -96,7 +96,7 @@ namespace GramophoneUtils.Stats
 
 		public void RemoveModifier(StatModifier modifier)
 		{
-			if (!stats.TryGetValue(modifier.StatType, out Stat stat))
+			if (!stats.TryGetValue(modifier.StatType, out IStat stat))
 			{
 				return;
 			}

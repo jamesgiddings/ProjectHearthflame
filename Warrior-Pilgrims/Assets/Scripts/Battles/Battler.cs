@@ -162,7 +162,7 @@ public class Battler : MonoBehaviour
             Destroy(modifierPanel.GetChild(i));
         }
 
-        foreach (KeyValuePair<IStatType, Stat> keyValuePair in character.StatSystem.Stats)
+        foreach (KeyValuePair<IStatType, IStat> keyValuePair in character.StatSystem.Stats)
         {
             foreach (StatModifier statModifier in keyValuePair.Value.StatModifiers)
             {
