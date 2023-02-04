@@ -1,10 +1,6 @@
-using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Items;
 using GramophoneUtils.Stats;
 using NUnit.Framework;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 
 public class ItemTests : BasicEditModeTest
 {
@@ -12,13 +8,14 @@ public class ItemTests : BasicEditModeTest
     public void ItemStatsTestsSimplePasses()
     {
         StatType statType = Constants.Strength;
-        StatModifier testModifier = new StatModifier(statType, StatModifierTypes.Flat, 13f, 5);
+        StatModifier testModifier = new StatModifier(statType, ModifierNumericType.Flat, StatModifierType.Physical, 13f);
         Character1 = Character1Blueprint.Instance();
 
         float statBeforeEquip = Character1.StatSystem.GetStatValue(statType);
 
         EquipmentItem weaponItem = EquipmentItem1;
-
+        Assert.That(weaponItem, Is.Not.Null);
+        Assert.That(Character1, Is.Not.Null);
         weaponItem.Equip(Character1);
 
         Assert.AreEqual(statBeforeEquip + 5f, Character1.StatSystem.GetStat(statType).Value);

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
 using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class StatSystemTests : BasicEditModeTest
 {
@@ -14,18 +11,17 @@ public class StatSystemTests : BasicEditModeTest
         base.SetUp();
     }
 
-    // A Test behaves as an ordinary method
-    [Test]
-    public void StatSystemTestsSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
+/*    [Test]
+    public void StatsTestsSimplePasses()
+    { 
+    
+    }*/
 
     [Test]
     public void StatsTestsSimplePasses()
     {
         Character character = Character1Blueprint.Instance();
-        StatModifier testModifier = new StatModifier(Constants.Strength, StatModifierTypes.Flat, 13f, 5);
+        StatModifier testModifier = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 13f);
 
         Assert.NotNull(character);
         Assert.NotNull(Constants.Strength);
@@ -39,14 +35,14 @@ public class StatSystemTests : BasicEditModeTest
         int iterations = 0;
         while (iterations < 5)
         {
-            Turn.AdvanceTurn();
+            character.AdvanceCharacterTurn();
             iterations++;
         }
-        Assert.AreEqual(0, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
+        Assert.AreEqual(1, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
         float currentStatValue = character.StatSystem.GetStat(Constants.Strength).Value;
-        StatModifier testModifier2 = new StatModifier(Constants.Strength, StatModifierTypes.Flat, 15f, -1);
-        StatModifier testModifier3 = new StatModifier(Constants.Strength, StatModifierTypes.Flat, 8f, -1);
+        StatModifier testModifier2 = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 15f);
+        StatModifier testModifier3 = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 8f);
         character.StatSystem.AddModifier(testModifier2);
         character.StatSystem.AddModifier(testModifier3);
 
@@ -54,50 +50,86 @@ public class StatSystemTests : BasicEditModeTest
 
 
         currentStatValue = character.StatSystem.GetStat(Constants.Strength).Value;
-        testModifier = new StatModifier(Constants.Strength, StatModifierTypes.PercentAdditive, 0.50f, 5);
-        testModifier2 = new StatModifier(Constants.Strength, StatModifierTypes.PercentAdditive, 0.50f, 5);
+        testModifier = new StatModifier(Constants.Strength, ModifierNumericType.PercentAdditive, StatModifierType.Physical, 0.50f);
+        testModifier2 = new StatModifier(Constants.Strength, ModifierNumericType.PercentAdditive, StatModifierType.Physical, 0.50f);
 
         character.StatSystem.AddModifier(testModifier);
         character.StatSystem.AddModifier(testModifier2);
 
         Assert.AreEqual(currentStatValue * 2, character.StatSystem.GetStat(Constants.Strength).Value); // check that two additive 50% percent mods behave as expected
 
-        iterations = 0;
-        while (iterations < 5)
-        {
-            Turn.AdvanceTurn();
-            iterations++;
-        }
+        character.StatSystem.RemoveModifier(testModifier);
+        character.StatSystem.RemoveModifier(testModifier2);
 
         Assert.AreEqual(currentStatValue, character.StatSystem.GetStat(Constants.Strength).Value); // check the two additive buffs have ticked off.
 
-        testModifier = new StatModifier(Constants.Strength, StatModifierTypes.Flat, 10f, 5);
+        testModifier = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 10f);
 
-        testModifier3 = new StatModifier(Constants.Strength, StatModifierTypes.PercentMultiplicative, 1f, 5);
+        testModifier3 = new StatModifier(Constants.Strength, ModifierNumericType.PercentMultiplicative, StatModifierType.Physical, 1f);
         character.StatSystem.AddModifier(testModifier);
         character.StatSystem.AddModifier(testModifier2);
         character.StatSystem.AddModifier(testModifier3);
 
         Assert.AreEqual(((currentStatValue + 10f) * 1.5f) * 2f, character.StatSystem.GetStat(Constants.Strength).Value); // check the value of modifiers when flat and additive and multiplicative are used is as expected 
 
-        iterations = 0;
-        while (iterations < 5)
-        {
-            Turn.AdvanceTurn();
-            iterations++;
-        }
+        character.StatSystem.RemoveModifier(testModifier);
+        character.StatSystem.RemoveModifier(testModifier2);
+        character.StatSystem.RemoveModifier(testModifier3);
 
         Assert.AreEqual(currentStatValue, character.StatSystem.GetStat(Constants.Strength).Value); // check all modifiers have been removed following 5 ticks
     }
 
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator StatSystemTestsWithEnumeratorPasses()
+    [Test]
+    public void Test_PercentageStatModifierCorrectlyReducesDexBy50Percent()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        // Given StatModifier
+        Character character = Character2Blueprint.Instance();
+        IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
+            Constants.Dexterity,
+            ModifierNumericType.PercentAdditive,
+            StatModifierType.Physical,
+            -0.5f
+            );
+        float currentDexterity = character.StatSystem.GetStat(Constants.Dexterity).Value;
+        Assert.That(character, Is.Not.Null);
+        Assert.That(fiftyPercentDexMinusStatModifier, Is.Not.Null);
+        Assert.That(fiftyPercentDexMinusStatModifier.Value, Is.EqualTo(-0.5f));
+        Assert.That(fiftyPercentDexMinusStatModifier.ModifierNumericType, Is.EqualTo(ModifierNumericType.PercentAdditive));
+        Assert.That(fiftyPercentDexMinusStatModifier.StatType, Is.EqualTo(Constants.Dexterity));
+
+        // When
+        character.StatSystem.AddModifier(fiftyPercentDexMinusStatModifier);
+
+        // Then
+        Assert.That(character.StatSystem.GetStat(Constants.Dexterity).Value, Is.EqualTo(currentDexterity / 2f));
+    }
+
+    [Test]
+    public void Test_PercentageStatModifierCorrectlyIncreasesSpeedBy100Percent()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        // Given StatModifier
+        Character character = Character2Blueprint.Instance();
+        IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
+            Constants.Speed,
+            ModifierNumericType.PercentAdditive,
+            StatModifierType.Physical,
+            1f
+            );
+        float currentDexterity = character.StatSystem.GetStat(Constants.Speed).Value;
+        Assert.That(character, Is.Not.Null);
+        Assert.That(fiftyPercentDexMinusStatModifier, Is.Not.Null);
+        Assert.That(fiftyPercentDexMinusStatModifier.Value, Is.EqualTo(1f));
+        Assert.That(fiftyPercentDexMinusStatModifier.ModifierNumericType, Is.EqualTo(ModifierNumericType.PercentAdditive));
+        Assert.That(fiftyPercentDexMinusStatModifier.StatType, Is.EqualTo(Constants.Speed));
+
+        // When
+        character.StatSystem.AddModifier(fiftyPercentDexMinusStatModifier);
+
+        // Then
+        Assert.That(character.StatSystem.GetStat(Constants.Speed).Value, Is.EqualTo(currentDexterity * 2f));
     }
 }

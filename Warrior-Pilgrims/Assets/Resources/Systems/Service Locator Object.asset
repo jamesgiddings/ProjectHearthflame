@@ -42,3 +42,7 @@ MonoBehaviour:
   _battleManager: {fileID: 11400000, guid: 16e2d1f2653c4344eb71164213344d78, type: 2}
   _battleDataModel: {fileID: 11400000, guid: 1da08d31d457999408de2004035e2650, type: 2}
   _savingSystem: {fileID: 11400000, guid: 46c184559cae47f40b8dcf38cc94e87b, type: 2}
+  _statModifierFactory:
+    _underlyingValue: {fileID: 11400000, guid: 41487c2672364374ca4fcbc6582f6251, type: 2}
+  _statusEffectFactory:
+    _underlyingValue: {fileID: 11400000, guid: acb5c598f4d55d14e98891354ba7fc57, type: 2}

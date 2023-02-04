@@ -22,8 +22,8 @@ MonoBehaviour:
   equipmentType: 0
   isUnique: 0
   flavourText: Worth eleventy million scrip.
-  weaponEffectBlueprints:
-  - {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
+  _weaponEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
   classRestrictions:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   - {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}

@@ -1,13 +1,20 @@
 using System;
 
-public struct Healing
+[Serializable]
+public class Healing
 {
 	public readonly float Value;
-	public readonly object source;
+	public readonly object Source;
 
 	public Healing(float value, object source = null)
 	{
 		this.Value = Math.Abs(value);
-		this.source = null;
+		this.Source = source;
 	}
+
+    public Healing(Healing healing)
+    {
+        this.Value = Math.Abs(healing.Value);
+        this.Source = healing.Source;
+    }
 }

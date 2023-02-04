@@ -1,13 +1,12 @@
 using GramophoneUtils.Stats;
-using System;
-using System.Collections;
+using GramophoneUtils.Items.Containers;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AYellowpaper;
 
-namespace GramophoneUtils.Items.Containers
+namespace GramophoneUtils.Items
 {
 	[CreateAssetMenu(fileName = "New Equipment Item", menuName = "Items/Equipment Item")]
 	public class EquipmentItem : InventoryItem, IEquippable
@@ -16,25 +15,23 @@ namespace GramophoneUtils.Items.Containers
 		[SerializeField] private EquipmentType equipmentType;
 		[SerializeField] private bool isUnique = false;
 		[SerializeField] private string flavourText = "Flavour text here.";
-        [TableList(AlwaysExpanded = true)]
-        [SerializeField] private List<StatModifierBlueprint> weaponEffectBlueprints;
-        [TableList(AlwaysExpanded = true)]
+		[SerializeField] private List<InterfaceReference<IStatModifierBlueprint>> _weaponEffectBlueprints = new List<InterfaceReference<IStatModifierBlueprint>>();
         [SerializeField] private CharacterClass[] classRestrictions;
 
-		private List<StatModifier> equipmentEffects { get { return InstanceEquipmentEffectBlueprints(); } }
+		private List<IStatModifier> equipmentEffects { get { return InstanceEquipmentEffectBlueprints(); } }
 
 		public CharacterClass[] ClassRestrictions => classRestrictions;
 
 		public EquipmentType EquipmentType => equipmentType;
 
-		private List<StatModifier> InstanceEquipmentEffectBlueprints()
+		private List<IStatModifier> InstanceEquipmentEffectBlueprints()
 		{
-			List<StatModifier> effects = new List<StatModifier>();
-			if (weaponEffectBlueprints.Count > 0)
+			List<IStatModifier> effects = new List<IStatModifier>();
+			if (_weaponEffectBlueprints.Count > 0)
 			{
-				foreach (var blueprint in weaponEffectBlueprints)
+				foreach (var blueprint in _weaponEffectBlueprints)
 				{
-					effects.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
+					effects.Add(ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromBlueprint(blueprint.Value, new object[] { this }));
 				}
 			}
 			return effects;
@@ -42,9 +39,16 @@ namespace GramophoneUtils.Items.Containers
 
 		public void Equip(GramophoneUtils.Characters.Character character)
 		{
-			foreach (StatModifier weaponEffect in equipmentEffects)
-			{
-				character.StatSystem.AddModifier(new StatModifier(weaponEffect.StatType, weaponEffect.ModifierType, weaponEffect.Value, weaponEffect.Duration, this)); // we make a new effect, which allows us to add the source as 'this' when we equip the item
+			foreach (IStatModifier weaponEffect in equipmentEffects)
+			{   // TODO, this could be tidier
+				character.StatSystem.AddModifier(
+					ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue( // we make a new effect, which allows us to add the source as 'this' when we equip the item
+						weaponEffect.StatType,
+						weaponEffect.ModifierNumericType,
+						weaponEffect.StatModifierType,
+						weaponEffect.Value,
+                        new object[] { this }
+                        ));
 			}
 		}
 		public override string GetInfoDisplayText()
@@ -86,7 +90,7 @@ namespace GramophoneUtils.Items.Containers
 		{
 			foreach (KeyValuePair<IStatType, IStat> entry in character.StatSystem.Stats)
 			{
-				entry.Value.RemoveAllModifiersFromSource(this);
+				entry.Value.RemoveAllModifiersFromSources(new object[] { this });
 			}
 		}
 

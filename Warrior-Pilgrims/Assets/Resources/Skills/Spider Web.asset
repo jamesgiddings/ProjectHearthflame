@@ -32,8 +32,9 @@ MonoBehaviour:
   _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
     type: 3}
   _animatorController: {fileID: 9100000, guid: 9bc1efec7131407458845a638f46b93b, type: 2}
-  _statModifierBlueprints:
-  - {fileID: 11400000, guid: 0d63f1257d11e0e4fa44011a2164c449, type: 2}
-  - {fileID: 11400000, guid: cc8515336ad85824fb385add4308355e, type: 2}
+  _statusEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 3f94ac5da06799149877f0fa5096d7c4, type: 2}
+  _statModifierBlueprints: []
   _damageBlueprints: []
   _healingBlueprints: []
+  _moveBlueprints: []

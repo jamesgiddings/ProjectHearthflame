@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AYellowpaper;
 
 [Serializable]
-public class Resource : Data
+public class Resource : Data, IResource
 {
     [VerticalGroup("General/Split/Right")]
     [VerticalGroup("General/Split/Right/Sprites", 30)]

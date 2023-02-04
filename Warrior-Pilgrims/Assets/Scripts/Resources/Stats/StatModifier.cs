@@ -1,97 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using GramophoneUtils.Characters;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace GramophoneUtils.Stats
 {
-	public enum StatModifierTypes
+	public enum ModifierNumericType
 	{
 		Flat = 0,
 		PercentAdditive = 1,
 		PercentMultiplicative = 2,
 	}
 
+	public enum StatModifierType
+	{
+		Physical = 0,
+		Magical = 1
+	}
+
 	[Serializable]
-	public class StatModifier
+	public class StatModifier : IStatModifier
 	{
 		#region Attributes/Fields/Properties
 
 		private bool _isSubscribedToOnCharacterTurnAdvance = false;
 
-        [SerializeField] private IStatType statType;
-        public IStatType StatType => statType;
+        [SerializeField] private IStatType _statType;
+        public IStatType StatType => _statType;
 
 
-        [SerializeField] private StatModifierTypes modifierType;
-        public StatModifierTypes ModifierType => modifierType;
+        [SerializeField] private ModifierNumericType _modifierNumericType;
+        public ModifierNumericType ModifierNumericType => _modifierNumericType;
 
 
-        [SerializeField] private float value;
-        public float Value => value;
+		[SerializeField] private StatModifierType _statModifierType;
+		public StatModifierType StatModifierType => _statModifierType;
 
 
-        [SerializeField] private int duration = -1;
-        public int Duration => duration;
+		[SerializeField] private float _value;
+        public float Value => _value;
 
 
-        [SerializeField] private readonly object source = null;
-        public object Source => source;
+        [SerializeField] private int _duration = -1;
+        public int Duration => _duration;
 
-        public Action<StatModifier> OnDurationElapsed;
 
+        [SerializeField] private readonly object[] _sources = null;
+        public object[] Sources => _sources;
+
+        public Action<IStatModifier> OnDurationElapsed { get; set; }
+		     
         #endregion
 
         #region Constructors
 
-        public StatModifier(IStatType statType, StatModifierTypes modifierType, float value, int duration = -1, object source = null)
+        public StatModifier(
+			IStatType statType, 
+			ModifierNumericType modifierType, 
+			StatModifierType statModifierType,
+			float value, 
+			object[] sources = null)
 		{
-			this.statType = statType;
-			this.modifierType = modifierType;
-			this.value = value;
-			this.duration = duration;
-			this.source = source;
-			if (duration != -1)
-			{
-				Turn.OnTurnElapsed += DecrementDuration; //subscribe to turn clock
-			}
+			_statType = statType;
+			_modifierNumericType = modifierType;
+			_statModifierType = statModifierType;
+			_value = value;
+			_sources = sources;
 		}
 
         #endregion
 
         #region Public Functions
 
-		public void SubscribeToCharacterOnTurnElapsed(Character character)
+		public async Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
 		{
-			if (!_isSubscribedToOnCharacterTurnAdvance)
-			{
-                character.OnCharacterTurnElapsed += DecrementDuration;
-            }
-			_isSubscribedToOnCharacterTurnAdvance = true;
-        }
-
-        public void UnsubscribeFromCharacterOnTurnElapsed(Character character)
-        {
-            if (_isSubscribedToOnCharacterTurnAdvance)
-            {
-                character.OnCharacterTurnElapsed -= DecrementDuration;
-            }
-            _isSubscribedToOnCharacterTurnAdvance = false;
-        }
-
-        public void DecrementDuration()
-		{
-			duration -= 1;
-			if (duration <= 0)
-			{
-				ElapseDuration();
-			}
+			throw new NotImplementedException();
 		}
 
-		public void ElapseDuration()
+		public Task Remove(Character target, Character originator, CancellationTokenSource tokenSource)
 		{
-			OnDurationElapsed?.Invoke(this);
+			throw new NotImplementedException();
 		}
 
 		#endregion

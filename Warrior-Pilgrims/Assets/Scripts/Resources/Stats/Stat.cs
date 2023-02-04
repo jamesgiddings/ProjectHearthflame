@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 
 namespace GramophoneUtils.Stats
@@ -25,8 +26,9 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        private readonly List<StatModifier> _modifiers = new List<StatModifier>();
-        public List<StatModifier> StatModifiers
+        private readonly List<IStatModifier> _modifiers = new List<IStatModifier>();
+
+        public List<IStatModifier> StatModifiers
         {
             get
             {
@@ -39,9 +41,6 @@ namespace GramophoneUtils.Stats
         private bool isDirty = true;
 
         private float value;
-
-
-
 
         #endregion
 
@@ -78,7 +77,7 @@ namespace GramophoneUtils.Stats
             OnStatChanged?.Invoke();
         }
 
-        public void AddModifier(StatModifier modifier)
+        public void AddModifier(IStatModifier modifier)
         {
             isDirty = true;
             int index = _modifiers.BinarySearch(modifier, new ByPriority());
@@ -87,7 +86,7 @@ namespace GramophoneUtils.Stats
             OnStatChanged?.Invoke();
         }
 
-        public bool RemoveModifier(StatModifier modifier)
+        public bool RemoveModifier(IStatModifier modifier)
         {
             if (_modifiers.Remove(modifier))
             {
@@ -98,9 +97,22 @@ namespace GramophoneUtils.Stats
             return false;
         }
 
-        public bool RemoveAllModifiersFromSource(object source)
+        public bool RemoveAllModifiersFromSources(object[] sources)
         {
-            int numRemovals = _modifiers.RemoveAll(mod => mod.Source == source);
+            int numRemovals = 0;
+
+            for (int i = 0; i < sources.Length; i++)
+            {
+                for (int j = 0; j < _modifiers.Count; j++)
+                {
+                    if (sources[i] is StatusEffect)
+                    {
+                        StatusEffect statusEffect = (StatusEffect)sources[i];
+                    }
+                    int numRemovedInIterations = _modifiers.RemoveAll(mod => mod.Sources.Contains(sources[i]));
+                    numRemovals += numRemovedInIterations;
+                }
+            }
 
             if (numRemovals > 0)
             {
@@ -108,6 +120,7 @@ namespace GramophoneUtils.Stats
                 OnStatChanged?.Invoke();
                 return true;
             }
+
             return false;
         }
 
@@ -127,19 +140,19 @@ namespace GramophoneUtils.Stats
             {
                 var modifier = _modifiers[i];
 
-                switch (modifier.ModifierType)
+                switch (modifier.ModifierNumericType)
                 {
-                    case StatModifierTypes.Flat:
+                    case ModifierNumericType.Flat:
                         finalValue += modifier.Value;
                         break;
-                    case StatModifierTypes.PercentAdditive:
+                    case ModifierNumericType.PercentAdditive:
                         sumPercentAdditive += modifier.Value;
-                        if (i + 1 >= _modifiers.Count || _modifiers[i + 1].ModifierType != StatModifierTypes.PercentAdditive)
+                        if (i + 1 >= _modifiers.Count || _modifiers[i + 1].ModifierNumericType != ModifierNumericType.PercentAdditive)
                         {
                             finalValue *= 1 + sumPercentAdditive;
                         }
                         break;
-                    case StatModifierTypes.PercentMultiplicative:
+                    case ModifierNumericType.PercentMultiplicative:
 
                         finalValue *= 1 + modifier.Value;
                         break;
@@ -154,12 +167,12 @@ namespace GramophoneUtils.Stats
 
     #region Inner Classes
 
-    internal class ByPriority : IComparer<StatModifier>
+    internal class ByPriority : IComparer<IStatModifier>
     {
-        public int Compare(StatModifier x, StatModifier y)
+        public int Compare(IStatModifier x, IStatModifier y)
         {
-            if (x.ModifierType > y.ModifierType) { return 1; }
-            if (x.ModifierType < y.ModifierType) { return -1; }
+            if (x.ModifierNumericType > y.ModifierNumericType) { return 1; }
+            if (x.ModifierNumericType < y.ModifierNumericType) { return -1; }
             return 0;
         }
     }

@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using UnityEditor;
-using GramophoneUtils.Items.Containers;
-using GramophoneUtils.Characters;
 using NSubstitute;
+using UnityEditor;
+using GramophoneUtils.Items;
+using GramophoneUtils.Characters;
 using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
 

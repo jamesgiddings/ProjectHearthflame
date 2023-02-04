@@ -1,212 +1,213 @@
 using GramophoneUtils.Characters;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
     public class StatSystem
-
     {
-		private Character character;
+        #region Attributes/Fields/Properties
 
-		private Dictionary<string, IStatType> statTypeStringRefDictionary = new Dictionary<string, IStatType>();
+        private Character _character;
 
-		private readonly Dictionary<IStatType, IStat> stats = new Dictionary<IStatType, IStat>();
+        public StatusEffectType ActiveStatusEffectTypes => GetActiveStatusEffectTypes();
+
+        private List<StatusEffectTypeWrapper> _activeStatusEffects = new List<StatusEffectTypeWrapper>();
+
+        public List<StatusEffectTypeWrapper> ActiveStatusEffects { get => _activeStatusEffects; }
+
+        private readonly Dictionary<IStatType, IStat> stats = new Dictionary<IStatType, IStat>();
+
+        private List<IStatusEffect> _statusEffects = new List<IStatusEffect>();
+        public List<IStatusEffect> StatusEffects => _statusEffects;
+
+        private Dictionary<string, IStatType> _statTypeStringRefDictionary = new Dictionary<string, IStatType>();
+        public Dictionary<string, IStatType> StatTypeStringRefDictionary => _statTypeStringRefDictionary;
 
         public Action<BattlerNotificationImpl> OnStatSystemNotification;
-        public Dictionary<IStatType, IStat> Stats => stats; //getter
 
-		public StatSystem(Character character) //constructor 2
-		{
-			foreach (var stat in character.Stats.Stats)
-			{
-				stats.Add(stat.StatType, new Stat(stat.Value));
-				statTypeStringRefDictionary.Add(stat.StatType.Name, stat.StatType);
-			}
-			this.character = character;
-		}
+        public Action<List<IStatusEffect>> OnStatusEffectsListUpdated;
+        public Dictionary<IStatType, IStat> Stats => stats; //getter      
 
-		public Dictionary<string, IStatType> StatTypeStringRefDictionary => statTypeStringRefDictionary;
+        #endregion
 
-		public void AddModifier(StatModifier modifier)
-		{
-			if (!stats.TryGetValue(modifier.StatType, out IStat stat))
-			{
-				stat = new Stat(modifier.StatType);
-				stats.Add(modifier.StatType, stat);
-			}
-			stat.AddModifier(modifier);
-			modifier.SubscribeToCharacterOnTurnElapsed(character);
-			modifier.OnDurationElapsed += RemoveModifier;
-		}
+        #region Constructors
 
-		public void UpdateStatBaseValue(StatModifierBlueprint statComponentBlueprint)
-		{
-			if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
-			{
-				stat = new Stat(statComponentBlueprint.StatType);
-				stats.Add(statComponentBlueprint.StatType, stat);
-			}
-			stat.UpdateBaseValue(statComponentBlueprint.Value);
-		}
-		
-		public void IncrementStatBaseValue(StatModifierBlueprint statComponentBlueprint)
-		{
-			if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
-			{
-				stat = new Stat(statComponentBlueprint.StatType);
-				stats.Add(statComponentBlueprint.StatType, stat);
-			}
-			stat.IncrementBaseValue(statComponentBlueprint.Value);
-		}
+        public StatSystem(Character character) //constructor 2
+        {
+            foreach (var stat in character.Stats.Stats)
+            {
+                stats.Add(stat.StatType, new Stat(stat.Value));
+                _statTypeStringRefDictionary.Add(stat.StatType.Name, stat.StatType);
+            }
+            this._character = character;
+        }
 
-		public IStat GetStat(IStatType type)
-		{
-			if (!stats.TryGetValue(type, out IStat stat))
-			{
-				stat = new Stat(type);
-				stats.Add(type, stat);
-			}
-			return stat;
-		}
+        #endregion
 
-		public float GetStatValue(IStatType type)
-		{
-			if (!stats.TryGetValue(type, out IStat stat))
-			{
-				stat = new Stat(type);
-				stats.Add(type, stat);
-			}
+        #region Callbacks
+        #endregion
 
-			return stat.Value;
-		}
+        #region Public Functions
 
-		public float GetBaseStatValue(IStatType type)
-		{
-			if (!stats.TryGetValue(type, out IStat stat))
-			{
-				stat = new Stat(type);
-				stats.Add(type, stat);
-			}
+        public void AddStatusEffectObject(IStatusEffect statusEffect)
+        {
+            _statusEffects.Add(statusEffect);
+            OnStatusEffectsListUpdated?.Invoke(_statusEffects);
+        }
 
-			return stat.GetBaseValue();
-		}
+        public void RemoveStatusEffectObject(IStatusEffect statusEffect)
+        {
+            bool isEqual = statusEffect.Equals(_statusEffects[0]);
+            _statusEffects.Remove(statusEffect);
+            OnStatusEffectsListUpdated?.Invoke(_statusEffects);
+        }
 
-		public void RemoveModifier(StatModifier modifier)
-		{
-			if (!stats.TryGetValue(modifier.StatType, out IStat stat))
-			{
-				return;
-			}
-			stat.RemoveModifier(modifier);
-            modifier.UnsubscribeFromCharacterOnTurnElapsed(character);
-            modifier.OnDurationElapsed -= RemoveModifier;
-		}
+        public void RemoveStatusEffectTypeWrapper(StatusEffectTypeWrapper statusEffectTypeWrapper)
+        {
+            _activeStatusEffects.Remove(statusEffectTypeWrapper);
+        }
 
-		#region Derived Stats
+        public void UpdateStatBaseValue(StatModifierBlueprint statComponentBlueprint)
+        {
+            if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
+            {
+                stat = new Stat(statComponentBlueprint.StatType);
+                stats.Add(statComponentBlueprint.StatType, stat);
+            }
+            stat.UpdateBaseValue(statComponentBlueprint.Value);
+        }
 
-		public float GetMeleeAccuracy()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMeleeAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.StrengthMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Accuracy"]);
-		}
+        public void IncrementStatBaseValue(StatModifierBlueprint statComponentBlueprint)
+        {
+            if (!stats.TryGetValue(statComponentBlueprint.StatType, out IStat stat))
+            {
+                stat = new Stat(statComponentBlueprint.StatType);
+                stats.Add(statComponentBlueprint.StatType, stat);
+            }
+            stat.IncrementBaseValue(statComponentBlueprint.Value);
+        }
 
-		public float GetRangedAccuracy()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Dexterity"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.DexterityMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Accuracy"]);
-		}
+        public IStat GetStat(IStatType type)
+        {
+            if (!stats.TryGetValue(type, out IStat stat))
+            {
+                stat = new Stat(type);
+                stats.Add(type, stat);
+            }
+            return stat;
+        }
 
-		public float GetMagicAccuracy()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.MagicMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Accuracy"]);
-		}
+        public float GetStatValue(IStatType type)
+        {
+            if (!stats.TryGetValue(type, out IStat stat))
+            {
+                stat = new Stat(type);
+                stats.Add(type, stat);
+            }
 
-		public float GetMeleeEvasion()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMeleeEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Evasion"]);
-		}
+            return stat.Value;
+        }
 
-		public float GetRangedEvasion()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseRangedEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Evasion"]);
-		}
+        public float GetBaseStatValue(IStatType type)
+        {
+            if (!stats.TryGetValue(type, out IStat stat))
+            {
+                stat = new Stat(type);
+                stats.Add(type, stat);
+            }
 
-		public float GetMagicEvasion()
-		{
-			return ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BaseMagicEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Evasion"]);
-		}
+            return stat.GetBaseValue();
+        }
 
-		private List<Damage> FilterMisses(List<Damage> receivedDamages, Character originator)
-		{
-			List<Damage> filteredDamages = new List<Damage>();
-			foreach (Damage damage in receivedDamages)
-			{
-				if (!GetIfMisses(damage, originator))
-				{
-					filteredDamages.Add(damage);
-				}
-			}
-			return filteredDamages;
-		}
+        public void AddModifier(IStatModifier modifier)
+        {
+            if (!stats.TryGetValue(modifier.StatType, out IStat stat))
+            {
+                stat = new Stat(modifier.StatType);
+                stats.Add(modifier.StatType, stat);
+            }
+            stat.AddModifier(modifier);
+        }
 
-		private bool GetIfMisses(Damage damage, Character originator)
-		{
-			switch (damage.AttackType)
-			{
-				case AttackType.Magic:
-					if (GetMagicEvasion() > originator.StatSystem.GetMagicAccuracy())
-					{
-						return true;
-					}
-					else return false;			
-				case AttackType.Ranged:
-					if (GetRangedEvasion() > originator.StatSystem.GetRangedAccuracy())
-					{
-						return true;
-					}
-					else return false;
-				case AttackType.Melee:
-					if (GetMeleeEvasion() > originator.StatSystem.GetMeleeAccuracy())
-					{
-						return true;
-					}
-					else return false;
-				default:
-					return false;
-			}
-		}
+        public void RemoveModifier(IStatModifier modifier)
+        {
+            if (!stats.TryGetValue(modifier.StatType, out IStat stat))
+            {
+                return;
+            }
+            stat.RemoveModifier(modifier);
+        }
 
-		public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, Character originator)
-		{
-            Debug.Log(character.Name + "'s character.GetInstanceID()" + character.GetInstanceID());
+        public void AddElapsible(IElapsible elapsible)
+        {
+            elapsible.OnDurationElapsed += RemoveElapsible;
+        }
+
+        public void RemoveElapsible(IElapsible elapsible)
+        {
+            elapsible.Remove(_character, null, null); // TODO, we might not need to pass the rest
+        }
+
+        public void ReceiveStatusEffectType(StatusEffectTypeWrapper receivedStatusEffectType, Character originator, CancellationTokenSource tokenSource)
+        {
+            StatusEffectTypeWrapper filteredStatusEffectType = FilterStatusEffectTypes(receivedStatusEffectType, originator);
+            _activeStatusEffects.Add(filteredStatusEffectType);
+        }
+
+        public void ReceiveModifiedStatModifiers(List<IStatModifier> receivedStatModifiers, Character originator, CancellationTokenSource tokenSource)
+        {
+            List<IStatModifier> filteredStatModifiers = FilterResists(receivedStatModifiers, originator);
+            if (filteredStatModifiers.Count == 0 && receivedStatModifiers.Count > 0)
+            {
+                string evasionString = receivedStatModifiers[0].StatModifierType == StatModifierType.Magical ? ServiceLocatorObject.Instance.Constants.MagicEvasionText : ServiceLocatorObject.Instance.Constants.PhysicalEvasionText;
+                OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString));
+                tokenSource.Cancel();
+                return;
+            }
+            List<IStatModifier> modifiedFilteredStatModifiers = new List<IStatModifier>();
+
+            foreach (IStatModifier statModifier in filteredStatModifiers)
+            {
+                modifiedFilteredStatModifiers.Add(ModifyIncomingStatModifier(statModifier));
+            }
+            ApplyModifiedStatModifiers(modifiedFilteredStatModifiers);
+        }
+
+        public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, Character originator, CancellationTokenSource tokenSource)
+        {
             List<Damage> filteredDamages = FilterMisses(receivedDamages, originator);
-			if (filteredDamages.Count == 0 && receivedDamages.Count > 0)
-			{
-				string evasionString = receivedDamages[0].AttackType == AttackType.Magic ? ServiceLocator.Instance.ServiceLocatorObject.Constants.MagicEvasionText : ServiceLocator.Instance.ServiceLocatorObject.Constants.PhysicalEvasionText;
-				OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString));
-				return;
-			}
-			List<Damage> modifiedDamages = new List<Damage>();
-			foreach (Damage damage in filteredDamages)
-			{
-				modifiedDamages.Add(ModifyIncomingDamage(damage));
-			}
-			ApplyModifiedDamageObjects(modifiedDamages);
-		}
+            if (filteredDamages.Count == 0 && receivedDamages.Count > 0)
+            {
+                string evasionString = receivedDamages[0].AttackType == AttackType.Magic ? ServiceLocatorObject.Instance.Constants.MagicEvasionText : ServiceLocatorObject.Instance.Constants.PhysicalEvasionText;
+                OnStatSystemNotification?.Invoke(new BattlerNotificationImpl(evasionString));
+                tokenSource.Cancel();
+                return;
+            }
+            List<Damage> modifiedDamages = new List<Damage>();
+            foreach (Damage damage in filteredDamages)
+            {
+                modifiedDamages.Add(ModifyIncomingDamage(damage));
+            }
+            ApplyModifiedDamageObjects(modifiedDamages);
+        }
 
-		public void ReceiveModifiedHealingStructs(List<Healing> receivedHealings, Character originator)
-		{
-			List<Healing> modifiedHealings = new List<Healing>();
-			foreach (Healing healing in receivedHealings)
-			{
-				modifiedHealings.Add(ModifyIncomingHealing(healing));
-			}
+        public void ReceiveModifiedHealingStructs(List<Healing> receivedHealings, Character originator, CancellationTokenSource tokenSource)
+        {
+            List<Healing> modifiedHealings = new List<Healing>();
+            foreach (Healing healing in receivedHealings)
+            {
+                modifiedHealings.Add(ModifyIncomingHealing(healing));
+            }
 
-			ApplyModifiedHealingObjects(modifiedHealings);
-		}
+            ApplyModifiedHealingObjects(modifiedHealings);
+        }
 
-        public void ReceiveModifiedMoveStructs(List<Move> receivedMoves, Character originator)
+        public void ReceiveModifiedMoveStructs(List<Move> receivedMoves, Character originator, CancellationTokenSource tokenSource)
         {
             List<Move> modifiedMoves = new List<Move>();
             foreach (Move move in receivedMoves)
@@ -217,88 +218,289 @@ namespace GramophoneUtils.Stats
             ApplyModifiedMoveObjects(modifiedMoves);
         }
 
-        private void ApplyModifiedDamageObjects(List<Damage> modifiedDamages)
-		{
-			foreach (Damage damage in modifiedDamages)
-			{
-                Debug.Log(damage.Value);
-                Debug.Log(character.Name);
-                character.HealthSystem.AddDamage(damage);
+        public Damage ModifyOutgoingDamage(Damage damage)
+        {
+            float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocatorObject.Instance.StatSystemConstants.StrengthMultiplier);
 
-			}
-		}
-		
-		private void ApplyModifiedHealingObjects(List<Healing> modifiedDamages)
-		{
-			foreach (Healing healing in modifiedDamages)
-			{
-				character.HealthSystem.AddHealing(healing);
-			}
-		}
+            return new Damage(newValue, damage.Element, damage.AttackType, damage.Source);
+        }
+
+        public Healing ModifyOutgoingHealing(Healing healing)
+        {
+            float newValue = healing.Value + (GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocatorObject.Instance.StatSystemConstants.MagicMultiplier);
+
+            return new Healing(newValue, healing.Source);
+        }
+
+        public Move ModifyOutgoingMove(Move move)
+        {
+            int newValue = move.Value; // TODO, decide if this will have any effect
+
+            return new Move(newValue, move.MoveByValue, move.Source);
+        }
+
+        public IStatModifier ModifyOutgoinStatModifiers(IStatModifier statModifier, IStatusEffect statusEffect = null)
+        {
+            return ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromInstance(statModifier); // TODO, decide if this will have any effect
+        }
+
+        #region Derived Stats
+
+        public float GetMeleeAccuracy()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseMeleeAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocatorObject.Instance.StatSystemConstants.StrengthMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Accuracy"]);
+        }
+
+        public float GetRangedAccuracy()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Dexterity"]) * ServiceLocatorObject.Instance.StatSystemConstants.DexterityMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Accuracy"]);
+        }
+
+        public float GetMagicAccuracy()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseRangedAccuracy + ((GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocatorObject.Instance.StatSystemConstants.MagicMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Accuracy"]);
+        }
+
+        public float GetMeleeEvasion()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseMeleeEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocatorObject.Instance.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Melee Evasion"]);
+        }
+
+        public float GetRangedEvasion()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseRangedEvasion + ((GetStatValue(StatTypeStringRefDictionary["Speed"]) * ServiceLocatorObject.Instance.StatSystemConstants.SpeedMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Ranged Evasion"]);
+        }
+
+        public float GetMagicEvasion()
+        {
+            return ServiceLocatorObject.Instance.StatSystemConstants.BaseMagicEvasion + ((GetStatValue(StatTypeStringRefDictionary["Wits"]) * ServiceLocatorObject.Instance.StatSystemConstants.WitsMultiplier)) + GetStatValue(StatTypeStringRefDictionary["Magic Evasion"]);
+        }
+
+        #endregion
+
+        public Damage ModifyIncomingDamage(Damage damage)
+        {
+            float newValue = damage.Value - ServiceLocatorObject.Instance.StatSystemConstants.BasePhysicalArmour;
+
+            return new Damage(newValue, damage.Element, damage.AttackType, damage.Source);
+        }
+
+        public Healing ModifyIncomingHealing(Healing healing)
+        {
+            float newValue = healing.Value; // Find modifier here
+
+            return new Healing(newValue, healing.Source);
+        }
+
+        public Move ModifyIncomingMove(Move move)
+        {
+            int newValue = move.Value; // TODO, decide if this will have any effect
+
+            return new Move(newValue, move.MoveByValue, move.Source);
+        }
+
+        #endregion
+
+        #region Protected Functions
+        #endregion
+
+        #region Private Functions
+
+        private StatusEffectType GetActiveStatusEffectTypes()
+        {
+            StatusEffectType activeStatusEffects = StatusEffectType.None;
+
+            foreach (StatusEffectTypeWrapper wrapper in _activeStatusEffects)
+            {
+                activeStatusEffects |= wrapper.StatusEffectTypeFlag;
+            }
+
+            return activeStatusEffects;
+        }
+
+        private IStatModifier ModifyIncomingStatModifier(IStatModifier statModifier)
+        {
+            return ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromInstance(statModifier); // TODO, decide if this will have any effect
+        }
+
+        private void ApplyModifiedStatModifiers(List<IStatModifier> modifiedFilteredStatModifiers)
+        {
+            foreach (IStatModifier statModifier in modifiedFilteredStatModifiers)
+            {
+                AddModifier(statModifier);
+            }
+        }
+
+        private void ApplyModifiedDamageObjects(List<Damage> modifiedDamages)
+        {
+            foreach (Damage damage in modifiedDamages)
+            {
+                _character.HealthSystem.AddDamage(damage);
+
+            }
+        }
+
+        private void ApplyModifiedHealingObjects(List<Healing> modifiedDamages)
+        {
+            foreach (Healing healing in modifiedDamages)
+            {
+                _character.HealthSystem.AddHealing(healing);
+            }
+        }
 
         private void ApplyModifiedMoveObjects(List<Move> modifiedMoves)
         {
             foreach (Move move in modifiedMoves)
             {
-				if (move.Value == 0)
-				{
-					continue;
-				}
-
-				CharacterOrder characterOrder = ServiceLocator.Instance.ServiceLocatorObject.CharacterModel.GetCharacterOrderByCharacter(character);
-                if (move.MoveByValue)
-				{
-					characterOrder.MoveCharacter(character, move.Value);
+                if (move.Value == 0)
+                {
+                    continue;
                 }
-				else
-				{
-                    characterOrder.SwapCharacterIntoSlot(character, move.Value);
+
+                CharacterOrder characterOrder = ServiceLocatorObject.Instance.CharacterModel.GetCharacterOrderByCharacter(_character);
+                if (move.MoveByValue)
+                {
+                    characterOrder.MoveCharacter(_character, move.Value);
+                }
+                else
+                {
+                    characterOrder.SwapCharacterIntoSlot(_character, move.Value);
                 }
             }
         }
 
-        public Damage ModifyIncomingDamage(Damage damage)
-		{
-			float newValue = damage.Value - ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.BasePhysicalArmour;
-
-			return new Damage(newValue, damage.Element, damage.AttackType, damage.source);
-		}
-
-		public Healing ModifyIncomingHealing(Healing healing)
-		{
-			float newValue = healing.Value; // Find modifier here
-
-			return new Healing(newValue, healing.source);
-		}
-
-        internal Move ModifyIncomingMove(Move move)
+        private List<IStatModifier> FilterResists(List<IStatModifier> receivedStatModifiers, Character originator)
         {
-            int newValue = move.Value; // TODO, decide if this will have any effect
-
-            return new Move(newValue, move.MoveByValue, move.source);
+            List<IStatModifier> filteredModifiers = new List<IStatModifier>();
+            foreach (IStatModifier modifier in receivedStatModifiers)
+            {
+                if (!GetIfResists(modifier, originator))
+                {
+                    filteredModifiers.Add(modifier);
+                }
+            }
+            return filteredModifiers;
         }
 
-        public Damage ModifyOutgoingDamage(Damage damage)
-		{
-			float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.StrengthMultiplier); //TODO, move this to serviceLocator
-
-			return new Damage(newValue, damage.Element, damage.AttackType, damage.source);
-		}		
-		
-		public Healing ModifyOutgoingHealing(Healing healing)
-		{
-			float newValue = healing.Value + (GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocator.Instance.ServiceLocatorObject.StatSystemConstants.MagicMultiplier);
-
-			return new Healing(newValue, healing.source);
-		}
-
-        internal Move ModifyOutgoingMove(Move move)
+        private bool GetIfResists(IStatModifier modifier, Character originator)
         {
-			int newValue = move.Value; // TODO, decide if this will have any effect
+            switch (modifier.StatModifierType)
+            {
+                case StatModifierType.Magical:
+                    if (GetMagicEvasion() > originator.StatSystem.GetMagicAccuracy()) // TODO, these are not the right stats for statModifier resistance
+                    {
+                        return true;
+                    }
+                    else return false;
+                case StatModifierType.Physical:
+                    if (GetMeleeEvasion() > originator.StatSystem.GetMeleeAccuracy()) // TODO, these are not the right stats for statModifier resistance
+                    {
+                        return true;
+                    }
+                    else return false;
+            }
+            return false;
+        }
 
-            return new Move(newValue, move.MoveByValue, move.source);
+        private List<Damage> FilterMisses(List<Damage> receivedDamages, Character originator)
+        {
+            List<Damage> filteredDamages = new List<Damage>();
+            foreach (Damage damage in receivedDamages)
+            {
+                if (!GetIfMisses(damage, originator))
+                {
+                    filteredDamages.Add(damage);
+                }
+            }
+            return filteredDamages;
+        }
+
+        private bool GetIfMisses(Damage damage, Character originator)
+        {
+            switch (damage.AttackType)
+            {
+                case AttackType.Magic:
+                    if (GetMagicEvasion() > originator.StatSystem.GetMagicAccuracy())
+                    {
+                        return true;
+                    }
+                    else return false;
+                case AttackType.Ranged:
+                    if (GetRangedEvasion() > originator.StatSystem.GetRangedAccuracy())
+                    {
+                        return true;
+                    }
+                    else return false;
+                case AttackType.Melee:
+                    if (GetMeleeEvasion() > originator.StatSystem.GetMeleeAccuracy())
+                    {
+                        return true;
+                    }
+                    else return false;
+                default:
+                    return false;
+            }
+        }
+
+        private StatusEffectTypeWrapper FilterStatusEffectTypes(StatusEffectTypeWrapper receivedStatusEffectType, Character originator)
+        {
+            List<StatusEffectType> listOfIndividualStatusEffectTypes = new List<StatusEffectType>();
+
+            var flags = (StatusEffectType[])StatusEffectType.GetValues(typeof(StatusEffectType)); // get an array of the flags
+
+            foreach (var flag in flags)
+            {
+                if (flag == StatusEffectType.None)
+                {
+                    continue;
+                }
+
+                if ((receivedStatusEffectType.StatusEffectTypeFlag & flag) != 0)
+                {
+                    listOfIndividualStatusEffectTypes.Add(flag);
+                }
+            }
+
+            StatusEffectType filteredUnresistedStatusEffectType = StatusEffectType.None;
+
+            foreach (StatusEffectType statusEffectTypeFlag in listOfIndividualStatusEffectTypes)
+            {
+                if (!GetIsStatusEffectTypeResisted(statusEffectTypeFlag, originator))
+                {
+                    filteredUnresistedStatusEffectType |= statusEffectTypeFlag;
+                }
+            }
+
+            return new StatusEffectTypeWrapper(filteredUnresistedStatusEffectType, originator);
+        }
+
+        private bool GetIsStatusEffectTypeResisted(StatusEffectType receivedStatusEffectTypeFlag, Character originator)
+        {
+            switch (receivedStatusEffectTypeFlag)
+            {
+                case StatusEffectType.Stun:
+                    if (GetMeleeEvasion() > originator.StatSystem.GetMeleeAccuracy()) // TODO, these are not the right stats for statModifier resistance
+                    {
+                        return true;
+                    }
+                    else return false;
+                case StatusEffectType.Burn:
+                    if (GetMagicEvasion() > originator.StatSystem.GetMagicAccuracy()) // TODO, these are not the right stats for statModifier resistance
+                    {
+                        return true;
+                    }
+                    else return false;
+                case StatusEffectType.None:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         #endregion
+
+        #region Inner Classes
+        #endregion
+
     }
 }

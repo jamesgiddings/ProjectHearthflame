@@ -1,4 +1,5 @@
-﻿using GramophoneUtils.Items.Containers;
+﻿using AYellowpaper;
+using GramophoneUtils.Items.Containers;
 using GramophoneUtils.Stats;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace GramophoneUtils.Items
     {
         [Header("Basic Info")]
         [SerializeField] private string description = "New Item Description";
+
         public string Description => description;
         public abstract string ColouredName { get; }
 

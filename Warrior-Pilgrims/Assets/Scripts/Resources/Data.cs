@@ -8,12 +8,14 @@ public abstract class Data : ScriptableObject
 {
     [HideInInspector]
     [ScriptableObjectId]
-    public string UID;
+    private string _uid;
+
+    public string UID => _uid;
     
     [BoxGroup("General")]
     [HorizontalGroup("General/Split", 60)]
     [VerticalGroup("General/Split/Left"), HideLabel]
-    [SerializeField] protected new string name;
+    [SerializeField] private string _name;
 
-    public string Name => name;
+    public string Name => _name;
 }

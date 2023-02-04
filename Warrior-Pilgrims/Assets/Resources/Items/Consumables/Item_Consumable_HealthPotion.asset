@@ -20,5 +20,5 @@ MonoBehaviour:
   sellPrice: 1
   maxStack: 5
   useText: Does something, maybe?
-  consumableEffectBlueprints: []
+  _consumableEffectBlueprints: []
   classRestrictions: []

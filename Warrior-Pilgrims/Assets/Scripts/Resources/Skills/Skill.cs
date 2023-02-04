@@ -6,6 +6,8 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -68,17 +70,23 @@ public class Skill : Resource, ISkill, IHotbarItem
     public RuntimeAnimatorController AnimatorController => _animatorController;
 
     [BoxGroup("Effect Blueprints")]
+    [SerializeField] private List<InterfaceReference<IStatusEffectBlueprint>> _statusEffectBlueprints;
+
+    [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<StatModifierBlueprint> _statModifierBlueprints;
+
     [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<DamageBlueprint> _damageBlueprints;
+
     [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<HealingBlueprint> _healingBlueprints;
+
     [BoxGroup("Effect Blueprints")]
     [SerializeField] private List<MoveBlueprint> _moveBlueprints;
 
     public Action OnSkillUsed;
     
-    private List<StatModifier> _skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
+    private List<IStatModifier> _skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
     private List<Damage> _skillDamages { get { return InstanceSkillDamageBlueprints(); } }
     private List<Healing> _skillHealings { get { return InstanceSkillHealingBlueprints(); } }
 
@@ -105,11 +113,13 @@ public class Skill : Resource, ISkill, IHotbarItem
     {
         foreach (Character character in characterTargets)
         {
-            ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
-
-            SendDamageStructs(character, originator);
-            SendHealingStructs(character, originator);
-            SendMoveStructs(character, originator);
+            
+            //ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(); // TODO refactoring hack
+            ApplyStatusEffects(character, originator, cancellationTokenSource);
+            SendDamageStructs(character, originator, cancellationTokenSource);
+            SendHealingStructs(character, originator, cancellationTokenSource);
+            SendMoveStructs(character, originator, cancellationTokenSource);
         }
     }
 
@@ -144,6 +154,16 @@ public class Skill : Resource, ISkill, IHotbarItem
         return false;
     }
 
+    public Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task Remove(Character target, Character originator, CancellationTokenSource tokenSource)
+    {
+        throw new NotImplementedException();
+    }
+
 #if UNITY_EDITOR
 
     [Button("Create Random Skill Object")]
@@ -169,14 +189,14 @@ public class Skill : Resource, ISkill, IHotbarItem
 
     #region Private Functions
 
-    private List<StatModifier> InstanceSkillStatModifierBlueprints()
+    private List<IStatModifier> InstanceSkillStatModifierBlueprints()
     {
-        List<StatModifier> statModifiers = new List<StatModifier>();
+        List<IStatModifier> statModifiers = new List<IStatModifier>();
         if (_statModifierBlueprints.Count > 0)
         {
             foreach (var blueprint in _statModifierBlueprints)
             {
-                statModifiers.Add(blueprint.CreateBlueprintInstance<StatModifier>(this));
+                statModifiers.Add(ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromBlueprint(blueprint, new object[] { this }));
             }
         }
         return statModifiers;
@@ -221,30 +241,31 @@ public class Skill : Resource, ISkill, IHotbarItem
         return moves;
     }
 
-    private void ApplyStatModifiers(Character character)
+    private void ApplyStatusEffects(Character character, Character originator, CancellationTokenSource cancellationTokenSource)
     {
-        foreach (StatModifier statModifier in _skillStatModifiers)
+        foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _statusEffectBlueprints)
         {
-            character.StatSystem.AddModifier(statModifier);
+            IStatusEffect statusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(statusEffectBlueprint.Value, new object[] { this, originator });
+            statusEffect.Apply(character, originator, cancellationTokenSource);
         }
     }
 
-    private void SendDamageStructs(Character target, Character originator)
+    private void SendDamageStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
         List<Damage> modifiedDamages = ModifyDamageStructs(originator);
-        target.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator);
+        target.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator, tokenSource);
     }
 
-    private void SendHealingStructs(Character target, Character originator)
+    private void SendHealingStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
         List<Healing> modifiedHealings = ModifyHealingStructs(originator);
-        target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator);
+        target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator, tokenSource);
     }
 
-    private void SendMoveStructs(Character target, Character originator)
+    private void SendMoveStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
         List<Move> modifiedStructs = ModifyMoveStructs(originator);
-        target.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator);
+        target.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator, tokenSource);
     }
 
     private List<Damage> ModifyDamageStructs(Character originator)

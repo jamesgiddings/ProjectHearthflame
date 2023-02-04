@@ -1,38 +1,55 @@
+using GramophoneUtils.Characters;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
 	[Serializable]
 	[CreateAssetMenu(fileName = "New Stat Modifier Blueprint", menuName = "Skills/Effects/Stat Modifier Blueprint")]
-	public class StatModifierBlueprint : ScriptableObject, IBlueprint
-	{
-		[SerializeField] private StatType statType;
-		[SerializeField] private StatModifierTypes modifierType;
-		[SerializeField] private float value;
-		[SerializeField] private int duration;
+	public class StatModifierBlueprint : ScriptableObject, IStatModifierBlueprint
+    {
+        #region Attributes/Fields/Properties
 
-		public StatModifierTypes ModifierType => modifierType; //getter
-		public StatType StatType => statType; //getter
-		public float Value => value; //getter
-		public int Duration => duration; //getter
-
-		public T CreateBlueprintInstance<T>(object source = null)
-		{
-			StatModifier blueprintInstance = new StatModifier(statType, modifierType, value, duration, source);
-			return (T) Convert.ChangeType(blueprintInstance, typeof(T));
-		}
+        [SerializeField] private StatType statType;
+        public IStatType StatType => statType;
 
 
-		// StatComponentObject 
+        [SerializeField] private ModifierNumericType modifierType;
+        public ModifierNumericType ModifierNumericType => modifierType;
 
-		// the design of this class is to be a blueprint for the creation of StatModifiers at runtime.
 
-		// some will be set, some can be level scaled to the player, some can be ranges, so can be random stats 
+        [SerializeField] private StatModifierType _statModifierType;
+        public StatModifierType StatModifierType => _statModifierType;
 
-		// there could be a WeaponStatComponents object, which groups together some statComponenets and determines which of a collection are present on an item
-	}
+
+        [SerializeField, Tooltip("Percentage values should be expressed as a decimal between 0 and 1 (or higher), i.e. not 50 for 50%.")] private float value;
+        public float Value => value;
+
+
+        [SerializeField] private int duration;
+        public int Duration => duration;
+
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Callbacks
+        #endregion
+
+        #region Public Functions
+        #endregion
+
+        #region Protected Functions
+        #endregion
+
+        #region Private Functions
+        #endregion
+
+        #region Inner Classes
+        #endregion
+    }
 }
 

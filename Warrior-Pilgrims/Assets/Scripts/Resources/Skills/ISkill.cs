@@ -2,7 +2,7 @@ using GramophoneUtils.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISkill
+public interface ISkill : IApplyable
 {
     #region Attributes/Fields/Properties
 

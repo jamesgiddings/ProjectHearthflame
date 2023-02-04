@@ -22,5 +22,6 @@ MonoBehaviour:
   equipmentType: 2
   isUnique: 0
   flavourText: Resembles Amanda.
-  weaponEffectBlueprints: []
+  _weaponEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
   classRestrictions: []

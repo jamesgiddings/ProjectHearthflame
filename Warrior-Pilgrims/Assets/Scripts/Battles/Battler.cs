@@ -9,12 +9,16 @@ using TMPro;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 using GramophoneUtils.Events.CustomEvents;
+using System.Threading;
 
 public class Battler : MonoBehaviour
 {
+    #region Attributes/Fields/Properties
+
     [SerializeField] private SpriteRenderer targetCursor;
     [SerializeField] private SpriteRenderer currentActorHighlight;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private StatusEffectBarUI statusEffectBarUI;
     [SerializeField] private TextMeshPro floatingText;
     [SerializeField] private Transform modifierPanel;
     [SerializeField] private GameObject statModifierImagePrefab;
@@ -28,6 +32,8 @@ public class Battler : MonoBehaviour
     private bool isInitialised = false;
 
     public Action OnTurnComplete;
+
+    #endregion
 
     #region Callbacks
 
@@ -61,15 +67,7 @@ public class Battler : MonoBehaviour
 
     #endregion
 
-    #region API
-
-    [Button]
-    public void TestIncrementHealth(int increment)
-    {
-        Debug.Log(increment);
-        Debug.Log(character.Name);
-        character.HealthSystem.IncrementCurrentHealth(increment);
-    }
+    #region Public Functions
 
     public void SetCharacterMovementIsLeader(int sortingGroupIndex)
     {
@@ -124,6 +122,8 @@ public class Battler : MonoBehaviour
         character.HealthSystem.OnCharacterDeath += KillCharacter;
         character.SkillSystem.OnSkillUsed += animationPlayer.DisplayAnimation;
 
+        statusEffectBarUI.Initialise(character);
+
         UpdateHealthSlider(0);
 
         DisplayBattleUI(ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.BattleState);
@@ -131,10 +131,50 @@ public class Battler : MonoBehaviour
         isInitialised = true;
     }
 
+    IStatusEffect statusEffect;
+    IStatusEffect statusEffect1;
+
+    [Button]
+    public void Apply() //TODO this is just for testing
+    {
+        statusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(ServiceLocatorObject.Instance.TestObjectReferences.TestStatusEffect);
+
+        if (statusEffect != null)
+        {
+            statusEffect.Apply(character, character, new CancellationTokenSource());
+        }
+    }
+
+    [Button]
+    public void Apply1() //TODO this is just for testing
+    {
+        IStatusEffect statusEffect1 = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(ServiceLocatorObject.Instance.TestObjectReferences.TestStatusEffect1);
+
+        if (statusEffect1 != null)
+        {
+            statusEffect1.Apply(character, character, new CancellationTokenSource());
+        }
+    }
+
+    [Button]
+    public void Remove() //TODO this is just for testing
+    {
+        
+        if (statusEffect != null)
+        {
+            statusEffect.Remove(character, character, new CancellationTokenSource());
+        }        
+        if (statusEffect1 != null)
+        {
+            statusEffect1.Remove(character, character, new CancellationTokenSource());
+        }
+    }
+
 
     public void DisplayBattleUI(bool value)
     {
         healthSlider.gameObject.SetActive(value);
+        statusEffectBarUI.gameObject.SetActive(value);
         statModifierImagePrefab.SetActive(value);
     }
 
@@ -210,7 +250,7 @@ public class Battler : MonoBehaviour
 
     #endregion
 
-    #region Utilities
+    #region Private Functions
 
     private void UpdateTargetCursor(List<Character> targets)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using AYellowpaper;
 
 namespace GramophoneUtils.Items
 {
@@ -13,10 +14,7 @@ namespace GramophoneUtils.Items
     {
         [Header("Consumable Data")]
         [SerializeField] private string useText = "Does something, maybe?";
-
-        [TableList(AlwaysExpanded = true)]
-        [SerializeField] private List<StatModifierBlueprint> consumableEffectBlueprints;
-        [TableList(AlwaysExpanded = true)]
+        [SerializeField] private List<InterfaceReference<IStatModifierBlueprint>> _consumableEffectBlueprints;
         [SerializeField] private CharacterClass[] classRestrictions;
 
         public override string GetInfoDisplayText()

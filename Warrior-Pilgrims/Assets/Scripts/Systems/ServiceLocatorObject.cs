@@ -8,6 +8,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Service Locator Object", menuName = "Systems/Service Locator Object")]
 public class ServiceLocatorObject : ScriptableObject
 {
+    private static ServiceLocatorObject _instance;
+
+    public static ServiceLocatorObject Instance
+    {
+        get 
+        {
+            if (_instance == null)
+            { 
+                _instance = Resources.Load<ServiceLocatorObject>(pathToServiceLocatorObject); 
+            }
+        
+            return _instance; 
+        }
+    }
+
+    [SerializeField, Required, Tooltip("The file extension '.asset' should be omitted when using 'Resources.Load', and automatically includes the Resources folder.")] private static string pathToServiceLocatorObject = "Systems/Service Locator Object";
+
     [SerializeField, Required] private Constants _constants;
     public Constants Constants => _constants;
 
@@ -105,8 +122,18 @@ public class ServiceLocatorObject : ScriptableObject
     [SerializeField] private BattleDataModel _battleDataModel;
     public BattleDataModel BattleDataModel => _battleDataModel;
 
+    [BoxGroup("Saving")]
     [BoxGroup("Saving/Loading")]
     [SerializeField] private SavingSystem _savingSystem;
     public SavingSystem SavingSystem => _savingSystem;
+
+    [BoxGroup("Factories")]
+    [BoxGroup("Factories/StatModifier")]
+    [SerializeField] private AYellowpaper.InterfaceReference<IStatModifierFactory> _statModifierFactory;
+    public IStatModifierFactory StatModifierFactory => _statModifierFactory.Value;
+
+    [BoxGroup("Factories/StatModifier")]
+    [SerializeField] private AYellowpaper.InterfaceReference<IStatusEffectFactory> _statusEffectFactory;
+    public IStatusEffectFactory StatusEffectFactory => _statusEffectFactory.Value;
 
 }

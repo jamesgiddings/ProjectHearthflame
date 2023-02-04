@@ -22,6 +22,6 @@ MonoBehaviour:
   equipmentType: 2
   isUnique: 0
   flavourText: Flavour text here.
-  weaponEffectBlueprints:
-  - {fileID: 11400000, guid: abcc3c6cd2c2b524781f555d61af7a1f, type: 2}
+  _weaponEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 6d1a70899b220f24297049ab5ed44b3c, type: 2}
   classRestrictions: []

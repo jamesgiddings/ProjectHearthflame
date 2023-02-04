@@ -1,6 +1,8 @@
 using AYellowpaper;
 using GramophoneUtils.Characters;
+using GramophoneUtils.Items;
 using GramophoneUtils.Items.Containers;
+using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -123,4 +125,13 @@ public class TestObjectReferences : ScriptableObject
     [BoxGroup("Saving-Loading")]
     [SerializeField] private string testSaveFile;
     public string TestSaveFile => testSaveFile;
+
+    [BoxGroup("Stats")]
+    [BoxGroup("Stats/StatusEffects")]
+    [SerializeField] private StatusEffectBlueprint _testStatusEffect;
+    public StatusEffectBlueprint TestStatusEffect => _testStatusEffect;
+
+    [BoxGroup("Stats/StatusEffects")]
+    [SerializeField] private StatusEffectBlueprint _testStatusEffect1;
+    public StatusEffectBlueprint TestStatusEffect1 => _testStatusEffect1;
 }

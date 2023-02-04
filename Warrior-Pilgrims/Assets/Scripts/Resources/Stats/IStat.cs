@@ -9,14 +9,14 @@ namespace GramophoneUtils.Stats
 	{
         Action OnStatChanged { get; set; }
         float Value { get; }
-        List<StatModifier> StatModifiers { get; }
+        List<IStatModifier> StatModifiers { get; }
 
         float GetBaseValue();
         void UpdateBaseValue(float newBase);
 		void IncrementBaseValue(float increment);
-        void AddModifier(StatModifier modifier);
-		bool RemoveModifier(StatModifier modifier);
-        bool RemoveAllModifiersFromSource(object source);
+        void AddModifier(IStatModifier modifier);
+		bool RemoveModifier(IStatModifier modifier);
+        bool RemoveAllModifiersFromSources(object[] sources);
 
     }
 }
