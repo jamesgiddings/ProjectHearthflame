@@ -12,27 +12,9 @@ public class StatusEffectBarUI : MonoBehaviour, IStatusEffectBarUI
 
     [SerializeField] private GameObject _statusEffectIconPrefab;
 
-    [SerializeField] private StatusEffectBarTooltipUI _statusEffectTooltipUI;
-
     [SerializeField] private GameObject _gridLayoutGroup;
 
     private bool _initialised = false;
-
-    private IStatusEffectBarTooltipUI _tooltipComponent 
-    {
-        get 
-        { 
-            if (_tooltipComponent == null)
-            {
-                _tooltipComponent = _statusEffectTooltipUI.GetComponent<IStatusEffectBarTooltipUI>();
-            }
-            return _tooltipComponent; 
-        }
-        set
-        {
-            _tooltipComponent = value;
-        }
-    }
 
     private Character _character;
 
@@ -85,15 +67,9 @@ public class StatusEffectBarUI : MonoBehaviour, IStatusEffectBarUI
         foreach (var statusEffect in _statusEffects)
         {
             var statusEffectIcon = Instantiate(_statusEffectIconPrefab, _gridLayoutGroup.transform);
+            statusEffectIcon.GetComponent<IResourceDragHandler>().Initialise(statusEffect);
             statusEffectIcon.GetComponent<Image>().sprite = statusEffect.Icon;
-            //statusEffectIcon.GetComponent<Button>().onClick.AddListener(() => OnStatusEffectIconClicked(statusEffect));
         }
-
-    }
-
-    private void OnStatusEffectIconClicked(IStatusEffect statusEffect)
-    {        
-        _tooltipComponent.ShowTooltip(true, statusEffect);
     }
 
     #endregion

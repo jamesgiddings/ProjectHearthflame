@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using UnityEngine;
 
 public interface IStatModifierBlueprint
 {
@@ -12,6 +13,12 @@ public interface IStatModifierBlueprint
     #endregion
 
     #region Public Functions
+
+    public string Name { get; }
+
+    public string UID { get; }
+
+    public Sprite Sprite { get; }
 
     public IStatType StatType { get; }
 

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918b4767811b96845b52b2017e0cca95, type: 3}
   m_Name: Large Magic Evasion
   m_EditorClassIdentifier: 
+  _name: Magic Evasion
+  _sprite: {fileID: 0}
   statType: {fileID: 11400000, guid: ca28bb8db71d50f42be70264cab938c8, type: 2}
   modifierType: 0
+  _statModifierType: 0
   value: 200
   duration: 50

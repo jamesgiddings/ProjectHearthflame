@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918b4767811b96845b52b2017e0cca95, type: 3}
   m_Name: 50% Dexterity Minus (Multiplicative)
   m_EditorClassIdentifier: 
+  _name: Dexterity Reduction
+  _sprite: {fileID: 0}
   statType: {fileID: 11400000, guid: 2c01afbc47a489f4eb2f58c4cf99cc82, type: 2}
   modifierType: 2
   _statModifierType: 0

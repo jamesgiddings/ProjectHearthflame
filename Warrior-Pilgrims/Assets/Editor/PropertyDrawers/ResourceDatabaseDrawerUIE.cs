@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 
 
-[CustomPropertyDrawer(typeof(ResourceDatabase))]
+//[CustomPropertyDrawer(typeof(ResourceDatabase))]
 public class ResourceDatabaseDrawerUIE : PropertyDrawer
 {
 	public override VisualElement CreatePropertyGUI(SerializedProperty property)

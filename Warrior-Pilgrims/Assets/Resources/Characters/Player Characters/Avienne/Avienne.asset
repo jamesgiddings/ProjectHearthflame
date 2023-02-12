@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
   m_Name: Avienne
   m_EditorClassIdentifier: 
-  UID: 
-  name: Avienne
+  _name: Avienne
   _sprite: {fileID: 3155209142526937495, guid: 3e8d2003b77948a41a3041afcf2a91ff, type: 3}
   _description: 
   _characterClass: {fileID: 11400000, guid: 6b5712bee7049ae4d86541e962de55a3, type: 2}

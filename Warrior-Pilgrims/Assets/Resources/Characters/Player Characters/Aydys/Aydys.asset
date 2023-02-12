@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
   m_Name: Aydys
   m_EditorClassIdentifier: 
-  UID: 
-  name: Aydys
+  _name: Aydys
   _sprite: {fileID: -7550927025469842021, guid: f06069f7fda60e6409adebcd42b518a7,
     type: 3}
   _description: 

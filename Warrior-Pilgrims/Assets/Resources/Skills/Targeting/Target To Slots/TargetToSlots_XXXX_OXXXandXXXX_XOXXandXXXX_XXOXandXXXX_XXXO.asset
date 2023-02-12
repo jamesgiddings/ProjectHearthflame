@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetCombinations:
   - rid: 5443654707522306048
-  - rid: 5443654707522306049
-  - rid: 5443654707522306050
-  - rid: 5443654707522306051
+  - rid: 7308756367210708992
+  - rid: 7308756367210708993
+  - rid: 7308756367210708994
   references:
     version: 2
     RefIds:
@@ -31,7 +31,7 @@ MonoBehaviour:
         _enemySlot2: 0
         _enemySlot3: 0
         _enemySlot4: 0
-    - rid: 5443654707522306049
+    - rid: 7308756367210708992
       type: {class: TargetCombination, ns: , asm: Scripts}
       data:
         _allySlot1: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
         _enemySlot2: 1
         _enemySlot3: 0
         _enemySlot4: 0
-    - rid: 5443654707522306050
+    - rid: 7308756367210708993
       type: {class: TargetCombination, ns: , asm: Scripts}
       data:
         _allySlot1: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
         _enemySlot2: 0
         _enemySlot3: 1
         _enemySlot4: 0
-    - rid: 5443654707522306051
+    - rid: 7308756367210708994
       type: {class: TargetCombination, ns: , asm: Scripts}
       data:
         _allySlot1: 0

@@ -44,9 +44,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnCharacterModelPlayerCharacterOrderUpdated: {fileID: 11400000, guid: 7849ba24264b2c0428d5fb416ca817d0,
+  OnCharacterModelPlayerCharacterOrderUpdated: {fileID: 11400000, guid: 4bb8d905da5dc1d43a392892c73223ea,
     type: 2}
-  OnCharacterModelEnemyCharacterOrderUpdated: {fileID: 11400000, guid: 4bb8d905da5dc1d43a392892c73223ea,
+  OnCharacterModelEnemyCharacterOrderUpdated: {fileID: 11400000, guid: 7849ba24264b2c0428d5fb416ca817d0,
     type: 2}
   OnCharacterDeath: {fileID: 11400000, guid: bcf232d9ebeae0f4bbd1bdb9cb9c80a1, type: 2}
   _partyInventory: {fileID: 11400000, guid: 5c2f7a62535fbf647a7b2f9e4276325d, type: 2}

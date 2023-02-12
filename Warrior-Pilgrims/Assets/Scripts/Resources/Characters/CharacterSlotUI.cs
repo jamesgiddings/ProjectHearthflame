@@ -11,12 +11,12 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
 
     [SerializeField] private bool isRear;
 
-    protected Resource slotResource = null;
+    protected IResource slotResource = null;
 
     public Action onCharacterSlotChanged;
 
 
-    public override Resource SlotResource
+    public override IResource SlotResource
     {
         get { return slotResource; }
         set {slotResource = value; UpdateSlotUI();}
@@ -32,7 +32,7 @@ public class CharacterSlotUI : ResourceSlotUI, IDropHandler
             CharacterSlotUI characterSlotUI = resourceDragHandler.ResourceSlotUI as CharacterSlotUI;
             if (characterSlotUI != null)
             {
-                Resource oldResource = SlotResource;
+                IResource oldResource = SlotResource;
                 SlotResource = characterSlotUI.SlotResource;
                 characterSlotUI.SlotResource = oldResource;
                 UpdateSlotUI();

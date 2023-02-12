@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3703635728629466016}
   - component: {fileID: 3420393637810244008}
   - component: {fileID: 3785083843772704095}
-  - component: {fileID: 7442062524894215706}
+  - component: {fileID: -6768435334999951127}
   m_Layer: 0
   m_Name: FrontBattlerPosition
   m_TagString: Untagged
@@ -85,6 +85,11 @@ MonoBehaviour:
   _isFollower: 0
   _followee: {fileID: 0}
   _gap: 0
+  _tolerance: 0.01
+  _gameStateManager: {fileID: 0}
+  _explorationState: {fileID: 0}
+  _enterExplorationState: {fileID: 0}
+  _enterBattleState: {fileID: 0}
 --- !u!114 &3420393637810244008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,9 +138,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!70 &7442062524894215706
-CapsuleCollider2D:
+  m_Constraints: 7
+--- !u!61 &-6768435334999951127
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,8 +153,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.1}
+  m_EdgeRadius: 0
 --- !u!1 &5691437289913239764
 GameObject:
   m_ObjectHideFlags: 0

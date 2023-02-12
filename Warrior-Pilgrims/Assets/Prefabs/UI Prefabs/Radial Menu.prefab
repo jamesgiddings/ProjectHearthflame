@@ -962,6 +962,11 @@ MonoBehaviour:
   itemsElementsParent: {fileID: 6445347122408196716}
   skillsElementsParent: {fileID: 6445347122408237116}
   positionElementsParent: {fileID: 6445347122531972222}
+  moveToSlotsSkills:
+  - _underlyingValue: {fileID: 11400000, guid: eb74b32ee463f3345878bab4d88536d7, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: a1c73ca5ea950da4e9ec7115e0fde89a, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 2b6dce1be11e39b42a171f96fa735be0, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 68d05a90563aaaa4a818f8953d9d029f, type: 2}
 --- !u!114 &1180377897758429368
 MonoBehaviour:
   m_ObjectHideFlags: 0

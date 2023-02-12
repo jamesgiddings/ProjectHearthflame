@@ -17,5 +17,9 @@ public abstract class Data : ScriptableObject
     [VerticalGroup("General/Split/Left"), HideLabel]
     [SerializeField] private string _name;
 
-    public string Name => _name;
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
 }

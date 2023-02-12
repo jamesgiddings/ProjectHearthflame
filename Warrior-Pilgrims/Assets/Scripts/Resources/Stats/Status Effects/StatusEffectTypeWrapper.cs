@@ -11,7 +11,6 @@ namespace GramophoneUtils.Stats
         Stun = 4
     }
 
-
     /// <summary>
     /// This is wrapper class for the enum so that it can have a 'source' which allows 
     /// 'remove all from source' behvaiour and can be removed upon elapsing by subscribing to an event

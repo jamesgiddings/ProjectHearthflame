@@ -1,4 +1,5 @@
-﻿using GramophoneUtils.Stats; // for testing
+﻿using GramophoneUtils.Characters;
+using GramophoneUtils.Stats; // for testing
 using Sirenix.OdinInspector;
 using System;
 using TMPro;
@@ -14,9 +15,9 @@ namespace GramophoneUtils.Items.Containers
         [ShowInInspector] protected Inventory inventory;
         [SerializeField] private TextMeshProUGUI itemQuantityText;
 
-        private GramophoneUtils.Characters.Character character;
+        private Character character;
 
-        public override Resource SlotResource
+        public override IResource SlotResource
         {
             get { return ItemSlot.item; }
             set { }
@@ -24,9 +25,9 @@ namespace GramophoneUtils.Items.Containers
 
 		public virtual ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
         public Inventory Inventory => inventory;
-        public GramophoneUtils.Characters.Character Character => character;
+        public Character Character => character;
 
-        public virtual void Initialise(GramophoneUtils.Characters.Character character, ItemDestroyer itemDestroyer)
+        public virtual void Initialise(Character character, ItemDestroyer itemDestroyer)
 		{
             inventory = character.PartyInventory;
             this.character = character;

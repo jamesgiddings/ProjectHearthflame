@@ -3,6 +3,8 @@ using System;
 using GramophoneUtils.Characters;
 using System.Threading.Tasks;
 using System.Threading;
+using UnityEditor;
+using System.Text;
 
 namespace GramophoneUtils.Stats
 {
@@ -25,6 +27,18 @@ namespace GramophoneUtils.Stats
 		#region Attributes/Fields/Properties
 
 		private bool _isSubscribedToOnCharacterTurnAdvance = false;
+
+		[SerializeField] private string _name;
+		public string Name => _name;
+
+
+        private readonly string _uid;
+        public string UID => _uid;
+
+
+		private Sprite _sprite;
+		public Sprite Sprite => _sprite;
+
 
         [SerializeField] private IStatType _statType;
         public IStatType StatType => _statType;
@@ -50,18 +64,24 @@ namespace GramophoneUtils.Stats
         public object[] Sources => _sources;
 
         public Action<IStatModifier> OnDurationElapsed { get; set; }
-		     
+
         #endregion
 
         #region Constructors
 
         public StatModifier(
+			string name,
+			string uid,
+			Sprite sprite,
 			IStatType statType, 
 			ModifierNumericType modifierType, 
 			StatModifierType statModifierType,
 			float value, 
 			object[] sources = null)
 		{
+			_name = name;
+			_uid = uid;
+			_sprite = sprite;
 			_statType = statType;
 			_modifierNumericType = modifierType;
 			_statModifierType = statModifierType;
@@ -82,6 +102,25 @@ namespace GramophoneUtils.Stats
 		{
 			throw new NotImplementedException();
 		}
+
+		public string GetInfoDisplayText()
+		{
+			StringBuilder builder = new StringBuilder();
+
+			string plusOrMinus = _value >= 0 ? "+" : "";
+
+			float percentValue = _value * 100f;
+
+			string flatOrPercentageValueString = _modifierNumericType == ModifierNumericType.Flat ? _value.ToString() : percentValue.ToString() + "%";
+
+			builder
+				.Append(plusOrMinus)
+				.Append(flatOrPercentageValueString)
+				.Append(" ")
+				.Append(_statType.Name);
+
+			return builder.ToString();
+        }
 
 		#endregion
 	}

@@ -2,10 +2,9 @@
 using GramophoneUtils.Items.Containers;
 using System.Text;
 using UnityEngine;
-using GramophoneUtils.Stats;
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using AYellowpaper;
+using GramophoneUtils.Characters;
 
 namespace GramophoneUtils.Items
 {
@@ -14,13 +13,19 @@ namespace GramophoneUtils.Items
     {
         [Header("Consumable Data")]
         [SerializeField] private string useText = "Does something, maybe?";
-        [SerializeField] private List<InterfaceReference<IStatModifierBlueprint>> _consumableEffectBlueprints;
+        
         [SerializeField] private CharacterClass[] classRestrictions;
+
+        [SerializeField] private InterfaceReference<ISkill> _skill;
+        public ISkill Skill => _skill.Value;
 
         public override string GetInfoDisplayText()
         {
             StringBuilder builder = new StringBuilder();
-
+            builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_TITLE_SIZE_OPEN_TAG)
+                .Append(ColouredName)
+                .Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_SIZE_CLOSE_TAG)
+                .AppendLine();
             builder.Append(Rarity.Name).AppendLine();
             builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
             builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
@@ -29,7 +34,7 @@ namespace GramophoneUtils.Items
             return builder.ToString();
         }
 
-		public override void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(Character character, InventorySlotUI inventorySlotUI)
 		{
             Debug.Log($"Drinking {Name}");
             // Do use code here

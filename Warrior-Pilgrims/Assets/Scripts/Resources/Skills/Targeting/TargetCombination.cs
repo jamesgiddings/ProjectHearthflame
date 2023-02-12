@@ -88,64 +88,64 @@ public class TargetCombination : ITargetCombination
 
     #region Public Functions
 
-    public List<Character> GetCombination(List<Character> _allyCharacters, List<Character> _enemyCharacters)
+    public List<Character> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder)
     {
         List<Character> combination = new List<Character>();
         if (AllySlot4)
-        {
-            if (_allyCharacters.Count > 3 && _allyCharacters[3] != null)
+        { 
+            if (_allyCharacterOrder.Slot4Character != null)
             {
-                combination.Add(_allyCharacters[3]);
+                combination.Add(_allyCharacterOrder.Slot4Character);
             }
         }
         if (AllySlot3)
         {
-            if (_allyCharacters.Count > 2 && _allyCharacters[2] != null)
+            if (_allyCharacterOrder.Slot3Character != null)
             {
-                combination.Add(_allyCharacters[2]);
+                combination.Add(_allyCharacterOrder.Slot3Character);
             }
         }
         if (AllySlot2)
         {
-            if (_allyCharacters.Count > 1 && _allyCharacters[1] != null)
+            if (_allyCharacterOrder.Slot2Character != null)
             {
-                combination.Add(_allyCharacters[1]);
+                combination.Add(_allyCharacterOrder.Slot2Character); //TODO, the problem here is when there are fewer than 4 ally characters, we're not geeting the allycharacter in slot 2 if slot 1 is empty.
             }
         }
         if (AllySlot1)
         {
-            if (_allyCharacters.Count > 0 && _allyCharacters[0] != null)
+            if (_allyCharacterOrder.Slot1Character != null)
             {
-                combination.Add(_allyCharacters[0]);
+                combination.Add(_allyCharacterOrder.Slot1Character);
             }
         }
 
         if (EnemySlot1)
         {
-            if (_enemyCharacters.Count > 0 && _enemyCharacters[0] != null)
+            if (_enemyCharacterOrder.Slot1Character != null)
             {
-                combination.Add(_enemyCharacters[0]);
+                combination.Add(_enemyCharacterOrder.Slot1Character);
             }
         }
         if (EnemySlot2)
         {
-            if (_enemyCharacters.Count > 1 && _enemyCharacters[1] != null)
+            if (_enemyCharacterOrder.Slot2Character != null)
             {
-                combination.Add(_enemyCharacters[1]);
+                combination.Add(_enemyCharacterOrder.Slot2Character);
             };
         }
         if (EnemySlot3)
         {
-            if (_enemyCharacters.Count > 2 && _enemyCharacters[2] != null)
+            if (_enemyCharacterOrder.Slot3Character != null)
             {
-                combination.Add(_enemyCharacters[2]);
+                combination.Add(_enemyCharacterOrder.Slot3Character);
             }
         }
         if (EnemySlot4)
         {
-            if (_enemyCharacters.Count > 3 && _enemyCharacters[3] != null)
+            if (_enemyCharacterOrder.Slot4Character != null)
             {
-                combination.Add(_enemyCharacters[3]);
+                combination.Add(_enemyCharacterOrder.Slot4Character);
             }
         }
 

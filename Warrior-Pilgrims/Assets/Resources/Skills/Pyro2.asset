@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
   m_Name: Pyro2
   m_EditorClassIdentifier: 
-  UID: 
-  name: Pyro2
+  _name: Pyro2
   _sprite: {fileID: 0}
   _classRestrictions: []
   _school: 1
@@ -30,7 +29,9 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 0}
   _effectPrefab: {fileID: 0}
   _animatorController: {fileID: 0}
+  _statusEffectBlueprints: []
   _statModifierBlueprints: []
   _damageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
   _healingBlueprints: []
+  _moveBlueprints: []

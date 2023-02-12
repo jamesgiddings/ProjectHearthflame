@@ -132,14 +132,13 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         ClearTargets();
     }
 
-#if UNITY_EDITOR
-
-    public void SimulatePlayerTargeting(ISkill skill, List<Character> charactersToTarget, Character originator)
+    public void SimulatePlayerTargeting(ISkill skill, List<Character> charactersToTarget, Character originator) // TODO this is just for testing
+        //so i put it in a pre processor block for editor only, but then when we build the game, it no longer fulfils the interface. 
+        // MAybe the test class can use the impl class?
     {
         throw new System.NotImplementedException();
     }
 
-#endif
 
     #endregion
 

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
   m_Name: Spider Bite
   m_EditorClassIdentifier: 
-  UID: fa30bf93-2ed0-41df-95b7-433e62eae364
-  name: Spider Bite
+  _name: Spider
   _sprite: {fileID: 0}
   _classRestrictions:
   - {fileID: 11400000, guid: 8591d985200a1d844a7c8863f9ace1b0, type: 2}
@@ -34,8 +33,12 @@ MonoBehaviour:
   _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
     type: 3}
   _animatorController: {fileID: 0}
-  _statModifierBlueprints:
-  - {fileID: 11400000, guid: 07c9c7aec62ff8f4791ec9d64970eecc, type: 2}
-  _damageBlueprints:
+  _targetStatusEffectBlueprints: []
+  _targetDamageBlueprints:
   - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
-  _healingBlueprints: []
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

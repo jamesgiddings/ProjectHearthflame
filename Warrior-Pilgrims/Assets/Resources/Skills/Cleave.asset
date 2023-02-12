@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
   m_Name: Cleave
   m_EditorClassIdentifier: 
-  UID: 2ebe94e6-452a-46af-a38d-945cced3b768
-  name: Cleave
+  _name: Cleave
   _sprite: {fileID: 0}
   _classRestrictions:
   - {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
@@ -31,7 +30,9 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 0}
   _effectPrefab: {fileID: 0}
   _animatorController: {fileID: 0}
+  _statusEffectBlueprints: []
   _statModifierBlueprints: []
   _damageBlueprints:
   - {fileID: 11400000, guid: afe48b2818af5374881c18450e823fdc, type: 2}
   _healingBlueprints: []
+  _moveBlueprints: []

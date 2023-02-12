@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-[Serializable, CreateAssetMenu(fileName = "New Skill", menuName = "Skills")]
+[Serializable, CreateAssetMenu(fileName = "New Skill", menuName = "Skills/New Skill")]
 public class Skill : Resource, ISkill, IHotbarItem
 {
     #region Attributes/Fields/Properties
@@ -69,28 +69,42 @@ public class Skill : Resource, ISkill, IHotbarItem
     [SerializeField] private RuntimeAnimatorController _animatorController;
     public RuntimeAnimatorController AnimatorController => _animatorController;
 
-    [BoxGroup("Effect Blueprints")]
-    [SerializeField] private List<InterfaceReference<IStatusEffectBlueprint>> _statusEffectBlueprints;
 
-    [BoxGroup("Effect Blueprints")]
-    [SerializeField] private List<StatModifierBlueprint> _statModifierBlueprints;
+    [BoxGroup("Target Effect Blueprints")]
+    [SerializeField] private List<InterfaceReference<IStatusEffectBlueprint>> _targetStatusEffectBlueprints;
 
-    [BoxGroup("Effect Blueprints")]
-    [SerializeField] private List<DamageBlueprint> _damageBlueprints;
+    [BoxGroup("Target Effect Blueprints")]
+    [SerializeField] private List<DamageBlueprint> _targetDamageBlueprints;
 
-    [BoxGroup("Effect Blueprints")]
-    [SerializeField] private List<HealingBlueprint> _healingBlueprints;
+    [BoxGroup("Target Effect Blueprints")]
+    [SerializeField] private List<HealingBlueprint> _targetHealingBlueprints;
 
-    [BoxGroup("Effect Blueprints")]
-    [SerializeField] private List<MoveBlueprint> _moveBlueprints;
+    [BoxGroup("Target Effect Blueprints")]
+    [SerializeField] private List<MoveBlueprint> _targetMoveBlueprints;
+
+
+    [BoxGroup("Self Effect Blueprints")]
+    [SerializeField] private List<InterfaceReference<IStatusEffectBlueprint>> _selfStatusEffectBlueprints;
+
+    [BoxGroup("Self Effect Blueprints")]
+    [SerializeField] private List<DamageBlueprint> _selfDamageBlueprints;
+
+    [BoxGroup("Self Effect Blueprints")]
+    [SerializeField] private List<HealingBlueprint> _selfHealingBlueprints;
+
+    [BoxGroup("Self Effect Blueprints")]
+    [SerializeField] private List<MoveBlueprint> _selfMoveBlueprints;
+
 
     public Action OnSkillUsed;
-    
-    private List<IStatModifier> _skillStatModifiers { get { return InstanceSkillStatModifierBlueprints(); } }
-    private List<Damage> _skillDamages { get { return InstanceSkillDamageBlueprints(); } }
-    private List<Healing> _skillHealings { get { return InstanceSkillHealingBlueprints(); } }
 
-    private List<Move> _skillMoves { get { return InstanceSkillMovesBlueprints(); } }
+    private List<Damage> _targetSkillDamages { get { return InstanceSkillDamageBlueprints(_targetDamageBlueprints); } }
+    private List<Healing> _targetSkillHealings { get { return InstanceSkillHealingBlueprints(_targetHealingBlueprints); } }
+    private List<Move> _targetSkillMoves { get { return InstanceSkillMovesBlueprints(_targetMoveBlueprints); } }
+
+    private List<Damage> _selfSkillDamages { get { return InstanceSkillDamageBlueprints(_selfDamageBlueprints); } }
+    private List<Healing> _selfSkillHealings { get { return InstanceSkillHealingBlueprints(_selfHealingBlueprints); } }
+    private List<Move> _selfSkillMoves { get { return InstanceSkillMovesBlueprints(_selfMoveBlueprints); } }
 
     #endregion
 
@@ -113,14 +127,23 @@ public class Skill : Resource, ISkill, IHotbarItem
     {
         foreach (Character character in characterTargets)
         {
-            
-            //ApplyStatModifiers(character); // change these to 'sendModified' statModifier struct, to 'receiveModified' statModifier struct
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(); // TODO refactoring hack
-            ApplyStatusEffects(character, originator, cancellationTokenSource);
-            SendDamageStructs(character, originator, cancellationTokenSource);
-            SendHealingStructs(character, originator, cancellationTokenSource);
-            SendMoveStructs(character, originator, cancellationTokenSource);
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(); // TODO we currently don't do anything with this token, it should have some logic to cancel an ability if damage doesn't land, for example
+
+            ApplyTargetStatusEffects(character, originator, cancellationTokenSource);
+            SendTargetDamageStructs(character, originator, cancellationTokenSource);
+            SendTargetHealingStructs(character, originator, cancellationTokenSource);
+            SendTargetMoveStructs(character, originator, cancellationTokenSource);
+
+            ApplySelfStatusEffects(originator, cancellationTokenSource);
+            SendSelfTargetDamageStructs(originator, cancellationTokenSource);
+            SendSelfTargetHealingStructs(originator, cancellationTokenSource);
+            SendSelfTargetMoveStructs(originator, cancellationTokenSource);
         }
+    }
+
+    public override string GetInfoDisplayText()
+    {
+        return "";
     }
 
     public bool CanStartUnlocking(ISkill skill, Character character)
@@ -189,20 +212,7 @@ public class Skill : Resource, ISkill, IHotbarItem
 
     #region Private Functions
 
-    private List<IStatModifier> InstanceSkillStatModifierBlueprints()
-    {
-        List<IStatModifier> statModifiers = new List<IStatModifier>();
-        if (_statModifierBlueprints.Count > 0)
-        {
-            foreach (var blueprint in _statModifierBlueprints)
-            {
-                statModifiers.Add(ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromBlueprint(blueprint, new object[] { this }));
-            }
-        }
-        return statModifiers;
-    }
-
-    private List<Damage> InstanceSkillDamageBlueprints()
+    private List<Damage> InstanceSkillDamageBlueprints(List<DamageBlueprint> _damageBlueprints)
     {
         List<Damage> damages = new List<Damage>();
         if (_damageBlueprints.Count > 0)
@@ -215,7 +225,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return damages;
     }
 
-    private List<Healing> InstanceSkillHealingBlueprints()
+    private List<Healing> InstanceSkillHealingBlueprints(List<HealingBlueprint> _healingBlueprints)
     {
         List<Healing> healings = new List<Healing>();
         if (_healingBlueprints.Count > 0)
@@ -228,7 +238,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return healings;
     }
 
-    private List<Move> InstanceSkillMovesBlueprints()
+    private List<Move> InstanceSkillMovesBlueprints(List<MoveBlueprint> _moveBlueprints)
     {
         List<Move> moves = new List<Move>();
         if (_moveBlueprints.Count > 0)
@@ -241,57 +251,114 @@ public class Skill : Resource, ISkill, IHotbarItem
         return moves;
     }
 
-    private void ApplyStatusEffects(Character character, Character originator, CancellationTokenSource cancellationTokenSource)
+    private void ApplyTargetStatusEffects(Character character, Character originator, CancellationTokenSource tokenSource)
     {
-        foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _statusEffectBlueprints)
+        foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _targetStatusEffectBlueprints)
         {
             IStatusEffect statusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(statusEffectBlueprint.Value, new object[] { this, originator });
-            statusEffect.Apply(character, originator, cancellationTokenSource);
+            statusEffect.Apply(character, originator, tokenSource);
         }
     }
 
-    private void SendDamageStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetDamageStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
-        List<Damage> modifiedDamages = ModifyDamageStructs(originator);
+        List<Damage> modifiedDamages = ModifyTargetDamageStructs(originator);
         target.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator, tokenSource);
     }
 
-    private void SendHealingStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetHealingStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
-        List<Healing> modifiedHealings = ModifyHealingStructs(originator);
+        List<Healing> modifiedHealings = ModifyTargetHealingStructs(originator);
         target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator, tokenSource);
     }
 
-    private void SendMoveStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetMoveStructs(Character target, Character originator, CancellationTokenSource tokenSource)
     {
-        List<Move> modifiedStructs = ModifyMoveStructs(originator);
+        List<Move> modifiedStructs = ModifyTargetMoveStructs(originator);
         target.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator, tokenSource);
     }
 
-    private List<Damage> ModifyDamageStructs(Character originator)
+    private void ApplySelfStatusEffects(Character originator, CancellationTokenSource tokenSource)
+    {
+        foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _selfStatusEffectBlueprints)
+        {
+            IStatusEffect statusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(statusEffectBlueprint.Value, new object[] { this, originator });
+            statusEffect.Apply(originator, originator, tokenSource);
+        }
+    }
+
+    private void SendSelfTargetDamageStructs(Character originator, CancellationTokenSource tokenSource)
+    {
+        List<Damage> modifiedDamages = ModifySelfDamageStructs(originator);
+        originator.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator, tokenSource);
+    }
+
+    private void SendSelfTargetHealingStructs(Character originator, CancellationTokenSource tokenSource)
+    {
+        List<Healing> modifiedHealings = ModifySelfHealingStructs(originator);
+        originator.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator, tokenSource);
+    }
+
+    private void SendSelfTargetMoveStructs(Character originator, CancellationTokenSource tokenSource)
+    {
+        List<Move> modifiedStructs = ModifySelfMoveStructs(originator);
+        originator.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator, tokenSource);
+    }
+
+    private List<Damage> ModifyTargetDamageStructs(Character originator)
     {
         List<Damage> modifiedDamages = new List<Damage>();
-        foreach (Damage damage in _skillDamages)
+        foreach (Damage damage in _targetSkillDamages)
         {
             modifiedDamages.Add(originator.StatSystem.ModifyOutgoingDamage(damage));
         }
         return modifiedDamages;
     }
 
-    private List<Healing> ModifyHealingStructs(Character originator)
+    private List<Healing> ModifyTargetHealingStructs(Character originator)
     {
         List<Healing> modifiedHealings = new List<Healing>();
-        foreach (Healing healing in _skillHealings)
+        foreach (Healing healing in _targetSkillHealings)
         {
             modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
         }
         return modifiedHealings;
     }
 
-    private List<Move> ModifyMoveStructs(Character originator)
+    private List<Move> ModifyTargetMoveStructs(Character originator)
     {
         List<Move> modifiedMoves = new List<Move>();
-        foreach (Move move in _skillMoves)
+        foreach (Move move in _targetSkillMoves)
+        {
+            modifiedMoves.Add(originator.StatSystem.ModifyOutgoingMove(move));
+        }
+        return modifiedMoves;
+    }
+
+    private List<Damage> ModifySelfDamageStructs(Character originator)
+    {
+        List<Damage> modifiedDamages = new List<Damage>();
+        foreach (Damage damage in _selfSkillDamages)
+        {
+            modifiedDamages.Add(originator.StatSystem.ModifyOutgoingDamage(damage));
+        }
+        return modifiedDamages;
+    }
+
+    private List<Healing> ModifySelfHealingStructs(Character originator)
+    {
+        List<Healing> modifiedHealings = new List<Healing>();
+        foreach (Healing healing in _selfSkillHealings)
+        {
+            modifiedHealings.Add(originator.StatSystem.ModifyOutgoingHealing(healing));
+        }
+        return modifiedHealings;
+    }
+
+    private List<Move> ModifySelfMoveStructs(Character originator)
+    {
+        List<Move> modifiedMoves = new List<Move>();
+        foreach (Move move in _selfSkillMoves)
         {
             modifiedMoves.Add(originator.StatSystem.ModifyOutgoingMove(move));
         }

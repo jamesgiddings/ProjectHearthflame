@@ -33,6 +33,8 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 	private Queue<Character> _resolvedQueue = new Queue<Character>();
 
     private Character _currentActor;
+
+    [ShowInInspector]
     public Character CurrentActor
     {
         get { return _currentActor; }

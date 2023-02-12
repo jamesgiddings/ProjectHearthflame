@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Immolate
+  m_EditorClassIdentifier: 
+  _name: Immolate
+  _sprite: {fileID: 0}
+  _classRestrictions: []
+  _school: 0
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 0
+  _targetNumberFlag: 0
+  _targetTypeFlag: 1
+  _skillAnimType: 4
+  _targetToSlots:
+    _underlyingValue: {fileID: 11400000, guid: 118827180577a6444a23c18a8e28d178, type: 2}
+  _useFromSlot:
+    _underlyingValue: {fileID: 11400000, guid: 5e01e60918686374f8d1726e947ff25b, type: 2}
+  _projectilePrefab: {fileID: 4489135468955082421, guid: d77f8f93722cdf64d8813d57e3aed4b9,
+    type: 3}
+  _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+    type: 3}
+  _animatorController: {fileID: 9100000, guid: e96f6c8641c93d54d92de69bcebd8cf6, type: 2}
+  _targetStatusEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 3fb5ff9a4a1abdf47b55650294b5303a, type: 2}
+  _targetDamageBlueprints: []
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 8610ad31b4aa1a748afe75d066e7bc4f, type: 2}
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

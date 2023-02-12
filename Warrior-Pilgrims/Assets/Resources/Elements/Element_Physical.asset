@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Element_Physical
   m_EditorClassIdentifier: 
   name: Physical
-  colour: {r: 0, g: 0, b: 0, a: 1}
+  colour: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}

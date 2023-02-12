@@ -24,3 +24,4 @@ MonoBehaviour:
   _randomSkillObjects:
   - {fileID: 11400000, guid: 723ae6ac43b354d47ad11787e7030404, type: 2}
   - {fileID: 11400000, guid: a5e233b95ef6c9642a771e35213b607f, type: 2}
+  - {fileID: 11400000, guid: 20b4c7db7730853489acb529c6344663, type: 2}

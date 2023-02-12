@@ -139,20 +139,6 @@ public class BattleManager : ScriptableObjectThatCanRunCoroutines
         //_rearBattlePrefab.SetActive(true);
     }
 
-
-    private void UninitialiseBattlers()
-	{
-		Battler[] battlers = ServiceLocator.Instance.CharacterGameObjectManager.CharacterBattlerDictionary.Values.ToArray();
-
-        foreach (Battler battler in battlers)
-		{
-			if (battler != null)
-			{
-                battler.Uninitialise();
-            }
-		}
-	}
-
 	#endregion
 
 }

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
   m_Name: Evil Eye
   m_EditorClassIdentifier: 
-  UID: 
-  name: Evil Eye
+  _name: Evil Eye
   _sprite: {fileID: -4556660915178727136, guid: 528858e6e6597fc42a1be63f8c52deb3,
     type: 3}
   _description: 

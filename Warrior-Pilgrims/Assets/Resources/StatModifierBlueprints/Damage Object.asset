@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a34724bf439e44b9e4321e49043531, type: 3}
   m_Name: Damage Object
   m_EditorClassIdentifier: 
-  _value: 0
-  _element: {fileID: 0}
-  Element: {fileID: 0}
-  _attackType: 0
+  _name: Fire Damage
+  _sprite: {fileID: 0}
+  _value: 5
+  _element: {fileID: 11400000, guid: c3e86214f61df214881da2411528c5a3, type: 2}
+  Element: {fileID: 11400000, guid: c3e86214f61df214881da2411528c5a3, type: 2}
+  _attackType: 2

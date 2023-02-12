@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using AYellowpaper;
+using GramophoneUtils.Characters;
 
 namespace GramophoneUtils.Items
 {
@@ -37,12 +38,15 @@ namespace GramophoneUtils.Items
 			return effects;
 		}
 
-		public void Equip(GramophoneUtils.Characters.Character character)
+		public void Equip(Character character)
 		{
 			foreach (IStatModifier weaponEffect in equipmentEffects)
 			{   // TODO, this could be tidier
 				character.StatSystem.AddModifier(
 					ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue( // we make a new effect, which allows us to add the source as 'this' when we equip the item
+						weaponEffect.Name,
+						weaponEffect.UID,
+						weaponEffect.Sprite,
 						weaponEffect.StatType,
 						weaponEffect.ModifierNumericType,
 						weaponEffect.StatModifierType,
@@ -53,9 +57,11 @@ namespace GramophoneUtils.Items
 		}
 		public override string GetInfoDisplayText()
 		{
-			Debug.Log("Inside Get Info Display text 1");
-			StringBuilder builder = new StringBuilder();
-			Debug.Log("Inside Get Info Display text 2");
+            StringBuilder builder = new StringBuilder();
+            builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_TITLE_SIZE_OPEN_TAG)
+				.Append(ColouredName)
+				.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_SIZE_CLOSE_TAG)
+				.AppendLine();
 			builder.Append(Rarity.Name).AppendLine();
 			if (classRestrictions.Length > 0)
 			{
@@ -63,30 +69,38 @@ namespace GramophoneUtils.Items
 				{
 					if (i < classRestrictions.Length - 1)
 					{
-						builder.Append("<color=yellow>" + classRestrictions[i].Name).Append(", </color>");
+						builder.Append(classRestrictions[i].GetInfoDisplayText());
+						builder.Append(", ");
 					}
 					else
 					{
-						builder.Append("<color=yellow>" + classRestrictions[i].Name).Append(" only.</color>").AppendLine();
+                        builder.Append(classRestrictions[i].GetInfoDisplayText());
+                        builder.Append(" only.")
+                            .Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_COLOUR_CLOSE_TAG)
+							.AppendLine();
 					}
 				}
 			}
 			foreach (var effect in equipmentEffects)
 			{
 				
-				builder.Append("+").Append(effect.Value).Append(" ").Append(effect.StatType.Name).AppendLine();
+				builder
+					.Append(effect.GetInfoDisplayText())
+					.AppendLine();
 			}
 						
 			//builder.Append("<color=green>Use: ").Append(useText).Append("</color>").AppendLine();
 			builder.Append("Max Stack: ").Append(MaxStack).AppendLine();
 			builder.Append("Sell Price: ").Append(SellPrice).Append(" Gold").AppendLine();
-			builder.Append('"').Append(flavourText).Append('"');
+			builder
+				.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_FLAVOUR_TEXT_OPEN_TAG)
+				.Append(flavourText)
+				.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_FLAVOUR_TEXT_CLOSE_TAG);
 
-			Debug.Log("Inside Get Info Display text5");
 			return builder.ToString();
 		}
 
-		public void Unequip(GramophoneUtils.Characters.Character character)
+		public void Unequip(Character character)
 		{
 			foreach (KeyValuePair<IStatType, IStat> entry in character.StatSystem.Stats)
 			{
@@ -94,7 +108,7 @@ namespace GramophoneUtils.Items
 			}
 		}
 
-		public override void Use(GramophoneUtils.Characters.Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(Character character, InventorySlotUI inventorySlotUI)
 		{
 			character.EquipmentInventory.TryToEquip(this, inventorySlotUI);
 		}

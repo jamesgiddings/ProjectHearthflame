@@ -9,9 +9,14 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController2D _characterController2D;
     [SerializeField] private float _moveSpeed = 30f;
+
     [SerializeField] private bool _isFollower;
+    public bool IsFollower => _isFollower;
+
     [ShowIf("_isFollower"), PropertyTooltip("This is the character to follow.")]
     [SerializeField] private CharacterMovement _followee;
+    public CharacterMovement Followee => _followee;
+
     [ShowIf("_isFollower"), PropertyTooltip("This is the distance the character will follow at.")]
     [SerializeField] private float _gap;
     [SerializeField] private float _tolerance = 3f;
@@ -102,6 +107,14 @@ public class CharacterMovement : MonoBehaviour
             }
             else
             {
+                if (distance > _gap + (_tolerance / 2)) // turn back to face the followee
+                {
+                    _horizontalMove = -2f;
+                } 
+                else if (distance < _gap + (_tolerance /2))
+                {
+                    _horizontalMove = 2f;
+                }
                 _horizontalMove = 0f;
             }
             return;
@@ -109,6 +122,7 @@ public class CharacterMovement : MonoBehaviour
         else // don't move
         {
             _horizontalMove = 0f; // stop the characters motion
+
         }
     }
 

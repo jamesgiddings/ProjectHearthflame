@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc30f81a0d6bcc4883224d6a6e11c5f, type: 3}
   m_Name: Wyrdwasp
   m_EditorClassIdentifier: 
-  UID: 815383a5-2816-419b-90aa-20b6fa3f9748
-  name: Wyrdwasp
+  _name: Wyrdwasp
   _sprite: {fileID: 0}
   _description: 
   _baseMaxHealth: 30

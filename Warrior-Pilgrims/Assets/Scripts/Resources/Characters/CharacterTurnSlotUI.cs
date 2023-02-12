@@ -19,7 +19,7 @@ public class CharacterTurnSlotUI : CharacterSlotUI
     public CharacterInventory CharacterInventory { get { return characterInventory; } set { characterInventory = value; } }
     public Action OnCurrentActorChanged;
 
-    public override Resource SlotResource
+    public override IResource SlotResource
     {
         get { return slotResource; }
         set { slotResource = value; UpdateSlotUI(); }

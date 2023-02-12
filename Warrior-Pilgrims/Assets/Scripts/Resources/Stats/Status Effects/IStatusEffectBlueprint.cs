@@ -14,6 +14,7 @@ public interface IStatusEffectBlueprint
     public Move[][] TurnMoveEffects { get; }
     public int Duration { get; }
     public bool DamageMustLandForOtherEffectsToLand { get; }
+    public string Name { get; }
     public string TooltipText { get; }
     public Sprite Icon { get; }
 

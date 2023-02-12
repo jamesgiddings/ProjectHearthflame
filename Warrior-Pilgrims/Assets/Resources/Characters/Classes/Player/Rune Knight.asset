@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc30f81a0d6bcc4883224d6a6e11c5f, type: 3}
   m_Name: Rune Knight
   m_EditorClassIdentifier: 
-  UID: 0ccafb30-9ce0-4c5a-8b1b-22ac38f99dc7
-  name: Rune Knight
+  _name: Rune Knight
   _sprite: {fileID: 0}
   _description: 
   _baseMaxHealth: 100

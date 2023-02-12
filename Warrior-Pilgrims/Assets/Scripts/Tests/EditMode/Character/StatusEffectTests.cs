@@ -411,14 +411,39 @@ public class StatusEffectTests : BasicEditModeTest
         Assert.That(newCharacterSpeedValue, Is.Not.EqualTo(startingCharacterSpeedValue));
     }
 
-    #endregion
+    [Test]
+    public async void Given_StatusEffectWithDamageObjectEveryTurnFor2Turns_WhenAppliedToCharacter_ThenCharacterReceivesDamageEveryTurnFor2Turns()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-    #region Protected Functions
-    #endregion
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
 
-    #region Private Functions
-    #endregion
+        float startingCharacterDexterityValue = _character1.StatSystem.GetStat(Constants.Dexterity).Value;
+        float startingCharacterSpeedValue = _character1.StatSystem.GetStat(Constants.Speed).Value;
+        // Given StatusEffectWithDurationOf2IsAdded
+        IStatusEffect testStatusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(_testStatusEffectBlueprint, null);
+        Assert.That(testStatusEffect, Is.Not.Null);
+        Assert.That(_character1.StatSystem.StatusEffects.Count, Is.EqualTo(0));
+        Assert.That(_character1.HealthSystem.CurrentHealth, Is.EqualTo(_character1.HealthSystem.MaxHealth));
+        await testStatusEffect.Apply(_character1, _character2, cancellationTokenSource);
+        Assert.That(_character1.HealthSystem.CurrentHealth, Is.EqualTo(_character1.HealthSystem.MaxHealth));
+        _character1.AdvanceCharacterTurn();
+        Assert.That(_character1.HealthSystem.CurrentHealth, Is.Not.EqualTo(_character1.HealthSystem.MaxHealth));
+        float currentHP = _character1.HealthSystem.CurrentHealth;
+        float damageAmount = _character1.HealthSystem.MaxHealth - _character1.HealthSystem.CurrentHealth;
+        _character1.AdvanceCharacterTurn();
+        Assert.That(_character1.HealthSystem.CurrentHealth, Is.EqualTo(currentHP - damageAmount));
 
-    #region Inner Classes
-    #endregion
-}
+    }
+
+        #endregion
+
+        #region Protected Functions
+        #endregion
+
+        #region Private Functions
+        #endregion
+
+        #region Inner Classes
+        #endregion
+    }

@@ -21,7 +21,14 @@ public class StatSystemTests : BasicEditModeTest
     public void StatsTestsSimplePasses()
     {
         Character character = Character1Blueprint.Instance();
-        StatModifier testModifier = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 13f);
+        StatModifier testModifier = new StatModifier(
+            "",
+            "",
+            null,
+            Constants.Strength, 
+            ModifierNumericType.Flat, 
+            StatModifierType.Physical, 
+            13f);
 
         Assert.NotNull(character);
         Assert.NotNull(Constants.Strength);
@@ -41,8 +48,24 @@ public class StatSystemTests : BasicEditModeTest
         Assert.AreEqual(1, character.StatSystem.GetStat(Constants.Strength).StatModifiers.Count); // the new strength stat in statSystem should have had its modifier removed after it timed out.
 
         float currentStatValue = character.StatSystem.GetStat(Constants.Strength).Value;
-        StatModifier testModifier2 = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 15f);
-        StatModifier testModifier3 = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 8f);
+        StatModifier testModifier2 = new StatModifier(
+            "",
+            "",
+            null,
+            Constants.Strength, 
+            ModifierNumericType.Flat, 
+            StatModifierType.Physical, 
+            15f
+            );
+        StatModifier testModifier3 = new StatModifier(
+            "",
+            "",
+            null, 
+            Constants.Strength, 
+            ModifierNumericType.Flat, 
+            StatModifierType.Physical, 
+            8f
+            );
         character.StatSystem.AddModifier(testModifier2);
         character.StatSystem.AddModifier(testModifier3);
 
@@ -50,8 +73,22 @@ public class StatSystemTests : BasicEditModeTest
 
 
         currentStatValue = character.StatSystem.GetStat(Constants.Strength).Value;
-        testModifier = new StatModifier(Constants.Strength, ModifierNumericType.PercentAdditive, StatModifierType.Physical, 0.50f);
-        testModifier2 = new StatModifier(Constants.Strength, ModifierNumericType.PercentAdditive, StatModifierType.Physical, 0.50f);
+        testModifier = new StatModifier(
+            "",
+            "",
+            null, 
+            Constants.Strength, 
+            ModifierNumericType.PercentAdditive, 
+            StatModifierType.Physical, 
+            0.50f);
+        testModifier2 = new StatModifier(
+            "",
+            "",
+            null, 
+            Constants.Strength, 
+            ModifierNumericType.PercentAdditive, 
+            StatModifierType.Physical, 0.50f
+            );
 
         character.StatSystem.AddModifier(testModifier);
         character.StatSystem.AddModifier(testModifier2);
@@ -63,9 +100,26 @@ public class StatSystemTests : BasicEditModeTest
 
         Assert.AreEqual(currentStatValue, character.StatSystem.GetStat(Constants.Strength).Value); // check the two additive buffs have ticked off.
 
-        testModifier = new StatModifier(Constants.Strength, ModifierNumericType.Flat, StatModifierType.Physical, 10f);
+        testModifier = new StatModifier(
+            "",
+            "",
+            null, 
+            Constants.Strength, 
+            ModifierNumericType.Flat, 
+            StatModifierType.Physical, 
+            10f
+            );
 
-        testModifier3 = new StatModifier(Constants.Strength, ModifierNumericType.PercentMultiplicative, StatModifierType.Physical, 1f);
+        testModifier3 = new StatModifier(
+            "",
+            "",
+            null, 
+            Constants.Strength, 
+            ModifierNumericType.PercentMultiplicative, 
+            StatModifierType.Physical, 
+            1f
+            );
+
         character.StatSystem.AddModifier(testModifier);
         character.StatSystem.AddModifier(testModifier2);
         character.StatSystem.AddModifier(testModifier3);
@@ -87,6 +141,9 @@ public class StatSystemTests : BasicEditModeTest
         // Given StatModifier
         Character character = Character2Blueprint.Instance();
         IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
+            "",
+            "",
+            null,
             Constants.Dexterity,
             ModifierNumericType.PercentAdditive,
             StatModifierType.Physical,
@@ -114,6 +171,9 @@ public class StatSystemTests : BasicEditModeTest
         // Given StatModifier
         Character character = Character2Blueprint.Instance();
         IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
+            "",
+            "",
+            null,
             Constants.Speed,
             ModifierNumericType.PercentAdditive,
             StatModifierType.Physical,

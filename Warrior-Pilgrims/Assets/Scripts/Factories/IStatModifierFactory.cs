@@ -1,4 +1,5 @@
 using GramophoneUtils.Stats;
+using UnityEngine;
 
 public interface IStatModifierFactory
 {
@@ -15,7 +16,16 @@ public interface IStatModifierFactory
 
     IStatModifier CreateStatModifierFromInstance(IStatModifier statModifier);
     IStatModifier CreateStatModifierFromInstance(IStatModifier statModifier, object[] sources);
-    IStatModifier CreateStatModifierFromValue(IStatType statType, ModifierNumericType modifierNumericType, StatModifierType statModifierType, float value, object[] sources = null);
+    IStatModifier CreateStatModifierFromValue(
+        string name,
+        string uid,
+        Sprite sprite,
+        IStatType statType, 
+        ModifierNumericType modifierNumericType, 
+        StatModifierType statModifierType, 
+        float value, 
+        object[] sources = null
+        );
     IStatModifier CreateStatModifierFromBlueprint(IStatModifierBlueprint statModifierBlueprint, object[] sources = null);
 
     #endregion

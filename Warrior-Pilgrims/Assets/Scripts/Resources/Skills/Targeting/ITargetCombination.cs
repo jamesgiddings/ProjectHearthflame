@@ -14,7 +14,7 @@ public interface ITargetCombination
 
     #region Public Functions
 
-    List<Character> GetCombination(List<Character> _allyCharacters, List<Character> _enemyCharacters); 
+    List<Character> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder); 
 
     #endregion
 

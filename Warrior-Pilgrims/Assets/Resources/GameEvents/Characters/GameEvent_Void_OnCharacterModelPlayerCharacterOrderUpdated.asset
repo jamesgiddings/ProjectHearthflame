@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d288cf77db84f7d4d92356095f337891, type: 3}
   m_Name: GameEvent_Void_OnCharacterModelPlayerCharacterOrderUpdated
   m_EditorClassIdentifier: 
+  gameListenersToAddFromScriptableObject: []

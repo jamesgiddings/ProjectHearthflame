@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc30f81a0d6bcc4883224d6a6e11c5f, type: 3}
   m_Name: Duelist
   m_EditorClassIdentifier: 
-  UID: d596f7f9-fd73-4a55-8f29-012cf40502d3
-  name: Duelist
+  _name: Duelist
   _sprite: {fileID: 0}
   _description: 
   _baseMaxHealth: 150
@@ -23,7 +22,7 @@ MonoBehaviour:
   _skillsAvailable:
   - _underlyingValue: {fileID: 11400000, guid: fb1a0256ee0b3b34082fe0b7b48002c4, type: 2}
   - _underlyingValue: {fileID: 11400000, guid: 5a8b3dcd59789ad4c9aa83e58b8c3fa6, type: 2}
-  - _underlyingValue: {fileID: 11400000, guid: 83330ecbffd48284aae04b696d8e8c2c, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 5e7955f070e160949ad4ea065ee17ae1, type: 2}
   _levelStatEffects:
   - baseHealthIncrement: 50
     statComponentBlueprints: []

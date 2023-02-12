@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff7992665614ca4092e1cf863bfb3e6, type: 3}
   m_Name: Web Status Effect
   m_EditorClassIdentifier: 
-  UID: 
-  name: 
-  _sprite: {fileID: 0}
   _statusEffectTypeFlag: 0
   _statModifierBlueprints:
   - {fileID: 11400000, guid: 0d63f1257d11e0e4fa44011a2164c449, type: 2}
@@ -22,5 +19,6 @@ MonoBehaviour:
   _duration: 2
   _turnDamageHealingAndMoveEffects: []
   _damageMustLandForOtherEffectsToLand: 0
+  _name: Web!
   _tooltipText: This web makes it difficult to move!
   _icon: {fileID: 21300000, guid: 912f2333824ee3946814a450e92ab11a, type: 3}

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f7b07576def404f8d9cf1348d94714, type: 3}
   m_Name: Move Backward 1 Blueprint Object
   m_EditorClassIdentifier: 
+  _name: 
+  _sprite: {fileID: 0}
   _value: 1
   _moveByValue: 1

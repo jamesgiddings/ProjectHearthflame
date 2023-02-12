@@ -1500,11 +1500,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
         type: 3}
-      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
-        type: 3}
       propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -1534,6 +1529,41 @@ PrefabInstance:
       value: GramophoneUtils.Stats.CharacterGameObjectManager, Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 2910045582686674365, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2539212353321144437}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MovePlayerBattlersForward
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
+        type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GramophoneUtils.Stats.CharacterGameObjectManager, Scripts
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888631989275560550, guid: 0fdeeca382fa1ba41b4d82cdb338c3a1,
         type: 3}
       propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine

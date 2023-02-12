@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a34724bf439e44b9e4321e49043531, type: 3}
   m_Name: Large Physical Damage Object
   m_EditorClassIdentifier: 
-  value: 77
-  element: {fileID: 11400000, guid: e4ada8a54886d3a4d97af2687927f9bf, type: 2}
-  attackType: 0
+  _name: Large Physical Damage
+  _sprite: {fileID: 0}
+  _value: 20
+  _element: {fileID: 0}
+  _attackType: 0

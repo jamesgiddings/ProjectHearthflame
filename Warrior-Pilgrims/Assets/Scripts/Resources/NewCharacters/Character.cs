@@ -97,7 +97,7 @@ namespace GramophoneUtils.Characters
 
         public Dictionary<string, IStatType> StatTypeStringRefDictionary;
 
-        public Action OnCharacterTurnElapsed;
+        public Action<Character> OnCharacterTurnElapsed;
 
 #if UNITY_EDITOR
         private UnityEditor.Animations.AnimatorController animatorController;
@@ -331,7 +331,7 @@ namespace GramophoneUtils.Characters
         /// </summary>
         public void AdvanceCharacterTurn()
         {
-            OnCharacterTurnElapsed?.Invoke();
+            OnCharacterTurnElapsed?.Invoke(this);
         }
 
 #if UNITY_EDITOR
@@ -415,6 +415,7 @@ namespace GramophoneUtils.Characters
         private void InitialiseInstancedCharacter(Character instancedCharacter)
         {
             instancedCharacter.name = this.name;
+            instancedCharacter.Name = this.name;
             instancedCharacter._sprite = this._sprite;
             instancedCharacter._portrait = this._portrait;
             instancedCharacter._statTemplate = this._statTemplate;

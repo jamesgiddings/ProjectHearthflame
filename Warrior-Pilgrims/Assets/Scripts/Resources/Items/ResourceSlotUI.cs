@@ -14,7 +14,7 @@ namespace GramophoneUtils.Items.Containers
 
         public int SlotIndex { get; protected set; }
 
-        public virtual Resource SlotResource { get; set; }
+        public virtual IResource SlotResource { get; set; }
 
         private void OnEnable() => UpdateSlotUI();
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6427519814448882335}
   - component: {fileID: 505297150444549317}
   - component: {fileID: 8694758451893612526}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Status Effect Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6367933397138741591}
   - component: {fileID: 4808965221666881465}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Grid Layout Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}

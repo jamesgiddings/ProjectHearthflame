@@ -222,21 +222,21 @@ namespace GramophoneUtils.Stats
         {
             float newValue = damage.Value + (GetStatValue(StatTypeStringRefDictionary["Strength"]) * ServiceLocatorObject.Instance.StatSystemConstants.StrengthMultiplier);
 
-            return new Damage(newValue, damage.Element, damage.AttackType, damage.Source);
+            return new Damage(damage.Name, damage.UID, damage.Sprite, newValue, damage.Element, damage.AttackType, damage.Source);
         }
 
         public Healing ModifyOutgoingHealing(Healing healing)
         {
             float newValue = healing.Value + (GetStatValue(StatTypeStringRefDictionary["Magic"]) * ServiceLocatorObject.Instance.StatSystemConstants.MagicMultiplier);
 
-            return new Healing(newValue, healing.Source);
+            return new Healing(healing.Name, healing.UID, healing.Sprite, newValue, healing.Source);
         }
 
         public Move ModifyOutgoingMove(Move move)
         {
             int newValue = move.Value; // TODO, decide if this will have any effect
 
-            return new Move(newValue, move.MoveByValue, move.Source);
+            return new Move(move.Name, move.UID, move.Sprite, newValue, move.MoveByValue, move.Source);
         }
 
         public IStatModifier ModifyOutgoinStatModifiers(IStatModifier statModifier, IStatusEffect statusEffect = null)
@@ -282,21 +282,33 @@ namespace GramophoneUtils.Stats
         {
             float newValue = damage.Value - ServiceLocatorObject.Instance.StatSystemConstants.BasePhysicalArmour;
 
-            return new Damage(newValue, damage.Element, damage.AttackType, damage.Source);
+            return new Damage(damage.Name, damage.UID, damage.Sprite, newValue, damage.Element, damage.AttackType, damage.Source);
         }
 
         public Healing ModifyIncomingHealing(Healing healing)
         {
             float newValue = healing.Value; // Find modifier here
 
-            return new Healing(newValue, healing.Source);
+            return new Healing(healing.Name, healing.UID, healing.Sprite, newValue, healing.Source);
         }
 
         public Move ModifyIncomingMove(Move move)
         {
             int newValue = move.Value; // TODO, decide if this will have any effect
 
-            return new Move(newValue, move.MoveByValue, move.Source);
+            return new Move(move.Name, move.UID, move.Sprite, newValue, move.MoveByValue, move.Source);
+        }
+
+        public bool CharacterIsNotInControl()
+        {
+            foreach (StatusEffectType statusEffectType in ServiceLocatorObject.Instance.LossOfControlStatusEffectTypes)
+            {
+                if (GetActiveStatusEffectTypes().HasFlag(statusEffectType))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion
@@ -352,7 +364,7 @@ namespace GramophoneUtils.Stats
         {
             foreach (Move move in modifiedMoves)
             {
-                if (move.Value == 0)
+                if (move.MoveByValue == true && move.Value == 0) // if we're not swapping the character, and it's a 0 move, cancel the move
                 {
                     continue;
                 }

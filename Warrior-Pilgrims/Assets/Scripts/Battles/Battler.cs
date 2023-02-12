@@ -28,8 +28,24 @@ public class Battler : MonoBehaviour
     private Character character;
     private SpriteRenderer spriteRenderer;
     private AnimationPlayer animationPlayer;
+    private CharacterAnimation _characterAnimation;
+    private CharacterMovement _characterMovement;
 
     private bool isInitialised = false;
+
+    [ShowInInspector] int SlotIndex => GetSlotIndex(); // todo test
+
+    private int GetSlotIndex()
+    {
+        if (character.IsPlayer)
+        {
+            return ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder.GetSlotIndexByCharacter(character);
+        }
+        else
+        {
+            return ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder.GetSlotIndexByCharacter(character);
+        }
+    } // todo test
 
     public Action OnTurnComplete;
 
@@ -87,11 +103,15 @@ public class Battler : MonoBehaviour
         sortingGroup.sortingOrder = sortingGroupIndex;
     }
 
-    public void ConnectFollowerToLeader(CharacterMovement followee, float gap, int sortingGroupIndex)
+    public void ConnectFollowerToLeader(CharacterMovement followee, float battlerGap, int positionIndex, int sortingGroupIndex)
     {
-        CharacterMovement characterMovement = GetComponent<CharacterMovement>();
+        if (_characterMovement == null)
+        {
+            _characterMovement = GetComponent<CharacterMovement>();
+        }
+        
         SortingGroup sortingGroup = GetComponent<SortingGroup>();
-        if (characterMovement == null)
+        if (_characterMovement == null)
         {
             Debug.LogError("no FollowerMove component on battler.");
             return;
@@ -101,10 +121,31 @@ public class Battler : MonoBehaviour
             Debug.LogError("no SortingGroup component on battler.");
             return;
         }
-        characterMovement.SetIsFollower(true);
-        characterMovement.SetFollowee(followee);
-        characterMovement.SetGap(gap);
+        _characterMovement.SetIsFollower(true);
+        _characterMovement.SetFollowee(followee);
+
+        float stateDependentBattlerGap = ServiceLocatorObject.Instance.GameStateManager.State == ServiceLocatorObject.Instance.GameBattleState ? battlerGap + (battlerGap * positionIndex) : battlerGap * positionIndex;
+
+        _characterMovement.SetGap(stateDependentBattlerGap);
         sortingGroup.sortingOrder = sortingGroupIndex;
+    }
+
+    [Button]
+    public void PointFollowerToLeader(CharacterMovement followee = null)
+    {
+        if (_characterMovement == null)
+        {
+            _characterMovement = GetComponent<CharacterMovement>();
+        }
+        if (_characterAnimation == null)
+        {
+            _characterAnimation = GetComponent<CharacterAnimation>();
+        }
+        if (_characterMovement.IsFollower || followee != null)
+        {
+            CharacterMovement characterToPointTo = followee == null ? _characterMovement.Followee : followee;
+            _characterAnimation.SetLastX(GetOrientation(this.gameObject.transform.position.x, characterToPointTo.gameObject.transform.position.x));
+        }
     }
 
     public void Initialise(Character character)
@@ -133,43 +174,6 @@ public class Battler : MonoBehaviour
 
     IStatusEffect statusEffect;
     IStatusEffect statusEffect1;
-
-    [Button]
-    public void Apply() //TODO this is just for testing
-    {
-        statusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(ServiceLocatorObject.Instance.TestObjectReferences.TestStatusEffect);
-
-        if (statusEffect != null)
-        {
-            statusEffect.Apply(character, character, new CancellationTokenSource());
-        }
-    }
-
-    [Button]
-    public void Apply1() //TODO this is just for testing
-    {
-        IStatusEffect statusEffect1 = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(ServiceLocatorObject.Instance.TestObjectReferences.TestStatusEffect1);
-
-        if (statusEffect1 != null)
-        {
-            statusEffect1.Apply(character, character, new CancellationTokenSource());
-        }
-    }
-
-    [Button]
-    public void Remove() //TODO this is just for testing
-    {
-        
-        if (statusEffect != null)
-        {
-            statusEffect.Remove(character, character, new CancellationTokenSource());
-        }        
-        if (statusEffect1 != null)
-        {
-            statusEffect1.Remove(character, character, new CancellationTokenSource());
-        }
-    }
-
 
     public void DisplayBattleUI(bool value)
     {
@@ -251,6 +255,28 @@ public class Battler : MonoBehaviour
     #endregion
 
     #region Private Functions
+
+    /// <summary>
+    /// Find out which way sprite should face baced on difference in position between them.
+    /// </summary>
+    /// <param name="x1"></param>
+    /// <param name="x2"></param>
+    /// <returns></returns>
+    private int GetOrientation(float x1, float x2)
+    {
+        if (x2 - x1 > 0)
+        {
+            return 1;
+        }
+        else if (x2 - x1 < 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     private void UpdateTargetCursor(List<Character> targets)
     {

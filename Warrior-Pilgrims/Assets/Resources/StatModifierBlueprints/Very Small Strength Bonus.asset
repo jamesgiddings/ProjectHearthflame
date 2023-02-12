@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918b4767811b96845b52b2017e0cca95, type: 3}
   m_Name: Very Small Strength Bonus
   m_EditorClassIdentifier: 
+  _name: Very Small Strength Bonus
+  _sprite: {fileID: 0}
   statType: {fileID: 11400000, guid: 17b42aa11264ad24aba972d107342db2, type: 2}
   modifierType: 0
+  _statModifierType: 0
   value: 1
   duration: -1

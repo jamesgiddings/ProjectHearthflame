@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
   m_Name: Bash
   m_EditorClassIdentifier: 
-  UID: 2ebe94e6-452a-46af-a38d-945cced3b768
-  name: Bash
+  _name: Bash
   _sprite: {fileID: 0}
   _classRestrictions:
   - {fileID: 11400000, guid: e55df6340addfdb4180e980f630e3d25, type: 2}
@@ -31,9 +30,13 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 0}
   _effectPrefab: {fileID: 0}
   _animatorController: {fileID: 0}
-  _statModifierBlueprints: []
-  _damageBlueprints:
-  - {fileID: 11400000, guid: 27a92f9a5cc5c094d8b8a72fc3b0b751, type: 2}
-  _healingBlueprints: []
-  _moveBlueprints:
+  _targetStatusEffectBlueprints: []
+  _targetDamageBlueprints:
+  - {fileID: 11400000, guid: aebb3679addecaa41a9daa2e73f8bac9, type: 2}
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints:
   - {fileID: 11400000, guid: 99120395bd1b88d4eaa271a3013c88e8, type: 2}
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

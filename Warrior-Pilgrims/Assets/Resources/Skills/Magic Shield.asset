@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
   m_Name: Magic Shield
   m_EditorClassIdentifier: 
-  UID: 326e920b-acc2-4fd4-b6e3-80c2c6112ed3
-  name: Magic Shield
+  _name: Magic Shield
   _sprite: {fileID: 0}
   _classRestrictions: []
   _school: 0
@@ -31,7 +30,12 @@ MonoBehaviour:
   _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
     type: 3}
   _animatorController: {fileID: 9100000, guid: 326ab8ce442b4da4788fe0f0b0b70e67, type: 2}
-  _statModifierBlueprints:
-  - {fileID: 11400000, guid: f55ea2dd99a3cd84bbc2f1ec6d5bb8da, type: 2}
-  _damageBlueprints: []
-  _healingBlueprints: []
+  _targetStatusEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 0a0b1169b5927f149afb015e2c7e7436, type: 2}
+  _targetDamageBlueprints: []
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

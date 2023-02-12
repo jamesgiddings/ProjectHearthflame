@@ -30,8 +30,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _commands:
-  - _underlyingValue: {fileID: 11400000, guid: 5b0601e1575f34e458c6e8a1b55a5c4f, type: 2}
+  _tasks: []
   _exitState: {fileID: 11400000, guid: b61d7a84ee8158e49a37cb0e8d4f1e68, type: 2}
   _exitStateStateManager: {fileID: 11400000, guid: 587ce225f3f2aff40912c0e13226531f,
     type: 2}
@@ -39,6 +38,3 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 0.5
     Variable: {fileID: 0}
-  _eventDelay: 0
-  _onAfterEnterUnityEvents: []
-  _onBeforeExitUnityEvents: []

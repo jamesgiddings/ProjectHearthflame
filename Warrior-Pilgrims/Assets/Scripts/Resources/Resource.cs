@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using AYellowpaper;
 
 [Serializable]
 public class Resource : Data, IResource
@@ -12,5 +11,10 @@ public class Resource : Data, IResource
     [SerializeField] protected Sprite _sprite;
 
     public Sprite Sprite => _sprite;
+
+    public virtual string GetInfoDisplayText()
+    {
+        return Name;
+    }
 
 }

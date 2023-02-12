@@ -8,7 +8,14 @@ public class ItemTests : BasicEditModeTest
     public void ItemStatsTestsSimplePasses()
     {
         StatType statType = Constants.Strength;
-        StatModifier testModifier = new StatModifier(statType, ModifierNumericType.Flat, StatModifierType.Physical, 13f);
+        StatModifier testModifier = new StatModifier(
+            "",
+            "",
+            null,
+            statType, 
+            ModifierNumericType.Flat, 
+            StatModifierType.Physical, 
+            13f);
         Character1 = Character1Blueprint.Instance();
 
         float statBeforeEquip = Character1.StatSystem.GetStatValue(statType);

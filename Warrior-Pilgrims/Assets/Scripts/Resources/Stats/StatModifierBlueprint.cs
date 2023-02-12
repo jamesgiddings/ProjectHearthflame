@@ -12,6 +12,18 @@ namespace GramophoneUtils.Stats
     {
         #region Attributes/Fields/Properties
 
+        [SerializeField] private string _name;
+        public string Name => _name;
+
+
+        [SerializeField] private readonly string _uid;
+        public string UID => _uid;
+
+
+        [SerializeField] private Sprite _sprite;
+        public Sprite Sprite => _sprite;
+
+
         [SerializeField] private StatType statType;
         public IStatType StatType => statType;
 

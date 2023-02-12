@@ -10,8 +10,10 @@ namespace GramophoneUtils.Items
     {
         [SerializeField] protected ResourceSlotUI resourceSlotUI = null;
         [SerializeField] protected ResourceEvent onMouseStartHoverResource = null;
+        [SerializeField] protected IResourceEvent onMouseStartHoverIResource = null;
         [SerializeField] protected VoidEvent onMouseEndHoverResource = null;
         [SerializeField] protected ResourceEvent onMouseRightClickResource = null;
+        [SerializeField] protected IResourceEvent onMouseRightClickIResource = null;
 
         protected CanvasGroup canvasGroup = null;
         protected GameObject dragDropCanvas;
@@ -85,7 +87,7 @@ namespace GramophoneUtils.Items
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            onMouseStartHoverResource.Raise(ResourceSlotUI.SlotResource);
+            onMouseStartHoverIResource.Raise(ResourceSlotUI.SlotResource);
             isHovering = true;
         }
 

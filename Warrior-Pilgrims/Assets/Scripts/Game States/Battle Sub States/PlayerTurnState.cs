@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Turn State", menuName = "States/Battle Sub States/Player Turn State")]
-public class PlayerTurnState : BattleSubState
+public class PlayerTurnState : CharacterTurnState
 {
     #region Attributes/Fields/Properties
-
-    private Character StateActor;
 
     #endregion
 
@@ -18,12 +16,7 @@ public class PlayerTurnState : BattleSubState
     public override void EnterState()
 	{
         base.EnterState();
-		StateActor = BattleManager.BattleDataModel.CurrentActor;
-/*		if (StateActor.HealthSystem.IsDead)
-		{
-			BattleManager.BattleDataModel.NextTurn();
-		}*/
-	}
+    }
 
 	public override void ExitState()
 	{
@@ -32,6 +25,12 @@ public class PlayerTurnState : BattleSubState
 
 	public override void HandleInput()
 	{
+        base.HandleInput();
+        if (CharacterNotInControl)
+        {
+            return;
+        }
+
         if (ServiceLocator.Instance.PlayerInputBehaviour.CancelAction.triggered)
         {
             PlayerAction();

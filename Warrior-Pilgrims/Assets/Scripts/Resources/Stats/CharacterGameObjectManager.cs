@@ -22,6 +22,7 @@ namespace GramophoneUtils.Stats
         private Vector3 _savedPosition = Vector3.zero;
 
         private CharacterMovement _frontBattlerPosition = null;
+        public CharacterMovement FrontBattlerPosition => _frontBattlerPosition;
 
         private Dictionary<Character, Battler> _characterBattlerDictionary = new Dictionary<Character, Battler>();
         public Dictionary<Character, Battler> CharacterBattlerDictionary => _characterBattlerDictionary;
@@ -57,6 +58,8 @@ namespace GramophoneUtils.Stats
             this.GetComponent<SortingGroup>().sortingOrder = CharacterOrder.NumberOfSlots + 1;
             Vector3 instantiationPosition = _playerStartTransform == null ? _savedPosition == Vector3.zero ? this.transform.position : _savedPosition : _playerStartTransform.position;
 
+            bool leaderSet = false;
+            Character leader = null;
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
                 Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
@@ -65,14 +68,16 @@ namespace GramophoneUtils.Stats
                     Battler battler = Instantiate(character.CharacterPrefab, instantiationPosition + new Vector3(-2 * i, 0, 0), Quaternion.identity, _battlerParent).GetComponent<Battler>();
                     battler.Initialise(character);
                     
-                    if (i == 0) // this is the first character, which will directly follow the playerBehaviour
+                    if (!leaderSet) // this is the first character, which will directly follow the playerBehaviour
                     {
                         battler.SetCharacterMovementIsLeader(this.GetComponent<SortingGroup>().sortingOrder = CharacterOrder.NumberOfSlots);
                         _battlerToFollow = battler.transform;
+                        leader = character;
+                        leaderSet = true;
                     }
                     else
                     {
-                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[playerCharacterOrder.GetCharacterBySlotIndex(0)].GetComponent<CharacterMovement>(), battlerGap * i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
+                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     }
                     Debug.Log(character.Name);
                     _characterBattlerDictionary.Add(character, battler);
@@ -92,7 +97,7 @@ namespace GramophoneUtils.Stats
 
             if (_frontBattlerPosition == null)
             {
-                _frontBattlerPosition = Instantiate(_frontBattlerPositionPrefab, this.transform.position + new Vector3(2, 0, 0), Quaternion.identity).GetComponent<CharacterMovement>();
+                _frontBattlerPosition = Instantiate(_frontBattlerPositionPrefab, this.transform.position + new Vector3(battlerGap * 2, 0), Quaternion.identity).GetComponent<CharacterMovement>();
             }
 
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
@@ -100,10 +105,10 @@ namespace GramophoneUtils.Stats
                 Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
-                    Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3((2 * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
+                    Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3(battlerGap * 2, 0) + new Vector3((2 * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
                     battler.Initialise(character);
 
-                    battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
+                    battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     
                     if (character.CharacterClass.Size == 2)
                     {
@@ -131,6 +136,38 @@ namespace GramophoneUtils.Stats
             }
             InstantiateEnemyCharacters();
         }
+
+        public void ConnectPlayerCharactersToLeadCharacter()
+        {
+            CharacterOrder playerCharacterOrder = ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder;
+
+            bool leaderSet = false;
+            Character leader = null;
+            int j = 0;
+            for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
+            {
+                Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
+                if (character != null && character.CharacterPrefab != null)
+                {
+                    Battler battler = _characterBattlerDictionary[character];
+
+                    if (!leaderSet) // this is the first character, which will directly follow the playerBehaviour
+                    {
+                        battler.SetCharacterMovementIsLeader(this.GetComponent<SortingGroup>().sortingOrder = CharacterOrder.NumberOfSlots);
+                        _battlerToFollow = battler.transform;
+                        leader = character;
+                        leaderSet = true;
+                        j++;
+                    }
+                    else
+                    {
+                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), battlerGap, j, CharacterOrder.NumberOfSlots - j); // the rest follow in a chain
+                        j++;
+                    }
+                }
+            }
+        }
+
 
         [Button]
         public void MoveEnemyBattlersForward()
@@ -160,7 +197,7 @@ namespace GramophoneUtils.Stats
             {
                 Battler battler = _characterBattlerDictionary[characterList[i]];
 
-                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
+                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
             foreach (Character character in characterList)
             {
@@ -172,41 +209,37 @@ namespace GramophoneUtils.Stats
         }
 
         [Button]
-        public void MoveEnemyBattlersBackward()
+        public void MovePlayerBattlersForward()
         {
 
             // Todo, this is being called outside of battle and I don't know why
 
-            CharacterOrder enemyCharacterOrder = ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder;
+            CharacterOrder playerCharacterOrder = ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder;
 
-            if (enemyCharacterOrder == null) { return; }
+            if (playerCharacterOrder == null) { return; }
 
-            int numberOfCharacters = enemyCharacterOrder.GetCharacters().Count;
+            int numberOfCharacters = playerCharacterOrder.GetCharacters().Count;
             List<Character> characterList = new List<Character>();
 
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
+                Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null)
                 {
                     if (!characterList.Contains(character))
                     {
-                        characterList.Add(enemyCharacterOrder.GetCharacterBySlotIndex(i));
-                    }
-                    if (character.CharacterClass.Size == 2)
-                    {
-                        i++;
+                        characterList.Add(playerCharacterOrder.GetCharacterBySlotIndex(i));
                     }
                 }
             }
+
             for (int i = 0; i < characterList.Count; i++)
             {
-                Debug.Log(characterList[i].Name);
-                Debug.Log(_characterBattlerDictionary.Values.Count);
                 Battler battler = _characterBattlerDictionary[characterList[i]];
 
-                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap * enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
+                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, playerCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
+
             foreach (Character character in characterList)
             {
                 if (_characterBattlerDictionary.ContainsKey(character))
@@ -214,6 +247,7 @@ namespace GramophoneUtils.Stats
                     StartCoroutine(EnableBattlerMovementForSeconds(_characterBattlerDictionary[character], 2f));
                 }
             }
+
         }
 
         public void UpdatePlayerBattlers()

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Element_Earth
   m_EditorClassIdentifier: 
   name: Earth
-  colour: {r: 0.7075472, g: 0.32254377, b: 0.09678713, a: 1}
+  colour: {r: 0.051592372, g: 0.31132078, b: 0.0014684978, a: 1}

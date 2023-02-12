@@ -1,66 +1,59 @@
-using GramophoneUtils.Items;
-using GramophoneUtils.Items.Hotbars;
-using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Hel.Items
+namespace GramophoneUtils.UI
 {
     public class HoverInfoPopup : MonoBehaviour
     {
         [SerializeField] private GameObject popupCanvasObject = null;
         [SerializeField] private RectTransform popupObject = null;
         [SerializeField] private TextMeshProUGUI infoText = null;
-        //[SerializeField] private Vector3 offset = new Vector3(0f, 5000f, 0f);
         [SerializeField] private float padding = 25f;
+        [SerializeField] private float offsetX = 220f;
+        [SerializeField] private float offsetY = -250f;
+        [SerializeField] private float threshold = 10f;
+
+        private Vector3 lastPosition;
+        
 
         private Canvas popupCanvas = null;
 
         private void Start() => popupCanvas = popupCanvasObject.GetComponent<Canvas>();
 
-        private void Update() => FollowCursor();
+        private void LateUpdate() => FollowCursor();
 
         public void HideInfo() => popupCanvasObject.SetActive(false);
+
+
 
         private void FollowCursor()
         {
             if (!popupCanvasObject.activeSelf) { return; }
-          
-            Vector3 newPos = new Vector3(Input.mousePosition.x + 220, Input.mousePosition.y - 250, 0f );
-            newPos.z = 0f;
 
-            // float rightEdgeToScreenEdgeDistance = Screen.width - (newPos.x + popupObject.rect.width * popupCanvas.scaleFactor / 2) - padding;
-            // if (rightEdgeToScreenEdgeDistance < 0)
-            // {
-            //     newPos.x += rightEdgeToScreenEdgeDistance;
-            // }
-            // float leftEdgeToScreenEdgeDistance = 0 - (newPos.x - popupObject.rect.width * popupCanvas.scaleFactor / 2) + padding;
-            // if (leftEdgeToScreenEdgeDistance > 0)
-            // {
-            //     newPos.x += leftEdgeToScreenEdgeDistance;
-            // }
-            // float topEdgeToScreenEdgeDistance = Screen.height - (newPos.y + popupObject.rect.height * popupCanvas.scaleFactor) - padding;
-            // if (topEdgeToScreenEdgeDistance < 0)
-            // {
-            //     newPos.y += topEdgeToScreenEdgeDistance;
-            // }
+            Vector2 newPos = Input.mousePosition + new Vector3(offsetX, offsetY, 0f);
+
+            newPos = ClampToScreen(newPos, popupObject.rect.size);
+
             popupObject.transform.position = newPos;
         }
 
-        public void DisplayInfo(Resource infoResource)
+        private Vector2 ClampToScreen(Vector2 pos, Vector2 size)
+        {
+            pos.x = Mathf.Clamp(pos.x, size.x / 2 + padding, Screen.width - size.x / 2 - padding);
+
+            pos.y = Mathf.Clamp(pos.y, size.y + padding, Screen.height - padding);
+
+            return pos;
+        }
+
+        public void DisplayInfo(IResource infoResource)
         {
             if (popupCanvasObject.activeInHierarchy == true) { return; }
-                Item infoItem = infoResource as Item;
-                if (infoItem != null)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append("<size=35>").Append(infoItem.ColouredName).Append("</size>\n");
-                    builder.Append(infoItem.GetInfoDisplayText());
-                    infoText.text = builder.ToString();
-                    popupCanvasObject.SetActive(true);
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
-                }
+
+            infoText.text = infoResource.GetInfoDisplayText();
+            popupCanvasObject.SetActive(true);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
         }
     }
 }

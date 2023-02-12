@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc30f81a0d6bcc4883224d6a6e11c5f, type: 3}
   m_Name: Musketeer
   m_EditorClassIdentifier: 
-  UID: f50f2d1a5f4efb5439fe9aaf377ca70d
-  name: Musketeer
+  _name: Musketeer
   _sprite: {fileID: 0}
   _description: 
   _baseMaxHealth: 100

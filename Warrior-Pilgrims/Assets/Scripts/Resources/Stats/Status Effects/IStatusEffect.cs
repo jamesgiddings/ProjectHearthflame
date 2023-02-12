@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
-    public interface IStatusEffect : IElapsible
+    public interface IStatusEffect : IElapsible, IResource
     {
         #region Attributes/Fields/Properties
 

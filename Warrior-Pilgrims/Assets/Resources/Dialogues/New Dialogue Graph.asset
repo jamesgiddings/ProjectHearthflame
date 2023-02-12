@@ -626,8 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a171cd762148104283954f9fc937950, type: 3}
   m_Name: New Dialogue Graph
   m_EditorClassIdentifier: 
-  UID: 0be0c00c-8b97-4192-a79c-e53d7522b6f8
-  name: 
+  _name: 
   _sprite: {fileID: 0}
   nodes:
   - {fileID: -4624151079997485496}
@@ -773,7 +772,7 @@ MonoBehaviour:
       _dynamic: 0
   input: {fileID: 0}
   output: {fileID: 0}
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: 7a4031f4f632ab244a3f01fd779ea5c6, type: 2}
   text: 
   answers: []
 --- !u!114 &3917539637293640597

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
   m_Name: The Rune Knight
   m_EditorClassIdentifier: 
-  UID: 
-  name: The Rune Knight
+  _name: The Rune Knight
   _sprite: {fileID: -7998199444753790316, guid: 193646214d563244c95237efe150f55a,
     type: 3}
   _description: 

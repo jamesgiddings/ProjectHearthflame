@@ -10,6 +10,13 @@ public class MoveBlueprint : ScriptableObject, IBlueprint
 {
     #region Attributes/Fields/Properties
 
+    [SerializeField] private string _name;
+    public string Name => _name;
+
+
+    [SerializeField] private Sprite _sprite;
+    public Sprite Sprite => _sprite;
+
     [SerializeField] private int _value;
     [SerializeField, Tooltip("If _moveByValue is true it moves the character forward (towards the centre) if negative, and backwards (away from the centre) if positive. If false it puts the character directly into that slot")]
     private bool _moveByValue;
@@ -26,7 +33,7 @@ public class MoveBlueprint : ScriptableObject, IBlueprint
 
     public T CreateBlueprintInstance<T>(object source = null)
     {
-        Move moveInstance = new Move(_value, _moveByValue, source);
+        Move moveInstance = new Move(_name, new Guid().ToString(), _sprite, _value, _moveByValue, source);
         return (T)Convert.ChangeType(moveInstance, typeof(T));
     }
 

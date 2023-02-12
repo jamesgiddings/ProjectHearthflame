@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -63,6 +64,16 @@ public class CharacterClass : Resource
         IncrementStatBaseValues(castArgs);
         IncrementHealthBaseValues(castArgs);
     }
+
+    public override string GetInfoDisplayText()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_CHARACTER_CLASS_RESTRICTION_COLOUR_OPEN_TAG);
+        builder.Append(Name);
+        builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_COLOUR_CLOSE_TAG);
+        return(builder.ToString());
+    }
+
 
 #if UNITY_EDITOR
 

@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1384355338}
   - {fileID: 1635954535}
@@ -52,12 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyValue: {fileID: 1635954536}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
 --- !u!114 &23615860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +110,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 758130449}
   m_RootOrder: 0
@@ -249,6 +246,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1360093042}
   m_RootOrder: 0
@@ -387,6 +385,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1462880219}
   m_Father: {fileID: 1357056334}
@@ -482,9 +481,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1357056335}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &72967239
@@ -515,6 +518,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1839835360}
   m_RootOrder: 0
@@ -650,6 +654,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 641017596}
   m_RootOrder: 0
@@ -787,6 +792,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1985176725}
   m_Father: {fileID: 1233681203}
@@ -850,12 +856,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1985176729}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1739376840}
 --- !u!114 &100929084
 MonoBehaviour:
@@ -915,6 +915,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1785755974}
   m_Father: {fileID: 1233681203}
@@ -978,12 +979,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1785755978}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1738726057}
 --- !u!114 &169152395
 MonoBehaviour:
@@ -1044,6 +1039,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 489353855}
   m_Father: {fileID: 980169598}
@@ -1139,9 +1135,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 980169599}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 0}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
+    type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &204678177
 GameObject:
@@ -1170,6 +1170,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1292497523}
   - {fileID: 1414067950}
@@ -1235,6 +1236,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1424786435}
   m_RootOrder: 0
@@ -1370,6 +1372,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 980169598}
   m_RootOrder: 1
@@ -1507,6 +1510,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1120650583}
   m_Father: {fileID: 1233681203}
@@ -1570,12 +1574,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1120650587}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1158163937}
 --- !u!114 &282831842
 MonoBehaviour:
@@ -1636,6 +1634,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2101089927}
   m_Father: {fileID: 1310267499}
@@ -1731,9 +1730,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1310267500}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &330445367
@@ -1764,6 +1767,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1912094436}
   m_RootOrder: 0
@@ -1902,6 +1906,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 777938965}
   m_Father: {fileID: 1343584100}
@@ -1997,9 +2002,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1343584101}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &376396701
@@ -2030,6 +2039,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1025239634}
   m_RootOrder: 0
@@ -2164,6 +2174,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1427584372}
   m_RootOrder: 0
@@ -2302,6 +2313,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 781899309}
   m_Father: {fileID: 571634277}
@@ -2397,9 +2409,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 571634278}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 0}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
+    type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &408448463
 GameObject:
@@ -2427,6 +2443,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1233681203}
   - {fileID: 204678178}
@@ -2466,6 +2483,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 457209306}
   m_RootOrder: 0
@@ -2603,6 +2621,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1912094436}
   m_Father: {fileID: 1233681203}
@@ -2666,12 +2685,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1912094440}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 330445369}
 --- !u!114 &454806154
 MonoBehaviour:
@@ -2732,6 +2745,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 452451119}
   m_Father: {fileID: 994715634}
@@ -2827,9 +2841,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 994715635}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &489353854
@@ -2860,6 +2878,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 193943249}
   m_RootOrder: 0
@@ -2994,13 +3013,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 756521538}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10.3, y: 4.1}
+  m_AnchoredPosition: {x: -10.3, y: 4.100006}
   m_SizeDelta: {x: 20, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &496272362
@@ -3132,6 +3152,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1532327161}
   m_Father: {fileID: 1753770327}
@@ -3227,9 +3248,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1753770328}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &516248754
@@ -3260,6 +3285,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 962753046}
   m_RootOrder: 0
@@ -3397,6 +3423,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 758130449}
   m_Father: {fileID: 1233681203}
@@ -3460,12 +3487,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 758130453}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 26245785}
 --- !u!114 &558903371
 MonoBehaviour:
@@ -3523,6 +3544,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1665559848}
   m_RootOrder: 0
@@ -3659,6 +3681,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 403993629}
   - {fileID: 2039861915}
@@ -3723,12 +3746,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 403993633}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 781899310}
   equipmentType: 2
 --- !u!114 &571634279
@@ -3788,6 +3805,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1292497523}
   m_RootOrder: 1
@@ -3926,6 +3944,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 87965896}
   m_Father: {fileID: 1654354926}
@@ -4021,9 +4040,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1654354927}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &662007736
@@ -4054,6 +4077,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1463598066}
   m_RootOrder: 0
@@ -4191,6 +4215,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 756521538}
   m_Father: {fileID: 1233681203}
@@ -4254,12 +4279,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 756521542}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 496272361}
 --- !u!114 &722230496
 MonoBehaviour:
@@ -4320,6 +4339,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1023822190}
   m_Father: {fileID: 1206919717}
@@ -4415,9 +4435,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1206919718}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &756521537
@@ -4451,6 +4475,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 496272360}
   m_Father: {fileID: 722230493}
@@ -4546,9 +4571,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 722230494}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &758130448
@@ -4582,6 +4611,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 26245784}
   m_Father: {fileID: 558903369}
@@ -4677,9 +4707,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 558903370}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &777938964
@@ -4710,13 +4744,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 371236364}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -7.1, y: 1.2}
+  m_AnchoredPosition: {x: -7.1000004, y: 1.2000122}
   m_SizeDelta: {x: 20, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &777938967
@@ -4845,6 +4880,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 403993629}
   m_RootOrder: 0
@@ -4982,6 +5018,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1491483203}
   m_Father: {fileID: 1904413327}
@@ -5077,9 +5114,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1904413328}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &962753045
@@ -5113,6 +5154,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 516248755}
   m_Father: {fileID: 1176624798}
@@ -5208,9 +5250,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1176624799}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &980169597
@@ -5243,6 +5289,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 193943249}
   - {fileID: 229176954}
@@ -5307,12 +5354,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 193943253}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 489353856}
   equipmentType: 2
 --- !u!114 &980169600
@@ -5374,6 +5415,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 457209306}
   m_Father: {fileID: 1233681203}
@@ -5437,12 +5479,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 457209310}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 452451120}
 --- !u!114 &994715636
 MonoBehaviour:
@@ -5502,6 +5538,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1839835360}
   m_Father: {fileID: 1233681203}
@@ -5565,12 +5602,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1839835364}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 72967241}
 --- !u!114 &998243129
 MonoBehaviour:
@@ -5628,6 +5659,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 739425679}
   m_RootOrder: 0
@@ -5766,6 +5798,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 376396702}
   m_Father: {fileID: 1292497523}
@@ -5861,9 +5894,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1292497524}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 0}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
+    type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1036848540
 GameObject:
@@ -5895,6 +5932,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1360093042}
   m_Father: {fileID: 1233681203}
@@ -5958,12 +5996,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1360093046}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 37997973}
 --- !u!114 &1036848543
 MonoBehaviour:
@@ -6023,6 +6055,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2012041579}
   m_Father: {fileID: 1233681203}
@@ -6086,12 +6119,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 2012041583}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 2023180118}
 --- !u!114 &1050495356
 MonoBehaviour:
@@ -6152,6 +6179,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1763729536}
   m_Father: {fileID: 2088001488}
@@ -6247,9 +6275,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2088001489}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1120650582
@@ -6283,6 +6315,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1158163936}
   m_Father: {fileID: 282831840}
@@ -6378,9 +6411,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 282831841}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1158163935
@@ -6411,6 +6448,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1120650583}
   m_RootOrder: 0
@@ -6546,6 +6584,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1414067950}
   m_RootOrder: 1
@@ -6683,6 +6722,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 962753046}
   m_Father: {fileID: 1233681203}
@@ -6746,12 +6786,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 962753050}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 516248756}
 --- !u!114 &1176624800
 MonoBehaviour:
@@ -6811,6 +6845,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 739425679}
   m_Father: {fileID: 1233681203}
@@ -6874,12 +6909,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 739425683}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1023822191}
 --- !u!114 &1206919719
 MonoBehaviour:
@@ -6936,6 +6965,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 722230493}
   - {fileID: 1310267499}
@@ -7021,6 +7051,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5552664867056836716}
   m_RootOrder: 1
@@ -7158,6 +7189,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1025239634}
   - {fileID: 602612946}
@@ -7222,12 +7254,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1025239638}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 376396703}
   equipmentType: 1
 --- !u!114 &1292497525
@@ -7289,6 +7315,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 329962228}
   m_Father: {fileID: 1233681203}
@@ -7352,12 +7379,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 329962232}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 2101089928}
 --- !u!114 &1310267501
 MonoBehaviour:
@@ -7417,6 +7438,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 371236364}
   m_Father: {fileID: 1233681203}
@@ -7480,12 +7502,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 371236368}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 777938966}
 --- !u!114 &1343584102
 MonoBehaviour:
@@ -7545,6 +7561,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 40794982}
   m_Father: {fileID: 1233681203}
@@ -7608,12 +7625,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 40794986}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1462880220}
 --- !u!114 &1357056336
 MonoBehaviour:
@@ -7674,6 +7685,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 37997972}
   m_Father: {fileID: 1036848541}
@@ -7769,9 +7781,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1036848542}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1379604405
@@ -7802,6 +7818,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1692068075}
   m_RootOrder: 0
@@ -7937,6 +7954,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 23615859}
   m_RootOrder: 0
@@ -8074,6 +8092,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1665559848}
   - {fileID: 1164998164}
@@ -8138,12 +8157,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1665559852}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 569450355}
   equipmentType: 0
 --- !u!114 &1414067952
@@ -8206,6 +8219,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 222854326}
   m_Father: {fileID: 1815385585}
@@ -8301,9 +8315,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1815385586}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1427584371
@@ -8337,6 +8355,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 380419456}
   m_Father: {fileID: 1474682270}
@@ -8432,9 +8451,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1474682271}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1462880218
@@ -8465,6 +8488,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 40794982}
   m_RootOrder: 0
@@ -8603,6 +8627,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662007737}
   m_Father: {fileID: 2110003679}
@@ -8698,9 +8723,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2110003680}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1474682269
@@ -8733,6 +8762,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1427584372}
   m_Father: {fileID: 1233681203}
@@ -8796,12 +8826,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1427584376}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 380419457}
 --- !u!114 &1474682272
 MonoBehaviour:
@@ -8859,6 +8883,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 867078316}
   m_RootOrder: 0
@@ -8994,6 +9019,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 508009863}
   m_RootOrder: 0
@@ -9129,6 +9155,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2093431877}
   m_RootOrder: 0
@@ -9264,6 +9291,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 23615859}
   m_RootOrder: 1
@@ -9401,6 +9429,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 641017596}
   m_Father: {fileID: 1233681203}
@@ -9464,12 +9493,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 641017600}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 87965897}
 --- !u!114 &1654354928
 MonoBehaviour:
@@ -9530,6 +9553,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 569450354}
   m_Father: {fileID: 1414067950}
@@ -9625,9 +9649,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1414067951}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 0}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
+    type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1692068074
 GameObject:
@@ -9660,6 +9688,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1379604406}
   m_Father: {fileID: 1836343275}
@@ -9755,9 +9784,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1836343276}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1738726055
@@ -9788,6 +9821,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1785755974}
   m_RootOrder: 0
@@ -9923,6 +9957,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1985176725}
   m_RootOrder: 0
@@ -10060,6 +10095,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 508009863}
   m_Father: {fileID: 1233681203}
@@ -10123,12 +10159,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 508009867}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1532327162}
 --- !u!114 &1753770329
 MonoBehaviour:
@@ -10186,6 +10216,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1078260232}
   m_RootOrder: 0
@@ -10324,6 +10355,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1738726056}
   m_Father: {fileID: 169152393}
@@ -10419,9 +10451,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 169152394}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1815385584
@@ -10454,6 +10490,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1424786435}
   m_Father: {fileID: 1233681203}
@@ -10517,12 +10554,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1424786439}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 222854327}
 --- !u!114 &1815385587
 MonoBehaviour:
@@ -10582,6 +10613,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1692068075}
   m_Father: {fileID: 1233681203}
@@ -10645,12 +10677,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1692068079}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1379604407}
 --- !u!114 &1836343277
 MonoBehaviour:
@@ -10711,6 +10737,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 72967240}
   m_Father: {fileID: 998243127}
@@ -10806,9 +10833,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 998243128}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1904413326
@@ -10841,6 +10872,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 867078316}
   m_Father: {fileID: 1233681203}
@@ -10904,12 +10936,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 867078320}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1491483204}
 --- !u!114 &1904413329
 MonoBehaviour:
@@ -10970,6 +10996,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330445368}
   m_Father: {fileID: 454806152}
@@ -11065,9 +11092,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 454806153}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &1985176724
@@ -11101,6 +11132,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1739376839}
   m_Father: {fileID: 100929082}
@@ -11196,9 +11228,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 100929083}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2012041578
@@ -11232,6 +11268,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2023180117}
   m_Father: {fileID: 1050495354}
@@ -11327,9 +11364,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 1050495355}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2023180116
@@ -11360,6 +11401,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2012041579}
   m_RootOrder: 0
@@ -11495,6 +11537,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 571634277}
   m_RootOrder: 1
@@ -11632,6 +11675,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1078260232}
   m_Father: {fileID: 1233681203}
@@ -11695,12 +11739,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1078260236}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1763729537}
 --- !u!114 &2088001490
 MonoBehaviour:
@@ -11760,6 +11798,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2093431877}
   m_Father: {fileID: 1233681203}
@@ -11823,12 +11862,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 2093431881}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 1622407907}
 --- !u!114 &2093184781
 MonoBehaviour:
@@ -11889,6 +11922,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622407906}
   m_Father: {fileID: 2093184779}
@@ -11984,9 +12018,13 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2093184780}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 11400000, guid: d12b045891d3a3c43a1c708457717166,
+    type: 2}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
+    type: 2}
+  onMouseRightClickIResource: {fileID: 11400000, guid: 6124aba0fee0ba143895b29d5ff6c252,
     type: 2}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2101089926
@@ -12017,6 +12055,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 329962228}
   m_RootOrder: 0
@@ -12154,6 +12193,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1463598066}
   m_Father: {fileID: 1233681203}
@@ -12217,12 +12257,6 @@ MonoBehaviour:
   resourceIconImage: {fileID: 1463598070}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
   itemQuantityText: {fileID: 662007738}
 --- !u!114 &2110003681
 MonoBehaviour:
@@ -12280,6 +12314,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522538345189162}
   m_RootOrder: 0
@@ -12414,6 +12449,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8795605445089353467}
   - {fileID: 1633522538345189162}
@@ -12482,6 +12518,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.537963, y: 0.537963, z: 0.537963}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2237349222839162995}
   m_RootOrder: 0
@@ -12617,6 +12654,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 922915578121529802}
   - {fileID: 1633522539462813731}
@@ -12699,6 +12737,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633522538974116572}
   - {fileID: 1633522538953445179}
@@ -12781,6 +12820,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539305380399}
   m_RootOrder: 1
@@ -12916,6 +12956,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539305380399}
   m_RootOrder: 0
@@ -13051,6 +13092,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539091161255}
   m_RootOrder: 0
@@ -13186,6 +13228,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539091161255}
   m_RootOrder: 1
@@ -13321,6 +13364,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539717467774}
   m_RootOrder: 1
@@ -13456,6 +13500,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522538375079281}
   m_RootOrder: 1
@@ -13591,6 +13636,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522538375079281}
   m_RootOrder: 0
@@ -13726,6 +13772,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633522538815776391}
   - {fileID: 1633522538890488735}
@@ -13808,6 +13855,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539825988303}
   m_RootOrder: 1
@@ -13943,6 +13991,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633522538802719836}
   - {fileID: 1633522538657721254}
@@ -14025,6 +14074,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522538345189162}
   m_RootOrder: 1
@@ -14160,6 +14210,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539717467774}
   m_RootOrder: 0
@@ -14295,6 +14346,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633522539575877408}
   - {fileID: 1633522538897892737}
@@ -14377,6 +14429,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1633522539825988303}
   m_RootOrder: 0
@@ -14512,6 +14565,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1633522539743036997}
   - {fileID: 1633522539246961523}
@@ -14593,6 +14647,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -793.8668, y: -427.57462, z: 0}
   m_LocalScale: {x: 1.858864, y: 1.858864, z: 1.858864}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 922915579693215077}
   m_Father: {fileID: 5552664866935933710}
@@ -14639,6 +14694,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 384284013958717570}
   - {fileID: 2428652471097948535}
@@ -14729,6 +14785,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5552664866293892388}
   m_RootOrder: 0
@@ -14802,6 +14859,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664865859018822}
   m_Father: {fileID: 1865364006961273070}
@@ -14840,6 +14898,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1865364006961273070}
   m_RootOrder: 1
@@ -14916,6 +14975,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664866515434709}
   m_Father: {fileID: 5552664866685340407}
@@ -15037,6 +15097,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 23615859}
   - {fileID: 408448464}
@@ -15114,6 +15175,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664865999439783}
   - {fileID: 5552664865842080762}
@@ -15192,6 +15254,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5552664865859018822}
   m_RootOrder: 0
@@ -15328,6 +15391,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664864966622741}
   m_Father: {fileID: 5552664866685340407}
@@ -15449,6 +15513,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5552664865755505735}
   m_RootOrder: 0
@@ -15524,6 +15589,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664866293892388}
   - {fileID: 5552664865755505735}
@@ -15599,6 +15665,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2237349222839162995}
   - {fileID: 922915578684548702}
@@ -15638,6 +15705,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8977065149089902086}
   - {fileID: 1240829071}
@@ -15717,6 +15785,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4897596933579525127}
   m_RootOrder: 1
@@ -15791,6 +15860,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5552664867056836716}
   - {fileID: 5552664865373551843}
@@ -15849,6 +15919,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4897596933579525127}
   m_RootOrder: 0
@@ -15924,6 +15995,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8795605445089353467}
   m_RootOrder: 1
@@ -16058,6 +16130,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8795605445823565526}
   - {fileID: 8795605444997057582}
@@ -16083,6 +16156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statLabel: {fileID: 8795605445823565513}
   statValue: {fileID: 8795605444997057569}
+  character: {fileID: 0}
 --- !u!1 &8795605445823565527
 GameObject:
   m_ObjectHideFlags: 0
@@ -16111,6 +16185,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8795605445089353467}
   m_RootOrder: 0
@@ -16245,6 +16320,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8977065149752315573}
   m_Father: {fileID: 5552664867056836716}
@@ -16297,6 +16373,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8977065149089902086}
   m_RootOrder: 0

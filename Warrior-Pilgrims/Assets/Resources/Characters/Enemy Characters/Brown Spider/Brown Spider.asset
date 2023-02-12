@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
   m_Name: Brown Spider
   m_EditorClassIdentifier: 
-  UID: 
-  name: Brown Spider
+  _name: Brown Spider
   _sprite: {fileID: -8230967131063585693, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
   _description: 

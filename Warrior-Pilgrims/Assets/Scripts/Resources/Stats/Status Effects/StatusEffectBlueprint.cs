@@ -8,7 +8,7 @@ namespace GramophoneUtils.Stats
 {
     [Serializable]
     [CreateAssetMenu(fileName = "New Status Effect Blueprint", menuName = "Skills/Status Effects/Status Effect Blueprint")]
-    public class StatusEffectBlueprint : Resource, IStatusEffectBlueprint
+    public class StatusEffectBlueprint : ScriptableObject, IStatusEffectBlueprint
     {
         #region Attributes/Fields/Properties
 
@@ -30,6 +30,10 @@ namespace GramophoneUtils.Stats
 
         [SerializeField] private bool _damageMustLandForOtherEffectsToLand;
         public bool DamageMustLandForOtherEffectsToLand => _damageMustLandForOtherEffectsToLand;
+
+
+        [SerializeField] private string _name;
+        public string Name => _name;
 
 
         [SerializeField, TextArea] private string _tooltipText;

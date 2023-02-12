@@ -48,4 +48,18 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
     #endregion
+
+    #region Public Functions
+
+    public void SetLastX(int direction)
+    {
+        _animator.SetFloat("LastX", direction);
+    }
+
+    public void SetLastY(int direction)
+    {
+        _animator.SetFloat("LastY", direction);
+    }
+
+    #endregion
 }

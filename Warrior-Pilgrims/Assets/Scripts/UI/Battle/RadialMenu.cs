@@ -1,3 +1,4 @@
+using AYellowpaper;
 using GramophoneUtils.Characters;
 using GramophoneUtils.Items;
 using GramophoneUtils.Stats;
@@ -20,6 +21,8 @@ public class RadialMenu : MonoBehaviour
 	[SerializeField] private Transform itemsElementsParent;
 	[SerializeField] private Transform skillsElementsParent;
 	[SerializeField] private Transform positionElementsParent;
+
+	[SerializeField] private List<InterfaceReference<ISkill>> moveToSlotsSkills;
 
 	RMF_RadialMenu subMenu;
 
@@ -64,18 +67,24 @@ public class RadialMenu : MonoBehaviour
 
 		Button button = itemsElementsParent.GetComponent<Button>(); // get the button
 
-		button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); });
+        button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { _battleManager.TargetManager.ClearTargets(); } });
 
-		foreach (ItemSlot itemSlot in character.PartyInventory.ItemSlots) // add the items from the partyInventory
+        foreach (ItemSlot itemSlot in character.PartyInventory.ItemSlots) // add the items from the partyInventory
 		{
 			//Debug.LogWarning("This should actually add from that characters quickbar, not the partyInventory"); // TODO
-			if (itemSlot.item != null)
+			if (itemSlot.item != null && itemSlot.item is ConsumableItem)
 			{
-				items.Add(itemSlot.item);
-				RMF_RadialMenuElement rMF_RadialMenuElement = Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
-				rMF_RadialMenuElement.text.text = itemSlot.item.Name;
-				subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
-			}
+                ConsumableItem consumableItem = (ConsumableItem)itemSlot.item;
+                if (consumableItem.Skill.UseFromSlot.CanUseFromSlot(character))
+				{ 
+					items.Add(itemSlot.item);
+					RMF_RadialMenuElement rMF_RadialMenuElement = Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
+					rMF_RadialMenuElement.text.text = itemSlot.item.Name;
+					subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
+
+					rMF_RadialMenuElement.button.onClick.AddListener(delegate { _battleManager.GetTargets(consumableItem.Skill); });
+				}
+            }
 		}
 
 		return subMenu;
@@ -109,10 +118,34 @@ public class RadialMenu : MonoBehaviour
 		return subMenu;
 	}
 
-	private void InitialisePositionSubMenu()
+	private RMF_RadialMenu InitialisePositionSubMenu()
 	{
-		throw new NotImplementedException();
-	}
+        RMF_RadialMenu subMenu = Instantiate(subMenuPrefab, positionElementsParent).GetComponent<RMF_RadialMenu>();
+
+        Transform parent = subMenu.gameObject.transform.GetChild(0); // get the parent transform for the elements
+
+        Button button = positionElementsParent.GetComponent<Button>(); // get the buttons
+
+        button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { _battleManager.TargetManager.ClearTargets(); } });
+
+        foreach (InterfaceReference<ISkill> skill in moveToSlotsSkills) // add the unlocked skills from the SkillSystem
+        {
+			// Todo, we know the character, so we can create a skill which targets an ally and moves them to the current slot, rather than a skill which 
+			// moves that character? Or we need another option which is swap to slot in move, anyway, there should be a better option
+            if (skill.Value.UseFromSlot.CanUseFromSlot(character))
+            {
+                skills.Add(skill.Value);
+
+                RMF_RadialMenuElement rMF_RadialMenuElement = Instantiate(elementPrefab, parent).GetComponent<RMF_RadialMenuElement>();
+                rMF_RadialMenuElement.text.text = skill.Value.Name;
+                subMenu.GetComponent<RMF_RadialMenu>().elements.Add(rMF_RadialMenuElement);
+
+                rMF_RadialMenuElement.button.onClick.AddListener(delegate { _battleManager.GetTargets(skill.Value); });
+            }
+        }
+
+        return subMenu;
+    }
 
 	public void UpdateDisplay()
 	{
@@ -127,10 +160,13 @@ public class RadialMenu : MonoBehaviour
 		{
 			DestroyOldMenu(itemsElementsParent);
 			DestroyOldMenu(skillsElementsParent);
+			DestroyOldMenu(positionElementsParent);
 
 			InitialiseItemSubMenu();
-			InitialiseSkillsSubMenu();  
-		}
+			InitialiseSkillsSubMenu();
+			InitialisePositionSubMenu();
+
+        }
 	}
 
 

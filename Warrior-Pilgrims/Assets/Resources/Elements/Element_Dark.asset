@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Element_Dark
   m_EditorClassIdentifier: 
   name: Dark
-  colour: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  colour: {r: 0, g: 0, b: 0, a: 1}

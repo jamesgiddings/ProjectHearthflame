@@ -1,6 +1,7 @@
 using GramophoneUtils.Stats;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,12 +16,22 @@ public class StatusEffect : IStatusEffect
 {
     #region Attributes/Fields/Properties
 
+
+    private readonly string _uid;
+    public string UID => _uid;
+
+
     private bool _isSubscribedToOnCharacterTurnAdvance = false;
+
+    private Character _originator;
+
+    private CancellationTokenSource _cancellationTokenSource;
 
 
     private readonly StatusEffectType _statusEffectTypeFlag;
 
     private StatusEffectTypeWrapper _statusEffectTypeWrapper = null;
+
     public StatusEffectTypeWrapper StatusEffectTypeWrapper
     {
         get 
@@ -71,6 +82,13 @@ public class StatusEffect : IStatusEffect
 
     public Action<IElapsible> OnDurationElapsed { get; set; }
 
+
+    private readonly string _name;
+    public string Name => _name;
+
+
+    public Sprite Sprite => Icon;
+
     #endregion
 
     #region Constructors
@@ -80,14 +98,17 @@ public class StatusEffect : IStatusEffect
         List<IStatModifier> statModifiers,
         Damage[][] turnDamageEffects,
         Healing[][] turnHealingEffects,
-        Move[][] turnMoveEffects,
+        Move[][] turnMoveEffects,        
         string tooltipText,
+        string name,
         Sprite icon,
         bool damageMustLandForOtherEffectsToLand = false,
         int duration = -1,
         object source = null
         )
     {
+        _uid = new Guid().ToString();
+
         _statusEffectTypeFlag = statusEffectTypeFlag;
         _statModifiers = CloneStatModifiers(statModifiers);
 
@@ -95,6 +116,7 @@ public class StatusEffect : IStatusEffect
         _turnHealingEffects = CloneAndSanitizeHealingArray(turnHealingEffects, duration);
         _turnMoveEffects = CloneAndSanitizeMoveArray(turnMoveEffects, duration);
 
+        _name = name;
         _tooltipText = tooltipText;
         _icon = icon;
 
@@ -125,6 +147,70 @@ public class StatusEffect : IStatusEffect
         }
     }
 
+    public string GetInfoDisplayText()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_TITLE_SIZE_OPEN_TAG)
+            .Append(Name)
+            .Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_SIZE_CLOSE_TAG)
+            .AppendLine();
+        
+        if(_statusEffectTypeFlag != StatusEffectType.None)
+        {
+            builder.Append(GetStatusEffectTypeString())
+            .AppendLine();
+        }
+
+        foreach (StatModifier statModifier in _statModifiers)
+        {
+            builder.Append(statModifier.GetInfoDisplayText())
+                .AppendLine();
+        }
+
+        foreach (Damage[] damages in _turnDamageEffects)
+        {
+            foreach (Damage damage in damages)
+            {
+                builder.Append(damage.GetInfoDisplayText())
+                    .Append(" per turn.")
+                    .AppendLine();
+            }
+            break; // Only add the first iteration
+        }
+
+        foreach (Healing[] healings in _turnHealingEffects)
+        {
+            foreach (Healing healing in healings)
+            {
+                builder.Append(healing.GetInfoDisplayText())
+                    .Append(" per turn.")
+                    .AppendLine();
+            }
+            break; // Only add the first iteration
+        }
+
+        foreach (Move[] moves in _turnMoveEffects)
+        {
+            foreach (Move move in moves)
+            {
+                builder.Append(move.GetInfoDisplayText())
+                    .Append(" per turn.")
+                    .AppendLine();
+            }
+            break; // Only add the first iteration
+        }
+
+        builder.Append("Remaining Duration: " + _duration + " turns.")
+            .AppendLine();
+
+        builder.Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_FLAVOUR_TEXT_OPEN_TAG)
+            .Append(_tooltipText)
+            .Append(ServiceLocatorObject.Instance.UIConstants.TOOLTIP_FLAVOUR_TEXT_CLOSE_TAG);
+           
+
+        return builder.ToString();
+    }
+
     public void ElapseDuration()
     {
         OnDurationElapsed?.Invoke(this);
@@ -132,8 +218,8 @@ public class StatusEffect : IStatusEffect
 
     public async Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
     {
-        if (tokenSource.Token.IsCancellationRequested) return;
-        await SendDamageStructs(target, originator, tokenSource);
+        _originator = originator;
+        _cancellationTokenSource = tokenSource;
 
         if (tokenSource.Token.IsCancellationRequested) return;
         await SendStatusEffectType(target, originator, tokenSource);
@@ -141,12 +227,6 @@ public class StatusEffect : IStatusEffect
         if (tokenSource.Token.IsCancellationRequested) return;
         await SendStatModifiers(target, originator, tokenSource);
 
-        if (tokenSource.Token.IsCancellationRequested) return;
-        await SendHealingStructs(target, originator, tokenSource);
-        
-        if (tokenSource.Token.IsCancellationRequested) return;
-        await SendMoveStructs(target, originator, tokenSource);
-        
         SubscribeToCharacterOnTurnElapsed(target);
 
         target.StatSystem.AddStatusEffectObject(this);
@@ -219,6 +299,23 @@ public class StatusEffect : IStatusEffect
     #endregion
 
     #region Private Functions
+
+    private string GetStatusEffectTypeString()
+    {
+        switch (_statusEffectTypeFlag)
+        {
+            case StatusEffectType.None:
+                return null;
+            case StatusEffectType.Burn:
+                return ServiceLocatorObject.Instance.UIConstants.TOOLTIP_BURN_COLOUR_OPEN_TAG + "Burning" + ServiceLocatorObject.Instance.UIConstants.TOOLTIP_COLOUR_CLOSE_TAG;
+            case StatusEffectType.Bleed:
+                return ServiceLocatorObject.Instance.UIConstants.TOOLTIP_BLEED_COLOUR_OPEN_TAG + "Bleeding" + ServiceLocatorObject.Instance.UIConstants.TOOLTIP_COLOUR_CLOSE_TAG;
+            case StatusEffectType.Stun:
+                return ServiceLocatorObject.Instance.UIConstants.TOOLTIP_STUN_COLOUR_OPEN_TAG + "Stunned" + ServiceLocatorObject.Instance.UIConstants.TOOLTIP_COLOUR_CLOSE_TAG;
+            default:
+                return null;
+        }
+    }
 
     private List<IStatModifier> CloneStatModifiers(List<IStatModifier> statModifiers)
     {
@@ -336,7 +433,7 @@ public class StatusEffect : IStatusEffect
         return modifiedMoves;
     }
 
-    private void DecrementDuration()
+    private void DecrementDuration(Character target)
     {
         IncrementDuration();
     }
@@ -345,19 +442,36 @@ public class StatusEffect : IStatusEffect
     {
         if (!_isSubscribedToOnCharacterTurnAdvance)
         {
+            target.OnCharacterTurnElapsed += SendDamageHealingAndMove;
             target.OnCharacterTurnElapsed += DecrementDuration;
+
             OnDurationElapsed += target.StatSystem.RemoveElapsible;
         }
         _isSubscribedToOnCharacterTurnAdvance = true;
     }
 
-    private void UnsubscribeFromCharacterOnTurnElapsed(Character character)
+    private void UnsubscribeFromCharacterOnTurnElapsed(Character target)
     {
         if (_isSubscribedToOnCharacterTurnAdvance)
         {
-            character.OnCharacterTurnElapsed -= DecrementDuration;
+            target.OnCharacterTurnElapsed -= SendDamageHealingAndMove;
+            target.OnCharacterTurnElapsed -= DecrementDuration;
+
+            OnDurationElapsed -= target.StatSystem.RemoveElapsible;
         }
         _isSubscribedToOnCharacterTurnAdvance = false;
+    }
+
+    private async void SendDamageHealingAndMove(Character target)
+    {
+        if (_cancellationTokenSource.Token.IsCancellationRequested) return;
+        await SendDamageStructs(target, _originator, _cancellationTokenSource);
+
+        if (_cancellationTokenSource.Token.IsCancellationRequested) return;
+        await SendHealingStructs(target, _originator, _cancellationTokenSource);
+
+        if (_cancellationTokenSource.Token.IsCancellationRequested) return;
+        await SendMoveStructs(target, _originator, _cancellationTokenSource);
     }
 
     private Damage[][] CloneAndSanitizeDamageArray(Damage[][] turnDamageEffects, int duration)

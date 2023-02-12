@@ -23,4 +23,4 @@ MonoBehaviour:
     SerializationNodes: []
   _weightedObject:
     _underlyingValue: {fileID: 11400000, guid: 69f0cab7f86133248a6339f40c71b6db, type: 2}
-  _weighting: 1
+  _weighting: 4

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Tea
+  m_EditorClassIdentifier: 
+  _name: 
+  _sprite: {fileID: 0}
+  _classRestrictions: []
+  _school: 0
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 0
+  _targetNumberFlag: 0
+  _targetTypeFlag: 1
+  _skillAnimType: 5
+  _targetToSlots:
+    _underlyingValue: {fileID: 11400000, guid: ac46d3b7e5145a041b4f31d6aec1dd8d, type: 2}
+  _useFromSlot:
+    _underlyingValue: {fileID: 11400000, guid: fb7bfddde348979479e10a5cf822946a, type: 2}
+  _projectilePrefab: {fileID: 0}
+  _effectPrefab: {fileID: 7058582335725275139, guid: 23b11a86c6ae6514cb419a80130b4c66,
+    type: 3}
+  _animatorController: {fileID: 0}
+  _targetStatusEffectBlueprints:
+  - _underlyingValue: {fileID: 11400000, guid: 6b5ab5dbb4c8d964388229e30d1c520c, type: 2}
+  _targetDamageBlueprints: []
+  _targetHealingBlueprints:
+  - {fileID: 11400000, guid: 91f07cee622f03c40a9b2e93fb26fdfe, type: 2}
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

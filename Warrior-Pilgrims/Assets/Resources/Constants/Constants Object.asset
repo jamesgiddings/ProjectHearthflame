@@ -28,5 +28,16 @@ MonoBehaviour:
   _magicAccuracy: {fileID: 11400000, guid: d63f02b6d6f5ae94eb46f92dd8805bee, type: 2}
   _meleeAccuracy: {fileID: 11400000, guid: e6e46823710539b419ffc08acad8af25, type: 2}
   _rangedAccuracy: {fileID: 11400000, guid: 2fceb0b5ddebae349898d8f469cc5d3b, type: 2}
+  _air: {fileID: 11400000, guid: 98e73c62d66e69c46a5315188d02da87, type: 2}
+  _arcane: {fileID: 11400000, guid: af89356433704614ead14c7969182fcb, type: 2}
+  _dark: {fileID: 11400000, guid: 0d71e84adaa2d1049a2f9194e305e2eb, type: 2}
+  _earth: {fileID: 11400000, guid: e4230c44fa5f6e149966778053681bc3, type: 2}
+  _fire: {fileID: 11400000, guid: c3e86214f61df214881da2411528c5a3, type: 2}
+  _light: {fileID: 11400000, guid: cc02cf1720f8fb145aaa765e0c674d4e, type: 2}
+  _physical: {fileID: 11400000, guid: e4ada8a54886d3a4d97af2687927f9bf, type: 2}
+  _water: {fileID: 11400000, guid: 024297f49a6bfea4bb57903f244d0b3b, type: 2}
+  _battleShortDelay: 0.5
+  _battleMediumDelay: 1
+  _battleLongDelay: 2
   _magicEvasionText: Resist!
   _physicalEvasionText: Miss!

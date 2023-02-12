@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918b4767811b96845b52b2017e0cca95, type: 3}
   m_Name: Very Small Dexterity Bonus
   m_EditorClassIdentifier: 
+  _name: Very Small Dexterity Bonus
+  _sprite: {fileID: 0}
   statType: {fileID: 11400000, guid: 2c01afbc47a489f4eb2f58c4cf99cc82, type: 2}
   modifierType: 0
+  _statModifierType: 0
   value: 1
   duration: -1

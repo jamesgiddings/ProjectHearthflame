@@ -18,7 +18,7 @@ public class AssetHandler
 }
 
 
-[CustomEditor(typeof(ResourceDatabase))]
+//[CustomEditor(typeof(ResourceDatabase))]
 public class ResourceDatabseCustomEditor : Editor
 {
     public override void OnInspectorGUI()

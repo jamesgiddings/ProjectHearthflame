@@ -10,7 +10,7 @@ namespace GramophoneUtils.Items.Containers
 	{
 		[SerializeField] private ISkill slotSkill;
 
-		public override Resource SlotResource => (Resource) slotSkill;
+		public override IResource SlotResource => (IResource) slotSkill;
 
 		public void OnDrag(PointerEventData eventData)
 		{

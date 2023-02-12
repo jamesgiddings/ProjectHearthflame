@@ -122,6 +122,11 @@ public class ServiceLocatorObject : ScriptableObject
     [SerializeField] private BattleDataModel _battleDataModel;
     public BattleDataModel BattleDataModel => _battleDataModel;
 
+    [BoxGroup("Battle")]
+    [BoxGroup("Battle/Loss Of Control Status Effect Types")]
+    [SerializeField] private List<StatusEffectType> _lossOfControlStatusEffectTypes;
+    public List<StatusEffectType> LossOfControlStatusEffectTypes => _lossOfControlStatusEffectTypes;
+
     [BoxGroup("Saving")]
     [BoxGroup("Saving/Loading")]
     [SerializeField] private SavingSystem _savingSystem;
@@ -135,5 +140,9 @@ public class ServiceLocatorObject : ScriptableObject
     [BoxGroup("Factories/StatModifier")]
     [SerializeField] private AYellowpaper.InterfaceReference<IStatusEffectFactory> _statusEffectFactory;
     public IStatusEffectFactory StatusEffectFactory => _statusEffectFactory.Value;
+
+    [BoxGroup("UI")]
+    [SerializeField] private UIConstants _uiConstants;
+    public UIConstants UIConstants => _uiConstants;
 
 }

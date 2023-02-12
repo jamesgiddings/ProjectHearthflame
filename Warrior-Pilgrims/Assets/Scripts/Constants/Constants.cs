@@ -1,3 +1,4 @@
+using GramophoneUtils.Magic;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -70,6 +71,50 @@ public class Constants : ScriptableObject
     [BoxGroup("Stats/StatTypes/Offence")]
     [SerializeField] private StatType _rangedAccuracy;
     public StatType RangedAccuracy => _rangedAccuracy;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _air;
+    public Element Air => _air;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _arcane;
+    public Element Arcane => _arcane;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _dark;
+    public Element Dark => _dark;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _earth;
+    public Element Earth => _earth;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _fire;
+    public Element Fire => _fire;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _light;
+    public Element Light => _light;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _physical;
+    public Element Physical => _physical;
+
+    [BoxGroup("Stats/Damage Types")]
+    [SerializeField] private Element _water;
+    public Element Water => _water;
+
+    [BoxGroup("Battle/Battle Delays")]
+    [SerializeField] private float _battleShortDelay = 0.5f;
+    public float BattleShortDelay => _battleShortDelay;
+
+    [BoxGroup("Battle/Battle Delays")]
+    [SerializeField] private float _battleMediumDelay = 1f;
+    public float BattleMediumDelay => _battleMediumDelay;
+
+    [BoxGroup("Battle/Battle Delays")]
+    [SerializeField] private float _battleLongDelay = 2f;
+    public float BattleLongDelay => _battleLongDelay;
 
     [BoxGroup("Battle")]
     [BoxGroup("Battle/Floating Text")]

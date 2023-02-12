@@ -18,8 +18,11 @@ MonoBehaviour:
   _stateExitTimerEvent:
     m_PersistentCalls:
       m_Calls: []
+  _tasks:
+  - _underlyingValue: {fileID: 11400000, guid: 18b39e825840a384b8dae6679db49988, type: 2}
   _exitState: {fileID: 0}
   _exitStateStateManager: {fileID: 0}
-  _delay: 0
-  _onAfterEnterUnityEvents: []
-  _onBeforeExitUnityEvents: []
+  _delay:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}

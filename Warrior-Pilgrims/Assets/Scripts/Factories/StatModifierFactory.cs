@@ -19,6 +19,9 @@ namespace GramophoneUtils.Stats
         public IStatModifier CreateStatModifierFromBlueprint(IStatModifierBlueprint statModifierBlueprint, object[] sources = null)
         {
             return new StatModifier(
+                statModifierBlueprint.Name,
+                statModifierBlueprint.UID,
+                statModifierBlueprint.Sprite,
                 statModifierBlueprint.StatType,
                 statModifierBlueprint.ModifierNumericType,
                 statModifierBlueprint.StatModifierType,
@@ -30,6 +33,9 @@ namespace GramophoneUtils.Stats
         public IStatModifier CreateStatModifierFromInstance(IStatModifier statModifier)
         {
             return new StatModifier(
+                statModifier.Name,
+                statModifier.UID,
+                statModifier.Sprite,
                 statModifier.StatType,
                 statModifier.ModifierNumericType,
                 statModifier.StatModifierType,
@@ -43,6 +49,9 @@ namespace GramophoneUtils.Stats
             object[] sourcesOverride = sources == null ? statModifier.Sources : sources;
 
             return new StatModifier(
+                statModifier.Name,
+                statModifier.UID,
+                statModifier.Sprite,
                 statModifier.StatType,
                 statModifier.ModifierNumericType,
                 statModifier.StatModifierType,
@@ -51,9 +60,20 @@ namespace GramophoneUtils.Stats
                 );
         }
 
-        public IStatModifier CreateStatModifierFromValue(IStatType statType, ModifierNumericType modifierNumericType, StatModifierType statModifierType, float value, object[] sources = null)
+        public IStatModifier CreateStatModifierFromValue(
+            string name, 
+            string uid, 
+            Sprite sprite, 
+            IStatType statType, 
+            ModifierNumericType modifierNumericType, 
+            StatModifierType statModifierType, 
+            float value, 
+            object[] sources = null)
         {
             return new StatModifier(
+                name,
+                uid,
+                sprite,
                 statType,
                 modifierNumericType,
                 statModifierType,

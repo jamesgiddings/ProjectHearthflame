@@ -66,8 +66,10 @@ namespace GramophoneUtils.Stats
         {
             get
             {
-                _playerCharacterOrder = new CharacterOrder(PlayerCharacters.ToArray());
-                OnCharacterModelPlayerCharacterOrderUpdated?.Raise();
+                if (_playerCharacterOrder == null)
+                {
+                    _playerCharacterOrder = new CharacterOrder(PlayerCharacters.ToArray());
+                }
                 return _playerCharacterOrder;
             }
             set
@@ -92,11 +94,13 @@ namespace GramophoneUtils.Stats
         {
             get
             {
-                if (_playerCharacterOrder != null) { return _playerCharacterOrder.GetCharacters().ToList(); }
+                if (_playerCharacterOrder != null) 
+                { 
+                    return _playerCharacterOrder.GetCharacters().ToList(); 
+                }
                 _playerCharacters = InstanceCharacters();
                 foreach (Character character in _playerCharacters)
                 {
-
                     if (!character.IsUnlocked) // TODO, there might be a better place to handle Unlocked Status
                     {
                         continue;
@@ -115,7 +119,6 @@ namespace GramophoneUtils.Stats
                 if (_enemyCharacterOrder == null)
                 {
                     _enemyCharacterOrder = new CharacterOrder(_enemyCharacters.ToArray());
-                    OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
                 }
                 return _enemyCharacterOrder.GetCharacters().ToList();
             }
@@ -481,6 +484,7 @@ namespace GramophoneUtils.Stats
             }
 
             ServiceLocator.Instance.CharacterGameObjectManager.MoveEnemyBattlersForward();
+
             end = Time.time + 0.3f;
             while (Time.time < end)
             {

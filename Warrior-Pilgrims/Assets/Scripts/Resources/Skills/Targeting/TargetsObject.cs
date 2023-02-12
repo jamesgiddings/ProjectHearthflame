@@ -107,29 +107,50 @@ public class TargetsObject : ITargets
         List<List<Character>> combinations = new List<List<Character>>();
 
         List<TargetCombination> targetCombinations = targetToSlots.GetTargetCombinations();
-        List<Character> opponentCharacters = _originator.IsPlayer ? _enemyCharacterOrder.GetCharacters().ToList() : _playerCharacterOrder.GetCharacters().ToList();
-        List<Character> allyCharacters = !_originator.IsPlayer ? _enemyCharacterOrder.GetCharacters().ToList() : _playerCharacterOrder.GetCharacters().ToList();
+        CharacterOrder opponentCharacterOrder = _originator.IsPlayer ? _enemyCharacterOrder : _playerCharacterOrder;
+        CharacterOrder allyCharacterOrder = _originator.IsPlayer ? _playerCharacterOrder : _enemyCharacterOrder;
 
         foreach (TargetCombination targetCombination in targetCombinations)
         {
-            List<Character> chars = targetCombination.GetCombination(allyCharacters, opponentCharacters);
-            Debug.Log("List of chars: ");
-            chars.ForEach(x => Debug.Log(x.Name));
-
-            List<Character> combination = targetCombination.GetCombination(allyCharacters, opponentCharacters);
+            List<Character> combination = targetCombination.GetCombination(allyCharacterOrder, opponentCharacterOrder);
             if (combination.Count > 0) // check there are actually characters there.
             {
-                combinations.Add(combination);
+                combinations.Add(combination); // TODO, we are adding this to a hashset, but it isn't rejecting the duplicate if it targets a large character twice.
             }
             
         }
 
-        return combinations;
+        return combinations.ToList();
     }
 
     #endregion
 
     #region Inner Classes
+
+    class ListEqCompare : IEqualityComparer<List<Character>>
+    {
+        public bool Equals(List<Character> x, List<Character> y)
+        {
+            if (x.Count != y.Count)
+                return false;
+            for (int i = 0; i < x.Count; i++)
+            {
+                if (x[i] != y[i])
+                    return false;
+            }
+            return true;
+        }
+
+        public int GetHashCode(List<Character> obj)
+        {
+            int hash = 0;
+            foreach (Character character in obj)
+                hash = hash ^ EqualityComparer<Character>.Default.GetHashCode(character);
+
+            return hash;
+        }
+    }
+
     #endregion
 
 }

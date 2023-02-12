@@ -10,15 +10,15 @@ namespace GramophoneUtils.Items.Hotbars
         [SerializeField] private Inventory inventory = null;
         [SerializeField] private TextMeshProUGUI itemQuantityText = null;
 
-        private Resource slotResource = null;
+        private IResource slotResource = null;
 
-        public override Resource SlotResource
+        public override IResource SlotResource
         {
             get { return slotResource; }
             set { slotResource = value; UpdateSlotUI(); }
         }
 
-        public bool AddResource(Resource resourceToAdd)
+        public bool AddResource(IResource resourceToAdd)
         {
             if (SlotResource != null) { return false; }
 
@@ -62,7 +62,7 @@ namespace GramophoneUtils.Items.Hotbars
                 HotbarSlotUI hotbarSlot = resourceDragHandler.ResourceSlotUI as HotbarSlotUI;
                 if (hotbarSlot != null)
                 {
-                    Resource oldResource = SlotResource;
+                    IResource oldResource = SlotResource;
                     SlotResource = hotbarSlot.SlotResource;
                     hotbarSlot.SlotResource = oldResource;
                     UpdateSlotUI();

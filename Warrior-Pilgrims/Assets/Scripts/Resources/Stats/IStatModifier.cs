@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
-    public interface IStatModifier : IApplyable
+    public interface IStatModifier : IApplyable, IResource
     {
         #region Attributes/Fields/Properties
 

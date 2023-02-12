@@ -19,6 +19,8 @@ public interface IResource
     public string UID { get; }
     public Sprite Sprite { get; }
 
+    public abstract string GetInfoDisplayText();
+
     #endregion
 
     #region Protected Functions
