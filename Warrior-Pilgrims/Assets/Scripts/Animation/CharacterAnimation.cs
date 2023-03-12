@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     private Animator _animator;
-
     private CharacterController2D _characterController2D;
 
     #region Callbacks
@@ -13,7 +12,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void Start()
     {
-        _animator = gameObject.GetComponent<Animator>();
+        _animator = gameObject.GetComponent<Battler>().Animator;
         _characterController2D = gameObject.GetComponent<CharacterController2D>();
     }
 

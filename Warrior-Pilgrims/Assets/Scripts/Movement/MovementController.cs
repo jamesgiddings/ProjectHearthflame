@@ -5,14 +5,13 @@ using UnityEngine;
 namespace GramophoneUtils.Movement
 {
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(Animator))]
     public class MovementController : MonoBehaviour
     {
         [SerializeField] private float movementSpeed = 3f;
         [SerializeField] private float speedSmoothTime = 0.1f;
+        [SerializeField] private Animator _animator;
 
         private CharacterController controller = null;
-        private Animator animator = null;
         private Transform mainCameraTransform = null;
 
         private float velocityY = 0f;
@@ -24,7 +23,12 @@ namespace GramophoneUtils.Movement
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            animator = GetComponent<Animator>();
+
+            if (_animator == null)
+            {
+                _animator = GetComponent<Battler>().Animator;
+            }
+            
             mainCameraTransform = Camera.main.transform;
         }
 
@@ -61,7 +65,7 @@ namespace GramophoneUtils.Movement
 
             controller.Move(desiredMoveDirection * currentSpeed * Time.deltaTime);
 
-            animator.SetFloat(hashSpeedPercentage, 0.5f * movementInput.magnitude, speedSmoothTime, Time.deltaTime);
+            _animator.SetFloat(hashSpeedPercentage, 0.5f * movementInput.magnitude, speedSmoothTime, Time.deltaTime);
         }
     }
 }

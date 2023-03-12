@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Hocha
+  m_EditorClassIdentifier: 
+  _name: Hocha
+  _sprite: {fileID: 0}
+  _description: Mature tea priest, accomplished at supporting his teammates with
+    the subtle magic of his mystic brews.
+  _characterClass: {fileID: 11400000, guid: 6c3fe64e5f249694fb3e7bc7a3148c11, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 1
+  _startingLevel: 0
+  _characterPrefab: {fileID: 193777274298245750, guid: fa95a420a839ce8409f3224f7b02a34c,
+    type: 3}
+  _brain:
+    _underlyingValue: {fileID: 0}
+  _portrait: {fileID: 0}
+  _color: {r: 0.14208794, g: 0.2924528, b: 0.14846417, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: 96a8562e2be60254e9b5e4c5cfcdfa83,
+    type: 2}
+  _isPlayer: 1
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/HochaAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/HochaAnimationController
+  _idle_Left: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _idle_Right: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _idle_Up: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _idle_Down: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _walk_Left: {fileID: 7400000, guid: e8703d8b0dd6a274ea041be02bc5126e, type: 2}
+  _walk_Right: {fileID: 7400000, guid: e8703d8b0dd6a274ea041be02bc5126e, type: 2}
+  _walk_Up: {fileID: 7400000, guid: e8703d8b0dd6a274ea041be02bc5126e, type: 2}
+  _walk_Down: {fileID: 7400000, guid: e8703d8b0dd6a274ea041be02bc5126e, type: 2}
+  _attack_Left: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _attack_Right: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _attack_Up: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _attack_Down: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _cast_Left: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _cast_Right: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _cast_Up: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _cast_Down: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _die: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _dead: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _shoot_Left: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _shoot_Right: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _shoot_Up: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}
+  _shoot_Down: {fileID: 7400000, guid: 1c14dec94d219e147bb20af0acbc5522, type: 2}

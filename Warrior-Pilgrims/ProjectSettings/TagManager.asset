@@ -60,8 +60,26 @@ TagManager:
   - name: 1
     uniqueID: 2393378671
     locked: 0
-  - name: 0 (Ground)
+  - name: 0_3
+    uniqueID: 3709830905
+    locked: 0
+  - name: 0_2
+    uniqueID: 1824762759
+    locked: 0
+  - name: 0_1
+    uniqueID: 2400676903
+    locked: 0
+  - name: 0_0 (Ground)
     uniqueID: 1811155961
+    locked: 0
+  - name: 0_-1
+    uniqueID: 1943857149
+    locked: 0
+  - name: 0_-2
+    uniqueID: 3734618569
+    locked: 0
+  - name: 0_-3
+    uniqueID: 731433865
     locked: 0
   - name: -1
     uniqueID: 968580291

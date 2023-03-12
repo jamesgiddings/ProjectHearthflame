@@ -160,7 +160,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,7 +275,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -359,7 +359,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -475,7 +475,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -863,7 +863,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1052,9 +1052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adbd23c39dfdf746806c00b6317fb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deactivateOnTrigger: 1
-  colliderSizeX: 5
-  colliderSizeY: 5
+  _deactivateOnTrigger: 0
+  _colliderSizeX: 5
+  _colliderSizeY: 5
   battle: {fileID: 11400000, guid: 155ce334592ff4c42b12e4fac1effc49, type: 2}
 --- !u!50 &773972862
 Rigidbody2D:
@@ -1209,7 +1209,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &805931529
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1226,7 +1226,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!212 &805931530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1247,7 +1247,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1266,7 +1266,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1901588625
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ccf0c68dd7f2ec04ebb29da1a386816a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1340,6 +1340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9791c63574104484e90bd3d6d8b7a717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _battlerParent: {fileID: 0}
+  battlerGap: 2
+  _frontBattlerPositionPrefab: {fileID: 0}
 --- !u!114 &805931536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,7 +1431,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1603,7 +1606,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1774,9 +1777,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adbd23c39dfdf746806c00b6317fb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deactivateOnTrigger: 0
-  colliderSizeX: 5
-  colliderSizeY: 5
+  _deactivateOnTrigger: 0
+  _colliderSizeX: 5
+  _colliderSizeY: 5
   battle: {fileID: 11400000, guid: 155ce334592ff4c42b12e4fac1effc49, type: 2}
 --- !u!50 &851483437
 Rigidbody2D:
@@ -1927,7 +1930,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2011,7 +2014,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2131,9 +2134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adbd23c39dfdf746806c00b6317fb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deactivateOnTrigger: 1
-  colliderSizeX: 5
-  colliderSizeY: 5
+  _deactivateOnTrigger: 0
+  _colliderSizeX: 5
+  _colliderSizeY: 5
   battle: {fileID: 11400000, guid: 155ce334592ff4c42b12e4fac1effc49, type: 2}
 --- !u!50 &1075825265
 Rigidbody2D:
@@ -2318,7 +2321,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1901588625
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 255ae63b126099443a99dd7a18d12d17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2345,7 +2348,7 @@ Transform:
   m_Children:
   - {fileID: 851059759}
   m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152087224
 GameObject:
@@ -2419,7 +2422,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1152087226
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2436,7 +2439,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &1152087227
 Transform:
   m_ObjectHideFlags: 0
@@ -2450,7 +2453,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 43
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153504448
 GameObject:
@@ -2553,7 +2556,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2657,7 +2660,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1505285075 stripped
 MonoBehaviour:
@@ -2708,7 +2711,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2792,7 +2795,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3004,7 +3007,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3150,7 +3153,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3296,7 +3299,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3385,7 +3388,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3538,170 +3541,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: ab76e5e4-c560-4ee3-830f-61c9f4f40f63
---- !u!43 &2133909421
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 10
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 42
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 16
-    localAABB:
-      m_Center: {x: 0.0018806458, y: -0.7870035, z: 0}
-      m_Extent: {x: 0.29350662, y: 0.10898113, z: 0}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 16
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 704
-    _typelessdata: 003d973ee0922dbf00000000ab1d7fbf960faa3d0000008000000080003d973ee0922dbf003d973ee0922dbf80f08d3e405f65bf00000000b4fd0e3c82fd7f3f000000800000008080f08d3e405f65bf80f08d3e405f65bfc096923e107949bf00000000ab1d7fbf960faa3d000000800000008080f08d3e405f65bf003d973ee0922dbf0000633c20e62fbf000000009113043decdd7fbf0000008000000080003d973ee0922dbf000d89be603932bf00f0ebbb90bc64bf00000000b4fd0e3c82fd7f3f0000008000000080005095bee01964bf80f08d3e405f65bf000d89be603932bf000000009113043decdd7fbf0000008000000080000d89be603932bf000d89be603932bf802e8fbea0294bbf0000000071167e3fe7dbf9bd0000008000000080000d89be603932bf005095bee01964bf005095bee01964bf0000000071167e3fe7dbf9bd0000008000000080005095bee01964bf005095bee01964bfc096923e107949bf00000000ab1d7fbf960faa3d000000800000008080f08d3e405f65bf003d973ee0922dbf003d973ee0922dbf000000009113043decdd7fbf0000008000000080003d973ee0922dbf003d973ee0922dbf80f08d3e405f65bf00000000ab1d7fbf960faa3d000000800000008080f08d3e405f65bf80f08d3e405f65bf00f0ebbb90bc64bf00000000b4fd0e3c82fd7f3f0000008000000080005095bee01964bf80f08d3e405f65bf0000633c20e62fbf000000009113043decdd7fbf0000008000000080003d973ee0922dbf000d89be603932bf005095bee01964bf00000000b4fd0e3c82fd7f3f0000008000000080005095bee01964bf005095bee01964bf000d89be603932bf0000000071167e3fe7dbf9bd0000008000000080000d89be603932bf000d89be603932bf802e8fbea0294bbf0000000071167e3fe7dbf9bd0000008000000080000d89be603932bf005095bee01964bf
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0.0018806458, y: -0.7870035, z: 0}
-    m_Extent: {x: 0.29350662, y: 0.10898113, z: 0}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &78544611569902598
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,12 +4126,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 3258141219111317098}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 223914115033359472}
 --- !u!222 &1171418738175998721
 CanvasRenderer:
@@ -6380,12 +6214,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006123606076459}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488178288600625}
 --- !u!114 &2962698839281227483
 MonoBehaviour:
@@ -6402,12 +6231,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006123710060924}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488178722132838}
 --- !u!114 &2962698839382246691
 MonoBehaviour:
@@ -6424,12 +6248,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006123878255236}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488178554519710}
 --- !u!114 &2962698839455422687
 MonoBehaviour:
@@ -6446,12 +6265,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006123745843064}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488178686352738}
 --- !u!114 &2962698839710669001
 MonoBehaviour:
@@ -6468,12 +6282,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006121919698798}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488177826962804}
 --- !u!114 &2962698839881180962
 MonoBehaviour:
@@ -6490,12 +6299,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006122028378245}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488178256798367}
 --- !u!114 &2962698840247867299
 MonoBehaviour:
@@ -6512,12 +6316,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006122456897540}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488177290416670}
 --- !u!114 &2962698840313658920
 MonoBehaviour:
@@ -6534,12 +6333,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006122661130639}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488177622612885}
 --- !u!114 &2962698840517185207
 MonoBehaviour:
@@ -6556,12 +6350,7 @@ MonoBehaviour:
   resourceIconImage: {fileID: 666006122726277392}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
-  inventory:
-    money: 0
-    itemSlots: []
-    onInventoryItemsUpdated:
-      m_PersistentCalls:
-        m_Calls: []
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 2815488177557965578}
 --- !u!222 &3181738766835641816
 CanvasRenderer:
@@ -9822,6 +9611,9 @@ MonoBehaviour:
   popupObject: {fileID: 8109783069764861043}
   infoText: {fileID: 8109783070950140902}
   padding: 25
+  offsetX: 220
+  offsetY: -250
+  threshold: 10
 --- !u!222 &4202803276871837014
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10957,10 +10749,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 942520896262300109}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &6643072169667413168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13449,10 +13243,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839382246691}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847398826272220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13468,10 +13264,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839455422687}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847398903737304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13487,10 +13285,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839281227483}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847399005363855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13506,10 +13306,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839115342732}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847399886992308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13525,10 +13327,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698840517185207}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847399951876907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13544,10 +13348,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698840313658920}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847400154540704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13563,10 +13369,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698840247867299}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847400577554977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13582,10 +13390,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839881180962}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9106847400691213770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13601,10 +13411,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2962698839710669001}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
 --- !u!114 &9185450991997898325 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4072961602597870480, guid: f18550f7cd664a245830a06d1a771463,

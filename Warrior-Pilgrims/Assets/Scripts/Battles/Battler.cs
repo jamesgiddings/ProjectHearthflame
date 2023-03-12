@@ -24,6 +24,8 @@ public class Battler : MonoBehaviour
     [SerializeField] private GameObject statModifierImagePrefab;
     [SerializeField] private Canvas battlerStatsCanvas;
     [SerializeField] private CharacterEvent _onCharacterDeath;
+    [SerializeField] private Animator _animatorOverride;
+    public Animator Animator => GetAnimator();
 
     private Character character;
     private SpriteRenderer spriteRenderer;
@@ -33,19 +35,6 @@ public class Battler : MonoBehaviour
 
     private bool isInitialised = false;
 
-    [ShowInInspector] int SlotIndex => GetSlotIndex(); // todo test
-
-    private int GetSlotIndex()
-    {
-        if (character.IsPlayer)
-        {
-            return ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder.GetSlotIndexByCharacter(character);
-        }
-        else
-        {
-            return ServiceLocator.Instance.CharacterModel.EnemyCharacterOrder.GetSlotIndexByCharacter(character);
-        }
-    } // todo test
 
     public Action OnTurnComplete;
 
@@ -255,6 +244,11 @@ public class Battler : MonoBehaviour
     #endregion
 
     #region Private Functions
+
+    private Animator GetAnimator()
+    {
+        return _animatorOverride == null ? GetComponent<Animator>() : _animatorOverride;
+    }
 
     /// <summary>
     /// Find out which way sprite should face baced on difference in position between them.

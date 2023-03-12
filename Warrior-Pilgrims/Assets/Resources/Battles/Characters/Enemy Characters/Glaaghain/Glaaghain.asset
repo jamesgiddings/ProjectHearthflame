@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Glaaghain
+  m_EditorClassIdentifier: 
+  _name: Glaaghain
+  _sprite: {fileID: 0}
+  _description: 
+  _characterClass: {fileID: 11400000, guid: e518dac9e97b9cb40898149b31ceff3c, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 0
+  _startingLevel: 0
+  _characterPrefab: {fileID: 193777274298245750, guid: b33135c7b8b4ddc4e9966a33edb02e95,
+    type: 3}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: 102125e93746c9b4da9b211bc70f0b12, type: 2}
+  _portrait: {fileID: 0}
+  _color: {r: 0.2901961, g: 0.40784317, b: 0.36862746, a: 1}
+  _equipmentInventory: {fileID: 11400000, guid: 55299748fff7a544d8662004bdd15bf9,
+    type: 2}
+  _isPlayer: 1
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/GlaaghainAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/GlaaghainAnimationController
+  _idle_Left: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _idle_Right: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _idle_Up: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _idle_Down: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _walk_Left: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _walk_Right: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _walk_Up: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _walk_Down: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _attack_Left: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _attack_Right: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _attack_Up: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _attack_Down: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _cast_Left: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _cast_Right: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _cast_Up: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _cast_Down: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _die: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _dead: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _shoot_Left: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _shoot_Right: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _shoot_Up: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}
+  _shoot_Down: {fileID: 7400000, guid: 7531ae4900ac23240a8e7f3e4ce985b6, type: 2}

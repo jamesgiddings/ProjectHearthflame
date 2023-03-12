@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class LightFlicker : MonoBehaviour
 {
-	/*[Header("Intensity Flicker")] 
+	[Header("Intensity Flicker")]
 
 	[SerializeField] float minimumIntensityModifier;
 	[SerializeField] float maximumIntensityModifier;
@@ -80,18 +80,18 @@ public class LightFlicker : MonoBehaviour
 	private float RandomizeIntensity()
 	{
 		return Random.Range(minimumIntensityModifier, maximumIntensityModifier);
-	}		
-	
+	}
+
 	private float RandomizeInnerRadius()
 	{
 		return Random.Range(minimumInnerRadiusModifier, maximumInnerRadiusModifier);
-	}		
-	
+	}
+
 	private float RandomizeOuterRadius()
 	{
 		return Random.Range(minimumOuterRadiusModifier, maximumOuterRadiusModifier);
-	}	
-	
+	}
+
 	private float RandomizeIntensityFlickerDuration()
 	{
 		return Random.Range(minimumIntensityDuration, maximumIntensityDuration);
@@ -113,8 +113,8 @@ public static class FlickerTweeners
 	public static Tweener DOColor(this UnityEngine.Rendering.Universal.Light2D target, Color endValue, float duration)
 	{
 		return DOTween.To(() => target.color, x => target.color = x, endValue, duration).SetTarget(target);
-	}	
-	
+	}
+
 	public static Tweener DOInnerRadius(this UnityEngine.Rendering.Universal.Light2D target, float endValue, float duration)
 	{
 		return DOTween.To(() => target.pointLightInnerRadius, x => target.pointLightInnerRadius = x, endValue, duration).SetTarget(target);
@@ -128,5 +128,5 @@ public static class FlickerTweeners
 	public static Tweener DOIntensity(this UnityEngine.Rendering.Universal.Light2D target, float endValue, float duration)
 	{
 		return DOTween.To(() => target.intensity, x => target.intensity = x, endValue, duration).SetTarget(target);
-	}*/
+	}
 }

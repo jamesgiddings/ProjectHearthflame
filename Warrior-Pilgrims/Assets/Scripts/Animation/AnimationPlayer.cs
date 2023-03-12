@@ -25,7 +25,7 @@ public class AnimationPlayer
         this.character = character;
         Debug.Log(this.character.Name + " is getting a new Animation player");
         _characterGameObjectManager = ServiceLocator.Instance.CharacterGameObjectManager;
-        animator = battler.gameObject.GetComponent<Animator>();
+        animator = battler.Animator;
 
         SetAnimationDirections();
 
