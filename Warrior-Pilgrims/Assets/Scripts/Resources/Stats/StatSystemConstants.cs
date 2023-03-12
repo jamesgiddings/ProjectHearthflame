@@ -12,24 +12,6 @@ public class StatSystemConstants : ScriptableObject
 	[SerializeField] public float BaseMagicAccuracy = 1f;
 	[SerializeField] public float BaseMagicEvasion = 1f;
 
-	// Strength
-	[SerializeField] public float StrengthMultiplier = 1f;
-
-	// Magic
-	[SerializeField] public float MagicMultiplier = 1f;
-
-	// Dexterity
-	[SerializeField] public float DexterityMultiplier = 1f;	
-	
-	// Speed
-	[SerializeField] public float SpeedMultiplier = 1f;	
-	
-	// Resilience
-	[SerializeField] public float ResilienceMultiplier = 1f;
-
-	// Wits
-	[SerializeField] public float WitsMultiplier = 1f;
-
 	// Armour
 	[SerializeField] public float BasePhysicalArmour = 1f;
 	[SerializeField] public float BaseFireArmour = 1f;

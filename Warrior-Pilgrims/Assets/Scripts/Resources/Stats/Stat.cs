@@ -36,6 +36,16 @@ namespace GramophoneUtils.Stats
             }
         }
 
+        private float _tuningMultiplier;
+
+        public float TuningMultiplier
+        {
+            get 
+            { 
+                return _tuningMultiplier; 
+            }
+        }
+
         private float baseValue = 0f;
 
         private bool isDirty = true;
@@ -46,9 +56,17 @@ namespace GramophoneUtils.Stats
 
         #region Constructors
 
-        public Stat(float initialValue) => baseValue = initialValue;
-        public Stat(IStatType statType) => baseValue = statType.DefaultValue;
+        public Stat(float initialValue, float tuningMultiplier)
+        {
+            baseValue = initialValue;
+            _tuningMultiplier = tuningMultiplier;
+        }
 
+        public Stat(IStatType statType)
+        {
+            baseValue = statType.DefaultValue;
+            _tuningMultiplier = statType.TuningMultiplier;
+        }
         #endregion
 
         #region Callbacks

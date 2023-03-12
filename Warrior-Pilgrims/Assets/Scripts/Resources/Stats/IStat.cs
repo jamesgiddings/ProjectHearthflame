@@ -9,6 +9,7 @@ namespace GramophoneUtils.Stats
 	{
         Action OnStatChanged { get; set; }
         float Value { get; }
+        float TuningMultiplier { get; }
         List<IStatModifier> StatModifiers { get; }
 
         float GetBaseValue();

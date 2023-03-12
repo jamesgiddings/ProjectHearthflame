@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0faa668de086ac14299ea91ebbcddb65, type: 3}
   m_Name: Magic Evasion
   m_EditorClassIdentifier: 
-  name: Magic Evasion
-  defaultValue: 0
+  _name: Magic Evasion
+  _defaultValue: 0
+  _tuningMultiplier: 1
