@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Fire Damage
   _sprite: {fileID: 0}
-  _value: 5
+  _value:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 75e5fca3f5d841d4ebd433ce5acda568, type: 2}
   _element: {fileID: 11400000, guid: c3e86214f61df214881da2411528c5a3, type: 2}
-  Element: {fileID: 11400000, guid: c3e86214f61df214881da2411528c5a3, type: 2}
   _attackType: 2

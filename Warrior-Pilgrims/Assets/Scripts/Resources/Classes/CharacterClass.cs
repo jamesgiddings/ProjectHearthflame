@@ -16,15 +16,15 @@ public class CharacterClass : Resource
 {
     #region Attributes/Fields/Properties
 
-    [VerticalGroup("General/Split/Left"), TextArea(3, 5)]
+    [TextArea(3, 5)]
     [SerializeField] private string _description;
     public string Description => _description;
 
-    [ProgressBar(0, 300), SerializeField] private int _baseMaxHealth;
-    public int BaseMaxHealth => _baseMaxHealth;
+    [SerializeField] private IntVariable _baseMaxHealth;
+    public int BaseMaxHealth => _baseMaxHealth.Value;
 
-    [ProgressBar(0, 300), SerializeField] private int baseHealth;
-    public int BaseHealth => baseHealth;
+    [SerializeField] private IntVariable _baseHealth;
+    public int BaseHealth => _baseHealth == null ? BaseMaxHealth : _baseHealth.Value;
 
     [ProgressBar(1, 40), SerializeField] private int _maxLevel;
     public int MaxLevel => _maxLevel;

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Tidal Call
+  m_EditorClassIdentifier: 
+  _name: Tidal Call
+  _sprite: {fileID: 0}
+  _description: 'The power and inexorability of water exposes hiding enemies. Moderate
+    physical damage, L.1. '
+  _classRestrictions:
+  - {fileID: 11400000, guid: b39e5b34b1b780149b598581e316c9b0, type: 2}
+  _school: 0
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 0
+  _targetNumberFlag: 0
+  _targetTypeFlag: 1
+  _skillAnimType: 5
+  _targetToSlots:
+    _underlyingValue: {fileID: 11400000, guid: 060bbe3128196b34f9e2d01af8dc8a56, type: 2}
+  _useFromSlot:
+    _underlyingValue: {fileID: 11400000, guid: a9e08d35f1860564499a07d7a64ed66e, type: 2}
+  _projectilePrefab: {fileID: 0}
+  _effectPrefab: {fileID: 0}
+  _animatorController: {fileID: 0}
+  _targetStatusEffectBlueprints: []
+  _targetDamageBlueprints: []
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

@@ -12,11 +12,9 @@ using GramophoneUtils.Characters;
 [CreateAssetMenu(fileName = "New Battle Reward", menuName = "Battles/Battle Reward")]
 public class BattleReward: Data
 {
-	[SerializeField] int experience;
+	[SerializeField] private IntReference _experience;
 	[SerializeField] ItemSlot[] itemSlots;
 
-
-    
 	public void AddBattleReward(ICharacterModel player)
 	{
 		foreach (ItemSlot itemSlot in itemSlots)
@@ -29,16 +27,14 @@ public class BattleReward: Data
 
 		foreach (Character character in player.PlayerCharacters)
 		{
-			character.LevelSystem.AddExperience(experience);
+			character.LevelSystem.AddExperience(_experience.Value);
 		}
 	}
 
 	public string GetRewardsInfoDisplayText()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.Append("Experience: ").Append(experience.ToString()).AppendLine();
-
-
+		builder.Append("Experience: ").Append(_experience.Value.ToString()).AppendLine();
 
 		foreach (ItemSlot itemSlot in itemSlots)
 		{

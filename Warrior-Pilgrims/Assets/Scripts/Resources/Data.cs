@@ -13,8 +13,6 @@ public abstract class Data : ScriptableObject
     public string UID => _uid;
     
     [BoxGroup("General")]
-    [HorizontalGroup("General/Split", 60)]
-    [VerticalGroup("General/Split/Left"), HideLabel]
     [SerializeField] private string _name;
 
     public string Name

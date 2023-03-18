@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Large Physical Damage
   _sprite: {fileID: 0}
-  _value: 20
-  _element: {fileID: 0}
+  _value:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: b93cafe230f378e4190803ddbd1ee1da, type: 2}
+  _element: {fileID: 11400000, guid: e4ada8a54886d3a4d97af2687927f9bf, type: 2}
   _attackType: 0

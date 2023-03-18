@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f74ede077e1042429f5955460658855, type: 3}
   m_Name: New Battle Reward
   m_EditorClassIdentifier: 
-  UID: de168df9ced645d44b6b1651689ef602
-  name: f
-  experience: 15000
+  _name: 
+  _experience:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 7e736b4763f952142854eef7edebd84f, type: 2}
   itemSlots:
   - item: {fileID: 11400000, guid: ef225be4f145c5e4f853d9fdfa9058ff, type: 2}
     quantity: 1

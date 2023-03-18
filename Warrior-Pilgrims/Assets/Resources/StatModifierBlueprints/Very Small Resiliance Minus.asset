@@ -17,5 +17,8 @@ MonoBehaviour:
   statType: {fileID: 11400000, guid: ba2499cb473f31e49b9a1997cf5eb22b, type: 2}
   modifierType: 0
   _statModifierType: 0
-  value: -1
+  _value:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: de61b7386d2babf499f5f58130e353a0, type: 2}
   duration: 2

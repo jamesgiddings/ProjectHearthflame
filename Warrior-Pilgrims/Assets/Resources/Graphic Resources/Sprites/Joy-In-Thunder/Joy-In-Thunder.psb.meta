@@ -1,0 +1,2991 @@
+fileFormatVersion: 2
+guid: 760daaea0a215594b8d6ef315e94efec
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMasterTextureLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: No Name
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4217
+      width: 0
+      height: 0
+    spriteID: 8dcb5ab2876f2364bae8dcd43d177973
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4217}
+    spritePosition: {x: 0, y: 2512}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 4180
+      width: 418
+      height: 651
+    spriteID: ae3d43e83305e504d8cb7a07101af704
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 4180}
+    spritePosition: {x: 1036, y: 848}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3150
+      y: 6955
+      width: 628
+      height: 1039
+    spriteID: 84b32bdc781900547b21538a2ded9f3b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3150, y: 6955}
+    spritePosition: {x: 897, y: 582}
+  - name: Front Haori Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3521
+      y: 1636
+      width: 437
+      height: 696
+    spriteID: 2ecf20cadae06e94a938618ca5e5bbe9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3521, y: 1636}
+    spritePosition: {x: 1008, y: 828}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4225
+      width: 0
+      height: 0
+    spriteID: f1c31aa4dd9a6044685a6c568a3e45de
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4225}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 5372
+      width: 598
+      height: 424
+    spriteID: a00295e4253f6eb419beffd911a307ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 5372}
+    spritePosition: {x: 1051, y: 1061}
+  - name: Front Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 7684
+      width: 601
+      height: 286
+    spriteID: 8401f8e6fbb9b5440ac2b34d70dd471f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 7684}
+    spritePosition: {x: 1025, y: 1210}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 4
+      width: 1024
+      height: 1700
+    spriteID: b82070db6df6ddb42948a3bdf45bc5b9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 4}
+    spritePosition: {x: 55, y: 16}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1709
+      width: 1106
+      height: 1762
+    spriteID: c0f3784db7476e745ada056b6820b06c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 1709}
+    spritePosition: {x: 9, y: 0}
+  - name: Front Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 3479
+      width: 1058
+      height: 1718
+    spriteID: 48a49391b4c6198439b9d7a67db9863d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 3479}
+    spritePosition: {x: 40, y: 13}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3150
+      y: 6036
+      width: 861
+      height: 911
+    spriteID: 13529f0595724c04db0594734a13b372
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3150, y: 6036}
+    spritePosition: {x: 579, y: 689}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 6643
+      width: 850
+      height: 1126
+    spriteID: 1011c539983f52f4c8907feef8a2364d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 6643}
+    spritePosition: {x: 460, y: 563}
+  - name: 'Front Haori '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3252
+      y: 2927
+      width: 688
+      height: 940
+    spriteID: b65e637298c04aa40bb8a283c7bccc5a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3252, y: 2927}
+    spritePosition: {x: 526, y: 688}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3786
+      y: 6955
+      width: 256
+      height: 299
+    spriteID: 60b9b38503dff1443884103d93ca126f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3786, y: 6955}
+    spritePosition: {x: 903, y: 1271}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 1636
+      width: 1320
+      height: 1283
+    spriteID: 4eb4ef524d98de04da3f525c252e7c1a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 1636}
+    spritePosition: {x: 426, y: 796}
+  - name: Upper Torso Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 7777
+      width: 307
+      height: 379
+    spriteID: 053e391395c66ca4e95b2875203784ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 7777}
+    spritePosition: {x: 871, y: 1227}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4233
+      width: 0
+      height: 0
+    spriteID: ccac80fa0e7a1204bbbbeea52b154876
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4233}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 2927
+      width: 1051
+      height: 1367
+    spriteID: 19f16d3bfd5cf634a93c8173210a2e73
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 2927}
+    spritePosition: {x: 94, y: 85}
+  - name: Front Wing
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 5449
+      width: 889
+      height: 1186
+    spriteID: 801442e6b7c623b47a814fc938235b64
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 5449}
+    spritePosition: {x: 200, y: 243}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4241
+      width: 0
+      height: 0
+    spriteID: cd0c877bc1e242b4d9cb98a7d5e387d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4241}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 7978
+      width: 421
+      height: 194
+    spriteID: 53c587f506e60db40a413a73ca144894
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 7978}
+    spritePosition: {x: 1154, y: 714}
+  - name: Front Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 5804
+      width: 574
+      height: 436
+    spriteID: c6444131c6aa71646bbdca1e3123036f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 5804}
+    spritePosition: {x: 996, y: 748}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4048
+      y: 7262
+      width: 34
+      height: 96
+    spriteID: a908994b7c1d72348b2d721f46e85acc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4048, y: 7262}
+    spritePosition: {x: 1223, y: 1815}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1739
+      y: 6248
+      width: 60
+      height: 340
+    spriteID: 7d866b6dc4dafec4abeaf4d3fe045cc6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1739, y: 6248}
+    spritePosition: {x: 1196, y: 1793}
+  - name: Front Antennae
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3966
+      y: 1636
+      width: 122
+      height: 674
+    spriteID: 15b9da95718103d45b48d63dedcfc123
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3966, y: 1636}
+    spritePosition: {x: 1135, y: 1810}
+  - name: Paint Layer 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4002
+      y: 4217
+      width: 57
+      height: 66
+    spriteID: 3bef87a72c3589940914659a65e5e8cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4002, y: 4217}
+    spritePosition: {x: 1149, y: 1775}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3636
+      y: 3875
+      width: 358
+      height: 333
+    spriteID: c9bea96e057043a458e22384081c2630
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3636, y: 3875}
+    spritePosition: {x: 1038, y: 1561}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 7232
+      width: 461
+      height: 444
+    spriteID: d31658a6c329b7442bc9cf13c49e0174
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 7232}
+    spritePosition: {x: 984, y: 1478}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3252
+      y: 3875
+      width: 376
+      height: 338
+    spriteID: e1937fa9246a9ad4a90b28659ca10afa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3252, y: 3875}
+    spritePosition: {x: 1021, y: 1560}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1739
+      y: 6596
+      width: 49
+      height: 90
+    spriteID: 11b2e2eecdd93864698a5cbee7bba866
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1739, y: 6596}
+    spritePosition: {x: 1258, y: 1820}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4002
+      y: 3875
+      width: 90
+      height: 334
+    spriteID: 6bc4f74d93470ac41b68b4d49c2a60b3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4002, y: 3875}
+    spritePosition: {x: 1239, y: 1802}
+  - name: Rear Antennae
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1587
+      y: 4180
+      width: 92
+      height: 633
+    spriteID: 0c292dfe5c57f4d4bb629f21e8bc2c91
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1587, y: 4180}
+    spritePosition: {x: 1249, y: 1815}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 6248
+      width: 570
+      height: 439
+    spriteID: ad7ac4f56937fe348bde87325fa7c23e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 6248}
+    spritePosition: {x: 537, y: 454}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 4839
+      width: 487
+      height: 525
+    spriteID: 0eb540db567ae464aaef1e6e717664d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 4839}
+    spritePosition: {x: 537, y: 452}
+  - name: Torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3269
+      y: 4
+      width: 723
+      height: 866
+    spriteID: 15aa27307f078714fa095701ce70964c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3269, y: 4}
+    spritePosition: {x: 536, y: 451}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3786
+      y: 7262
+      width: 254
+      height: 264
+    spriteID: 20631257cf84e7b4eb77eda219348e90
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3786, y: 7262}
+    spritePosition: {x: 1008, y: 1287}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 6695
+      width: 420
+      height: 529
+    spriteID: 6626c48f029412d40996e257d3f509b0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 6695}
+    spritePosition: {x: 912, y: 1199}
+  - name: Upper Torso Rear
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2843
+      y: 7777
+      width: 268
+      height: 312
+    spriteID: 0142fe4745937e9408a042b0489e720a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2843, y: 7777}
+    spritePosition: {x: 988, y: 1264}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3488
+      y: 8002
+      width: 98
+      height: 135
+    spriteID: fa81ef939978a2644b1631d749ff5bd9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3488, y: 8002}
+    spritePosition: {x: 1113, y: 1519}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3786
+      y: 7534
+      width: 213
+      height: 220
+    spriteID: 1435a9ec1dd57f345a64b3239556e737
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3786, y: 7534}
+    spritePosition: {x: 1018, y: 1478}
+  - name: Neck
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1590
+      y: 7978
+      width: 178
+      height: 190
+    spriteID: 8d96ebe8e7723cf4aa6bee95a7c827ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1590, y: 7978}
+    spritePosition: {x: 1036, y: 1489}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3625
+      y: 4302
+      width: 330
+      height: 1657
+    spriteID: 7df94ca1bd88e5141b11d46aa684ae7f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3625, y: 4302}
+    spritePosition: {x: 1383, y: 47}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3150
+      y: 4302
+      width: 467
+      height: 1726
+    spriteID: ae3e4b8b526a9d54bb46029d0c656bd5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3150, y: 4302}
+    spritePosition: {x: 1285, y: 0}
+  - name: Staff
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 2536
+      width: 315
+      height: 1636
+    spriteID: 422901f0f5b2e6742932de578698b178
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 2536}
+    spritePosition: {x: 1381, y: 46}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1630
+      y: 7232
+      width: 100
+      height: 431
+    spriteID: df2cf5b8eb8db184d9ae38e1001a26df
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1630, y: 7232}
+    spritePosition: {x: 1386, y: 748}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1161
+      y: 1712
+      width: 640
+      height: 816
+    spriteID: c51052af8388a004e9cf4c7edf2ab75b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1161, y: 1712}
+    spritePosition: {x: 884, y: 693}
+  - name: Rear Haori Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3269
+      y: 878
+      width: 431
+      height: 716
+    spriteID: 037d7f40f1e6ffa4d9408cf7c44ef599
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3269, y: 878}
+    spritePosition: {x: 1056, y: 740}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4249
+      width: 0
+      height: 0
+    spriteID: 27542dc847686d34ca29a32cee22f8a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4249}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3150
+      y: 8002
+      width: 330
+      height: 143
+    spriteID: 2a8d1ef8671c5f34cbeb9a54103007b6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3150, y: 8002}
+    spritePosition: {x: 1267, y: 1021}
+  - name: Rear Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3521
+      y: 2340
+      width: 547
+      height: 490
+    spriteID: 6637f27ef4c33b24f8adddf2dc773f73
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3521, y: 2340}
+    spritePosition: {x: 1047, y: 1023}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4257
+      width: 0
+      height: 0
+    spriteID: 8057d736422e5c94cb06721e8caff2f0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4257}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2508
+      y: 7777
+      width: 327
+      height: 284
+    spriteID: 0734b9d4bd3b4d7409e277a4bca944b4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2508, y: 7777}
+    spritePosition: {x: 1195, y: 557}
+  - name: Rear Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3708
+      y: 878
+      width: 367
+      height: 637
+    spriteID: 2b837afb825f2db499e82621241d0892
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3708, y: 878}
+    spritePosition: {x: 1154, y: 566}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4067
+      y: 4265
+      width: 0
+      height: 0
+    spriteID: 9844c9d1684117b4db51421709f3cb36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4067, y: 4265}
+    spritePosition: {x: 0, y: 2512}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 6854
+      width: 1106
+      height: 1330
+    spriteID: 8ddd6cd2c1925954bbf83a1e4a187c36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 6854}
+    spritePosition: {x: 114, y: 195}
+  - name: Front Wing
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 4302
+      width: 949
+      height: 1139
+    spriteID: 60b16f3d05825d947a38f50c64e9adad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 4302}
+    spritePosition: {x: 220, y: 354}
+  - name: Highlights
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2193
+      y: 4
+      width: 1068
+      height: 1624
+    spriteID: 85a32b3a2f82d9c419cb0f0c2f8660ba
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 2193, y: 4}
+    spritePosition: {x: 269, y: 38}
+  - name: Shadows
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 1149
+      height: 1697
+    spriteID: b1c525741901ecc4199d85dce33e624b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 223, y: 10}
+  - name: Front Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 5205
+      width: 1101
+      height: 1641
+    spriteID: 659286a9bfe174146b4d648188922c4f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 5205}
+    spritePosition: {x: 255, y: 35}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: No Name
+    spriteName: No Name
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8dcb5ab2876f2364bae8dcd43d177973
+    layerID: 0
+    mosaicPosition: {x: 4067, y: 4217}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Haori Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 318825608873ef14791b1b0aa9d92adf
+    layerID: -2145996906
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 1
+    spriteID: ae3d43e83305e504d8cb7a07101af704
+    layerID: -2142515933
+    mosaicPosition: {x: 1161, y: 4180}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 84b32bdc781900547b21538a2ded9f3b
+    layerID: 1571363105
+    mosaicPosition: {x: 3150, y: 6955}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Haori Arm
+    spriteName: Front Haori Arm
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 2ecf20cadae06e94a938618ca5e5bbe9
+    layerID: 111562482
+    mosaicPosition: {x: 3521, y: 1636}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Haori Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 387a2b19692c7c54588e60500759f23d
+    layerID: 240217874
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: c794b7e5195358b4b8b12478ff8ba885
+    layerID: 577320625
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 7a25e0d977484344f895e5cf30de2ee6
+    layerID: -276126209
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Haori Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: a886e35789e6f444dbaa55355bf51723
+    layerID: 1806301815
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Upper Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: ee226a433e49fed42bcd0c8b5e42921f
+    layerID: 601324113
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 9
+    spriteID: f1c31aa4dd9a6044685a6c568a3e45de
+    layerID: 577320628
+    mosaicPosition: {x: 4067, y: 4225}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 9
+    spriteID: a00295e4253f6eb419beffd911a307ef
+    layerID: -679410736
+    mosaicPosition: {x: 1161, y: 5372}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Upper Arm
+    spriteName: Front Upper Arm
+    isGroup: 0
+    parentIndex: 9
+    spriteID: 8401f8e6fbb9b5440ac2b34d70dd471f
+    layerID: 2051742777
+    mosaicPosition: {x: 1161, y: 7684}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Upper Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 61e42677d73e6684381c8e020dc9fdc7
+    layerID: -1603466329
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 13
+    spriteID: 48474f8adc509c84f9c4c6be4010e6b1
+    layerID: 577320627
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 13
+    spriteID: c92916bb5c071ff47b6aeb33bc216746
+    layerID: 886673205
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Upper Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 13
+    spriteID: cfa5470235853b747906b73ac0a7ac44
+    layerID: -2006750856
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Leg Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 688fef57c85dcf245a4020ae0f92afff
+    layerID: -1362826581
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 17
+    spriteID: b82070db6df6ddb42948a3bdf45bc5b9
+    layerID: 577320622
+    mosaicPosition: {x: 1161, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 17
+    spriteID: c0f3784db7476e745ada056b6820b06c
+    layerID: 483388678
+    mosaicPosition: {x: 4, y: 1709}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Leg
+    spriteName: Front Leg
+    isGroup: 0
+    parentIndex: 17
+    spriteID: 48a49391b4c6198439b9d7a67db9863d
+    layerID: -98127073
+    mosaicPosition: {x: 4, y: 3479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 03fb1e8305f5fd24d857934871956665
+    layerID: 465272621
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 21
+    spriteID: edde1d6e9c115404184b8e3e1e005ac7
+    layerID: 577320621
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 21
+    spriteID: 831a76e6ec8f9f5459a954bb1c01931f
+    layerID: 2049472619
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Leg
+    spriteName: 
+    isGroup: 0
+    parentIndex: 21
+    spriteID: c74b164466cc05545b4f5148f3dcae1c
+    layerID: 2031356562
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Haori Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 35323b8a58148fd4db5386854e49ab2e
+    layerID: -1417433720
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 25
+    spriteID: 13529f0595724c04db0594734a13b372
+    layerID: 577320624
+    mosaicPosition: {x: 3150, y: 6036}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 25
+    spriteID: 1011c539983f52f4c8907feef8a2364d
+    layerID: 1646188092
+    mosaicPosition: {x: 2193, y: 6643}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: 'Front Haori '
+    spriteName: 'Front Haori '
+    isGroup: 0
+    parentIndex: 25
+    spriteID: b65e637298c04aa40bb8a283c7bccc5a
+    layerID: -1062289336
+    mosaicPosition: {x: 3252, y: 2927}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Haori
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 0e43edd7534825a4ab7dab031570ef9f
+    layerID: -503699032
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 29
+    spriteID: d9c1f171fd5c4aa429c60c19b03624f0
+    layerID: 577320623
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 29
+    spriteID: ee6b270d8781c3d4cacde035355f0c69
+    layerID: -1082695263
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: 'Front Haori '
+    spriteName: 
+    isGroup: 0
+    parentIndex: 29
+    spriteID: 3f1ac5ad563a18646966fa47f3f0557f
+    layerID: -2093879952
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Upper Torso Front Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 486fbbe9291fb26448290a2895714103
+    layerID: 1667796938
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 60b9b38503dff1443884103d93ca126f
+    layerID: 577320634
+    mosaicPosition: {x: 3786, y: 6955}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 4eb4ef524d98de04da3f525c252e7c1a
+    layerID: -1485979790
+    mosaicPosition: {x: 2193, y: 1636}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Upper Torso Front
+    spriteName: Upper Torso Front
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 053e391395c66ca4e95b2875203784ff
+    layerID: 882822006
+    mosaicPosition: {x: 2193, y: 7777}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Upper Torso Front
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: f17b0c340a1af5e4b95e6ee785ffdc86
+    layerID: -78021698
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 0691172470c550c42957d22a8e4314be
+    layerID: 577320633
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 32898e9640390ec4085ed97c22e6370a
+    layerID: 80104151
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Upper Torso Front
+    spriteName: 
+    isGroup: 0
+    parentIndex: 37
+    spriteID: cf6ea190db7fae541852dbba33c80be8
+    layerID: 1488062243
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Wing Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 0ba948c29cfb13444a658fc15ea38f9b
+    layerID: -1128231992
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 41
+    spriteID: ccac80fa0e7a1204bbbbeea52b154876
+    layerID: -232273407
+    mosaicPosition: {x: 4067, y: 4233}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 41
+    spriteID: 19f16d3bfd5cf634a93c8173210a2e73
+    layerID: -1460227953
+    mosaicPosition: {x: 2193, y: 2927}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Wing
+    spriteName: Front Wing
+    isGroup: 0
+    parentIndex: 41
+    spriteID: 801442e6b7c623b47a814fc938235b64
+    layerID: 56506996
+    mosaicPosition: {x: 2193, y: 5449}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Wing
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 08efc76288590a64ea94bd252d7a4f5f
+    layerID: -1596816200
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 45
+    spriteID: a71f0d4afab63b54289e437e3e01488b
+    layerID: -1798357348
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 45
+    spriteID: 8657a9ee1b261f849bee89887ad7c9f4
+    layerID: -1460227952
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Wing
+    spriteName: 
+    isGroup: 0
+    parentIndex: 45
+    spriteID: 430e7e3f233a0da48b921083896e0b15
+    layerID: -1596816197
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Lower Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: a9214ee58f174b04fb40fa142d8ddaa4
+    layerID: 1594675914
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 49
+    spriteID: cd0c877bc1e242b4d9cb98a7d5e387d3
+    layerID: -1395072821
+    mosaicPosition: {x: 4067, y: 4241}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 49
+    spriteID: 53c587f506e60db40a413a73ca144894
+    layerID: -1460227951
+    mosaicPosition: {x: 1161, y: 7978}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Lower Arm
+    spriteName: Front Lower Arm
+    isGroup: 0
+    parentIndex: 49
+    spriteID: c6444131c6aa71646bbdca1e3123036f
+    layerID: -101052798
+    mosaicPosition: {x: 1161, y: 5804}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Lower Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 1e48d000330614943ba0ec3d0e53337b
+    layerID: 1551726194
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 53
+    spriteID: 46ea59542391d264999d9d3acd51adc7
+    layerID: 1333810534
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 53
+    spriteID: 8549ee0cca3456f4a8b7e416898caac3
+    layerID: -1460227950
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Lower Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 53
+    spriteID: dfad275bcbed0f9478e4aa13999191f3
+    layerID: 1955010721
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Antennae Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: b9a79e9105420ed45b0814349648a2cb
+    layerID: -276642765
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 57
+    spriteID: a908994b7c1d72348b2d721f46e85acc
+    layerID: 1737095061
+    mosaicPosition: {x: 4048, y: 7262}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 57
+    spriteID: 7d866b6dc4dafec4abeaf4d3fe045cc6
+    layerID: -1460227957
+    mosaicPosition: {x: 1739, y: 6248}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Antennae
+    spriteName: Front Antennae
+    isGroup: 0
+    parentIndex: 57
+    spriteID: 15b9da95718103d45b48d63dedcfc123
+    layerID: 2005946879
+    mosaicPosition: {x: 3966, y: 1636}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Antennae
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: cfd7a87b93fb1db4cb7bb56463288820
+    layerID: 635789329
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 61
+    spriteID: 968ada0ecba269a40b29e168e07e4e90
+    layerID: 171011120
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 61
+    spriteID: 4a65cecc0b80bbc42aff8ad86a06ad6f
+    layerID: -1460227956
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Antennae
+    spriteName: 
+    isGroup: 0
+    parentIndex: 61
+    spriteID: 049bea2a82bce12419901f3a7122c2a2
+    layerID: 635789326
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Head Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 00be903db8d9b294eb23883279151a4c
+    layerID: 1893151904
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Paint Layer 1
+    spriteName: Paint Layer 1
+    isGroup: 0
+    parentIndex: 65
+    spriteID: 3bef87a72c3589940914659a65e5e8cf
+    layerID: 1139611364
+    mosaicPosition: {x: 4002, y: 4217}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 65
+    spriteID: c9bea96e057043a458e22384081c2630
+    layerID: 574295647
+    mosaicPosition: {x: 3636, y: 3875}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 65
+    spriteID: d31658a6c329b7442bc9cf13c49e0174
+    layerID: -1460227955
+    mosaicPosition: {x: 1161, y: 7232}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: 65
+    spriteID: e1937fa9246a9ad4a90b28659ca10afa
+    layerID: 28851968
+    mosaicPosition: {x: 3252, y: 3875}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Head
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 30110f8363eb8254998b95f9abc8af19
+    layerID: -237535612
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Paint Layer 1
+    spriteName: 
+    isGroup: 0
+    parentIndex: 70
+    spriteID: 0da0da6d16f9eb74eaf0ae50b0b1af54
+    layerID: 1231013916
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 70
+    spriteID: 122fbd7a2052f304693564a3e8c765d8
+    layerID: -991788294
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 70
+    spriteID: 30947997ebd119e40ad6f7aa752adefa
+    layerID: -1460227954
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Head
+    spriteName: 
+    isGroup: 0
+    parentIndex: 70
+    spriteID: 9020a88b415a7534e85c4526e2f51c3a
+    layerID: -237535611
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Antennae Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 4cff51162ecebbd4ea6fcb616dc4f0c0
+    layerID: 633000050
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 75
+    spriteID: 11b2e2eecdd93864698a5cbee7bba866
+    layerID: 123956953
+    mosaicPosition: {x: 1739, y: 6596}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 75
+    spriteID: 6bc4f74d93470ac41b68b4d49c2a60b3
+    layerID: -1460227945
+    mosaicPosition: {x: 4002, y: 3875}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Antennae
+    spriteName: Rear Antennae
+    isGroup: 0
+    parentIndex: 75
+    spriteID: 0c292dfe5c57f4d4bb629f21e8bc2c91
+    layerID: -123317378
+    mosaicPosition: {x: 1587, y: 4180}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Antennae
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 2a5d83f2a0e0df34b8ec64d45b69c95d
+    layerID: -345804346
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 79
+    spriteID: 638d18fddbd91004faede77bd183c102
+    layerID: -1442126988
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 79
+    spriteID: 6926147784ad04a488a4473c2db3758d
+    layerID: -1460227944
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Antennae
+    spriteName: 
+    isGroup: 0
+    parentIndex: 79
+    spriteID: df6d58e2433488c438c6efac813c9b53
+    layerID: 1220279595
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Torso Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: c737ab1b929aa19419998f2afa08c0c2
+    layerID: 1120390353
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 83
+    spriteID: ad7ac4f56937fe348bde87325fa7c23e
+    layerID: -232273404
+    mosaicPosition: {x: 1161, y: 6248}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 83
+    spriteID: 0eb540db567ae464aaef1e6e717664d3
+    layerID: -1863512480
+    mosaicPosition: {x: 1161, y: 4839}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso
+    spriteName: Torso
+    isGroup: 0
+    parentIndex: 83
+    spriteID: 15aa27307f078714fa095701ce70964c
+    layerID: -587803991
+    mosaicPosition: {x: 3269, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: be7509662adf3b0419f0d0dd4670196a
+    layerID: -201239813
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 87
+    spriteID: c38676d411838164fb3dafb95f09224d
+    layerID: -1798357345
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 87
+    spriteID: 180b9b0fda341b44c92011921dad1de6
+    layerID: -1863512479
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Torso
+    spriteName: 
+    isGroup: 0
+    parentIndex: 87
+    spriteID: a4c2f28a633ed9a4bbb9f6cad7bd1271
+    layerID: 202044714
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Upper Torso Rear Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 201096e3e1fc5514ebc68886b36b3b08
+    layerID: -315536653
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 91
+    spriteID: 20631257cf84e7b4eb77eda219348e90
+    layerID: -1395072818
+    mosaicPosition: {x: 3786, y: 7262}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 91
+    spriteID: 6626c48f029412d40996e257d3f509b0
+    layerID: -1863512478
+    mosaicPosition: {x: 1161, y: 6695}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Upper Torso Rear
+    spriteName: Upper Torso Rear
+    isGroup: 0
+    parentIndex: 91
+    spriteID: 0142fe4745937e9408a042b0489e720a
+    layerID: -980720625
+    mosaicPosition: {x: 2843, y: 7777}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Upper Torso Rear
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 3206cb0845b8fca40ba50b4b2c0ad5c2
+    layerID: 1780889869
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 768789dbd546c2443b8d4209cbb073e7
+    layerID: 1333810537
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 9f09d667175769f46bd75a7422334ff8
+    layerID: -1863512477
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Upper Torso Rear
+    spriteName: 
+    isGroup: 0
+    parentIndex: 95
+    spriteID: b1fb530f17f398a4c9c3ad07cfe73f24
+    layerID: 1780889870
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Neck Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 0d47af74d5de10346bc8bba047ef1038
+    layerID: -837516029
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 99
+    spriteID: fa81ef939978a2644b1631d749ff5bd9
+    layerID: 1737095064
+    mosaicPosition: {x: 3488, y: 8002}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 99
+    spriteID: 1435a9ec1dd57f345a64b3239556e737
+    layerID: -1863512484
+    mosaicPosition: {x: 3786, y: 7534}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Neck
+    spriteName: Neck
+    isGroup: 0
+    parentIndex: 99
+    spriteID: 8d96ebe8e7723cf4aa6bee95a7c827ee
+    layerID: -1893468801
+    mosaicPosition: {x: 1590, y: 7978}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Neck
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 57462e3d79d4e4a4bba5bbdd237ac5b2
+    layerID: 300049757
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 103
+    spriteID: 5ce0a485bd2db2f41b27151f6a9fefb2
+    layerID: 171011123
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 103
+    spriteID: 5ab253331c57f774c8cf4c947de67527
+    layerID: -1863512483
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Neck
+    spriteName: 
+    isGroup: 0
+    parentIndex: 103
+    spriteID: 7c52d1bb0c2b91f419da2c1b15fa1a3d
+    layerID: 300049758
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Staff Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 6529999b0a652314da29d1b3333f95ea
+    layerID: 951320832
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 107
+    spriteID: 7df94ca1bd88e5141b11d46aa684ae7f
+    layerID: 574295650
+    mosaicPosition: {x: 3625, y: 4302}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 107
+    spriteID: ae3e4b8b526a9d54bb46029d0c656bd5
+    layerID: -1863512482
+    mosaicPosition: {x: 3150, y: 4302}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Staff
+    spriteName: Staff
+    isGroup: 0
+    parentIndex: 107
+    spriteID: 422901f0f5b2e6742932de578698b178
+    layerID: -2093016796
+    mosaicPosition: {x: 1161, y: 2536}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Staff
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 0b42a281988710442a6cc8b08a477c69
+    layerID: 221220620
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 111
+    spriteID: a84373282cb518a428f2787480df5f96
+    layerID: -991788291
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 111
+    spriteID: 4afae95e73249ac4b82d0979dca0cc18
+    layerID: -1863512481
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Staff
+    spriteName: 
+    isGroup: 0
+    parentIndex: 111
+    spriteID: 3e1dbdeb3a1fff74b8c677302822b162
+    layerID: -1344863321
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Haori Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 7d2ca36c7fe622d4980fe574c995edad
+    layerID: 859229411
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 115
+    spriteID: df2cf5b8eb8db184d9ae38e1001a26df
+    layerID: 123956956
+    mosaicPosition: {x: 1630, y: 7232}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 115
+    spriteID: c51052af8388a004e9cf4c7edf2ab75b
+    layerID: -1863512472
+    mosaicPosition: {x: 1161, y: 1712}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Haori Arm
+    spriteName: Rear Haori Arm
+    isGroup: 0
+    parentIndex: 115
+    spriteID: 037d7f40f1e6ffa4d9408cf7c44ef599
+    layerID: 1998680455
+    mosaicPosition: {x: 3269, y: 878}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Haori Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: a9cc4a7dcfb01904eb98c73e25260c35
+    layerID: -1479262767
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 119
+    spriteID: f89f4f7dbfae9e645beac8a4f3debd05
+    layerID: -1442126985
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 119
+    spriteID: 2017d86ae90de2f41b8adeeb49112caa
+    layerID: -1863512471
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Haori Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 119
+    spriteID: 1b3e06e3f99cecd4ea1eb01c5467b646
+    layerID: -1479262768
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Upper Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 626d4aa1391037446b0d68677eec84b0
+    layerID: 469535158
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 123
+    spriteID: 27542dc847686d34ca29a32cee22f8a8
+    layerID: -232273405
+    mosaicPosition: {x: 4067, y: 4249}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 123
+    spriteID: 2a8d1ef8671c5f34cbeb9a54103007b6
+    layerID: -297428539
+    mosaicPosition: {x: 3150, y: 8002}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Upper Arm
+    spriteName: Rear Upper Arm
+    isGroup: 0
+    parentIndex: 123
+    spriteID: 6637f27ef4c33b24f8adddf2dc773f73
+    layerID: -732116866
+    mosaicPosition: {x: 3521, y: 2340}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Upper Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: ee74e1d575e003545a0f35198d8715d3
+    layerID: 1939326318
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 127
+    spriteID: 410aa3fadda435442bb3d5070754d46a
+    layerID: -1798357346
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 127
+    spriteID: 533e2504d1d05a64f920e8574249983f
+    layerID: -297428538
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Upper Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 127
+    spriteID: c8cb8a7a4756d8e4b8f39012502d835e
+    layerID: 1939326321
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Lower Arm Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 4db40f8156dd0144295387ea06cdec1c
+    layerID: -531153591
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 131
+    spriteID: 8057d736422e5c94cb06721e8caff2f0
+    layerID: -1395072819
+    mosaicPosition: {x: 4067, y: 4257}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 131
+    spriteID: 0734b9d4bd3b4d7409e277a4bca944b4
+    layerID: -297428537
+    mosaicPosition: {x: 2508, y: 7777}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Lower Arm
+    spriteName: Rear Lower Arm
+    isGroup: 0
+    parentIndex: 131
+    spriteID: 2b837afb825f2db499e82621241d0892
+    layerID: 303851681
+    mosaicPosition: {x: 3708, y: 878}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Lower Arm
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: ad9ca9da205f008429bd80ea1cbf0465
+    layerID: 865872711
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 135
+    spriteID: 2d9289b223a825243a46e2f8320408f4
+    layerID: 1333810536
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 135
+    spriteID: 3ead3a31bb8f8be42b288820d6c3d6bd
+    layerID: -297428536
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Lower Arm
+    spriteName: 
+    isGroup: 0
+    parentIndex: 135
+    spriteID: 79eb1162bd9fbc34588863d39c15b70d
+    layerID: 865872708
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Wing Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 4ee96fe9db0a87a4397a54cc78c12bc8
+    layerID: -355413149
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 139
+    spriteID: 9844c9d1684117b4db51421709f3cb36
+    layerID: 1737095063
+    mosaicPosition: {x: 4067, y: 4265}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 139
+    spriteID: 8ddd6cd2c1925954bbf83a1e4a187c36
+    layerID: -297428543
+    mosaicPosition: {x: 4, y: 6854}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Wing
+    spriteName: Front Wing
+    isGroup: 0
+    parentIndex: 139
+    spriteID: 60b16f3d05825d947a38f50c64e9adad
+    layerID: -1596816198
+    mosaicPosition: {x: 2193, y: 4302}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Wing
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 842919b82c0ff38499ec08d3a32cd9d9
+    layerID: 602952623
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 143
+    spriteID: 8153161d90aedf44dbbea78b5022c19d
+    layerID: 171011122
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 143
+    spriteID: dfd1bee2ca76ccf4db5696237622186a
+    layerID: -297428542
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Wing
+    spriteName: 
+    isGroup: 0
+    parentIndex: 143
+    spriteID: 087b824492ab44349a6ac2fc25fb63b9
+    layerID: -1596816195
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Rear Leg Merged
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 53939da54ef39b74fac75561af261a66
+    layerID: 2099683876
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Highlights
+    spriteName: Highlights
+    isGroup: 0
+    parentIndex: 147
+    spriteID: 85a32b3a2f82d9c419cb0f0c2f8660ba
+    layerID: 574295649
+    mosaicPosition: {x: 2193, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Shadows
+    spriteName: Shadows
+    isGroup: 0
+    parentIndex: 147
+    spriteID: b1c525741901ecc4199d85dce33e624b
+    layerID: -297428541
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front Leg
+    spriteName: Front Leg
+    isGroup: 0
+    parentIndex: 147
+    spriteID: 659286a9bfe174146b4d648188922c4f
+    layerID: -697526793
+    mosaicPosition: {x: 4, y: 5205}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rear Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 801a621247f37db4e8e743b234346438
+    layerID: -151320368
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Highlights
+    spriteName: 
+    isGroup: 0
+    parentIndex: 151
+    spriteID: e15ffe3b8832ad5488b5482e979a35f0
+    layerID: -991788292
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shadows
+    spriteName: 
+    isGroup: 0
+    parentIndex: 151
+    spriteID: 4c1ed75392bec81468acca71d7c1e205
+    layerID: -297428540
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Front Leg
+    spriteName: 
+    isGroup: 0
+    parentIndex: 151
+    spriteID: d63b8a46d6bcf444380157e3087b9e80
+    layerID: 1224787508
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Background
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ba574da634a5f594185081ac1cb49ae0
+    layerID: -1498723586
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

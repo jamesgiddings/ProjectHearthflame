@@ -26,9 +26,7 @@ public class Battle : Data
     [SerializeField] private GameObject _battleMusic;
 
     [Header("Battle Opponents")]
-    [TableList(ShowIndexLabels = true)]
     [SerializeField] private ItemSlot[] _itemSlots;
-    [TableList(DrawScrollView = true, MaxScrollViewHeight = 200, MinScrollViewHeight = 100)]
     [SerializeField] private Character[] _battleCharacterBlueprints;
 
 	[SerializeField] private BattleWinConditions _battleWinConditions;

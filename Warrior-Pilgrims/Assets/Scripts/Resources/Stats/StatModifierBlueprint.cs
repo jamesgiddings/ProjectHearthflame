@@ -36,8 +36,8 @@ namespace GramophoneUtils.Stats
         public StatModifierType StatModifierType => _statModifierType;
 
 
-        [SerializeField, Tooltip("Percentage values should be expressed as a decimal between 0 and 1 (or higher), i.e. not 50 for 50%.")] private float value;
-        public float Value => value;
+        [SerializeField, Tooltip("Percentage values should be expressed as a decimal between 0 and 1 (or higher), i.e. not 50 for 50%.")] private FloatReference _value;
+        public float Value => _value;
 
 
         [SerializeField] private int duration;

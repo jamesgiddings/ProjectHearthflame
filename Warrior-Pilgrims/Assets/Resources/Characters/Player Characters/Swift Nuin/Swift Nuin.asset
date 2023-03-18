@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Swift Nuin
+  m_EditorClassIdentifier: 
+  _name: Swift Nuin
+  _sprite: {fileID: 0}
+  _description: 
+  _characterClass: {fileID: 11400000, guid: b39e5b34b1b780149b598581e316c9b0, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 1
+  _startingLevel: 0
+  _characterPrefab: {fileID: 2374561135625250464, guid: 350fff1ba2396e3428e6e9e0dea440d1,
+    type: 3}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: d52ffbb6d0c38a74ca203f11447b2731, type: 2}
+  _portrait: {fileID: 0}
+  _color: {r: 0.49803925, g: 0.5803922, b: 0.6666667, a: 1}
+  _equipmentInventory: {fileID: 11400000, guid: 728ddc8487ad2864da16dc399b7140e6,
+    type: 2}
+  _isPlayer: 1
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Swift NuinAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/Swift NuinAnimationController
+  _idle_Left: {fileID: 0}
+  _idle_Right: {fileID: 0}
+  _idle_Up: {fileID: 0}
+  _idle_Down: {fileID: 0}
+  _walk_Left: {fileID: 0}
+  _walk_Right: {fileID: 0}
+  _walk_Up: {fileID: 0}
+  _walk_Down: {fileID: 0}
+  _attack_Left: {fileID: 0}
+  _attack_Right: {fileID: 0}
+  _attack_Up: {fileID: 0}
+  _attack_Down: {fileID: 0}
+  _cast_Left: {fileID: 0}
+  _cast_Right: {fileID: 0}
+  _cast_Up: {fileID: 0}
+  _cast_Down: {fileID: 0}
+  _die: {fileID: 0}
+  _dead: {fileID: 0}
+  _shoot_Left: {fileID: 0}
+  _shoot_Right: {fileID: 0}
+  _shoot_Up: {fileID: 0}
+  _shoot_Down: {fileID: 0}

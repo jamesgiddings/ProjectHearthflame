@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Small Healing
   _sprite: {fileID: 0}
-  _value: 5
+  _value:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: de61b7386d2babf499f5f58130e353a0, type: 2}

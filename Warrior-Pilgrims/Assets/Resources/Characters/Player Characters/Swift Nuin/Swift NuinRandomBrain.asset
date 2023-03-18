@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee655a2603fdb9942a381ed80253b480, type: 3}
+  m_Name: Swift NuinRandomBrain
+  m_EditorClassIdentifier: 
+  _name: 
+  _sprite: {fileID: 0}
+  _randomSkillObjectCollection: {fileID: 11400000, guid: 03ca4c8343ad9774298006288d3f6be7,
+    type: 2}
+  _randomCharacterClassObjectCollection: {fileID: 11400000, guid: 04f1008ea97e4af40a5367cfd40ad7d4,
+    type: 2}

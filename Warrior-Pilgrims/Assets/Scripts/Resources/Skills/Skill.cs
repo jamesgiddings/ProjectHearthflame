@@ -16,6 +16,10 @@ public class Skill : Resource, ISkill, IHotbarItem
 {
     #region Attributes/Fields/Properties
 
+    [BoxGroup("General")]
+    [SerializeField] private string _description;
+    public string Description => _description;
+
     [BoxGroup("Skill Progression")]
     [SerializeField] private CharacterClass[] _classRestrictions;
     public CharacterClass[] ClassRestrictions => _classRestrictions;

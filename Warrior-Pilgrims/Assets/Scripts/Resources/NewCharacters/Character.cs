@@ -14,7 +14,7 @@ namespace GramophoneUtils.Characters
     {
         #region Attributes/Fields
 
-        [VerticalGroup("General/Split/Left")]
+        [BoxGroup("General")]
         [TextArea(3, 5)]
         [SerializeField] private string _description;
         public string Description => _description;
@@ -43,12 +43,12 @@ namespace GramophoneUtils.Characters
         [SerializeField] InterfaceReference<IBrain> _brain;
         public IBrain Brain => _brain.Value;
 
-        [VerticalGroup("General/Split/Right/Sprites")]
+        [BoxGroup("General")]
         [PreviewField(60), LabelWidth(50)]
         [SerializeField] private Sprite _portrait;
         public Sprite Portrait => _portrait;
 
-        [VerticalGroup("General/Split/Left")]
+        [BoxGroup("General")]
         [SerializeField] private Color _color;
         public Color Color => _color;
 
@@ -80,7 +80,7 @@ namespace GramophoneUtils.Characters
         private bool _isRear;
         public bool IsRear { get { return _isRear; } set { _isRear = value; } }
 
-        [VerticalGroup("General/Split/Left")]
+        [BoxGroup("General")]
         [SerializeField] private bool _isPlayer;
         public bool IsPlayer { get { return _isPlayer; } set { _isPlayer = value; } }
 

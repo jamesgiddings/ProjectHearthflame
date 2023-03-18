@@ -5,8 +5,7 @@ using Sirenix.OdinInspector;
 [Serializable]
 public class Resource : Data, IResource
 {
-    [VerticalGroup("General/Split/Right")]
-    [VerticalGroup("General/Split/Right/Sprites", 30)]
+    [BoxGroup("General")]
     [PreviewField(60), LabelWidth(50)]
     [SerializeField] protected Sprite _sprite;
 

@@ -15,7 +15,7 @@ public class HealingBlueprint : ScriptableObject, IBlueprint
     public Sprite Sprite => _sprite;
 
 
-    [SerializeField] float _value;
+    [SerializeField] FloatReference _value;
     public float Value => _value;
 
 
