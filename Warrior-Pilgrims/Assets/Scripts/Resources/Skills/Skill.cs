@@ -17,6 +17,7 @@ public class Skill : Resource, ISkill, IHotbarItem
     #region Attributes/Fields/Properties
 
     [BoxGroup("General")]
+    [TextArea(3, 5)]
     [SerializeField] private string _description;
     public string Description => _description;
 

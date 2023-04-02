@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Joy-In-Thunder
+  m_EditorClassIdentifier: 
+  _name: Joy-In-Thunder
+  _sprite: {fileID: 21300000, guid: 2a4561cf858759f4da0fbdb96cbc8db5, type: 3}
+  _description: Joy-in-Thunder is a grasshopper/cricket hengeyokai, son of a clan
+    of sages and farmers (or layabouts and thieves, depending upon who is asked),
+    who travels the realm, hoping that the peace he brings for others might bring
+    him peace in his own soul.
+  _characterClass: {fileID: 11400000, guid: 6e07dc291e71ede438f310b03b89f969, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 1
+  _startingLevel: 0
+  _characterPrefab: {fileID: 2374561135625250464, guid: bee3afd6d2e037c4897df2a488324ba9,
+    type: 3}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: 0d2af48c0969a7644bd2ab7fbd4eb37f, type: 2}
+  _portrait: {fileID: 21300000, guid: 2a4561cf858759f4da0fbdb96cbc8db5, type: 3}
+  _color: {r: 0.70980394, g: 0.7411765, b: 0.4784314, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: d16375cdea813b942a6f09367288a550,
+    type: 2}
+  _isPlayer: 1
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/Joy-In-ThunderAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/Joy-In-ThunderAnimationController
+  _idle_Left: {fileID: 0}
+  _idle_Right: {fileID: 0}
+  _idle_Up: {fileID: 0}
+  _idle_Down: {fileID: 0}
+  _walk_Left: {fileID: 0}
+  _walk_Right: {fileID: 0}
+  _walk_Up: {fileID: 0}
+  _walk_Down: {fileID: 0}
+  _attack_Left: {fileID: 0}
+  _attack_Right: {fileID: 0}
+  _attack_Up: {fileID: 0}
+  _attack_Down: {fileID: 0}
+  _cast_Left: {fileID: 0}
+  _cast_Right: {fileID: 0}
+  _cast_Up: {fileID: 0}
+  _cast_Down: {fileID: 0}
+  _die: {fileID: 0}
+  _dead: {fileID: 0}
+  _shoot_Left: {fileID: 0}
+  _shoot_Right: {fileID: 0}
+  _shoot_Up: {fileID: 0}
+  _shoot_Down: {fileID: 0}

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd0153750db294b998599321ab5397, type: 3}
+  m_Name: Return to Formlessness
+  m_EditorClassIdentifier: 
+  _name: Return to Formlessness
+  _sprite: {fileID: 0}
+  _description: "Nirkapur strikes his shield with his mace, and sets the sparks thus
+    conjured to invade the souls of his foes.\r\nInflict kami-rot on the foe and
+    the foe behind it.\r"
+  _classRestrictions:
+  - {fileID: 11400000, guid: 6e07dc291e71ede438f310b03b89f969, type: 2}
+  _school: 0
+  _prerequisites: []
+  _usesToUnlock: 0
+  _targetAreaFlag: 0
+  _targetNumberFlag: 0
+  _targetTypeFlag: 1
+  _skillAnimType: 1
+  _targetToSlots:
+    _underlyingValue: {fileID: 11400000, guid: d3eb08f3404fcf641b419391872e4fa1, type: 2}
+  _useFromSlot:
+    _underlyingValue: {fileID: 11400000, guid: 5e01e60918686374f8d1726e947ff25b, type: 2}
+  _projectilePrefab: {fileID: 0}
+  _effectPrefab: {fileID: 0}
+  _animatorController: {fileID: 0}
+  _targetStatusEffectBlueprints: []
+  _targetDamageBlueprints: []
+  _targetHealingBlueprints: []
+  _targetMoveBlueprints: []
+  _selfStatusEffectBlueprints: []
+  _selfDamageBlueprints: []
+  _selfHealingBlueprints: []
+  _selfMoveBlueprints: []

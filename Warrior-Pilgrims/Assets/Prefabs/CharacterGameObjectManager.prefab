@@ -109,7 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _battlerParent: {fileID: 0}
-  battlerGap: 2
+  _battlerGapReference:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 5dfcbda7054d7ba42bd9cb855718dfb4, type: 2}
   _frontBattlerPositionPrefab: {fileID: 5274669892593997697, guid: 43c0c4cbadb91e24fbb007a20b76f3be,
     type: 3}
 --- !u!114 &584415698
@@ -185,7 +188,7 @@ SortingGroup:
   m_GameObject: {fileID: 2173672338051350461}
   m_Enabled: 1
   m_SortingLayerID: 1811155961
-  m_SortingLayer: 7
+  m_SortingLayer: 10
   m_SortingOrder: 5
 --- !u!114 &2910045582686674365
 MonoBehaviour:

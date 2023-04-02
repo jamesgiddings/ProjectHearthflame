@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc31e97daa2528c4b906b7501c4babb5, type: 3}
+  m_Name: Jade HammerRandomSkillObjectCollection
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _randomSkillObjects:
+  - {fileID: 11400000, guid: 7ed937a6824f55843abfbfbd528a2ff8, type: 2}
+  - {fileID: 11400000, guid: de4686602bddd2140bd369bcc49497f4, type: 2}
+  - {fileID: 11400000, guid: 8027d3d9776ab394a94dd04e7038b845, type: 2}
+  - {fileID: 11400000, guid: 13f52dc43cd272645a949b45bc6d0b47, type: 2}
+  - {fileID: 11400000, guid: 4d6ffbf90b3117e488ca5a5112957a29, type: 2}
+  - {fileID: 11400000, guid: 7686bac2c15d5d947b8f8c82da6462dd, type: 2}

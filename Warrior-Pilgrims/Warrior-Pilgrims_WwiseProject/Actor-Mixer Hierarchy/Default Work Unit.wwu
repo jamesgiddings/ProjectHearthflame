@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{0D98DDB5-DF26-421F-9926-56A456FF3321}" SchemaVersion="110">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{0D98DDB5-DF26-421F-9926-56A456FF3321}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Bluezone_BC0279_forest_tree_branch_leaf_foliage_impact_short_012" ID="{DFDB20CE-6555-4231-92E6-6F64C494C55E}" ShortID="824916122">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5E6E6860-E20A-48DB-BE4D-7A4751B76131}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5616E41E-88D5-4F87-AA2B-C043BE78F0DE}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Bluezone_BC0279_forest_tree_branch_leaf_foliage_impact_short_012" ID="{E34AF87C-42BA-4A66-B1F8-9814A581EE16}">
+							<Language>SFX</Language>
+							<AudioFile>Bluezone_BC0279_forest_tree_branch_leaf_foliage_impact_short_012.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="439320526"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Bluezone_BC0279_forest_tree_branch_leaf_foliage_impact_short_012" ID="{E34AF87C-42BA-4A66-B1F8-9814A581EE16}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Bluezone_BC0279_forest_tree_branch_texture_1_004" ID="{7E3460D8-073C-47F5-B2C0-BAC972E4A7EA}" ShortID="268858505">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5E6E6860-E20A-48DB-BE4D-7A4751B76131}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5616E41E-88D5-4F87-AA2B-C043BE78F0DE}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Bluezone_BC0279_forest_tree_branch_texture_1_004" ID="{567E080C-3CC8-463C-AC20-E00CF9F9BDA3}">
+							<Language>SFX</Language>
+							<AudioFile>Bluezone_BC0279_forest_tree_branch_texture_1_004.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="143200980"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Bluezone_BC0279_forest_tree_branch_texture_1_004" ID="{567E080C-3CC8-463C-AC20-E00CF9F9BDA3}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Bluezone_BC0279_forest_tree_wood_texture_creaking_016" ID="{BEA4059A-4F92-4BC5-9312-38C634BC8255}" ShortID="674261847">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5E6E6860-E20A-48DB-BE4D-7A4751B76131}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5616E41E-88D5-4F87-AA2B-C043BE78F0DE}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Bluezone_BC0279_forest_tree_wood_texture_creaking_016" ID="{75821562-B590-442A-9021-2548AF587FA4}">
+							<Language>SFX</Language>
+							<AudioFile>Bluezone_BC0279_forest_tree_wood_texture_creaking_016.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="634736989"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Bluezone_BC0279_forest_tree_wood_texture_creaking_016" ID="{75821562-B590-442A-9021-2548AF587FA4}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="Bluezone_BC0279_forest_wood_log_debris_falling_3_007" ID="{BCE0F6F1-A99F-448B-9D63-DD30E07E7DA2}" ShortID="222697673">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5E6E6860-E20A-48DB-BE4D-7A4751B76131}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5616E41E-88D5-4F87-AA2B-C043BE78F0DE}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Bluezone_BC0279_forest_wood_log_debris_falling_3_007" ID="{D9B729C5-2FF6-48A7-A04E-AD5D9B69EB2B}">
+							<Language>SFX</Language>
+							<AudioFile>Bluezone_BC0279_forest_wood_log_debris_falling_3_007.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="746019541"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Bluezone_BC0279_forest_wood_log_debris_falling_3_007" ID="{D9B729C5-2FF6-48A7-A04E-AD5D9B69EB2B}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7a99623ac4cbe449abec516395c3bb, type: 3}
+  m_Name: Nirkapur
+  m_EditorClassIdentifier: 
+  _name: Nirkapur
+  _sprite: {fileID: 0}
+  _description: Nirkapur is a warrior from Occupied Reshwat. He has come to undertake
+    the warrior-pilgrimage only grudgingly, in the hope that what he learns may help
+    to free his homeland. He wields secrets of enchanted jade, dangerous to spirits,
+    and taboo for many.
+  _characterClass: {fileID: 11400000, guid: c68454c713716e341b64858f44a231ca, type: 2}
+  _statTemplate: {fileID: 11400000, guid: 6629d4f0c3a443f4cb5a2b77edfcf3ee, type: 2}
+  _startsUnlocked: 1
+  _startingLevel: 0
+  _characterPrefab: {fileID: 2374561135625250464, guid: b90d2fcd67e31e04bb679a074d415273,
+    type: 3}
+  _brain:
+    _underlyingValue: {fileID: 11400000, guid: f1cd72ac67a1bb94db3ebd4d6c7b4e94, type: 2}
+  _portrait: {fileID: 0}
+  _color: {r: 0.5686275, g: 0.78823537, b: 0.7019608, a: 0}
+  _equipmentInventory: {fileID: 11400000, guid: b6304c32c16ec8d4b9c7eb039fff4d53,
+    type: 2}
+  _isPlayer: 1
+  AnimControllerPath: Assets/Resources/Animations/AnimationControllers/NirkapurAnimationController.asset
+  AnimControllerLoadPath: Animations/AnimationControllers/NirkapurAnimationController
+  _idle_Left: {fileID: 0}
+  _idle_Right: {fileID: 0}
+  _idle_Up: {fileID: 0}
+  _idle_Down: {fileID: 0}
+  _walk_Left: {fileID: 0}
+  _walk_Right: {fileID: 0}
+  _walk_Up: {fileID: 0}
+  _walk_Down: {fileID: 0}
+  _attack_Left: {fileID: 0}
+  _attack_Right: {fileID: 0}
+  _attack_Up: {fileID: 0}
+  _attack_Down: {fileID: 0}
+  _cast_Left: {fileID: 0}
+  _cast_Right: {fileID: 0}
+  _cast_Up: {fileID: 0}
+  _cast_Down: {fileID: 0}
+  _die: {fileID: 0}
+  _dead: {fileID: 0}
+  _shoot_Left: {fileID: 0}
+  _shoot_Right: {fileID: 0}
+  _shoot_Up: {fileID: 0}
+  _shoot_Down: {fileID: 0}

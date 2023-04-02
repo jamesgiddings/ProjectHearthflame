@@ -20,7 +20,6 @@ MonoBehaviour:
   _battleMusic: {fileID: 0}
   _itemSlots: []
   _battleCharacterBlueprints:
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
   - {fileID: 11400000, guid: 55b2c1db6472c0148a751e61cfecfb7f, type: 2}
   _battleWinConditions: {fileID: 11400000, guid: 030072b44ac4e744ca39c57edec9e437,
     type: 2}

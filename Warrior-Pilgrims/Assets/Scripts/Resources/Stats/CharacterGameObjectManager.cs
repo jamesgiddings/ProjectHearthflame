@@ -28,7 +28,10 @@ namespace GramophoneUtils.Stats
         public Dictionary<Character, Battler> CharacterBattlerDictionary => _characterBattlerDictionary;
 
         [SerializeField] private Transform _battlerParent;
-		[SerializeField] private float battlerGap = 2f;
+
+        [SerializeField, Required] private FloatReference _battlerGapReference;
+        private float _battlerGap => _battlerGapReference.Value;
+
         [SerializeField] private GameObject _frontBattlerPositionPrefab;
 		
         #region Callbacks
@@ -65,7 +68,7 @@ namespace GramophoneUtils.Stats
                 Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
-                    Battler battler = Instantiate(character.CharacterPrefab, instantiationPosition + new Vector3(-2 * i, 0, 0), Quaternion.identity, _battlerParent).GetComponent<Battler>();
+                    Battler battler = Instantiate(character.CharacterPrefab, instantiationPosition + new Vector3(-_battlerGap * i, 0, 0), Quaternion.identity, _battlerParent).GetComponent<Battler>();
                     battler.Initialise(character);
                     
                     if (!leaderSet) // this is the first character, which will directly follow the playerBehaviour
@@ -77,7 +80,7 @@ namespace GramophoneUtils.Stats
                     }
                     else
                     {
-                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
+                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), _battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     }
                     Debug.Log(character.Name);
                     _characterBattlerDictionary.Add(character, battler);
@@ -97,7 +100,7 @@ namespace GramophoneUtils.Stats
 
             if (_frontBattlerPosition == null)
             {
-                _frontBattlerPosition = Instantiate(_frontBattlerPositionPrefab, this.transform.position + new Vector3(battlerGap * 2, 0), Quaternion.identity).GetComponent<CharacterMovement>();
+                _frontBattlerPosition = Instantiate(_frontBattlerPositionPrefab, this.transform.position + new Vector3(_battlerGap * 1, 0), Quaternion.identity).GetComponent<CharacterMovement>();
             }
 
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
@@ -105,10 +108,10 @@ namespace GramophoneUtils.Stats
                 Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
-                    Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3(battlerGap * 2, 0) + new Vector3((2 * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
+                    Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3(_battlerGap * 2, 0) + new Vector3((_battlerGap * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
                     battler.Initialise(character);
 
-                    battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
+                    battler.ConnectFollowerToLeader(_frontBattlerPosition, _battlerGap, i, CharacterOrder.NumberOfSlots - i); // the rest follow in a chain
                     
                     if (character.CharacterClass.Size == 2)
                     {
@@ -161,7 +164,7 @@ namespace GramophoneUtils.Stats
                     }
                     else
                     {
-                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), battlerGap, j, CharacterOrder.NumberOfSlots - j); // the rest follow in a chain
+                        battler.ConnectFollowerToLeader(_characterBattlerDictionary[leader].GetComponent<CharacterMovement>(), _battlerGap, j, CharacterOrder.NumberOfSlots - j); // the rest follow in a chain
                         j++;
                     }
                 }
@@ -197,7 +200,7 @@ namespace GramophoneUtils.Stats
             {
                 Battler battler = _characterBattlerDictionary[characterList[i]];
 
-                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
+                battler.ConnectFollowerToLeader(_frontBattlerPosition, _battlerGap, enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
             foreach (Character character in characterList)
             {
@@ -237,7 +240,7 @@ namespace GramophoneUtils.Stats
             {
                 Battler battler = _characterBattlerDictionary[characterList[i]];
 
-                battler.ConnectFollowerToLeader(_frontBattlerPosition, battlerGap, playerCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
+                battler.ConnectFollowerToLeader(_frontBattlerPosition, _battlerGap, playerCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
 
             foreach (Character character in characterList)

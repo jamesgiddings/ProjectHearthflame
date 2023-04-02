@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d73640312e0be4a806d612a3533197, type: 3}
+  m_Name: TargetToSlots_XXXX_OOXX
+  m_EditorClassIdentifier: 
+  _targetCombinations:
+  - rid: 5700428435147718656
+  references:
+    version: 2
+    RefIds:
+    - rid: 5700428435147718656
+      type: {class: TargetCombination, ns: , asm: Scripts}
+      data:
+        _allySlot1: 0
+        _allySlot2: 0
+        _allySlot3: 0
+        _allySlot4: 0
+        _enemySlot1: 1
+        _enemySlot2: 1
+        _enemySlot3: 0
+        _enemySlot4: 0

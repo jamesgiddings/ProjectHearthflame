@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc30f81a0d6bcc4883224d6a6e11c5f, type: 3}
+  m_Name: Grasshopper Hengeyokai
+  m_EditorClassIdentifier: 
+  _name: Grasshopper Hengeyokai
+  _sprite: {fileID: 0}
+  _description: "DPS/Support: Joy-in-Thunder is fast and deals good damage to single
+    targets, even those that might be hard to hit. However, his attacks tend to have
+    fewer riders than other characters\u2019, and he is reliant upon his evasion
+    and movement to stay out of harm\u2019s way. Players must plan ahead to ensure
+    that his movement does not disrupt the team\u2019s formation, or he may become
+    a liability."
+  _baseMaxHealth: {fileID: 11400000, guid: 2917594d0058c994180d9ae694e5c301, type: 2}
+  _baseHealth: {fileID: 11400000, guid: 2917594d0058c994180d9ae694e5c301, type: 2}
+  _maxLevel: 20
+  _experienceData: {fileID: 11400000, guid: b0df1353afa3d31469f8b969b680f368, type: 2}
+  _skillsAvailable:
+  - _underlyingValue: {fileID: 11400000, guid: f79b7f4563d119c49b7da428d802e809, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 27be9acbaf64cec49bb4d6cc1e53e467, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 959214ae5d4bb2041b43ea8563639b73, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: cd46f0dd8f3306448a4b3b7a81b3dd3d, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: c1a3f5903ca6d394ba49fd56a3904ed4, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: e3bc3c68c1d5d244cbba475033960380, type: 2}
+  _levelStatEffects: []
+  _size: 1

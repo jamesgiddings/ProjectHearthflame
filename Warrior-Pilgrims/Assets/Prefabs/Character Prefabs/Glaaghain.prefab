@@ -291,6 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981575258486526835}
+  - component: {fileID: 2369568796895400802}
   m_Layer: 0
   m_Name: Glaaghain
   m_TagString: Untagged
@@ -314,6 +315,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2369568796895400802
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757044181606016056}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1884551, y: 1.6122154}
+  m_Size: {x: 1.0610132, y: 3.1833117}
+  m_Direction: 0
 --- !u!1 &7048426026482914331
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +638,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7552582706839291426, guid: 9d3368be360e2fd44ae30c877ce24005,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3375
+      objectReference: {fileID: 0}
+    - target: {fileID: -7552582706839291426, guid: 9d3368be360e2fd44ae30c877ce24005,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3375
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 9d3368be360e2fd44ae30c877ce24005,
         type: 3}

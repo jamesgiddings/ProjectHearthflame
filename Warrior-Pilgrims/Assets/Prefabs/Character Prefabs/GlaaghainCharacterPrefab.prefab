@@ -103,6 +103,11 @@ PrefabInstance:
       propertyPath: _animatorOverride
       value: 
       objectReference: {fileID: 7673854642875285252}
+    - target: {fileID: 6265061784032980167, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9034757748333488705, guid: f6f8be75ff5a8314bb1e4f9400629c16,
         type: 3}
       propertyPath: m_RootOrder
