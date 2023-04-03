@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Sword of Nipsying
   m_EditorClassIdentifier: 
+  _uid: 8772cf9f-9baf-4107-adc4-0560844ef091
   _name: Sword of Nipsying
   _sprite: {fileID: 21300000, guid: cf22a89d7a08d764d8691991965b4c27, type: 3}
   description: Item description will go here.

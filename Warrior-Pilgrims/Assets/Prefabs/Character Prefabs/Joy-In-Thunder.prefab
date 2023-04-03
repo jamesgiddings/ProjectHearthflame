@@ -495,8 +495,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11411166, y: 2.0347052}
-  m_Size: {x: 1.0302858, y: 3.7971249}
+  m_Offset: {x: 0.11411166, y: 0.76790106}
+  m_Size: {x: 1.0302858, y: 2.3324578}
   m_Direction: 0
 --- !u!1 &7249811627647773959
 GameObject:
@@ -725,12 +725,12 @@ PrefabInstance:
     - target: {fileID: -7552582706839291426, guid: 760daaea0a215594b8d6ef315e94efec,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 0.126
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 760daaea0a215594b8d6ef315e94efec,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15
+      value: 0.126
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 760daaea0a215594b8d6ef315e94efec,
         type: 3}

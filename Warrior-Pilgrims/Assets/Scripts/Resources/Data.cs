@@ -1,16 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public abstract class Data : ScriptableObject
 {
-    [HideInInspector]
-    [ScriptableObjectId]
+    [SerializeField, HideInInspector]
     private string _uid;
 
-    public string UID => _uid;
+    [ShowInInspector, BoxGroup("General")]
+    public string UID
+    {
+        get { 
+            if (!string.IsNullOrEmpty(_uid))
+            {
+                return _uid;
+            }
+            else
+            {
+                _uid = Guid.NewGuid().ToString();
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.AssetDatabase.SaveAssets();
+                UnityEditor.AssetDatabase.Refresh();
+#endif
+                return _uid;
+            }
+        } 
+            
+    }
     
     [BoxGroup("General")]
     [SerializeField] private string _name;

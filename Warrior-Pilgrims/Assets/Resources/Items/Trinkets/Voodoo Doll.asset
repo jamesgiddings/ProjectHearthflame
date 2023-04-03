@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Voodoo Doll
   m_EditorClassIdentifier: 
+  _uid: b2a746e4-7aa1-4c08-a666-557bb5066129
   _name: Voodoo Doll
   _sprite: {fileID: 21300000, guid: 724cc1a574cd782428ba62055b49da31, type: 3}
   description: A doll for cursing.

@@ -14,21 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   itemSlots:
-  - item: {fileID: 11400000, guid: ef225be4f145c5e4f853d9fdfa9058ff, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 2a7144857792a624c99cc10bd737575f, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 2a7144857792a624c99cc10bd737575f, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 2a7144857792a624c99cc10bd737575f, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: eafcaa734050eb549a21b365a23b0921, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 782d9ad6d9b2a634481575582ff8079f, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 7152801aa9f48aa4da2a298f494b2e62, type: 2}
-    quantity: 1
-  - item: {fileID: 11400000, guid: 0c34e435b40e83e4895a185b7e860a86, type: 2}
+  - item: {fileID: 0}
     quantity: 1
   - item: {fileID: 0}
     quantity: 0
@@ -42,6 +28,20 @@ MonoBehaviour:
     quantity: 0
   - item: {fileID: 0}
     quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 0
+  - item: {fileID: 0}
+    quantity: 1
   - item: {fileID: 0}
     quantity: 0
   - item: {fileID: 0}
@@ -78,3 +78,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _startingItemSlots: []

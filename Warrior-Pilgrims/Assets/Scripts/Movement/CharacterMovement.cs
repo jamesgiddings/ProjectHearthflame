@@ -19,21 +19,25 @@ public class CharacterMovement : MonoBehaviour
 
     [ShowIf("_isFollower"), PropertyTooltip("This is the distance the character will follow at.")]
     [SerializeField] private float _gap;
-    [SerializeField] private float _tolerance = 3f;
+    [SerializeField] private float _explorationGapTolerance;
+    [SerializeField] private float _battleGapTolerance;
+    private float _tolerance;
 
-    [BoxGroup("Moevement By State")]
+    [BoxGroup("Movement By State")]
     [SerializeField] private StateManager _gameStateManager;
-    [BoxGroup("Moevement By State")]
+    [BoxGroup("Movement By State")]
     [SerializeField] private State _explorationState;
-    [BoxGroup("Moevement By State")]
+    [BoxGroup("Movement By State")]
     [SerializeField] private StateEvent _enterExplorationState;
-    [BoxGroup("Moevement By State")]
+    [BoxGroup("Movement By State")]
     [SerializeField] private StateEvent _enterBattleState;
 
-    private float _speedAdjustmentCoefficientToMaintainGap = 40f;
+    private float _speedAdjustmentCoefficientToMaintainGap = 8f;
 
     private float _horizontalMove = 0f;
     private bool _jump;
+/*
+    private Vector3 _targetPosition = Vector3.zero;*/
 
     #region Callbacks
 
@@ -67,8 +71,11 @@ public class CharacterMovement : MonoBehaviour
         _moveSpeed = _followee.GetMoveSpeed();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        _tolerance = ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState ? _explorationGapTolerance : _battleGapTolerance;
+
+        UpdateFunction();
         if (!_isFollower && ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState)
         {
             _horizontalMove = Input.GetAxisRaw("Horizontal") * _moveSpeed;
@@ -81,6 +88,16 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (_followee != null)
         {
+/*            _targetPosition = transform.position;
+            if (_followee.gameObject.GetComponent<CharacterController2D>().IsFacingRight)
+            {
+                _targetPosition = _followee.transform.position - new Vector3(_gap, 0f);
+            }
+            else
+            {
+                _targetPosition = _followee.transform.position + new Vector3(_gap, 0f);
+            }*/
+
             float distance = Math.Abs(transform.position.x - _followee.GetTransform().position.x);
             if (distance > _gap + _tolerance)
             {
@@ -111,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     _horizontalMove = -2f;
                 } 
-                else if (distance < _gap + (_tolerance /2))
+                else if (distance < _gap + (_tolerance / 2))
                 {
                     _horizontalMove = 2f;
                 }
@@ -122,48 +139,11 @@ public class CharacterMovement : MonoBehaviour
         else // don't move
         {
             _horizontalMove = 0f; // stop the characters motion
-
         }
     }
 
-    /* void Update()
-     {
-         if (!_isFollower && ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState)
-         {
-             _horizontalMove = Input.GetAxisRaw("Horizontal") * _moveSpeed;
 
-             if (Input.GetButtonDown("Jump"))
-             {
-                 _jump = true;
-             }
-             return;
-         } else if (_followee != null)
-         {
-             if (Math.Abs(transform.position.x - _followee.GetTransform().position.x) > _gap)
-             {
-                 float speedAdjustment = Math.Max(Math.Abs((transform.position.x - _followee.GetTransform().position.x)) - _gap, 0f);
-
-                 float x = _followee.GetTransform().position.x - transform.position.x;
-                 float y = _followee.GetTransform().position.y - transform.position.y;
-
-                 float hyp = (float)Math.Sqrt(x * x + y * y);
-                 x /= hyp;
-                 _horizontalMove = x * (_moveSpeed + (speedAdjustment * _speedAdjustmentCoefficientToMaintainGap));
-             }
-             else
-             {
-                 _horizontalMove = 0f;
-             }
-             return;
-         } else // don't move
-         {
-             _horizontalMove = 0f; // stop the characters motion
-         }
-     }*/
-
-
-
-    private void FixedUpdate()
+    private void UpdateFunction()
     {
         if (_isFollower && _followee == null)
         {
@@ -171,6 +151,19 @@ public class CharacterMovement : MonoBehaviour
         }
 
         _characterController2D.Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
+/*
+        if (!_isFollower)
+        {
+            _characterController2D.Move(_horizontalMove * Time.fixedDeltaTime, false, _jump);
+        }
+        if (_isFollower)
+        {
+            if (_horizontalMove != 0f)
+            {
+                _characterController2D.Follow(_targetPosition, _horizontalMove * Time.fixedDeltaTime);
+            }
+        }*/
+
         _jump = false;
     }
 

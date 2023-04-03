@@ -99,97 +99,6 @@ namespace GramophoneUtils.Characters
 
         public Action<Character> OnCharacterTurnElapsed;
 
-#if UNITY_EDITOR
-        private UnityEditor.Animations.AnimatorController animatorController;
-        public UnityEditor.Animations.AnimatorController AnimatorController => animatorController; //getter
-#endif
-
-        [FoldoutGroup("Animation")]
-        public string AnimControllerPath;
-
-        [FoldoutGroup("Animation")]
-        public string AnimControllerLoadPath;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _idle_Left;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _idle_Right;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _idle_Up;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _idle_Down;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _walk_Left;
-
-        public AnimationClip Walk_Left => _walk_Left;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _walk_Right;
-        public AnimationClip Walk_Right => _walk_Right;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _walk_Up;
-        public AnimationClip Walk_Up => _walk_Up;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _walk_Down;
-        public AnimationClip Walk_Down => _walk_Down;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _attack_Left;
-        public AnimationClip Attack_Left => _attack_Left;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _attack_Right;
-        public AnimationClip Attack_Right => _attack_Right;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _attack_Up;
-        public AnimationClip Attack_Up => _attack_Up;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _attack_Down;
-        public AnimationClip Attack_Down => _attack_Down;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _cast_Left;
-        public AnimationClip Cast_Left => _cast_Left;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _cast_Right;
-        public AnimationClip Cast_Right => _cast_Right;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _cast_Up;
-        public AnimationClip Cast_Up => _cast_Up;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _cast_Down;
-        public AnimationClip Cast_Down => _cast_Down;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _die;
-        public AnimationClip Die => _die;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _dead;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _shoot_Left;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _shoot_Right;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _shoot_Up;
-
-        [FoldoutGroup("Animation/Animation Clips")]
-        [SerializeField] private AnimationClip _shoot_Down;
-        
         #endregion
 
         #region Constructors
@@ -202,25 +111,6 @@ namespace GramophoneUtils.Characters
 
 
 #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            AnimControllerPath = "Assets/Resources/Animations/AnimationControllers/" + Name + "AnimationController.asset";
-            AnimControllerLoadPath = "Animations/AnimationControllers/" + Name + "AnimationController";
-
-            var _exists = AssetDatabase.LoadAssetAtPath(AnimControllerPath, typeof(UnityEditor.Animations.AnimatorController));
-
-            if (animatorController == null)
-            {
-                if (_exists != null)
-                {
-                    animatorController = (UnityEditor.Animations.AnimatorController)_exists;
-                }
-                else
-                {
-                    CreateController();
-                }
-            }
-        }
 
         private void OnDisable()
         {
@@ -335,38 +225,6 @@ namespace GramophoneUtils.Characters
         }
 
 #if UNITY_EDITOR
-        public void CreateController()
-        {
-            // Creates the controller
-            animatorController = UnityEditor.Animations.AnimatorController.CreateAnimatorControllerAtPath(AnimControllerPath);
-
-            if (_walk_Left != null)
-            {
-                UnityEditor.Animations.AnimatorState idleLeft = animatorController.AddMotion(_idle_Left);
-
-                animatorController.AddMotion(_idle_Right);
-                animatorController.AddMotion(_idle_Up);
-                animatorController.AddMotion(_idle_Down);
-                animatorController.AddMotion(_walk_Left);
-                animatorController.AddMotion(_walk_Right);
-                animatorController.AddMotion(_walk_Up);
-                animatorController.AddMotion(_walk_Down);
-                animatorController.AddMotion(_attack_Left);
-                animatorController.AddMotion(_attack_Right);
-                animatorController.AddMotion(_attack_Up);
-                animatorController.AddMotion(_attack_Down);
-                animatorController.AddMotion(_cast_Left);
-                animatorController.AddMotion(_cast_Right);
-                animatorController.AddMotion(_cast_Up);
-                animatorController.AddMotion(_cast_Down);
-                animatorController.AddMotion(_die);
-                animatorController.AddMotion(_dead);
-                animatorController.AddMotion(_shoot_Left);
-                animatorController.AddMotion(_shoot_Right);
-                animatorController.AddMotion(_shoot_Up);
-                animatorController.AddMotion(_shoot_Down);
-            }
-        }
 
         [Button("Create Random Brain")]
         public void CreateRandomBrain()
@@ -438,8 +296,6 @@ namespace GramophoneUtils.Characters
             instancedCharacter._brain = this._brain;
             instancedCharacter.IsUnlocked = this._startsUnlocked;
             instancedCharacter._characterPrefab = this._characterPrefab;
-            instancedCharacter.AnimControllerLoadPath = this.AnimControllerLoadPath;
-            instancedCharacter.AnimControllerPath = this.AnimControllerPath;
 
         }
 

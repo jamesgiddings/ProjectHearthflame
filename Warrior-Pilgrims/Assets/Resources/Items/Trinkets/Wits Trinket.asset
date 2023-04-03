@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Wits Trinket
   m_EditorClassIdentifier: 
+  _uid: 757d5782-eb41-479a-bba6-8100359541ce
   _name: Wits Trinket
   _sprite: {fileID: 21300000, guid: 073d3bc6631565b4fb3fde03c512b4d7, type: 3}
   description: A trinket that sharpens the wit of the bearer.

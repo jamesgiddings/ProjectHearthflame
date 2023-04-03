@@ -23,25 +23,12 @@ public class AnimationPlayer
 	{
         this.battler = battler;
         this.character = character;
-        Debug.Log(this.character.Name + " is getting a new Animation player");
         _characterGameObjectManager = ServiceLocator.Instance.CharacterGameObjectManager;
         animator = battler.Animator;
 
         SetAnimationDirections();
 
-        Debug.Log(character.Name + " animator: " + (animator == null));
-        Debug.Log(character.Name + "'s animControllerPath: " + character.AnimControllerPath);
-        if (!character.IsPlayer)
-        {
-            RuntimeAnimatorController runtimeAnimatorController = Resources.Load(character.AnimControllerLoadPath) as RuntimeAnimatorController;
-            animator.runtimeAnimatorController = runtimeAnimatorController;
-        }
-
-        
-        //Debug.Log(character.CharacterTemplate.AnimControllerPath);
-        //Debug.Log(character.Name + " runtimeAnimatorController: " + (animator.runtimeAnimatorController == null));
         animator.enabled = true;
-        //Debug.Log(character.Name);
 
         animator.Play(idle);
     }

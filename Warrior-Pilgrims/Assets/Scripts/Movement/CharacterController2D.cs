@@ -19,6 +19,7 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
 
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public bool IsFacingRight => m_FacingRight;
 
     private Vector3 m_Velocity = Vector3.zero;
 
@@ -69,7 +70,7 @@ public class CharacterController2D : MonoBehaviour
     }
 
     public void Move(float move, bool crouch, bool jump)
-    {
+    {        
         // If crouching, check to see if the character can stand up
         if (!crouch)
         {
@@ -113,10 +114,13 @@ public class CharacterController2D : MonoBehaviour
                 }
             }
 
+
+
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
 
             if (ServiceLocatorObject.Instance.GameStateManager.State == ServiceLocatorObject.Instance.GameExplorationState)
             {
@@ -140,6 +144,35 @@ public class CharacterController2D : MonoBehaviour
             // Add a vertical force to the player.
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+        }
+    }
+
+    public void Follow(Vector3 targetPosition, float move)
+    {
+        Vector3 currentPosition = transform.position;
+        Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+        //transform.position = Vector3.Lerp(currentPosition, targetPosition, Time.fixedDeltaTime * 200f);
+        Vector3 velocityAdjustment = new Vector3(targetPosition.x - currentPosition.x, 0f);
+        if (velocityAdjustment.x < 0.1f)
+        {
+            velocityAdjustment = Vector3.zero;
+        }
+        m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity + velocityAdjustment * 2f, ref m_Velocity, 0.2f);
+
+        if (ServiceLocatorObject.Instance.GameStateManager.State == ServiceLocatorObject.Instance.GameExplorationState)
+        {
+            // If the input is moving the player right and the player is facing left...
+            if (move > 0 && !m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (move < 0 && m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
         }
     }
 

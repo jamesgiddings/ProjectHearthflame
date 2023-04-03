@@ -115,6 +115,8 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 5dfcbda7054d7ba42bd9cb855718dfb4, type: 2}
   _frontBattlerPositionPrefab: {fileID: 5274669892593997697, guid: 43c0c4cbadb91e24fbb007a20b76f3be,
     type: 3}
+  _serviceLocatorObject: {fileID: 11400000, guid: 95ba770c049128b4db528e2a78a3fd9a,
+    type: 2}
 --- !u!114 &584415698
 MonoBehaviour:
   m_ObjectHideFlags: 0

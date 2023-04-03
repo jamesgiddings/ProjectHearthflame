@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbb3f357eea75c4b8f3172b006ed258, type: 3}
   m_Name: Armour of Silliness
   m_EditorClassIdentifier: 
+  _uid: fc9394a4-0747-4744-b469-d4f90177813e
   _name: Armour of Silliness
   _sprite: {fileID: 21300000, guid: 5372afdb7d982a248a89012aa0c42002, type: 3}
   description: Sillies.

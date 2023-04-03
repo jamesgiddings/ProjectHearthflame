@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 using GramophoneUtils.Characters;
 using System.Linq;
 using Sirenix.OdinInspector;
-using DG.Tweening;
 using System.Collections;
 
 namespace GramophoneUtils.Stats
@@ -33,6 +32,8 @@ namespace GramophoneUtils.Stats
         private float _battlerGap => _battlerGapReference.Value;
 
         [SerializeField] private GameObject _frontBattlerPositionPrefab;
+
+        [SerializeField] private ServiceLocatorObject _serviceLocatorObject;
 		
         #region Callbacks
 
@@ -56,6 +57,11 @@ namespace GramophoneUtils.Stats
 
         public void InstantiatePlayerCharacters()
         {
+            if (!_serviceLocatorObject.SceneController.GetShouldHandleInstancedPlayerGameObjectsThisScene())
+            {
+                return; 
+            }
+
             CharacterOrder playerCharacterOrder = ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder;
 
             this.GetComponent<SortingGroup>().sortingOrder = CharacterOrder.NumberOfSlots + 1;
@@ -142,6 +148,11 @@ namespace GramophoneUtils.Stats
 
         public void ConnectPlayerCharactersToLeadCharacter()
         {
+            if (!_serviceLocatorObject.SceneController.GetShouldHandleInstancedPlayerGameObjectsThisScene())
+            {
+                return;
+            }
+
             CharacterOrder playerCharacterOrder = ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder;
 
             bool leaderSet = false;
@@ -171,8 +182,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-
-        [Button]
         public void MoveEnemyBattlersForward()
         {
 
@@ -211,7 +220,6 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        [Button]
         public void MovePlayerBattlersForward()
         {
 

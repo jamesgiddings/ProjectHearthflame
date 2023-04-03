@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b41e7e9ccdd344eaae014e0deb8fd3, type: 3}
   m_Name: Flask of Tea
   m_EditorClassIdentifier: 
+  _uid: 31dd4f3c-4d4c-4c32-851d-25d8fdc6c111
   _name: Flask of Tea
   _sprite: {fileID: 21300000, guid: 1029e0f27ea15ec4ab57f97c0452c0eb, type: 3}
   description: Tea

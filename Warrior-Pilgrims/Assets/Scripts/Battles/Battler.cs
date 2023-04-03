@@ -247,7 +247,7 @@ public class Battler : MonoBehaviour
 
     private Animator GetAnimator()
     {
-        return _animatorOverride == null ? GetComponent<Animator>() : _animatorOverride;
+        return _animatorOverride;
     }
 
     /// <summary>

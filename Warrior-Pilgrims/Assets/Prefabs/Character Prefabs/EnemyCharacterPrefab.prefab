@@ -72,5 +72,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4985769597387191513, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: _moveSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985769597387191513, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: _tolerance
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985769597387191513, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: _battleGapTolerance
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330164128964111157, guid: f6f8be75ff5a8314bb1e4f9400629c16,
+        type: 3}
+      propertyPath: m_MovementSmoothing
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f8be75ff5a8314bb1e4f9400629c16, type: 3}

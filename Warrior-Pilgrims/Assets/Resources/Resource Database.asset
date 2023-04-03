@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c63a74d7d286a49b65db460f491999, type: 3}
   m_Name: Resource Database
   m_EditorClassIdentifier: 
-  resources: []
+  resources:
+  - {fileID: 11400000, guid: ef225be4f145c5e4f853d9fdfa9058ff, type: 2}
   characterClasses:
   - {fileID: 11400000, guid: c67d24aeb40bc524e956d079c6d86f4b, type: 2}
   - {fileID: 11400000, guid: 33eb257d41d9b6d4dbc7578d08a8d0f3, type: 2}

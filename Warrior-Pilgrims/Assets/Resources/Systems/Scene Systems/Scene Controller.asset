@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b990b3f48865d4280591e5562d8dbd, type: 3}
   m_Name: Scene Controller
   m_EditorClassIdentifier: 
+  _listOfNoPlayerScenes:
+  - Map1
+  - Main_Menu

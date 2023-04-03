@@ -7,8 +7,8 @@ namespace GramophoneUtils.Movement
     [RequireComponent(typeof(CharacterController))]
     public class MovementController : MonoBehaviour
     {
-        [SerializeField] private float movementSpeed = 3f;
-        [SerializeField] private float speedSmoothTime = 0.1f;
+        [SerializeField] private float movementSpeed;
+        [SerializeField] private float speedSmoothTime;
         [SerializeField] private Animator _animator;
 
         private CharacterController controller = null;
@@ -32,7 +32,7 @@ namespace GramophoneUtils.Movement
             mainCameraTransform = Camera.main.transform;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
         }
@@ -63,9 +63,9 @@ namespace GramophoneUtils.Movement
             float targetSpeed = movementSpeed * movementInput.magnitude;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
-            controller.Move(desiredMoveDirection * currentSpeed * Time.deltaTime);
+            controller.Move(desiredMoveDirection * currentSpeed * Time.fixedDeltaTime);
 
-            _animator.SetFloat(hashSpeedPercentage, 0.5f * movementInput.magnitude, speedSmoothTime, Time.deltaTime);
+            _animator.SetFloat(hashSpeedPercentage, 0.5f * movementInput.magnitude, speedSmoothTime, Time.fixedDeltaTime);
         }
     }
 }

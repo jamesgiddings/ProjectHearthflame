@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4658bec8faa9b48b4b399f5b629de9, type: 3}
   m_Name: New Map Graph
   m_EditorClassIdentifier: 
+  _uid: 
   _name: 
   _sprite: {fileID: 0}
   nodes:

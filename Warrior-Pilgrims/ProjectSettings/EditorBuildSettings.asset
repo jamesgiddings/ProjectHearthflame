@@ -5,52 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Demo.unity
-    guid: 975326c5f497e4d4fba51540d7522a05
-  - enabled: 0
-    path: Assets/Scenes/Tile Scene.unity
-    guid: 84c6496a9872ea54cb1ea64de73e02f7
-  - enabled: 0
-    path: Assets/Scenes/UI.unity
-    guid: 6729b1710bb64d04780e74376776e273
-  - enabled: 0
-    path: Assets/Scenes/Slums/Slums.unity
-    guid: c5c903f30927ef9499d1471db17dd322
   - enabled: 1
-    path: Assets/Scenes/The Charmed Forest/The_Charmed_Forest.unity
-    guid: 83c9d7d58dcd6384b8167c17d217b010
-  - enabled: 1
-    path: Assets/Scenes/Aydys' House/Aydys' Basement.unity
-    guid: 9d93311aa3a2a9c44b26cd4b70c06581
+    path: Assets/Scenes/Main Menu/Main_Menu.unity
+    guid: 5a267bfc8dddaad4a9119c37e6fb51c9
   - enabled: 1
     path: Assets/Scenes/Maps/Map1.unity
     guid: 6840851af17d5c84982fcaaec1cd3d30
   - enabled: 1
-    path: Assets/Scenes/Ship2/Ship2.unity
-    guid: 9babb028e4371ab44b0caeb4caa1583e
-  - enabled: 0
-    path: Assets/Scenes/Aydys' House/Aydys' Living Room.unity
-    guid: bace961e36c2494408b7f698eba5dd11
-  - enabled: 0
-    path: Assets/Scenes/Slums Gauntlet/Slums Gauntlet.unity
-    guid: 7a769dd76020059438c28b61d7b8a2ff
-  - enabled: 0
-    path: Assets/Scenes/New Scene.unity
-    guid: 065856acf21f5d94aa59899e19fa55c4
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/ShipCorridor/ShipCorridor.unity
-    guid: a4122b4b0e810204c94677f2c6a4aefc
-  - enabled: 1
-    path: Assets/Scenes/Main Menu/Main_Menu.unity
-    guid: 5a267bfc8dddaad4a9119c37e6fb51c9
-  - enabled: 0
-    path: Assets/Scenes/Test Scene/Blank_Scene.unity
-    guid: 0417243829c90404a8e1bcb899a2c749
-  - enabled: 1
-    path: Assets/Scenes/Test Scene/Test_Scene.unity
-    guid: 703b63129045d3e4b8dafef3901e4098
+    path: Assets/Scenes/The Forest of Blood/The_Charmed_Forest.unity
+    guid: 83c9d7d58dcd6384b8167c17d217b010
   m_configObjects: {}
