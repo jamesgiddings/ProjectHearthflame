@@ -13,20 +13,18 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
         [SerializeField] private VendorDataEvent onStartVendorScenario;
         [SerializeField] private UnityEvent onInventoryItemsUpdated;
         [SerializeField] private VendorInventory vendorInventory;
+        [SerializeField] private Inventory _itemContainer;
 
         public string Name => "Would you like to see my wares?";
 
-        private Inventory itemContainer = null;
-
         private void Start()
         {
-            if (itemContainer == null)
+            if (_itemContainer == null)
 			{
-                itemContainer = new Inventory(vendorInventory.Inventory.ItemSlots.Length, vendorInventory.Inventory.Money);
-                itemContainer.onInventoryItemsUpdated = onInventoryItemsUpdated;
-                for (int i = 0; i < vendorInventory.Inventory.ItemSlots.Length; i++)
+                _itemContainer.onInventoryItemsUpdated = onInventoryItemsUpdated;
+                for (int i = 0; i < vendorInventory.Inventory.IResourceSlots.Length; i++)
 				{
-                    itemContainer.ItemSlots[i] = vendorInventory.Inventory.ItemSlots[i];
+                    _itemContainer.IResourceSlots[i] = vendorInventory.Inventory.IResourceSlots[i];
                 }
 			}
         }
@@ -39,20 +37,20 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
 
             var otherItemContainer = ServiceLocator.Instance.CharacterModel.PartyInventory;
 
-            VendorData vendorData = new VendorData(otherItemContainer, itemContainer);
-            Debug.Log(vendorData.BuyingItemContainer.GetAllUniqueItems().Count + " + " + vendorData.SellingItemContainer.GetAllUniqueItems().Count);
+            VendorData vendorData = new VendorData(otherItemContainer, _itemContainer);
+            Debug.Log(vendorData.BuyingItemContainer.GetAllUnique().Count + " + " + vendorData.SellingItemContainer.GetAllUnique().Count);
             onStartVendorScenario.Raise(vendorData);
         }
 
 		# region SavingLoading
 		public object CaptureState()
 		{
-            return itemContainer.CaptureState();
+            return _itemContainer.CaptureState();
         }
 
 		public void RestoreState(object state)
 		{
-            itemContainer.RestoreState(state);
+            _itemContainer.RestoreState(state);
             onInventoryItemsUpdated.Invoke();
 
         }

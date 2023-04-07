@@ -1,8 +1,6 @@
-using GramophoneUtils.Characters;
 using GramophoneUtils.Utilities;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +11,8 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
 
     [SerializeField] private ServiceLocatorObject _serviceLocatorObject;
 
-    private Action<List<Character>> _onCurrentTargetsChanged;
-    public Action<List<Character>> OnCurrentTargetsChanged
+    private Action<List<ICharacter>> _onCurrentTargetsChanged;
+    public Action<List<ICharacter>> OnCurrentTargetsChanged
     {
         get
         {
@@ -32,8 +30,8 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
     [ShowInInspector]
     private ISkill _currentSkill;
 
-    private List<Character> _currentTargetsCache = new List<Character>();
-    public List<Character> CurrentTargetsCache => _currentTargetsCache;
+    private List<ICharacter> _currentTargetsCache = new List<ICharacter>();
+    public List<ICharacter> CurrentTargetsCache => _currentTargetsCache;
 
     private bool _isTargeting = false;
     [ShowInInspector]
@@ -49,13 +47,13 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
 
     #region Public Functions
 
-    public List<Character> ChangeTargeted(Vector2 direction)
+    public List<ICharacter> ChangeTargeted(Vector2 direction)
     {
         if (_targetsObject == null)
         {
             throw new NullReferenceException("ChangeTargeted was called before GetCurrentlyTargeted. Therefore ITargets targestObject was null.");
         }
-        List<Character> currentlyTargeted = _targetsObject.ChangeCurrentlyTargeted(direction);
+        List<ICharacter> currentlyTargeted = _targetsObject.ChangeCurrentlyTargeted(direction);
         _currentTargetsCache = currentlyTargeted;
         _onCurrentTargetsChanged?.Invoke(currentlyTargeted);
         return currentlyTargeted;
@@ -70,7 +68,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         _isTargeting = false;
     }
 
-    public List<Character> GetAllPossibleTargets(ISkill skill, Character originator)
+    public List<ICharacter> GetAllPossibleTargets(ISkill skill, ICharacter originator)
     {
         if (_targetsObject == null)
         {
@@ -86,7 +84,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         return _targetsObject.GetCurrentlyTargeted();
     }
 
-    public List<Character> GetCurrentlyTargeted(ISkill skill, Character originator)
+    public List<ICharacter> GetCurrentlyTargeted(ISkill skill, ICharacter originator)
     {
         if (_targetsObject == null)
         {
@@ -99,7 +97,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
             _isTargeting = true;
         }
 
-        List<Character> currentlyTargeted = _targetsObject.GetCurrentlyTargeted();
+        List<ICharacter> currentlyTargeted = _targetsObject.GetCurrentlyTargeted();
         _currentTargetsCache = currentlyTargeted;
         if (currentlyTargeted.Count > 0)
         {
@@ -109,7 +107,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         return currentlyTargeted;
     }
 
-    public Character GetTargetByMouse()
+    public ICharacter GetTargetByMouse()
     {
         throw new System.NotImplementedException();
     }
@@ -124,7 +122,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         _serviceLocatorObject.BattleDataModel.OnSkillUsed -= UseSkill;
     }
 
-    public void UseSkill(Character originator)
+    public void UseSkill(ICharacter originator)
     {
         //TODO, the character list that is passed to this function has to be cloned, as it is set to 0 at some point after it is passed to the function.
         //Mayba it could duplicate before it sends, or pass by value (struct?)?
@@ -132,7 +130,7 @@ public class TargetManager : ScriptableObjectThatCanRunCoroutines, ITargetManage
         ClearTargets();
     }
 
-    public void SimulatePlayerTargeting(ISkill skill, List<Character> charactersToTarget, Character originator) // TODO this is just for testing
+    public void SimulatePlayerTargeting(ISkill skill, List<ICharacter> charactersToTarget, ICharacter originator) // TODO this is just for testing
         //so i put it in a pre processor block for editor only, but then when we build the game, it no longer fulfils the interface. 
         // MAybe the test class can use the impl class?
     {

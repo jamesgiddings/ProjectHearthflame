@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,13 +31,13 @@ public interface ISkill : IApplyable
 
     #region Public Functions
 
-    void Use(List<Character> characterTargets, Character originator);
+    void Use(List<ICharacter> characterTargets, ICharacter originator);
 
-    void DoNextBit(List<Character> characterTargets, Character originator);
+    void DoNextBit(List<ICharacter> characterTargets, ICharacter originator);
 
-    bool CanStartUnlocking(ISkill skill, Character character);
+    bool CanStartUnlocking(ISkill skill, ICharacter character);
 
-    bool CanUnlock(ISkill skill, Character character);
+    bool CanUnlock(ISkill skill, ICharacter character);
 
     #endregion
 

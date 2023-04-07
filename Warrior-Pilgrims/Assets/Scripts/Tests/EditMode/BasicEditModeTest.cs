@@ -2,7 +2,6 @@ using NUnit.Framework;
 using NSubstitute;
 using UnityEditor;
 using GramophoneUtils.Items;
-using GramophoneUtils.Characters;
 using GramophoneUtils.SavingLoading;
 using GramophoneUtils.Stats;
 
@@ -16,23 +15,23 @@ public class BasicEditModeTest
 
 	protected CharacterModel CharacterModel;
 
-	protected Character Character1Blueprint;
-	protected Character Character2Blueprint;
-	protected Character Character3Blueprint;
+	protected ICharacter Character1Blueprint;
+	protected ICharacter Character2Blueprint;
+	protected ICharacter Character3Blueprint;
 
-    protected Character EnemyCharacter1Blueprint;
-    protected Character Size2EnemyCharacter2Blueprint;
-    protected Character EnemyCharacter3Blueprint;
+    protected ICharacter EnemyCharacter1Blueprint;
+    protected ICharacter Size2EnemyCharacter2Blueprint;
+    protected ICharacter EnemyCharacter3Blueprint;
 
-    protected Character Character1;
-	protected Character Character2;
-	protected Character Character3;
-	protected Character Character4;
+    protected ICharacter Character1;
+	protected ICharacter Character2;
+	protected ICharacter Character3;
+	protected ICharacter Character4;
 
-	protected Character EnemyCharacter1;
-	protected Character Size2EnemyCharacter2;
-	protected Character EnemyCharacter3;
-	protected Character Size2EnemyCharacter4;
+	protected ICharacter EnemyCharacter1;
+	protected ICharacter Size2EnemyCharacter2;
+	protected ICharacter EnemyCharacter3;
+	protected ICharacter Size2EnemyCharacter4;
 
 	protected CharacterClass HearthPriest;
 	protected CharacterClass Duelist;

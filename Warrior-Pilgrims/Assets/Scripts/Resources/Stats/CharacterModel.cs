@@ -5,12 +5,11 @@ using UnityEngine.Events;
 using GramophoneUtils.Items.Containers;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Character = GramophoneUtils.Characters.Character;
 using System.Linq;
 using GramophoneUtils.Events.CustomEvents;
-using System.Collections;
 using GramophoneUtils.Utilities;
 using System.Threading.Tasks;
+using AYellowpaper;
 
 namespace GramophoneUtils.Stats
 {
@@ -40,23 +39,23 @@ namespace GramophoneUtils.Stats
         [SerializeField] private Inventory _enemyInventory;
         [ShowInInspector] public Inventory EnemyInventory => _enemyInventory;
 
-        [SerializeField] private Character[] _playerCharacterBlueprints = new Character[6];
-        public Character[] PlayerCharacterBlueprints
+        [SerializeField] private InterfaceReference<ICharacter>[] _playerCharacterBlueprints = new InterfaceReference<ICharacter>[6];
+        public ICharacter[] PlayerCharacterBlueprints
         {
             get
             {
-                return _playerCharacterBlueprints;
+                return Array.ConvertAll(_playerCharacterBlueprints, x => x.Value);
             }
         }
 
-        private List<Character> _playerCharacters = null;
-        private List<Character> _enemyCharacters = new List<Character>();
-        private List<Character> _reserveEnemyCharacters = new List<Character>();
-        private List<Character> _deadEnemyCharacters = new List<Character>();
-        public List<Character> DeadEnemyCharacters => _deadEnemyCharacters;
+        private List<ICharacter> _playerCharacters = null;
+        private List<ICharacter> _enemyCharacters = new List<ICharacter>();
+        private List<ICharacter> _reserveEnemyCharacters = new List<ICharacter>();
+        private List<ICharacter> _deadEnemyCharacters = new List<ICharacter>();
+        public List<ICharacter> DeadEnemyCharacters => _deadEnemyCharacters;
 
-        private List<Character> _deadPlayerCharacters = new List<Character>();
-        public List<Character> DeadPlayerCharacters => _deadPlayerCharacters;
+        private List<ICharacter> _deadPlayerCharacters = new List<ICharacter>();
+        public List<ICharacter> DeadPlayerCharacters => _deadPlayerCharacters;
 
         private CharacterOrder _playerCharacterOrder = null;
         private CharacterOrder _enemyCharacterOrder = null;
@@ -90,7 +89,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public List<Character> PlayerCharacters
+        public List<ICharacter> PlayerCharacters
         {
             get
             {
@@ -99,7 +98,7 @@ namespace GramophoneUtils.Stats
                     return _playerCharacterOrder.GetCharacters().ToList(); 
                 }
                 _playerCharacters = InstanceCharacters();
-                foreach (Character character in _playerCharacters)
+                foreach (ICharacter character in _playerCharacters)
                 {
                     if (!character.IsUnlocked) // TODO, there might be a better place to handle Unlocked Status
                     {
@@ -112,7 +111,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public List<Character> EnemyCharacters
+        public List<ICharacter> EnemyCharacters
         {
             get
             {
@@ -124,7 +123,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public List<Character> ReserveEnemyCharacters
+        public List<ICharacter> ReserveEnemyCharacters
         {
             get
             {
@@ -132,7 +131,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot1PlayerCharacter
+        public ICharacter Slot1PlayerCharacter
         {
             get
             {
@@ -146,7 +145,7 @@ namespace GramophoneUtils.Stats
         }
 
 
-        public Character Slot2PlayerCharacter
+        public ICharacter Slot2PlayerCharacter
         {
             get
             {
@@ -159,7 +158,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot3PlayerCharacter
+        public ICharacter Slot3PlayerCharacter
         {
             get
             {
@@ -172,7 +171,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot4PlayerCharacter
+        public ICharacter Slot4PlayerCharacter
         {
             get
             {
@@ -185,7 +184,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot1EnemyCharacter
+        public ICharacter Slot1EnemyCharacter
         {
             get
             {
@@ -198,7 +197,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot2EnemyCharacter
+        public ICharacter Slot2EnemyCharacter
         {
             get
             {
@@ -211,7 +210,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot3EnemyCharacter
+        public ICharacter Slot3EnemyCharacter
         {
             get
             {
@@ -224,7 +223,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public Character Slot4EnemyCharacter
+        public ICharacter Slot4EnemyCharacter
         {
             get
             {
@@ -237,7 +236,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public List<Character> DeadEnemyCharactersList
+        public List<ICharacter> DeadEnemyCharactersList
         {
             get
             {
@@ -245,11 +244,11 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public List<Character> AllCharacters
+        public List<ICharacter> AllCharacters
         {
             get
             {
-                List<Character> allCharacters = new List<Character>();
+                List<ICharacter> allCharacters = new List<ICharacter>();
                 allCharacters.AddRange(PlayerCharacters);
                 allCharacters.AddRange(EnemyCharacters);
                 return allCharacters;
@@ -263,10 +262,10 @@ namespace GramophoneUtils.Stats
         private void OnEnable()
         {
             _playerCharacters = null;
-            _enemyCharacters = new List<Character>();
-            _reserveEnemyCharacters = new List<Character>();
-            _deadEnemyCharacters = new List<Character>();
-            _deadPlayerCharacters = new List<Character>();
+            _enemyCharacters = new List<ICharacter>();
+            _reserveEnemyCharacters = new List<ICharacter>();
+            _deadEnemyCharacters = new List<ICharacter>();
+            _deadPlayerCharacters = new List<ICharacter>();
 
             _playerCharacterOrder = null;
             _enemyCharacterOrder = null;
@@ -274,7 +273,7 @@ namespace GramophoneUtils.Stats
 
         private void OnDestroy() // just deregister from the unity event
         {
-            foreach (Character character in PlayerCharacters)
+            foreach (ICharacter character in PlayerCharacters)
             {
                 UnregisterCharacterOnStatsChangedEvent(character);
             }
@@ -295,9 +294,9 @@ namespace GramophoneUtils.Stats
             // Do some more processing
         }
 
-        public List<Character> InstanceCharacters()
+        public List<ICharacter> InstanceCharacters()
         {
-            _playerCharacters = new List<Character>();
+            _playerCharacters = new List<ICharacter>();
 
             if (PlayerCharacterBlueprints == null)
             {
@@ -320,7 +319,7 @@ namespace GramophoneUtils.Stats
             return _playerCharacters;
         }
 
-        public void RemoveEnemyCharacter(Character characterToRemove)
+        public void RemoveEnemyCharacter(ICharacter characterToRemove)
         {
             if (_enemyCharacterOrder == null)
             {
@@ -332,7 +331,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        public void RemovePlayerCharacter(Character characterToRemove)
+        public void RemovePlayerCharacter(ICharacter characterToRemove)
         {
             if (_playerCharacterOrder == null)
             {
@@ -349,7 +348,7 @@ namespace GramophoneUtils.Stats
         /// removes the enemy from the enemyCharacterOrder
         /// </summary>
         /// <param name="character"></param>
-        public void RegisterCharacterDeath(Character character)
+        public void RegisterCharacterDeath(ICharacter character)
         {
             _unhandledCharacterDeath = true;
             if (character.IsPlayer)
@@ -407,7 +406,7 @@ namespace GramophoneUtils.Stats
         /// Returns the CharacterOrder object if the character was found in one of the CharacterModel's
         /// CharacterOrder objects.
         /// </returns>
-        public CharacterOrder GetCharacterOrderByCharacter(Character character)
+        public CharacterOrder GetCharacterOrderByCharacter(ICharacter character)
         {
             // TODO test
 
@@ -422,17 +421,17 @@ namespace GramophoneUtils.Stats
             return null;
         }
 
-        public void AddEnemyToDeadEnemyCharactersList(Character character)
+        public void AddEnemyToDeadEnemyCharactersList(ICharacter character)
         {
             _deadEnemyCharacters.Add(character);
         }
 
-        public void AddPlayerToDeadPlayerCharactersList(Character character)
+        public void AddPlayerToDeadPlayerCharactersList(ICharacter character)
         {
             _deadPlayerCharacters.Add(character);
         }
 
-        public void AddEnemyCharacters(List<Character> charactersToAdd)
+        public void AddEnemyCharacters(List<ICharacter> charactersToAdd)
         {
             if (_enemyCharacterOrder == null)
             {
@@ -442,7 +441,7 @@ namespace GramophoneUtils.Stats
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
         }
 
-        public void ReplaceEnemyCharacters(List<Character> charactersToReplaceWith)
+        public void ReplaceEnemyCharacters(List<ICharacter> charactersToReplaceWith)
         {
             _enemyCharacterOrder = new CharacterOrder(charactersToReplaceWith.ToArray());
             OnCharacterModelEnemyCharacterOrderUpdated?.Raise();
@@ -495,7 +494,7 @@ namespace GramophoneUtils.Stats
             _unhandledCharacterDeath = false;
         }
 
-        private void ConnectInventories(Character character)
+        private void ConnectInventories(ICharacter character)
         {
             character.PartyInventory = this.PartyInventory;
             character.EquipmentInventory.ConnectToCharacter(character, PartyInventory);
@@ -509,7 +508,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        private void RegisterCharacterOnStatsChangedEvent(Character character)
+        private void RegisterCharacterOnStatsChangedEvent(ICharacter character)
         {
             foreach (var stat in character.StatSystem.Stats)
             {
@@ -517,7 +516,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        private void UnregisterCharacterOnStatsChangedEvent(Character character)
+        private void UnregisterCharacterOnStatsChangedEvent(ICharacter character)
         {
             foreach (var stat in character.StatSystem.Stats)
             {
@@ -601,7 +600,7 @@ namespace GramophoneUtils.Stats
 
                 PlayerCharacters[i].IsRear = saveData.charactersSaveData[i].IsRear;
 
-                Character character = PlayerCharacters[i];
+                ICharacter character = PlayerCharacters[i];
 
                 // LevelSystem
 

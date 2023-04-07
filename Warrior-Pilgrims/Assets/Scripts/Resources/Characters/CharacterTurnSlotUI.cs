@@ -1,11 +1,6 @@
 using System;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GramophoneUtils.Stats;
-using GramophoneUtils.Characters;
 
 public class CharacterTurnSlotUI : CharacterSlotUI
 {
@@ -14,7 +9,7 @@ public class CharacterTurnSlotUI : CharacterSlotUI
 	[SerializeField] protected Image currentCharacterImage;
 
     private CharacterInventory characterInventory;
-    private Character character = null;
+    private ICharacter character = null;
 
     public CharacterInventory CharacterInventory { get { return characterInventory; } set { characterInventory = value; } }
     public Action OnCurrentActorChanged;
@@ -25,7 +20,7 @@ public class CharacterTurnSlotUI : CharacterSlotUI
         set { slotResource = value; UpdateSlotUI(); }
     }
 
-    public Character Character
+    public ICharacter Character
 	{
         get { return character; }
         set { character = value; UpdateSlotUI(); }
@@ -71,9 +66,9 @@ public class CharacterTurnSlotUI : CharacterSlotUI
 		{
             return false;
 		}
-        else if ((Character) slotResource != null)
+        else if ((ICharacter) slotResource != null)
         {
-            Character characterFromSlotResource = (Character) slotResource;
+            ICharacter characterFromSlotResource = (ICharacter) slotResource;
             return characterFromSlotResource.IsCurrentActor;
         }
 		{

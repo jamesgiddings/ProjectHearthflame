@@ -25,8 +25,7 @@ public abstract class Data : ScriptableObject
 #endif
                 return _uid;
             }
-        } 
-            
+        }
     }
     
     [BoxGroup("General")]

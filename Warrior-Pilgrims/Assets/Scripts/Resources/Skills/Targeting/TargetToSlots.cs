@@ -17,7 +17,7 @@ public class TargetToSlots : ScriptableObject, ITargetToSlots
 
     #region Public Functions
 
-    public ITargets GetTargetsObject(Character originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
+    public ITargets GetTargetsObject(ICharacter originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
     {
         return new TargetsObject(this, originator, playerCharacterOrder, enemyCharacterOrder);
     }

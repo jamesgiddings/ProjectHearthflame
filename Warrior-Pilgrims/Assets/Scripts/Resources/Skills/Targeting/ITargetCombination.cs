@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using System.Collections.Generic;
 
 public interface ITargetCombination
@@ -14,7 +13,7 @@ public interface ITargetCombination
 
     #region Public Functions
 
-    List<Character> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder); 
+    List<ICharacter> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder); 
 
     #endregion
 

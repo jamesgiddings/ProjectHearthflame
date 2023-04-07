@@ -1,7 +1,4 @@
-using GramophoneUtils.Characters;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public interface IBrain
 {
@@ -16,9 +13,9 @@ public interface IBrain
 
     #region Public Functions
 
-    ISkill ChooseSkill(Character character);
+    ISkill ChooseSkill(ICharacter character);
 
-    List<Character> ChooseTargets(Character originator, ISkill skill);
+    List<ICharacter> ChooseTargets(ICharacter originator, ISkill skill);
 
     #endregion
 

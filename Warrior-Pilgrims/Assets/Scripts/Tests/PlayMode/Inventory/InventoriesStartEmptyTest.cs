@@ -10,6 +10,6 @@ public class InventoriesStartEmptyTest : BasicPlayModeTest
     public IEnumerator TestThatPartyInventoryStartsEmpty()
     {
         yield return new WaitUntil(() => ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState);
-        Assert.AreEqual(0, ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUniqueItems().Count);
+        Assert.AreEqual(0, ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUnique().Count);
     }
 }

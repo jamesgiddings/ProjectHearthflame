@@ -105,8 +105,8 @@ public class CharacterModelTests : BasicEditModeTest
         EnemyCharacter3 = EnemyCharacter3Blueprint.Instance();
         Size2EnemyCharacter4 = Size2EnemyCharacter2Blueprint.Instance();
 
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
 
         _shoot = TestObjectReferences.Shoot;
         _cleave = TestObjectReferences.Cleave;
@@ -120,7 +120,7 @@ public class CharacterModelTests : BasicEditModeTest
     public void TestRemoveEnemyCharacter()
     {
         // Arrange
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { Character1 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { Character1 });
         CharacterModel.EnemyCharacterOrder = _enemyCharacterOrder;
 
         // Act

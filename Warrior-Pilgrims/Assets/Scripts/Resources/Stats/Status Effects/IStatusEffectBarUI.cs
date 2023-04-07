@@ -16,7 +16,7 @@ public interface IStatusEffectBarUI
 
     #region Public Functions
 
-    public void Initialise(Character character);
+    public void Initialise(ICharacter character);
 
     #endregion
 

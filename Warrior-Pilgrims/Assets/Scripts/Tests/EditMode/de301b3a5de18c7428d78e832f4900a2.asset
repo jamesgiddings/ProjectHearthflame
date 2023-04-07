@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cbf1d74bc0e4f48890eefec2e7436f, type: 3}
   m_Name: de301b3a5de18c7428d78e832f4900a2
   m_EditorClassIdentifier: 
-  UID: de301b3a5de18c7428d78e832f4900a2
-  name: 
-  icon: {fileID: 0}
+  _uid: 0117090f-062e-4ea5-9859-599fc3ef82ca
+  _name: 
+  _sprite: {fileID: 0}

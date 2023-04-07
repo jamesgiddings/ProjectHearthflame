@@ -29,12 +29,12 @@ public class TargetToSlotsSelfOnly : ScriptableObject, ITargetToSlots
         return _targetCombinations;
     }
 
-    public ITargets GetTargetsObject(Character originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
+    public ITargets GetTargetsObject(ICharacter originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
     {
         CharacterOrder opponentCharacterOrder = originator.IsPlayer ? enemyCharacterOrder : playerCharacterOrder;
         CharacterOrder allyCharacterOrder = originator.IsPlayer ? playerCharacterOrder : enemyCharacterOrder;
 
-        _targetCombinations = new List<TargetCombination>() { new TargetCombination(new List<Character>() { originator }, allyCharacterOrder, opponentCharacterOrder) };
+        _targetCombinations = new List<TargetCombination>() { new TargetCombination(new List<ICharacter>() { originator }, allyCharacterOrder, opponentCharacterOrder) };
         return new TargetsObject(this, originator, playerCharacterOrder, enemyCharacterOrder);
     }
 

@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -11,8 +10,8 @@ public class StatusEffectTests : BasicEditModeTest
     private StatusEffectBlueprint _testStatusEffectBlueprint;
     private StatusEffectBlueprint _testStatusEffectBlueprint1;
 
-    private Character _character1;
-    private Character _character2;
+    private ICharacter _character1;
+    private ICharacter _character2;
 
     #endregion
 
@@ -280,7 +279,7 @@ public class StatusEffectTests : BasicEditModeTest
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<ICharacter> { _character1 });
 
         // Given StatusEffectWithDurationOf2IsAdded
         IStatusEffect testStatusEffect = ServiceLocatorObject.Instance.StatusEffectFactory.CreateStatusEffectFromBlueprint(_testStatusEffectBlueprint, null);
@@ -306,7 +305,7 @@ public class StatusEffectTests : BasicEditModeTest
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<ICharacter> { _character1 });
 
         StatusEffectType characterStatusEffectType = _character1.StatSystem.ActiveStatusEffectTypes;
         Assert.That(characterStatusEffectType, Is.Not.Null);
@@ -344,7 +343,7 @@ public class StatusEffectTests : BasicEditModeTest
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<ICharacter> { _character1 });
 
         float startingCharacterDexterityValue = _character1.StatSystem.GetStat(Constants.Dexterity).Value;
 
@@ -376,7 +375,7 @@ public class StatusEffectTests : BasicEditModeTest
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<ICharacter> { _character1 });
 
         float startingCharacterDexterityValue = _character1.StatSystem.GetStat(Constants.Dexterity).Value;
         float startingCharacterSpeedValue = _character1.StatSystem.GetStat(Constants.Speed).Value;
@@ -416,7 +415,7 @@ public class StatusEffectTests : BasicEditModeTest
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<Character> { _character1 });
+        ServiceLocatorObject.Instance.CharacterModel.AddEnemyCharacters(new List<ICharacter> { _character1 });
 
         float startingCharacterDexterityValue = _character1.StatSystem.GetStat(Constants.Dexterity).Value;
         float startingCharacterSpeedValue = _character1.StatSystem.GetStat(Constants.Speed).Value;

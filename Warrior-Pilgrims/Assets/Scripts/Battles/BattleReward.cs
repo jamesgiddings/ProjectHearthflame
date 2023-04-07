@@ -22,7 +22,7 @@ public class BattleReward: Data
 			var partyInventory = player.PartyInventory;
 
 			if (partyInventory == null) { return; }
-			partyInventory.AddItem(itemSlot);
+			partyInventory.Add(itemSlot);
 		}
 
 		foreach (Character character in player.PlayerCharacters)

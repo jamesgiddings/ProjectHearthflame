@@ -8,40 +8,40 @@ namespace GramophoneUtils.Stats
     public interface ICharacterModel
     {
         IAnimationService AnimationService { get; }
-        List<Character> AllCharacters { get; }
-        List<Character> DeadEnemyCharacters { get; }
-        List<Character> DeadEnemyCharactersList { get; }
-        List<Character> DeadPlayerCharacters { get; }
+        List<ICharacter> AllCharacters { get; }
+        List<ICharacter> DeadEnemyCharacters { get; }
+        List<ICharacter> DeadEnemyCharactersList { get; }
+        List<ICharacter> DeadPlayerCharacters { get; }
         CharacterOrder EnemyCharacterOrder { get; set; }
-        List<Character> EnemyCharacters { get; }
+        List<ICharacter> EnemyCharacters { get; }
         Inventory EnemyInventory { get; }
         Inventory PartyInventory { get; }
-        Character[] PlayerCharacterBlueprints { get; }
+        ICharacter[] PlayerCharacterBlueprints { get; }
         CharacterOrder PlayerCharacterOrder { get; set; }
-        List<Character> PlayerCharacters { get; }
-        List<Character> ReserveEnemyCharacters { get; }
-        Character Slot1EnemyCharacter { get; }
-        Character Slot1PlayerCharacter { get; }
-        Character Slot2EnemyCharacter { get; }
-        Character Slot2PlayerCharacter { get; }
-        Character Slot3EnemyCharacter { get; }
-        Character Slot3PlayerCharacter { get; }
-        Character Slot4EnemyCharacter { get; }
-        Character Slot4PlayerCharacter { get; }
+        List<ICharacter> PlayerCharacters { get; }
+        List<ICharacter> ReserveEnemyCharacters { get; }
+        ICharacter Slot1EnemyCharacter { get; }
+        ICharacter Slot1PlayerCharacter { get; }
+        ICharacter Slot2EnemyCharacter { get; }
+        ICharacter Slot2PlayerCharacter { get; }
+        ICharacter Slot3EnemyCharacter { get; }
+        ICharacter Slot3PlayerCharacter { get; }
+        ICharacter Slot4EnemyCharacter { get; }
+        ICharacter Slot4PlayerCharacter { get; }
 
         Task PerformAction();
-        void AddEnemyCharacters(List<Character> charactersToAdd);
-        void AddEnemyToDeadEnemyCharactersList(Character character);
-        void AddPlayerToDeadPlayerCharactersList(Character character);
+        void AddEnemyCharacters(List<ICharacter> charactersToAdd);
+        void AddEnemyToDeadEnemyCharactersList(ICharacter character);
+        void AddPlayerToDeadPlayerCharactersList(ICharacter character);
         Task AwaitCharacterDeathSequence();
         object CaptureState();
         void ClearDeadEnemyCharactersList();
         void ClearDeadPlayerCharactersList();
-        List<Character> InstanceCharacters();
-        void RegisterCharacterDeath(Character character);
-        void RemoveEnemyCharacter(Character characterToRemove);
-        void RemovePlayerCharacter(Character characterToRemove);
-        void ReplaceEnemyCharacters(List<Character> charactersToReplaceWith);
+        List<ICharacter> InstanceCharacters();
+        void RegisterCharacterDeath(ICharacter character);
+        void RemoveEnemyCharacter(ICharacter characterToRemove);
+        void RemovePlayerCharacter(ICharacter characterToRemove);
+        void ReplaceEnemyCharacters(List<ICharacter> charactersToReplaceWith);
         void ResetEnemyCharacterOrder();
         void ResetPlayerCharacterOrder();
         void RestoreState(object state);

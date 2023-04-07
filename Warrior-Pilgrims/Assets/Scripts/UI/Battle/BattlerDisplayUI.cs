@@ -2,7 +2,6 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Character = GramophoneUtils.Characters.Character;
 
 public class BattlerDisplayUI : MonoBehaviour
 {
@@ -15,11 +14,11 @@ public class BattlerDisplayUI : MonoBehaviour
 
 	private Battler[] battlerGameObjects;
 
-	private Dictionary<Character, Battler> characterBattlerDictionary;
+	private Dictionary<ICharacter, Battler> characterBattlerDictionary;
 
     public Battler[] BattlerGameObjects => battlerGameObjects;
 
-    public Dictionary<Character, Battler> CharacterBattlerDictionary => characterBattlerDictionary;
+    public Dictionary<ICharacter, Battler> CharacterBattlerDictionary => characterBattlerDictionary;
 
 	#region Initialising
 	public void Initialise(BattleManager battleManager)
@@ -27,7 +26,7 @@ public class BattlerDisplayUI : MonoBehaviour
 		_characterModel = ServiceLocator.Instance.CharacterModel;
 		
 		battlerGameObjects = new Battler[_characterModel.AllCharacters.Count];
-		characterBattlerDictionary = new Dictionary<Character, Battler>();
+		characterBattlerDictionary = new Dictionary<ICharacter, Battler>();
 
         playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
         enemyBattlers = new Battler[_characterModel.EnemyCharacters.Count];
@@ -36,14 +35,14 @@ public class BattlerDisplayUI : MonoBehaviour
         battlerGameObjects = playerBattlers.Concat(enemyBattlers).ToArray();
 	}
 
-    private Battler[] InitialisePlayerBattlers(List<Character> characters)
+    private Battler[] InitialisePlayerBattlers(List<ICharacter> characters)
     {
         int newCharacterStartIndex = playerBattlers.Length;
         Battler[] newPlayerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
         for (int i = newCharacterStartIndex; i < playerBattlers.Length; i++)
         {
             int j = 0;
-            Character character = characters[j];
+            ICharacter character = characters[j];
             j++;
             if (character != null)
             {
@@ -74,7 +73,7 @@ public class BattlerDisplayUI : MonoBehaviour
 
 		for (int i = characterBattlerDictionary.Keys.Count - 1; i >= 0; i--)
 		{
-			Character character = characterBattlerDictionary.ElementAt(i).Key;
+			ICharacter character = characterBattlerDictionary.ElementAt(i).Key;
             if (character.IsPlayer && !_characterModel.PlayerCharacters.Contains(character))
 			{
 				characterBattlerDictionary[character].Uninitialise();
@@ -82,7 +81,7 @@ public class BattlerDisplayUI : MonoBehaviour
             }
         }
 
-        IEnumerable<Character> uninitialisedCharacters = from uninitialised in _characterModel.PlayerCharacters.Except(characterBattlerDictionary.Keys) select uninitialised;
+        IEnumerable<ICharacter> uninitialisedCharacters = from uninitialised in _characterModel.PlayerCharacters.Except(characterBattlerDictionary.Keys) select uninitialised;
         
         playerBattlers = new Battler[_characterModel.PlayerCharacters.Count];
         playerBattlers.Concat(InitialisePlayerBattlers(_characterModel.PlayerCharacters));

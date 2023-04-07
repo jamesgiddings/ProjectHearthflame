@@ -126,10 +126,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 5916370039742868270}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &513370361690629348
 GameObject:
@@ -646,10 +648,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 27470095438738847}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2822318730038150711
 GameObject:
@@ -1126,10 +1130,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 7884175600590198703}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2822318730591302237
 GameObject:
@@ -1501,10 +1507,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 2139676980812633882}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &2822318731736085447
 GameObject:
@@ -2118,10 +2126,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 5826109465401577161}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &3812455934899615287
 GameObject:
@@ -2287,7 +2297,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3812455935514515850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,6 +2327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f96e9293662f74ab9c33d1f3718578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnCharacterOrderChanged: {fileID: 0}
   FrontCharacterSlotsHolder: {fileID: 2822318730591302236}
   RearCharacterSlotsHolder: {fileID: 6266805050969053577}
 --- !u!1 &3812455935737845542
@@ -2891,10 +2902,12 @@ MonoBehaviour:
   resourceSlotUI: {fileID: 8790419288417286955}
   onMouseStartHoverResource: {fileID: 11400000, guid: 5c94e50fefe9ccc4fa7f308e15a64ab3,
     type: 2}
+  onMouseStartHoverIResource: {fileID: 0}
   onMouseEndHoverResource: {fileID: 11400000, guid: 7194f1b4bb7176b47b57e76c7d2c56e0,
     type: 2}
   onMouseRightClickResource: {fileID: 11400000, guid: a530e5db83f1ecf4d9fed92183135953,
     type: 2}
+  onMouseRightClickIResource: {fileID: 0}
   itemDestroyer: {fileID: 0}
 --- !u!1 &6064694097425885938
 GameObject:

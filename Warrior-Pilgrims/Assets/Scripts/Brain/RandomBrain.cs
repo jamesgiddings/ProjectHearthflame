@@ -1,6 +1,4 @@
-using GramophoneUtils.Characters;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +25,7 @@ public class RandomBrain : Resource, IBrain
     /// </summary>
     /// <param name="character"></param>
     /// <returns></returns>
-    public ISkill ChooseSkill(Character character)
+    public ISkill ChooseSkill(ICharacter character)
     {
         if (_randomSkillObjectCollection == null)
         {
@@ -38,20 +36,20 @@ public class RandomBrain : Resource, IBrain
         return (ISkill)randomObject.WeightedObject;
     }
 
-    public List<Character> ChooseTargets(Character originator, ISkill skill) // TODO update this to avoid target manager, and not have to use RandomObject<>?
+    public List<ICharacter> ChooseTargets(ICharacter originator, ISkill skill) // TODO update this to avoid target manager, and not have to use RandomObject<>?
     {
-        List<Character> targets = new List<Character>();
+        List<ICharacter> targets = new List<ICharacter>();
 
-        List<RandomObject<Character>> randomTargets = new List<RandomObject<Character>>();
+        List<RandomObject<ICharacter>> randomTargets = new List<RandomObject<ICharacter>>();
 
-        List<Character> availableTargets = ServiceLocator.Instance.TargetManager.GetAllPossibleTargets(skill, originator);
+        List<ICharacter> availableTargets = ServiceLocator.Instance.TargetManager.GetAllPossibleTargets(skill, originator);
 
-        foreach (Character character in availableTargets)
+        foreach (ICharacter character in availableTargets)
         {
-            randomTargets.Add(new RandomObject<Character>(character, _randomCharacterClassObjectCollection.GetWeighting(character.CharacterClass)));
+            randomTargets.Add(new RandomObject<ICharacter>(character, _randomCharacterClassObjectCollection.GetWeighting(character.CharacterClass)));
         }
 
-        RandomObjectCollection<Character> randomTargetCollection = new RandomObjectCollection<Character>(randomTargets);
+        RandomObjectCollection<ICharacter> randomTargetCollection = new RandomObjectCollection<ICharacter>(randomTargets);
 
         if (skill.TargetNumberFlag.HasFlag(TargetNumberFlag.Single))
         {

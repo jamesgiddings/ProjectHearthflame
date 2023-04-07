@@ -22,7 +22,7 @@ public class UseFromSlot : ScriptableObject, IUseFromSlot
 
     #region Public Functions
 
-    public bool CanUseFromSlot(Character character)
+    public bool CanUseFromSlot(ICharacter character)
     {
         int slotIndex = ServiceLocator.Instance.ServiceLocatorObject.CharacterModel.PlayerCharacterOrder.GetSlotIndexByCharacter(character);
         switch (slotIndex)

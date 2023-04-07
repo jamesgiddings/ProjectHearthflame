@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Heading" src="project://database/Assets/Scenes/UI%20Creation%20Scene/Heading.uxml?fileID=9197481963319205126&amp;guid=bf91fcdafb277f74b9eecc28d546d5f8&amp;type=3#Heading" />
+    <ui:Template name="Button" src="project://database/Assets/Scenes/UI%20Creation%20Scene/Button.uxml?fileID=9197481963319205126&amp;guid=3eba02d25b260ba40bde184c3883f959&amp;type=3#Button" />
+    <ui:Instance template="Heading" name="Heading" style="align-items: center; justify-content: center;" />
+    <ui:GroupBox style="align-items: center;">
+        <ui:Instance template="Button" name="Button" style="width: 50%;" />
+        <ui:Instance template="Button" name="Button" style="width: 50%;" />
+        <ui:Instance template="Button" name="Button" style="width: 50%;" />
+    </ui:GroupBox>
+</ui:UXML>

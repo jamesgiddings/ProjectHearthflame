@@ -1,29 +1,26 @@
-using GramophoneUtils.Characters;
-using GramophoneUtils.Stats;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SkillSystem
 {
-	private Character character;
+	private ICharacter character;
 	private List<ISkill> unlockedSkills;
 	private Dictionary<ISkill, int> lockedSkills;
 	private ISkill activeSkill;
 
-	public Action<ISkill, List<Character>> OnSkillUsed;
+	public Action<ISkill, List<ICharacter>> OnSkillUsed;
 	public List<ISkill> LockedSkillsList => new List<ISkill>(lockedSkills.Keys);
 	
 	private int skillUseIncreaseMinimumInclusive = 1; // these are so we can set the range of 
 	private int skillUseIncreaseMaximumExclusive = 2; // possible increases when a skill is used.
 
-	public Character Character => character;
+	public ICharacter Character => character;
 
 	public List<ISkill> UnlockedSkills => unlockedSkills; // getter
 
 	public Dictionary<ISkill, int> LockedSkills => lockedSkills; // getter
 
-	public SkillSystem(Character character) // constructor
+	public SkillSystem(ICharacter character) // constructor
 	{
 		this.character = character;
 		unlockedSkills = new List<ISkill>();
@@ -96,7 +93,7 @@ public class SkillSystem
 		return unlockedSkills.Contains(skill);
 	}
 
-	public void IncreaseSkillUses(ISkill skill, List<Character> targets)
+	public void IncreaseSkillUses(ISkill skill, List<ICharacter> targets)
 	{
 		if (activeSkill == null)
 		{

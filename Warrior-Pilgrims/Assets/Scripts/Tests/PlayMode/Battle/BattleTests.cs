@@ -83,8 +83,8 @@ public class BattleTests : BasicPlayModeTest
         EnemyCharacter3 = EnemyCharacter3Blueprint.Instance();
         Size2EnemyCharacter4 = Size2EnemyCharacter2Blueprint.Instance();
 
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
 
         _battleManager = TestObjectReferences.BattleManager;
 

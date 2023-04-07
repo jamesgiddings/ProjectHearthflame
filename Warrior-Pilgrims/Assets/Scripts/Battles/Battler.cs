@@ -1,5 +1,4 @@
 using GramophoneUtils.Stats;
-using GramophoneUtils.Characters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using TMPro;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 using GramophoneUtils.Events.CustomEvents;
-using System.Threading;
 
 public class Battler : MonoBehaviour
 {
@@ -23,11 +21,11 @@ public class Battler : MonoBehaviour
     [SerializeField] private Transform modifierPanel;
     [SerializeField] private GameObject statModifierImagePrefab;
     [SerializeField] private Canvas battlerStatsCanvas;
-    [SerializeField] private CharacterEvent _onCharacterDeath;
+    [SerializeField] private ICharacterEvent _onCharacterDeath;
     [SerializeField] private Animator _animatorOverride;
     public Animator Animator => GetAnimator();
 
-    private Character character;
+    private ICharacter character;
     private SpriteRenderer spriteRenderer;
     private AnimationPlayer animationPlayer;
     private CharacterAnimation _characterAnimation;
@@ -137,7 +135,7 @@ public class Battler : MonoBehaviour
         }
     }
 
-    public void Initialise(Character character)
+    public void Initialise(ICharacter character)
     {
         this.character = character;
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -272,7 +270,7 @@ public class Battler : MonoBehaviour
         }
     }
 
-    private void UpdateTargetCursor(List<Character> targets)
+    private void UpdateTargetCursor(List<ICharacter> targets)
     {
         if (targets.Contains(character))
         {

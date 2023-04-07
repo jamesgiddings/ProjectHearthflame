@@ -6,6 +6,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using GramophoneUtils.Battles;
 using GramophoneUtils.Characters;
+using AYellowpaper;
 
 [CreateAssetMenu(fileName = "New Battle", menuName = "Battles/Battle")]
 public class Battle : Data
@@ -27,7 +28,7 @@ public class Battle : Data
 
     [Header("Battle Opponents")]
     [SerializeField] private ItemSlot[] _itemSlots;
-    [SerializeField] private Character[] _battleCharacterBlueprints;
+    [SerializeField] private InterfaceReference<ICharacter>[] _battleCharacterBlueprints;
 
 	[SerializeField] private BattleWinConditions _battleWinConditions;
 
@@ -51,7 +52,7 @@ public class Battle : Data
 
     public BattleRear BattleRear => _battleRear;
 
-	public List<Character> BattleCharacters
+	public List<ICharacter> BattleCharacters
 	{
 		get
 		{
@@ -63,14 +64,14 @@ public class Battle : Data
 
     #region Utilities
 
-    private List<Character> InstanceCharacters()
+    private List<ICharacter> InstanceCharacters()
     {
-        List<Character> _battleCharacters = new List<Character>();
+        List<ICharacter> _battleCharacters = new List<ICharacter>();
         for (int i = 0; i < _battleCharacterBlueprints.Length; i++)
         {
             if (_battleCharacterBlueprints[i] != null)
             {
-                _battleCharacters.Add(_battleCharacterBlueprints[i].Instance());
+                _battleCharacters.Add(_battleCharacterBlueprints[i].Value.Instance());
                 _battleCharacters[i].IsPlayer = false;
                 _battleCharacters[i].PartyInventory = _enemyInventory;
             }

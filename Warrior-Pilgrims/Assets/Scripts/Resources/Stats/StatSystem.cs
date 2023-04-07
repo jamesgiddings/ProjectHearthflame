@@ -1,10 +1,6 @@
-using GramophoneUtils.Characters;
-using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEngine;
 
 namespace GramophoneUtils.Stats
 {
@@ -12,7 +8,7 @@ namespace GramophoneUtils.Stats
     {
         #region Attributes/Fields/Properties
 
-        private Character _character;
+        private ICharacter _character;
 
         public StatusEffectType ActiveStatusEffectTypes => GetActiveStatusEffectTypes();
 
@@ -37,7 +33,7 @@ namespace GramophoneUtils.Stats
 
         #region Constructors
 
-        public StatSystem(Character character) //constructor 2
+        public StatSystem(ICharacter character) //constructor 2
         {
             foreach (var stat in character.Stats.Stats)
             {
@@ -164,13 +160,13 @@ namespace GramophoneUtils.Stats
             elapsible.Remove(_character, null, null); // TODO, we might not need to pass the rest
         }
 
-        public void ReceiveStatusEffectType(StatusEffectTypeWrapper receivedStatusEffectType, Character originator, CancellationTokenSource tokenSource)
+        public void ReceiveStatusEffectType(StatusEffectTypeWrapper receivedStatusEffectType, ICharacter originator, CancellationTokenSource tokenSource)
         {
             StatusEffectTypeWrapper filteredStatusEffectType = FilterStatusEffectTypes(receivedStatusEffectType, originator);
             _activeStatusEffects.Add(filteredStatusEffectType);
         }
 
-        public void ReceiveModifiedStatModifiers(List<IStatModifier> receivedStatModifiers, Character originator, CancellationTokenSource tokenSource)
+        public void ReceiveModifiedStatModifiers(List<IStatModifier> receivedStatModifiers, ICharacter originator, CancellationTokenSource tokenSource)
         {
             List<IStatModifier> filteredStatModifiers = FilterResists(receivedStatModifiers, originator);
             if (filteredStatModifiers.Count == 0 && receivedStatModifiers.Count > 0)
@@ -189,7 +185,7 @@ namespace GramophoneUtils.Stats
             ApplyModifiedStatModifiers(modifiedFilteredStatModifiers);
         }
 
-        public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, Character originator, CancellationTokenSource tokenSource)
+        public void ReceiveModifiedDamageStructs(List<Damage> receivedDamages, ICharacter originator, CancellationTokenSource tokenSource)
         {
             List<Damage> filteredDamages = FilterMisses(receivedDamages, originator);
             if (filteredDamages.Count == 0 && receivedDamages.Count > 0)
@@ -207,7 +203,7 @@ namespace GramophoneUtils.Stats
             ApplyModifiedDamageObjects(modifiedDamages);
         }
 
-        public void ReceiveModifiedHealingStructs(List<Healing> receivedHealings, Character originator, CancellationTokenSource tokenSource)
+        public void ReceiveModifiedHealingStructs(List<Healing> receivedHealings, ICharacter originator, CancellationTokenSource tokenSource)
         {
             List<Healing> modifiedHealings = new List<Healing>();
             foreach (Healing healing in receivedHealings)
@@ -218,7 +214,7 @@ namespace GramophoneUtils.Stats
             ApplyModifiedHealingObjects(modifiedHealings);
         }
 
-        public void ReceiveModifiedMoveStructs(List<Move> receivedMoves, Character originator, CancellationTokenSource tokenSource)
+        public void ReceiveModifiedMoveStructs(List<Move> receivedMoves, ICharacter originator, CancellationTokenSource tokenSource)
         {
             List<Move> modifiedMoves = new List<Move>();
             foreach (Move move in receivedMoves)
@@ -392,7 +388,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        private List<IStatModifier> FilterResists(List<IStatModifier> receivedStatModifiers, Character originator)
+        private List<IStatModifier> FilterResists(List<IStatModifier> receivedStatModifiers, ICharacter originator)
         {
             List<IStatModifier> filteredModifiers = new List<IStatModifier>();
             foreach (IStatModifier modifier in receivedStatModifiers)
@@ -405,7 +401,7 @@ namespace GramophoneUtils.Stats
             return filteredModifiers;
         }
 
-        private bool GetIfResists(IStatModifier modifier, Character originator)
+        private bool GetIfResists(IStatModifier modifier, ICharacter originator)
         {
             switch (modifier.StatModifierType)
             {
@@ -425,7 +421,7 @@ namespace GramophoneUtils.Stats
             return false;
         }
 
-        private List<Damage> FilterMisses(List<Damage> receivedDamages, Character originator)
+        private List<Damage> FilterMisses(List<Damage> receivedDamages, ICharacter originator)
         {
             List<Damage> filteredDamages = new List<Damage>();
             foreach (Damage damage in receivedDamages)
@@ -438,7 +434,7 @@ namespace GramophoneUtils.Stats
             return filteredDamages;
         }
 
-        private bool GetIfMisses(Damage damage, Character originator)
+        private bool GetIfMisses(Damage damage, ICharacter originator)
         {
             switch (damage.AttackType)
             {
@@ -465,7 +461,7 @@ namespace GramophoneUtils.Stats
             }
         }
 
-        private StatusEffectTypeWrapper FilterStatusEffectTypes(StatusEffectTypeWrapper receivedStatusEffectType, Character originator)
+        private StatusEffectTypeWrapper FilterStatusEffectTypes(StatusEffectTypeWrapper receivedStatusEffectType, ICharacter originator)
         {
             List<StatusEffectType> listOfIndividualStatusEffectTypes = new List<StatusEffectType>();
 
@@ -497,7 +493,7 @@ namespace GramophoneUtils.Stats
             return new StatusEffectTypeWrapper(filteredUnresistedStatusEffectType, originator);
         }
 
-        private bool GetIsStatusEffectTypeResisted(StatusEffectType receivedStatusEffectTypeFlag, Character originator)
+        private bool GetIsStatusEffectTypeResisted(StatusEffectType receivedStatusEffectTypeFlag, ICharacter originator)
         {
             switch (receivedStatusEffectTypeFlag)
             {

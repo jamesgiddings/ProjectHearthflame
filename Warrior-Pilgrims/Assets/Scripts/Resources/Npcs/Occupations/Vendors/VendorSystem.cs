@@ -38,7 +38,7 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
 
             scenarioData.IsFirstContainerBuying = isFirst;
 
-            var items = scenarioData.SellingItemContainer.GetAllUniqueItems();
+            var items = scenarioData.SellingItemContainer.GetAllUnique();
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -88,26 +88,26 @@ namespace GramophoneUtils.Npcs.Occupations.Vendors
 
             int price = currentItem.SellPrice * (int)quantitySlider.value;
 
-            if (scenarioData.BuyingItemContainer.Money < price) { return; }
+            if (scenarioData.BuyingItemContainer.Currency < price) { return; }
 
-            scenarioData.BuyingItemContainer.Money -= price;
-            scenarioData.SellingItemContainer.Money += price;
+            scenarioData.BuyingItemContainer.Currency -= price;
+            scenarioData.SellingItemContainer.Currency += price;
 
             var itemSlotSwap = new ItemSlot(currentItem, (int)quantitySlider.value);
 
             bool soldAll = (int)quantitySlider.value == scenarioData.SellingItemContainer.GetTotalQuantity(currentItem);
 
             if (soldAll) { selectedItemDataHolder.SetActive(false); }
-            scenarioData.BuyingItemContainer.AddItem(itemSlotSwap);
+            scenarioData.BuyingItemContainer.Add(itemSlotSwap);
             
-            scenarioData.SellingItemContainer.RemoveItem(itemSlotSwap);
+            scenarioData.SellingItemContainer.Remove(itemSlotSwap);
 
             SetCurrentItemContainer(scenarioData.IsFirstContainerBuying);
 
             if (!soldAll) { SetItem(currentItem); }
 
-            Debug.Log("selling item container: " + scenarioData.SellingItemContainer.GetAllUniqueItems());
-            Debug.Log("buying item container: " + scenarioData.BuyingItemContainer.GetAllUniqueItems());
+            Debug.Log("selling item container: " + scenarioData.SellingItemContainer.GetAllUnique());
+            Debug.Log("buying item container: " + scenarioData.BuyingItemContainer.GetAllUnique());
         }
 
         private void ClearItemButtons()

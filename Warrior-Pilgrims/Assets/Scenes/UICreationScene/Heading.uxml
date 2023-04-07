@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/UI%20Creation%20Scene/TextUss.uss?fileID=7433441132597879392&amp;guid=6bdcb5d6224945e41816848e7d819850&amp;type=3#TextUss" />
+    <ui:VisualElement style="width: 100%; height: 100%;">
+        <ui:Label text="Warrior Pilgrims" display-tooltip-when-elided="true" />
+    </ui:VisualElement>
+</ui:UXML>

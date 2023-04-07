@@ -16,7 +16,7 @@ public class StatusEffectBarUI : MonoBehaviour, IStatusEffectBarUI
 
     private bool _initialised = false;
 
-    private Character _character;
+    private ICharacter _character;
 
     private List<IStatusEffect> _statusEffects;
 
@@ -38,7 +38,7 @@ public class StatusEffectBarUI : MonoBehaviour, IStatusEffectBarUI
     #endregion
 
     #region Public Functions
-    public void Initialise(Character character)
+    public void Initialise(ICharacter character)
     {
         _character = character;
         _statusEffects = new List<IStatusEffect>();

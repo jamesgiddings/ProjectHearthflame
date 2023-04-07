@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +14,8 @@ public interface ITargets
 
     #region Public Functions
 
-    List<Character> GetCurrentlyTargeted();
-    List<Character> ChangeCurrentlyTargeted(Vector2 direction); 
+    List<ICharacter> GetCurrentlyTargeted();
+    List<ICharacter> ChangeCurrentlyTargeted(Vector2 direction); 
 
     #endregion
 

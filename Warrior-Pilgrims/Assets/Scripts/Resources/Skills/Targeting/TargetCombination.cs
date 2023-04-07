@@ -1,5 +1,3 @@
-using GramophoneUtils.Characters;
-using GramophoneUtils.Stats;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +30,7 @@ public class TargetCombination : ITargetCombination
 
     #region Constructors
 
-    public TargetCombination(List<Character> characters, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
+    public TargetCombination(List<ICharacter> characters, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
     {
         foreach (var character in characters)
         {
@@ -88,9 +86,9 @@ public class TargetCombination : ITargetCombination
 
     #region Public Functions
 
-    public List<Character> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder)
+    public List<ICharacter> GetCombination(CharacterOrder _allyCharacterOrder, CharacterOrder _enemyCharacterOrder)
     {
-        List<Character> combination = new List<Character>();
+        List<ICharacter> combination = new List<ICharacter>();
         if (AllySlot4)
         { 
             if (_allyCharacterOrder.Slot4Character != null)

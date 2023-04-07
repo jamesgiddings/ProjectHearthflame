@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716914488a000324ab9fda8ac5898f53, type: 3}
   m_Name: New Battle
   m_EditorClassIdentifier: 
-  UID: 897da615-7a16-43c3-bfe1-3f62f2999902
-  name: New Battle
+  _uid: c77310d4-20f2-42a9-ae97-18ab08145a44
+  _name: 
   _deactivateOnComplete: 0
   _battleSprite: {fileID: -3438905571476058607, guid: b1f1a7d80bc424649b367a6104a59aa8,
     type: 3}
@@ -21,12 +21,8 @@ MonoBehaviour:
   _battleMusic: {fileID: 0}
   _itemSlots: []
   _battleCharacterBlueprints:
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
-  - {fileID: 11400000, guid: 2149b79823b06d64dbdaf1fa9d159787, type: 2}
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
-  - {fileID: 11400000, guid: 771e914b1e6fb534199b8bcf9784b0f7, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 55b2c1db6472c0148a751e61cfecfb7f, type: 2}
   _battleWinConditions: {fileID: 11400000, guid: 030072b44ac4e744ca39c57edec9e437,
     type: 2}
   _battleRear: {fileID: 11400000, guid: 8c25ebd8344159643bb72bbc25649eed, type: 2}
+  _enemyInventory: {fileID: 0}

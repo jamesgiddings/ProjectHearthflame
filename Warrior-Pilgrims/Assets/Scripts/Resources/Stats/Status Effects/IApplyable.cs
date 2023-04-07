@@ -1,9 +1,5 @@
-using GramophoneUtils.Characters;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 
 public interface IApplyable
 {
@@ -18,9 +14,9 @@ public interface IApplyable
 
     #region Public Functions
 
-    Task Apply(Character target, Character originator, CancellationTokenSource tokenSource);
+    Task Apply(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource);
 
-    Task Remove(Character target, Character originator, CancellationTokenSource tokenSource);
+    Task Remove(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource);
 
     #endregion
 

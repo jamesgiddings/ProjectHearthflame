@@ -1,7 +1,5 @@
-using GramophoneUtils.Characters;
 using GramophoneUtils.Stats;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +34,7 @@ public class TurnOrderUI : MonoBehaviour
 
 		_characterTurnSlotUIs = new List<CharacterTurnSlotUI>();
 
-		foreach (Character character in _characterModel.AllCharacters)
+		foreach (ICharacter character in _characterModel.AllCharacters)
 		{
 			CharacterTurnSlotUI characterTurnSlotUI = Instantiate(_characterTurnSlotPrefab, _characterSlotsHolder).GetComponent<CharacterTurnSlotUI>();
 			_characterTurnSlotUIs.Add(characterTurnSlotUI);

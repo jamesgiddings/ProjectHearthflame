@@ -1,17 +1,15 @@
-using GramophoneUtils.Characters;
 using GramophoneUtils.Events.CustomEvents;
 using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CharacterSlotsDisplayUI : MonoBehaviour
 {
 	private ICharacterModel _characterModel;
 
-	private Character[] frontCharacters;
-	private Character[] rearCharacters;
+	private ICharacter[] frontCharacters;
+	private ICharacter[] rearCharacters;
 
 	public ICharacterModel CharacterModel { get { return _characterModel; } set { _characterModel = value; } }
 
@@ -22,15 +20,15 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 	private void OnEnable()
 	{
         _characterModel = ServiceLocator.Instance.CharacterModel;
-        frontCharacters = new Character[3];
-		rearCharacters = new Character[3];
+        frontCharacters = new ICharacter[3];
+		rearCharacters = new ICharacter[3];
 
 		int frontIndex = 0;
 		int rearIndex = 0;
 
-		IEnumerable<Character> query = _characterModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
-		List<Character> unlockedCharacters = new List<Character>();
-		foreach (Character character in query)
+		IEnumerable<ICharacter> query = _characterModel.PlayerCharacters.Where(character => character.IsUnlocked == true);
+		List<ICharacter> unlockedCharacters = new List<ICharacter>();
+		foreach (ICharacter character in query)
 		{
 			unlockedCharacters.Add(character);
 		}
@@ -57,7 +55,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (frontCharacters[i] != null)
 			{
-				Character frontCharacter = frontCharacters[i];
+				ICharacter frontCharacter = frontCharacters[i];
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = frontCharacter;
 				FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -72,7 +70,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (rearCharacters[i] != null)
 			{
-				Character rearCharacter = rearCharacters[i];
+				ICharacter rearCharacter = rearCharacters[i];
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource = rearCharacter;
 				RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().UpdateSlotUI();
 			}
@@ -122,7 +120,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				Character character = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as Character;
+				ICharacter character = FrontCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as ICharacter;
                 character.IsRear = false;
 			}
 		}
@@ -131,7 +129,7 @@ public class CharacterSlotsDisplayUI : MonoBehaviour
 		{
 			if (RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource != null)
 			{
-				Character character = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as Character;
+				ICharacter character = RearCharacterSlotsHolder.GetChild(i).gameObject.GetComponent<CharacterSlotUI>().SlotResource as ICharacter;
 				character.IsRear = true;
 			}
 		}

@@ -13,8 +13,8 @@ public class ItemPickupTest : BasicPlayModeTest
     {
         yield return new WaitUntil(() => ServiceLocator.Instance.GameStateManager.State == ServiceLocator.Instance.ExplorationState);
         StartSlot1CharacterMoving();
-        yield return new WaitUntil(() => ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUniqueItems().Count > 0);
+        yield return new WaitUntil(() => ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUnique().Count > 0);
         StopSlot1CharacterMoving();
-        Assert.AreEqual(6, ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUniqueItems().Count);
+        Assert.AreEqual(6, ServiceLocator.Instance.CharacterModel.PartyInventory.GetAllUnique().Count);
     }
 }

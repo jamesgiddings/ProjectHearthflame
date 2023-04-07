@@ -3,7 +3,6 @@ using UnityEngine;
 using GramophoneUtils.SavingLoading;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
-using GramophoneUtils.Characters;
 using System.Linq;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -23,8 +22,8 @@ namespace GramophoneUtils.Stats
         private CharacterMovement _frontBattlerPosition = null;
         public CharacterMovement FrontBattlerPosition => _frontBattlerPosition;
 
-        private Dictionary<Character, Battler> _characterBattlerDictionary = new Dictionary<Character, Battler>();
-        public Dictionary<Character, Battler> CharacterBattlerDictionary => _characterBattlerDictionary;
+        private Dictionary<ICharacter, Battler> _characterBattlerDictionary = new Dictionary<ICharacter, Battler>();
+        public Dictionary<ICharacter, Battler> CharacterBattlerDictionary => _characterBattlerDictionary;
 
         [SerializeField] private Transform _battlerParent;
 
@@ -68,10 +67,10 @@ namespace GramophoneUtils.Stats
             Vector3 instantiationPosition = _playerStartTransform == null ? _savedPosition == Vector3.zero ? this.transform.position : _savedPosition : _playerStartTransform.position;
 
             bool leaderSet = false;
-            Character leader = null;
+            ICharacter leader = null;
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
+                ICharacter character = playerCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
                     Battler battler = Instantiate(character.CharacterPrefab, instantiationPosition + new Vector3(-_battlerGap * i, 0, 0), Quaternion.identity, _battlerParent).GetComponent<Battler>();
@@ -111,7 +110,7 @@ namespace GramophoneUtils.Stats
 
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
+                ICharacter character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null && !_characterBattlerDictionary.ContainsKey(character))
                 {
                     Battler battler = Instantiate(character.CharacterPrefab, _frontBattlerPosition.transform.position + new Vector3(_battlerGap * 2, 0) + new Vector3((_battlerGap * i), 0, 0), Quaternion.identity).GetComponent<Battler>();
@@ -135,7 +134,7 @@ namespace GramophoneUtils.Stats
 
             for (int i = _characterBattlerDictionary.Keys.Count - 1; i >= 0; i--)
             {
-                Character character = _characterBattlerDictionary.ElementAt(i).Key;
+                ICharacter character = _characterBattlerDictionary.ElementAt(i).Key;
                 if (!ServiceLocator.Instance.CharacterModel.AllCharacters.Contains(character))
                 {
                     _characterBattlerDictionary[character].Uninitialise();
@@ -156,11 +155,11 @@ namespace GramophoneUtils.Stats
             CharacterOrder playerCharacterOrder = ServiceLocator.Instance.CharacterModel.PlayerCharacterOrder;
 
             bool leaderSet = false;
-            Character leader = null;
+            ICharacter leader = null;
             int j = 0;
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
+                ICharacter character = playerCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null && character.CharacterPrefab != null)
                 {
                     Battler battler = _characterBattlerDictionary[character];
@@ -192,11 +191,11 @@ namespace GramophoneUtils.Stats
             if(enemyCharacterOrder == null) { return; }
 
             int numberOfCharacters = enemyCharacterOrder.GetCharacters().Count;
-            List<Character> characterList = new List<Character>();
+            List<ICharacter> characterList = new List<ICharacter>();
             
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
+                ICharacter character = enemyCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null)
                 {
                     if (!characterList.Contains(character))
@@ -211,7 +210,7 @@ namespace GramophoneUtils.Stats
 
                 battler.ConnectFollowerToLeader(_frontBattlerPosition, _battlerGap, enemyCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
-            foreach (Character character in characterList)
+            foreach (ICharacter character in characterList)
             {
                 if (_characterBattlerDictionary.ContainsKey(character))
                 {
@@ -230,11 +229,11 @@ namespace GramophoneUtils.Stats
             if (playerCharacterOrder == null) { return; }
 
             int numberOfCharacters = playerCharacterOrder.GetCharacters().Count;
-            List<Character> characterList = new List<Character>();
+            List<ICharacter> characterList = new List<ICharacter>();
 
             for (int i = 0; i < CharacterOrder.NumberOfSlots; i++)
             {
-                Character character = playerCharacterOrder.GetCharacterBySlotIndex(i);
+                ICharacter character = playerCharacterOrder.GetCharacterBySlotIndex(i);
                 if (character != null)
                 {
                     if (!characterList.Contains(character))
@@ -251,7 +250,7 @@ namespace GramophoneUtils.Stats
                 battler.ConnectFollowerToLeader(_frontBattlerPosition, _battlerGap, playerCharacterOrder.GetSlotIndexByCharacter(characterList[i]), CharacterOrder.NumberOfSlots - i);
             }
 
-            foreach (Character character in characterList)
+            foreach (ICharacter character in characterList)
             {
                 if (_characterBattlerDictionary.ContainsKey(character))
                 {
@@ -267,7 +266,7 @@ namespace GramophoneUtils.Stats
 
             for (int i = _characterBattlerDictionary.Keys.Count - 1; i >= 0; i--)
             {
-                Character character = _characterBattlerDictionary.ElementAt(i).Key;
+                ICharacter character = _characterBattlerDictionary.ElementAt(i).Key;
                 if (!ServiceLocator.Instance.CharacterModel.AllCharacters.Contains(character))
                 {
                     _characterBattlerDictionary[character].Uninitialise();
@@ -284,7 +283,7 @@ namespace GramophoneUtils.Stats
 
             for (int i = _characterBattlerDictionary.Keys.Count - 1; i >= 0; i--)
             {
-                Character character = _characterBattlerDictionary.ElementAt(i).Key;
+                ICharacter character = _characterBattlerDictionary.ElementAt(i).Key;
                 _characterBattlerDictionary[character].Uninitialise();
                 Destroy(_characterBattlerDictionary[character].gameObject);
                 _characterBattlerDictionary.Remove(character);
@@ -303,7 +302,7 @@ namespace GramophoneUtils.Stats
             {
                 if (!_characterBattlerDictionary.Keys.ElementAt(i).IsPlayer)
                 {
-                    Character enemyCharacter = _characterBattlerDictionary.Keys.ElementAt(i);
+                    ICharacter enemyCharacter = _characterBattlerDictionary.Keys.ElementAt(i);
                     GameObject battlerGameObject = _characterBattlerDictionary[enemyCharacter].gameObject;
                     _characterBattlerDictionary.Remove(enemyCharacter);
                     Destroy(battlerGameObject);

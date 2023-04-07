@@ -1,22 +1,21 @@
-﻿using GramophoneUtils.Characters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface ITargetManager
 {
-    List<Character> CurrentTargetsCache { get; }
+    List<ICharacter> CurrentTargetsCache { get; }
     bool IsTargeting { get; }
-    Action<List<Character>> OnCurrentTargetsChanged { get; set; }
+    Action<List<ICharacter>> OnCurrentTargetsChanged { get; set; }
 
 
-    List<Character> ChangeTargeted(Vector2 direction);
+    List<ICharacter> ChangeTargeted(Vector2 direction);
     void ClearTargets();
-    List<Character> GetAllPossibleTargets(ISkill skill, Character originator);
-    List<Character> GetCurrentlyTargeted(ISkill skill, Character originator);
-    Character GetTargetByMouse();
-    void SimulatePlayerTargeting(ISkill skill, List<Character> charactersToTarget, Character originator);
+    List<ICharacter> GetAllPossibleTargets(ISkill skill, ICharacter originator);
+    List<ICharacter> GetCurrentlyTargeted(ISkill skill, ICharacter originator);
+    ICharacter GetTargetByMouse();
+    void SimulatePlayerTargeting(ISkill skill, List<ICharacter> charactersToTarget, ICharacter originator);
     void SubscribeToBattleDataModelOnSkillUsed();
     void UnsubscribeFromBattleDataModelOnSkillUsed();
-    void UseSkill(Character originator);
+    void UseSkill(ICharacter originator);
 }

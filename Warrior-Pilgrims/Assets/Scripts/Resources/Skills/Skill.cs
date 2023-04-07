@@ -121,16 +121,16 @@ public class Skill : Resource, ISkill, IHotbarItem
 
     #region Public Functions
 
-    public virtual void Use(List<Character> characterTargets, Character originator)
+    public virtual void Use(List<ICharacter> characterTargets, ICharacter originator)
     {
         //Debug.LogWarning("Here is where we should instance the blueprints, instancing them with the originator. The target can then adapt them on reception.");
 
         originator.SkillSystem.OnSkillUsed?.Invoke(this, characterTargets);
     }
 
-    public virtual void DoNextBit(List<Character> characterTargets, Character originator)
+    public virtual void DoNextBit(List<ICharacter> characterTargets, ICharacter originator)
     {
-        foreach (Character character in characterTargets)
+        foreach (ICharacter character in characterTargets)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(); // TODO we currently don't do anything with this token, it should have some logic to cancel an ability if damage doesn't land, for example
 
@@ -151,7 +151,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return "";
     }
 
-    public bool CanStartUnlocking(ISkill skill, Character character)
+    public bool CanStartUnlocking(ISkill skill, ICharacter character)
     {
         if (character.CharacterClass.SkillsAvailable.Contains(skill))
         {
@@ -163,7 +163,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return false;
     }
 
-    public bool CanUnlock(ISkill skill, Character character)
+    public bool CanUnlock(ISkill skill, ICharacter character)
     {
         if (CanStartUnlocking(skill, character))
         {
@@ -182,12 +182,12 @@ public class Skill : Resource, ISkill, IHotbarItem
         return false;
     }
 
-    public Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
+    public Task Apply(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         throw new NotImplementedException();
     }
 
-    public Task Remove(Character target, Character originator, CancellationTokenSource tokenSource)
+    public Task Remove(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         throw new NotImplementedException();
     }
@@ -256,7 +256,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return moves;
     }
 
-    private void ApplyTargetStatusEffects(Character character, Character originator, CancellationTokenSource tokenSource)
+    private void ApplyTargetStatusEffects(ICharacter character, ICharacter originator, CancellationTokenSource tokenSource)
     {
         foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _targetStatusEffectBlueprints)
         {
@@ -265,25 +265,25 @@ public class Skill : Resource, ISkill, IHotbarItem
         }
     }
 
-    private void SendTargetDamageStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetDamageStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Damage> modifiedDamages = ModifyTargetDamageStructs(originator);
         target.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator, tokenSource);
     }
 
-    private void SendTargetHealingStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetHealingStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Healing> modifiedHealings = ModifyTargetHealingStructs(originator);
         target.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator, tokenSource);
     }
 
-    private void SendTargetMoveStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private void SendTargetMoveStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Move> modifiedStructs = ModifyTargetMoveStructs(originator);
         target.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator, tokenSource);
     }
 
-    private void ApplySelfStatusEffects(Character originator, CancellationTokenSource tokenSource)
+    private void ApplySelfStatusEffects(ICharacter originator, CancellationTokenSource tokenSource)
     {
         foreach (InterfaceReference<IStatusEffectBlueprint> statusEffectBlueprint in _selfStatusEffectBlueprints)
         {
@@ -292,25 +292,25 @@ public class Skill : Resource, ISkill, IHotbarItem
         }
     }
 
-    private void SendSelfTargetDamageStructs(Character originator, CancellationTokenSource tokenSource)
+    private void SendSelfTargetDamageStructs(ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Damage> modifiedDamages = ModifySelfDamageStructs(originator);
         originator.StatSystem.ReceiveModifiedDamageStructs(modifiedDamages, originator, tokenSource);
     }
 
-    private void SendSelfTargetHealingStructs(Character originator, CancellationTokenSource tokenSource)
+    private void SendSelfTargetHealingStructs(ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Healing> modifiedHealings = ModifySelfHealingStructs(originator);
         originator.StatSystem.ReceiveModifiedHealingStructs(modifiedHealings, originator, tokenSource);
     }
 
-    private void SendSelfTargetMoveStructs(Character originator, CancellationTokenSource tokenSource)
+    private void SendSelfTargetMoveStructs(ICharacter originator, CancellationTokenSource tokenSource)
     {
         List<Move> modifiedStructs = ModifySelfMoveStructs(originator);
         originator.StatSystem.ReceiveModifiedMoveStructs(modifiedStructs, originator, tokenSource);
     }
 
-    private List<Damage> ModifyTargetDamageStructs(Character originator)
+    private List<Damage> ModifyTargetDamageStructs(ICharacter originator)
     {
         List<Damage> modifiedDamages = new List<Damage>();
         foreach (Damage damage in _targetSkillDamages)
@@ -320,7 +320,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return modifiedDamages;
     }
 
-    private List<Healing> ModifyTargetHealingStructs(Character originator)
+    private List<Healing> ModifyTargetHealingStructs(ICharacter originator)
     {
         List<Healing> modifiedHealings = new List<Healing>();
         foreach (Healing healing in _targetSkillHealings)
@@ -330,7 +330,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return modifiedHealings;
     }
 
-    private List<Move> ModifyTargetMoveStructs(Character originator)
+    private List<Move> ModifyTargetMoveStructs(ICharacter originator)
     {
         List<Move> modifiedMoves = new List<Move>();
         foreach (Move move in _targetSkillMoves)
@@ -340,7 +340,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return modifiedMoves;
     }
 
-    private List<Damage> ModifySelfDamageStructs(Character originator)
+    private List<Damage> ModifySelfDamageStructs(ICharacter originator)
     {
         List<Damage> modifiedDamages = new List<Damage>();
         foreach (Damage damage in _selfSkillDamages)
@@ -350,7 +350,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return modifiedDamages;
     }
 
-    private List<Healing> ModifySelfHealingStructs(Character originator)
+    private List<Healing> ModifySelfHealingStructs(ICharacter originator)
     {
         List<Healing> modifiedHealings = new List<Healing>();
         foreach (Healing healing in _selfSkillHealings)
@@ -360,7 +360,7 @@ public class Skill : Resource, ISkill, IHotbarItem
         return modifiedHealings;
     }
 
-    private List<Move> ModifySelfMoveStructs(Character originator)
+    private List<Move> ModifySelfMoveStructs(ICharacter originator)
     {
         List<Move> modifiedMoves = new List<Move>();
         foreach (Move move in _selfSkillMoves)

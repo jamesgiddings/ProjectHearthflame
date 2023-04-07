@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +9,29 @@ public class CharacterOrder
 {
     private static int _numberOfSlots = 4;
 
-    private Dictionary<int, Character> _slots;
+    private Dictionary<int, ICharacter> _slots;
 
     public static int NumberOfSlots => _numberOfSlots;
 
-    public Character Slot1Character
+    public ICharacter Slot1Character
     {
         get { return _slots[0]; }
         set { _slots[0] = value; }
     }
 
-    public Character Slot2Character
+    public ICharacter Slot2Character
     {
         get { return _slots[1]; }
         set { _slots[1] = value; }
     }
 
-    public Character Slot3Character
+    public ICharacter Slot3Character
     {
         get { return _slots[2]; }
         set { _slots[2] = value; }
     }
 
-    public Character Slot4Character
+    public ICharacter Slot4Character
     {
         get { return _slots[3]; }
         set { _slots[3] = value; }
@@ -49,9 +48,9 @@ public class CharacterOrder
     /// <param name="slot2Character"></param>
     /// <param name="slot3Character"></param>
     /// <param name="slot4Character"></param>
-    public CharacterOrder(Character slot1Character = null, Character slot2Character = null, Character slot3Character = null, Character slot4Character = null)
+    public CharacterOrder(ICharacter slot1Character = null, ICharacter slot2Character = null, ICharacter slot3Character = null, ICharacter slot4Character = null)
     {
-        Character[] characters = new Character[] { slot1Character, slot2Character, slot3Character, slot4Character };
+        ICharacter[] characters = new ICharacter[] { slot1Character, slot2Character, slot3Character, slot4Character };
         
         _slots = CreateDictionaryWithKeysAndNullValues();
 
@@ -68,7 +67,7 @@ public class CharacterOrder
     /// and a single size 2 character spanning slots 3 and 4. If the array is smaller, then the constructor will leave the remaining slots blank.
     /// </summary>
     /// <param name="characters"></param>
-    public CharacterOrder(Character[] characters)
+    public CharacterOrder(ICharacter[] characters)
     {
         _slots = CreateDictionaryWithKeysAndNullValues();
 
@@ -81,7 +80,7 @@ public class CharacterOrder
             }
         }
 
-        Character[] arrayCache = new Character[_numberOfSlots];
+        ICharacter[] arrayCache = new ICharacter[_numberOfSlots]; // Todo, need to use character factory here
         if (characters.Length != _numberOfSlots || numberOfCharacters != characters.Length)
         {
             int charactersIndex = 0;
@@ -120,7 +119,7 @@ public class CharacterOrder
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public Character GetCharacterBySlotIndex(int index)
+    public ICharacter GetCharacterBySlotIndex(int index)
     {
         if (_slots.ContainsKey(index))
         {
@@ -142,7 +141,7 @@ public class CharacterOrder
         {
             if (_slots[i] == null)
             {
-                Character characterToMove = null;
+                ICharacter characterToMove = null;
                 for (int j = i + 1; j < (includeFromIndex + 1); j++)
                 {
                     if (_slots[j] != null)
@@ -172,7 +171,7 @@ public class CharacterOrder
         {
             if (_slots[i] == null)
             {
-                Character characterToMove = null;
+                ICharacter characterToMove = null;
                 for (int j = i - 1; j > (includeFromIndex - 1); j--)
                 {
                     if (_slots[j] != null)
@@ -202,9 +201,9 @@ public class CharacterOrder
     /// Get all the characters in the character order
     /// </summary>
     /// <returns>Returns a unique set of Characters as a HashSet, with no null values</returns>
-    public HashSet<Character> GetCharacters()
+    public HashSet<ICharacter> GetCharacters()
     {
-        HashSet<Character> characters = new HashSet<Character>();
+        HashSet<ICharacter> characters = new HashSet<ICharacter>();
         //Debug.Log(_slots == null); // TODO Optimise, this is being called hundreds of times, possibly during character death
         foreach (var item in _slots)
         {
@@ -222,7 +221,7 @@ public class CharacterOrder
     /// </summary>
     /// <param name="characterToMove"></param>
     /// <param name="slotsToMove"></param>
-    public void MoveCharacter(Character characterToMove, int slotsToMove)
+    public void MoveCharacter(ICharacter characterToMove, int slotsToMove)
     {
         if (slotsToMove == 0) { return; } // no move
 
@@ -236,7 +235,7 @@ public class CharacterOrder
         // back one additional space. Vice versa for moving forwards, so we find the
         // unit increment to move an additional step in the direction we need.
 
-        Character characterInNewSlotIndex = null;
+        ICharacter characterInNewSlotIndex = null;
 
         _slots.TryGetValue(newSlotIndex, out characterInNewSlotIndex);
 
@@ -285,15 +284,15 @@ public class CharacterOrder
     /// <param name="newSlotIndex"></param>
     /// <param name="oldSlotIndex"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void SwapCharacterIntoSlot(Character characterToMove, int newSlotIndex)
+    public void SwapCharacterIntoSlot(ICharacter characterToMove, int newSlotIndex)
     {
         int oldSlotIndex = GetSlotIndexByCharacter(characterToMove);
         if (oldSlotIndex == -1) { return; }
 
         if (!ValidateMove(characterToMove, newSlotIndex)) { return; }
 
-        Character cachedCharacter1; 
-        Character cachedCharacter2; 
+        ICharacter cachedCharacter1;
+        ICharacter cachedCharacter2; 
         if (characterToMove.CharacterClass.Size == 1)
         {
             cachedCharacter1 = _slots[newSlotIndex];
@@ -344,7 +343,7 @@ public class CharacterOrder
         }
     }
 
-    public int GetSlotIndexByCharacter(Character character)
+    public int GetSlotIndexByCharacter(ICharacter character)
     {
         if (character == null)
         {
@@ -360,7 +359,7 @@ public class CharacterOrder
         return -1;
     }
 
-    public List<Character> AddCharactersAndReturnRemainder(List<Character> characters)
+    public List<ICharacter> AddCharactersAndReturnRemainder(List<ICharacter> characters)
     {
         int j = 0;
         if (characters.Count == 0) { return characters; } 
@@ -391,7 +390,7 @@ public class CharacterOrder
     /// </summary>
     /// <param name="character"></param>
     /// <returns></returns>
-    public bool RemoveCharacter(Character character)
+    public bool RemoveCharacter(ICharacter character)
     {
         bool removed = false;
         foreach (var item in _slots.Where(kvp => kvp.Value == character).ToList())
@@ -411,7 +410,7 @@ public class CharacterOrder
 
     #region Utilities
 
-    private bool ValidateMove(Character characterToMove, int slotIndex)
+    private bool ValidateMove(ICharacter characterToMove, int slotIndex)
     {
         if (characterToMove == null)
         {
@@ -435,7 +434,7 @@ public class CharacterOrder
         return true;
     }
 
-    private int GetValidSlotIndexFromInvalidSlotIndex(Character characterToMove, int oldSlotIndex, int proposedNewSlotIndex)
+    private int GetValidSlotIndexFromInvalidSlotIndex(ICharacter characterToMove, int oldSlotIndex, int proposedNewSlotIndex)
     {
         bool moveForwards = oldSlotIndex > proposedNewSlotIndex;
         int validNewSlotIndex;
@@ -466,9 +465,9 @@ public class CharacterOrder
         return validNewSlotIndex;
     }
 
-    private Dictionary<int, Character> CreateDictionaryWithKeysAndNullValues()
+    private Dictionary<int, ICharacter> CreateDictionaryWithKeysAndNullValues()
     {
-        _slots = new Dictionary<int, Character>();
+        _slots = new Dictionary<int, ICharacter>();
         for (int i = 0; i < _numberOfSlots; i++)
         {
             _slots.Add(i, null);

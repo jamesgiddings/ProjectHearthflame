@@ -25,17 +25,17 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 
     private ICharacterModel _characterModel;
 
-	private List<Character> _orderedBattlersList;
-    public List<Character> OrderedBattlersList => _orderedBattlersList;
+	private List<ICharacter> _orderedBattlersList;
+    public List<ICharacter> OrderedBattlersList => _orderedBattlersList;
 
-	private Queue<Character> _unresolvedQueue = new Queue<Character>();
+	private Queue<ICharacter> _unresolvedQueue = new Queue<ICharacter>();
 
-	private Queue<Character> _resolvedQueue = new Queue<Character>();
+	private Queue<ICharacter> _resolvedQueue = new Queue<ICharacter>();
 
-    private Character _currentActor;
+    private ICharacter _currentActor;
 
     [ShowInInspector]
-    public Character CurrentActor
+    public ICharacter CurrentActor
     {
         get { return _currentActor; }
         set { _currentActor = value; }
@@ -47,7 +47,7 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 
 	[SerializeField] public VoidEvent OnBattlerCollectionsUpdated;
 
-    public Action<Character> OnSkillUsed;
+    public Action<ICharacter> OnSkillUsed;
 
     private int _turn;
     [ShowInInspector] public int CurrentTurn => _turn;
@@ -169,12 +169,12 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
     [Button]
     public void CreateNewRoundQueues()
     {
-        _unresolvedQueue = new Queue<Character>();
-        foreach (Character character in _characterModel.AllCharacters)
+        _unresolvedQueue = new Queue<ICharacter>();
+        foreach (ICharacter character in _characterModel.AllCharacters)
         {
             _unresolvedQueue.Enqueue(character);
         }
-        _resolvedQueue = new Queue<Character>();
+        _resolvedQueue = new Queue<ICharacter>();
         OnBattlerCollectionsUpdated?.Raise();
     }
 
@@ -195,25 +195,25 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 		UpdateState();
     }
 
-	private Queue<Character> OrderQueue()
+	private Queue<ICharacter> OrderQueue()
 	{
 
         //Todo, this gets ordered three times at the start of the battle, find out why
-		List<Character> frontAndEnemyCharacters = new List<Character>();
+		List<ICharacter> frontAndEnemyCharacters = new List<ICharacter>();
 		frontAndEnemyCharacters.AddRange(_characterModel.PlayerCharacters);
 		frontAndEnemyCharacters.AddRange(_characterModel.EnemyCharacters);
-		IEnumerable<Character> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(_resolvedQueue) select unresolved;
+		IEnumerable<ICharacter> unresolvedQuery = from unresolved in frontAndEnemyCharacters.Except(_resolvedQueue) select unresolved;
         _unresolvedQueue.Clear();
 
         unresolvedQuery = from chara in unresolvedQuery orderby chara.StatSystem.GetStatValue(chara.StatTypeStringRefDictionary["Speed"]) * -1 select chara;
 
-        foreach (Character battler in unresolvedQuery)
+        foreach (ICharacter battler in unresolvedQuery)
 		{
 			_unresolvedQueue.Enqueue(battler);
 		}
 
-		Queue<Character> orderedRoundQueue = new Queue<Character>();
-		foreach (Character battler in unresolvedQuery)
+		Queue<ICharacter> orderedRoundQueue = new Queue<ICharacter>();
+		foreach (ICharacter battler in unresolvedQuery)
 		{
 			orderedRoundQueue.Enqueue(battler);
 		}
@@ -221,14 +221,14 @@ public class BattleDataModel : ScriptableObjectThatCanRunCoroutines
 		return orderedRoundQueue;
 	}
 
-	private List<Character> CalculateOrderedBattlersList()
+	private List<ICharacter> CalculateOrderedBattlersList()
 	{
-		_orderedBattlersList = new List<Character>();
-		foreach (Character battler in _resolvedQueue)
+		_orderedBattlersList = new List<ICharacter>();
+		foreach (ICharacter battler in _resolvedQueue)
 		{
 			_orderedBattlersList.Add(battler);
 		}
-		foreach (Character battler in _unresolvedQueue)
+		foreach (ICharacter battler in _unresolvedQueue)
 		{
 			_orderedBattlersList.Add(battler);
 		}

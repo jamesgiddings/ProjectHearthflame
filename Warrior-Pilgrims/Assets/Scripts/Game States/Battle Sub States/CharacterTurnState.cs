@@ -1,13 +1,8 @@
-using GramophoneUtils.Characters;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CharacterTurnState : BattleSubState
 {
     #region Attributes/Fields/Properties
 
-    protected Character StateActor;
+    protected ICharacter StateActor;
     protected bool CharacterNotInControl;
 
     #endregion

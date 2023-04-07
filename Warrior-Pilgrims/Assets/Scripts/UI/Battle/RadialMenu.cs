@@ -1,9 +1,5 @@
 using AYellowpaper;
-using GramophoneUtils.Characters;
 using GramophoneUtils.Items;
-using GramophoneUtils.Stats;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,14 +22,14 @@ public class RadialMenu : MonoBehaviour
 
 	RMF_RadialMenu subMenu;
 
-	private Character character;
+	private ICharacter character;
 
 	private List<Item> items = new List<Item>();
 	private List<ISkill> skills = new List<ISkill>();
 
     #region API
 
-    public Character Character
+    public ICharacter Character
 	{
 		get { return character; }
 		set { character = value; UpdateDisplay(); Debug.Log("Setting character" ); }
@@ -69,7 +65,7 @@ public class RadialMenu : MonoBehaviour
 
         button.onClick.AddListener(delegate { subMenu.gameObject.SetActive(!subMenu.gameObject.activeInHierarchy); if (!subMenu.gameObject.activeInHierarchy) { _battleManager.TargetManager.ClearTargets(); } });
 
-        foreach (ItemSlot itemSlot in character.PartyInventory.ItemSlots) // add the items from the partyInventory
+        foreach (ItemSlot itemSlot in character.PartyInventory.IResourceSlots) // add the items from the partyInventory
 		{
 			//Debug.LogWarning("This should actually add from that characters quickbar, not the partyInventory"); // TODO
 			if (itemSlot.item != null && itemSlot.item is ConsumableItem)

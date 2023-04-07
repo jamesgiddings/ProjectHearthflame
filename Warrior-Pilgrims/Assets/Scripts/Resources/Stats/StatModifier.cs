@@ -1,9 +1,7 @@
 using UnityEngine;
 using System;
-using GramophoneUtils.Characters;
 using System.Threading.Tasks;
 using System.Threading;
-using UnityEditor;
 using System.Text;
 
 namespace GramophoneUtils.Stats
@@ -93,12 +91,12 @@ namespace GramophoneUtils.Stats
 
         #region Public Functions
 
-		public async Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
+		public async Task Apply(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task Remove(Character target, Character originator, CancellationTokenSource tokenSource)
+		public Task Remove(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
 		{
 			throw new NotImplementedException();
 		}

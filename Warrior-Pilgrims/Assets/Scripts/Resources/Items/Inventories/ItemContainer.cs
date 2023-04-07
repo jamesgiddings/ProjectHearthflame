@@ -1,3 +1,4 @@
+using GramophoneUtils.Containers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,15 +8,15 @@ using UnityEngine.Events;
 namespace GramophoneUtils.Items.Containers
 {    
 
-    public class ItemContainer : ScriptableObject, IItemContainer
+    public class ItemContainer : ScriptableObject, IItemContainer, IContainer
     {
         [SerializeField] protected int money = 100;
         [SerializeField] protected ItemSlot[] itemSlots = new ItemSlot[0];
 
         public UnityEvent onInventoryItemsUpdated;
 
-        public ItemSlot[] ItemSlots { get => itemSlots; }
-        public int Money { get { return money; } set { money = value; } }
+        public ItemSlot[] IResourceSlots { get => itemSlots; }
+        public int Currency { get { return money; } set { money = value; } }
 
         public ItemSlot GetSlotByIndex(int index) 
         {
@@ -26,7 +27,7 @@ namespace GramophoneUtils.Items.Containers
             return itemSlots[index];
         }
 
-        public virtual ItemSlot AddItem(ItemSlot itemSlot)
+        public virtual ItemSlot Add(ItemSlot itemSlot)
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
@@ -81,7 +82,7 @@ namespace GramophoneUtils.Items.Containers
             return itemSlot;
         }
 
-        public virtual void RemoveItem(ItemSlot itemSlot)
+        public virtual void Remove(ItemSlot itemSlot)
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
@@ -115,7 +116,7 @@ namespace GramophoneUtils.Items.Containers
             }
         }
 
-        public List<InventoryItem> GetAllUniqueItems()
+        public List<InventoryItem> GetAllUnique()
         {
             List<InventoryItem> items = new List<InventoryItem>();
 
@@ -140,10 +141,12 @@ namespace GramophoneUtils.Items.Containers
             onInventoryItemsUpdated.Invoke();
         }
 
+        public bool CanSwap() => true;
+
         public virtual void Swap(IItemContainer itemContainerOne, int indexOne, IItemContainer itemContainerTwo, int indexTwo)
         {
-            ItemSlot firstSlot = itemContainerOne.ItemSlots[indexOne];
-            ItemSlot secondSlot = itemContainerTwo.ItemSlots[indexTwo];
+            ItemSlot firstSlot = itemContainerOne.IResourceSlots[indexOne];
+            ItemSlot secondSlot = itemContainerTwo.IResourceSlots[indexTwo];
 
             if (firstSlot.Equals(secondSlot)) { return; }
 
@@ -155,9 +158,9 @@ namespace GramophoneUtils.Items.Containers
 
                     if (firstSlot.quantity <= secondSlotRemainingSpace)
                     {
-                        itemContainerTwo.ItemSlots[indexTwo].quantity += firstSlot.quantity;
+                        itemContainerTwo.IResourceSlots[indexTwo].quantity += firstSlot.quantity;
 
-                        itemContainerOne.ItemSlots[indexOne] = new ItemSlot();
+                        itemContainerOne.IResourceSlots[indexOne] = new ItemSlot();
 
                         onInventoryItemsUpdated.Invoke();
 
@@ -166,8 +169,8 @@ namespace GramophoneUtils.Items.Containers
                 }
             }
 
-            itemContainerOne.ItemSlots[indexOne] = secondSlot;
-            itemContainerTwo.ItemSlots[indexTwo] = firstSlot;
+            itemContainerOne.IResourceSlots[indexOne] = secondSlot;
+            itemContainerTwo.IResourceSlots[indexTwo] = firstSlot;
 
             if (itemContainerOne as EquipmentInventory != null)
             {
@@ -202,7 +205,7 @@ namespace GramophoneUtils.Items.Containers
             onInventoryItemsUpdated.Invoke();
         }
 
-        public virtual bool HasItem(InventoryItem item)
+        public virtual bool Has(InventoryItem item)
         {
             foreach (ItemSlot itemSlot in itemSlots)
             {

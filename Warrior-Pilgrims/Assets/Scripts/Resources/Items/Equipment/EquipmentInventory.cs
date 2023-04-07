@@ -11,8 +11,8 @@ namespace GramophoneUtils.Items.Containers
 	[Serializable, CreateAssetMenu(fileName = "Equipment Inventory", menuName = "Containers/Equipment Inventory")]
 	public class EquipmentInventory : Inventory
     {
-		private Character character;
-		public Character Character => character;
+		private ICharacter character;
+		public ICharacter Character => character;
 
 		public Action Refresh;
 
@@ -40,7 +40,7 @@ namespace GramophoneUtils.Items.Containers
             };
         }
 
-		public void ConnectToCharacter(Character character, Inventory _partyInventory)
+		public void ConnectToCharacter(ICharacter character, Inventory _partyInventory)
 		{
             this.character = character;
             this.onInventoryItemsUpdated = _partyInventory.onInventoryItemsUpdated;
@@ -49,7 +49,7 @@ namespace GramophoneUtils.Items.Containers
 
 		public void RefreshEquipmentInSlots()
 		{
-			foreach(ItemSlot itemSlot in ItemSlots)
+			foreach(ItemSlot itemSlot in IResourceSlots)
 			{
 				IEquippable equippable = (EquipmentItem)itemSlot.item;
 				if (equippable != null)

@@ -1,4 +1,3 @@
-using GramophoneUtils.Characters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,9 @@ public class TargetsObject : ITargets
     #region Attributes/Fields/Properties
 
     private int _currentCombinationIndex;
-    private List<List<Character>> _characterCombinations;
+    private List<List<ICharacter>> _characterCombinations;
     private ITargetToSlots _targetToSlots;
-    private Character _originator;
+    private ICharacter _originator;
     private CharacterOrder _playerCharacterOrder;
     private CharacterOrder _enemyCharacterOrder;
 
@@ -24,7 +23,7 @@ public class TargetsObject : ITargets
 
     private TargetsObject() { }
 
-    public TargetsObject(ITargetToSlots targetToSlots, Character originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
+    public TargetsObject(ITargetToSlots targetToSlots, ICharacter originator, CharacterOrder playerCharacterOrder, CharacterOrder enemyCharacterOrder)
     {
         _currentCombinationIndex = 0;
         _targetToSlots = targetToSlots;
@@ -41,13 +40,13 @@ public class TargetsObject : ITargets
 
     #region Public Functions
 
-    public List<Character> ChangeCurrentlyTargeted(Vector2 direction)
+    public List<ICharacter> ChangeCurrentlyTargeted(Vector2 direction)
     {
         //Todo, here we have to assess the maximum number of characters in a particular target field, i.e. ally or opponent, and then cap the _currentCombinationINDEX at the lower of the two.
 
 
         Debug.Log("_characterCombinations.Count:" + _characterCombinations.Count);
-        List<Character> currentlyTargeted = new List<Character>();
+        List<ICharacter> currentlyTargeted = new List<ICharacter>();
         switch (direction)
         {
             case Vector2 vector when (vector.y >= 0f && Math.Abs(vector.y) > Math.Abs(vector.x) || // move down
@@ -89,9 +88,9 @@ public class TargetsObject : ITargets
         return currentlyTargeted;
     }
 
-    public List<Character> GetCurrentlyTargeted()
+    public List<ICharacter> GetCurrentlyTargeted()
     {
-        if (_characterCombinations == null || _characterCombinations.Count == 0) { return new List<Character>(); }
+        if (_characterCombinations == null || _characterCombinations.Count == 0) { return new List<ICharacter>(); }
         return _characterCombinations[_currentCombinationIndex];
     }
 
@@ -102,9 +101,9 @@ public class TargetsObject : ITargets
 
     #region Private Functions
 
-    private List<List<Character>> GetAllCombinations(ITargetToSlots targetToSlots)
+    private List<List<ICharacter>> GetAllCombinations(ITargetToSlots targetToSlots)
     {
-        List<List<Character>> combinations = new List<List<Character>>();
+        List<List<ICharacter>> combinations = new List<List<ICharacter>>();
 
         List<TargetCombination> targetCombinations = targetToSlots.GetTargetCombinations();
         CharacterOrder opponentCharacterOrder = _originator.IsPlayer ? _enemyCharacterOrder : _playerCharacterOrder;
@@ -112,7 +111,7 @@ public class TargetsObject : ITargets
 
         foreach (TargetCombination targetCombination in targetCombinations)
         {
-            List<Character> combination = targetCombination.GetCombination(allyCharacterOrder, opponentCharacterOrder);
+            List<ICharacter> combination = targetCombination.GetCombination(allyCharacterOrder, opponentCharacterOrder);
             if (combination.Count > 0) // check there are actually characters there.
             {
                 combinations.Add(combination); // TODO, we are adding this to a hashset, but it isn't rejecting the duplicate if it targets a large character twice.
@@ -127,9 +126,9 @@ public class TargetsObject : ITargets
 
     #region Inner Classes
 
-    class ListEqCompare : IEqualityComparer<List<Character>>
+    class ListEqCompare : IEqualityComparer<List<ICharacter>>
     {
-        public bool Equals(List<Character> x, List<Character> y)
+        public bool Equals(List<ICharacter> x, List<ICharacter> y)
         {
             if (x.Count != y.Count)
                 return false;
@@ -141,11 +140,11 @@ public class TargetsObject : ITargets
             return true;
         }
 
-        public int GetHashCode(List<Character> obj)
+        public int GetHashCode(List<ICharacter> obj)
         {
             int hash = 0;
-            foreach (Character character in obj)
-                hash = hash ^ EqualityComparer<Character>.Default.GetHashCode(character);
+            foreach (ICharacter character in obj)
+                hash = hash ^ EqualityComparer<ICharacter>.Default.GetHashCode(character);
 
             return hash;
         }

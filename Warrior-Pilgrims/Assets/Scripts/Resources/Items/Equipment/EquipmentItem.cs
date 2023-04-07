@@ -37,7 +37,7 @@ namespace GramophoneUtils.Items
 			return effects;
 		}
 
-		public void Equip(Character character)
+		public void Equip(ICharacter character)
 		{
 			foreach (IStatModifier weaponEffect in equipmentEffects)
 			{   // TODO, this could be tidier
@@ -99,7 +99,7 @@ namespace GramophoneUtils.Items
 			return builder.ToString();
 		}
 
-		public void Unequip(Character character)
+		public void Unequip(ICharacter character)
 		{
 			foreach (KeyValuePair<IStatType, IStat> entry in character.StatSystem.Stats)
 			{
@@ -107,7 +107,7 @@ namespace GramophoneUtils.Items
 			}
 		}
 
-		public override void Use(Character character, InventorySlotUI inventorySlotUI)
+		public override void Use(ICharacter character, InventorySlotUI inventorySlotUI)
 		{
 			character.EquipmentInventory.TryToEquip(this, inventorySlotUI);
 		}

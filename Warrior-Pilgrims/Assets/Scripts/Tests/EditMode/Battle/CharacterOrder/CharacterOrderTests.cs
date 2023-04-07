@@ -48,8 +48,8 @@ namespace GramophoneUtils.Tests
             _targetToSlots_XXXX_OOXXandXXXX_XXOO = TestObjectReferences.TargetToSlots_XXXX_OOXXandXXXX_XXOO;
             _targetToSlots_XXXX_OOXXandXXXX_XXOOandXXXX_XXOXandXXXX_XXXO = TestObjectReferences.TargetToSlots_XXXX_OOXXandXXXX_XXOOandXXXX_XXOXandXXXX_XXXO;
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-            _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+            _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
         }
 
         #endregion
@@ -65,19 +65,19 @@ namespace GramophoneUtils.Tests
         [Test]
         public void AssertCharacterOrderContainsTheCorrectNumberOfSize1CharactersWhenVariousNumbersAreAddedInTheConstructorByArray()
         {
-            _playerCharacterOrder = new CharacterOrder(new Character[] { });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { });
             Assert.AreEqual(0, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1 });
             Assert.AreEqual(1, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2 });
             Assert.AreEqual(2, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3 });
             Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
             Assert.AreEqual(4, _playerCharacterOrder.GetCharacters().Count);
         }
 
@@ -86,10 +86,10 @@ namespace GramophoneUtils.Tests
         {
             Assert.AreEqual(2, Size2EnemyCharacter2.CharacterClass.Size);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Size2EnemyCharacter2Blueprint.Instance(), Character2 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Size2EnemyCharacter2Blueprint.Instance(), Character2 });
             Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Size2EnemyCharacter2Blueprint.Instance(), Character2, Character3, Character4 });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Size2EnemyCharacter2Blueprint.Instance(), Character2, Character3, Character4 });
             Assert.AreEqual(3, _playerCharacterOrder.GetCharacters().Count);
         }
 
@@ -98,16 +98,16 @@ namespace GramophoneUtils.Tests
         {
             Assert.AreEqual(2, Size2EnemyCharacter2.CharacterClass.Size);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Size2EnemyCharacter2Blueprint.Instance() });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Size2EnemyCharacter2Blueprint.Instance() });
             Assert.AreEqual(1, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance() });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance() });
             Assert.AreEqual(2, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance() });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance(), Size2EnemyCharacter2Blueprint.Instance() });
             Assert.AreEqual(2, _playerCharacterOrder.GetCharacters().Count);
 
-            _playerCharacterOrder = new CharacterOrder(new Character[] { });
+            _playerCharacterOrder = new CharacterOrder(new ICharacter[] { });
             Assert.AreEqual(0, _playerCharacterOrder.GetCharacters().Count);
         }
 

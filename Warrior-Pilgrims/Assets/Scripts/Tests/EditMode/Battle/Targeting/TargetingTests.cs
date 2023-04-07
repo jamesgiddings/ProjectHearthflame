@@ -44,8 +44,8 @@ public class TargetingTests : BasicEditModeTest
         _targetToSlots_XXXX_OOXXandXXXX_XXOO = TestObjectReferences.TargetToSlots_XXXX_OOXXandXXXX_XXOO;
         _targetToSlots_XXXX_OOXXandXXXX_XXOOandXXXX_XXOXandXXXX_XXXO = TestObjectReferences.TargetToSlots_XXXX_OOXXandXXXX_XXOOandXXXX_XXOXandXXXX_XXXO;
 
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1, Size2EnemyCharacter2, EnemyCharacter3 });
     }
 
 
@@ -85,8 +85,8 @@ public class TargetingTests : BasicEditModeTest
     [Test]
     public void AssertTargetsObjetesGetCurrentlyTargetedReturnsListOfCount2WhenOnly2TargetsInSkillAndOnlyTwoCombinationsAvailableAndChangeDirectionCalledOnceWith10()
     {
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
 
         ITargets targetsObject = _targetToSlots_XXXX_OOXXandXXXX_XXOO.GetTargetsObject(Character1, _playerCharacterOrder, _enemyCharacterOrder);
         targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
@@ -96,12 +96,12 @@ public class TargetingTests : BasicEditModeTest
     [Test]
     public void AssertTargetsAreDifferentWhenChangeCurrentlyTargetedCalledWhenXXOOandOOXX()
     {
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
 
         ITargets targetsObject = _targetToSlots_XXXX_OOXXandXXXX_XXOO.GetTargetsObject(Character1, _playerCharacterOrder, _enemyCharacterOrder);
-        List<Character> list1 = targetsObject.GetCurrentlyTargeted();
-        List<Character> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
+        List<ICharacter> list1 = targetsObject.GetCurrentlyTargeted();
+        List<ICharacter> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
 
         Assert.AreNotEqual(list1[0], list2[0]);
         Assert.AreNotEqual(list1[1], list2[1]);
@@ -112,13 +112,13 @@ public class TargetingTests : BasicEditModeTest
     [Test]
     public void AssertTargetsAreTheSameWhenChangeCurrentlyTargetedCalledTwiceWhenXXOOandOOXXSoShouldHaveCycledRound()
     {
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
 
         ITargets targetsObject = _targetToSlots_XXXX_OOXXandXXXX_XXOO.GetTargetsObject(Character1, _playerCharacterOrder, _enemyCharacterOrder);
-        List<Character> list1 = targetsObject.GetCurrentlyTargeted();
-        List<Character> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
-        List<Character> list3 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
+        List<ICharacter> list1 = targetsObject.GetCurrentlyTargeted();
+        List<ICharacter> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
+        List<ICharacter> list3 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
         Assert.AreEqual(list1[0], list3[0]);
         Assert.AreEqual(list1[1], list3[1]);
     }
@@ -126,11 +126,11 @@ public class TargetingTests : BasicEditModeTest
     [Test]
     public void AssertTargetIsOriginatorWhenSelfOnlySkillGetsTargets()
     {
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
 
         ITargets targetsObject = MagicShield.TargetToSlots.GetTargetsObject(Character1, _playerCharacterOrder, _enemyCharacterOrder);
-        List<Character> list1 = targetsObject.GetCurrentlyTargeted();
+        List<ICharacter> list1 = targetsObject.GetCurrentlyTargeted();
 
         Assert.AreEqual(list1[0], Character1);
     }
@@ -138,12 +138,12 @@ public class TargetingTests : BasicEditModeTest
     [Test]
     public void AssertTargetIsOriginatorWhenSelfOnlySkillGetsTargetsAfterChangingTargets()
     {
-        _playerCharacterOrder = new CharacterOrder(new Character[] { Character1, Character2, Character3, Character4 });
-        _enemyCharacterOrder = new CharacterOrder(new Character[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
+        _playerCharacterOrder = new CharacterOrder(new ICharacter[] { Character1, Character2, Character3, Character4 });
+        _enemyCharacterOrder = new CharacterOrder(new ICharacter[] { EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance(), EnemyCharacter1Blueprint.Instance() });
 
         ITargets targetsObject = MagicShield.TargetToSlots.GetTargetsObject(Character1, _playerCharacterOrder, _enemyCharacterOrder);
-        List<Character> list1 = targetsObject.GetCurrentlyTargeted();
-        List<Character> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
+        List<ICharacter> list1 = targetsObject.GetCurrentlyTargeted();
+        List<ICharacter> list2 = targetsObject.ChangeCurrentlyTargeted(new Vector2(1, 0));
 
         Assert.AreEqual(list1[0], Character1);
         Assert.AreEqual(list2[0], Character1);

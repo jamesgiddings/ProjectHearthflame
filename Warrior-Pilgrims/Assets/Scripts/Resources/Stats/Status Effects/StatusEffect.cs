@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using Character = GramophoneUtils.Characters.Character;
 
 /// <summary>
 /// This class groups together StatModifiers (flat effects which last the duration
@@ -21,9 +20,9 @@ public class StatusEffect : IStatusEffect
     public string UID => _uid;
 
 
-    private bool _isSubscribedToOnCharacterTurnAdvance = false;
+    private bool _isSubscribedToOnICharacterTurnAdvance = false;
 
-    private Character _originator;
+    private ICharacter _originator;
 
     private CancellationTokenSource _cancellationTokenSource;
 
@@ -216,7 +215,7 @@ public class StatusEffect : IStatusEffect
         OnDurationElapsed?.Invoke(this);
     }
 
-    public async Task Apply(Character target, Character originator, CancellationTokenSource tokenSource)
+    public async Task Apply(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         _originator = originator;
         _cancellationTokenSource = tokenSource;
@@ -227,14 +226,14 @@ public class StatusEffect : IStatusEffect
         if (tokenSource.Token.IsCancellationRequested) return;
         await SendStatModifiers(target, originator, tokenSource);
 
-        SubscribeToCharacterOnTurnElapsed(target);
+        SubscribeToICharacterOnTurnElapsed(target);
 
         target.StatSystem.AddStatusEffectObject(this);
     }
 
-    public Task Remove(Character target, Character originator, CancellationTokenSource tokenSource)
+    public Task Remove(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
-        UnsubscribeFromCharacterOnTurnElapsed(target);
+        UnsubscribeFromICharacterOnTurnElapsed(target);
 
         target.StatSystem.RemoveStatusEffectTypeWrapper(StatusEffectTypeWrapper);
 
@@ -250,7 +249,7 @@ public class StatusEffect : IStatusEffect
     public override bool Equals(object obj)
     {// TODO the problem is possibly with both of comparing the private variables but it is also definitely comparing the StatusEffectTypeWrapper in the equality way.
         return obj is StatusEffect effect &&
-               _isSubscribedToOnCharacterTurnAdvance == effect._isSubscribedToOnCharacterTurnAdvance &&
+               _isSubscribedToOnICharacterTurnAdvance == effect._isSubscribedToOnICharacterTurnAdvance &&
                _statusEffectTypeFlag == effect._statusEffectTypeFlag &&
                EqualityComparer<StatusEffectTypeWrapper>.Default.Equals(StatusEffectTypeWrapper, effect.StatusEffectTypeWrapper) &&
                EqualityComparer<List<IStatModifier>>.Default.Equals(_statModifiers, effect._statModifiers) &&
@@ -272,7 +271,7 @@ public class StatusEffect : IStatusEffect
     public override int GetHashCode()
     {
         HashCode hash = new HashCode();
-        hash.Add(_isSubscribedToOnCharacterTurnAdvance);
+        hash.Add(_isSubscribedToOnICharacterTurnAdvance);
         hash.Add(_statusEffectTypeFlag);
         hash.Add(StatusEffectTypeWrapper);
         hash.Add(_statModifiers);
@@ -332,7 +331,7 @@ public class StatusEffect : IStatusEffect
         return clonedStatModifiers;
     }
 
-    private Task SendStatModifiers(Character target, Character originator, CancellationTokenSource tokenSource)
+    private Task SendStatModifiers(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         if (tokenSource.Token.IsCancellationRequested) return Task.CompletedTask;
         List<IStatModifier> modifiedStatModifiers = ModifyStatModifiers(originator);
@@ -340,7 +339,7 @@ public class StatusEffect : IStatusEffect
         return Task.CompletedTask;
     }
 
-    private Task SendStatusEffectType(Character target, Character originator, CancellationTokenSource tokenSource)
+    private Task SendStatusEffectType(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         if (tokenSource.Token.IsCancellationRequested) return Task.CompletedTask;
         target.StatSystem.ReceiveStatusEffectType(new StatusEffectTypeWrapper(_statusEffectTypeFlag, this), originator, tokenSource);
@@ -348,7 +347,7 @@ public class StatusEffect : IStatusEffect
 
     }
 
-    private Task SendDamageStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private Task SendDamageStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         if (tokenSource.Token.IsCancellationRequested) return Task.CompletedTask;
         List<Damage> modifiedDamages = ModifyDamageStructs(originator);
@@ -357,7 +356,7 @@ public class StatusEffect : IStatusEffect
         return Task.CompletedTask;
     }
 
-    private Task SendHealingStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private Task SendHealingStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         if (tokenSource.Token.IsCancellationRequested) return Task.CompletedTask;
         List<Healing> modifiedHealings = ModifyHealingStructs(originator);
@@ -365,7 +364,7 @@ public class StatusEffect : IStatusEffect
         return Task.CompletedTask;
     }
 
-    private Task SendMoveStructs(Character target, Character originator, CancellationTokenSource tokenSource)
+    private Task SendMoveStructs(ICharacter target, ICharacter originator, CancellationTokenSource tokenSource)
     {
         if (tokenSource.Token.IsCancellationRequested) return Task.CompletedTask;
         List<Move> modifiedStructs = ModifyMoveStructs(originator);
@@ -373,7 +372,7 @@ public class StatusEffect : IStatusEffect
         return Task.CompletedTask;
     }
 
-    private List<IStatModifier> ModifyStatModifiers(Character originator)
+    private List<IStatModifier> ModifyStatModifiers(ICharacter originator)
     {
         List<IStatModifier> modifiedStatModifiers = new List<IStatModifier>();
 
@@ -385,7 +384,7 @@ public class StatusEffect : IStatusEffect
         return modifiedStatModifiers;
     }
 
-    private List<Damage> ModifyDamageStructs(Character originator)
+    private List<Damage> ModifyDamageStructs(ICharacter originator)
     {
         List<Damage> modifiedDamages = new List<Damage>();
 
@@ -401,7 +400,7 @@ public class StatusEffect : IStatusEffect
         return modifiedDamages;
     }
 
-    private List<Healing> ModifyHealingStructs(Character originator)
+    private List<Healing> ModifyHealingStructs(ICharacter originator)
     {
         List<Healing> modifiedHealings = new List<Healing>();
 
@@ -417,7 +416,7 @@ public class StatusEffect : IStatusEffect
         return modifiedHealings;
     }
 
-    private List<Move> ModifyMoveStructs(Character originator) // TODO we should probably add moves as well
+    private List<Move> ModifyMoveStructs(ICharacter originator) // TODO we should probably add moves as well
     {
         List<Move> modifiedMoves = new List<Move>();
 
@@ -433,36 +432,36 @@ public class StatusEffect : IStatusEffect
         return modifiedMoves;
     }
 
-    private void DecrementDuration(Character target)
+    private void DecrementDuration(ICharacter target)
     {
         IncrementDuration();
     }
 
-    private void SubscribeToCharacterOnTurnElapsed(Character target)
+    private void SubscribeToICharacterOnTurnElapsed(ICharacter target)
     {
-        if (!_isSubscribedToOnCharacterTurnAdvance)
+        if (!_isSubscribedToOnICharacterTurnAdvance)
         {
             target.OnCharacterTurnElapsed += SendDamageHealingAndMove;
             target.OnCharacterTurnElapsed += DecrementDuration;
 
             OnDurationElapsed += target.StatSystem.RemoveElapsible;
         }
-        _isSubscribedToOnCharacterTurnAdvance = true;
+        _isSubscribedToOnICharacterTurnAdvance = true;
     }
 
-    private void UnsubscribeFromCharacterOnTurnElapsed(Character target)
+    private void UnsubscribeFromICharacterOnTurnElapsed(ICharacter target)
     {
-        if (_isSubscribedToOnCharacterTurnAdvance)
+        if (_isSubscribedToOnICharacterTurnAdvance)
         {
             target.OnCharacterTurnElapsed -= SendDamageHealingAndMove;
             target.OnCharacterTurnElapsed -= DecrementDuration;
 
             OnDurationElapsed -= target.StatSystem.RemoveElapsible;
         }
-        _isSubscribedToOnCharacterTurnAdvance = false;
+        _isSubscribedToOnICharacterTurnAdvance = false;
     }
 
-    private async void SendDamageHealingAndMove(Character target)
+    private async void SendDamageHealingAndMove(ICharacter target)
     {
         if (_cancellationTokenSource.Token.IsCancellationRequested) return;
         await SendDamageStructs(target, _originator, _cancellationTokenSource);

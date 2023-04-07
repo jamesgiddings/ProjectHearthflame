@@ -1,5 +1,3 @@
-using GramophoneUtils.Characters;
-
 public interface IUseFromSlot
 {
     #region Attributes/Fields/Properties
@@ -19,7 +17,7 @@ public interface IUseFromSlot
 
     #region Public Functions
 
-    bool CanUseFromSlot(Character character);
+    bool CanUseFromSlot(ICharacter character);
 
     #endregion
 

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GramophoneUtils.Items.Containers
 {
@@ -28,16 +27,6 @@ namespace GramophoneUtils.Items.Containers
 		}
 
 		#endregion
-
-		public Inventory(int size = 20, int money = 0, UnityEvent onInventoryItemsUpdated = null)
-		{
-			if (onInventoryItemsUpdated != null)
-			{
-				this.onInventoryItemsUpdated = onInventoryItemsUpdated;
-			}
-			itemSlots = new ItemSlot[size];
-			this.money = money;
-		}
 
         #region Private Functions
 
@@ -69,12 +58,12 @@ namespace GramophoneUtils.Items.Containers
 			//Debug.Log("We are in Inventory.CaptureState()");
 			//GameManager.Instance.ResourceDatabase.Print();
 			List <ResourceSlotUI.ResourceSlotSaveData> tempList = new List<ResourceSlotUI.ResourceSlotSaveData>();
-			for (int i = 0; i < ItemSlots.Length; i++)
+			for (int i = 0; i < IResourceSlots.Length; i++)
 			{
-				if(ItemSlots[i].item != null)
+				if(IResourceSlots[i].item != null)
 				{
 					//Debug.Log("We are saving:  + " + ItemSlots[i].item.Name);
-					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(ItemSlots[i].item.UID, GetSlotByIndex(i).quantity));
+					tempList.Add(new ResourceSlotUI.ResourceSlotSaveData(IResourceSlots[i].item.UID, GetSlotByIndex(i).quantity));
 				}
 				else
 				{
@@ -95,14 +84,14 @@ namespace GramophoneUtils.Items.Containers
 			var saveData = (InventorySaveData)state;
 			//GameManager.Instance.ResourceDatabase.Print();
 			money = saveData.money;
-			for (int i = 0; i < ItemSlots.Length; i++)
+			for (int i = 0; i < IResourceSlots.Length; i++)
 			{
 
 				if (saveData.itemSlotSaveData[i].resourceUID != null)
 				{
 					Resource resource = GameManager.Instance.ResourceDatabase.GetResourceByUID(saveData.itemSlotSaveData[i].resourceUID);
-					ItemSlots[i].item = (InventoryItem)resource;
-					ItemSlots[i].quantity = saveData.itemSlotSaveData[i].resourceQuantity;
+					IResourceSlots[i].item = (InventoryItem)resource;
+					IResourceSlots[i].quantity = saveData.itemSlotSaveData[i].resourceQuantity;
 				}
 			}
 			onInventoryItemsUpdated?.Invoke();

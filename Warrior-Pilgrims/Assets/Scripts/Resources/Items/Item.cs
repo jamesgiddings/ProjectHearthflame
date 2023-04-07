@@ -7,12 +7,12 @@ namespace GramophoneUtils.Items
     public abstract class Item : Resource
     {
         [Header("Basic Info")]
-        [SerializeField] private string description = "New Item Description";
+        [SerializeField] private string _description = "New Item Description";
 
-        public string Description => description;
+        public string Description => _description;
 
         public abstract string ColouredName { get; }
 
-        public abstract void Use(Character character, InventorySlotUI inventorySlotUI);
+        public abstract void Use(ICharacter character, InventorySlotUI inventorySlotUI);
     }
 }

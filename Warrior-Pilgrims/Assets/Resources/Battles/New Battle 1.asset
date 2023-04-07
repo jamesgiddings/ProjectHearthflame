@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716914488a000324ab9fda8ac5898f53, type: 3}
   m_Name: New Battle 1
   m_EditorClassIdentifier: 
+  _uid: 6ff136ba-ee49-4691-8b20-a6436cc4e84b
   _name: 
   _deactivateOnComplete: 0
   _battleSprite: {fileID: -3438905571476058607, guid: b1f1a7d80bc424649b367a6104a59aa8,
@@ -20,7 +21,7 @@ MonoBehaviour:
   _battleMusic: {fileID: 0}
   _itemSlots: []
   _battleCharacterBlueprints:
-  - {fileID: 11400000, guid: 55b2c1db6472c0148a751e61cfecfb7f, type: 2}
+  - _underlyingValue: {fileID: 11400000, guid: 55b2c1db6472c0148a751e61cfecfb7f, type: 2}
   _battleWinConditions: {fileID: 11400000, guid: 030072b44ac4e744ca39c57edec9e437,
     type: 2}
   _battleRear: {fileID: 11400000, guid: 8c25ebd8344159643bb72bbc25649eed, type: 2}

@@ -97,7 +97,7 @@ namespace GramophoneUtils.Items.Hotbars
         {
             if (SlotResource is InventoryItem inventoryItem)
             {
-                if (inventory.HasItem(inventoryItem))
+                if (inventory.Has(inventoryItem))
                 {
                     int quantityCount = inventory.GetTotalQuantity(inventoryItem);
 					itemQuantityText.text = quantityCount > 1 ? quantityCount.ToString() : "";

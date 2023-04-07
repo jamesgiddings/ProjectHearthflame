@@ -1,5 +1,3 @@
-using GramophoneUtils.Characters;
-using GramophoneUtils.Stats;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +57,7 @@ public class PlayerTurnState : CharacterTurnState
 
 #if UNITY_EDITOR
 
-    public void SimulatePlayerAction(ISkill skill, List<Character> targets, Character originator)
+    public void SimulatePlayerAction(ISkill skill, List<ICharacter> targets, ICharacter originator)
     {
         BattleManager.TargetManager.SimulatePlayerTargeting(skill, targets, originator);
         ServiceLocator.Instance.BattleStateManager.ChangeState(ServiceLocator.Instance.ServiceLocatorObject.PostCharacterTurnState);

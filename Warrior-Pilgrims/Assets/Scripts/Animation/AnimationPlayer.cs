@@ -2,13 +2,12 @@ using GramophoneUtils.Stats;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using GramophoneUtils.Characters;
 
 public class AnimationPlayer
 {
 	private Animator animator;
     private Battler battler;
-    private Character character;
+    private ICharacter character;
 
     private CharacterGameObjectManager _characterGameObjectManager;
 
@@ -19,7 +18,7 @@ public class AnimationPlayer
     private string cast;
     private string shoot;
 
-    public AnimationPlayer(Battler battler, Character character)
+    public AnimationPlayer(Battler battler, ICharacter character)
 	{
         this.battler = battler;
         this.character = character;
@@ -55,9 +54,9 @@ public class AnimationPlayer
         }
     }
 
-	public void DisplayAnimation(ISkill skill, List<Character> targets)
+	public void DisplayAnimation(ISkill skill, List<ICharacter> targets)
     {
-        List<Character> targetsCache = new List<Character> ();
+        List<ICharacter> targetsCache = new List<ICharacter> ();
         targetsCache.AddRange(targets);
 
         switch (skill.SkillAnimType)
@@ -65,7 +64,7 @@ public class AnimationPlayer
             case (SkillAnimType.MeleePhysical):
                 Sequence sequence = DOTween.Sequence();
                 Vector3 startPos = battler.gameObject.transform.position;
-                foreach (Character target in targetsCache)
+                foreach (ICharacter target in targetsCache)
                 {
                     Vector3 currentPos = battler.gameObject.transform.position;
                     Vector3 targetPos = Vector3.Lerp(battler.gameObject.transform.position, _characterGameObjectManager.CharacterBattlerDictionary[target].transform.position, 0.65f);
@@ -90,7 +89,7 @@ public class AnimationPlayer
                 projectileSequence.AppendCallback(() => animator.Play(idle));
                 projectileSequence.AppendInterval(0.05f).WaitForCompletion();
 
-                foreach (Character target in targetsCache)
+                foreach (ICharacter target in targetsCache)
                 {
                     GameObject projectile = Object.Instantiate(skill.ProjectilePrefab, battler.gameObject.transform);
                     Animator projectileAnimator = projectile.GetComponent<Animator>();
@@ -131,7 +130,7 @@ public class AnimationPlayer
                 physicalProjectileSequence.AppendCallback(() => animator.Play(idle));
                 physicalProjectileSequence.AppendInterval(0.05f).WaitForCompletion();
 
-                foreach (Character target in targetsCache)
+                foreach (ICharacter target in targetsCache)
                 {
                     GameObject physicalProjectile = Object.Instantiate(skill.ProjectilePrefab, battler.gameObject.transform);
                     Animator pysicalProjectileAnimator = physicalProjectile.GetComponent<Animator>();
@@ -161,7 +160,7 @@ public class AnimationPlayer
 
                 break;
             case (SkillAnimType.BuffOrDebuff):
-                foreach (Character target in targetsCache)
+                foreach (ICharacter target in targetsCache)
                 {
                     GameObject effect = Object.Instantiate(skill.EffectPrefab, battler.gameObject.transform);
                     Animator effectAnimator = effect.GetComponent<Animator>();

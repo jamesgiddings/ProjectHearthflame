@@ -29,7 +29,7 @@ namespace GramophoneUtils.Items
             {
                 if (itemContainer == null) { return; }
 
-                if (itemContainer.AddItem(itemSlot).quantity == 0)
+                if (itemContainer.Add(itemSlot).quantity == 0)
                 {
                     this.gameObject.SetActive(false);
                 }

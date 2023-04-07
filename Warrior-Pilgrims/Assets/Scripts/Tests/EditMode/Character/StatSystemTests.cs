@@ -20,7 +20,7 @@ public class StatSystemTests : BasicEditModeTest
     [Test]
     public void StatsTestsSimplePasses()
     {
-        Character character = Character1Blueprint.Instance();
+        ICharacter character = Character1Blueprint.Instance();
         StatModifier testModifier = new StatModifier(
             "",
             "",
@@ -139,7 +139,7 @@ public class StatSystemTests : BasicEditModeTest
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         // Given StatModifier
-        Character character = Character2Blueprint.Instance();
+        ICharacter character = Character2Blueprint.Instance();
         IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
             "",
             "",
@@ -169,7 +169,7 @@ public class StatSystemTests : BasicEditModeTest
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         // Given StatModifier
-        Character character = Character2Blueprint.Instance();
+        ICharacter character = Character2Blueprint.Instance();
         IStatModifier fiftyPercentDexMinusStatModifier = ServiceLocatorObject.Instance.StatModifierFactory.CreateStatModifierFromValue(
             "",
             "",
